@@ -79,9 +79,11 @@ class DetectionPredictor {
     std::vector<DetectionPredictResult> predict(cv::Mat input_frame);
     void TransposeAndCopyToTensor(const cv::Mat &src, NDTensor &dst);
 
+    /*
     void printResults(std::vector<DetectionPredictResult> &results);
     void drawResults(cv::Mat &input_frame, std::vector<DetectionPredictResult> &results);
     std::string getLabel(uint16_t type);
+    */
 };
 
 class Detection {

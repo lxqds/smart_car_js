@@ -333,6 +333,7 @@ void DetectionPredictor::TransposeAndCopyToTensor(const cv::Mat &src, NDTensor &
     }
 }
 
+/*
 // 检测结果格式化输出
 void DetectionPredictor::printResults(
     std::vector<DetectionPredictResult> &results) {
@@ -373,3 +374,4 @@ std::string DetectionPredictor::getLabel(uint16_t type) {
 
     return _model_config->labels[type];
 }
+*/
