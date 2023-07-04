@@ -293,6 +293,14 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
         result.y = data[i + 3];
         result.width = data[i + 4] - data[i + 2];
         result.height = data[i + 5] - data[i + 3];
+
+        LOG_I << "result.type = " << result.type << "\r\n"
+              << "result.score = " << result.score << "\r\n"
+              << "result.x = " << result.x << "\r\n"
+              << "result.y = " << result.y << "\r\n"
+              << "result.width = " << result.width << "\r\n"
+              << "result.height = " << result.score << LOG_END;
+
         predict_ret.push_back(result);
     }
 
