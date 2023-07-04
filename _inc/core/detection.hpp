@@ -6,7 +6,7 @@
 
 #include "../common/model_config.hpp"
 #include "../utils/blocking_queue.h"
-#include "../utils/logger_helper.hpp"s
+#include "../utils/logger_helper.hpp"
 #include "../utils/stop_watch.hpp"
 // #include "preprocess.hpp"
 
