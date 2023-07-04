@@ -288,8 +288,8 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
         }
 
         // turnning....
-        if (result.type < labels.size())
-            result.label = labels[result.type];
+        // if (result.type < labels.size())
+        //     result.label = labels[result.type];
         result.x = data[i + 2];
         result.y = data[i + 3];
         result.width = data[i + 4] - data[i + 2];
