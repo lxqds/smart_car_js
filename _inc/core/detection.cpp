@@ -124,6 +124,11 @@ int DetectionPredictor::init() {
             labels.push_back(line);
         }
         file.close();
+
+        for (uint8_t i = 0; i < labels.size(); i++) {
+            LOG_I << lables.at(i) << LOG_END;
+        }
+
         LOG_I << "Done." << LOG_END;
 
         return 0;
@@ -283,9 +288,6 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
         result.type = data[i];
         result.score = data[i + 1];
 
-        LOG_I << "result.type = " << result.type << "\r\n"
-              << "result.score = " << result.score << LOG_END;
-
         if (result.score < 0.5) {
             continue;
         }
@@ -298,6 +300,8 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
         result.width = data[i + 4] - data[i + 2];
         result.height = data[i + 5] - data[i + 3];
 
+        LOG_I << "result.type = " << result.type << "\r\n"
+              << "result.score = " << result.score << LOG_END;
         LOG_I << "result.x = " << result.x << "\r\n"
               << "result.y = " << result.y << "\r\n"
               << "result.width = " << result.width << "\r\n"
