@@ -476,7 +476,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                     MAT_INFO(mat_result, cv::Point(deX, deY), 0.4, "%s - %.2f",
                              detection_labels[r.type].c_str(), r.score);
                     cv::Rect rect(deX, deY, deW, deH);
-                    cv::rectangle(mat_result, rect, Scalar(0, 0, 224), 2);
+                    cv::rectangle(mat_result, rect, cv::Scalar(0, 0, 224), 2);
                 }
             }
         }
@@ -1034,7 +1034,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         if (flag_rpts) {
             // 贝塞尔曲线
             for (auto p : bezier_line)
-                circle(mat_result, Point(p.x, p.y), 1, Scalar(0, 0, 255), -1);
+                circle(mat_result, cv::Point(p.x, p.y), 1, cv::Scalar(0, 0, 255), -1);
 
             // 归一化中线
             for (int a = 0; a < rptsn_num; a++) {
