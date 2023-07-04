@@ -12,11 +12,16 @@ set(LIB_PATH "/usr/local/lib")
 #---------------------------------------------------------------------
 
 find_package(PkgConfig)
+
 pkg_search_module(GLIB REQUIRED glib-2.0)
 include_directories(${GLIB_INCLUDE_DIRS})
 
 find_package(OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
+
+pkg_search_module(SERIAL REQUIRED libserial)
+include_directories(${SERIAL_INCLUDE_DIRS})
+link_directories(${SERIAL_LIBRARY_DIRS})
 
 # find_package(PaddleLite QUIET)
 # include_directories(${PADDLELITE_INCLUDE_DIR})
@@ -70,6 +75,9 @@ target_link_libraries(${YYDS} PRIVATE imgprocess)
 target_link_libraries(${YYDS} PRIVATE sideline)
 
 # add link some libs
+target_link_libraries(${YYDS}  ${PPNC_LIBRARIES})
+target_link_libraries(${YYDS}  ${ONNX_LIBRARIES})
+
 target_link_libraries(${YYDS} PRIVATE elements_libs)
 target_link_libraries(${YYDS} PRIVATE logger_libs)
 target_link_libraries(${YYDS} PRIVATE pthread)
