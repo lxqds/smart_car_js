@@ -182,5 +182,5 @@ class Detection {
         return nullptr;
     };
 
-    std::string getLabel(int type) { return _predictor->getLabel(type); };
+    // std::string getLabel(int type) { return _predictor->getLabel(type); };
 };
