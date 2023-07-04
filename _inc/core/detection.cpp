@@ -71,7 +71,7 @@ int DetectionPredictor::init() {
     this->onnx_input_names_.first.push_back("im_shape");
     this->onnx_input_names_.first.push_back("scale_factor");
     std::string io_paddle = _config_path + "/io_paddle.json";
-    LOG_I << "[PPNC] Step 2 Done." << LOG_END;
+    LOG_I << "Done." << LOG_END;
 
     // Read io_paddle
     LOG_I << "[PPNC] Read io_paddle." << LOG_END;
