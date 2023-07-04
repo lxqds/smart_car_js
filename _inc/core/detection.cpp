@@ -333,7 +333,7 @@ void DetectionPredictor::TransposeAndCopyToTensor(const cv::Mat &src, NDTensor &
 }
 
 std::string DetectionPredictor::getLabel(uint16_t type) {
-    if ((type < 0) || (type > this > labels.size())) {
+    if ((type < 0) || (type > this->labels.size())) {
         LOG_I << "Predictor Label [" << type << "] is error." << LOG_END;
         return "BackGround";
     }
