@@ -1,2 +1,0 @@
-/usr/bin/ar qc libelements_libs.a  CMakeFiles/elements_libs.dir/road/elements/_circle.cpp.o CMakeFiles/elements_libs.dir/road/elements/_cross.cpp.o CMakeFiles/elements_libs.dir/road/elements/_garage.cpp.o CMakeFiles/elements_libs.dir/road/elements/_gas.cpp.o CMakeFiles/elements_libs.dir/road/elements/_ramp.cpp.o CMakeFiles/elements_libs.dir/road/elements/_work.cpp.o CMakeFiles/elements_libs.dir/road/elements/_yroad.cpp.o
-/usr/bin/ranlib libelements_libs.a

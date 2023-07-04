@@ -1,2 +1,0 @@
-/usr/bin/ar qc liblogger_libs.a  CMakeFiles/logger_libs.dir/utils/logger/src/elog.c.o CMakeFiles/logger_libs.dir/utils/logger/src/elog_async.c.o CMakeFiles/logger_libs.dir/utils/logger/src/elog_buf.c.o CMakeFiles/logger_libs.dir/utils/logger/src/elog_file.c.o CMakeFiles/logger_libs.dir/utils/logger/src/elog_file_port.c.o CMakeFiles/logger_libs.dir/utils/logger/src/elog_port.c.o CMakeFiles/logger_libs.dir/utils/logger/src/elog_utils.c.o CMakeFiles/logger_libs.dir/utils/logger/src/logger_helper.cc.o
-/usr/bin/ranlib liblogger_libs.a

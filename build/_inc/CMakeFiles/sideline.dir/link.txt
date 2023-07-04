@@ -1,2 +1,0 @@
-/usr/bin/ar qc libsideline.a  CMakeFiles/sideline.dir/road/_sideline.cpp.o
-/usr/bin/ranlib libsideline.a
