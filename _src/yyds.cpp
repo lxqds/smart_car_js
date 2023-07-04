@@ -62,9 +62,9 @@ int main(int argc, char const *argv[]) {
     CHECK(0 == ret) << "windows or video can not create !!" << LOG_END;
 
     /* 串口 */
-    serial = std::make_shared<SerialDriver>("/dev/ttyPS1", BaudRate::BAUD_921600);
+    serial = std::make_shared<SerialDriver>("/dev/ttyUSB0", BaudRate::BAUD_115200);
     ret = serial->open();
-    CHECK(0 == ret) << "/dev/ttyPS1 can not open !!" << LOG_END;
+    CHECK(0 == ret) << "/dev/ttyUSB0 can not open !!" << LOG_END;
 
     /* 启动多线程 */
     capture->start();
