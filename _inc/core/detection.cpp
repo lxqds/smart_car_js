@@ -55,7 +55,7 @@ int DetectionPredictor::init() {
     /* NEW PPNC PREDICTION CODES BELOW*/
 
     // Initialize model
-    LOG_I << "[PPNC] Initalize model." << LOG_END;
+    LOG_I << "[PPNC] Initialize model." << LOG_END;
     this->predictor_nna_ = std::make_shared<PPNCPredictor>("../configs/config_ppncnna.json");
     this->predictor_nms_ = std::make_shared<PPNCPredictor>("../configs/config_ppncnms.json");
     this->onnx_env_ = Ort::Env(OrtLoggingLevel::ORT_LOGGING_LEVEL_WARNING, "test");
@@ -293,10 +293,6 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
         if (result.score < 0.5) {
             continue;
         }
-
-        // turnning....
-        // if (result.type < labels.size())
-        //     result.label = labels[result.type];
         result.x = data[i + 2];
         result.y = data[i + 3];
         result.width = data[i + 4] - data[i + 2];
