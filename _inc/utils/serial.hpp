@@ -15,7 +15,7 @@
 #undef LOG_TAG
 #define LOG_TAG "Serial"
 
-#define PWM_MIDDLE 1500
+#define PWM_MIDDLE 1520
 
 using namespace LibSerial;
 
@@ -27,7 +27,6 @@ typedef union {
     uint8_t U8_Buff[2];
     uint16_t U16;
 } Bint16_Union;
-
 
 typedef union {
     uint8_t U8_Buff[4];
@@ -41,7 +40,6 @@ class SerialDriver {
 
    private:
     // 通讯协议结构体
-    
 
     // OLD send packet struct
     // struct Packet {
@@ -52,14 +50,14 @@ class SerialDriver {
     //     uint8_t tail;      // 尾
     // };
 
-    //NEW send packet strucrt
+    // NEW send packet strucrt
     struct Packet {
         uint8_t head;
         uint8_t addr;
         uint8_t length;
         uint8_t buf_speed[4];
         uint8_t buf_direction[2];
-	uint8_t sumcheck = 0;
+        uint8_t sumcheck = 0;
     };
 
     // 4字节转int32
@@ -96,7 +94,6 @@ class SerialDriver {
 
                 payload = _queue.Take();
 
-
                 // OLD send data preparation
                 // packet->dirty = 0x66;
                 // packet->head[0] = 0xF1;
@@ -115,15 +112,13 @@ class SerialDriver {
 
                 // NEW send preration
 
-
                 speed_union.Float = payload.tSpeed / 1000.0;
 
                 direction_union.U16 = (uint16_t)(payload.tAngle * (-2.0f) + PWM_MIDDLE);
 
-
-                packet->head         = 0x42;
-                packet->addr         = 0x01;
-                packet->length       = 10;
+                packet->head = 0x42;
+                packet->addr = 0x01;
+                packet->length = 10;
 
                 packet->buf_speed[0] = speed_union.U8_Buff[0];
                 packet->buf_speed[1] = speed_union.U8_Buff[1];
@@ -133,17 +128,17 @@ class SerialDriver {
                 packet->buf_direction[0] = direction_union.U8_Buff[0];
                 packet->buf_direction[1] = direction_union.U8_Buff[1];
 
-                packet->sumcheck = packet->head + 
+                packet->sumcheck = packet->head +
                                    packet->addr +
                                    packet->length;
 
-                for(uint8_t i = 0; i < 4; i++) {
+                for (uint8_t i = 0; i < 4; i++) {
                     packet->sumcheck += packet->buf_speed[i];
                 }
-                for(uint8_t i = 0; i < 2; i++) {
+                for (uint8_t i = 0; i < 2; i++) {
                     packet->sumcheck += packet->buf_direction[i];
                 }
-                
+
                 try {
                     _serial_port->Write(pkt_buf);
                 } catch (const std::runtime_error &) {
