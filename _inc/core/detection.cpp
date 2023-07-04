@@ -126,7 +126,7 @@ int DetectionPredictor::init() {
         file.close();
 
         for (uint8_t i = 0; i < labels.size(); i++) {
-            LOG_I << lables.at(i) << LOG_END;
+            LOG_I << labels.at(i) << LOG_END;
         }
 
         LOG_I << "Done." << LOG_END;
