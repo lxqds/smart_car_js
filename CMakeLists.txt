@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.4...3.18)
-project(YYDS)
+project(YYDS_PPNC_Modified)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "-g -Wall")
+set(CMAKE_CXX_FLAGS "-O3 -Wall -mcpu=native -flto -pthread")
 
 #---------------------------------------------------------------------
 #       [ Include、Lib  : Define ] ==> []
@@ -19,12 +19,22 @@ find_package(PaddleLite QUIET)
 include_directories(${PADDLELITE_INCLUDE_DIR})
 LINK_DIRECTORIES("/usr/local/lib/paddle_lite/")
 
+# find ppnc
+pkg_search_module(PPNC REQUIRED ppnc)
+include_directories(${PPNC_INCLUDE_DIRS})
+link_directories(${PPNC_LIBRARY_DIRS})
+
+# find onnx
+pkg_search_module(ONNX REQUIRED onnx)
+include_directories(${ONNX_INCLUDE_DIRS})
+link_directories(${ONNX_LIBRARY_DIRS})
+
 #---------------------------------------------------------------------
 #               [ bin ] ==> [ demo ]
 #---------------------------------------------------------------------
 
 # params
-set(YYDS "yyds")
+set(YYDS "yyds_ppnc_modified")
 set(INCLUDE_DIRS
     ${PROJECT_SOURCE_DIR}/_inc/common
     ${PROJECT_SOURCE_DIR}/_inc/core
