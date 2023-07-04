@@ -15,9 +15,9 @@ include_directories(${GLIB_INCLUDE_DIRS})
 find_package(OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
-find_package(PaddleLite QUIET)
-include_directories(${PADDLELITE_INCLUDE_DIR})
-LINK_DIRECTORIES("/usr/local/lib/paddle_lite/")
+# find_package(PaddleLite QUIET)
+# include_directories(${PADDLELITE_INCLUDE_DIR})
+# LINK_DIRECTORIES("/usr/local/lib/paddle_lite/")
 
 # find ppnc
 pkg_search_module(PPNC REQUIRED ppnc)
