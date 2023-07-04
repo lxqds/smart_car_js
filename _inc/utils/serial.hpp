@@ -15,7 +15,7 @@
 #undef LOG_TAG
 #define LOG_TAG "Serial"
 
-#define PWM_MIDDLE 1560
+#define PWM_MIDDLE 1580
 
 using namespace LibSerial;
 
@@ -59,7 +59,7 @@ class SerialDriver {
         uint8_t length;
         uint8_t buf_speed[4];
         uint8_t buf_direction[2];
-        uint8_t sumcheck;
+	uint8_t sumcheck = 0;
     };
 
     // 4字节转int32
@@ -118,7 +118,7 @@ class SerialDriver {
 
                 speed_union.Float = payload.tSpeed / 1000.0;
 
-                direction_union.U16 = payload.tAngle * 0.7 + PWM_MIDDLE;
+                direction_union.U16 = (uint16_t)(payload.tAngle * (-2.0f) + PWM_MIDDLE);
 
 
                 packet->head         = 0x42;
