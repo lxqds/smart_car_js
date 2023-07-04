@@ -282,6 +282,10 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
     for (int i = 0; i < prod; i += 6) {
         result.type = data[i];
         result.score = data[i + 1];
+
+        LOG_I << "result.type = " << result.type << "\r\n"
+              << "result.score = " << result.score << LOG_END;
+
         if (result.score < 0.5) {
             continue;
         }
@@ -294,9 +298,7 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
         result.width = data[i + 4] - data[i + 2];
         result.height = data[i + 5] - data[i + 3];
 
-        LOG_I << "result.type = " << result.type << "\r\n"
-              << "result.score = " << result.score << "\r\n"
-              << "result.x = " << result.x << "\r\n"
+        LOG_I << "result.x = " << result.x << "\r\n"
               << "result.y = " << result.y << "\r\n"
               << "result.width = " << result.width << "\r\n"
               << "result.height = " << result.score << LOG_END;
