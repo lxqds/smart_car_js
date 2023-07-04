@@ -18,7 +18,6 @@ void DetectionPredictor::_boundaryCorrection(DetectionPredictResult &r,
     r.y = (r.y < MARGIN_PIXELS) ? MARGIN_PIXELS : r.y;
 }
 
-
 // 初始化
 int DetectionPredictor::init() {
     /*
@@ -81,7 +80,7 @@ int DetectionPredictor::init() {
 
     // Read json file
     LOG_I << "[PPNC] Read JSON file." << LOG_END;
-    json j;
+    nlohmann::json j;
     ifs >> j;
     ifs.close();
     LOG_I << "Done." << LOG_END;
@@ -119,26 +118,22 @@ int DetectionPredictor::init() {
     std::string pathLabels = _config_path + "/label_list.txt";
     labels.clear();
     std::ifstream file(pathLabels);
-    if (file.is_open())
-    {
+    if (file.is_open()) {
         std::string line;
-        while (getline(file, line))
-        {
-        labels.push_back(line);
+        while (getline(file, line)) {
+            labels.push_back(line);
         }
         file.close();
         LOG_I << "Done." << LOG_END;
-        
+
         return 0;
-    }
-    else
-    {
+    } else {
         LOG_I << "Failed." << LOG_END;
     }
     return -1;
 }
 
-void DetectionPredictor::build_nms(const std::string &model_dir)  {
+void DetectionPredictor::build_nms(const std::string &model_dir) {
     std::string model_file = model_dir + "/nms.tar";
     std::string untar_cmd = "tar -xf " + model_file + " -C . --no-same-owner";
     std::string final_file = model_file + ".so";
@@ -162,7 +157,6 @@ void DetectionPredictor::build_nms(const std::string &model_dir)  {
 
 // 预测
 std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_frame) {
-
     /*
     std::vector<DetectionPredictResult> predict_ret;
 
@@ -215,7 +209,7 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
 
     std::vector<DetectionPredictResult> predict_ret;
 
-    auto feeds = detection.preprocess(input_frame, {320, 320});
+    auto feeds = preprocess(input_frame, {320, 320});
     auto &image = feeds.at("image");
 
     // ppnc_nna run
@@ -228,34 +222,34 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
 
     int numel = std::accumulate(im_shape.shape.begin(), im_shape.shape.end(), 1, std::multiplies<>());
     input_tensors.push_back(Ort::Value::CreateTensor<float>(
-            memory_info,
-            im_shape.value(),
-            numel,
-            im_shape.shape.data(),
-            im_shape.shape.size()));
+        memory_info,
+        im_shape.value(),
+        numel,
+        im_shape.shape.data(),
+        im_shape.shape.size()));
     numel = std::accumulate(scale_factor.shape.begin(), scale_factor.shape.end(), 1, std::multiplies<>());
     input_tensors.push_back(Ort::Value::CreateTensor<float>(
-            memory_info,
-            scale_factor.value(),
-            numel,
-            scale_factor.shape.data(),
-            scale_factor.shape.size()));
+        memory_info,
+        scale_factor.value(),
+        numel,
+        scale_factor.shape.data(),
+        scale_factor.shape.size()));
 
     for (size_t i = 2; i < this->onnx_input_names_.second.size(); ++i) {
         const NDTensor &t = this->predictor_nna_->get_output(i - 2);
         numel = std::accumulate(t.shape.begin(), t.shape.end(), 1, std::multiplies<>());
         input_tensors.push_back(Ort::Value::CreateTensor<float>(
-                memory_info, t.value(), numel, t.shape.data(), t.shape.size()));
+            memory_info, t.value(), numel, t.shape.data(), t.shape.size()));
     }
 
     Ort::RunOptions run_options;
     auto onnx_out = this->predictor_onnx_->Run(
-            run_options,
-            this->onnx_input_names_.second.data(),
-            input_tensors.data(),
-            input_tensors.size(),
-            this->onnx_out_names_.second.data(),
-            this->onnx_out_names_.second.size());
+        run_options,
+        this->onnx_input_names_.second.data(),
+        input_tensors.data(),
+        input_tensors.size(),
+        this->onnx_out_names_.second.data(),
+        this->onnx_out_names_.second.size());
 
     auto *data0 = onnx_out[0].GetTensorData<float>();
     auto *data1 = onnx_out[1].GetTensorData<float>();
@@ -263,7 +257,7 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
     auto output_shape1 = onnx_out[1].GetTensorTypeAndShapeInfo().GetShape();
 
     int32_t cls_num, num, box_point;
-    
+
     // bbox
     num = output_shape0[1];
     box_point = output_shape0[2];
@@ -278,7 +272,7 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
     // ppnc_nms run
     this->predictor_nms_->set_inputs({{"bboxes", bboxes}, {"scores", scores}});
     this->predictor_nms_->run();
-    
+
     // Get result and return
     NDTensor res = this->predictor_nms_->get_output(0);
     auto data = res.value();
@@ -293,21 +287,20 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
             continue;
         }
 
-        //turnning....
-        if(result.type<labels.size()) result.label = labels[result.type];
+        // turnning....
+        if (result.type < labels.size())
+            result.label = labels[result.type];
         result.x = data[i + 2];
         result.y = data[i + 3];
-        result.width = data[i + 4]-data[i + 2];
-        result.height = data[i + 5]-data[i + 3];
+        result.width = data[i + 4] - data[i + 2];
+        result.height = data[i + 5] - data[i + 3];
         predict_ret.push_back(result);
     }
 
     return predict_ret;
-
 }
 
 std::shared_ptr<std::unordered_map<std::string, NDTensor>> DetectionPredictor::preprocess(cv::Mat frame, const std::vector<int64_t> &input_size) {
-
     cv::Mat x;
     NDTensor scale_factor({1, 2}), img({1, 3, input_size[0], input_size[1]});
     scale_factor.value()[0] = static_cast<float>(input_size[0]) / frame.size[0];
@@ -324,10 +317,20 @@ std::shared_ptr<std::unordered_map<std::string, NDTensor>> DetectionPredictor::p
     TransposeAndCopyToTensor(x, img);
 
     std::unordered_map<std::string, NDTensor> ret = {
-            {"image", img}, {"im_shape", im_shape}, {"scale_factor", scale_factor}};
+        {"image", img}, {"im_shape", im_shape}, {"scale_factor", scale_factor}};
 
     return std::make_shared<std::unordered_map<std::string, NDTensor>>(ret);
+}
 
+void DetectionPredictor::TransposeAndCopyToTensor(const Mat &src, NDTensor &dst) {
+    Mat channels[3];
+    split(src, channels);
+    int offset = src.rows * src.cols;
+    auto start = dst.value();
+    for (int i = 0; i < 3; ++i) {
+        std::memcpy(start + i * offset, channels[i].data,
+                    offset * sizeof(float));
+    }
 }
 
 // 检测结果格式化输出
