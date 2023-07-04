@@ -55,7 +55,7 @@ int DetectionPredictor::init() {
     /* NEW PPNC PREDICTION CODES BELOW*/
 
     // Initialize model
-    LOG_I << "[PPNC]Initalize model." << LOG_END;
+    LOG_I << "[PPNC] Initalize model." << LOG_END;
     this->predictor_nna_ = std::make_shared<PPNCPredictor>("../configs/config_ppncnna.json");
     this->predictor_nms_ = std::make_shared<PPNCPredictor>("../configs/config_ppncnms.json");
     this->onnx_env_ = Ort::Env(OrtLoggingLevel::ORT_LOGGING_LEVEL_WARNING, "test");
@@ -333,8 +333,15 @@ void DetectionPredictor::TransposeAndCopyToTensor(const cv::Mat &src, NDTensor &
     }
 }
 
-/*
-// 检测结果格式化输出
+std::string DetectionPredictor::getLabel(uint16_t type) {
+    if ((type < 0) || (type > _model_config->labels.size())) {
+        LOG_I << "Predictor Label [" << type << "] is error." << LOG_END;
+        return "BackGround";
+    }
+
+    return _model_config->labels[type];
+}
+
 void DetectionPredictor::printResults(
     std::vector<DetectionPredictResult> &results) {
     for (uint32_t i = 0; i < results.size(); ++i) {
@@ -348,6 +355,7 @@ void DetectionPredictor::printResults(
     }
 }
 
+/*
 // 针对检测结果, 进行画框操作
 void DetectionPredictor::drawResults(
     cv::Mat &input_frame, std::vector<DetectionPredictResult> &results) {
@@ -363,15 +371,5 @@ void DetectionPredictor::drawResults(
         cv::Rect rect(r.x, r.y, r.width, r.height);
         cv::rectangle(input_frame, rect, Scalar(0, 0, 224), 2);
     }
-}
-
-// 根据type的id, 返回具体label
-std::string DetectionPredictor::getLabel(uint16_t type) {
-    if ((type < 0) || (type > _model_config->labels.size())) {
-        LOG_I << "Predictor Label [" << type << "] is error." << LOG_END;
-        return "BackGround";
-    }
-
-    return _model_config->labels[type];
 }
 */
