@@ -155,7 +155,6 @@ void DetectionPredictor::build_nms(const std::string &model_dir) {
     LOG_I << "Compile done." << LOG_END;
 }
 
-// 预测
 std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_frame) {
     /*
     std::vector<DetectionPredictResult> predict_ret;
@@ -210,7 +209,7 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
     std::vector<DetectionPredictResult> predict_ret;
 
     auto feeds = preprocess(input_frame, {320, 320});
-    auto &image = feeds->at("image");
+    // auto &image = feeds->at("image");
 
     // ppnc_nna run
     this->predictor_nna_->run();
@@ -334,20 +333,20 @@ void DetectionPredictor::TransposeAndCopyToTensor(const cv::Mat &src, NDTensor &
 }
 
 std::string DetectionPredictor::getLabel(uint16_t type) {
-    if ((type < 0) || (type > _model_config->labels.size())) {
+    if ((type < 0) || (type > this > labels.size())) {
         LOG_I << "Predictor Label [" << type << "] is error." << LOG_END;
         return "BackGround";
     }
 
-    return _model_config->labels[type];
+    return this->labels[type];
 }
 
 void DetectionPredictor::printResults(
     std::vector<DetectionPredictResult> &results) {
     for (uint32_t i = 0; i < results.size(); ++i) {
         DetectionPredictResult r = results[i];
-        if (r.type >= 0 && (uint16_t)r.type < _model_config->labels.size()) {
-            LOG_I << "label:" << _model_config->labels[r.type] << LOG_END;
+        if (r.type >= 0 && (uint16_t)r.type < this->labels.size()) {
+            LOG_I << "label:" << this->labels[r.type] << LOG_END;
             LOG_I << "\t\tindex:" << r.type << ", score:" << r.score
                   << ", loc:" << r.x << ", " << r.y << ", " << r.width << ", "
                   << r.height << LOG_END;
