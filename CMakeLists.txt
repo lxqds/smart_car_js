@@ -75,8 +75,8 @@ target_link_libraries(${YYDS} PRIVATE imgprocess)
 target_link_libraries(${YYDS} PRIVATE sideline)
 
 # add link some libs
-target_link_libraries(${YYDS}  ${PPNC_LIBRARIES})
-target_link_libraries(${YYDS}  ${ONNX_LIBRARIES})
+target_link_libraries(${YYDS} PRIVATE ${PPNC_LIBRARIES})
+target_link_libraries(${YYDS} PRIVATE ${ONNX_LIBRARIES})
 
 target_link_libraries(${YYDS} PRIVATE elements_libs)
 target_link_libraries(${YYDS} PRIVATE logger_libs)
@@ -84,4 +84,4 @@ target_link_libraries(${YYDS} PRIVATE pthread)
 target_link_libraries(${YYDS} PRIVATE serial)
 # target_link_libraries(${YYDS} PRIVATE paddle_full_api_shared)
 target_link_libraries(${YYDS} PRIVATE ${OpenCV_LIBS})
-target_link_libraries(${YYDS} PRIVATE ${PADDLELITE_LIBRARY})
+# target_link_libraries(${YYDS} PRIVATE ${PADDLELITE_LIBRARY})
