@@ -94,7 +94,7 @@ class ImageProcess {
 
    public:
     bool detection_new = false;
-    string detection_labels[11] = {
+    string detection_labels[20] = {
         "background",
         "cone", "granary", "bridge", "tractor", "corn", "pig", "crosswalk", "bump",
 
