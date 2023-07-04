@@ -461,7 +461,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                 }
             }
 
-            if (r.type > 0 && r.type < 8) {
+            if (r.type > 0 && r.type < 16) {
                 // 计算偏移
                 if (deY < BEGIN_Y + 30 && deY + deH > BEGIN_Y - 30 &&
                     deX < IMAGE_WIDTH - BEGIN_X + 20 && deX + deW > BEGIN_X - 20) {
