@@ -63,7 +63,7 @@ add_executable(
 target_link_libraries(${YYDS} PRIVATE capture)
 target_link_libraries(${YYDS} PRIVATE detection)
 target_link_libraries(${YYDS} PRIVATE display)
-target_link_libraries(${YYDS} PRIVATE imgprocess)
+# target_link_libraries(${YYDS} PRIVATE imgprocess)
 target_link_libraries(${YYDS} PRIVATE sideline)
 
 # add link some libs
