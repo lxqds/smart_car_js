@@ -15,7 +15,7 @@
 #undef LOG_TAG
 #define LOG_TAG "Serial"
 
-#define PWM_MIDDLE 1580
+#define PWM_MIDDLE 1500
 
 using namespace LibSerial;
 
