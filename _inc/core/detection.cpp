@@ -210,15 +210,15 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
     std::vector<DetectionPredictResult> predict_ret;
 
     auto feeds = preprocess(input_frame, {320, 320});
-    auto &image = feeds.at("image");
+    auto &image = feeds->at("image");
 
     // ppnc_nna run
     this->predictor_nna_->run();
 
     auto memory_info = Ort::MemoryInfo::CreateCpu(OrtDeviceAllocator, OrtMemTypeCPU);
     std::vector<Ort::Value> input_tensors;
-    NDTensor im_shape = feeds.at("im_shape");
-    NDTensor scale_factor = feeds.at("scale_factor");
+    NDTensor im_shape = feeds->at("im_shape");
+    NDTensor scale_factor = feeds->at("scale_factor");
 
     int numel = std::accumulate(im_shape.shape.begin(), im_shape.shape.end(), 1, std::multiplies<>());
     input_tensors.push_back(Ort::Value::CreateTensor<float>(

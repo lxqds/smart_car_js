@@ -1,0 +1,11 @@
+/home/edgeboard/worspace/YYDS_PPNC_Modified/build/CMakeFiles/rebuild_cache.dir
+/home/edgeboard/worspace/YYDS_PPNC_Modified/build/CMakeFiles/yyds_ppnc_modified.dir
+/home/edgeboard/worspace/YYDS_PPNC_Modified/build/CMakeFiles/edit_cache.dir
+/home/edgeboard/worspace/YYDS_PPNC_Modified/build/_inc/CMakeFiles/rebuild_cache.dir
+/home/edgeboard/worspace/YYDS_PPNC_Modified/build/_inc/CMakeFiles/edit_cache.dir
+/home/edgeboard/worspace/YYDS_PPNC_Modified/build/_inc/CMakeFiles/detection.dir
+/home/edgeboard/worspace/YYDS_PPNC_Modified/build/_inc/CMakeFiles/elements_libs.dir
+/home/edgeboard/worspace/YYDS_PPNC_Modified/build/_inc/CMakeFiles/capture.dir
+/home/edgeboard/worspace/YYDS_PPNC_Modified/build/_inc/CMakeFiles/display.dir
+/home/edgeboard/worspace/YYDS_PPNC_Modified/build/_inc/CMakeFiles/sideline.dir
+/home/edgeboard/worspace/YYDS_PPNC_Modified/build/_inc/CMakeFiles/logger_libs.dir

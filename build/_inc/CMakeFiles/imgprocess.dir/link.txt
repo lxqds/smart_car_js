@@ -1,0 +1,2 @@
+/usr/bin/ar qc libimgprocess.a  CMakeFiles/imgprocess.dir/road/imgprocess.cpp.o
+/usr/bin/ranlib libimgprocess.a

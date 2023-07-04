@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/edgeboard/worspace/YYDS_PPNC_Modified/_inc/utils/logger/inc/elog.h
+elog_cfg.h
+/home/edgeboard/worspace/YYDS_PPNC_Modified/_inc/utils/logger/inc/elog_cfg.h
+stdint.h
+-
+stddef.h
+-
+stdbool.h
+-
+
+/home/edgeboard/worspace/YYDS_PPNC_Modified/_inc/utils/logger/inc/elog_cfg.h
+
+/home/edgeboard/worspace/YYDS_PPNC_Modified/_inc/utils/logger/src/logger_helper.cc
+../../logger_helper.hpp
+/home/edgeboard/worspace/YYDS_PPNC_Modified/_inc/utils/logger_helper.hpp
+
+/home/edgeboard/worspace/YYDS_PPNC_Modified/_inc/utils/logger_helper.hpp
+unistd.h
+-
+iostream
+-
+sstream
+-
+logger/inc/elog.h
+/home/edgeboard/worspace/YYDS_PPNC_Modified/_inc/utils/logger/inc/elog.h
+
