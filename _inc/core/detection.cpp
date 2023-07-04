@@ -322,8 +322,8 @@ std::shared_ptr<std::unordered_map<std::string, NDTensor>> DetectionPredictor::p
     return std::make_shared<std::unordered_map<std::string, NDTensor>>(ret);
 }
 
-void DetectionPredictor::TransposeAndCopyToTensor(const Mat &src, NDTensor &dst) {
-    Mat channels[3];
+void DetectionPredictor::TransposeAndCopyToTensor(const cv::Mat &src, NDTensor &dst) {
+    cv::Mat channels[3];
     split(src, channels);
     int offset = src.rows * src.cols;
     auto start = dst.value();
