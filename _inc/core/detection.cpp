@@ -126,7 +126,7 @@ int DetectionPredictor::init() {
         file.close();
 
         for (uint8_t i = 0; i < labels.size(); i++) {
-            LOG_I << labels.at(i) << LOG_END;
+            LOG_I << "[Label " << (i + 1) << "] " << labels.at(i) << LOG_END;
         }
 
         LOG_I << "Done." << LOG_END;
@@ -214,7 +214,9 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
     std::vector<DetectionPredictResult> predict_ret;
 
     auto feeds = preprocess(input_frame, {320, 320});
-    // auto &image = feeds->at("image");
+    auto &image = feeds->at("image");
+
+    this->predictor_nna_->set_inputs({{"image", image}});
 
     // ppnc_nna run
     this->predictor_nna_->run();
