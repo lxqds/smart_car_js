@@ -11,7 +11,7 @@
 #define LOG_TAG "Control Json"
 
 using namespace std;
-using json = nlohmann::json;
+// using json = nlohmann::json;
 
 // 车模控制配置项
 struct ControlConfig {
@@ -74,7 +74,7 @@ struct ControlConfig {
     float steering_d;    // 转向环 D
 
     ControlConfig(std::string dir) : config_dir(dir) {
-        json root;
+        nlohmann::json root;
         std::ifstream is(config_dir);
         CHECK(is.good()) << "File: " << config_dir << "not found" << LOG_END;
 
@@ -118,7 +118,7 @@ struct ControlConfig {
         AUTOCFG(work_rou_over);
 
         AUTOCFG(speed_level);
-        json speed = root[speed_level];
+        nlohmann::json speed = root[speed_level];
 
 /* 改写当前配置项节点 */
 #undef P_CUR
@@ -303,7 +303,7 @@ struct SystemConfig {
     bool display_enable;
 
     SystemConfig(std::string dir) : config_dir(dir) {
-        json value;
+        nlohmann::json value;
         std::ifstream is(config_dir);
 
         CHECK(is.good()) << "File path:[" << config_dir << "] not find." << LOG_END;
@@ -316,7 +316,7 @@ struct SystemConfig {
         model_config_path = value["model_config"];
         model_config_path = confiig_path + model_config_path;
 
-        json input_config = value["input"];
+        nlohmann::json input_config = value["input"];
         input_type = input_config["type"];
 
         if (input_config["path"] != nullptr) {
@@ -333,7 +333,7 @@ struct SystemConfig {
         }
 
         if (value["debug"] != nullptr) {
-            json debug_config = value["debug"];
+            nlohmann::json debug_config = value["debug"];
             if (debug_config["predict_time_log_enable"] == nullptr) {
                 predict_time_log_enable = true;
             } else {

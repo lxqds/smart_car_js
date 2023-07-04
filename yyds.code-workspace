@@ -101,7 +101,8 @@
             "numbers": "cpp",
             "semaphore": "cpp",
             "stop_token": "cpp",
-            "xstring": "cpp"
+            "xstring": "cpp",
+            "xiosbase": "cpp"
         },
     },
     "tasks": {
