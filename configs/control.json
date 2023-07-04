@@ -1,6 +1,6 @@
 {
     "threshold": 127,
-    "threshold_detection": 0.9,
+    "threshold_detection": 0.5,
     "******-direction-*******": 0,
     "direction_garage": 1,
     "direction_yroad": 1,

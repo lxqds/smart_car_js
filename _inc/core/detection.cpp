@@ -357,6 +357,7 @@ std::string DetectionPredictor::getLabel(uint16_t type) {
     return this->labels[type];
 }
 
+/*
 void DetectionPredictor::printResults(
     std::vector<DetectionPredictResult> &results) {
     for (uint32_t i = 0; i < results.size(); ++i) {
@@ -370,7 +371,7 @@ void DetectionPredictor::printResults(
     }
 }
 
-/*
+
 // 针对检测结果, 进行画框操作
 void DetectionPredictor::drawResults(
     cv::Mat &input_frame, std::vector<DetectionPredictResult> &results) {
