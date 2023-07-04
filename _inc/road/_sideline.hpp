@@ -7,6 +7,7 @@
 #include <opencv2/opencv.hpp>
 
 #include "imgprocess.hpp"
+#include "predictor_api.h"
 
 /* ********************************************************************* */
 

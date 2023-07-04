@@ -1,4 +1,6 @@
 #pragma once
+#include <onnxruntime_cxx_api.h>
+
 #include <cstdint>
 #include <opencv2/opencv.hpp>
 
