@@ -6,24 +6,24 @@
 
 #include "../common/model_config.hpp"
 #include "../utils/blocking_queue.h"
-#include "../utils/logger_helper.hpp"
+#include "../utils/logger_helper.hpp"s
 #include "../utils/stop_watch.hpp"
-#include "preprocess.hpp"
-
+// #include "preprocess.hpp"
 
 // new PPNC predictor includes
-#include "predictor_api.h"
 #include <onnxruntime_cxx_api.h>
 
-#include <unordered_map>
-#include <memory>
+#include <algorithm>
 #include <cstdio>
+#include <fstream>
 #include <functional>
+#include <iostream>
+#include <memory>
 #include <numeric>
 #include <string>
-#include <fstream>
-#include <iostream>
-#include <algorithm>
+#include <unordered_map>
+
+#include "predictor_api.h"
 
 #undef LOG_TAG
 #define LOG_TAG "Detection"
@@ -57,29 +57,26 @@ class DetectionPredictor {
     // new PPNC
     std::vector<std::string> labels;
     // onnx info
-    std::pair<std::vector<std::string>, std::vector<const char*>> onnx_input_names_;
-    std::pair<std::vector<std::string>, std::vector<const char*>> onnx_out_names_;
+    std::pair<std::vector<std::string>, std::vector<const char *>> onnx_input_names_;
+    std::pair<std::vector<std::string>, std::vector<const char *>> onnx_out_names_;
     Ort::Env onnx_env_;
     // predictor
     std::shared_ptr<PPNCPredictor> predictor_nna_;
     std::shared_ptr<PPNCPredictor> predictor_nms_;
     std::shared_ptr<Ort::Session> predictor_onnx_;
 
-
     void _boundaryCorrection(DetectionPredictResult &r, int width_range, int height_range);
 
    public:
     int init();
 
-
     void build_nms(const std::string &model_dir);
     std::shared_ptr<std::unordered_map<std::string, NDTensor>> preprocess(
-            cv::Mat frame,
-            const std::vector<int64_t> &input_size);
+        cv::Mat frame,
+        const std::vector<int64_t> &input_size);
     // void render();
 
     std::vector<DetectionPredictResult> predict(cv::Mat input_frame);
-
 
     void printResults(std::vector<DetectionPredictResult> &results);
     void drawResults(cv::Mat &input_frame, std::vector<DetectionPredictResult> &results);
