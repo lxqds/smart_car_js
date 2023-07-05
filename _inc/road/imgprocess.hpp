@@ -18,7 +18,7 @@
 #include "elements/_ramp.hpp"
 #include "elements/_work.hpp"
 #include "elements/_yroad.hpp"
-#include "elements/_slowzone.h"
+#include "elements/_slowzone.hpp"
 
 class ImageProcess {
    public:
