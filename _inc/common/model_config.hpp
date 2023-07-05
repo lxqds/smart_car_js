@@ -30,6 +30,7 @@ struct ControlConfig {
     uint8_t check_gas_;     // 是否识别加油站
     uint8_t check_yroad_;   // 是否识别泛行区
     uint8_t check_ramp_;    // 是否识别坡道
+    uint8_t check_slow_;    // 是否识别慢行区
     uint8_t check_circle_;  // 是否识别环岛
     uint8_t check_cross_;   // 是否识别十字
 
@@ -65,6 +66,7 @@ struct ControlConfig {
     uint16_t speed_cross;       // 十字速度
     uint16_t speed_ramp_up;     // 上坡速度
     uint16_t speed_ramp_down;   // 下坡速度
+    uint16_t speed_slow_down;   // 慢行速度
 
     float deviation_garage_in_p;  // 入库偏差 (P项增大值)
     float deviation_garage_out;   // 出库偏差
@@ -97,6 +99,7 @@ struct ControlConfig {
         AUTOCFG(check_gas_);
         AUTOCFG(check_yroad_);
         AUTOCFG(check_ramp_);
+        AUTOCFG(check_slow_);
         AUTOCFG(check_circle_);
         AUTOCFG(check_cross_);
 
@@ -139,6 +142,7 @@ struct ControlConfig {
         AUTOCFG(speed_cross);
         AUTOCFG(speed_ramp_up);
         AUTOCFG(speed_ramp_down);
+        AUTOCFG(speed_slow_down);
 
         AUTOCFG(deviation_garage_in_p);
         AUTOCFG(deviation_garage_out);

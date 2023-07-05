@@ -259,7 +259,7 @@ bool sort_x_down(POINT a, POINT b) {  // 降序
 std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict) {
     std::vector<POINT> cones;
     for (auto p : predict) {
-        if (ImageProcess::DetectionLabel(p.type) == ImageProcess::label_red) {
+        if (ImageProcess::DetectionLabel(p.type) == ImageProcess::label_cone) {
             cones.push_back(POINT(p.y / 2 + p.height / 4,
                                   p.x / 2 + p.width / 4));
         }

@@ -37,11 +37,11 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     cv::cvtColor(mat_result, mat_bin, cv::COLOR_BGR2GRAY);
     cv::threshold(mat_bin, mat_bin, 0, 255, cv::THRESH_OTSU);
 
-    // 获取 LAB 图片 A 通道 (红色) -> 提取锥桶
+    // 获取 LAB 图片 B 通道 (黄) -> 提取锥桶
     cv::cvtColor(mat_result, mat_lab, cv::COLOR_BGR2Lab);
     std::vector<cv::Mat> channels_lab;
     cv::split(mat_lab, channels_lab);
-    cv::threshold(channels_lab[1], mat_lab, 150, 255, cv::THRESH_BINARY);
+    cv::threshold(channels_lab[2], mat_lab, 150, 255, cv::THRESH_BINARY);
 
     // 绘制处理结果图, 灰度格式转BGR格式
     /*
@@ -409,8 +409,10 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             // 检测结果筛选
             if (r.score < _config->threshold_detection)
                 continue;
-            if (DetectionLabel(r.type) == label_red)
+            /*if (DetectionLabel(r.type) == label_cone){
                 continue;
+            }*/
+
 
             // 转换到处理图像坐标
             int deX = r.x / 2, deY = r.y / 2;
@@ -422,17 +424,17 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
 
             // 禁止在元素内判断其他元素
             if (flag_work == WORK_NONE && flag_gas == GAS_NONE &&
-                flag_yroad == YROAD_NONE && flag_ramp == RAMP_NONE) {
+                flag_yroad == YROAD_NONE && flag_ramp == RAMP_NONE && flag_slow == SLOW_NONE) {
                 switch (DetectionLabel(r.type)) {
-                    case label_work:  // 施工区
+                    case label_tractor:  // 施工区 拖拉机
                         if (flag_work == WORK_NONE && _config->check_work_ == 1) {
                             flag_work = WORK_DETECTION;
-                            sprintf(string_log, "WORK_DETECTION");
-                            log_i("WORK_DETECTION");
+                            sprintf(string_log, "TRACTOR_DETECTION");
+                            log_i("TRACTOR_DETECTION");
                         }
                         break;
 
-                    case label_gas:  // 加油站
+                    case label_granary:  // 加油站 谷仓
                         if (flag_gas == GAS_NONE && _config->check_gas_ == 1) {
                             flag_gas = GAS_DETECTION;
                             sprintf(string_log, "GAS_DETECTION");
@@ -440,11 +442,11 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                         }
                         break;
 
-                    case label_three:  // 泛行区
+                    case label_corn:  // 泛行区 农场区
                         if (flag_yroad == YROAD_NONE && _config->check_yroad_ == 1) {
                             flag_yroad = YROAD_DETECTION;
-                            sprintf(string_log, "YROAD_DETECTION");
-                            log_i("YROAD_DETECTION");
+                            sprintf(string_log, "FARM_DETECTION");
+                            log_i("FARM_DETECTION");
                         }
                         break;
 
@@ -455,7 +457,20 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                             log_i("RAMP_DETECTION");
                         }
                         break;
-
+                    case label_bridge:// 桥
+                        if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
+                            flag_ramp = RAMP_DETECTION;
+                            sprintf(string_log, "BRIDGE_DETECTION");
+                            log_i("BRIDGE_DETECTION");
+                        }
+                        break;
+                    case label_pig:// 慢行区
+                        if (flag_slow == SLOW_NONE && _config->check_slow_ == 1) {
+                            flag_slow = SLOW_DETECTION;
+                            sprintf(string_log, "PIG_DETECTION");
+                            log_i("PIG_DETECTION");
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -516,16 +531,21 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             flag_gas == GAS_NONE && flag_yroad == YROAD_NONE)
             check_ramp();  // 坡道 - 识别标志
 
+        if (flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
+            flag_gas == GAS_NONE && flag_yroad == YROAD_NONE)
+            check_slow();  // 慢行区 - 识别标志
+
         if (_config->check_circle_ == 1 &&
             flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
             flag_gas == GAS_NONE && flag_yroad == YROAD_NONE &&
-            flag_ramp == RAMP_NONE)
+            flag_ramp == RAMP_NONE &&
+            flag_slow == SLOW_NONE)
             check_circle();  // 环岛路 - 识别角点特征
 
         if (_config->check_cross_ == 1 &&
             flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
             flag_gas == GAS_NONE && flag_yroad == YROAD_NONE &&
-            flag_ramp == RAMP_NONE && flag_circle <= 2)
+            flag_ramp == RAMP_NONE && flag_slow == SLOW_NONE &&flag_circle <= 2)
             check_cross();  // 十字路 - 识别角点特征
     }
 
@@ -537,6 +557,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         flag_gas = GAS_NONE;
         flag_yroad = YROAD_NONE;
         flag_ramp = RAMP_NONE;
+        flag_slow = SLOW_NONE;
         flag_circle = CIRCLE_NONE;
         flag_cross = CROSS_NONE;
     } else if (flag_work != WORK_NONE) {
@@ -545,6 +566,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         flag_gas = GAS_NONE;
         flag_yroad = YROAD_NONE;
         flag_ramp = RAMP_NONE;
+        flag_slow = SLOW_NONE;
         flag_circle = CIRCLE_NONE;
         flag_cross = CROSS_NONE;
     } else if (flag_gas != GAS_NONE) {
@@ -552,16 +574,23 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         /* *** *** *** *** *** */
         flag_yroad = YROAD_NONE;
         flag_ramp = RAMP_NONE;
+        flag_slow = SLOW_NONE;
         flag_circle = CIRCLE_NONE;
         flag_cross = CROSS_NONE;
     } else if (flag_yroad != YROAD_NONE) {
         run_yroad();
         /* *** *** *** *** *** */
         flag_ramp = RAMP_NONE;
+        flag_slow = SLOW_NONE;
         flag_circle = CIRCLE_NONE;
         flag_cross = CROSS_NONE;
     } else if (flag_ramp != RAMP_NONE) {
         run_ramp();
+        /* *** *** *** *** *** */
+        flag_circle = CIRCLE_NONE;
+        flag_cross = CROSS_NONE;
+    } else if (flag_slow != SLOW_NONE) {
+        run_slow();
         /* *** *** *** *** *** */
         flag_circle = CIRCLE_NONE;
         flag_cross = CROSS_NONE;
@@ -813,6 +842,9 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     else if (flag_ramp == RAMP_DOWN) {
         aim_speed = _config->speed_ramp_down;
     }  // 坡道 下
+    else if (flag_slow == SLOW_DOWN) {
+        aim_speed = _config->speed_slow_down;
+    }  // 慢行区
     else if (flag_circle > 0 && flag_circle < 7) {
         aim_speed = _config->speed_circle;
     }  // 出入环岛
@@ -893,7 +925,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
 
         MAT_INFO(mat_result, cv::Point(5, 25), 0.4, "%s", track_label.c_str());
         MAT_INFO(mat_result, cv::Point(5, 40), 0.4, "speed: %d", aim_speed);
-        MAT_INFO(mat_result, cv::Point(5, 55), 0.4, "angle: %.2f", aim_angle_filter);
+        MAT_INFO(mat_result, cv::Point(5, 55), 0.4, "angle: %.2f,pwm:%d", aim_angle_filter,aim_angle_pwm);
         MAT_INFO(mat_result, cv::Point(5, 70), 0.4, "stg_p: %.4f", aim_angle_p);
         MAT_INFO(mat_result, cv::Point(120, 10), 0.4, "[%c][%c][%c]",
                  is_straight0 ? '^' : (is_curve0 ? '<' : ' '),

@@ -23,7 +23,7 @@ void check_ramp() {
         IMG.element_identify = 1;
         ramp_route = IMG.encoder.route;
         flag_ramp = RAMP_UP;
-        MAT_LOG("RAMP_UP");
+        MAT_LOG("BRIDGE_UP");
     }
 }
 
@@ -33,7 +33,7 @@ void run_ramp() {
     if (flag_ramp == RAMP_UP && (IMG.encoder.route - ramp_route > 130)) {
         IMG.flag_track = TRACK_MIDDLE;
         flag_ramp = RAMP_DOWN;
-        MAT_LOG("RAMP_DOWN");
+        MAT_LOG("BRIDGE_DOWN");
     }
 
     if (flag_ramp == RAMP_DOWN && (IMG.encoder.route - ramp_route > 180)) {
@@ -41,7 +41,7 @@ void run_ramp() {
         IMG.element_over = true;
         IMG.element_over_route = IMG.encoder.route;
         flag_ramp = RAMP_NONE;
-        MAT_LOG("RAMP_NONE");
+        MAT_LOG("BRIDGE_NONE");
     }
 }
 

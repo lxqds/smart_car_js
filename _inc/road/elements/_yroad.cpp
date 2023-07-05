@@ -15,6 +15,10 @@ extern ImageProcess imgprocess;
 // 变量定义
 float yroad_route = 0;  // 泛行区编码器积分
 int yroad_out_num = 0;  // 泛行区结束计次
+POINT yroad_ld_near_cone;  // 左下方边缘最近的锥桶
+POINT yroad_rd_near_cone;  // 右下方边缘最近的锥桶
+POINT yroad_lu_near_cone;  // 左上方边缘最近的锥桶
+POINT yroad_ru_near_cone;  // 右上方边缘最近的锥桶
 
 // 泛行区角点
 int yroad_Lpt_id;      // 泛行区角点位置
@@ -35,7 +39,7 @@ void check_yroad() {
     if (flag_yroad == YROAD_DETECTION) {
         IMG.element_identify = 1;
         flag_yroad = YROAD_FOUND;
-        MAT_LOG("YROAD_FOUND");
+        MAT_LOG("Farmland_FOUND");
     }
 }
 
@@ -43,106 +47,115 @@ void check_yroad() {
 
 void run_yroad() {
     if (flag_yroad == YROAD_FOUND) {
-        IMG.flag_track = TRACK_MIDDLE;
+        // 清弯道防止加大 P 项, 提高稳定性
+        IMG.is_curve0 = IMG.is_curve1 = false;
 
+        // 找锥桶
+        IMG.edge_det = search_targets(IMG._det_result);
+
+        // 进入方向，以左锥桶为点或是右锥桶
+        /*if (IMG._config->direction_yroad == 0)
+            work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
+        else
+            work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);*/
         // 丢线, 进入泛行区巡线
         if (IMG.rpts0s_num < 0.2 / SAMPLE_DIST &&
             IMG.rpts1s_num < 0.2 / SAMPLE_DIST) {
             yroad_route = IMG.encoder.route;
             flag_yroad = YROAD_IN;
-            MAT_LOG("YROAD_IN");
+            MAT_LOG("Farmland_IN");
         }
     }
 
     /* ***************************************************************** */
 
     if (flag_yroad == YROAD_IN) {
-        if (IMG.encoder.route - yroad_route > 180) {
+        if (IMG.encoder.route - yroad_route > 180&&IMG.rpts0s_num > 0.2 / SAMPLE_DIST) {
+            //路程积分和识别到双线
             yroad_route = IMG.encoder.route;
             flag_yroad = YROAD_OUT;
-            MAT_LOG("YROAD_OUT");
-        } else {
-            int yroad_x = IMAGE_WIDTH / 2;
-            int yroad_y = IMAGE_HEIGHT / 2;
+            MAT_LOG("Farmland_OUT");
+        } else{
+            // 清弯道防止加大 P 项, 提高稳定性
+            IMG.is_curve0 = IMG.is_curve1 = false;
 
-            if (IMG._config->direction_yroad == 1) {
-                yroad_x -= 10;
-                IMG.flag_track = TRACK_RIGHT;
-            } else {
-                yroad_x += 10;
-                IMG.flag_track = TRACK_LEFT;
-            }
+            // 正入口 巡中线
+            IMG.flag_track = TRACK_MIDDLE;
 
-            if (AT_IMAGE(IMG.mat_bin, yroad_x, yroad_y) < IMG._config->threshold) {
-                if (IMG._config->direction_yroad == 1) {
-                    // 向右寻找白点
-                    for (; yroad_x < IMAGE_WIDTH - 1; yroad_x++)
-                        if (AT_IMAGE(IMG.mat_bin, yroad_x, yroad_y) >=
-                            IMG._config->threshold)
-                            break;
-                    // 向上寻找白点
-                    if (yroad_x > IMAGE_WIDTH - BLOCK_SIZE / 2 - 1) {
-                        yroad_x = IMAGE_WIDTH - BLOCK_SIZE / 2 - 1;
-                        for (; yroad_y > IMAGE_HEIGHT / 4; yroad_y--)
-                            if (AT_IMAGE(IMG.mat_bin, yroad_x, yroad_y) >
-                                IMG._config->threshold)
-                                break;
+            IMG.edge_det = search_targets(IMG._det_result);
+
+            // 找目标点
+            yroad_ld_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
+            yroad_rd_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);
+            yroad_lu_near_cone = search_leftUp_cone(IMG.edge_det);
+            yroad_ru_near_cone = search_rightDown_cone(IMG.edge_det);
+
+            //底端看到两个锥桶
+            if (yroad_ld_near_cone.x > 0 && yroad_rd_near_cone.x > 0 ){
+                //补线起点,中点和终点
+                POINT startPoint = POINT((yroad_ld_near_cone.x + yroad_rd_near_cone.x)/2,
+                                         (yroad_ld_near_cone.y + yroad_rd_near_cone.y)/2);
+                POINT middlePoint = POINT((yroad_lu_near_cone.x + yroad_ru_near_cone.x)/2,
+                                         (yroad_lu_near_cone.y + yroad_ru_near_cone.y)/2);
+                double k = 0;
+                k = (float)(middlePoint.y - startPoint.y)/(float)(middlePoint.x-startPoint.x);
+                MAT_LOG("line_k:%f",k);
+                POINT endPoint;
+
+                int x1_x2;
+                int x2_x1;
+                int y1_y2;
+                int y2_y1;
+                int x1sumx2;
+                int y1sumy2;
+                x1_x2 =  startPoint.x - middlePoint.x;
+                x2_x1 =  middlePoint.x - startPoint.x;
+                y1_y2 =  startPoint.y - middlePoint.y;
+                y2_y1 =  middlePoint.y - startPoint.y;
+                x1sumx2 =  startPoint.x + middlePoint.x;
+                y1sumy2 =  startPoint.y + middlePoint.y;
+                if(k < 0){
+                    //预判点在左边，计算左边远处的点，根据两倍的角度计算
+                    if((((1+sqrt(2))*x1_x2) < IMAGE_WIDTH/2) && ((2*middlePoint.y)<IMAGE_HEIGHT)){
+                        //左边的点
+                        endPoint = POINT((middlePoint.x - (int)((1+sqrt(2))*x1_x2)),(2*middlePoint.y));
                     }
-                } else {
-                    // 向左寻找白点
-                    for (; yroad_x > 0; yroad_x--)
-                        if (AT_IMAGE(IMG.mat_bin, yroad_x, yroad_y) >=
-                            IMG._config->threshold)
-                            break;
-                    // 向上寻找白点
-                    if (yroad_x < BLOCK_SIZE / 2) {
-                        yroad_x = BLOCK_SIZE / 2;
-                        for (; yroad_y > IMAGE_HEIGHT / 4; yroad_y--)
-                            if (AT_IMAGE(IMG.mat_bin, yroad_x, yroad_y) >
-                                IMG._config->threshold)
-                                break;
+                    else if((((1+sqrt(2))*(x1_x2)) > IMAGE_WIDTH/2) && ((y2_y1)<IMAGE_HEIGHT)){
+                        //左边点在图像左边以外
+                        endPoint = POINT(0,middlePoint.y+middlePoint.y);
+                    }
+                    else{
+                        //直走
+                        endPoint = POINT(IMAGE_WIDTH/2,IMAGE_HEIGHT/2);
                     }
                 }
-            } else {
-                // 向上寻找黑点
-                for (; yroad_y > 0; yroad_y--)
-                    if (AT_IMAGE(IMG.mat_bin, yroad_x, yroad_y) <
-                        IMG._config->threshold)
-                        break;
-                yroad_y++;
+                else if(k>0){
+                    //预判点在右边，计算右边远处的点，根据两倍的角度计算
+                    if((((1+sqrt(2))*x2_x1) < IMAGE_WIDTH/2) && ((2*middlePoint.y)<IMAGE_HEIGHT)){
+                        //右边的点
+                        endPoint = POINT((middlePoint.x + (int)((1+sqrt(2))*x2_x1)),(2*middlePoint.y));
+                    }
+                    else if((((1+sqrt(2))*(x1_x2)) > IMAGE_WIDTH/2) && ((y2_y1)<IMAGE_HEIGHT)){
+                        //左边点在图像左边以外
+                        endPoint = POINT(IMAGE_WIDTH,middlePoint.y+middlePoint.y);
+                    }
+                    else{
+                        //直走
+                        endPoint = POINT(IMAGE_WIDTH/2,IMAGE_HEIGHT/2);
+                    }
+                } else {
+                    //直走
+                    endPoint = POINT(IMAGE_WIDTH/2,IMAGE_HEIGHT/2);
+                }
+
+                vector<POINT> input = {startPoint, middlePoint, endPoint};
+                vector<POINT> repair = bezier(0.02, input);
+
+                IMG.edge_right = repair;
+
             }
 
-            // 搜索边界
-            yroad_ipts_num = sizeof(yroad_ipts) / sizeof(yroad_ipts[0]);
-            if (AT_IMAGE(IMG.mat_bin, yroad_x, yroad_y) >=
-                IMG._config->threshold) {
-                if (IMG._config->direction_yroad == 1) {
-                    findline_lefthand_adaptive(IMG.mat_bin, BLOCK_SIZE, CLIP_VALUE,
-                                               yroad_x, yroad_y, yroad_ipts,
-                                               &yroad_ipts_num);
-                } else {
-                    findline_righthand_adaptive(IMG.mat_bin, BLOCK_SIZE, CLIP_VALUE,
-                                                yroad_x, yroad_y, yroad_ipts,
-                                                &yroad_ipts_num);
-                }
-            } else
-                yroad_ipts_num = 0;
-
-            // 原图边线 -> 透视边线
-            for (int i = 0; i < yroad_ipts_num; i++)
-                map_perspective(yroad_ipts[i][0], yroad_ipts[i][1], yroad_rpts[i], 0);
-
-            // 边线滤波
-            blur_points(yroad_rpts, yroad_ipts_num, yroad_rptsb,
-                        (int)round(LINE_BLUR_KERNEL));
-
-            // 边线等距采样
-            yroad_rptss_num = sizeof(yroad_rptss) / sizeof(yroad_rptss[0]);
-            resample_points(yroad_rptsb, yroad_ipts_num, yroad_rptss,
-                            &yroad_rptss_num, SAMPLE_DIST * PIXEL_PER_METER);
-
-            yroad_Lpt_id = 0;
-            yroad_Lpt_found = false;
+            //补线
         }
     }
 
