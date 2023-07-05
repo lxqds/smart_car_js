@@ -114,7 +114,7 @@ class SerialDriver {
 
                 speed_union.Float = payload.tSpeed / 1000.0;
 
-                direction_union.U16 = (uint16_t)(payload.tAngle * (-2.0f) + PWM_MIDDLE);
+                direction_union.U16 = (uint16_t)(payload.tAngle * (-3.0f) + PWM_MIDDLE);
 
                 packet->head = 0x42;
                 packet->addr = 0x01;
