@@ -63,6 +63,8 @@ struct ControlConfig {
     uint16_t speed_steady;      // 元素稳定速度
     uint16_t speed_garage_in;   // 入库速度
     uint16_t speed_garage_out;  // 出库速度
+    uint16_t garage_in_route_;  //入库距离判断
+    uint16_t garage_out_route_; //出库距离判断
     uint16_t speed_work;        // 出入施工区速度
     uint16_t speed_gas;         // 出入加油站速度
     uint16_t speed_yroad;       // 泛行区速度
@@ -142,6 +144,8 @@ struct ControlConfig {
         AUTOCFG(speed_up);
         AUTOCFG(speed_steady);
         AUTOCFG(speed_garage_in);
+        AUTOCFG(garage_in_route_);
+        AUTOCFG(garage_out_route_);
         AUTOCFG(speed_garage_out);
         AUTOCFG(speed_work);
         AUTOCFG(speed_gas);

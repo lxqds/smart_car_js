@@ -101,9 +101,9 @@ void run_garage() {
             if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
                 none_right++;
             if (IMG.rpts1s_num > 1.0 / SAMPLE_DIST && none_right > 1) {
-                // 未识别到双 L 角点, 识别到双线, 出库完成
-                if (!IMG.Lpt0_found && !IMG.Lpt1_found &&
-                    IMG.rpts0s_num > 0.2 / SAMPLE_DIST) {
+                // 未识别到双 L 角点, 识别到双线, 或者积分到一定距离出库完成
+                if ((!IMG.Lpt0_found && !IMG.Lpt1_found &&
+                    IMG.rpts0s_num > 0.2 / SAMPLE_DIST)||((IMG.encoder.route)>_config->garage_out_route_)) {
                     none_right = 0;
                     IMG.element_over = true;
                     IMG.element_over_route = IMG.encoder.route;
@@ -119,8 +119,8 @@ void run_garage() {
                 none_left++;
             if (IMG.rpts0s_num > 1.0 / SAMPLE_DIST && none_left > 1) {
                 // 未识别到双 L 角点, 识别到双线, 出库完成
-                if (!IMG.Lpt0_found && !IMG.Lpt1_found &&
-                    IMG.rpts1s_num > 0.2 / SAMPLE_DIST) {
+                if ((!IMG.Lpt0_found && !IMG.Lpt1_found &&
+                    IMG.rpts1s_num > 0.2 / SAMPLE_DIST)||((IMG.encoder.route)>_config->garage_out_route_)) {
                     none_left = 0;
                     IMG.element_over = true;
                     IMG.element_over_route = IMG.encoder.route;
@@ -151,7 +151,7 @@ void run_garage() {
                     }
                 }
             }
-            if (garage_stop || IMG.encoder.route - garage_route >= 125) {
+            if (garage_stop && IMG.encoder.route - garage_route >= _config->garage_in_route_) {
                 flag_garage = GARAGE_STOP;
                 MAT_LOG("GARAGE_STOP");
             }
@@ -175,7 +175,7 @@ void run_garage() {
                     }
                 }
             }
-            if (garage_stop || IMG.encoder.route - garage_route >= 125) {
+            if (garage_stop && IMG.encoder.route - garage_route >= _config->garage_in_route_) {
                 flag_garage = GARAGE_STOP;
                 MAT_LOG("GARAGE_STOP");
             }
