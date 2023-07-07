@@ -29,6 +29,7 @@ struct ControlConfig {
     uint8_t check_binary_;    //是否显示二值化图像
     uint8_t check_lab_;      //是否显示lab
     uint8_t over_route_;    //识别元素后经过的路程再开启新的元素检测距离
+    uint8_t check_garage_times_;//第几次入库
     uint8_t check_work_;    // 是否识别施工区
     uint8_t check_gas_;     // 是否识别加油站
     uint8_t check_yroad_;   // 是否识别泛行区
@@ -101,6 +102,7 @@ struct ControlConfig {
         AUTOCFG(check_binary_);
         AUTOCFG(check_lab_);
         AUTOCFG(over_route_);
+        AUTOCFG(check_garage_times_)
         AUTOCFG(check_work_);
         AUTOCFG(check_gas_);
         AUTOCFG(check_yroad_);

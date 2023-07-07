@@ -66,7 +66,7 @@ void check_garage() {
         garage_route = IMG.encoder.route;
 
         if (IMG._config->direction_garage == 0) {  // 左库
-            if (++garage_num >= 2) {
+            if (++garage_num >= _config->check_garage_times_) {
                 flag_garage = GARAGE_IN_LEFT;  // 第二次入库
                 MAT_LOG("GARAGE_IN_LEFT");
             } else {
@@ -74,7 +74,7 @@ void check_garage() {
                 MAT_LOG("GARAGE_PASS_LEFT");
             }
         } else if (IMG._config->direction_garage == 1) {  // 右库
-            if (++garage_num >= 2) {
+            if (++garage_num >= _config->check_garage_times_) {
                 flag_garage = GARAGE_IN_RIGHT;  // 第二次入库
                 MAT_LOG("GARAGE_IN_RIGHT");
             } else {
