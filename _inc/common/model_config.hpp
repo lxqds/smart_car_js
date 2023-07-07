@@ -26,6 +26,8 @@ struct ControlConfig {
     uint8_t direction_work;    // 施工区方向  0: 左   1: 右
     uint8_t direction_gas;     // 加油站方向  0: 左   1: 右
 
+    uint8_t check_binary_;    //是否显示二值化图像
+    uint8_t check_lab_;      //是否显示lab
     uint8_t check_work_;    // 是否识别施工区
     uint8_t check_gas_;     // 是否识别加油站
     uint8_t check_yroad_;   // 是否识别泛行区
@@ -95,6 +97,8 @@ struct ControlConfig {
         AUTOCFG(direction_work);
         AUTOCFG(direction_gas);
 
+        AUTOCFG(check_binary_);
+        AUTOCFG(check_lab_);
         AUTOCFG(check_work_);
         AUTOCFG(check_gas_);
         AUTOCFG(check_yroad_);
