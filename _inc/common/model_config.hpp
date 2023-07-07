@@ -104,7 +104,7 @@ struct ControlConfig {
         AUTOCFG(check_binary_);
         AUTOCFG(check_lab_);
         AUTOCFG(over_route_);
-        AUTOCFG(check_garage_times_)
+        AUTOCFG(check_garage_times_);
         AUTOCFG(check_work_);
         AUTOCFG(check_gas_);
         AUTOCFG(check_yroad_);
