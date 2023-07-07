@@ -9,6 +9,7 @@
     "*****-aim_distance-*****": 0,
     "check_binary_": 0,
     "check_lab_": 0,
+    "over_route_": 10,
     "check_work_": 0,
     "check_gas_": 0,
     "check_yroad_": 0,

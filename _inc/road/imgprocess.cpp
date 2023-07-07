@@ -182,9 +182,10 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         iptsc[ccy] = iptsc0[ccy] + iptsc1[ccy];
 
         if (iptsc[ccy] != 0) {
+            //如果右边线丢失
             if (iptsc1[ccy] == 0)
                 iptsc[ccy] = (int)((IMAGE_WIDTH - iptsc[ccy]) / 2 + iptsc[ccy]);
-            else
+            else//左边线丢失
                 iptsc[ccy] = (int)(iptsc[ccy] / 2);
 
             // 原图中线 -> 透视中线
@@ -421,9 +422,10 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             int deX = r.x / 2, deY = r.y / 2;
             int deH = r.height / 2, deW = r.width / 2;
 
+            //都需要，可以不筛选
             // 尺寸位置筛选
-            if ((deX < 25 || deX + deW > 275) || deY < 40 || (deH < 25 || deW < 25))
-                continue;
+            //if ((deX < 25 || deX + deW > 275) || deY < 40 || (deH < 25 || deW < 25))
+            //    continue;
 
             // 禁止在元素内判断其他元素
             if (flag_work == WORK_NONE && flag_gas == GAS_NONE &&
@@ -508,7 +510,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     element_identify = 0;
 
     // 完成一个元素后, 过一段路程再开始检测(识别)新的元素
-    if (element_over && encoder.route - element_over_route > 20.0f) {
+    if (element_over && (encoder.route - element_over_route > _config->over_route_)) {
         element_over = false;
         element_over_route = 0.0f;
         element_begin_id = 0;
@@ -997,13 +999,13 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             // 施工区 & 加油站---------------------------------------
             if (flag_gas != GAS_NONE || flag_work != WORK_NONE) {
                 // 锥桶
-                for (auto p : edge_det)
+                for (auto p : edge_det)//白色
                     cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
 
                 // 边线
-                for (auto p : edge_left)
+                for (auto p : edge_left)//青蓝色
                     cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(0, 238, 238), -1);
-                for (auto p : edge_right)
+                for (auto p : edge_right)// 黄色
                     cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(238, 238, 0), -1);
             }
             // 正常巡线 --------------------------------------------
