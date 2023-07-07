@@ -102,7 +102,7 @@ class ImageProcess {
         "red", "gas", "wone", "wtwo"};
 
     enum DetectionLabel {
-        label_cone = 1,
+        label_cone = 0,
         label_granary,
         label_bridge,
         label_tractor,
