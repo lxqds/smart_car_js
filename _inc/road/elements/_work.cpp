@@ -4,7 +4,7 @@
 
 #include "../imgprocess.hpp"
 #include "../utils/logger_helper.hpp"
-
+#include "../utils/stop_watch.hpp"
 #undef LOG_TAG
 #define LOG_TAG "Work"
 
@@ -17,7 +17,8 @@ extern ImageProcess imgprocess;
 // 变量定义
 float work_route = 0;  // 施工区编码器积分
 POINT work_near_cone;  // 较近的锥桶
-
+StopWatch stop_clock;
+double stop_time;
 /* ********************************************************************* */
 
 void check_work() {
@@ -136,11 +137,19 @@ void run_work() {
                 }
             } else {
                 work_route = IMG.encoder.route;
-                flag_work = WORK_RUN;
-                MAT_LOG("WORK_RUN");
+                flag_work = WORK_STOP;
+                stop_clock.tic();
+                MAT_LOG("WORK_STOP");
             }
         }
-
+        if(flag_work == WORK_STOP){
+            if(stop_clock.toc() > IMG._config->work_stop_time){
+                MAT_LOG("WORK_STOPFINISH");
+                //flag_work = WORK_OUT;
+            } else {
+                MAT_LOG("WORK_STOPPING");
+            }
+        }
         // *****************************************************************
 
         if (flag_work == WORK_RUN) {
@@ -195,7 +204,6 @@ void run_work() {
                 MAT_LOG("WORK_OUT");
             }
         }
-
         // *****************************************************************
 
         if (flag_work == WORK_OUT) {

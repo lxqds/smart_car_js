@@ -8,6 +8,7 @@ enum flag_work_e {
     WORK_READY,      // 正在进入绕行区域
     WORK_RUN,        // 施工区绕行中
     WORK_OUT,        // 驶离
+    WORK_STOP,       // 停止
 };
 extern flag_work_e flag_work;
 
