@@ -1002,7 +1002,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             // 施工区 & 加油站---------------------------------------
             if (flag_gas != GAS_NONE || flag_work != WORK_NONE) {
                 // 锥桶
-                for (auto p : edge_det)//白色
+                for (auto p : edge_det)//白色 //列 |  行———
                     cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
 
                 // 边线

@@ -109,6 +109,7 @@ void run_work() {
                     vector<POINT> repair = bezier(0.03, input);
 
                     IMG.edge_right = repair;
+                    MAT_LOG("WORK_FIRST");
                 }
                 // 第二阶段: 检查右下锥桶坐标满足巡航条件
                 else {
@@ -133,6 +134,7 @@ void run_work() {
                         vector<POINT> repair = bezier(0.02, input);
 
                         IMG.edge_right = repair;
+                        MAT_LOG("WORK_SECOND");
                     }
                 }
             } else {
