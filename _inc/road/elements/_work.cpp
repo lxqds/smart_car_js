@@ -52,7 +52,7 @@ void run_work() {
             work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);
 
         // 当车辆开始靠近锥桶: 准备进入
-        if (work_near_cone.x > IMAGE_HEIGHT * 0.25f) {
+        if (work_near_cone.x > IMAGE_HEIGHT * 0.7f) {
             work_route = IMG.encoder.route;
             flag_work = WORK_READY;
             MAT_LOG("WORK_READY");
@@ -82,7 +82,7 @@ void run_work() {
             // 找目标点
             IMG.edge_det = search_targets(IMG._det_result);
             work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
-            POINT cone_RD = search_rightDown_cone(IMG.edge_det);
+            POINT cone_RU = search_rightUp_cone(IMG.edge_det);
 
             // 补线
             if (IMG.encoder.route - work_route < IMG._config->work_rou_ready) {
@@ -91,19 +91,19 @@ void run_work() {
                     // 补线起点: 右
                     POINT startPoint = POINT((work_near_cone.x + IMAGE_HEIGHT) / 2,
                                              (work_near_cone.y + IMAGE_WIDTH) / 2);
-
+                    POINT midPiont = POINT((work_near_cone.x),2*work_near_cone.y)
                     double k = 0, b = 0;
-                    k = (float)(work_near_cone.y - startPoint.y) /
+                    k = (float)(2*work_near_cone.y - startPoint.y) /
                         (float)(work_near_cone.x - startPoint.x);
-                    b = work_near_cone.y - k * work_near_cone.x;
+                    b = 2*work_near_cone.y - k * work_near_cone.x;
                     if (b < 0)
                         b = 0;
                     else if (b >= IMAGE_WIDTH)
                         b = IMAGE_WIDTH - 1;
 
                     POINT endPoint = POINT(0, b);     // 补线终点: 左
-                    POINT midPoint = work_near_cone;  // 补线中点
-                    POINT SSPoint = POINT(BEGIN_Y, IMG.edge_right[0].y);
+                    //POINT midPoint = work_near_cone;  // 补线中点
+                    POINT SSPoint = POINT(BEGIN_Y, IMG.edge_right[15].y);//备用起点，应该是
 
                     vector<POINT> input = {endPoint, midPoint, startPoint, SSPoint};
                     vector<POINT> repair = bezier(0.03, input);
@@ -113,22 +113,11 @@ void run_work() {
                 }
                 // 第二阶段: 检查右下锥桶坐标满足巡航条件
                 else {
-                    if (cone_RD.x > 0) {
+                    if (cone_RU.x > 0) {
                         // 补线起点: 右
-                        POINT startPoint = POINT((cone_RD.x + IMAGE_HEIGHT) / 2,
-                                                 (cone_RD.y + IMAGE_WIDTH) / 2);
-
-                        double k = 0, b = 0;
-                        k = (float)(cone_RD.y - startPoint.y) /
-                            (float)(cone_RD.x - startPoint.x);
-                        b = cone_RD.y - k * cone_RD.x;
-                        if (b < 0)
-                            b = 0;
-                        else if (b >= IMAGE_WIDTH)
-                            b = IMAGE_WIDTH - 1;
-
-                        POINT endPoint = POINT(0, b);  // 补线终点: 左
-                        POINT midPoint = cone_RD;      // 补线中点
+                        POINT startPoint = POINT(IMAGE_HEIGHT-40,IMAGE_WIDTH-1);
+                        POINT endPoint = POINT(50,0);  // 补线终点: 左
+                        POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
 
                         vector<POINT> input = {startPoint, midPoint, endPoint};
                         vector<POINT> repair = bezier(0.02, input);
@@ -139,7 +128,7 @@ void run_work() {
                 }
             } else {
                 work_route = IMG.encoder.route;
-                flag_work = WORK_STOP;
+                flag_work = WORK_RUN;
                 stop_clock.tic();
                 MAT_LOG("WORK_STOP");
             }
@@ -202,8 +191,8 @@ void run_work() {
             // 积分延迟一定距离出施工区
             if ((cone_RU.x >= 55) || (IMG.encoder.route - work_route >= IMG._config->work_rou_run)) {
                 work_route = IMG.encoder.route;
-                flag_work = WORK_OUT;
-                MAT_LOG("WORK_OUT");
+                flag_work = WORK_STOP;
+                MAT_LOG("WORK_RUN_STOP");
             }
         }
         // *****************************************************************
