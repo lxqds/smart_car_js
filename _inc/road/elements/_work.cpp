@@ -88,7 +88,7 @@ void run_work() {
             if (IMG.encoder.route - work_route < IMG._config->work_rou_ready) {
                 // 第一阶段: 当赛道边缘存在时
                 if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST) {
-                    // 补线起点: 右
+                   /* // 补线起点: 右
                     POINT startPoint = POINT((work_near_cone.x + IMAGE_HEIGHT) / 2,
                                              (work_near_cone.y + IMAGE_WIDTH) / 2);
                     POINT midPoint = POINT((work_near_cone.x),2*work_near_cone.y);
@@ -109,9 +109,19 @@ void run_work() {
                     vector<POINT> repair = bezier(0.03, input);
 
                     IMG.edge_right = repair;
+                    MAT_LOG("WORK_FIRST");*/
+                    // 补线起点: 右
+                    POINT startPoint = POINT(IMAGE_HEIGHT-40,IMAGE_WIDTH-1);
+                    POINT endPoint = POINT(50,0);  // 补线终点: 左
+                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
+
+                    vector<POINT> input = {startPoint, midPoint, endPoint};
+                    vector<POINT> repair = bezier(0.02, input);
+
+                    IMG.edge_right = repair;
                     MAT_LOG("WORK_FIRST");
                 }
-                // 第二阶段: 检查右下锥桶坐标满足巡航条件
+                // 第二阶段: 检查右上锥桶坐标满足巡航条件
                 else {
                     if (cone_RU.x > 0) {
                         // 补线起点: 右
