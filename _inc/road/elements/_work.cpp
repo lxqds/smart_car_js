@@ -241,12 +241,15 @@ void run_work() {
                 flag_work = WORK_NONE;
                 MAT_LOG("WORK_NONE");
             } else {
+                MAT_LOG("WORK_Debug1");
                 if(IMG.path_last_edge_left.size() >= 1){//先左边线
                     IMG.edge_left = IMG.path_last_edge_left[IMG.path_last_edge_left.size() - 1];
                     IMG.path_last_edge_left.pop_back();
+                    MAT_LOG("WORK_Debug2");
                 } else {//再右边线
                     IMG.edge_right = IMG.path_last_edge_right[IMG.path_last_edge_right.size() - 1];
                     IMG.path_last_edge_right.pop_back();
+                    MAT_LOG("WORK_Debug3");
                 }
 
             }
