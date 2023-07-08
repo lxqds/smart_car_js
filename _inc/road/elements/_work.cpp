@@ -185,8 +185,8 @@ void run_work() {
                         IMG.edge_left.clear();
                         for (size_t i = index; i < repair.size(); i++) {
                             IMG.edge_left.push_back(repair[i]);
-                            IMG.path_last_edge_left.push_back(repair[i]);
                         }
+                        IMG.path_last_edge_left.push_back(IMG.edge_left);
                     } else {
                         IMG.edge_left = repair;
                         IMG.path_last_edge_left.push_back(IMG.edge_left);
