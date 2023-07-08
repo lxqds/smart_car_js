@@ -824,16 +824,16 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         aim_angle_p += _config->deviation_garage_in_p;
     }  // 入库
     else if (flag_work == WORK_READY){
-        aim_speed = speed_work*0.7f;
+        aim_speed = _config->speed_work*0.7f;
     }
     else if (flag_work == WORK_RUN) {
-        aim_speed = speed_work*0.7f;
+        aim_speed = _config->speed_work*0.7f;
     }  // 施工区 内
     else if (flag_work == WORK_STOP){
         aim_speed = 0;
         aim_angle = 0;
     }else if(flag_work == WORK_OUT){
-        aim_speed = -speed_work*0.7f;
+        aim_speed = (_config->speed_work*-0.7f);
     }
     else if (flag_work != WORK_NONE) {
         aim_speed = (int16_t)_config->speed_work * 0.9f;
