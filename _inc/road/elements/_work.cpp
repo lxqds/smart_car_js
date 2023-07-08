@@ -91,7 +91,7 @@ void run_work() {
                     // 补线起点: 右
                     POINT startPoint = POINT((work_near_cone.x + IMAGE_HEIGHT) / 2,
                                              (work_near_cone.y + IMAGE_WIDTH) / 2);
-                    POINT midPiont = POINT((work_near_cone.x),2*work_near_cone.y)
+                    POINT midPoint = POINT((work_near_cone.x),2*work_near_cone.y);
                     double k = 0, b = 0;
                     k = (float)(2*work_near_cone.y - startPoint.y) /
                         (float)(work_near_cone.x - startPoint.x);
