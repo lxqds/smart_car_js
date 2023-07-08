@@ -201,17 +201,11 @@ void run_work() {
 
             // 计算所有锥桶的平均高度
             int num = 0;int levelCones;uint8_t counterRec;
-            for (int i = 0; i < pointEdgeDet.size(); i++)
-                num += pointEdgeDet[i].x;
+            for (int i = 0; i < IMG.edge_det.size(); i++)
+                num += IMG.edge_det[i].x;
 
-            levelCones = num / pointEdgeDet.size();
-            if (levelCones > IMAGE_HEIGHT * 0.24 || levelCones == 0) {
-                counterRec++;
-                if (counterRec > 3) {
-                    depotStep = DepotStep::DepotStop; // 停车使能
-                    counterRec = 0;
-                }
-            }
+            levelCones = num / IMG.edge_det.size();
+
 
             // 积分延迟一定距离出施工区
             if ((cone_RU.x >= 55) || (IMG.encoder.route - work_route >= IMG._config->work_rou_run)||(levelCones > IMAGE_HEIGHT * 0.24)) {
