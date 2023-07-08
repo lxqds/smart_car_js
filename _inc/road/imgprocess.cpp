@@ -413,19 +413,19 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             // 检测结果筛选
             if (r.score < _config->threshold_detection)
                 continue;
-            /*if (DetectionLabel(r.type) == label_cone){
+            if (DetectionLabel(r.type) == label_cone){
                 continue;
-            }*/
+            }
 
 
             // 转换到处理图像坐标
             int deX = r.x / 2, deY = r.y / 2;
             int deH = r.height / 2, deW = r.width / 2;
 
-            //都需要，可以不筛选
+
             // 尺寸位置筛选
-            //if ((deX < 25 || deX + deW > 275) || deY < 40 || (deH < 25 || deW < 25))
-            //    continue;
+            if ((deX < 25 || deX + deW > 275) || deY < 40 || (deH < 25 || deW < 25))
+                continue;
 
             // 禁止在元素内判断其他元素
             if (flag_work == WORK_NONE && flag_gas == GAS_NONE &&

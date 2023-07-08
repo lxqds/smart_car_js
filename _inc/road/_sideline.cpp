@@ -293,7 +293,31 @@ std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict) {
 
     return cones;
 }
+//搜索最高点的锥桶
+std::vector<POINT> search_highest_cone(std::vector<POINT> pointsCone) {
+    std::vector<POINT> highestCone = POINT(0, 0);
+    if (pointsCone.size() <= 0)
+        return;
+    highestCone = pointsCone[0];
+    for (int i = 0; i < pointsCone.size(); i++) {
+        if (pointsCone[i].x < highestCone.x)
+            highestCone = pointsCone[i];
+    }
+}
+//搜索最高点以左的锥桶集合
+std::vector<POINT> search_left_cones(std::vector<POINT> pointsCone,std::vector<POINT> highestCone) {
+    std::vector<POINT> points;
+    if (pointsCone.size() <= 0)
+        return points;
 
+    for (int i = 0; i < pointsCone.size(); i++) {
+        if (pointsCone[i].y <= highestCone.y)
+            points.push_back(pointsCone[i]);
+    }
+    if (points.size() >= 2)
+        std::sort(points.begin(), points.end(), sort_y_up);  // 纵坐标升序排序
+    return points;
+}
 // 搜索距离赛道左边缘最近的红色色块 (红色锥桶)
 POINT search_left_near(std::vector<POINT> pointsEdge, cv::Mat matt) {
     for (size_t i = 0; i < pointsEdge.size(); i++)
