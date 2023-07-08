@@ -3,7 +3,7 @@ project(YYDS_PPNC_Modified)
 
 set(CMAKE_CXX_STANDARD 17)
 MATH(EXPR stack_size "1024*1024*1024")
-set(CMAKE_CXX_FLAGS "-O3 -Wall -mcpu=native -flto -pthread -Wl,--stack,${stack_size}")
+set(CMAKE_CXX_FLAGS "-O3 -Wall -mcpu=native -flto -pthread -Wl,--stack-size=102400")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(INCLUDE_PATH "/usr/local/include")
 set(LIB_PATH "/usr/local/lib")
