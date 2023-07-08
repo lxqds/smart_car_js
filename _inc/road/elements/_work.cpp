@@ -221,12 +221,13 @@ void run_work() {
                 MAT_LOG("WORK_STOPFINISH");
                 flag_work = WORK_OUT;
             } else {
+                work_route = IMG.encoder.route;
                 MAT_LOG("WORK_STOPPING");
             }
         }
 
         if (flag_work == WORK_OUT) {
-            if ((IMG.encoder.route - work_route >= IMG._config->work_rou_out)&&IMG.path_last_edge_left.size() < 1 && IMG.path_last_edge_right.size() < 1  ) {
+            if ((IMG.encoder.route - work_route >= IMG._config->work_rou_out)&&(IMG.path_last_edge_left.size() < 1 && IMG.path_last_edge_right.size() < 1  )) {
                 if (IMG.rpts0s_num > 0.2 / SAMPLE_DIST) {
                     IMG.element_begin_id = IMG.rpts0s_num * 0.25f;
                     IMG.flag_track = TRACK_LEFT;
@@ -246,10 +247,12 @@ void run_work() {
                     IMG.edge_left = IMG.path_last_edge_left[IMG.path_last_edge_left.size() - 1];
                     IMG.path_last_edge_left.pop_back();
                     MAT_LOG("WORK_Debug2");
-                } else {//再右边线
+                } else if(IMG.path_last_edge_right.size() >= 1){//再右边线
                     IMG.edge_right = IMG.path_last_edge_right[IMG.path_last_edge_right.size() - 1];
                     IMG.path_last_edge_right.pop_back();
                     MAT_LOG("WORK_Debug3");
+                } else{
+                    MAT_LOG("WORK_Debug4");
                 }
 
             }
