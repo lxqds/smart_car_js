@@ -377,7 +377,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     else
         flag_track = TRACK_MIDDLE;
 
-    // 特殊处理
+    // 经过施工区后的特殊处理
     if (special_w) {  // 施工区
         if (_config->direction_work == 0)
             flag_track = TRACK_LEFT;
@@ -823,14 +823,20 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         /// 入库 加大角度 P 项
         aim_angle_p += _config->deviation_garage_in_p;
     }  // 入库
+    else if (flag_work == WORK_READY){
+        aim_speed = speed_work*0.7f;
+    }
     else if (flag_work == WORK_RUN) {
-        aim_speed = _config->speed_work;
+        aim_speed = speed_work*0.7f;
     }  // 施工区 内
     else if (flag_work == WORK_STOP){
         aim_speed = 0;
+        aim_angle = 0;
+    }else if(flag_work == WORK_OUT){
+        aim_speed = -speed_work*0.7f;
     }
     else if (flag_work != WORK_NONE) {
-        aim_speed = (int16_t)_config->speed_work * 1.3f;
+        aim_speed = (int16_t)_config->speed_work * 0.9f;
     }  // 施工区
     else if (flag_gas == GAS_RUN) {
         aim_speed = _config->speed_gas;
