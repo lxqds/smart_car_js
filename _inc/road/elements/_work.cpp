@@ -111,12 +111,12 @@ void run_work() {
                     IMG.edge_right = repair;
                     MAT_LOG("WORK_FIRST");*/
                     // 补线起点: 右
-                    POINT startPoint = POINT(IMAGE_HEIGHT-40,IMAGE_WIDTH-1);
-                    POINT endPoint = POINT(50,0);  // 补线终点: 左
+                    POINT startPoint = POINT(IMAGE_HEIGHT-50,IMAGE_WIDTH-1);
+                    POINT endPoint = POINT(10,0);  // 补线终点: 左
                     POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
 
                     vector<POINT> input = {startPoint, midPoint, endPoint};
-                    vector<POINT> repair = bezier(0.02, input);
+                    vector<POINT> repair = bezier(0.03, input);
 
                     IMG.edge_right = repair;
                     MAT_LOG("WORK_FIRST");
@@ -125,12 +125,12 @@ void run_work() {
                 else {
                     if (cone_RU.x > 0) {
                         // 补线起点: 右
-                        POINT startPoint = POINT(IMAGE_HEIGHT-40,IMAGE_WIDTH-1);
-                        POINT endPoint = POINT(50,0);  // 补线终点: 左
+                        POINT startPoint = POINT(IMAGE_HEIGHT-50,IMAGE_WIDTH-1);
+                        POINT endPoint = POINT(10,0);  // 补线终点: 左
                         POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
 
                         vector<POINT> input = {startPoint, midPoint, endPoint};
-                        vector<POINT> repair = bezier(0.02, input);
+                        vector<POINT> repair = bezier(0.03, input);
 
                         IMG.edge_right = repair;
                         MAT_LOG("WORK_SECOND");
@@ -140,7 +140,7 @@ void run_work() {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_RUN;
                 stop_clock.tic();
-                MAT_LOG("WORK_STOP");
+                MAT_LOG("WORK_RUN");
             }
         }
         if(flag_work == WORK_STOP){
