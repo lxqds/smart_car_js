@@ -111,8 +111,8 @@ void run_work() {
                     IMG.edge_right = repair;
                     MAT_LOG("WORK_FIRST");*/
                     // 补线起点: 右
-                    POINT startPoint = POINT(IMAGE_HEIGHT-50,IMAGE_WIDTH-1);
-                    POINT endPoint = POINT(80,0);  // 补线终点: 左
+                    POINT startPoint = POINT(IMAGE_HEIGHT-40,IMAGE_WIDTH-1);
+                    POINT endPoint = POINT(70,0);  // 补线终点: 左
                     POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
 
                     vector<POINT> input = {startPoint, midPoint, endPoint};
@@ -125,8 +125,8 @@ void run_work() {
                 else {
                     if (cone_RU.x > 0) {
                         // 补线起点: 右
-                        POINT startPoint = POINT(IMAGE_HEIGHT-50,IMAGE_WIDTH-1);
-                        POINT endPoint = POINT(80,0);  // 补线终点: 左
+                        POINT startPoint = POINT(IMAGE_HEIGHT-40,IMAGE_WIDTH-1);
+                        POINT endPoint = POINT(70,0);  // 补线终点: 左
                         POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
 
                         vector<POINT> input = {startPoint, midPoint, endPoint};
