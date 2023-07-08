@@ -232,7 +232,7 @@ void run_work() {
         }
 
         if (flag_work == WORK_OUT) {
-            if ((IMG.encoder.route - work_route >= IMG._config->work_rou_out)&&IMG.path_last_edge_left < 1 && IMG.path_last_edge_right < 1  ) {
+            if ((IMG.encoder.route - work_route >= IMG._config->work_rou_out)&&IMG.path_last_edge_left.size() < 1 && IMG.path_last_edge_right.size() < 1  ) {
                 if (IMG.rpts0s_num > 0.2 / SAMPLE_DIST) {
                     IMG.element_begin_id = IMG.rpts0s_num * 0.25f;
                     IMG.flag_track = TRACK_LEFT;
@@ -247,7 +247,7 @@ void run_work() {
                 flag_work = WORK_NONE;
                 MAT_LOG("WORK_NONE");
             } else {
-                if(IMG.path_last_edge_left >= 1){//先左边线
+                if(IMG.path_last_edge_left.size() >= 1){//先左边线
                     IMG.edge_left = IMG.path_last_edge_left[IMG.path_last_edge_left.size() - 1];
                     IMG.path_last_edge_left.pop_back();
                 } else {//再右边线
