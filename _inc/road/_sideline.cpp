@@ -294,7 +294,7 @@ std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict) {
     return cones;
 }
 //搜索最高点的锥桶
-std::vector<POINT> search_highest_cone(std::vector<POINT> pointsCone) {
+void search_highest_cone(std::vector<POINT> pointsCone) {
     std::vector<POINT> highestCone;
     if (pointsCone.size() <= 0)
         return;
