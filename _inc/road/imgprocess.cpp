@@ -830,7 +830,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         aim_speed = 0;
     }
     else if (flag_work != WORK_NONE) {
-        aim_speed = (int16_t)_config->speed_work * 0.9f;
+        aim_speed = (int16_t)_config->speed_work * 1.3f;
     }  // 施工区
     else if (flag_gas == GAS_RUN) {
         aim_speed = _config->speed_gas;
