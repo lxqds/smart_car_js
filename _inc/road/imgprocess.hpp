@@ -176,6 +176,10 @@ class ImageProcess {
     std::vector<POINT> last_edge_right;
     std::vector<vector<POINT>> path_last_edge_left; //记录左路径
     std::vector<vector<POINT>> path_last_edge_right; //记录右路径
+    std::vector<POINT> cones_edge_left;     //左边锥桶
+    std::vector<POINT> cones_edge_right;    //右边锥桶
+    std::vector<POINT> last_cones_edge_left; //记录前一场左边缘锥桶点集
+    std::vector<POINT> last_cones_edge_right; //记录前一场右边缘锥桶点集
 
 public:
     int det_ipts[IMAGE_HEIGHT][2];     // 加油站 & 施工区 边线原图

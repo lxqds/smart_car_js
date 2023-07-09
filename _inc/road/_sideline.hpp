@@ -70,6 +70,11 @@ bool sort_y_down(POINT a, POINT b);  // 降序
 bool sort_x_up(POINT a, POINT b);    // 升序
 bool sort_x_down(POINT a, POINT b);  // 降序
 
+//两点距离公式
+double distance_for_points(POINT a, POINT b);
+//搜索左右边缘的锥桶
+void search_cones_edge(std::vector<POINT> cones,std::vector<POINT> *left_cones,std::vector<POINT> *right_cones);
+
 // 从AI检测结果中检索锥桶坐标集合
 std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict);
 
@@ -79,6 +84,14 @@ POINT search_left_near(std::vector<POINT> pointsEdge, cv::Mat matt);
 // 搜索距离赛道右边缘最近的红色色块 (红色锥桶)
 POINT search_right_near(std::vector<POINT> pointsEdge, cv::Mat matt);
 
+//搜索左边线离锥桶最近的边线点的位次,x为行，第几行
+int search_break_left(std::vector<POINT> pointsEdge,cv::Mat matt);
+
+//找右边线离锥桶最近的边线点的位次,x为行，第几行
+int search_break_right(std::vector<POINT> pointsEdge,cv::Mat matt);
+
+// 搜索距离赛道左边缘上15最近的黄色色块 (黄色锥桶)
+POINT search_left_near15(std::vector<POINT> pointsEdge, cv::Mat matt);
 // 搜索左方的锥桶集合 ( IMAGE_WIDTH / 3 )
 std::vector<POINT> search_left_cones(std::vector<POINT> pointsCone);
 

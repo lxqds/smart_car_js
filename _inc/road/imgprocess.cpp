@@ -847,6 +847,9 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     else if (flag_yroad == YROAD_IN) {
         aim_speed = _config->speed_yroad;
     }  // 泛行区 内
+    else if (flag_yroad == YROAD_RUN) {
+        aim_speed = _config->speed_yroad;
+    }  // 泛行区 跑的过程
     else if (flag_yroad == YROAD_OUT) {
         aim_speed = _config->speed_steady;
     }  // 泛行区 出
@@ -986,14 +989,17 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         }
         // 泛行区 --------------------------------------------------
         else if (flag_yroad > YROAD_FOUND) {
-            // 角点
-            if (yroad_Lpt_found) {  // 绿色
-                map_perspective(yroad_rptss[yroad_Lpt_id][0], yroad_rptss[yroad_Lpt_id][1], trans, 1);
-                cv::circle(mat_result, cv::Point2f(trans[0], trans[1]), 3, cv::Scalar(0, 255, 0), 2, 8);
-            }
+            // 锥桶
+            for (auto p : edge_det)//白色 //列 |  行———
+                cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
 
             // 边线
-            for (int a = 0; a < yroad_rptss_num; a++) {  // 边线等距采样 泛行区边线
+            for (auto p : edge_left)//青蓝色
+                cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(0, 238, 238), -1);
+            for (auto p : edge_right)// 黄色
+                cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(238, 238, 0), -1);
+            // 边线
+            /*for (int a = 0; a < yroad_rptss_num; a++) {  // 边线等距采样 泛行区边线
                 map_perspective(yroad_rptss[a][0], yroad_rptss[a][1], trans, 1);
                 if ((int)trans[1] >= 0 && (int)trans[1] < mat_result.rows &&
                     (int)trans[0] >= 0 && (int)trans[0] < mat_result.cols) {
@@ -1001,7 +1007,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                     mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[1] = 238;
                     mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[2] = 238;
                 }
-            }
+            }*/
         }
         // 其他情况 ------------------------------------------------
         else {

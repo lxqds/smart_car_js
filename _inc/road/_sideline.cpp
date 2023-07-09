@@ -293,35 +293,47 @@ std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict) {
 
     return cones;
 }
-/*//搜索最高点的锥桶
-void search_highest_cone(std::vector<POINT> pointsCone) {
-    std::vector<POINT> highestCone;
-    if (pointsCone.size() <= 0)
-        return;
-    highestCone = pointsCone[0];
-    for (int i = 0; i < pointsCone.size(); i++) {
-        if (pointsCone[i].x < highestCone.x)
-            highestCone = pointsCone[i];
-    }
-}
-//搜索最高点以左的锥桶集合
-std::vector<POINT> search_left_cones(std::vector<POINT> pointsCone,std::vector<POINT> highestCone) {
-    std::vector<POINT> points;
-    if (pointsCone.size() <= 0)
-        return points;
 
-    for (int i = 0; i < pointsCone.size(); i++) {
-        if (pointsCone[i].y <= highestCone.y)
-            points.push_back(pointsCone[i]);
-    }
-    if (points.size() >= 2)
-        std::sort(points.begin(), points.end(), sort_y_up);  // 纵坐标升序排序
-    return points;
-}*/
-// 搜索距离赛道左边缘最近的红色色块 (红色锥桶)
+// 搜索距离赛道左边缘最近的黄色色块 (黄色锥桶)
 POINT search_left_near(std::vector<POINT> pointsEdge, cv::Mat matt) {
     for (size_t i = 0; i < pointsEdge.size(); i++)
         for (int y = pointsEdge[i].y - 25; y < pointsEdge[i].y; y++)
+            if ((y >= 0) && (y <= IMAGE_WIDTH - 1))
+                if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
+                    return POINT(pointsEdge[i].x, y);
+
+    return POINT(0, 0);
+}
+//找左边线离锥桶最近的边线点的位次,x为行，第几行
+int search_break_left(std::vector<POINT> pointsEdge,cv::Mat matt){
+    for (size_t i = 0; i < pointsEdge.size(); i++)
+        for (int x = pointsEdge[i].x - 25; x < pointsEdge[i].x; x++)
+            if ((x >= 0) && (x <= IMAGE_HEIGHT - 1))
+                if (AT_IMAGE(matt, x, pointsEdge[i].y) > 0)
+                    return pointsEdge[i].size();
+}
+//找右边线离锥桶最近的边线点的位次,x为行，第几行
+int search_break_right(std::vector<POINT> pointsEdge,cv::Mat matt){
+    for (size_t i = 0; i < pointsEdge.size(); i++)
+        for (int x = pointsEdge[i].x - 25; x < pointsEdge[i].x; x++)
+            if ((x >= 0) && (x <= IMAGE_HEIGHT - 1))
+                if (AT_IMAGE(matt, x, pointsEdge[i].y) > 0)
+                    return pointsEdge[i].size();
+}
+// 搜索距离赛道左边缘上15最近的黄色色块 (黄色锥桶)
+POINT search_left_near15(std::vector<POINT> pointsEdge, cv::Mat matt) {
+    for (size_t i = 0; i < pointsEdge.size(); i++)
+        for (int y = pointsEdge[i].y - 15; y < pointsEdge[i].y; y++)
+            if ((y >= 0) && (y <= IMAGE_WIDTH - 1))
+                if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
+                    return POINT(pointsEdge[i].x, y);
+
+    return POINT(0, 0);
+}
+// 搜索距离赛道左边缘上35最近的黄色色块 (黄色锥桶)
+POINT search_left_near35(std::vector<POINT> pointsEdge, cv::Mat matt) {
+    for (size_t i = 0; i < pointsEdge.size(); i++)
+        for (int y = pointsEdge[i].y - 35; y < pointsEdge[i].y; y++)
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1))
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
                     return POINT(pointsEdge[i].x, y);
@@ -339,7 +351,72 @@ POINT search_right_near(std::vector<POINT> pointsEdge, cv::Mat matt) {
 
     return POINT(0, 0);
 }
+//两点距离公式
+double distance_for_points(POINT a, POINT b){
+    return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+}
+//搜索左右边缘的锥桶
+void search_cones_edge(std::vector<POINT> cones,std::vector<POINT> *left_cones,std::vector<POINT> *right_cones){
+    std::vector<POINT> points_cones = cones;
+    if(left_cones.size() == 0&&right_cone.size()==0){
+        return;
+    }
 
+    while(points_cones.size() >0){
+        bool searched = false;
+        int index = -1;
+        //搜索左边缘
+        for (int i = 0;i < points_cones.size();i++){
+            if(left_cones.size() > 0){
+                //先前左边缘只到中间，拓展左边缘
+                if(distance_for_points(left_cones[left_cones.size() - 1],points_cones[i]) < left_cones[left_cones.size() - 1].x /1.1 && points_cones[i].x < left_cones[left_cones.size() - 1].x){
+                    if(index < 0){
+                        index = i ;
+                    }else if(distance_for_points(points_cones[i],left_cones[left_cones.size() - 1]) < distance_for_points(points_cones[index], left_cones[left_cones.size() - 1])){
+                        index = i; //更新下一个点
+                    }
+                }
+            }else{
+                break;
+            }
+        }
+        if(index >= 0){
+            left_cones.push_back(points_cones[index]);
+            swap(points_cones[index],points_cones[points_cones.size() - 1]);
+            points_cones.pop_back();
+            index = -1;
+            searched = true;
+        }
+
+        //搜索右边缘
+        for (int i = 0;i < points_cones.size();i++){
+            if(right_cones.size() > 0){
+                //先前左边缘只到中间，拓展左边缘
+                if(distance_for_points(right_cones[right_cones.size() - 1],points_cones[i]) < right_cones[right_cones.size() - 1].x /1.1 && points_cones[i].x < right_cones[right_cones.size() - 1].x){
+                    if(index < 0){
+                        index = i ;
+                    }else if(distance_for_points(points_cones[i],right_cones[right_cones.size() - 1]) < distance_for_points(points_cones[index], right_cones[right_cones.size() - 1])){
+                        index = i; //更新下一个点
+                    }
+                }
+            }else{
+                break;
+            }
+        }
+        if(index >= 0){
+            right_cones.push_back(points_cones[index]);
+            swap(points_cones[index],points_cones[points_cones.size() - 1]);
+            points_cones.pop_back();
+            index = -1;
+            searched = true;
+        }
+
+        if(!searched){
+            return;
+        }
+
+    }
+}
 // 搜索左方的锥桶集合 ( IMAGE_WIDTH / 3 )
 std::vector<POINT> search_left_cones(std::vector<POINT> pointsCone) {
     std::vector<POINT> points;
