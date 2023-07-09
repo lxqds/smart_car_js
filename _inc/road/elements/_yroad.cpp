@@ -58,10 +58,10 @@ void run_yroad() {
 
         //减少找的线
         if(IMG.edge_left.size() > 50 ){
-            IMG.edge_left.size() = (uint16_t)IMG.edge_left.size() * 0.7;
+            IMG.edge_left.resize(IMG.edge_left.size() * 0.7) ;
         }
         if(IMG.edge_right.size() > 50 ){
-            IMG.edge_right.size() = (uint16_t)(IMG.edge_right.size() * 0.7);
+            IMG.edge_right.resize(IMG.edge_right.size() * 0.7);
         }
 
         // 进入农场的条件，锥桶靠近，或者左右线很小
@@ -100,8 +100,8 @@ void run_yroad() {
                 IMG.cones_edge_right.push_back(IMG.edge_right[break_right]);
                 IMG.edge_left.resize(break_right);
             } else {//搜索左右锥桶
-                IMG.cones_edge_left.push_back(PIONT(0,0));
-                IMG.cones_edge_right.push_back(PIONT(0,0));
+                IMG.cones_edge_left.push_back(POINT(0,0));
+                IMG.cones_edge_right.push_back(POINT(0,0));
                 for (int i= 0;i < IMG.edge_det.size();i++){
                     //左边底部锥桶
                     if (IMG.edge_det[i].y < IMAGE_WIDTH/2&&IMG.edge_det[i].x>0){
@@ -156,7 +156,6 @@ void run_yroad() {
 
                 IMG.last_cones_edge_left = IMG.edge_left;
                 IMG.last_cones_edge_right = IMG.edge_right;
-                break;
             }
 
         }
@@ -172,7 +171,7 @@ void run_yroad() {
             flag_yroad = YROAD_NONE;
             MAT_LOG("Farmland_OUT");
         }else {
-            bool refreshed = true;
+            /*bool refreshed = true;
             // 清弯道防止加大 P 项, 提高稳定性
             IMG.is_curve0 = IMG.is_curve1 = false;
 
@@ -184,8 +183,8 @@ void run_yroad() {
             int break_right = search_break_right(IMG.edge_right,IMG.mat_lab);
 
              {//搜索左右锥桶
-                IMG.cones_edge_left.push_back(PIONT(0, 0));
-                IMG.cones_edge_right.push_back(PIONT(0, 0));
+                IMG.cones_edge_left.push_back(POINT(0, 0));
+                IMG.cones_edge_right.push_back(POINT(0, 0));
                 for (int i = 0; i < IMG.edge_det.size(); i++) {
                     //左边底部锥桶
                     if (IMG.edge_det[i].y < IMAGE_WIDTH / 2 && IMG.edge_det[i].x > 0) {
@@ -241,7 +240,7 @@ void run_yroad() {
 
                     IMG.last_cones_edge_left = IMG.edge_left;
                     IMG.last_cones_edge_right = IMG.edge_right;
-                }
+                }*/
 
             }
         }
