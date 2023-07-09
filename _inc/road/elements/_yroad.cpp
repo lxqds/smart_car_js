@@ -60,10 +60,10 @@ void run_yroad() {
 
         //减少找的线
         if(IMG.edge_left.size() > 50 ){
-            IMG.edge_left.size() = IMG.edge_left.size() * 0.7;
+            IMG.edge_left.size() = (uint16_t)IMG.edge_left.size() * 0.7;
         }
         if(IMG.edge_right.size() > 50 ){
-            IMG.edge_right.size() = IMG.edge_right.size() * 0.7;
+            IMG.edge_right.size() = (uint16_t)(IMG.edge_right.size() * 0.7);
         }
 
         // 进入农场的条件，锥桶靠近，或者左右线很小
@@ -92,8 +92,8 @@ void run_yroad() {
             IMG.cones_edge_left.clear();
             IMG.cones_edge_right.clear();
 
-            int break_left = search_break_left(IMG.edge_left);
-            int break_right = search_break_right(IMG.edge_right);
+            int break_left = search_break_left(IMG.edge_left,IMG.mat_lab);
+            int break_right = search_break_right(IMG.edge_right,IMG.mat_lab);
 
             //边线还在
             if(break_left > 25&&break_right > 25){
@@ -182,12 +182,12 @@ void run_yroad() {
             IMG.cones_edge_left.clear();
             IMG.cones_edge_right.clear();
 
-            int break_left = search_break_left(IMG.edge_left);
-            int break_right = search_break_right(IMG.edge_right);
+            int break_left = search_break_left(IMG.edge_left,IMG.mat_lab);
+            int break_right = search_break_right(IMG.edge_right,IMG.mat_lab);
 
              {//搜索左右锥桶
-                IMG.cones_edge_left.push_back(std::PIONT(0, 0));
-                IMG.cones_edge_right.push_back(std::PIONT(0, 0));
+                IMG.cones_edge_left.push_back(PIONT(0, 0));
+                IMG.cones_edge_right.push_back(PIONT(0, 0));
                 for (int i = 0; i < IMG.edge_det.size(); i++) {
                     //左边底部锥桶
                     if (IMG.edge_det[i].y < IMAGE_WIDTH / 2 && IMG.edge_det[i].x > 0) {
@@ -213,21 +213,21 @@ void run_yroad() {
 
                     if (IMG.cones_edge_left.size() >= IMG.cones_edge_right.size() && IMG.cones_edge_left.size() > 2) {
                         //补左线
-                        std::POINT startPoint = IMG.cones_edge_left[0];
-                        std::POINT midPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() / 2];
-                        std::POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() - 1];
-                        std::vector <POINT> input = {startPoint, midPoint, endPoint};
-                        std::vector <POINT> repair = bezier(0.05, input);
+                        POINT startPoint = IMG.cones_edge_left[0];
+                        POINT midPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() / 2];
+                        POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() - 1];
+                        vector <POINT> input = {startPoint, midPoint, endPoint};
+                        vector <POINT> repair = bezier(0.05, input);
                         IMG.edge_left.clear();
                         IMG.edge_left = repair;
                     } else if (IMG.cones_edge_left.size() < IMG.cones_edge_right.size() &&
                                IMG.cones_edge_right.size() >= 2) {
                         //补右线
-                        std::POINT startPoint = IMG.cones_edge_right[0];
-                        std::POINT midPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() / 2];
-                        std::POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() - 1];
-                        std::vector <POINT> input = {startPoint, midPoint, endPoint};
-                        std::vector <POINT> repair = Bezier(0.05, input);
+                        POINT startPoint = IMG.cones_edge_right[0];
+                        POINT midPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() / 2];
+                        POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() - 1];
+                        vector <POINT> input = {startPoint, midPoint, endPoint};
+                        vector <POINT> repair = bezier(0.05, input);
                         IMG.edge_right.clear();
                         IMG.edge_right = repair;
                     } else {
