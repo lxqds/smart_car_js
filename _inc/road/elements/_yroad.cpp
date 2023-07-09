@@ -116,11 +116,11 @@ void run_yroad() {
                 }
 
                 //判断是否是单边,清左右边，
-                if(abs(IMG.cones_edge_right[0].y-IMG.cones_edge_left )> IMAGE_WIDTH/3 && abs(IMG.cones_edge_right[0].x-IMG.cones_edge_left[0].x)>IMAGE_HEIGHT/3){
+                if(abs(IMG.cones_edge_right[0].y-IMG.cones_edge_left[0].y )> IMAGE_WIDTH/3 && abs(IMG.cones_edge_right[0].x-IMG.cones_edge_left[0].x)>IMAGE_HEIGHT/3){
                     if(IMG.cones_edge_left[0].x > IMG.cones_edge_right[0].x){
                         IMG.cones_edge_right.clear();
                     }else if(IMG.cones_edge_left[0].x < IMG.cones_edge_right[0].x){
-                        IMG.cones_edge_ledt.clear();
+                        IMG.cones_edge_left.clear();
                     }
                 }
 
@@ -133,7 +133,7 @@ void run_yroad() {
                     POINT midPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() / 2];
                     POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() - 1];
                     vector<POINT> input = {startPoint, midPoint, endPoint};
-                    vector<POINT> repair = Bezier(0.05, input);
+                    vector<POINT> repair = bezier(0.05, input);
                     IMG.edge_left.clear();
                     IMG.edge_left = repair;
                 }else if(IMG.cones_edge_left.size() < IMG.cones_edge_right.size() && IMG.cones_edge_right.size() >= 2){
@@ -142,7 +142,7 @@ void run_yroad() {
                     POINT midPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() / 2];
                     POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() - 1];
                     vector<POINT> input = {startPoint, midPoint, endPoint};
-                    vector<POINT> repair = Bezier(0.05, input);
+                    vector<POINT> repair = bezier(0.05, input);
                     IMG.edge_right.clear();
                     IMG.edge_right = repair;
                 } else{
@@ -200,7 +200,7 @@ void run_yroad() {
                 }
 
                     //判断是否是单边,清左右边，
-                    if (abs(IMG.cones_edge_right[0].y - IMG.cones_edge_left[0]) > IMAGE_WIDTH / 3 &&
+                    if (abs(IMG.cones_edge_right[0].y - IMG.cones_edge_left[0].y) > IMAGE_WIDTH / 3 &&
                         abs(IMG.cones_edge_right[0].x - IMG.cones_edge_left[0].x) > IMAGE_HEIGHT / 3) {
                         if (IMG.cones_edge_left[0].x > IMG.cones_edge_right[0].x) {
                             IMG.cones_edge_right.clear();
@@ -243,7 +243,6 @@ void run_yroad() {
 
                     IMG.last_cones_edge_left = IMG.edge_left;
                     IMG.last_cones_edge_right = IMG.edge_right;
-                    break;
                 }
 
             }
