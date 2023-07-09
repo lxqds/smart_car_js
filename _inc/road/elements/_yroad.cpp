@@ -111,7 +111,7 @@ void run_yroad() {
                     }
                 }
 
-                //判断是否是单边,清左右边，
+                //判断是否是单边,清左右边
                 if(abs(IMG.cones_edge_right[0].y-IMG.cones_edge_left[0].y )> IMAGE_WIDTH/3 && abs(IMG.cones_edge_right[0].x-IMG.cones_edge_left[0].x)>IMAGE_HEIGHT/3){
                     if(IMG.cones_edge_left[0].x > IMG.cones_edge_right[0].x){
                         IMG.cones_edge_right.clear();
@@ -129,7 +129,7 @@ void run_yroad() {
                     POINT midPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() / 2];
                     POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() - 1];
                     vector<POINT> input = {startPoint, midPoint, endPoint};
-                    vector<POINT> repair = bezier(0.05, input);
+                    vector<POINT> repair = bezier(0.02, input);
                     IMG.edge_left.clear();
                     IMG.edge_left = repair;
                 }else if(IMG.cones_edge_left.size() < IMG.cones_edge_right.size() && IMG.cones_edge_right.size() >= 2){
@@ -138,7 +138,7 @@ void run_yroad() {
                     POINT midPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() / 2];
                     POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() - 1];
                     vector<POINT> input = {startPoint, midPoint, endPoint};
-                    vector<POINT> repair = bezier(0.05, input);
+                    vector<POINT> repair = bezier(0.02, input);
                     IMG.edge_right.clear();
                     IMG.edge_right = repair;
                 } else{
@@ -161,7 +161,7 @@ void run_yroad() {
 
     /* ***************************************************************** */
     if(flag_yroad ==YROAD_RUN){
-        if(IMG.encoder.route - yroad_route > 100||(IMG.rpts0s_num > 0.2 / SAMPLE_DIST)||(IMG.rpts1s_num > 0.2 / SAMPLE_DIST)||IMG.edge_det.size()<1){
+        if((IMG.encoder.route - yroad_route > 100&&(IMG.rpts0s_num > 0.2 / SAMPLE_DIST)||(IMG.rpts1s_num > 0.2 / SAMPLE_DIST))||IMG.edge_det.size()<1){
             //路程积分或识别到边线或没有识别到锥桶
             yroad_out_num = 0;
             IMG.element_over = true;
