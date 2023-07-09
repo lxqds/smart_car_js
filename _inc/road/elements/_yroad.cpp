@@ -174,6 +174,7 @@ void run_yroad() {
             flag_yroad = YROAD_NONE;
             MAT_LOG("Farmland_OUT");
         }else {
+            bool refreshed = true;
             // 清弯道防止加大 P 项, 提高稳定性
             IMG.is_curve0 = IMG.is_curve1 = false;
 
@@ -199,12 +200,12 @@ void run_yroad() {
                 }
 
                     //判断是否是单边,清左右边，
-                    if (abs(IMG.cones_edge_right[0].y - IMG.cones_edge_left) > IMAGE_WIDTH / 3 &&
+                    if (abs(IMG.cones_edge_right[0].y - IMG.cones_edge_left[0]) > IMAGE_WIDTH / 3 &&
                         abs(IMG.cones_edge_right[0].x - IMG.cones_edge_left[0].x) > IMAGE_HEIGHT / 3) {
                         if (IMG.cones_edge_left[0].x > IMG.cones_edge_right[0].x) {
                             IMG.cones_edge_right.clear();
                         } else if (IMG.cones_edge_left[0].x < IMG.cones_edge_right[0].x) {
-                            IMG.cones_edge_ledt.clear();
+                            IMG.cones_edge_left.clear();
                         }
                     }
                     //搜左右边缘，在以划分的点加左右边缘点
@@ -216,7 +217,7 @@ void run_yroad() {
                         POINT midPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() / 2];
                         POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() - 1];
                         vector <POINT> input = {startPoint, midPoint, endPoint};
-                        vector <POINT> repair = Bezier(0.05, input);
+                        vector <POINT> repair = bezier(0.05, input);
                         IMG.edge_left.clear();
                         IMG.edge_left = repair;
                     } else if (IMG.cones_edge_left.size() < IMG.cones_edge_right.size() &&
