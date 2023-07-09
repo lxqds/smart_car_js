@@ -63,7 +63,7 @@ void run_yroad() {
         }
 
         // 进入农场的条件，锥桶靠近，或者左右线很小,或走过一段路
-        if (IMG.encoder.route-yroad_route > 30||yroad_near_cone.x > IMAGE_HEIGHT*0.5||(IMG.edge_left.size()<IMAGE_HEIGHT/2&&IMG.edge_right.size()<IMAGE_HEIGHT/2)) {
+        if (IMG.encoder.route-yroad_route > 60||yroad_near_cone.x > IMAGE_HEIGHT*0.5||(IMG.edge_left.size()<IMAGE_HEIGHT/2&&IMG.edge_right.size()<IMAGE_HEIGHT/2)) {
             yroad_route = IMG.encoder.route;
             flag_yroad = YROAD_IN;
             MAT_LOG("Farmland_IN");
@@ -75,7 +75,7 @@ void run_yroad() {
     if (flag_yroad == YROAD_IN) {
 
         bool refreshed = true;
-        if (IMG.encoder.route - yroad_route > 50) {
+        if (IMG.encoder.route - yroad_route > 50&&(IMG.rpts0s_num < 0.2 / SAMPLE_DIST&&IMG.rpts1s_num < 0.2 / SAMPLE_DIST)) {
             //路程积分或识别到边线或没有识别到锥桶
             yroad_route = IMG.encoder.route;
             flag_yroad = YROAD_RUN;
