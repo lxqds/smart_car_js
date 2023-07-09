@@ -109,7 +109,7 @@
         "speed_work": 1000,
         "work_stop_time": 2000,
         "speed_gas": 1055,
-        "speed_yroad": 1700,
+        "speed_yroad": 1300,
         "speed_circle": 1600,
         "speed_cross": 1600,
         "speed_ramp_up": 1900,
