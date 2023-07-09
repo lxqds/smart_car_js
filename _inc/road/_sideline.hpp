@@ -81,6 +81,9 @@ std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict);
 // 搜索距离赛道左边缘最近的红色色块 (红色锥桶)
 POINT search_left_near(std::vector<POINT> pointsEdge, cv::Mat matt);
 
+// 搜索距离赛道左边缘上面最近的黄色色块 (黄色锥桶)
+POINT search_left_near2(std::vector<POINT> pointsEdge, cv::Mat matt);
+
 // 搜索距离赛道右边缘最近的红色色块 (红色锥桶)
 POINT search_right_near(std::vector<POINT> pointsEdge, cv::Mat matt);
 

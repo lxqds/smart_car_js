@@ -304,12 +304,22 @@ POINT search_left_near(std::vector<POINT> pointsEdge, cv::Mat matt) {
 
     return POINT(0, 0);
 }
+// 搜索距离赛道左边缘上面最近的黄色色块 (黄色锥桶)
+POINT search_left_near2(std::vector<POINT> pointsEdge, cv::Mat matt) {
+    for (size_t i = 0; i < pointsEdge.size(); i++)
+        for (int x = pointsEdge[i].x - 25; x < pointsEdge[i].x; x++)
+            if ((x >= 0) && (x <= IMAGE_HEIGHT - 1))
+                if (AT_IMAGE(matt, pointsEdge[i].y, x) > 0)
+                    return POINT(pointsEdge[i].x, y);
+
+    return POINT(0, 0);
+}
 //找左边线离锥桶最近的边线点的位次,x为行，第几行
 uint16_t search_break_left(std::vector<POINT> pointsEdge,cv::Mat matt){
     for (size_t i = 0; i < pointsEdge.size(); i++)
         for (int x = pointsEdge[i].x - 25; x < pointsEdge[i].x; x++)
             if ((x >= 0) && (x <= IMAGE_HEIGHT - 1))
-                if (AT_IMAGE(matt, x, pointsEdge[i].y) > 0)
+                if (AT_IMAGE(matt, pointsEdge[i].y, x) > 0)
                     return i;
 }
 //找右边线离锥桶最近的边线点的位次,x为行，第几行
@@ -317,7 +327,7 @@ uint16_t search_break_right(std::vector<POINT> pointsEdge,cv::Mat matt){
     for (size_t i = 0; i < pointsEdge.size(); i++)
         for (int x = pointsEdge[i].x - 25; x < pointsEdge[i].x; x++)
             if ((x >= 0) && (x <= IMAGE_HEIGHT - 1))
-                if (AT_IMAGE(matt, x, pointsEdge[i].y) > 0)
+                if (AT_IMAGE(matt, pointsEdge[i].y, x) > 0)
                     return i;
 }
 // 搜索距离赛道左边缘上15最近的黄色色块 (黄色锥桶)

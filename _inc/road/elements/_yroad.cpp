@@ -37,6 +37,7 @@ int yroad_ipts_num, yroad_rptss_num;
 void check_yroad() {
     if (flag_yroad == YROAD_DETECTION) {
         IMG.element_identify = 1;
+        yroad_route = IMG.encoder.route;
         flag_yroad = YROAD_FOUND;
         MAT_LOG("Farmland_FOUND");
     }
@@ -53,19 +54,16 @@ void run_yroad() {
         // 找锥桶
         IMG.edge_det = search_targets(IMG._det_result);
 
-        //找右锥桶
-        yroad_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
+        //找左锥桶
+        yroad_near_cone = search_left_near2(IMG.edge_left, IMG.mat_lab);
 
         //减少找的线
         if(IMG.edge_left.size() > 50 ){
             IMG.edge_left.resize(IMG.edge_left.size() * 0.7) ;
         }
-        if(IMG.edge_right.size() > 50 ){
-            IMG.edge_right.resize(IMG.edge_right.size() * 0.7);
-        }
 
-        // 进入农场的条件，锥桶靠近，或者左右线很小
-        if (yroad_near_cone.x > IMAGE_HEIGHT*0.5||(IMG.edge_left.size()<IMAGE_HEIGHT/2&&IMG.edge_right.size()<IMAGE_HEIGHT/2)) {
+        // 进入农场的条件，锥桶靠近，或者左右线很小,或走过一段路
+        if (IMG.encoder.route-yroad_route > 30||yroad_near_cone.x > IMAGE_HEIGHT*0.5||(IMG.edge_left.size()<IMAGE_HEIGHT/2&&IMG.edge_right.size()<IMAGE_HEIGHT/2)) {
             yroad_route = IMG.encoder.route;
             flag_yroad = YROAD_IN;
             MAT_LOG("Farmland_IN");

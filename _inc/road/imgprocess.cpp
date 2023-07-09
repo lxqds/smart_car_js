@@ -988,7 +988,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             }
         }
         // 泛行区 --------------------------------------------------
-        else if (flag_yroad > YROAD_FOUND) {
+        else if (flag_yroad >= YROAD_FOUND) {
             // 锥桶
             for (auto p : edge_det)//白色 //列 |  行———
                 cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
