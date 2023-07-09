@@ -844,6 +844,9 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     else if (flag_gas != GAS_NONE) {
         aim_speed = (int16_t)_config->speed_gas * 0.9f;
     }  // 加油站
+    else if(flag_yroad == YROAD_FOUND){
+        aim_speed = _config->speed_yroad;
+    }
     else if (flag_yroad == YROAD_IN) {
         aim_speed = _config->speed_yroad;
     }  // 泛行区 内

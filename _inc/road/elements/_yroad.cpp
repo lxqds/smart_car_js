@@ -92,7 +92,7 @@ void run_yroad() {
             int break_right = search_break_right(IMG.edge_right,IMG.mat_lab);
 
             //边线还在
-            if(break_left > 25&&break_right > 25){
+            if(break_left > 100&&break_right > 100){
                 IMG.cones_edge_left.push_back(IMG.edge_left[break_left]);
                 IMG.edge_left.resize(break_left);
                 IMG.cones_edge_right.push_back(IMG.edge_right[break_right]);
