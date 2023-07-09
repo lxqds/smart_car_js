@@ -655,26 +655,22 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             map_perspective(rpts[i][0], rpts[i][1], rpts[i], 1);
 
     }
-    // 泛行区根据逆边线
+    // 泛行区根据 锥桶拟合边线
     else if (flag_yroad > YROAD_FOUND) {
-        int id = 0, dist = 30;
-        if (flag_yroad == YROAD_OUT) {
-            id = yroad_Lpt_id;  // 角点位置
-            dist = 0;           // 边线偏移
-        }
+        int dist = 0;  // 边线偏移
+        if (flag_yroad == YROAD_RUN )
+            dist = 50;
 
-        if (flag_track == TRACK_RIGHT) {
-            track_rightline(
-                yroad_rptss + id, yroad_rptss_num - id, rpts,
-                (int)round(ANGLE_DIST / SAMPLE_DIST),
-                PIXEL_PER_METER * ROAD_WIDTH / 2 + dist);
+        if (flag_track == TRACK_LEFT) {
+            track_leftline(det_rptss, det_rptss_num, rpts,
+                           (int)round(ANGLE_DIST / SAMPLE_DIST),
+                           PIXEL_PER_METER * ROAD_WIDTH / 2 + dist);
         } else {
-            track_leftline(
-                yroad_rptss + id, yroad_rptss_num - id, rpts,
-                (int)round(ANGLE_DIST / SAMPLE_DIST),
-                PIXEL_PER_METER * ROAD_WIDTH / 2 + dist);
+            track_rightline(det_rptss, det_rptss_num, rpts,
+                            (int)round(ANGLE_DIST / SAMPLE_DIST),
+                            PIXEL_PER_METER * ROAD_WIDTH / 2 + dist);
         }
-        rpts_num = yroad_rptss_num - id;
+        rpts_num = det_rptss_num;
         // 透视 -> 原图
         for (int i = 0; i < rpts_num; i++)
             map_perspective(rpts[i][0], rpts[i][1], rpts[i], 1);
