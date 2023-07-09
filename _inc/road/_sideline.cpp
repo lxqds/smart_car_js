@@ -310,7 +310,7 @@ POINT search_left_near2(std::vector<POINT> pointsEdge, cv::Mat matt) {
         for (int x = pointsEdge[i].x - 25; x < pointsEdge[i].x; x++)
             if ((x >= 0) && (x <= IMAGE_HEIGHT - 1))
                 if (AT_IMAGE(matt, pointsEdge[i].y, x) > 0)
-                    return POINT(pointsEdge[i].x, y);
+                    return POINT(x, pointsEdge[i].y);
 
     return POINT(0, 0);
 }
