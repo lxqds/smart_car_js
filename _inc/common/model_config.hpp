@@ -26,17 +26,17 @@ struct ControlConfig {
     uint8_t direction_work;    // 施工区方向  0: 左   1: 右
     uint8_t direction_gas;     // 加油站方向  0: 左   1: 右
 
-    uint8_t check_binary_;    //是否显示二值化图像
-    uint8_t check_lab_;      //是否显示lab
-    uint8_t over_route_;    //识别元素后经过的路程再开启新的元素检测距离
-    uint8_t check_garage_times_;//第几次入库
-    uint8_t check_work_;    // 是否识别施工区
-    uint8_t check_gas_;     // 是否识别加油站
-    uint8_t check_yroad_;   // 是否识别泛行区
-    uint8_t check_ramp_;    // 是否识别坡道
-    uint8_t check_slow_;    // 是否识别慢行区
-    uint8_t check_circle_;  // 是否识别环岛
-    uint8_t check_cross_;   // 是否识别十字
+    uint8_t check_binary_;        // 是否显示二值化图像
+    uint8_t check_lab_;           // 是否显示lab
+    uint8_t over_route_;          // 识别元素后经过的路程再开启新的元素检测距离
+    uint8_t check_garage_times_;  // 第几次入库
+    uint8_t check_work_;          // 是否识别施工区
+    uint8_t check_gas_;           // 是否识别加油站
+    uint8_t check_yroad_;         // 是否识别泛行区
+    uint8_t check_ramp_;          // 是否识别坡道
+    uint8_t check_slow_;          // 是否识别慢行区
+    uint8_t check_circle_;        // 是否识别环岛
+    uint8_t check_cross_;         // 是否识别十字
 
     float ai_p_k;  // 特殊元素 动态 P
     float ai_p;    // 特殊元素 P
@@ -58,22 +58,23 @@ struct ControlConfig {
     float aim_distance_far;   // 远预瞄点
     float aim_distance_near;  // 近预瞄点
 
-    uint16_t speed_base;        // 速度基准
-    uint16_t speed_up;          // 直道速度
-    uint16_t speed_steady;      // 元素稳定速度
-    uint16_t speed_garage_in;   // 入库速度
-    uint16_t speed_garage_out;  // 出库速度
-    uint16_t garage_in_route_;  //入库距离判断
-    uint16_t garage_out_route_; //出库距离判断
-    uint16_t speed_work;        // 出入施工区速度
-    uint16_t work_stop_time;    //停在施工区时间
-    uint16_t speed_gas;         // 出入加油站速度
-    uint16_t speed_yroad;       // 泛行区速度
-    uint16_t speed_circle;      // 出入环岛速度
-    uint16_t speed_cross;       // 十字速度
-    uint16_t speed_ramp_up;     // 上坡速度
-    uint16_t speed_ramp_down;   // 下坡速度
-    uint16_t speed_slow_down;   // 慢行速度
+    uint16_t speed_base;         // 速度基准
+    uint16_t speed_up;           // 直道速度
+    uint16_t speed_steady;       // 元素稳定速度
+    uint16_t speed_garage_in;    // 入库速度
+    uint16_t speed_garage_out;   // 出库速度
+    uint16_t garage_in_route_;   // 入库距离判断
+    uint16_t garage_out_route_;  // 出库距离判断
+    uint16_t speed_work;         // 出入施工区速度
+    uint16_t work_stop_time;     // 停在施工区时间
+    uint16_t speed_gas;          // 出入加油站速度
+    uint16_t speed_yroad;        // 泛行区速度
+    float deviation_Farm_in_p;
+    uint16_t speed_circle;     // 出入环岛速度
+    uint16_t speed_cross;      // 十字速度
+    uint16_t speed_ramp_up;    // 上坡速度
+    uint16_t speed_ramp_down;  // 下坡速度
+    uint16_t speed_slow_down;  // 慢行速度
 
     float deviation_garage_in_p;  // 入库偏差 (P项增大值)
     float deviation_garage_out;   // 出库偏差
@@ -152,6 +153,7 @@ struct ControlConfig {
         AUTOCFG(work_stop_time);
         AUTOCFG(speed_gas);
         AUTOCFG(speed_yroad);
+        AUTOCFG(deviation_Farm_in_p);
         AUTOCFG(speed_circle);
         AUTOCFG(speed_cross);
         AUTOCFG(speed_ramp_up);

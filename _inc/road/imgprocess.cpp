@@ -45,16 +45,15 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
 
     // 绘制处理结果图, 灰度格式转BGR格式
 
-    if (_config->check_binary_||_config->check_lab_) {
+    if (_config->check_binary_ || _config->check_lab_) {
         std::vector<cv::Mat> channels;
-        if(_config->check_binary_){
+        if (_config->check_binary_) {
             for (int i = 0; i < 3; i++) channels.push_back(mat_bin);
-        }else{
+        } else {
             for (int i = 0; i < 3; i++) channels.push_back(mat_lab);
         }
         cv::merge(channels, mat_result);
     }
-
 
     /* ***************************************************************** */
     /* **************************** 边线处理 **************************** */
@@ -182,10 +181,10 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         iptsc[ccy] = iptsc0[ccy] + iptsc1[ccy];
 
         if (iptsc[ccy] != 0) {
-            //如果右边线丢失
+            // 如果右边线丢失
             if (iptsc1[ccy] == 0)
                 iptsc[ccy] = (int)((IMAGE_WIDTH - iptsc[ccy]) / 2 + iptsc[ccy]);
-            else//左边线丢失
+            else  // 左边线丢失
                 iptsc[ccy] = (int)(iptsc[ccy] / 2);
 
             // 原图中线 -> 透视中线
@@ -413,15 +412,13 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             // 检测结果筛选
             if (r.score < _config->threshold_detection)
                 continue;
-            if (DetectionLabel(r.type) == label_cone){
+            if (DetectionLabel(r.type) == label_cone) {
                 continue;
             }
-
 
             // 转换到处理图像坐标
             int deX = r.x / 2, deY = r.y / 2;
             int deH = r.height / 2, deW = r.width / 2;
-
 
             // 尺寸位置筛选
             if ((deX < 25 || deX + deW > 275) || deY < 40 || (deH < 25 || deW < 25))
@@ -462,14 +459,14 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                             log_i("RAMP_DETECTION");
                         }
                         break;
-                    case label_bridge:// 桥
+                    case label_bridge:  // 桥
                         if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
                             flag_ramp = RAMP_DETECTION;
                             sprintf(string_log, "BRIDGE_DETECTION");
                             log_i("BRIDGE_DETECTION");
                         }
                         break;
-                    case label_pig:// 慢行区
+                    case label_pig:  // 慢行区
                         if (flag_slow == SLOW_NONE && _config->check_slow_ == 1) {
                             flag_slow = SLOW_DETECTION;
                             sprintf(string_log, "PIG_DETECTION");
@@ -550,7 +547,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         if (_config->check_cross_ == 1 &&
             flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
             flag_gas == GAS_NONE && flag_yroad == YROAD_NONE &&
-            flag_ramp == RAMP_NONE && flag_slow == SLOW_NONE &&flag_circle <= 2)
+            flag_ramp == RAMP_NONE && flag_slow == SLOW_NONE && flag_circle <= 2)
             check_cross();  // 十字路 - 识别角点特征
     }
 
@@ -658,7 +655,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     // 泛行区根据 锥桶拟合边线
     else if (flag_yroad > YROAD_FOUND) {
         int dist = 0;  // 边线偏移
-        if (flag_yroad == YROAD_RUN )
+        if (flag_yroad == YROAD_RUN)
             dist = 50;
 
         if (flag_track == TRACK_LEFT) {
@@ -819,19 +816,17 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         /// 入库 加大角度 P 项
         aim_angle_p += _config->deviation_garage_in_p;
     }  // 入库
-    else if (flag_work == WORK_READY){
-        aim_speed = _config->speed_work*0.7f;
-    }
-    else if (flag_work == WORK_RUN) {
-        aim_speed = _config->speed_work*0.7f;
+    else if (flag_work == WORK_READY) {
+        aim_speed = _config->speed_work * 0.7f;
+    } else if (flag_work == WORK_RUN) {
+        aim_speed = _config->speed_work * 0.7f;
     }  // 施工区 内
-    else if (flag_work == WORK_STOP){
+    else if (flag_work == WORK_STOP) {
         aim_speed = 0;
         aim_angle = 0;
-    }else if(flag_work == WORK_OUT){
-        aim_speed = (_config->speed_work*-0.7f);
-    }
-    else if (flag_work != WORK_NONE) {
+    } else if (flag_work == WORK_OUT) {
+        aim_speed = (_config->speed_work * -0.7f);
+    } else if (flag_work != WORK_NONE) {
         aim_speed = (int16_t)_config->speed_work * 0.9f;
     }  // 施工区
     else if (flag_gas == GAS_RUN) {
@@ -840,14 +835,14 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     else if (flag_gas != GAS_NONE) {
         aim_speed = (int16_t)_config->speed_gas * 0.9f;
     }  // 加油站
-    else if(flag_yroad == YROAD_FOUND){
+    else if (flag_yroad == YROAD_FOUND) {
         aim_speed = _config->speed_yroad;
-    }
-    else if (flag_yroad == YROAD_IN) {
+    } else if (flag_yroad == YROAD_IN) {
         aim_speed = _config->speed_yroad;
     }  // 泛行区 内
     else if (flag_yroad == YROAD_RUN) {
         aim_speed = _config->speed_yroad;
+        aim_angle_p = _config->deviation_Farm_in_p * aim_angle_p;
     }  // 泛行区 跑的过程
     else if (flag_yroad == YROAD_OUT) {
         aim_speed = 0;
@@ -941,7 +936,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
 
         MAT_INFO(mat_result, cv::Point(5, 25), 0.4, "%s", track_label.c_str());
         MAT_INFO(mat_result, cv::Point(5, 40), 0.4, "speed: %d", aim_speed);
-        MAT_INFO(mat_result, cv::Point(5, 55), 0.4, "angle: %.2f,pwm:%d", aim_angle_filter,aim_angle_pwm);
+        MAT_INFO(mat_result, cv::Point(5, 55), 0.4, "angle: %.2f,pwm:%d", aim_angle_filter, aim_angle_pwm);
         MAT_INFO(mat_result, cv::Point(5, 70), 0.4, "stg_p: %.4f", aim_angle_p);
         MAT_INFO(mat_result, cv::Point(120, 10), 0.4, "[%c][%c][%c]",
                  is_straight0 ? '^' : (is_curve0 ? '<' : ' '),
@@ -989,13 +984,13 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         // 泛行区 --------------------------------------------------
         else if (flag_yroad >= YROAD_FOUND) {
             // 锥桶
-            for (auto p : edge_det)//白色 //列 |  行———
+            for (auto p : edge_det)  // 白色 //列 |  行———
                 cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
 
             // 边线
-            for (auto p : edge_left)//青蓝色
+            for (auto p : edge_left)  // 青蓝色
                 cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(0, 238, 238), -1);
-            for (auto p : edge_right)// 黄色
+            for (auto p : edge_right)  // 黄色
                 cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(238, 238, 0), -1);
             // 边线
             /*for (int a = 0; a < yroad_rptss_num; a++) {  // 边线等距采样 泛行区边线
@@ -1013,13 +1008,13 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             // 施工区 & 加油站---------------------------------------
             if (flag_gas != GAS_NONE || flag_work != WORK_NONE) {
                 // 锥桶
-                for (auto p : edge_det)//白色 //列 |  行———
+                for (auto p : edge_det)  // 白色 //列 |  行———
                     cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
 
                 // 边线
-                for (auto p : edge_left)//青蓝色
+                for (auto p : edge_left)  // 青蓝色
                     cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(0, 238, 238), -1);
-                for (auto p : edge_right)// 黄色
+                for (auto p : edge_right)  // 黄色
                     cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(238, 238, 0), -1);
             }
             // 正常巡线 --------------------------------------------
