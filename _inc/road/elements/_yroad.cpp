@@ -168,10 +168,10 @@ void run_yroad() {
             yroad_out_num = 0;
             IMG.element_over = true;
             IMG.element_over_route = IMG.encoder.route + 20;
-            flag_yroad = YROAD_NONE;
+            flag_yroad = YROAD_OUT;
             MAT_LOG("Farmland_OUT");
         }else {
-            /*bool refreshed = true;
+            bool refreshed = true;
             // 清弯道防止加大 P 项, 提高稳定性
             IMG.is_curve0 = IMG.is_curve1 = false;
 
@@ -240,7 +240,7 @@ void run_yroad() {
 
                     IMG.last_cones_edge_left = IMG.edge_left;
                     IMG.last_cones_edge_right = IMG.edge_right;
-                }*/
+                }
 
             }
         }
@@ -250,112 +250,7 @@ void run_yroad() {
     /* ***************************************************************** */
 
     if (flag_yroad == YROAD_OUT) {
-        int yroad_x = 0;
-        int yroad_y = BEGIN_Y;
-        int line_counter = 0;
-
-        if (IMG._config->direction_yroad == 1) {
-            yroad_x = BLOCK_SIZE / 2;
-            IMG.flag_track = TRACK_LEFT;
-        } else {
-            yroad_x = IMAGE_WIDTH - BLOCK_SIZE / 2 - 1;
-            IMG.flag_track = TRACK_RIGHT;
-        }
-
-        // 向上黑白点
-        bool white_found = false;
-        bool black_found = false;
-        for (int yyy = IMAGE_HEIGHT - 1; yyy >= 25; yyy--) {
-            if (AT_IMAGE(IMG.mat_bin, yroad_x, yyy) >= IMG._config->threshold)
-                white_found = true;
-
-            if (AT_IMAGE(IMG.mat_bin, yroad_x, yyy) < IMG._config->threshold &&
-                white_found) {
-                black_found = true;
-                yroad_y = yyy;
-                break;
-            }
-        }
-
-        // 搜索边界
-        yroad_ipts_num = sizeof(yroad_ipts) / sizeof(yroad_ipts[0]);
-        if (AT_IMAGE(IMG.mat_bin, yroad_x, yroad_y + 1) >= IMG._config->threshold &&
-            black_found) {
-            if (IMG._config->direction_yroad == 1) {
-                findline_lefthand_adaptive(IMG.mat_bin, BLOCK_SIZE, CLIP_VALUE,
-                                           yroad_x, yroad_y + 1, yroad_ipts,
-                                           &yroad_ipts_num);
-            } else {
-                findline_righthand_adaptive(IMG.mat_bin, BLOCK_SIZE, CLIP_VALUE,
-                                            yroad_x, yroad_y + 1, yroad_ipts,
-                                            &yroad_ipts_num);
-            }
-        } else
-            yroad_ipts_num = 0;
-
-        // 原图边线 -> 透视边线
-        for (int i = 0; i < yroad_ipts_num; i++) {
-            if (yroad_ipts[i][1] < 25)
-                break;
-            map_perspective(yroad_ipts[i][0], yroad_ipts[i][1], yroad_rpts[i], 0);
-            line_counter++;
-        }
-
-        // 边线滤波
-        blur_points(yroad_rpts, line_counter, yroad_rptsb,
-                    (int)round(LINE_BLUR_KERNEL));
-
-        // 边线等距采样
-        yroad_rptss_num = sizeof(yroad_rptss) / sizeof(yroad_rptss[0]);
-        resample_points(yroad_rptsb, line_counter, yroad_rptss, &yroad_rptss_num,
-                        SAMPLE_DIST * PIXEL_PER_METER);
-
-        // 边线局部角度变化率
-        local_angle_points(yroad_rptss, yroad_rptss_num, yroad_rptsa,
-                           (int)round(ANGLE_DIST / SAMPLE_DIST));
-
-        // 角度变化率非极大抑制
-        nms_angle(yroad_rptsa, yroad_rptss_num, yroad_rptsan,
-                  (int)round(ANGLE_DIST / SAMPLE_DIST) * 2 + 1);
-
-        // 泛行区角点识别
-        yroad_Lpt_id = 0;
-        yroad_Lpt_found = false;
-        for (int i = 0; i < AT_MIN(yroad_rptss_num, 180); i++) {
-            if (yroad_rptsan[i] == 0)
-                continue;
-            int im1 = clip(i - (int)round(ANGLE_DIST / SAMPLE_DIST), 0,
-                           yroad_rptss_num - 1);
-            int ip1 = clip(i + (int)round(ANGLE_DIST / SAMPLE_DIST), 0,
-                           yroad_rptss_num - 1);
-            float conf = fabs(yroad_rptsa[i]) -
-                         (fabs(yroad_rptsa[im1]) + fabs(yroad_rptsa[ip1])) / 2;
-
-            if (20. / 180. * PI < conf && conf < 160. / 180. * PI) {
-                float trans[2];
-                map_perspective(yroad_rptss[i][0], yroad_rptss[i][1], trans, 1);
-                if (trans[1] < 30)
-                    break;
-
-                yroad_Lpt_id = i;
-                yroad_Lpt_found = true;
-                break;
-            }
-        }
-
-        if ((!IMG.Lpt0_found && !IMG.Lpt1_found &&
-             IMG.rpts0s_num > 0.6 / SAMPLE_DIST && IMG.rpts1s_num > 0.6 / SAMPLE_DIST) ||
-            (yroad_rptss_num < 0.2 / SAMPLE_DIST)) {
-            yroad_out_num++;
-        }
-
-        if (yroad_out_num > 2 || IMG.encoder.route - yroad_route > 150) {
-            yroad_out_num = 0;
-            IMG.element_over = true;
-            IMG.element_over_route = IMG.encoder.route + 20;
-            flag_yroad = YROAD_NONE;
-            MAT_LOG("YROAD_NONE");
-        }
+        MAT_LOG("FARM_OUT_FINISH");
     }
 }
 

@@ -851,7 +851,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         aim_speed = _config->speed_yroad;
     }  // 泛行区 跑的过程
     else if (flag_yroad == YROAD_OUT) {
-        aim_speed = _config->speed_steady;
+        aim_speed = 0;
     }  // 泛行区 出
     else if (flag_ramp == RAMP_UP) {
         aim_speed = _config->speed_ramp_up;
