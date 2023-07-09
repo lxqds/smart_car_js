@@ -84,11 +84,11 @@ POINT search_left_near(std::vector<POINT> pointsEdge, cv::Mat matt);
 // 搜索距离赛道右边缘最近的红色色块 (红色锥桶)
 POINT search_right_near(std::vector<POINT> pointsEdge, cv::Mat matt);
 
-//搜索左边线离锥桶最近的边线点的位次,x为行，第几行
-int search_break_left(std::vector<POINT> pointsEdge,cv::Mat matt);
+//找左边线离锥桶最近的边线点的位次,x为行，第几行
+uint16_t search_break_left(std::vector<POINT> pointsEdge,cv::Mat matt);
 
 //找右边线离锥桶最近的边线点的位次,x为行，第几行
-int search_break_right(std::vector<POINT> pointsEdge,cv::Mat matt);
+uint16_t search_break_right(std::vector<POINT> pointsEdge,cv::Mat matt);
 
 // 搜索距离赛道左边缘上15最近的黄色色块 (黄色锥桶)
 POINT search_left_near15(std::vector<POINT> pointsEdge, cv::Mat matt);

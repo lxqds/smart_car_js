@@ -305,7 +305,7 @@ POINT search_left_near(std::vector<POINT> pointsEdge, cv::Mat matt) {
     return POINT(0, 0);
 }
 //找左边线离锥桶最近的边线点的位次,x为行，第几行
-int search_break_left(std::vector<POINT> pointsEdge,cv::Mat matt){
+uint16_t search_break_left(std::vector<POINT> pointsEdge,cv::Mat matt){
     for (size_t i = 0; i < pointsEdge.size(); i++)
         for (int x = pointsEdge[i].x - 25; x < pointsEdge[i].x; x++)
             if ((x >= 0) && (x <= IMAGE_HEIGHT - 1))
@@ -313,7 +313,7 @@ int search_break_left(std::vector<POINT> pointsEdge,cv::Mat matt){
                     return pointsEdge[i].size();
 }
 //找右边线离锥桶最近的边线点的位次,x为行，第几行
-int search_break_right(std::vector<POINT> pointsEdge,cv::Mat matt){
+uint16_t search_break_right(std::vector<POINT> pointsEdge,cv::Mat matt){
     for (size_t i = 0; i < pointsEdge.size(); i++)
         for (int x = pointsEdge[i].x - 25; x < pointsEdge[i].x; x++)
             if ((x >= 0) && (x <= IMAGE_HEIGHT - 1))
@@ -352,13 +352,13 @@ POINT search_right_near(std::vector<POINT> pointsEdge, cv::Mat matt) {
     return POINT(0, 0);
 }
 //两点距离公式
-double distance_for_points(POINT a, POINT b){
+double distance_for_points(std::vector<POINT> a, std::vector<POINT> POINT b){
     return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 }
 //搜索左右边缘的锥桶
 void search_cones_edge(std::vector<POINT> cones,std::vector<POINT> *left_cones,std::vector<POINT> *right_cones){
     std::vector<POINT> points_cones = cones;
-    if(left_cones->size() == 0&&right_cone->size()==0){
+    if(left_cones->size() == 0&&right_cones->size()==0){
         return;
     }
 
