@@ -1,5 +1,6 @@
 #include "_yroad.hpp"
 
+#include "../_define.hpp"
 #include "../imgprocess.hpp"
 #include "../utils/logger_helper.hpp"
 
@@ -16,10 +17,7 @@ extern ImageProcess imgprocess;
 float yroad_route = 0;  // 泛行区编码器积分
 int yroad_out_num = 0;  // 泛行区结束计次
 POINT yroad_near_cone;  // 左右较近的锥桶
-POINT yroad_ld_near_cone;  // 左下方边缘最近的锥桶
-POINT yroad_rd_near_cone;  // 右下方边缘最近的锥桶
-POINT yroad_lu_near_cone;  // 左上方边缘最近的锥桶
-POINT yroad_ru_near_cone;  // 右上方边缘最近的锥桶
+
 
 // 泛行区角点
 int yroad_Lpt_id;      // 泛行区角点位置
@@ -102,8 +100,8 @@ void run_yroad() {
                 IMG.cones_edge_right.push_back(IMG.edge_right[break_right]);
                 IMG.edge_left.resize(break_right);
             } else {//搜索左右锥桶
-                IMG.cones_edge_left.push_back(std::PIONT(0,0));
-                IMG.cones_edge_right.push_back(std::PIONT(0,0));
+                IMG.cones_edge_left.push_back(PIONT(0,0));
+                IMG.cones_edge_right.push_back(PIONT(0,0));
                 for (int i= 0;i < IMG.edge_det.size();i++){
                     //左边底部锥桶
                     if (IMG.edge_det[i].y < IMAGE_WIDTH/2&&IMG.edge_det[i].x>0){
@@ -129,20 +127,20 @@ void run_yroad() {
 
                 if(IMG.cones_edge_left.size() >= IMG.cones_edge_right.size() &&IMG.cones_edge_left.size() > 2){
                     //补左线
-                    std::POINT startPoint = IMG.cones_edge_left[0];
-                    std::POINT midPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() / 2];
-                    std::POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() - 1];
-                    std::vector<POINT> input = {startPoint, midPoint, endPoint};
-                    std::vector<POINT> repair = bezier(0.05, input);
+                    POINT startPoint = IMG.cones_edge_left[0];
+                    POINT midPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() / 2];
+                    POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() - 1];
+                    vector<POINT> input = {startPoint, midPoint, endPoint};
+                    vector<POINT> repair = bezier(0.05, input);
                     IMG.edge_left.clear();
                     IMG.edge_left = repair;
                 }else if(IMG.cones_edge_left.size() < IMG.cones_edge_right.size() && IMG.cones_edge_right.size() >= 2){
                     //补右线
-                    std::POINT startPoint = IMG.cones_edge_right[0];
-                    std::POINT midPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() / 2];
-                    std::POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() - 1];
-                    std::vector<POINT> input = {startPoint, midPoint, endPoint};
-                    std::vector<POINT> repair = bezier(0.05, input);
+                    POINT startPoint = IMG.cones_edge_right[0];
+                    POINT midPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() / 2];
+                    POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() - 1];
+                    vector<POINT> input = {startPoint, midPoint, endPoint};
+                    vector<POINT> repair = bezier(0.05, input);
                     IMG.edge_right.clear();
                     IMG.edge_right = repair;
                 } else{
