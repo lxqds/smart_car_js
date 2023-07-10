@@ -322,6 +322,18 @@ uint16_t search_break_left(std::vector<POINT> pointsEdge,cv::Mat matt){
                 if (AT_IMAGE(matt, pointsEdge[i].y, x) > 0)
                     return i;
 }
+//左线预测右线
+std::vector<POINT> predict_edge_right(vector<POINT> &point_edge_left,POINT point_l,POINT point_r){
+    int offset = 100;
+    vector<POINT> points_edge_right;
+    POINT start_point(0,0);
+    POINT end_point(0,0);
+
+    /*// 透视 -> 原图
+    for (int i = 0; i < rpts_num; i++)
+        map_perspective(rpts[i][0], rpts[i][1], rpts[i], 1);*/
+}
+
 //找右边线离锥桶最近的边线点的位次,x为行，第几行
 uint16_t search_break_right(std::vector<POINT> pointsEdge,cv::Mat matt){
     for (size_t i = 0; i < pointsEdge.size(); i++)

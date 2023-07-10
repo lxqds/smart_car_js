@@ -991,6 +991,12 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             // 锥桶
             for (auto p : edge_det)//白色 //列 |  行———
                 cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
+            // 锥桶
+            for (auto p : cones_edge_left)//蓝色 //列 |  行———
+                cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(0,191,255), 2);
+            // 锥桶
+            for (auto p : cones_edge_right)//紫色 //列 |  行———
+                cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(138,43,226), 2);
 
             // 边线
             for (auto p : edge_left)//青蓝色

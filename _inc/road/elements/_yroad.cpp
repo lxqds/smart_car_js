@@ -128,6 +128,7 @@ void run_yroad() {
 
                 if(IMG.cones_edge_left.size() >= IMG.cones_edge_right.size() &&IMG.cones_edge_left.size() > 2){
                     //补左线
+                    IMG.flag_track = TRACK_LEFT;
                     POINT startPoint = IMG.edge_left[0];
                     POINT midPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() / 2];
                     POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() - 1];
@@ -137,6 +138,7 @@ void run_yroad() {
                     IMG.edge_left = repair;
                 }else if(IMG.cones_edge_left.size() < IMG.cones_edge_right.size() && IMG.cones_edge_right.size() >= 2){
                     //补右线
+                    IMG.flag_track = TRACK_RIGHT;
                     POINT startPoint = IMG.edge_right[0];
                     POINT midPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() / 2];
                     POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() - 1];
@@ -145,6 +147,7 @@ void run_yroad() {
                     IMG.edge_right.clear();
                     IMG.edge_right = repair;
                 } else{
+                    IMG.flag_track = TRACK_MIDDLE;
                     IMG.edge_left = IMG.last_cones_edge_left;
                     IMG.edge_right = IMG.last_cones_edge_right;
                     refreshed = false;
@@ -211,6 +214,7 @@ void run_yroad() {
 
                     if (IMG.cones_edge_left.size() >= IMG.cones_edge_right.size() && IMG.cones_edge_left.size() > 2) {
                         //补左线
+                        IMG.flag_track = TRACK_LEFT;
                         POINT startPoint = IMG.cones_edge_left[0];
                         POINT midPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() / 2];
                         POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() - 1];
@@ -221,6 +225,7 @@ void run_yroad() {
                     } else if (IMG.cones_edge_left.size() < IMG.cones_edge_right.size() &&
                                IMG.cones_edge_right.size() >= 2) {
                         //补右线
+                        IMG.flag_track = TRACK_RIGHT;
                         POINT startPoint = IMG.cones_edge_right[0];
                         POINT midPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() / 2];
                         POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() - 1];
@@ -229,6 +234,7 @@ void run_yroad() {
                         IMG.edge_right.clear();
                         IMG.edge_right = repair;
                     } else {
+                        IMG.flag_track = TRACK_MIDDLE;
                         IMG.edge_left = IMG.last_cones_edge_left;
                         IMG.edge_right = IMG.last_cones_edge_right;
                         refreshed = false;
