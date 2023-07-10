@@ -8251,3 +8251,1245 @@
 [36;22mI/Serial       [22:40:31] (serial.hpp 252) Stop.[0m
 [36;22mI/System       [22:40:31] (yyds.cpp 144) Exit Code: 0[0m
 [36;22mI/System       [22:40:31] (yyds.cpp 145) Finish !!![0m
+[36;22mI/NO_TAG       [04:26:16] (logger_helper.cc 36) Build: Jul  8 2023 22:22:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [04:26:16] (model_config.hpp 170) Init Success.[0m
+[31;22mE/Capture      [04:26:16] (capture.cpp 9) Create Capture Failed.[0m
+[36;22mI/NO_TAG       [04:26:34] (logger_helper.cc 36) Build: Jul  8 2023 22:22:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [04:26:34] (model_config.hpp 170) Init Success.[0m
+[36;22mI/Capture      [04:26:35] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [04:26:35] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [04:26:35] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [04:26:35] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [04:26:35] (model_config.hpp 380) Init Success.[0m
+[36;22mI/Detection    [04:26:35] (detection.hpp 138) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [04:26:35] (detection.hpp 139) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [04:26:35] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [04:26:35] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [04:26:35] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [04:26:35] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [04:26:35] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [04:26:35] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [04:26:35] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [04:26:35] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [04:26:35] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [04:26:35] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [04:26:35] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [04:26:35] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [04:26:36] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [04:26:36] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [04:26:36] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [04:26:36] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [04:26:36] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [04:26:36] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [04:26:36] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [04:26:36] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [04:26:36] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [04:26:36] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [04:26:36] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [04:26:36] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [04:26:36] (serial.hpp 224) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [04:26:36] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [04:26:36] (detection.hpp 159) Start![0m
+[36;22mI/Display      [04:26:36] (display.cpp 35) Start![0m
+[36;22mI/System       [04:26:54] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [04:26:54] (capture.cpp 41) Stop.[0m
+[36;22mI/Detection    [04:26:54] (detection.hpp 170) Stop.[0m
+[36;22mI/Display      [04:26:54] (display.cpp 50) Stop.[0m
+[36;22mI/Serial       [04:26:54] (serial.hpp 252) Stop.[0m
+[36;22mI/System       [04:26:54] (yyds.cpp 144) Exit Code: 0[0m
+[36;22mI/System       [04:26:54] (yyds.cpp 145) Finish !!![0m
+[36;22mI/NO_TAG       [04:30:20] (logger_helper.cc 36) Build: Jul  8 2023 22:22:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [04:30:20] (model_config.hpp 170) Init Success.[0m
+[36;22mI/Capture      [04:30:22] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [04:30:22] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [04:30:22] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [04:30:22] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [04:30:22] (model_config.hpp 380) Init Success.[0m
+[36;22mI/Detection    [04:30:22] (detection.hpp 138) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [04:30:22] (detection.hpp 139) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [04:30:22] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [04:30:23] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [04:30:23] (serial.hpp 224) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [04:30:23] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [04:30:23] (detection.hpp 159) Start![0m
+[36;22mI/Display      [04:30:23] (display.cpp 35) Start![0m
+[36;22mI/System       [04:30:50] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [04:30:51] (_garage.cpp 111) GARAGE_NONE[0m
+[36;22mI/NO_TAG       [04:32:00] (logger_helper.cc 36) Build: Jul  8 2023 22:22:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [04:32:00] (model_config.hpp 170) Init Success.[0m
+[36;22mI/Capture      [04:32:02] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [04:32:02] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [04:32:02] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [04:32:02] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [04:32:02] (model_config.hpp 380) Init Success.[0m
+[36;22mI/Detection    [04:32:02] (detection.hpp 138) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [04:32:02] (detection.hpp 139) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [04:32:02] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [04:32:02] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [04:32:02] (serial.hpp 224) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [04:32:02] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [04:32:02] (detection.hpp 159) Start![0m
+[36;22mI/Display      [04:32:02] (display.cpp 35) Start![0m
+[36;22mI/System       [04:32:09] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [04:32:10] (_garage.cpp 111) GARAGE_NONE[0m
+[36;22mI/System       [04:32:11] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [04:32:11] (capture.cpp 41) Stop.[0m
+[36;22mI/Detection    [04:32:11] (detection.hpp 170) Stop.[0m
+[36;22mI/Display      [04:32:11] (display.cpp 50) Stop.[0m
+[36;22mI/Serial       [04:32:11] (serial.hpp 252) Stop.[0m
+[36;22mI/System       [04:32:11] (yyds.cpp 144) Exit Code: 0[0m
+[36;22mI/System       [04:32:11] (yyds.cpp 145) Finish !!![0m
+[36;22mI/NO_TAG       [04:34:13] (logger_helper.cc 36) Build: Jul  8 2023 22:22:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [04:34:13] (model_config.hpp 170) Init Success.[0m
+[36;22mI/Capture      [04:34:14] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [04:34:14] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [04:34:14] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [04:34:14] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [04:34:14] (model_config.hpp 380) Init Success.[0m
+[36;22mI/Detection    [04:34:14] (detection.hpp 138) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [04:34:14] (detection.hpp 139) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [04:34:14] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [04:34:14] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [04:34:14] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [04:34:14] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [04:34:14] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [04:34:14] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [04:34:14] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [04:34:14] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [04:34:14] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [04:34:15] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [04:34:15] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [04:34:15] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [04:34:15] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [04:34:15] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [04:34:15] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [04:34:15] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [04:34:15] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [04:34:15] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [04:34:15] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [04:34:15] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [04:34:15] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [04:34:15] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [04:34:15] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [04:34:15] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [04:34:15] (serial.hpp 224) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [04:34:15] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [04:34:15] (detection.hpp 159) Start![0m
+[36;22mI/Display      [04:34:15] (display.cpp 35) Start![0m
+[36;22mI/System       [04:34:18] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [04:34:18] (_garage.cpp 111) GARAGE_NONE[0m
+[36;22mI/System       [04:34:19] (capture.cpp 94) Run![0m
+[36;22mI/System       [04:34:19] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [04:34:19] (capture.cpp 41) Stop.[0m
+[36;22mI/Detection    [04:34:19] (detection.hpp 170) Stop.[0m
+[36;22mI/Display      [04:34:19] (display.cpp 50) Stop.[0m
+[36;22mI/Serial       [04:34:19] (serial.hpp 252) Stop.[0m
+[36;22mI/System       [04:34:19] (yyds.cpp 144) Exit Code: 0[0m
+[36;22mI/System       [04:34:19] (yyds.cpp 145) Finish !!![0m
+[36;22mI/NO_TAG       [04:37:22] (logger_helper.cc 36) Build: Jul  8 2023 22:22:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [04:37:22] (model_config.hpp 170) Init Success.[0m
+[36;22mI/Capture      [04:37:23] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [04:37:23] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [04:37:23] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [04:37:23] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [04:37:23] (model_config.hpp 380) Init Success.[0m
+[36;22mI/Detection    [04:37:23] (detection.hpp 138) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [04:37:23] (detection.hpp 139) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [04:37:23] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [04:37:23] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [04:37:23] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [04:37:23] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [04:37:23] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [04:37:23] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [04:37:23] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [04:37:23] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [04:37:23] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [04:37:23] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [04:37:23] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [04:37:23] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [04:37:24] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [04:37:24] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [04:37:24] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [04:37:24] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [04:37:24] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [04:37:24] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [04:37:24] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [04:37:24] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [04:37:24] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [04:37:24] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [04:37:24] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [04:37:24] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [04:37:24] (serial.hpp 224) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [04:37:24] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [04:37:24] (detection.hpp 159) Start![0m
+[36;22mI/Display      [04:37:24] (display.cpp 35) Start![0m
+[36;22mI/System       [04:37:27] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [04:37:28] (_garage.cpp 111) GARAGE_NONE[0m
+[36;22mI/System       [04:37:29] (capture.cpp 94) Run![0m
+[36;22mI/System       [04:37:29] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [04:37:29] (capture.cpp 41) Stop.[0m
+[36;22mI/Detection    [04:37:29] (detection.hpp 170) Stop.[0m
+[36;22mI/Display      [04:37:29] (display.cpp 50) Stop.[0m
+[36;22mI/Serial       [04:37:29] (serial.hpp 252) Stop.[0m
+[36;22mI/System       [04:37:29] (yyds.cpp 144) Exit Code: 0[0m
+[36;22mI/System       [04:37:29] (yyds.cpp 145) Finish !!![0m
+[36;22mI/NO_TAG       [04:42:54] (logger_helper.cc 36) Build: Jul  8 2023 22:22:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [04:42:54] (model_config.hpp 170) Init Success.[0m
+[36;22mI/Capture      [04:42:56] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [04:42:56] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [04:42:56] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [04:42:56] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [04:42:56] (model_config.hpp 380) Init Success.[0m
+[36;22mI/Detection    [04:42:56] (detection.hpp 138) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [04:42:56] (detection.hpp 139) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [04:42:56] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [04:42:56] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [04:42:56] (serial.hpp 224) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [04:42:56] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [04:42:56] (detection.hpp 159) Start![0m
+[36;22mI/Display      [04:42:56] (display.cpp 35) Start![0m
+[36;22mI/System       [04:43:01] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [04:43:01] (_garage.cpp 128) GARAGE_NONE[0m
+[36;22mI/Cross        [04:43:01] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [04:43:01] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [04:43:02] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/System       [04:43:02] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [04:43:02] (capture.cpp 41) Stop.[0m
+[36;22mI/Detection    [04:43:02] (detection.hpp 170) Stop.[0m
+[36;22mI/Display      [04:43:02] (display.cpp 50) Stop.[0m
+[36;22mI/Serial       [04:43:02] (serial.hpp 252) Stop.[0m
+[36;22mI/System       [04:43:02] (yyds.cpp 144) Exit Code: 0[0m
+[36;22mI/System       [04:43:02] (yyds.cpp 145) Finish !!![0m
+[36;22mI/NO_TAG       [14:19:28] (logger_helper.cc 36) Build: Jul  8 2023 22:22:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [14:19:28] (model_config.hpp 170) Init Success.[0m
+[31;22mE/Capture      [14:19:28] (capture.cpp 9) Create Capture Failed.[0m
+[36;22mI/NO_TAG       [14:19:37] (logger_helper.cc 36) Build: Jul  8 2023 22:22:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [14:19:37] (model_config.hpp 170) Init Success.[0m
+[36;22mI/Capture      [14:19:38] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [14:19:38] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [14:19:38] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [14:19:38] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [14:19:38] (model_config.hpp 380) Init Success.[0m
+[36;22mI/Detection    [14:19:38] (detection.hpp 138) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [14:19:38] (detection.hpp 139) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [14:19:38] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [14:19:38] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [14:19:38] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [14:19:38] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [14:19:38] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [14:19:38] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [14:19:38] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [14:19:38] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [14:19:38] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [14:19:39] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [14:19:39] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [14:19:39] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [14:19:39] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [14:19:39] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [14:19:39] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [14:19:39] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [14:19:39] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [14:19:39] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [14:19:39] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [14:19:39] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [14:19:39] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [14:19:39] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [14:19:39] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [14:19:40] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [14:19:40] (serial.hpp 224) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [14:19:40] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [14:19:40] (detection.hpp 159) Start![0m
+[36;22mI/Display      [14:19:40] (display.cpp 35) Start![0m
+[36;22mI/Run          [14:19:57] (imgprocess.cpp 466) BRIDGE_DETECTION[0m
+[36;22mI/Run          [14:19:57] (imgprocess.cpp 466) BRIDGE_DETECTION[0m
+[36;22mI/Run          [14:19:58] (imgprocess.cpp 466) BRIDGE_DETECTION[0m
+[36;22mI/Run          [14:19:59] (imgprocess.cpp 466) BRIDGE_DETECTION[0m
+[36;22mI/Run          [14:20:00] (imgprocess.cpp 466) BRIDGE_DETECTION[0m
+[36;22mI/Run          [14:20:13] (imgprocess.cpp 466) BRIDGE_DETECTION[0m
+[36;22mI/Run          [14:20:16] (imgprocess.cpp 466) BRIDGE_DETECTION[0m
+[36;22mI/Run          [14:20:17] (imgprocess.cpp 466) BRIDGE_DETECTION[0m
+[36;22mI/NO_TAG       [14:21:46] (logger_helper.cc 36) Build: Jul  8 2023 22:22:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [14:21:46] (model_config.hpp 170) Init Success.[0m
+[36;22mI/Capture      [14:21:47] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [14:21:47] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [14:21:47] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [14:21:47] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [14:21:47] (model_config.hpp 380) Init Success.[0m
+[36;22mI/Detection    [14:21:47] (detection.hpp 138) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [14:21:47] (detection.hpp 139) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [14:21:47] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [14:21:47] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [14:21:47] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [14:21:47] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [14:21:47] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [14:21:47] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [14:21:47] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [14:21:47] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [14:21:47] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [14:21:47] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [14:21:47] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [14:21:47] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [14:21:48] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [14:21:48] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [14:21:48] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [14:21:48] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [14:21:48] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [14:21:48] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [14:21:48] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [14:21:48] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [14:21:48] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [14:21:48] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [14:21:48] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [14:21:48] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [14:21:48] (serial.hpp 224) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [14:21:48] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [14:21:48] (detection.hpp 159) Start![0m
+[36;22mI/Display      [14:21:48] (display.cpp 35) Start![0m
+[36;22mI/System       [14:21:50] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [14:21:51] (_garage.cpp 128) GARAGE_NONE[0m
+[36;22mI/Cross        [14:21:51] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [14:21:51] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [14:21:51] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [14:21:53] (imgprocess.cpp 435) TRACTOR_DETECTION[0m
+[36;22mI/Work         [14:21:53] (_work.cpp 30) WORK_FOUND[0m
+[36;22mI/Work         [14:21:53] (_work.cpp 59) WORK_READY[0m
+[36;22mI/Work         [14:21:53] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:53] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:53] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 139) WORK_SECOND[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 139) WORK_SECOND[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 139) WORK_SECOND[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 139) WORK_SECOND[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 139) WORK_SECOND[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 139) WORK_SECOND[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 146) WORK_RUN[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 214) WORK_RUN_STOP[0m
+[36;22mI/Work         [14:21:54] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 221) WORK_STOPFINISH[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 249) WORK_Debug2[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:58] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:58] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:58] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:58] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:58] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:58] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:58] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:21:58] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:21:58] (_work.cpp 243) WORK_NONE[0m
+[36;22mI/Cross        [14:22:04] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [14:22:04] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [14:22:04] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [14:22:04] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [14:22:04] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [14:22:05] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [14:22:05] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [14:22:05] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [14:22:05] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [14:22:06] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [14:22:06] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [14:22:06] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/System       [14:22:06] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [14:22:06] (capture.cpp 41) Stop.[0m
+[36;22mI/Detection    [14:22:06] (detection.hpp 170) Stop.[0m
+[36;22mI/Display      [14:22:06] (display.cpp 50) Stop.[0m
+[36;22mI/Serial       [14:22:06] (serial.hpp 252) Stop.[0m
+[36;22mI/System       [14:22:06] (yyds.cpp 144) Exit Code: 0[0m
+[36;22mI/System       [14:22:06] (yyds.cpp 145) Finish !!![0m
+[36;22mI/NO_TAG       [14:22:41] (logger_helper.cc 36) Build: Jul  8 2023 22:22:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [14:22:41] (model_config.hpp 170) Init Success.[0m
+[36;22mI/Capture      [14:22:43] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [14:22:43] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [14:22:43] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [14:22:43] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [14:22:43] (model_config.hpp 380) Init Success.[0m
+[36;22mI/Detection    [14:22:43] (detection.hpp 138) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [14:22:43] (detection.hpp 139) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [14:22:43] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [14:22:43] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [14:22:43] (serial.hpp 224) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [14:22:43] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [14:22:43] (detection.hpp 159) Start![0m
+[36;22mI/Display      [14:22:43] (display.cpp 35) Start![0m
+[36;22mI/System       [14:22:48] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [14:22:49] (_garage.cpp 128) GARAGE_NONE[0m
+[36;22mI/Cross        [14:22:49] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [14:22:49] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [14:22:49] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [14:22:51] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [14:22:51] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [14:22:51] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [14:22:53] (imgprocess.cpp 435) TRACTOR_DETECTION[0m
+[36;22mI/Work         [14:22:53] (_work.cpp 30) WORK_FOUND[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 59) WORK_READY[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 124) WORK_FIRST[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 139) WORK_SECOND[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 139) WORK_SECOND[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 139) WORK_SECOND[0m
+[36;22mI/Work         [14:22:54] (_work.cpp 139) WORK_SECOND[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 139) WORK_SECOND[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 139) WORK_SECOND[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 139) WORK_SECOND[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 146) WORK_RUN[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 214) WORK_RUN_STOP[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:55] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:56] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 225) WORK_STOPPING[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 221) WORK_STOPFINISH[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 249) WORK_Debug2[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:57] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 245) WORK_Debug1[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 253) WORK_Debug3[0m
+[36;22mI/Work         [14:22:58] (_work.cpp 243) WORK_NONE[0m
+[36;22mI/Cross        [14:23:13] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [14:23:14] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [14:23:14] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [14:23:17] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [14:23:17] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [14:23:18] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/System       [14:23:18] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [14:23:18] (capture.cpp 41) Stop.[0m
+[36;22mI/Detection    [14:23:18] (detection.hpp 170) Stop.[0m
+[36;22mI/Display      [14:23:18] (display.cpp 50) Stop.[0m
+[36;22mI/Serial       [14:23:18] (serial.hpp 252) Stop.[0m
+[36;22mI/System       [14:23:18] (yyds.cpp 144) Exit Code: 0[0m
+[36;22mI/System       [14:23:18] (yyds.cpp 145) Finish !!![0m
+[36;22mI/NO_TAG       [14:28:16] (logger_helper.cc 36) Build: Jul  8 2023 22:22:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [14:28:16] (model_config.hpp 170) Init Success.[0m
+[36;22mI/Capture      [14:28:18] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [14:28:18] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [14:28:18] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [14:28:18] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [14:28:18] (model_config.hpp 380) Init Success.[0m
+[36;22mI/Detection    [14:28:18] (detection.hpp 138) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [14:28:18] (detection.hpp 139) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [14:28:18] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [14:28:18] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [14:28:18] (serial.hpp 224) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [14:28:18] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [14:28:18] (detection.hpp 159) Start![0m
+[36;22mI/Display      [14:28:18] (display.cpp 35) Start![0m
+[36;22mI/System       [14:28:21] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [14:28:22] (_garage.cpp 111) GARAGE_NONE[0m
+[36;22mI/Run          [14:28:22] (imgprocess.cpp 451) FARM_DETECTION[0m
+[36;22mI/Yroad        [14:28:22] (_yroad.cpp 42) Farmland_FOUND[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 69) Farmland_IN[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 100) edge_exist1[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 100) edge_exist1[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 100) edge_exist1[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 100) edge_exist1[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:23] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 100) edge_exist1[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 100) edge_exist1[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 100) edge_exist1[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 100) edge_exist1[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 100) edge_exist1[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 100) edge_exist1[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 119) clear_right[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 122) clear_left[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 122) clear_left[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 122) clear_left[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 122) clear_left[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 122) clear_left[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 158) FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 154) UN_FARM_REFRESHED[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 82) Farmland_RUN[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 176) Farmland_OUT[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:24] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/System       [14:28:25] (capture.cpp 85) Exit...[0m
+[36;22mI/Yroad        [14:28:25] (_yroad.cpp 260) FARM_OUT_FINISH[0m
+[36;22mI/Capture      [14:28:25] (capture.cpp 41) Stop.[0m
+[36;22mI/Detection    [14:28:25] (detection.hpp 170) Stop.[0m
+[36;22mI/Display      [14:28:25] (display.cpp 50) Stop.[0m
+[36;22mI/Serial       [14:28:25] (serial.hpp 252) Stop.[0m
+[36;22mI/System       [14:28:25] (yyds.cpp 144) Exit Code: 0[0m
+[36;22mI/System       [14:28:25] (yyds.cpp 145) Finish !!![0m
+[36;22mI/NO_TAG       [14:32:48] (logger_helper.cc 36) Build: Jul  8 2023 22:22:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [14:32:48] (model_config.hpp 170) Init Success.[0m
+[36;22mI/Capture      [14:32:50] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [14:32:50] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [14:32:50] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [14:32:50] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [14:32:50] (model_config.hpp 380) Init Success.[0m
+[36;22mI/Detection    [14:32:50] (detection.hpp 138) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [14:32:50] (detection.hpp 139) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [14:32:50] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [14:32:50] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [14:32:50] (serial.hpp 224) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [14:32:50] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [14:32:50] (detection.hpp 159) Start![0m
+[36;22mI/Display      [14:32:50] (display.cpp 35) Start![0m
+[36;22mI/System       [14:32:52] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [14:32:53] (_garage.cpp 111) GARAGE_NONE[0m
+[36;22mI/Cross        [14:32:54] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [14:32:55] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [14:32:55] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/System       [14:32:55] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [14:32:55] (capture.cpp 41) Stop.[0m
+[36;22mI/Detection    [14:32:55] (detection.hpp 170) Stop.[0m
+[36;22mI/Display      [14:32:55] (display.cpp 50) Stop.[0m
+[36;22mI/Serial       [14:32:55] (serial.hpp 252) Stop.[0m
+[36;22mI/System       [14:32:55] (yyds.cpp 144) Exit Code: 0[0m
+[36;22mI/System       [14:32:55] (yyds.cpp 145) Finish !!![0m
+[36;22mI/NO_TAG       [14:33:17] (logger_helper.cc 36) Build: Jul  8 2023 22:22:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [14:33:17] (model_config.hpp 170) Init Success.[0m
+[36;22mI/Capture      [14:33:18] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [14:33:18] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [14:33:18] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [14:33:18] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [14:33:18] (model_config.hpp 380) Init Success.[0m
+[36;22mI/Detection    [14:33:18] (detection.hpp 138) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [14:33:18] (detection.hpp 139) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [14:33:18] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [14:33:18] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [14:33:18] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [14:33:18] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [14:33:18] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [14:33:18] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [14:33:18] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [14:33:18] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [14:33:18] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [14:33:18] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [14:33:18] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [14:33:18] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [14:33:19] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [14:33:19] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [14:33:19] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [14:33:19] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [14:33:19] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [14:33:19] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [14:33:19] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [14:33:19] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [14:33:19] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [14:33:19] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [14:33:19] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [14:33:19] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [14:33:19] (serial.hpp 224) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [14:33:19] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [14:33:19] (detection.hpp 159) Start![0m
+[36;22mI/Display      [14:33:19] (display.cpp 35) Start![0m
+[36;22mI/System       [14:33:21] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [14:33:21] (_garage.cpp 111) GARAGE_NONE[0m
+[36;22mI/Cross        [14:33:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [14:33:23] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [14:33:23] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [14:33:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [14:33:23] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [14:33:24] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [14:33:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [14:33:24] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/System       [14:33:25] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [14:33:25] (capture.cpp 41) Stop.[0m
+[36;22mI/Detection    [14:33:25] (detection.hpp 170) Stop.[0m
+[36;22mI/Display      [14:33:25] (display.cpp 50) Stop.[0m
+[36;22mI/Serial       [14:33:25] (serial.hpp 252) Stop.[0m
+[36;22mI/System       [14:33:25] (yyds.cpp 144) Exit Code: 0[0m
+[36;22mI/System       [14:33:25] (yyds.cpp 145) Finish !!![0m
