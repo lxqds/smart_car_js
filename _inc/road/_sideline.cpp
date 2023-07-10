@@ -329,6 +329,15 @@ std::vector<POINT> predict_edge_right(vector<POINT> &point_edge_left,POINT point
     POINT start_point(0,0);
     POINT end_point(0,0);
 
+    Point2d predict_right;
+    if(points_edge_left.size() <3){
+        return points_edge_right;
+    }
+
+    //start
+    if(point_r.x > 0 && point_r.y>0){
+
+    }
     /*// 透视 -> 原图
     for (int i = 0; i < rpts_num; i++)
         map_perspective(rpts[i][0], rpts[i][1], rpts[i], 1);*/

@@ -59,7 +59,7 @@ void run_yroad() {
 
         //减少找的线
         if(IMG.edge_left.size() > 50 ){
-            IMG.edge_left.resize(IMG.edge_left.size() * 0.7) ;
+            IMG.edge_left.resize(IMG.edge_left.size() * 0.5) ;
         }
 
         // 进入农场的条件，锥桶靠近，或者左右线很小,或走过一段路
@@ -75,7 +75,7 @@ void run_yroad() {
     if (flag_yroad == YROAD_IN) {
 
         bool refreshed = true;
-        if (IMG.encoder.route - yroad_route > 50&&(IMG.rpts0s_num < 0.2 / SAMPLE_DIST&&IMG.rpts1s_num < 0.2 / SAMPLE_DIST)) {
+        if (IMG.encoder.route - yroad_route > 20&&(IMG.rpts0s_num < 0.2 / SAMPLE_DIST&&IMG.rpts1s_num < 0.2 / SAMPLE_DIST)) {
             //路程积分或识别到边线或没有识别到锥桶
             yroad_route = IMG.encoder.route;
             flag_yroad = YROAD_RUN;
@@ -99,8 +99,8 @@ void run_yroad() {
                 IMG.edge_left.resize(break_right);
                 MAT_LOG("edge_exist1")
             } else {//搜索左右锥桶
-                IMG.cones_edge_left.push_back(POINT(0,0));
-                IMG.cones_edge_right.push_back(POINT(0,0));
+                IMG.cones_edge_left.push_back(POINT(IMAGE_HEIGHT-1,0));
+                IMG.cones_edge_right.push_back(POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH-1));
                 for (int i= 0;i < IMG.edge_det.size();i++){
                     //左边底部锥桶
                     if (IMG.edge_det[i].y < IMAGE_WIDTH/2&&IMG.edge_det[i].x>0){
@@ -130,7 +130,7 @@ void run_yroad() {
                     //补左线
                     IMG.flag_track = TRACK_LEFT;
                     POINT startPoint = POINT(IMAGE_HEIGHT-1,0);
-                    POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() /2];
+                    POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() - 1];
                     POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.05, input);
@@ -140,7 +140,7 @@ void run_yroad() {
                     //补右线
                     IMG.flag_track = TRACK_RIGHT;
                     POINT startPoint = POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH);
-                    POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() /2];
+                    POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() - 1];
                     POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.05, input);
@@ -179,35 +179,11 @@ void run_yroad() {
             IMG.is_curve0 = IMG.is_curve1 = false;
 
             IMG.edge_det = search_targets(IMG._det_result);
-            IMG.cones_edge_left.clear();
-            IMG.cones_edge_right.clear();
-
-            int break_left = search_break_left(IMG.edge_left,IMG.mat_lab);
-            int break_right = search_break_right(IMG.edge_right,IMG.mat_lab);
 
              {//搜索左右锥桶
-                IMG.cones_edge_left.push_back(POINT(0, 0));
-                IMG.cones_edge_right.push_back(POINT(0, 0));
-                for (int i = 0; i < IMG.edge_det.size(); i++) {
-                    //左边底部锥桶
-                    if (IMG.edge_det[i].y < IMAGE_WIDTH / 2 && IMG.edge_det[i].x > 0) {
-                        IMG.cones_edge_left[0] = IMG.edge_det[i];
-                    }
-                    //右边底部锥桶
-                    if (IMG.edge_det[i].y > IMAGE_WIDTH / 2 && IMG.edge_det[i].x > 0) {
-                        IMG.cones_edge_right[0] = IMG.edge_det[i];
-                    }
-                }
+                IMG.cones_edge_left[0] = POINT(IMAGE_HEIGHT-1,0);
+                IMG.cones_edge_right[0] = POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH);
 
-                    //判断是否是单边,清左右边，
-                    if (abs(IMG.cones_edge_right[0].y - IMG.cones_edge_left[0].y) > IMAGE_WIDTH / 3 &&
-                        abs(IMG.cones_edge_right[0].x - IMG.cones_edge_left[0].x) > IMAGE_HEIGHT / 3) {
-                        if (IMG.cones_edge_left[0].x > IMG.cones_edge_right[0].x) {
-                            IMG.cones_edge_right.clear();
-                        } else if (IMG.cones_edge_left[0].x < IMG.cones_edge_right[0].x) {
-                            IMG.cones_edge_left.clear();
-                        }
-                    }
                     //搜左右边缘，在以划分的点加左右边缘点
                     search_cones_edge(IMG.edge_det, &IMG.cones_edge_left, &IMG.cones_edge_right);
 
