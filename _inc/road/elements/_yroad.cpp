@@ -166,7 +166,7 @@ void run_yroad() {
 
     /* ***************************************************************** */
     if(flag_yroad ==YROAD_RUN){
-        if((IMG.encoder.route - yroad_route > 100&&(IMG.rpts0s_num > 0.2 / SAMPLE_DIST)||(IMG.rpts1s_num > 0.2 / SAMPLE_DIST))||IMG.edge_det.size()<1){
+        if((IMG.encoder.route - yroad_route > 100&&(IMG.rpts0s_num > 0.2 / SAMPLE_DIST)||(IMG.rpts1s_num > 0.2 / SAMPLE_DIST))&&IMG.edge_det.size()<1){
             //路程积分或识别到边线或没有识别到锥桶
             yroad_out_num = 0;
             IMG.element_over = true;
