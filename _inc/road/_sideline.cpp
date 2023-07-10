@@ -419,8 +419,8 @@ void search_cones_edge(std::vector<POINT> cones,std::vector<POINT> *left_cones,s
         //搜索右边缘
         for (int i = 0;i < points_cones.size();i++){
             if(right_cones->size() > 0){
-                //先前左边缘只到中间，拓展左边缘
-                if(distance_for_points(right_cones->at(right_cones->size() - 1),points_cones[i]) < right_cones->at(right_cones->size() - 1).x /1.1 && points_cones[i].x < right_cones->at(right_cones->size() - 1).x){
+                //先前右边缘只到中间，拓展左边缘
+                if(distance_for_points(right_cones->at(right_cones->size() - 1),points_cones[i]) < right_cones->at(right_cones->size() - 1).x /1.1 && points_cones[i].x > right_cones->at(right_cones->size() - 1).x){
                     if(index < 0){
                         index = i ;
                     }else if(distance_for_points(points_cones[i],right_cones->at(right_cones->size() - 1)) < distance_for_points(points_cones[index], right_cones->at(right_cones->size() - 1))){

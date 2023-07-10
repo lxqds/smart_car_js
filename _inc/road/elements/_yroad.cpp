@@ -183,9 +183,29 @@ void run_yroad() {
             IMG.edge_det = search_targets(IMG._det_result);
 
              {//搜索左右锥桶
-                IMG.cones_edge_left[0] = POINT(IMAGE_HEIGHT-1,0);
-                IMG.cones_edge_right[0] = POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH);
+                 IMG.cones_edge_left[0] = (POINT(IMAGE_HEIGHT-1,0));
+                 IMG.cones_edge_right[0] = (POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH-1));
+                 for (int i= 0;i < IMG.edge_det.size();i++){
+                     //左边底部锥桶
+                     if (IMG.edge_det[i].y < IMAGE_WIDTH/2&&IMG.edge_det[i].x>0){
+                         IMG.cones_edge_left[0] = IMG.edge_det[i];
+                     }
+                     //右边底部锥桶
+                     if (IMG.edge_det[i].y > IMAGE_WIDTH/2&&IMG.edge_det[i].x>0){
+                         IMG.cones_edge_right[0] = IMG.edge_det[i];
+                     }
+                 }
 
+                 //判断是否是单边,清左右边
+                 if(abs(IMG.cones_edge_right[0].y-IMG.cones_edge_left[0].y )> IMAGE_WIDTH/3 && abs(IMG.cones_edge_right[0].x-IMG.cones_edge_left[0].x)>IMAGE_HEIGHT/3){
+                     if(IMG.cones_edge_left[0].x > IMG.cones_edge_right[0].x){
+                         //IMG.cones_edge_right.clear();
+                         MAT_LOG("clear_right");
+                     }else if(IMG.cones_edge_left[0].x < IMG.cones_edge_right[0].x){
+                         //IMG.cones_edge_left.clear();
+                         MAT_LOG("clear_left");
+                     }
+                 }
                     //搜左右边缘，在以划分的点加左右边缘点
                     search_cones_edge(IMG.edge_det, &IMG.cones_edge_left, &IMG.cones_edge_right);
 
