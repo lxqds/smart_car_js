@@ -790,7 +790,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
 
         // 泛行区丢线
         if (flag_yroad != YROAD_NONE)
-            aim_angle = aim_angle_last;
+            aim_angle = aim_angle_last*1.01;
 
         // 斑马线丢线
         if (flag_garage >= GARAGE_PASS_LEFT)
