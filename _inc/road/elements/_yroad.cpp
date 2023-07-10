@@ -147,7 +147,6 @@ void run_yroad() {
                     IMG.edge_right.clear();
                     IMG.edge_right = repair;
                 } else{
-                    IMG.flag_track = TRACK_MIDDLE;
                     IMG.edge_left = IMG.last_cones_edge_left;
                     IMG.edge_right = IMG.last_cones_edge_right;
                     refreshed = false;
