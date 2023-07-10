@@ -228,17 +228,19 @@ void run_yroad() {
                     IMG.edge_right = repair;
 
                 }
-                if(IMG.edge_right.size()>IMG.edge_left.size()){
+                if(IMG.edge_left.size()>IMG.edge_right.size()){
                     IMG.flag_track = TRACK_RIGHT;
-                }else if(IMG.edge_right.size()<IMG.edge_left.size()){
+                }else if(IMG.edge_left.size()<IMG.edge_right.size()){
                     IMG.flag_track = TRACK_LEFT;
                 }else if(IMG.edge_right.size()==0&&IMG.edge_left.size()==0){
-                    IMG.edge_left = IMG.last_cones_edge_left;
-                    IMG.edge_right = IMG.last_cones_edge_right;
+                    /*IMG.edge_left = IMG.last_cones_edge_left;
+                    IMG.edge_right = IMG.last_cones_edge_right;*/
+                    IMG.flag_track = TRACK_MIDDLE;
                     refreshed = false;
-                    MAT_LOG("UN_FARM_REFRESHED2");
+                    MAT_LOG("LAST_CONES");
                 }else{
                     IMG.flag_track = TRACK_MIDDLE;
+                    MAT_LOG("TRCACK_MIDDLE");
                 }
                 /*if (IMG.cones_edge_left.size() >= IMG.cones_edge_right.size() && IMG.cones_edge_left.size() >= 2) {
                     //补左线
