@@ -139,7 +139,7 @@ void run_yroad() {
                 }else if(IMG.cones_edge_left.size() < IMG.cones_edge_right.size() && IMG.cones_edge_right.size() >= 2){
                     //补右线
                     IMG.flag_track = TRACK_RIGHT;
-                    POINT startPoint = POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH)
+                    POINT startPoint = POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH);
                     POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() /2];
                     POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
                     vector <POINT> input = {startPoint, midPoint, endPoint};
@@ -226,7 +226,7 @@ void run_yroad() {
                                IMG.cones_edge_right.size() >= 2) {
                         //补右线
                         IMG.flag_track = TRACK_RIGHT;
-                        POINT startPoint = POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH)
+                        POINT startPoint = POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH);
                         POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() /2];
                         POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
                         vector <POINT> input = {startPoint, midPoint, endPoint};
