@@ -229,9 +229,9 @@ void run_yroad() {
 
                 }
                 if(IMG.edge_left.size()>IMG.edge_right.size()){
-                    IMG.flag_track = TRACK_RIGHT;
-                }else if(IMG.edge_left.size()<IMG.edge_right.size()){
                     IMG.flag_track = TRACK_LEFT;
+                }else if(IMG.edge_left.size()<IMG.edge_right.size()){
+                    IMG.flag_track = TRACK_RIGHT;
                 }else if(IMG.edge_right.size()==0&&IMG.edge_left.size()==0){
                     /*IMG.edge_left = IMG.last_cones_edge_left;
                     IMG.edge_right = IMG.last_cones_edge_right;*/
