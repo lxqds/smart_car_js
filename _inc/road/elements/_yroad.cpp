@@ -178,6 +178,8 @@ void run_yroad() {
             // 清弯道防止加大 P 项, 提高稳定性
             IMG.is_curve0 = IMG.is_curve1 = false;
 
+            IMG.cones_edge_left.clear();
+            IMG.cones_edge_right.clear();
             IMG.edge_det = search_targets(IMG._det_result);
 
              {//搜索左右锥桶
