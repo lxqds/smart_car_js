@@ -100,7 +100,7 @@ void run_yroad() {
             }*/
             //边线还在
             if(IMG.encoder.route - yroad_route < 120){
-                MAT_LOG("edge_exist1");
+                //MAT_LOG("edge_exist1");
                 //补左边线。以左边线为准
                 IMG.flag_track = TRACK_LEFT;
                 POINT startPoint = POINT(IMAGE_HEIGHT-1,50);
