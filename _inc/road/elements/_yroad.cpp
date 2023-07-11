@@ -115,6 +115,7 @@ void run_yroad() {
                 POINT midPoint = IMG.edge_left[break_left];
                 vector <POINT> input = {startPoint, midPoint, endPoint};
                 vector <POINT> repair = bezier(0.02, input);
+                IMG.edge_left.clear();
                 IMG.edge_left = repair;
             } else {//进入农场
                 if(IMG.cones_edge_left.size()>IMG.cones_edge_right.size()&&IMG.cones_edge_left.size()>2){
@@ -124,6 +125,7 @@ void run_yroad() {
                     POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size()-1];
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.02, input);
+                    IMG.edge_left.clear();
                     IMG.edge_left = repair;
                 }else if(IMG.cones_edge_left.size()<IMG.cones_edge_right.size()&&IMG.cones_edge_right.size()>2){
                     IMG.flag_track = TRACK_RIGHT;
@@ -132,6 +134,7 @@ void run_yroad() {
                     POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_left.size()-1];
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.02, input);
+                    IMG.edge_right.clear();
                     IMG.edge_right = repair;
                 }else if(IMG.cones_edge_left.size()>IMG.cones_edge_right.size()&&IMG.cones_edge_left.size()>0){
                     IMG.flag_track = TRACK_LEFT;
@@ -140,6 +143,7 @@ void run_yroad() {
                     POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.02, input);
+                    IMG.edge_left.clear();
                     IMG.edge_left = repair;
                 }else if(IMG.cones_edge_left.size()<IMG.cones_edge_right.size()&&IMG.cones_edge_right.size()>0){
                     IMG.flag_track = TRACK_RIGHT;
@@ -148,7 +152,8 @@ void run_yroad() {
                     POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.02, input);
-                    IMG.edge_left = repair;
+                    IMG.edge_right.clear();
+                    IMG.edge_right = repair;
                 }else {
                     flag_yroad = YROAD_STRAIGH;
                     MAT_LOG("Farmland_GO_AHEAD");
