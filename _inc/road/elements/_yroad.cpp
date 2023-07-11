@@ -218,7 +218,7 @@ void run_yroad() {
                      IMG.cones_edge_right = search_right_cones(IMG.edge_det);
                  }
                 */
-                if (IMG.cones_edge_left.size() > 1 && IMG.cones_edge_left.size() <= = 3) {
+                if (IMG.cones_edge_left.size() > 1 && IMG.cones_edge_left.size() <= 3) {
                     POINT startPoint = POINT(IMAGE_HEIGHT - 1, 50);
                     POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() - 1];
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5);  // 补线中点
