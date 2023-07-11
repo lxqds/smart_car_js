@@ -91,22 +91,16 @@ void run_yroad() {
             IMG.cones_edge_left = search_left_cones(IMG.edge_det);
             IMG.cones_edge_right = search_right_cones(IMG.edge_det);
 
-            //int break_left = search_break_left(IMG.edge_left,IMG.mat_lab);
-            //int break_right = search_break_right(IMG.edge_right,IMG.mat_lab);
 
             //减少找的线
-            /*if(IMG.edge_left.size() > 50 ){
+            if(IMG.edge_left.size() > 50 ){
                 IMG.edge_left.resize(IMG.edge_left.size() * 0.5) ;
             }
             if(IMG.edge_right.size() > 50 ){
                 IMG.edge_right.resize(IMG.edge_right.size() * 0.5) ;
-            }*/
+            }
             //边线还在
-            /*if(break_left > 100&&break_right > 100){
-                IMG.cones_edge_left[0]=IMG.edge_left[break_left];
-                IMG.edge_left.resize(break_left);
-                IMG.cones_edge_right[0]=IMG.edge_right[break_right];
-                IMG.edge_left.resize(break_right);
+            if(IMG.encoder.route - yroad_route < 20){
                 MAT_LOG("edge_exist1");
                 //补左边线。以左边线为准
                 IMG.flag_track = TRACK_LEFT;
@@ -159,7 +153,7 @@ void run_yroad() {
                     MAT_LOG("Farmland_GO_AHEAD");
                 }
 
-            }*/
+            }
         }
     }
 
