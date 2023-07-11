@@ -87,8 +87,6 @@ void run_yroad() {
             IMG.is_curve0 = IMG.is_curve1 = false;
 
             IMG.edge_det = search_targets(IMG._det_result);
-            IMG.cones_edge_left.clear();
-            IMG.cones_edge_right.clear();
 
             IMG.cones_edge_left = search_left_cones(IMG.edge_det);
             IMG.cones_edge_right = search_right_cones(IMG.edge_det);
