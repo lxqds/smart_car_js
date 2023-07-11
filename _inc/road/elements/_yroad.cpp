@@ -100,7 +100,7 @@ void run_yroad() {
                 IMG.edge_right.resize(IMG.edge_right.size() * 0.5) ;
             }*/
             //边线还在
-            if(IMG.encoder.route - yroad_route < 20){
+            if(IMG.encoder.route - yroad_route < 120){
                 MAT_LOG("edge_exist1");
                 //补左边线。以左边线为准
                 IMG.flag_track = TRACK_LEFT;
@@ -124,7 +124,7 @@ void run_yroad() {
                 }else if(IMG.cones_edge_left.size()<IMG.cones_edge_right.size()){
                     IMG.flag_track = TRACK_RIGHT;
                     POINT startPoint = IMG.cones_edge_right[0];
-                    POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_left.size()-1];
+                    POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size()-1];
                     POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.02, input);
