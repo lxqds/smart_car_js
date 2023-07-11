@@ -96,9 +96,9 @@ void run_yroad() {
 
             //边线还在
             if(break_left > 100&&break_right > 100){
-                IMG.cones_edge_left[0].push_back(IMG.edge_left[break_left]);
+                IMG.cones_edge_left[0]=IMG.edge_left[break_left];
                 IMG.edge_left.resize(break_left);
-                IMG.cones_edge_right[0].push_back(IMG.edge_right[break_right]);
+                IMG.cones_edge_right[0]=IMG.edge_right[break_right];
                 IMG.edge_left.resize(break_right);
                 MAT_LOG("edge_exist1")
             } else {//搜索左右锥桶
