@@ -135,7 +135,7 @@ void run_yroad() {
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.02, input);
                     IMG.edge_right = repair;
-                }else if(IMG.cones_edge_left.size()>IMG.cones_edge_right.size()){
+                }else if(IMG.cones_edge_left.size()>IMG.cones_edge_right.size()&&IMG.cones_edge_left.size()>0){
                     IMG.flag_track = TRACK_LEFT;
                     POINT startPoint = POINT(IMAGE_HEIGHT-1,50);
                     POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() -1];
@@ -143,7 +143,7 @@ void run_yroad() {
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.02, input);
                     IMG.edge_left = repair;
-                }else if(IMG.cones_edge_left.size()<IMG.cones_edge_right.size()){
+                }else if(IMG.cones_edge_left.size()<IMG.cones_edge_right.size()&&IMG.cones_edge_right.size()>0){
                     IMG.flag_track = TRACK_RIGHT;
                     POINT startPoint = POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH-50);
                     POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() -1];
