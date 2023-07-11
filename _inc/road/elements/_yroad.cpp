@@ -104,7 +104,7 @@ void run_yroad() {
                 MAT_LOG("edge_exist1");
                 //补左边线。以左边线为准
                 IMG.flag_track = TRACK_LEFT;
-                POINT startPoint = IMG.edge_left[0];
+                POINT startPoint = POINT(IMAGE_HEIGHT-1,50);
                 POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size()-1];
                 POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
                 vector <POINT> input = {startPoint, midPoint, endPoint};
