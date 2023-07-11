@@ -248,7 +248,7 @@ void run_yroad() {
     /* ***************************************************************** */
 
     if (flag_yroad == YROAD_OUT) {
-        IMG.flag_track = YROAD_NONE;
+        flag_yroad = YROAD_NONE;
         MAT_LOG("FARM_OUT_FINISH");
     }
 
