@@ -93,12 +93,12 @@ void run_yroad() {
 
 
             //减少找的线
-            if(IMG.edge_left.size() > 50 ){
+            /*if(IMG.edge_left.size() > 50 ){
                 IMG.edge_left.resize(IMG.edge_left.size() * 0.5) ;
             }
             if(IMG.edge_right.size() > 50 ){
                 IMG.edge_right.resize(IMG.edge_right.size() * 0.5) ;
-            }
+            }*/
             //边线还在
             if(IMG.encoder.route - yroad_route < 20){
                 MAT_LOG("edge_exist1");
