@@ -243,12 +243,12 @@ void run_yroad() {
                 }else if(IMG.edge_right.size()==0&&IMG.edge_left.size()==0){
                     /*IMG.edge_left = IMG.last_cones_edge_left;
                     IMG.edge_right = IMG.last_cones_edge_right;*/
-                    IMG.flag_track = TRACK_MIDDLE;
+
                     refreshed = false;
                     MAT_LOG("LAST_CONES");
                 }else{
-                    IMG.flag_track = TRACK_MIDDLE;
-                    MAT_LOG("TRCACK_MIDDLE");
+                    IMG.flag_track = TRACK_LEFT;
+                    MAT_LOG("TRACK_LEFT");
                 }
                 /*if (IMG.cones_edge_left.size() >= IMG.cones_edge_right.size() && IMG.cones_edge_left.size() >= 2) {
                     //补左线
