@@ -147,8 +147,8 @@ void run_yroad() {
                     IMG.edge_right.clear();
                     IMG.edge_right = repair;
                 } else{
-                    IMG.edge_left = IMG.last_cones_edge_left;
-                    IMG.edge_right = IMG.last_cones_edge_right;
+                    IMG.cones_edge_left = IMG.last_cones_edge_left;
+                    IMG.cones_edge_right = IMG.last_cones_edge_right;
                     refreshed = false;
                     MAT_LOG("UN_FARM_REFRESHED");
                 }
@@ -157,8 +157,8 @@ void run_yroad() {
                     MAT_LOG("FARM_REFRESHED");
                 }
 
-                IMG.last_cones_edge_left = IMG.edge_left;
-                IMG.last_cones_edge_right = IMG.edge_right;
+                IMG.last_cones_edge_left = IMG.cones_edge_left;
+                IMG.last_cones_edge_right = IMG.cones_edge_right;
             }
 
         }
