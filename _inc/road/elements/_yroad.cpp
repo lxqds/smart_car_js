@@ -182,8 +182,8 @@ void run_yroad() {
             IMG.cones_edge_right.clear();
             IMG.edge_det = search_targets(IMG._det_result);
 
-            IMG.cones_edge_left = search_left_cones(IMG.edge_det);
-            IMG.cones_edge_right = search_right_cones(IMG.edge_det);
+            /*IMG.cones_edge_left = search_left_cones(IMG.edge_det);
+            IMG.cones_edge_right = search_right_cones(IMG.edge_det);*/
 
              {//搜索左右锥桶
                  IMG.cones_edge_left[0] = (POINT(IMAGE_HEIGHT-1,0));
@@ -210,7 +210,7 @@ void run_yroad() {
                      }
                  }*/
                 //搜左右边缘，在以划分的点加左右边缘点
-                //search_cones_edge(IMG.edge_det, &IMG.cones_edge_left, &IMG.cones_edge_right);
+                search_cones_edge(IMG.edge_det, &IMG.cones_edge_left, &IMG.cones_edge_right);
                  if(IMG.cones_edge_left.size()==0){
                      MAT_LOG("LEFT==0");
                      IMG.cones_edge_left = search_left_cones(IMG.edge_det);
