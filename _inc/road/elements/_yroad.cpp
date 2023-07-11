@@ -208,23 +208,26 @@ void run_yroad() {
                  }
                 //搜左右边缘，在以划分的点加左右边缘点
                 search_cones_edge(IMG.edge_det, &IMG.cones_edge_left, &IMG.cones_edge_right);
-
+                 if(IMG.cones_edge_left.size()==0){
+                     IMG.cones_edge_left = IMG.last_cones_edge_left;
+                 }
+                 if(IMG.cones_edge_right.size()==0){
+                     IMG.cones_edge_right = IMG.last_cones_edge_right;
+                 }
                 if(IMG.cones_edge_left.size()>1){
-                    POINT startPoint = IMG.cones_edge_left[0];
+                    POINT startPoint = POINT(IMAGE_HEIGHT-1,50);
                     POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() -1];
                     POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.02, input);
-                    IMG.edge_left.clear();
                     IMG.edge_left = repair;
                 }
                 if(IMG.cones_edge_right.size()>1){
-                    POINT startPoint = IMG.cones_edge_right[0];
+                    POINT startPoint = POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH-50);
                     POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() -1];
                     POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.02, input);
-                    IMG.edge_right.clear();
                     IMG.edge_right = repair;
 
                 }
@@ -274,8 +277,8 @@ void run_yroad() {
                     MAT_LOG("FARM_REFRESHED2");
                 }
 
-                IMG.last_cones_edge_left = IMG.edge_left;
-                IMG.last_cones_edge_right = IMG.edge_right;
+                IMG.last_cones_edge_left = IMG.cones_edge_left;
+                IMG.last_cones_edge_right = IMG.cones_edge_right;
              }
 
             }
