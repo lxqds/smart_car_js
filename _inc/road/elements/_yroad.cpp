@@ -89,7 +89,6 @@ void run_yroad() {
             IMG.edge_det = search_targets(IMG._det_result);
 
             IMG.cones_edge_left = search_left_cones(IMG.edge_det);
-            IMG.cones_edge_right = search_right_cones(IMG.edge_det);
 
 
             //减少找的线
