@@ -87,9 +87,11 @@ void run_yroad() {
             IMG.is_curve0 = IMG.is_curve1 = false;
 
             IMG.edge_det = search_targets(IMG._det_result);
-
-            IMG.cones_edge_left = search_left_cones(IMG.edge_det);
-
+            if(IMG.edge_det.size()>0){
+                IMG.cones_edge_left = search_left_cones(IMG.edge_det);
+            }else{
+                IMG.cones_edge_left = POINT(IMAGE_HEIGHT-50,50);
+            }
 
             //减少找的线
             /*if(IMG.edge_left.size() > 50 ){
@@ -108,7 +110,7 @@ void run_yroad() {
                 POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
                 vector <POINT> input = {startPoint, midPoint, endPoint};
                 vector <POINT> repair = bezier(0.02, input);
-                IMG.edge_left.clear();
+                //IMG.edge_left.clear();
                 IMG.edge_left = repair;
             } else {//进入农场
                 MAT_LOG("Farmland_120cm");
