@@ -102,8 +102,8 @@ void run_yroad() {
                 IMG.edge_right.resize(IMG.edge_right.size() * 0.5) ;
             }*/
             //边线还在
-            if(break_left > 100&&break_right > 100){
-                /*IMG.cones_edge_left[0]=IMG.edge_left[break_left];
+            /*if(break_left > 100&&break_right > 100){
+                IMG.cones_edge_left[0]=IMG.edge_left[break_left];
                 IMG.edge_left.resize(break_left);
                 IMG.cones_edge_right[0]=IMG.edge_right[break_right];
                 IMG.edge_left.resize(break_right);
@@ -116,9 +116,9 @@ void run_yroad() {
                 vector <POINT> input = {startPoint, midPoint, endPoint};
                 vector <POINT> repair = bezier(0.02, input);
                 IMG.edge_left.clear();
-                IMG.edge_left = repair;*/
+                IMG.edge_left = repair;
             } else {//进入农场
-                /*if(IMG.cones_edge_left.size()>IMG.cones_edge_right.size()&&IMG.cones_edge_left.size()>2){
+                if(IMG.cones_edge_left.size()>IMG.cones_edge_right.size()&&IMG.cones_edge_left.size()>2){
                     IMG.flag_track = TRACK_LEFT;
                     POINT startPoint = IMG.cones_edge_left[0];
                     POINT midPoint = IMG.cones_edge_left[IMG.cones_edge_left.size()/2];
@@ -157,9 +157,9 @@ void run_yroad() {
                 }else {
                     flag_yroad = YROAD_STRAIGH;
                     MAT_LOG("Farmland_GO_AHEAD");
-                }*/
+                }
 
-            }
+            }*/
         }
     }
 
