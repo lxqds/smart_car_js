@@ -844,6 +844,8 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         aim_speed = _config->speed_yroad;
         aim_angle_p = _config->deviation_Farm_in_p * aim_angle_p;
     }  // 泛行区 跑的过程
+    else if (flag_yroad == YROAD_STRAIGH) {
+        aim_angle = 0;
     else if (flag_yroad == YROAD_OUT) {
         aim_speed = 0;
     }  // 泛行区 出
