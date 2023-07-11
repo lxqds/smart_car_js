@@ -112,46 +112,29 @@ void run_yroad() {
                 IMG.edge_left.clear();
                 IMG.edge_left = repair;
             } else {//进入农场
-                if(IMG.cones_edge_left.size()>IMG.cones_edge_right.size()&&IMG.cones_edge_left.size()>2){
+                if(IMG.cones_edge_left.size()>IMG.cones_edge_right.size()){
                     IMG.flag_track = TRACK_LEFT;
                     POINT startPoint = IMG.cones_edge_left[0];
-                    POINT midPoint = IMG.cones_edge_left[IMG.cones_edge_left.size()/2];
                     POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size()-1];
+                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.02, input);
                     IMG.edge_left.clear();
                     IMG.edge_left = repair;
-                }else if(IMG.cones_edge_left.size()<IMG.cones_edge_right.size()&&IMG.cones_edge_right.size()>2){
+                }else if(IMG.cones_edge_left.size()<IMG.cones_edge_right.size()){
                     IMG.flag_track = TRACK_RIGHT;
                     POINT startPoint = IMG.cones_edge_right[0];
-                    POINT midPoint = IMG.cones_edge_right[IMG.cones_edge_left.size()/2];
                     POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_left.size()-1];
+                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.02, input);
                     IMG.edge_right.clear();
                     IMG.edge_right = repair;
-                }else if(IMG.cones_edge_left.size()>IMG.cones_edge_right.size()&&IMG.cones_edge_left.size()>0){
-                    IMG.flag_track = TRACK_LEFT;
-                    POINT startPoint = POINT(IMAGE_HEIGHT-1,50);
-                    POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() -1];
-                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
-                    vector <POINT> input = {startPoint, midPoint, endPoint};
-                    vector <POINT> repair = bezier(0.02, input);
-                    IMG.edge_left.clear();
-                    IMG.edge_left = repair;
-                }else if(IMG.cones_edge_left.size()<IMG.cones_edge_right.size()&&IMG.cones_edge_right.size()>0){
-                    IMG.flag_track = TRACK_RIGHT;
-                    POINT startPoint = POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH-50);
-                    POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() -1];
-                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
-                    vector <POINT> input = {startPoint, midPoint, endPoint};
-                    vector <POINT> repair = bezier(0.02, input);
-                    IMG.edge_right.clear();
-                    IMG.edge_right = repair;
-                }else {
+                }else{
                     flag_yroad = YROAD_STRAIGH;
                     MAT_LOG("Farmland_GO_AHEAD");
                 }
+
 
             }
         }
