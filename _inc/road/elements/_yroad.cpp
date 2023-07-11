@@ -91,19 +91,19 @@ void run_yroad() {
             IMG.cones_edge_left = search_left_cones(IMG.edge_det);
             IMG.cones_edge_right = search_right_cones(IMG.edge_det);
 
-            int break_left = search_break_left(IMG.edge_left,IMG.mat_lab);
-            int break_right = search_break_right(IMG.edge_right,IMG.mat_lab);
+            //int break_left = search_break_left(IMG.edge_left,IMG.mat_lab);
+            //int break_right = search_break_right(IMG.edge_right,IMG.mat_lab);
 
             //减少找的线
-            if(IMG.edge_left.size() > 50 ){
+            /*if(IMG.edge_left.size() > 50 ){
                 IMG.edge_left.resize(IMG.edge_left.size() * 0.5) ;
             }
             if(IMG.edge_right.size() > 50 ){
                 IMG.edge_right.resize(IMG.edge_right.size() * 0.5) ;
-            }
+            }*/
             //边线还在
             if(break_left > 100&&break_right > 100){
-                IMG.cones_edge_left[0]=IMG.edge_left[break_left];
+                /*IMG.cones_edge_left[0]=IMG.edge_left[break_left];
                 IMG.edge_left.resize(break_left);
                 IMG.cones_edge_right[0]=IMG.edge_right[break_right];
                 IMG.edge_left.resize(break_right);
@@ -112,11 +112,11 @@ void run_yroad() {
                 IMG.flag_track = TRACK_LEFT;
                 POINT startPoint = IMG.edge_left[0];
                 POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size()-1];
-                POINT midPoint = IMG.edge_left[break_left];
+                POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
                 vector <POINT> input = {startPoint, midPoint, endPoint};
                 vector <POINT> repair = bezier(0.02, input);
                 IMG.edge_left.clear();
-                IMG.edge_left = repair;
+                IMG.edge_left = repair;*/
             } else {//进入农场
                 /*if(IMG.cones_edge_left.size()>IMG.cones_edge_right.size()&&IMG.cones_edge_left.size()>2){
                     IMG.flag_track = TRACK_LEFT;
