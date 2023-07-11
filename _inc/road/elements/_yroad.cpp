@@ -118,7 +118,7 @@ void run_yroad() {
                 IMG.edge_left.clear();
                 IMG.edge_left = repair;
             } else {//进入农场
-                if(IMG.cones_edge_left.size()>IMG.cones_edge_right.size()&&IMG.cones_edge_left.size()>2){
+                /*if(IMG.cones_edge_left.size()>IMG.cones_edge_right.size()&&IMG.cones_edge_left.size()>2){
                     IMG.flag_track = TRACK_LEFT;
                     POINT startPoint = IMG.cones_edge_left[0];
                     POINT midPoint = IMG.cones_edge_left[IMG.cones_edge_left.size()/2];
@@ -157,7 +157,7 @@ void run_yroad() {
                 }else {
                     flag_yroad = YROAD_STRAIGH;
                     MAT_LOG("Farmland_GO_AHEAD");
-                }
+                }*/
 
             }
         }
