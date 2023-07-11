@@ -212,18 +212,18 @@ void run_yroad() {
                 if(IMG.cones_edge_left.size()>1){
                     POINT startPoint = IMG.cones_edge_left[0];
                     POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() -1];
-                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
+                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
                     vector <POINT> input = {startPoint, midPoint, endPoint};
-                    vector <POINT> repair = bezier(0.05, input);
+                    vector <POINT> repair = bezier(0.02, input);
                     IMG.edge_left.clear();
                     IMG.edge_left = repair;
                 }
                 if(IMG.cones_edge_right.size()>1){
                     POINT startPoint = IMG.cones_edge_right[0];
                     POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() -1];
-                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
+                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
                     vector <POINT> input = {startPoint, midPoint, endPoint};
-                    vector <POINT> repair = bezier(0.05, input);
+                    vector <POINT> repair = bezier(0.02, input);
                     IMG.edge_right.clear();
                     IMG.edge_right = repair;
 
@@ -287,6 +287,48 @@ void run_yroad() {
 
     if (flag_yroad == YROAD_OUT) {
         MAT_LOG("FARM_OUT_FINISH");
+    }
+
+
+    /* ***************************************************************** */
+
+    if (flag_yroad > YROAD_FOUND) {
+        IMG.det_ipts_num = 0;
+
+        if (IMG.flag_track == TRACK_LEFT) {
+            // 进行降序排序
+            std::sort(IMG.edge_left.begin(), IMG.edge_left.end(), sort_x_down);
+            for (size_t i = 0; i < IMG.edge_left.size(); i++) {
+                if (i >= IMAGE_HEIGHT)
+                    break;
+                IMG.det_ipts[i][0] = IMG.edge_left[i].y;
+                IMG.det_ipts[i][1] = IMG.edge_left[i].x;
+                IMG.det_ipts_num++;
+            }
+        } else {
+            // 进行降序排序
+            std::sort(IMG.edge_right.begin(), IMG.edge_right.end(), sort_x_down);
+            for (size_t i = 0; i < IMG.edge_right.size(); i++) {
+                if (i >= IMAGE_HEIGHT)
+                    break;
+                IMG.det_ipts[i][0] = IMG.edge_right[i].y;
+                IMG.det_ipts[i][1] = IMG.edge_right[i].x;
+                IMG.det_ipts_num++;
+            }
+        }
+
+        // 原图边线 -> 透视边线
+        for (int i = 0; i < IMG.det_ipts_num; i++)
+            map_perspective(IMG.det_ipts[i][0], IMG.det_ipts[i][1], IMG.det_rpts[i], 0);
+
+        // 边线滤波
+        blur_points(IMG.det_rpts, IMG.det_ipts_num, IMG.det_rptsb,
+                    (int)round(LINE_BLUR_KERNEL));
+
+        // 边线等距采样
+        IMG.det_rptss_num = sizeof(IMG.det_rptss) / sizeof(IMG.det_rptss[0]);
+        resample_points(IMG.det_rptsb, IMG.det_ipts_num, IMG.det_rptss,
+                        &IMG.det_rptss_num, SAMPLE_DIST * PIXEL_PER_METER);
     }
 }
 
