@@ -450,7 +450,7 @@ std::vector<POINT> search_left_cones(std::vector<POINT> pointsCone) {
     std::vector<POINT> points;
 
     for (auto p : pointsCone)
-        if ((p.y < IMAGE_WIDTH / 3) && (p.x > 30) && (p.x < IMAGE_HEIGHT - 50))
+        if ((p.y < IMAGE_WIDTH / 3) && (p.x > 10) && (p.x < IMAGE_HEIGHT))
             points.push_back(p);
 
     if (points.size() >= 2)
@@ -464,7 +464,7 @@ std::vector<POINT> search_right_cones(std::vector<POINT> pointsCone) {
     std::vector<POINT> points;
 
     for (auto p : pointsCone)
-        if ((p.y > IMAGE_WIDTH * 2 / 3) && (p.x > 30) && (p.x < IMAGE_HEIGHT - 50))
+        if ((p.y > IMAGE_WIDTH * 2 / 3) && (p.x > 10) && (p.x < IMAGE_HEIGHT))
             points.push_back(p);
 
     if (points.size() >= 2)
