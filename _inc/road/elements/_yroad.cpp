@@ -152,7 +152,7 @@ void run_yroad() {
                     vector <POINT> repair = bezier(0.02, input);
                     IMG.edge_left = repair;
                 }else {
-                    flag_yroad = YROAD_GO;
+                    flag_yroad = YROAD_STRAIGH;
                     MAT_LOG("Farmland_GO_AHEAD");
                 }
 
