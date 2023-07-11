@@ -987,12 +987,15 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             for (auto p : edge_det)  // 白色 //列 |  行———
                 cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
             // 锥桶
-            for (auto p : cones_edge_left)//蓝色 //列 |  行———
-                cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(0,191,255), 2);
-            // 锥桶
-            for (auto p : cones_edge_right)//紫色 //列 |  行———
-                cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(138,43,226), 2);
+            for (auto p : cones_edge_left)  // 蓝色 //列 |  行———
+                cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(0, 191, 255), 2);
 
+            // 锥桶
+            for (auto p : cones_edge_right)  // 紫色 //列 |  行———
+                cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(138, 43, 226), 2);
+
+            cv::circle(mat_result, cv::Point(cones_edge_left[0].y, cones_edge_left[0].x), 2, cv::Scalar(0, 0, 0), 2);
+            cv::circle(mat_result, cv::Point(cones_edge_right[0].y, cones_edge_right[0].x), 2, cv::Scalar(0, 255, 0), 2);
             // 边线
             for (auto p : edge_left)  // 青蓝色
                 cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(0, 238, 238), -1);

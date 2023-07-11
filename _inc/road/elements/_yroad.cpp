@@ -59,10 +59,12 @@ void run_yroad() {
         // 减少找的线
         if (IMG.edge_left.size() > 50) {
             IMG.edge_left.resize(IMG.edge_left.size() * 0.5);
+        } else if (IMG.edge_right.size() > 50) {
+            IMG.edge_right.resize(IMG.edge_right.size() * 0.5);
         }
 
         // 进入农场的条件，锥桶靠近，或者左右线很小,或走过一段路
-        if (IMG.encoder.route - yroad_route > 60 && yroad_near_cone.x > IMAGE_HEIGHT * 0.5) {
+        if (IMG.encoder.route - yroad_route > 60 && yroad_near_cone.x > IMAGE_HEIGHT / 2) {  // 除以二为锥桶图像位置
             yroad_route = IMG.encoder.route;
             flag_yroad = YROAD_IN;
             MAT_LOG("Farmland_IN");
@@ -183,16 +185,24 @@ void run_yroad() {
             IMG.cones_edge_right = search_right_cones(IMG.edge_det);*/
 
             {  // 搜索左右锥桶
-                // IMG.cones_edge_left[0] = (POINT(IMAGE_HEIGHT - 1, 50));
-                // IMG.cones_edge_right[0] = (POINT(IMAGE_HEIGHT - 1, IMAGE_WIDTH - 50));
+                // IMG.cones_edge_left[0] = (POINT(0, 50));
+                // IMG.cones_edge_right[0] = (POINT(0, IMAGE_WIDTH - 50));
                 for (int i = IMG.edge_det.size(); i > 0; i--) {
                     // 左边底部锥桶
                     if (IMG.edge_det[i].y < IMAGE_WIDTH / 2 && IMG.edge_det[i].x > IMAGE_HEIGHT / 2) {
-                        IMG.cones_edge_left[0] = IMG.edge_det[i];
+                        if (i == IMG.edge_det.size()) {
+                            IMG.cones_edge_left[0] = IMG.edge_det[i];
+                        } else if (IMG.edge_det[i].x > IMG.cones_edge_left[0].x) {
+                            IMG.cones_edge_left[0] = IMG.edge_det[i];
+                        }
                     }
                     // 右边底部锥桶
                     if (IMG.edge_det[i].y > IMAGE_WIDTH / 2 && IMG.edge_det[i].x > IMAGE_HEIGHT / 2) {
-                        IMG.cones_edge_right[0] = IMG.edge_det[i];
+                        if (i == IMG.edge_det.size()) {
+                            IMG.cones_edge_right[0] = IMG.edge_det[i];
+                        } else if (IMG.edge_det[i].x > IMG.cones_edge_right[0].x) {
+                            IMG.cones_edge_right[0] = IMG.edge_det[i];
+                        }
                     }
                 }
 
@@ -218,7 +228,7 @@ void run_yroad() {
                      IMG.cones_edge_right = search_right_cones(IMG.edge_det);
                  }
                 */
-                if (IMG.cones_edge_left.size() > 1 && IMG.cones_edge_left.size() <= 3) {
+                if (IMG.cones_edge_left.size() > 1 && IMG.cones_edge_left.size() < 3) {
                     POINT startPoint = POINT(IMAGE_HEIGHT - 1, 50);
                     POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() - 1];
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5);  // 补线中点
@@ -303,6 +313,7 @@ void run_yroad() {
     /* ***************************************************************** */
 
     if (flag_yroad == YROAD_OUT) {
+        flag_yroad = YROAD_NONE;
         MAT_LOG("FARM_OUT_FINISH");
     }
 
