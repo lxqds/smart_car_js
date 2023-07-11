@@ -90,7 +90,7 @@ void run_yroad() {
             if(IMG.edge_det.size()>0){
                 IMG.cones_edge_left = search_left_cones(IMG.edge_det);
             }else{
-                IMG.cones_edge_left = POINT(IMAGE_HEIGHT-50,50);
+                IMG.cones_edge_left[0] = POINT(IMAGE_HEIGHT-50,50);
             }
 
             //减少找的线
