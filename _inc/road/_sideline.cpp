@@ -445,12 +445,12 @@ void search_cones_edge(std::vector<POINT> cones,std::vector<POINT> *left_cones,s
 
     }
 }
-// 搜索左方的锥桶集合 ( IMAGE_WIDTH / 2 )
+// 搜索左方的锥桶集合 ( IMAGE_WIDTH / 3 )
 std::vector<POINT> search_left_cones(std::vector<POINT> pointsCone) {
     std::vector<POINT> points;
 
     for (auto p : pointsCone)
-        if ((p.y < IMAGE_WIDTH / 2) && (p.x > 30) && (p.x < IMAGE_HEIGHT - 50))
+        if ((p.y < IMAGE_WIDTH / 3) && (p.x > 30) && (p.x < IMAGE_HEIGHT - 50))
             points.push_back(p);
 
     if (points.size() >= 2)
@@ -459,12 +459,12 @@ std::vector<POINT> search_left_cones(std::vector<POINT> pointsCone) {
     return points;
 }
 
-// 搜索右方的锥桶集合 ( IMAGE_WIDTH * 1 / 2 )
+// 搜索右方的锥桶集合 ( IMAGE_WIDTH * 2 / 3 )
 std::vector<POINT> search_right_cones(std::vector<POINT> pointsCone) {
     std::vector<POINT> points;
 
     for (auto p : pointsCone)
-        if ((p.y > IMAGE_WIDTH * 1 / 2) && (p.x > 30) && (p.x < IMAGE_HEIGHT - 50))
+        if ((p.y > IMAGE_WIDTH * 2 / 3) && (p.x > 30) && (p.x < IMAGE_HEIGHT - 50))
             points.push_back(p);
 
     if (points.size() >= 2)

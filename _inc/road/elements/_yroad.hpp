@@ -8,6 +8,7 @@ enum flag_yroad_e {
     YROAD_IN,         // 泛行区内部
     YROAD_RUN,        // 运行
     YROAD_OUT,        // 驶离泛行区
+    YROAD_STRAIGH,    // 直走
 };
 extern flag_yroad_e flag_yroad;
 

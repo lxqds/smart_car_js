@@ -61,7 +61,9 @@ void run_yroad() {
         if(IMG.edge_left.size() > 50 ){
             IMG.edge_left.resize(IMG.edge_left.size() * 0.5) ;
         }
-
+        if(IMG.edge_right.size() > 50 ){
+            IMG.edge_right.resize(IMG.edge_right.size() * 0.5) ;
+        }
         // 进入农场的条件，锥桶靠近，或者左右线很小,或走过一段路
         if (IMG.encoder.route-yroad_route > 60&&yroad_near_cone.x > IMAGE_HEIGHT*0.5) {
             yroad_route = IMG.encoder.route;
@@ -75,10 +77,10 @@ void run_yroad() {
     if (flag_yroad == YROAD_IN) {
 
         bool refreshed = true;
-        if (IMG.encoder.route - yroad_route > 20&&(IMG.rpts0s_num < 0.2 / SAMPLE_DIST&&IMG.rpts1s_num < 0.2 / SAMPLE_DIST)) {
+        if (IMG.encoder.route - yroad_route > 120&&(IMG.rpts0s_num < 0.2 / SAMPLE_DIST&&IMG.rpts1s_num < 0.2 / SAMPLE_DIST)) {
             //路程积分或识别到边线或没有识别到锥桶
             yroad_route = IMG.encoder.route;
-            flag_yroad = YROAD_RUN;
+            flag_yroad = YROAD_OUT;
             MAT_LOG("Farmland_RUN");
         } else{
             // 清弯道防止加大 P 项, 提高稳定性
@@ -94,76 +96,67 @@ void run_yroad() {
             int break_left = search_break_left(IMG.edge_left,IMG.mat_lab);
             int break_right = search_break_right(IMG.edge_right,IMG.mat_lab);
 
+            //减少找的线
+            if(IMG.edge_left.size() > 50 ){
+                IMG.edge_left.resize(IMG.edge_left.size() * 0.5) ;
+            }
+            if(IMG.edge_right.size() > 50 ){
+                IMG.edge_right.resize(IMG.edge_right.size() * 0.5) ;
+            }
             //边线还在
             if(break_left > 100&&break_right > 100){
                 IMG.cones_edge_left[0]=IMG.edge_left[break_left];
                 IMG.edge_left.resize(break_left);
                 IMG.cones_edge_right[0]=IMG.edge_right[break_right];
                 IMG.edge_left.resize(break_right);
-                MAT_LOG("edge_exist1")
-            } else {//搜索左右锥桶
-                /*IMG.cones_edge_left.push_back(POINT(IMAGE_HEIGHT-1,50));
-                IMG.cones_edge_right.push_back(POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH-50));*/
-                /*for (int i= 0;i < IMG.edge_det.size();i++){
-                    //左边底部锥桶
-                    if (IMG.edge_det[i].y < IMAGE_WIDTH/2&&IMG.edge_det[i].x>0){
-                        IMG.cones_edge_left[0] = IMG.edge_det[i];
-                    }
-                    //右边底部锥桶
-                    if (IMG.edge_det[i].y > IMAGE_WIDTH/2&&IMG.edge_det[i].x>0){
-                        IMG.cones_edge_right[0] = IMG.edge_det[i];
-                    }
-                }*/
-
-                //判断是否是单边,清左右边
-                if(abs(IMG.cones_edge_right[0].y-IMG.cones_edge_left[0].y )> IMAGE_WIDTH/3 && abs(IMG.cones_edge_right[0].x-IMG.cones_edge_left[0].x)>IMAGE_HEIGHT/3){
-                    if(IMG.cones_edge_left[0].x > IMG.cones_edge_right[0].x){
-                        //IMG.cones_edge_right.clear();
-                        MAT_LOG("clear_right");
-                    }else if(IMG.cones_edge_left[0].x < IMG.cones_edge_right[0].x){
-                        //IMG.cones_edge_left.clear();
-                        MAT_LOG("clear_left");
-                    }
-                }
-
-                //搜左右边缘，在以划分的点加左右边缘点
-                //search_cones_edge(IMG.edge_det,&IMG.cones_edge_left,&IMG.cones_edge_right);
-
-                if(IMG.cones_edge_left.size() >= IMG.cones_edge_right.size() &&IMG.cones_edge_left.size() >= 2){
-                    //补左线
+                MAT_LOG("edge_exist1");
+                //补左边线。以左边线为准
+                IMG.flag_track = TRACK_LEFT;
+                POINT startPoint = IMG.edge_left[0];
+                POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size()-1];
+                POINT midPoint = IMG.edge_left[break_left];
+                vector <POINT> input = {startPoint, midPoint, endPoint};
+                vector <POINT> repair = bezier(0.02, input);
+                IMG.edge_left = repair;
+            } else {//进入农场
+                if(IMG.cones_edge_left.size()>IMG.cones_edge_right.size()&&IMG.cones_edge_left.size()>2){
+                    IMG.flag_track = TRACK_LEFT;
+                    POINT startPoint = IMG.cones_edge_left[0];
+                    POINT midPoint = IMG.cones_edge_left[IMG.cones_edge_left.size()/2];
+                    POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size()-1];
+                    vector <POINT> input = {startPoint, midPoint, endPoint};
+                    vector <POINT> repair = bezier(0.02, input);
+                    IMG.edge_left = repair;
+                }else if(IMG.cones_edge_left.size()<IMG.cones_edge_right.size()&&IMG.cones_edge_right.size()>2){
+                    IMG.flag_track = TRACK_RIGHT;
+                    POINT startPoint = IMG.cones_edge_right[0];
+                    POINT midPoint = IMG.cones_edge_right[IMG.cones_edge_left.size()/2];
+                    POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_left.size()-1];
+                    vector <POINT> input = {startPoint, midPoint, endPoint};
+                    vector <POINT> repair = bezier(0.02, input);
+                    IMG.edge_right = repair;
+                }else if(IMG.cones_edge_left.size()>IMG.cones_edge_right.size()){
                     IMG.flag_track = TRACK_LEFT;
                     POINT startPoint = POINT(IMAGE_HEIGHT-1,50);
-                    POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() - 1];
-                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.4);      // 补线中点
+                    POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size() -1];
+                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.02, input);
-                    IMG.edge_left.clear();
                     IMG.edge_left = repair;
-                }else if(IMG.cones_edge_left.size() < IMG.cones_edge_right.size() && IMG.cones_edge_right.size() >= 2){
-                    //补右线
+                }else if(IMG.cones_edge_left.size()<IMG.cones_edge_right.size()){
                     IMG.flag_track = TRACK_RIGHT;
-                    POINT startPoint = POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH);
-                    POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() - 1];
-                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
+                    POINT startPoint = POINT(IMAGE_HEIGHT-1,IMAGE_WIDTH-50);
+                    POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size() -1];
+                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
                     vector <POINT> input = {startPoint, midPoint, endPoint};
                     vector <POINT> repair = bezier(0.02, input);
-                    IMG.edge_right.clear();
-                    IMG.edge_right = repair;
-                } else{
-                    IMG.cones_edge_left = IMG.last_cones_edge_left;
-                    IMG.cones_edge_right = IMG.last_cones_edge_right;
-                    refreshed = false;
-                    MAT_LOG("UN_FARM_REFRESHED");
+                    IMG.edge_left = repair;
+                }else {
+                    flag_yroad = YROAD_GO;
+                    MAT_LOG("Farmland_GO_AHEAD");
                 }
 
-                if(refreshed){//刷新
-                    MAT_LOG("FARM_REFRESHED");
-                }
-
-                IMG.last_cones_edge_left = IMG.cones_edge_left;
-                IMG.last_cones_edge_right = IMG.cones_edge_right;
             }
-
         }
     }
 
