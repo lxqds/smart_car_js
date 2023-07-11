@@ -60,9 +60,6 @@ void run_yroad() {
         if (IMG.edge_left.size() > 50) {
             IMG.edge_left.resize(IMG.edge_left.size() * 0.5);
         }
-        if (IMG.edge_right.size() > 50) {
-            IMG.edge_right.resize(IMG.edge_right.size() * 0.5);
-        }
 
         // 进入农场的条件，锥桶靠近，或者左右线很小,或走过一段路
         if (IMG.encoder.route - yroad_route > 60 && yroad_near_cone.x > IMAGE_HEIGHT / 2) {  // 除以二为锥桶图像位置
