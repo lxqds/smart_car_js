@@ -391,7 +391,8 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
     float Right_Last_angle = 0;
     int left_cnt = 0;
     int right_cnt = 0;
-    while (points_cones.size() > 0) {
+    MAT_LOG("qpoint1");
+    for (int j = 0; j < points_cones.size(); j++) {
         bool searched = false;
         int index = -1;
 
@@ -451,6 +452,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
             index = -1;
             searched = true;
         }
+        MAT_LOG("qpoint2");
     }
 }
 // 搜索左方的锥桶集合 ( IMAGE_WIDTH / 2 )
