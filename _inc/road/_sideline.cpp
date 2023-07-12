@@ -206,7 +206,6 @@ float fit_line(float pts[][2], int num, int cut_h) {
 
         for (int i = 0; i < y_counter; i++)
             mea += fabs(k * points[i].x + b - points[i].y);
-
         return (float)(mea / y_counter);
     }
 
@@ -400,23 +399,22 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
         for (int i = 0; i < points_cones.size(); i++) {
             if (left_cones->size() > 0) {
                 // 先前左边缘只到中间，拓展左边缘
-                if ((((!left_cnt) && (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) < IMAGE_HEIGHT / 2)) || ((Left_Last_distance) && distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) < Left_Last_distance))  // 距离判断
-                    &&
-                    ((!left_cnt) || (((Left_Last_angle) && abs((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) / (points_cones[i].x - left_cones->at(left_cones->size() - 1).x)) > abs(Left_Last_angle)) && ((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) / (points_cones[i].x - left_cones->at(left_cones->size() - 1).x) * Left_Last_angle > 0))) &&
-                    points_cones[i].x < left_cones->at(left_cones->size() - 1).x) {
-                    if (index < 0) {
-                        index = i;
-                    } else if (distance_for_points(points_cones[i], left_cones->at(left_cones->size() - 1)) < distance_for_points(points_cones[index], left_cones->at(left_cones->size() - 1))) {
-                        index = i;  // 更新下一个点
+                if (points_cones[i].x < left_cones->at(left_cones->size() - 1).x) {
+                    if (!left_cnt) {
+                        if (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) < IMAGE_HEIGHT / 2) {
+                            index = i;
+                        }
+                    } else if (((distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) - Left_Last_distance) * 1.0 / Left_Last_distance < 1.2) || ((distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) - Left_Last_distance) * 1.0 / Left_Last_distance > 0.80)) {
+                        if ((((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (points_cones[i].x - left_cones->at(left_cones->size() - 1).x) / Left_Last_angle) < 2 && ((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (points_cones[i].x - left_cones->at(left_cones->size() - 1).x) / Left_Last_angle) > 0.6) || (((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (points_cones[i].x - left_cones->at(left_cones->size() - 1).x) / Left_Last_angle) < -0.6 && ((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (points_cones[i].x - left_cones->at(left_cones->size() - 1).x) / Left_Last_angle) > -2)) {
+                            index = i;
+                        }
                     }
                 }
-            } else {
-                break;
             }
         }
         if (index >= 0) {
             Left_Last_distance = distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[index]);
-            Left_Last_angle = (points_cones[index].y - left_cones->at(left_cones->size() - 1).y) / (points_cones[index].x - left_cones->at(left_cones->size() - 1).x);
+            Left_Last_angle = (points_cones[index].y - left_cones->at(left_cones->size() - 1).y) / (left_cones->at(left_cones->size() - 1).x - points_cones[index].x);
             left_cnt++;
             left_cones->push_back(points_cones[index]);
             swap(points_cones[index], points_cones[points_cones.size() - 1]);
@@ -424,38 +422,34 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
             index = -1;
             searched = true;
         }
-
+        bool searched = false;
+        int index = -1;
         // 搜索右边缘
         for (int i = 0; i < points_cones.size(); i++) {
             if (right_cones->size() > 0) {
-                // 先前右边缘只到中间，拓展左边缘
-                if ((((!right_cnt) && (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) < IMAGE_HEIGHT / 2)) || ((Right_Last_distance) && distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) < Right_Last_distance))  // 距离判断
-                    &&
-                    ((!right_cnt) || (((Right_Last_angle) && abs((points_cones[i].y - right_cones->at(right_cones->size() - 1).y) / (points_cones[i].x - right_cones->at(right_cones->size() - 1).x)) > abs(Right_Last_angle)) && ((points_cones[i].y - right_cones->at(right_cones->size() - 1).y) / (points_cones[i].x - right_cones->at(right_cones->size() - 1).x) * Right_Last_angle > 0))) &&
-                    points_cones[i].x < right_cones->at(right_cones->size() - 1).x) {
-                    if (index < 0) {
-                        index = i;
-                    } else if (distance_for_points(points_cones[i], right_cones->at(right_cones->size() - 1)) < distance_for_points(points_cones[index], right_cones->at(right_cones->size() - 1))) {
-                        index = i;  // 更新下一个点
+                // 先前左边缘只到中间，拓展左边缘
+                if (points_cones[i].x < right_cones->at(right_cones->size() - 1).x) {
+                    if (!right_cnt) {
+                        if (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) < IMAGE_HEIGHT / 2) {
+                            index = i;
+                        }
+                    } else if (((distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) - Right_Last_distance) * 1.0 / Right_Last_distance < 1.2) || ((distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) - Right_Last_distance) * 1.0 / Right_Last_distance > 0.80)) {
+                        if ((((points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (points_cones[i].x - right_cones->at(right_cones->size() - 1).x) / Right_Last_angle) < 2 && ((points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (points_cones[i].x - right_cones->at(right_cones->size() - 1).x) / Right_Last_angle) > 0.6) || (((points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (points_cones[i].x - right_cones->at(right_cones->size() - 1).x) / Right_Last_angle) < -0.6 && ((points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (points_cones[i].x - right_cones->at(right_cones->size() - 1).x) / Right_Last_angle) > -2)) {
+                            index = i;
+                        }
                     }
                 }
-            } else {
-                break;
             }
         }
         if (index >= 0) {
             Right_Last_distance = distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[index]);
-            Right_Last_angle = (points_cones[index].y - right_cones->at(right_cones->size() - 1).y) / (points_cones[index].x - right_cones->at(right_cones->size() - 1).x);
+            Right_Last_angle = (points_cones[index].y - right_cones->at(right_cones->size() - 1).y) / (right_cones->at(right_cones->size() - 1).x - points_cones[index].x);
             right_cnt++;
             right_cones->push_back(points_cones[index]);
             swap(points_cones[index], points_cones[points_cones.size() - 1]);
             points_cones.pop_back();
             index = -1;
             searched = true;
-        }
-
-        if (!searched) {
-            return;
         }
     }
 }
