@@ -422,8 +422,8 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
             index = -1;
             searched = true;
         }
-        bool searched = false;
-        int index = -1;
+        searched = false;
+        index = -1;
         // 搜索右边缘
         for (int i = 0; i < points_cones.size(); i++) {
             if (right_cones->size() > 0) {
