@@ -122,6 +122,7 @@ void run_yroad() {
                     }
                 }
                 MAT_LOG("question5");
+                /*
                 // 判断是否是单边,清左右边
                 if (abs(IMG.cones_edge_right[0].y - IMG.cones_edge_left[0].y) > IMAGE_WIDTH / 3 && abs(IMG.cones_edge_right[0].x - IMG.cones_edge_left[0].x) > IMAGE_HEIGHT / 3) {
                     if (IMG.cones_edge_left[0].x > IMG.cones_edge_right[0].x) {
@@ -132,8 +133,9 @@ void run_yroad() {
                         MAT_LOG("clear_left");
                     }
                 }
-
+                */
                 // 搜左右边缘，在以划分的点加左右边缘点
+                std::sort(IMG.edge_det.begin(), IMG.edge_det.end(), sort_x_down);  // 纵坐标升序排序
                 search_cones_edge(IMG.edge_det, &IMG.cones_edge_left, &IMG.cones_edge_right);
                 if (IMG.cones_edge_left.size() > 1 && IMG.cones_edge_left.size() < 3) {
                     POINT startPoint = IMG.cones_edge_left[0];
