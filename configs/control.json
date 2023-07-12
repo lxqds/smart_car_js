@@ -30,6 +30,7 @@
     "gas_rou_none": 35,
     "gas_rou_over": 50,
     "work_rou_ready": 60,
+    "work_rou_in": 10,
     "work_rou_run": 13,
     "work_rou_out": 10,
     "work_rou_none": 10,

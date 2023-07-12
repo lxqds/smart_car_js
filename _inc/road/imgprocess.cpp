@@ -817,18 +817,20 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         aim_angle_p += _config->deviation_garage_in_p;
     }  // 入库
     else if (flag_work == WORK_READY) {
-        aim_speed = _config->speed_work * 0.7f;
+        aim_speed = _config->speed_work;
     } else if (flag_work == WORK_RUN) {
-        aim_speed = _config->speed_work * 0.7f;
+        aim_speed = _config->speed_work;
     }  // 施工区 内
     else if (flag_work == WORK_STOP) {
         aim_speed = 0;
         aim_angle = 0;
     } else if (flag_work == WORK_OUT) {
-        aim_speed = (_config->speed_work * -0.7f);
-    } else if (flag_work != WORK_NONE) {
-        aim_speed = (int16_t)_config->speed_work * 0.9f;
-    }  // 施工区
+        aim_speed = (_config->speed_work * -1.0f);
+    }else if (flag_work == WORK_OUT_STOP) {
+        aim_speed = 0;
+        aim_angle = -30;
+    }
+    // 施工区
     else if (flag_gas == GAS_RUN) {
         aim_speed = _config->speed_gas;
     }  // 加油站 内
