@@ -55,7 +55,7 @@ double sigma(std::vector<POINT> vec);
 double dis_point_line(POINT a, POINT b, POINT p);
 
 // 两点间的距离计算
-float dis_point_point(POINT a, POINT b);
+double dis_point_point(POINT a, POINT b);
 
 // 直线拟合 (返回平均绝对误差)
 float fit_line(float pts[][2], int num, int cut_h);
@@ -71,7 +71,7 @@ bool sort_x_up(POINT a, POINT b);    // 升序
 bool sort_x_down(POINT a, POINT b);  // 降序
 
 //两点距离公式
-double distance_for_points(POINT a, POINT b);
+float distance_for_points(POINT a, POINT b);
 //搜索左右边缘的锥桶
 void search_cones_edge(std::vector<POINT> cones,std::vector<POINT> *left_cones,std::vector<POINT> *right_cones);
 
