@@ -103,9 +103,9 @@ void run_yroad() {
                 MAT_LOG("edge_exist1")
             } else {  // 搜索左右锥桶
                 MAT_LOG("question4");
-                for (int i = IMG.edge_det.size(); i > 0; i--) {
+                for (int i = IMG.edge_det.size() - 1; i >= 0; i--) {
                     // 左边底部锥桶
-                    if (i == IMG.edge_det.size()) {
+                    if (i == IMG.edge_det.size() - 1) {
                         IMG.cones_edge_left[0] = IMG.edge_det[i];
                         IMG.cones_edge_right[0] = IMG.edge_det[i];
                     }
@@ -197,9 +197,9 @@ void run_yroad() {
             {  // 搜索左右锥桶
                 // IMG.cones_edge_left[0] = (POINT(0, 50));
                 // IMG.cones_edge_right[0] = (POINT(0, IMAGE_WIDTH - 50));
-                for (int i = IMG.edge_det.size(); i > 0; i--) {
+                for (int i = IMG.edge_det.size() - 1; i >= 0; i--) {
                     // 左边底部锥桶
-                    if (i == IMG.edge_det.size()) {
+                    if (i == IMG.edge_det.size() - 1) {
                         IMG.cones_edge_left[0] = IMG.edge_det[i];
                         IMG.cones_edge_right[0] = IMG.edge_det[i];
                     }
