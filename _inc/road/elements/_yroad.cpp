@@ -106,8 +106,8 @@ void run_yroad() {
                 for (int i = IMG.edge_det.size() - 1; i >= 0; i--) {
                     // 左边底部锥桶
                     if (i == IMG.edge_det.size() - 1) {
-                        IMG.cones_edge_left[0] = IMG.edge_det[i];
-                        IMG.cones_edge_right[0] = IMG.edge_det[i];
+                        IMG.cones_edge_left.push_back(IMG.edge_det[i]);
+                        IMG.cones_edge_right.push_back(IMG.edge_det[i]);
                     }
                     if (IMG.edge_det[i].y < IMAGE_WIDTH / 2 && IMG.edge_det[i].x > IMAGE_HEIGHT / 2) {
                         if (IMG.edge_det[i].x > IMG.cones_edge_left[0].x) {
@@ -200,8 +200,8 @@ void run_yroad() {
                 for (int i = IMG.edge_det.size() - 1; i >= 0; i--) {
                     // 左边底部锥桶
                     if (i == IMG.edge_det.size() - 1) {
-                        IMG.cones_edge_left[0] = IMG.edge_det[i];
-                        IMG.cones_edge_right[0] = IMG.edge_det[i];
+                        IMG.cones_edge_left.push_back(IMG.edge_det[i]);
+                        IMG.cones_edge_right.push_back(IMG.edge_det[i]);
                     }
                     if (IMG.edge_det[i].y < IMAGE_WIDTH / 2 && IMG.edge_det[i].x > IMAGE_HEIGHT / 2) {
                         if (IMG.edge_det[i].x > IMG.cones_edge_left[0].x) {
