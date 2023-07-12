@@ -377,7 +377,7 @@ POINT search_right_near(std::vector<POINT> pointsEdge, cv::Mat matt) {
 }
 // 两点距离公式
 float distance_for_points(POINT a, POINT b) {
-    return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+    return (float)(sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)));
 }
 // 搜索左右边缘的锥桶
 void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones, std::vector<POINT> *right_cones) {
