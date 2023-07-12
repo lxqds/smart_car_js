@@ -134,6 +134,8 @@ void run_yroad() {
                     }
                 }
                 */
+                IMG.edge_right.clear();
+                IMG.edge_left.clear();
                 // 搜左右边缘，在以划分的点加左右边缘点
                 std::sort(IMG.edge_det.begin(), IMG.edge_det.end(), sort_x_down);  // 纵坐标升序排序
                 search_cones_edge(IMG.edge_det, &IMG.cones_edge_left, &IMG.cones_edge_right);
@@ -167,8 +169,8 @@ void run_yroad() {
                     vector<POINT> repair = bezier(0.02, input);
                     IMG.edge_right = repair;
                 } else {
-                    IMG.cones_edge_left = IMG.last_cones_edge_left;
-                    IMG.cones_edge_right = IMG.last_cones_edge_right;
+                    // IMG.cones_edge_left = IMG.last_cones_edge_left;
+                    // IMG.cones_edge_right = IMG.last_cones_edge_right;
                     refreshed = false;
                     MAT_LOG("UN_FARM_REFRESHED");
                 }
@@ -177,8 +179,8 @@ void run_yroad() {
                     MAT_LOG("FARM_REFRESHED");
                 }
 
-                IMG.last_cones_edge_left = IMG.cones_edge_left;
-                IMG.last_cones_edge_right = IMG.cones_edge_right;
+                // IMG.last_cones_edge_left = IMG.cones_edge_left;
+                // IMG.last_cones_edge_right = IMG.cones_edge_right;
             }
         }
     }
@@ -209,9 +211,6 @@ void run_yroad() {
                 // IMG.cones_edge_right[0] = (POINT(0, IMAGE_WIDTH - 50));
                 for (int i = IMG.edge_det.size() - 1; i >= 0; i--) {
                     // 左边底部锥桶
-                    if (i == IMG.edge_det.size() - 1) {
-                        IMG.cones_edge_right.push_back(IMG.edge_det[i]);
-                    }
                     if (IMG.edge_det[i].y < IMAGE_WIDTH / 3 && IMG.edge_det[i].x > IMAGE_HEIGHT / 3) {
                         if (IMG.cones_edge_left.size() == 0) {
                             IMG.cones_edge_left.push_back(IMG.edge_det[i]);
@@ -241,6 +240,10 @@ void run_yroad() {
                     }
                 }*/
                 // 搜左右边缘，在以划分的点加左右边缘点
+                IMG.edge_right.clear();
+                IMG.edge_left.clear();
+                // 搜左右边缘，在以划分的点加左右边缘点
+                std::sort(IMG.edge_det.begin(), IMG.edge_det.end(), sort_x_down);  // 纵坐标升序排序
                 search_cones_edge(IMG.edge_det, &IMG.cones_edge_left, &IMG.cones_edge_right);
                 /*
                  if(IMG.cones_edge_left.size()==0){

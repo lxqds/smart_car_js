@@ -402,7 +402,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                 // 先前左边缘只到中间，拓展左边缘
                 if (points_cones[i].x < left_cones->at(left_cones->size() - 1).x) {
                     if (!left_cnt) {
-                        if (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) < IMAGE_HEIGHT / 3) {
+                        if (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) < 85) {
                             index = i;
                         }
                     } else if ((distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) * 1.0 / Left_Last_distance < 1.2) || (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) * 1.0 / Left_Last_distance > 0.8)) {
@@ -431,7 +431,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                 // 先前左边缘只到中间，拓展左边缘
                 if (points_cones[i].x < right_cones->at(right_cones->size() - 1).x) {
                     if (!right_cnt) {
-                        if (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) < IMAGE_HEIGHT / 3) {
+                        if (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) < 85) {
                             index = i;
                         }
                     } else if ((distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) * 1.0 / Right_Last_distance < 1.2) || (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) * 1.0 / Right_Last_distance > 0.80)) {
