@@ -392,7 +392,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
     int left_cnt = 0;
     int right_cnt = 0;
     // MAT_LOG("qpoint1");
-    for (int j = 0; j < points_cones.size(); j++) {
+    for (int j = 0; j < points_cones.size() * points_cones.size(); j++) {
         bool searched = false;
         int index = -1;
 
