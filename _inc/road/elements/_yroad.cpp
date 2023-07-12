@@ -78,10 +78,12 @@ void run_yroad() {
         bool refreshed = true;
         if (IMG.encoder.route - yroad_route > 20 && (IMG.rpts0s_num < 0.2 / SAMPLE_DIST && IMG.rpts1s_num < 0.2 / SAMPLE_DIST)) {
             // 路程积分或识别到边线或没有识别到锥桶
+            MAT_LOG("question1");
             yroad_route = IMG.encoder.route;
             flag_yroad = YROAD_RUN;
             MAT_LOG("Farmland_RUN");
         } else {
+            MAT_LOG("question2");
             // 清弯道防止加大 P 项, 提高稳定性
             IMG.is_curve0 = IMG.is_curve1 = false;
 
@@ -91,7 +93,7 @@ void run_yroad() {
 
             int break_left = search_break_left(IMG.edge_left, IMG.mat_lab);
             int break_right = search_break_right(IMG.edge_right, IMG.mat_lab);
-
+            MAT_LOG("question3");
             // 边线还在
             if (break_left > 100 && break_right > 100) {
                 IMG.cones_edge_left.push_back(IMG.edge_left[break_left]);
@@ -100,6 +102,7 @@ void run_yroad() {
                 IMG.edge_left.resize(break_right);
                 MAT_LOG("edge_exist1")
             } else {  // 搜索左右锥桶
+                MAT_LOG("question4");
                 for (int i = IMG.edge_det.size(); i > 0; i--) {
                     // 左边底部锥桶
                     if (i == IMG.edge_det.size()) {
@@ -118,7 +121,7 @@ void run_yroad() {
                         }
                     }
                 }
-
+                MAT_LOG("question5");
                 // 判断是否是单边,清左右边
                 if (abs(IMG.cones_edge_right[0].y - IMG.cones_edge_left[0].y) > IMAGE_WIDTH / 3 && abs(IMG.cones_edge_right[0].x - IMG.cones_edge_left[0].x) > IMAGE_HEIGHT / 3) {
                     if (IMG.cones_edge_left[0].x > IMG.cones_edge_right[0].x) {
