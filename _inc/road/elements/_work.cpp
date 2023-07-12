@@ -88,7 +88,7 @@ void run_work() {
             // 补线
             if (IMG.encoder.route - work_route < IMG._config->work_rou_ready) {
                 // 第一阶段: 当赛道边缘存在时
-                if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST && IMG._config->work_rou_in) {
+                if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST ) {
 
                     // 补线起点: 右
                     POINT startPoint = POINT(IMAGE_HEIGHT-40,IMAGE_WIDTH-1);
@@ -106,9 +106,9 @@ void run_work() {
                 else {
                     if (cone_RU.x > 0) {
                         // 补线起点: 右
-                        POINT startPoint = POINT(IMAGE_HEIGHT-40,IMAGE_WIDTH-1);
-                        POINT endPoint = POINT(70,0);  // 补线终点: 左
-                        POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
+                        POINT startPoint = POINT(IMAGE_HEIGHT-50,IMAGE_WIDTH-1);
+                        POINT endPoint = POINT(80,0);  // 补线终点: 左
+                        POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
 
                         vector<POINT> input = {startPoint, midPoint, endPoint};
                         vector<POINT> repair = bezier(0.05, input);
@@ -184,10 +184,10 @@ void run_work() {
                 num += IMG.edge_det[i].x;
 
             levelCones = num / IMG.edge_det.size();
-
+            MAT_LOG("WORK_RUN_ING");
 
             // 积分延迟一定距离出施工区
-            if ((cone_RU.x >= IMAGE_HEIGHT*0.5) || (IMG.encoder.route - work_route >= IMG._config->work_rou_run)||(levelCones > IMAGE_HEIGHT * 0.4)) {
+            if ((cone_RU.x >= IMAGE_HEIGHT*0.5) || (IMG.encoder.route - work_route >= IMG._config->work_rou_run)) {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_STOP;
                 MAT_LOG("WORK_RUN_STOP");
@@ -210,10 +210,12 @@ void run_work() {
                 flag_work = WORK_OUT_STOP;
             } else {
                 if(IMG.path_last_edge_left.size() >= 1){//先左边线
+                    IMG.flag_track = TRACK_LEFT;
                     IMG.edge_left = IMG.path_last_edge_left[IMG.path_last_edge_left.size() - 1];
                     IMG.path_last_edge_left.pop_back();
                     MAT_LOG("TRACK_L");
                 } else if(IMG.path_last_edge_right.size() > 1){//再右边线
+                    IMG.flag_track = TRACK_RIGHT;
                     IMG.edge_right = IMG.path_last_edge_right[IMG.path_last_edge_right.size() - 1];
                     IMG.path_last_edge_right.pop_back();
                     MAT_LOG("TRACK_R");
