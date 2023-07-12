@@ -100,16 +100,22 @@ void run_yroad() {
                 IMG.edge_left.resize(break_right);
                 MAT_LOG("edge_exist1")
             } else {  // 搜索左右锥桶
-                IMG.cones_edge_left.push_back(POINT(IMAGE_HEIGHT - 1, 0));
-                IMG.cones_edge_right.push_back(POINT(IMAGE_HEIGHT - 1, IMAGE_WIDTH - 1));
-                for (int i = 0; i < IMG.edge_det.size(); i++) {
+                for (int i = IMG.edge_det.size(); i > 0; i--) {
                     // 左边底部锥桶
-                    if (IMG.edge_det[i].y < IMAGE_WIDTH / 2 && IMG.edge_det[i].x > 0) {
+                    if (i == IMG.edge_det.size()) {
                         IMG.cones_edge_left[0] = IMG.edge_det[i];
+                        IMG.cones_edge_right[0] = IMG.edge_det[i];
+                    }
+                    if (IMG.edge_det[i].y < IMAGE_WIDTH / 2 && IMG.edge_det[i].x > IMAGE_HEIGHT / 2) {
+                        if (IMG.edge_det[i].x > IMG.cones_edge_left[0].x) {
+                            IMG.cones_edge_left[0] = IMG.edge_det[i];
+                        }
                     }
                     // 右边底部锥桶
-                    if (IMG.edge_det[i].y > IMAGE_WIDTH / 2 && IMG.edge_det[i].x > 0) {
-                        IMG.cones_edge_right[0] = IMG.edge_det[i];
+                    if (IMG.edge_det[i].y > IMAGE_WIDTH / 2 && IMG.edge_det[i].x > IMAGE_HEIGHT / 2) {
+                        if (IMG.edge_det[i].x > IMG.cones_edge_right[0].x) {
+                            IMG.cones_edge_right[0] = IMG.edge_det[i];
+                        }
                     }
                 }
 
