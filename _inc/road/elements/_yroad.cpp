@@ -137,7 +137,7 @@ void run_yroad() {
                 IMG.edge_right.clear();
                 IMG.edge_left.clear();
                 // 搜左右边缘，在以划分的点加左右边缘点
-                std::sort(IMG.edge_det.begin(), IMG.edge_det.end(), sort_x_down);  // 纵坐标升序排序
+                std::sort(IMG.edge_det.begin(), IMG.edge_det.end(), sort_x_up);  // 纵坐标升序排序
                 search_cones_edge(IMG.edge_det, &IMG.cones_edge_left, &IMG.cones_edge_right);
                 if (IMG.cones_edge_left.size() > 1 && IMG.cones_edge_left.size() < 3) {
                     POINT startPoint = IMG.cones_edge_left[0];
@@ -243,7 +243,7 @@ void run_yroad() {
                 IMG.edge_right.clear();
                 IMG.edge_left.clear();
                 // 搜左右边缘，在以划分的点加左右边缘点
-                std::sort(IMG.edge_det.begin(), IMG.edge_det.end(), sort_x_down);  // 纵坐标升序排序
+                std::sort(IMG.edge_det.begin(), IMG.edge_det.end(), sort_x_up);  // 纵坐标升序排序
                 search_cones_edge(IMG.edge_det, &IMG.cones_edge_left, &IMG.cones_edge_right);
                 /*
                  if(IMG.cones_edge_left.size()==0){
