@@ -193,7 +193,7 @@ void run_work() {
             MAT_LOG("WORK_RUN_ING");
 
             // 积分延迟一定距离出施工区
-            if ((cone_RU.x >= IMAGE_HEIGHT*0.7) || (IMG.encoder.route - work_route >= IMG._config->work_rou_run)) {
+            if ((cone_RU.x >= IMAGE_HEIGHT*0.8) || (IMG.encoder.route - work_route >= IMG._config->work_rou_run)) {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_STOP;
                 stop_clock.tic();
