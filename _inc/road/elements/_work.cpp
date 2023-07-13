@@ -16,6 +16,7 @@ extern ImageProcess imgprocess;
 
 // 变量定义
 float work_route = 0;  // 施工区编码器积分
+float work_route2 = 0;  // 施工区编码器积分
 POINT work_near_cone;  // 较近的锥桶
 StopWatch stop_clock;
 double stop_time;
@@ -89,7 +90,6 @@ void run_work() {
             if (IMG.encoder.route - work_route < IMG._config->work_rou_ready) {
                 // 第一阶段: 当赛道边缘存在时
                 if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST ) {
-
                     // 补线起点: 右
                     POINT startPoint = POINT(IMAGE_HEIGHT-40,IMAGE_WIDTH-1);
                     POINT endPoint = POINT(70,0);  // 补线终点: 左
@@ -187,7 +187,7 @@ void run_work() {
             MAT_LOG("WORK_RUN_ING");
 
             // 积分延迟一定距离出施工区
-            if ((cone_RU.x >= IMAGE_HEIGHT*0.5) || (IMG.encoder.route - work_route >= IMG._config->work_rou_run)) {
+            if ((cone_RU.x >= IMAGE_HEIGHT*0.8) || (IMG.encoder.route - work_route >= IMG._config->work_rou_run)) {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_STOP;
                 MAT_LOG("WORK_RUN_STOP");

@@ -55,6 +55,9 @@ struct ControlConfig {
     uint8_t work_rou_out;    // 施工区驶离积分
     uint8_t work_rou_none;   // 施工区完成积分
     uint8_t work_rou_over;   // 施工区完成积分
+    uint8_t farm_rou_ready;  // 农场识别积分
+    uint8_t farm_rou_in;     // 农场进入积分
+    uint8_t farm_rou_run;    // 农场行进距离
 
     float aim_distance_far;   // 远预瞄点
     float aim_distance_near;  // 近预瞄点
@@ -133,6 +136,9 @@ struct ControlConfig {
         AUTOCFG(work_rou_out);
         AUTOCFG(work_rou_none);
         AUTOCFG(work_rou_over);
+        AUTOCFG(farm_rou_ready);
+        AUTOCFG(farm_rou_in);
+        AUTOCFG(farm_rou_run);
 
         AUTOCFG(speed_level);
         nlohmann::json speed = root[speed_level];
