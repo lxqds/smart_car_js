@@ -385,10 +385,10 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
     if (left_cones->size() == 0 && right_cones->size() == 0) {
         return;
     }
-    float Left_Last_distance = 0;
-    float Left_Last_angle = 0;
-    float Right_Last_distance = 0;
-    float Right_Last_angle = 0;
+    float Left_Last_distance = 0.0f;
+    double Left_Last_angle = 0.0f;
+    float Right_Last_distance = 0.0f;
+    double Right_Last_angle = 0.0f;
     int left_cnt = 0;
     int right_cnt = 0;
     // MAT_LOG("qpoint1");
@@ -405,441 +405,440 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                         if (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) < 85) {
                             index = i;
                         }
-                    } else if ((distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance < 1.05) && (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance > 0.3)) {
-                        // if ((((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (points_cones[i].x - left_cones->at(left_cones->size() - 1).x) / Left_Last_angle) < 2 && ((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (points_cones[i].x - left_cones->at(left_cones->size() - 1).x) / Left_Last_angle) > 0.6) || (((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (points_cones[i].x - left_cones->at(left_cones->size() - 1).x) / Left_Last_angle) < -0.6 && ((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (points_cones[i].x - left_cones->at(left_cones->size() - 1).x) / Left_Last_angle) > -2)) {
-                        index = i;
-                        //}
-                    }
-                }
-            }
-        }
-        if (index >= 0) {
-            Left_Last_distance = distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[index]);
-            Left_Last_angle = (points_cones[index].y - left_cones->at(left_cones->size() - 1).y) / (left_cones->at(left_cones->size() - 1).x - points_cones[index].x);
-            left_cnt++;
-            left_cones->push_back(points_cones[index]);
-            swap(points_cones[index], points_cones[points_cones.size() - 1]);
-            points_cones.pop_back();
-            index = -1;
-            searched = true;
-        }
-        searched = false;
-        index = -1;
-        // 搜索右边缘
-        for (int i = 0; i < points_cones.size(); i++) {
-            if (right_cones->size() > 0) {
-                // 先前左边缘只到中间，拓展左边缘
-                if (points_cones[i].x < right_cones->at(right_cones->size() - 1).x) {
-                    if (!right_cnt) {
-                        if (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) < 85) {
+                    } else if ((distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance < 1.1) && (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance > 0.3)) {
+                        if (fabs(atan((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (points_cones[i].x - left_cones->at(left_cones->size() - 1).x)) - Left_Last_angle) < 1) {
                             index = i;
                         }
-                    } else if ((distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) * 1.0 / Right_Last_distance < 1.05) && (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) / Right_Last_distance > 0.3)) {
-                        // if ((((points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (points_cones[i].x - right_cones->at(right_cones->size() - 1).x) / Right_Last_angle) < 2 && ((points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (points_cones[i].x - right_cones->at(right_cones->size() - 1).x) / Right_Last_angle) > 0.6) || (((points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (points_cones[i].x - right_cones->at(right_cones->size() - 1).x) / Right_Last_angle) < -0.6 && ((points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (points_cones[i].x - right_cones->at(right_cones->size() - 1).x) / Right_Last_angle) > -2)) {
-                        index = i;
-                        //}
                     }
                 }
             }
-        }
-        if (index >= 0) {
-            Right_Last_distance = distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[index]);
-            Right_Last_angle = (points_cones[index].y - right_cones->at(right_cones->size() - 1).y) / (right_cones->at(right_cones->size() - 1).x - points_cones[index].x);
-            right_cnt++;
-            right_cones->push_back(points_cones[index]);
-            swap(points_cones[index], points_cones[points_cones.size() - 1]);
-            points_cones.pop_back();
+            if (index >= 0) {
+                Left_Last_distance = distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[index]);
+                Left_Last_angle = atan((points_cones[index].y - left_cones->at(left_cones->size() - 1).y) / (left_cones->at(left_cones->size() - 1).x - points_cones[index].x));
+                left_cnt++;
+                left_cones->push_back(points_cones[index]);
+                swap(points_cones[index], points_cones[points_cones.size() - 1]);
+                points_cones.pop_back();
+                index = -1;
+                searched = true;
+            }
+            searched = false;
             index = -1;
-            searched = true;
-        }
-        // MAT_LOG("qpoint2");
-    }
-}
-// 搜索左方的锥桶集合 ( IMAGE_WIDTH / 2 )
-std::vector<POINT> search_left_cones(std::vector<POINT> pointsCone) {
-    std::vector<POINT> points;
-
-    for (auto p : pointsCone)
-        if ((p.y < IMAGE_WIDTH / 2) && (p.x > 30) && (p.x < IMAGE_HEIGHT - 50))
-            points.push_back(p);
-
-    if (points.size() >= 2)
-        std::sort(points.begin(), points.end(), sort_y_up);  // 纵坐标升序排序
-
-    return points;
-}
-
-// 搜索右方的锥桶集合 ( IMAGE_WIDTH * 1 / 2 )
-std::vector<POINT> search_right_cones(std::vector<POINT> pointsCone) {
-    std::vector<POINT> points;
-
-    for (auto p : pointsCone)
-        if ((p.y > IMAGE_WIDTH * 1 / 2) && (p.x > 30) && (p.x < IMAGE_HEIGHT - 50))
-            points.push_back(p);
-
-    if (points.size() >= 2)
-        std::sort(points.begin(), points.end(), sort_y_down);  // 纵坐标降序排序
-
-    return points;
-}
-
-// 搜索左上方的锥桶集合 (除了右下角)
-std::vector<POINT> search_leftUp_cones(std::vector<POINT> pointsCone) {
-    std::vector<POINT> points;
-
-    for (auto p : pointsCone) {
-        if (p.x > 30) {
-            if (p.x > IMAGE_HEIGHT / 2 && p.y > IMAGE_WIDTH / 2)
-                continue;
-
-            points.push_back(p);
+            // 搜索右边缘
+            for (int i = 0; i < points_cones.size(); i++) {
+                if (right_cones->size() > 0) {
+                    // 先前左边缘只到中间，拓展左边缘
+                    if (points_cones[i].x < right_cones->at(right_cones->size() - 1).x) {
+                        if (!right_cnt) {
+                            if (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) < 85) {
+                                index = i;
+                            }
+                        } else if ((distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) * 1.0 / Right_Last_distance < 1.1) && (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) / Right_Last_distance > 0.3)) {
+                            if (fabs(atan((points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (points_cones[i].x - right_cones->at(right_cones->size() - 1).x)) - Right_Last_angle) < 1) {
+                                index = i;
+                            }
+                        }
+                    }
+                }
+            }
+            if (index >= 0) {
+                Right_Last_distance = distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[index]);
+                Right_Last_angle = (points_cones[index].y - right_cones->at(right_cones->size() - 1).y) / (right_cones->at(right_cones->size() - 1).x - points_cones[index].x);
+                right_cnt++;
+                right_cones->push_back(points_cones[index]);
+                swap(points_cones[index], points_cones[points_cones.size() - 1]);
+                points_cones.pop_back();
+                index = -1;
+                searched = true;
+            }
+            // MAT_LOG("qpoint2");
         }
     }
+    // 搜索左方的锥桶集合 ( IMAGE_WIDTH / 2 )
+    std::vector<POINT> search_left_cones(std::vector<POINT> pointsCone) {
+        std::vector<POINT> points;
 
-    if (points.size() >= 2)
-        std::sort(points.begin(), points.end(), sort_y_up);  // 纵坐标升序排序
+        for (auto p : pointsCone)
+            if ((p.y < IMAGE_WIDTH / 2) && (p.x > 30) && (p.x < IMAGE_HEIGHT - 50))
+                points.push_back(p);
 
-    return points;
-}
+        if (points.size() >= 2)
+            std::sort(points.begin(), points.end(), sort_y_up);  // 纵坐标升序排序
 
-// 搜索右上方的锥桶集合 (除了左下角)
-std::vector<POINT> search_rightUp_cones(std::vector<POINT> pointsCone) {
-    std::vector<POINT> points;
-
-    for (auto p : pointsCone) {
-        if (p.x > 30) {
-            if (p.x > IMAGE_HEIGHT / 2 && p.y < IMAGE_WIDTH / 2)
-                continue;
-
-            points.push_back(p);
-        }
+        return points;
     }
 
-    if (points.size() >= 2)
-        std::sort(points.begin(), points.end(), sort_y_down);  // 纵坐标升序排序
+    // 搜索右方的锥桶集合 ( IMAGE_WIDTH * 1 / 2 )
+    std::vector<POINT> search_right_cones(std::vector<POINT> pointsCone) {
+        std::vector<POINT> points;
 
-    return points;
-}
+        for (auto p : pointsCone)
+            if ((p.y > IMAGE_WIDTH * 1 / 2) && (p.x > 30) && (p.x < IMAGE_HEIGHT - 50))
+                points.push_back(p);
 
-// 搜索右上方的锥桶
-POINT search_rightUp_cone(std::vector<POINT> pointsCone) {
-    POINT point(0, 0);
-    POINT max_point(IMAGE_HEIGHT - 1, 0);
-    double min_dis = 99999.0f;
+        if (points.size() >= 2)
+            std::sort(points.begin(), points.end(), sort_y_down);  // 纵坐标降序排序
 
-    for (auto p : pointsCone) {
-        if (p.x < 30)
-            continue;
-
-        if (p.x < max_point.x)
-            max_point.x = p.x;
-        if (p.y > max_point.y)
-            max_point.y = p.y;
+        return points;
     }
 
-    for (auto p : pointsCone) {
-        if (abs(max_point.x - p.x) >= 40 || abs(max_point.y - p.y) >= 40)
-            continue;
+    // 搜索左上方的锥桶集合 (除了右下角)
+    std::vector<POINT> search_leftUp_cones(std::vector<POINT> pointsCone) {
+        std::vector<POINT> points;
 
-        double dis = dis_point_point(p, max_point);
-        if (dis < min_dis) {
-            min_dis = dis;
-            point = p;
-        }
-    }
+        for (auto p : pointsCone) {
+            if (p.x > 30) {
+                if (p.x > IMAGE_HEIGHT / 2 && p.y > IMAGE_WIDTH / 2)
+                    continue;
 
-    if (point.x == 0 && point.y == 0 && pointsCone.size() > 0)
-        point = max_point;
-
-    return point;
-}
-
-// 搜索左上方的锥桶
-POINT search_leftUp_cone(std::vector<POINT> pointsCone) {
-    POINT point(0, 0);
-    POINT max_point(IMAGE_HEIGHT - 1, IMAGE_WIDTH - 1);
-    double min_dis = 99999.0f;
-
-    for (auto p : pointsCone) {
-        if (p.x < 30)
-            continue;
-
-        if (p.x < max_point.x)
-            max_point.x = p.x;
-        if (p.y < max_point.y)
-            max_point.y = p.y;
-    }
-
-    for (auto p : pointsCone) {
-        if (abs(max_point.x - p.x) >= 40 || abs(max_point.y - p.y) >= 40)
-            continue;
-
-        double dis = dis_point_point(p, max_point);
-        if (dis < min_dis) {
-            min_dis = dis;
-            point = p;
-        }
-    }
-
-    if (point.x == 0 && point.y == 0 && pointsCone.size() > 0)
-        point = max_point;
-
-    return point;
-}
-
-// 搜索右下方的锥桶
-POINT search_rightDown_cone(std::vector<POINT> pointsCone) {
-    POINT point(0, 0);
-
-    for (auto p : pointsCone)
-        if (p.y > (IMAGE_WIDTH / 2 - 10) && p.x > point.x)
-            point = p;
-
-    return point;
-}
-
-// 搜索左下方的锥桶
-POINT search_leftDown_cone(std::vector<POINT> pointsCone) {
-    POINT point(0, 0);
-
-    for (auto p : pointsCone)
-        if (p.y < (IMAGE_WIDTH / 2 + 10) && p.x > point.x)
-            point = p;
-
-    return point;
-}
-
-/* *********************************************************************** */
-/* ******************************* 边线处理 ******************************* */
-/* *********************************************************************** */
-
-// 限制范围
-int clip(int x, int low, int up) {
-    return x > up ? up : x < low ? low
-                                 : x;
-}
-
-/* 前进方向定义：
- *   0
- * 3   1
- *   2
- */
-const int dir_front[4][2] = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
-const int dir_frontleft[4][2] = {{-1, -1}, {1, -1}, {1, 1}, {-1, 1}};
-const int dir_frontright[4][2] = {{1, -1}, {1, 1}, {-1, 1}, {-1, -1}};
-
-// 左手迷宫巡线
-void findline_lefthand_adaptive(cv::Mat img, int block_size, int clip_value,
-                                int x, int y, int pts[][2], int *num) {
-    assert(num && *num >= 0);
-    assert(block_size > 1 && block_size % 2 == 1);
-
-    int half = block_size / 2;
-    int step = 0, dir = 0, turn = 0;
-
-    while ((step < *num) && (half <= x) && (x <= img.cols - half - 1) &&
-           (half <= y) && (y <= img.rows - half - 1) && (turn < 4)) {
-        int local_thres = 0;
-        for (int dy = -half; dy <= half; dy++) {
-            for (int dx = -half; dx <= half; dx++) {
-                local_thres += AT_IMAGE(img, x + dx, y + dy);
+                points.push_back(p);
             }
         }
-        local_thres /= block_size * block_size;
-        local_thres -= clip_value;
 
-        int front_value =
-            AT_IMAGE(img, x + dir_front[dir][0], y + dir_front[dir][1]);
-        int frontleft_value =
-            AT_IMAGE(img, x + dir_frontleft[dir][0], y + dir_frontleft[dir][1]);
-        if (front_value < local_thres) {
-            dir = (dir + 1) % 4;
-            turn++;
-        } else if (frontleft_value < local_thres) {
-            x += dir_front[dir][0];
-            y += dir_front[dir][1];
-            pts[step][0] = x;
-            pts[step][1] = y;
-            step++;
-            turn = 0;
-        } else {
-            x += dir_frontleft[dir][0];
-            y += dir_frontleft[dir][1];
-            dir = (dir + 3) % 4;
-            pts[step][0] = x;
-            pts[step][1] = y;
-            step++;
-            turn = 0;
-        }
+        if (points.size() >= 2)
+            std::sort(points.begin(), points.end(), sort_y_up);  // 纵坐标升序排序
+
+        return points;
     }
-    *num = step;
-}
 
-// 右手迷宫巡线
-void findline_righthand_adaptive(cv::Mat img, int block_size, int clip_value,
-                                 int x, int y, int pts[][2], int *num) {
-    assert(num && *num >= 0);
-    assert(block_size > 1 && block_size % 2 == 1);
+    // 搜索右上方的锥桶集合 (除了左下角)
+    std::vector<POINT> search_rightUp_cones(std::vector<POINT> pointsCone) {
+        std::vector<POINT> points;
 
-    int half = block_size / 2;
-    int step = 0, dir = 0, turn = 0;
+        for (auto p : pointsCone) {
+            if (p.x > 30) {
+                if (p.x > IMAGE_HEIGHT / 2 && p.y < IMAGE_WIDTH / 2)
+                    continue;
 
-    while ((step < *num) && (half <= x) && (x <= img.cols - half - 1) &&
-           (half <= y) && (y <= img.rows - half - 1) && (turn < 4)) {
-        int local_thres = 0;
-        for (int dy = -half; dy <= half; dy++) {
-            for (int dx = -half; dx <= half; dx++) {
-                local_thres += AT_IMAGE(img, x + dx, y + dy);
+                points.push_back(p);
             }
         }
-        local_thres /= block_size * block_size;
-        local_thres -= clip_value;
 
-        int front_value =
-            AT_IMAGE(img, x + dir_front[dir][0], y + dir_front[dir][1]);
-        int frontright_value =
-            AT_IMAGE(img, x + dir_frontright[dir][0], y + dir_frontright[dir][1]);
-        if (front_value < local_thres) {
-            dir = (dir + 3) % 4;
-            turn++;
-        } else if (frontright_value < local_thres) {
-            x += dir_front[dir][0];
-            y += dir_front[dir][1];
-            pts[step][0] = x;
-            pts[step][1] = y;
-            step++;
-            turn = 0;
-        } else {
-            x += dir_frontright[dir][0];
-            y += dir_frontright[dir][1];
-            dir = (dir + 1) % 4;
-            pts[step][0] = x;
-            pts[step][1] = y;
-            step++;
-            turn = 0;
+        if (points.size() >= 2)
+            std::sort(points.begin(), points.end(), sort_y_down);  // 纵坐标升序排序
+
+        return points;
+    }
+
+    // 搜索右上方的锥桶
+    POINT search_rightUp_cone(std::vector<POINT> pointsCone) {
+        POINT point(0, 0);
+        POINT max_point(IMAGE_HEIGHT - 1, 0);
+        double min_dis = 99999.0f;
+
+        for (auto p : pointsCone) {
+            if (p.x < 30)
+                continue;
+
+            if (p.x < max_point.x)
+                max_point.x = p.x;
+            if (p.y > max_point.y)
+                max_point.y = p.y;
+        }
+
+        for (auto p : pointsCone) {
+            if (abs(max_point.x - p.x) >= 40 || abs(max_point.y - p.y) >= 40)
+                continue;
+
+            double dis = dis_point_point(p, max_point);
+            if (dis < min_dis) {
+                min_dis = dis;
+                point = p;
+            }
+        }
+
+        if (point.x == 0 && point.y == 0 && pointsCone.size() > 0)
+            point = max_point;
+
+        return point;
+    }
+
+    // 搜索左上方的锥桶
+    POINT search_leftUp_cone(std::vector<POINT> pointsCone) {
+        POINT point(0, 0);
+        POINT max_point(IMAGE_HEIGHT - 1, IMAGE_WIDTH - 1);
+        double min_dis = 99999.0f;
+
+        for (auto p : pointsCone) {
+            if (p.x < 30)
+                continue;
+
+            if (p.x < max_point.x)
+                max_point.x = p.x;
+            if (p.y < max_point.y)
+                max_point.y = p.y;
+        }
+
+        for (auto p : pointsCone) {
+            if (abs(max_point.x - p.x) >= 40 || abs(max_point.y - p.y) >= 40)
+                continue;
+
+            double dis = dis_point_point(p, max_point);
+            if (dis < min_dis) {
+                min_dis = dis;
+                point = p;
+            }
+        }
+
+        if (point.x == 0 && point.y == 0 && pointsCone.size() > 0)
+            point = max_point;
+
+        return point;
+    }
+
+    // 搜索右下方的锥桶
+    POINT search_rightDown_cone(std::vector<POINT> pointsCone) {
+        POINT point(0, 0);
+
+        for (auto p : pointsCone)
+            if (p.y > (IMAGE_WIDTH / 2 - 10) && p.x > point.x)
+                point = p;
+
+        return point;
+    }
+
+    // 搜索左下方的锥桶
+    POINT search_leftDown_cone(std::vector<POINT> pointsCone) {
+        POINT point(0, 0);
+
+        for (auto p : pointsCone)
+            if (p.y < (IMAGE_WIDTH / 2 + 10) && p.x > point.x)
+                point = p;
+
+        return point;
+    }
+
+    /* *********************************************************************** */
+    /* ******************************* 边线处理 ******************************* */
+    /* *********************************************************************** */
+
+    // 限制范围
+    int clip(int x, int low, int up) {
+        return x > up ? up : x < low ? low
+                                     : x;
+    }
+
+    /* 前进方向定义：
+     *   0
+     * 3   1
+     *   2
+     */
+    const int dir_front[4][2] = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
+    const int dir_frontleft[4][2] = {{-1, -1}, {1, -1}, {1, 1}, {-1, 1}};
+    const int dir_frontright[4][2] = {{1, -1}, {1, 1}, {-1, 1}, {-1, -1}};
+
+    // 左手迷宫巡线
+    void findline_lefthand_adaptive(cv::Mat img, int block_size, int clip_value,
+                                    int x, int y, int pts[][2], int *num) {
+        assert(num && *num >= 0);
+        assert(block_size > 1 && block_size % 2 == 1);
+
+        int half = block_size / 2;
+        int step = 0, dir = 0, turn = 0;
+
+        while ((step < *num) && (half <= x) && (x <= img.cols - half - 1) &&
+               (half <= y) && (y <= img.rows - half - 1) && (turn < 4)) {
+            int local_thres = 0;
+            for (int dy = -half; dy <= half; dy++) {
+                for (int dx = -half; dx <= half; dx++) {
+                    local_thres += AT_IMAGE(img, x + dx, y + dy);
+                }
+            }
+            local_thres /= block_size * block_size;
+            local_thres -= clip_value;
+
+            int front_value =
+                AT_IMAGE(img, x + dir_front[dir][0], y + dir_front[dir][1]);
+            int frontleft_value =
+                AT_IMAGE(img, x + dir_frontleft[dir][0], y + dir_frontleft[dir][1]);
+            if (front_value < local_thres) {
+                dir = (dir + 1) % 4;
+                turn++;
+            } else if (frontleft_value < local_thres) {
+                x += dir_front[dir][0];
+                y += dir_front[dir][1];
+                pts[step][0] = x;
+                pts[step][1] = y;
+                step++;
+                turn = 0;
+            } else {
+                x += dir_frontleft[dir][0];
+                y += dir_frontleft[dir][1];
+                dir = (dir + 3) % 4;
+                pts[step][0] = x;
+                pts[step][1] = y;
+                step++;
+                turn = 0;
+            }
+        }
+        *num = step;
+    }
+
+    // 右手迷宫巡线
+    void findline_righthand_adaptive(cv::Mat img, int block_size, int clip_value,
+                                     int x, int y, int pts[][2], int *num) {
+        assert(num && *num >= 0);
+        assert(block_size > 1 && block_size % 2 == 1);
+
+        int half = block_size / 2;
+        int step = 0, dir = 0, turn = 0;
+
+        while ((step < *num) && (half <= x) && (x <= img.cols - half - 1) &&
+               (half <= y) && (y <= img.rows - half - 1) && (turn < 4)) {
+            int local_thres = 0;
+            for (int dy = -half; dy <= half; dy++) {
+                for (int dx = -half; dx <= half; dx++) {
+                    local_thres += AT_IMAGE(img, x + dx, y + dy);
+                }
+            }
+            local_thres /= block_size * block_size;
+            local_thres -= clip_value;
+
+            int front_value =
+                AT_IMAGE(img, x + dir_front[dir][0], y + dir_front[dir][1]);
+            int frontright_value =
+                AT_IMAGE(img, x + dir_frontright[dir][0], y + dir_frontright[dir][1]);
+            if (front_value < local_thres) {
+                dir = (dir + 3) % 4;
+                turn++;
+            } else if (frontright_value < local_thres) {
+                x += dir_front[dir][0];
+                y += dir_front[dir][1];
+                pts[step][0] = x;
+                pts[step][1] = y;
+                step++;
+                turn = 0;
+            } else {
+                x += dir_frontright[dir][0];
+                y += dir_frontright[dir][1];
+                dir = (dir + 1) % 4;
+                pts[step][0] = x;
+                pts[step][1] = y;
+                step++;
+                turn = 0;
+            }
+        }
+        *num = step;
+    }
+
+    // 点集三角滤波
+    void blur_points(float pts_in[][2], int num, float pts_out[][2], int kernel) {
+        assert(kernel % 2 == 1);
+
+        int half = kernel / 2;
+        for (int i = 0; i < num; i++) {
+            pts_out[i][0] = pts_out[i][1] = 0;
+            for (int j = -half; j <= half; j++) {
+                pts_out[i][0] += pts_in[clip(i + j, 0, num - 1)][0] * (half + 1 - abs(j));
+                pts_out[i][1] += pts_in[clip(i + j, 0, num - 1)][1] * (half + 1 - abs(j));
+            }
+            pts_out[i][0] /= (2 * half + 2) * (half + 1) / 2;
+            pts_out[i][1] /= (2 * half + 2) * (half + 1) / 2;
         }
     }
-    *num = step;
-}
 
-// 点集三角滤波
-void blur_points(float pts_in[][2], int num, float pts_out[][2], int kernel) {
-    assert(kernel % 2 == 1);
+    // 点集等距采样  使走过的采样前折线段的距离为`dist`
+    void resample_points(float pts_in[][2], int num1, float pts_out[][2], int *num2,
+                         float dist) {
+        int remain = 0, len = 0;
+        for (int i = 0; i < num1 - 1 && len < *num2; i++) {
+            float x0 = pts_in[i][0];
+            float y0 = pts_in[i][1];
+            float dx = pts_in[i + 1][0] - x0;
+            float dy = pts_in[i + 1][1] - y0;
+            float dn = sqrt(dx * dx + dy * dy);
+            dx /= dn;
+            dy /= dn;
 
-    int half = kernel / 2;
-    for (int i = 0; i < num; i++) {
-        pts_out[i][0] = pts_out[i][1] = 0;
-        for (int j = -half; j <= half; j++) {
-            pts_out[i][0] += pts_in[clip(i + j, 0, num - 1)][0] * (half + 1 - abs(j));
-            pts_out[i][1] += pts_in[clip(i + j, 0, num - 1)][1] * (half + 1 - abs(j));
+            while (remain < dn && len < *num2) {
+                x0 += dx * remain;
+                pts_out[len][0] = x0;
+                y0 += dy * remain;
+                pts_out[len][1] = y0;
+
+                len++;
+                dn -= remain;
+                remain = dist;
+            }
+            remain -= dn;
         }
-        pts_out[i][0] /= (2 * half + 2) * (half + 1) / 2;
-        pts_out[i][1] /= (2 * half + 2) * (half + 1) / 2;
+        *num2 = len;
     }
-}
 
-// 点集等距采样  使走过的采样前折线段的距离为`dist`
-void resample_points(float pts_in[][2], int num1, float pts_out[][2], int *num2,
-                     float dist) {
-    int remain = 0, len = 0;
-    for (int i = 0; i < num1 - 1 && len < *num2; i++) {
-        float x0 = pts_in[i][0];
-        float y0 = pts_in[i][1];
-        float dx = pts_in[i + 1][0] - x0;
-        float dy = pts_in[i + 1][1] - y0;
-        float dn = sqrt(dx * dx + dy * dy);
-        dx /= dn;
-        dy /= dn;
-
-        while (remain < dn && len < *num2) {
-            x0 += dx * remain;
-            pts_out[len][0] = x0;
-            y0 += dy * remain;
-            pts_out[len][1] = y0;
-
-            len++;
-            dn -= remain;
-            remain = dist;
-        }
-        remain -= dn;
-    }
-    *num2 = len;
-}
-
-// 点集局部角度变化率
-void local_angle_points(float pts_in[][2], int num, float angle_out[],
-                        int dist) {
-    for (int i = 0; i < num; i++) {
-        if (i <= 0 || i >= num - 1) {
-            angle_out[i] = 0;
-            continue;
-        }
-        float dx1 = pts_in[i][0] - pts_in[clip(i - dist, 0, num - 1)][0];
-        float dy1 = pts_in[i][1] - pts_in[clip(i - dist, 0, num - 1)][1];
-        float dn1 = sqrtf(dx1 * dx1 + dy1 * dy1);
-        float dx2 = pts_in[clip(i + dist, 0, num - 1)][0] - pts_in[i][0];
-        float dy2 = pts_in[clip(i + dist, 0, num - 1)][1] - pts_in[i][1];
-        float dn2 = sqrtf(dx2 * dx2 + dy2 * dy2);
-        float c1 = dx1 / dn1;
-        float s1 = dy1 / dn1;
-        float c2 = dx2 / dn2;
-        float s2 = dy2 / dn2;
-        angle_out[i] = atan2f(c1 * s2 - c2 * s1, c2 * c1 + s2 * s1);
-    }
-}
-
-// 角度变化率非极大抑制
-void nms_angle(float angle_in[], int num, float angle_out[], int kernel) {
-    assert(kernel % 2 == 1);
-
-    int half = kernel / 2;
-    for (int i = 0; i < num; i++) {
-        angle_out[i] = angle_in[i];
-        for (int j = -half; j <= half; j++) {
-            if (fabs(angle_in[clip(i + j, 0, num - 1)]) > fabs(angle_out[i])) {
+    // 点集局部角度变化率
+    void local_angle_points(float pts_in[][2], int num, float angle_out[],
+                            int dist) {
+        for (int i = 0; i < num; i++) {
+            if (i <= 0 || i >= num - 1) {
                 angle_out[i] = 0;
-                break;
+                continue;
+            }
+            float dx1 = pts_in[i][0] - pts_in[clip(i - dist, 0, num - 1)][0];
+            float dy1 = pts_in[i][1] - pts_in[clip(i - dist, 0, num - 1)][1];
+            float dn1 = sqrtf(dx1 * dx1 + dy1 * dy1);
+            float dx2 = pts_in[clip(i + dist, 0, num - 1)][0] - pts_in[i][0];
+            float dy2 = pts_in[clip(i + dist, 0, num - 1)][1] - pts_in[i][1];
+            float dn2 = sqrtf(dx2 * dx2 + dy2 * dy2);
+            float c1 = dx1 / dn1;
+            float s1 = dy1 / dn1;
+            float c2 = dx2 / dn2;
+            float s2 = dy2 / dn2;
+            angle_out[i] = atan2f(c1 * s2 - c2 * s1, c2 * c1 + s2 * s1);
+        }
+    }
+
+    // 角度变化率非极大抑制
+    void nms_angle(float angle_in[], int num, float angle_out[], int kernel) {
+        assert(kernel % 2 == 1);
+
+        int half = kernel / 2;
+        for (int i = 0; i < num; i++) {
+            angle_out[i] = angle_in[i];
+            for (int j = -half; j <= half; j++) {
+                if (fabs(angle_in[clip(i + j, 0, num - 1)]) > fabs(angle_out[i])) {
+                    angle_out[i] = 0;
+                    break;
+                }
             }
         }
     }
-}
 
-// 左边线跟踪中线
-void track_leftline(float pts_in[][2], int num, float pts_out[][2],
-                    int approx_num, float dist) {
-    for (int i = 0; i < num; i++) {
-        float dx = pts_in[clip(i + approx_num, 0, num - 1)][0] -
-                   pts_in[clip(i - approx_num, 0, num - 1)][0];
-        float dy = pts_in[clip(i + approx_num, 0, num - 1)][1] -
-                   pts_in[clip(i - approx_num, 0, num - 1)][1];
-        float dn = sqrt(dx * dx + dy * dy);
+    // 左边线跟踪中线
+    void track_leftline(float pts_in[][2], int num, float pts_out[][2],
+                        int approx_num, float dist) {
+        for (int i = 0; i < num; i++) {
+            float dx = pts_in[clip(i + approx_num, 0, num - 1)][0] -
+                       pts_in[clip(i - approx_num, 0, num - 1)][0];
+            float dy = pts_in[clip(i + approx_num, 0, num - 1)][1] -
+                       pts_in[clip(i - approx_num, 0, num - 1)][1];
+            float dn = sqrt(dx * dx + dy * dy);
 
-        dx /= dn;
-        dy /= dn;
+            dx /= dn;
+            dy /= dn;
 
-        pts_out[i][0] = pts_in[i][0] - dy * dist;
-        pts_out[i][1] = pts_in[i][1] + dx * dist;
+            pts_out[i][0] = pts_in[i][0] - dy * dist;
+            pts_out[i][1] = pts_in[i][1] + dx * dist;
+        }
     }
-}
 
-// 右边线跟踪中线
-void track_rightline(float pts_in[][2], int num, float pts_out[][2],
-                     int approx_num, float dist) {
-    for (int i = 0; i < num; i++) {
-        float dx = pts_in[clip(i + approx_num, 0, num - 1)][0] -
-                   pts_in[clip(i - approx_num, 0, num - 1)][0];
-        float dy = pts_in[clip(i + approx_num, 0, num - 1)][1] -
-                   pts_in[clip(i - approx_num, 0, num - 1)][1];
-        float dn = sqrt(dx * dx + dy * dy);
+    // 右边线跟踪中线
+    void track_rightline(float pts_in[][2], int num, float pts_out[][2],
+                         int approx_num, float dist) {
+        for (int i = 0; i < num; i++) {
+            float dx = pts_in[clip(i + approx_num, 0, num - 1)][0] -
+                       pts_in[clip(i - approx_num, 0, num - 1)][0];
+            float dy = pts_in[clip(i + approx_num, 0, num - 1)][1] -
+                       pts_in[clip(i - approx_num, 0, num - 1)][1];
+            float dn = sqrt(dx * dx + dy * dy);
 
-        dx /= dn;
-        dy /= dn;
+            dx /= dn;
+            dy /= dn;
 
-        pts_out[i][0] = pts_in[i][0] + dy * dist;
-        pts_out[i][1] = pts_in[i][1] - dx * dist;
+            pts_out[i][0] = pts_in[i][0] + dy * dist;
+            pts_out[i][1] = pts_in[i][1] - dx * dist;
+        }
     }
-}
 
-/* *********************************************************************** */
-/* *********************************************************************** */
-/* *********************************************************************** */
+    /* *********************************************************************** */
+    /* *********************************************************************** */
+    /* *********************************************************************** */
