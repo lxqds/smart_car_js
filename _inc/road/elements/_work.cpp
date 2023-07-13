@@ -101,6 +101,7 @@ void run_work() {
                     IMG.edge_right = repair;
                     IMG.path_last_edge_right.push_back(IMG.edge_right);
                     MAT_LOG("WORK_FIRST");
+                    work_route2 = IMG.encoder.route;
                 }
                 // 第二阶段: 检查右上锥桶坐标满足巡航条件
                 else {
@@ -116,6 +117,13 @@ void run_work() {
                         IMG.edge_right = repair;
                         IMG.path_last_edge_right.push_back(IMG.edge_right);
                         MAT_LOG("WORK_SECOND");
+
+                        if(IMG.encoder.route - work_route2 >IMG._config->work_rou_in){
+                            work_route = IMG.encoder.route;
+                            flag_work = WORK_RUN;
+                            stop_clock.tic();
+                            MAT_LOG("WORK_RUN");
+                        }
                     }
                 }
             } else {
