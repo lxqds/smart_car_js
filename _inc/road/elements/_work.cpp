@@ -234,8 +234,8 @@ void run_work() {
                 IMG.element_begin_id = IMG.rpts1s_num * 0.25f;
                 IMG.flag_track = TRACK_RIGHT;
             }
-            IMG.special_w_c = true;
-            IMG.special_w = true;
+            /*IMG.special_w_c = true;
+            IMG.special_w = true;*/
             IMG.element_over = true;
             IMG.element_over_route = IMG.encoder.route + IMG._config->work_rou_over;
             flag_work = WORK_NONE;
