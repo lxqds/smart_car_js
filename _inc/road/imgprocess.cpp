@@ -825,17 +825,31 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     }  // 入库
     else if (flag_work == WORK_READY) {
         aim_speed = _config->speed_work;
-    } else if (flag_work == WORK_RUN) {
+        aim_angle = 0;
+    }
+    else if (flag_work == WORK_IN) {
         aim_speed = _config->speed_work;
+        aim_angle = _config->work_in_angle;
+    }
+    else if (flag_work == WORK_RUN) {
+        aim_speed = _config->speed_work;
+        aim_angle = _config->work_run_angle;
     }  // 施工区 内
     else if (flag_work == WORK_STOP) {
         aim_speed = 0;
         aim_angle = 0;
-    } else if (flag_work == WORK_OUT) {
+    }
+    else if (flag_work == WORK_OUT) {
         aim_speed = (_config->speed_work * -1.0f);
-    }else if (flag_work == WORK_OUT_STOP) {
+        aim_angle = _config->work_out_angle;
+    }
+    else if (flag_work == WORK_OUT_STOP) {
         aim_speed = 0;
-        aim_angle = -45;
+        aim_angle = 0;
+    }
+    else if (flag_work == WORK_RIGHT) {
+        aim_speed = (_config->speed_work);
+        aim_angle = _config->work_right_angle;
     }
     // 施工区
     else if (flag_gas == GAS_RUN) {
