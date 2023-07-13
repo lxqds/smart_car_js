@@ -29,6 +29,8 @@
     "gas_rou_out2": 80,
     "gas_rou_none": 35,
     "gas_rou_over": 50,
+    "work_error": 170,
+    "work_rou_in_total": 65,
     "work_rou_ready": 65,
     "work_rou_in": 20,
     "work_rou_run": 15,

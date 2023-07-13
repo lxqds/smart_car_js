@@ -49,6 +49,8 @@ struct ControlConfig {
     uint8_t gas_rou_out2;    // 加油站驶离 #2 积分
     uint8_t gas_rou_none;    // 加油站结束积分
     uint8_t gas_rou_over;    // 加油站完成积分
+    uint8_t work_error;      //施工区错误
+    uint8_t work_rou_in_total; //施工区进入的总路程
     uint8_t work_rou_ready;  // 施工区准备进入积分
     uint8_t work_rou_in;     // 施工区进入积分
     uint8_t work_rou_run;    // 施工区内部积分
@@ -130,6 +132,8 @@ struct ControlConfig {
         AUTOCFG(gas_rou_out2);
         AUTOCFG(gas_rou_none);
         AUTOCFG(gas_rou_over);
+        AUTOCFG(work_error);
+        AUTOCFG(work_rou_in_total);
         AUTOCFG(work_rou_ready);
         AUTOCFG(work_rou_in);
         AUTOCFG(work_rou_run);

@@ -61,7 +61,7 @@ void run_work() {
         }
 
         // 超过指定距离未进入绕行区, 元素行驶失败
-        if (flag_work != WORK_READY && (IMG.encoder.route - work_route > 170)) {
+        if (flag_work != WORK_READY && (IMG.encoder.route - work_route > IMG._config->work_error)) {
             IMG.element_over = true;
             IMG.element_over_route = IMG.encoder.route;
             flag_work = WORK_NONE;
@@ -87,13 +87,13 @@ void run_work() {
             POINT cone_RU = search_rightUp_cone(IMG.edge_det);
 
             // 补线
-            if (IMG.encoder.route - work_route < IMG._config->work_rou_ready) {
+            if (IMG.encoder.route - work_route < IMG._config->work_rou_in_total) {
                 // 第一阶段: 当赛道边缘存在时
-                if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST ) {
+                if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST ||IMG.encoder.route - work_route < IMG._config->work_rou_ready) {
                     // 补线起点: 右
                     POINT startPoint = POINT(IMAGE_HEIGHT-40,IMAGE_WIDTH-1);
                     POINT endPoint = POINT(70,0);  // 补线终点: 左
-                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.4,(startPoint.y+endPoint.y)*0.6);      // 补线中点
+                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
 
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.05, input);
@@ -101,7 +101,7 @@ void run_work() {
                     IMG.edge_right = repair;
                     IMG.path_last_edge_right.push_back(IMG.edge_right);
                     MAT_LOG("WORK_FIRST");
-                    work_route2 = IMG.encoder.route;
+                    work_route2 = IMG.encoder.route;//为积分第二段路程
                 }
                 // 第二阶段: 检查右上锥桶坐标满足巡航条件
                 else {
@@ -121,7 +121,6 @@ void run_work() {
                         if(IMG.encoder.route - work_route2 >IMG._config->work_rou_in){
                             work_route = IMG.encoder.route;
                             flag_work = WORK_RUN;
-                            stop_clock.tic();
                             MAT_LOG("WORK_RUN");
                         }
                     }
@@ -129,7 +128,6 @@ void run_work() {
             } else {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_RUN;
-                stop_clock.tic();
                 MAT_LOG("WORK_RUN");
             }
         }
@@ -195,9 +193,10 @@ void run_work() {
             MAT_LOG("WORK_RUN_ING");
 
             // 积分延迟一定距离出施工区
-            if ((cone_RU.x >= IMAGE_HEIGHT*0.8) || (IMG.encoder.route - work_route >= IMG._config->work_rou_run)) {
+            if ((cone_RU.x >= IMAGE_HEIGHT*0.7) || (IMG.encoder.route - work_route >= IMG._config->work_rou_run)) {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_STOP;
+                stop_clock.tic();
                 MAT_LOG("WORK_RUN_STOP");
             }
         }
