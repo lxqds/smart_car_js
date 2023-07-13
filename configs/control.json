@@ -32,7 +32,7 @@
     "work_rou_ready": 65,
     "work_rou_in": 20,
     "work_rou_run": 15,
-    "work_rou_out": 60,
+    "work_rou_out": 58,
     "work_rou_none": 10,
     "work_rou_over": 1,
     "farm_rou_ready": 60,
