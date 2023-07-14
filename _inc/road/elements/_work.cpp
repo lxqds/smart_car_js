@@ -75,21 +75,21 @@ void run_work() {
 
     if (IMG._config->direction_work == 0) {
         if (flag_work == WORK_READY) {
-            if(IMG.encoder.route-work_route > IMG._config->work_ready){
+            if(IMG.encoder.route-work_route > IMG._config->work_rou_ready){
                 work_route =  IMG.encoder.route;
                 flag_work = WORK_IN;
                 MAT_LOG("WORK_IN");
             }
         }
         if (flag_work == WORK_IN) {
-            if(IMG.encoder.route-work_route > IMG._config->work_in){
+            if(IMG.encoder.route-work_route > IMG._config->work_rou_in){
                 work_route =  IMG.encoder.route;
                 flag_work = WORK_RUN;
                 MAT_LOG("WORK_RUN");
             }
         }
         if (flag_work == WORK_RUN) {
-            if(IMG.encoder.route-work_route > IMG._config->work_run){
+            if(IMG.encoder.route-work_route > IMG._config->work_rou_run){
                 work_route =  IMG.encoder.route;
                 flag_work = WORK_STOP;
                 stop_clock.toc();
@@ -104,7 +104,7 @@ void run_work() {
             }
         }
         if (flag_work == WORK_OUT) {
-            if(work_route - IMG.encoder.route > IMG._config->work_out){
+            if(work_route - IMG.encoder.route > IMG._config->work_rou_out){
                 work_route =  IMG.encoder.route;
                 flag_work = WORK_OUT_STOP;
                 MAT_LOG("WORK_OUT_STOP");
@@ -116,7 +116,7 @@ void run_work() {
             MAT_LOG("WORK_RIGHT");
         }
         if (flag_work == WORK_RIGHT) {
-            if(work_route - IMG.encoder.route > IMG._config->work_right){
+            if(work_route - IMG.encoder.route > IMG._config->work_rou_right){
                 if (IMG.rpts0s_num > 0.2 / SAMPLE_DIST) {
                     IMG.element_begin_id = IMG.rpts0s_num * 0.25f;
                     IMG.flag_track = TRACK_LEFT;
