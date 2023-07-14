@@ -34,6 +34,7 @@
     "work_rou_ready": 30,
     "work_rou_in": 20,
     "work_in_angle": 45,
+    "work_run_angle": -30,
     "work_out_angle": -30,
     "work_right_angle": -15,
     "work_rou_run": 10,
