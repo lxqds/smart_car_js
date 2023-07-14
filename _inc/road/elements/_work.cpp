@@ -92,7 +92,7 @@ void run_work() {
             if(IMG.encoder.route-work_route > IMG._config->work_rou_run){
                 work_route =  IMG.encoder.route;
                 flag_work = WORK_STOP;
-                stop_clock.toc();
+                stop_clock.tic();
                 MAT_LOG("WORK_STOP");
             }
         }
@@ -116,7 +116,7 @@ void run_work() {
             MAT_LOG("WORK_RIGHT");
         }
         if (flag_work == WORK_RIGHT) {
-            if(work_route - IMG.encoder.route > IMG._config->work_rou_right){
+            if( IMG.encoder.route- work_route > IMG._config->work_rou_right){
                 if (IMG.rpts0s_num > 0.2 / SAMPLE_DIST) {
                     IMG.element_begin_id = IMG.rpts0s_num * 0.25f;
                     IMG.flag_track = TRACK_LEFT;
