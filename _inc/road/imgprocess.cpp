@@ -473,13 +473,6 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                             log_i("PIG_DETECTION");
                         }
                         break;
-                    case label_crosswalk:  // 出入库口
-                        if (flag_garage == GARAGE_NONE ) {
-                            flag_garage = GARAGE_DETECTION;
-                            sprintf(string_log, "GARAGE_DETECTION");
-                            log_i("GARAGE_DETECTION");
-                        }
-                        break;
                     default:
                         break;
                 }
@@ -544,6 +537,11 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             flag_gas == GAS_NONE && flag_yroad == YROAD_NONE)
             check_slow();  // 慢行区 - 识别标志
 
+        if (_config->check_cross_ == 1 &&
+            flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
+            flag_gas == GAS_NONE && flag_yroad == YROAD_NONE &&
+            flag_ramp == RAMP_NONE && flag_slow == SLOW_NONE && flag_circle <= 2)
+            check_cross();  // 十字路 - 识别角点特征
         if (_config->check_circle_ == 1 &&
             flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
             flag_gas == GAS_NONE && flag_yroad == YROAD_NONE &&
@@ -551,11 +549,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             flag_slow == SLOW_NONE)
             check_circle();  // 环岛路 - 识别角点特征
 
-        if (_config->check_cross_ == 1 &&
-            flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
-            flag_gas == GAS_NONE && flag_yroad == YROAD_NONE &&
-            flag_ramp == RAMP_NONE && flag_slow == SLOW_NONE && flag_circle <= 2)
-            check_cross();  // 十字路 - 识别角点特征
+        
     }
 
     // 根据检查结果执行模式
@@ -825,31 +819,17 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     }  // 入库
     else if (flag_work == WORK_READY) {
         aim_speed = _config->speed_work;
-        aim_angle = 0;
-    }
-    else if (flag_work == WORK_IN) {
+    } else if (flag_work == WORK_RUN) {
         aim_speed = _config->speed_work;
-        aim_angle = _config->work_in_angle;
-    }
-    else if (flag_work == WORK_RUN) {
-        aim_speed = _config->speed_work;
-        aim_angle = _config->work_run_angle;
     }  // 施工区 内
     else if (flag_work == WORK_STOP) {
         aim_speed = 0;
         aim_angle = 0;
-    }
-    else if (flag_work == WORK_OUT) {
+    } else if (flag_work == WORK_OUT) {
         aim_speed = (_config->speed_work * -1.0f);
-        aim_angle = _config->work_out_angle;
-    }
-    else if (flag_work == WORK_OUT_STOP) {
+    }else if (flag_work == WORK_OUT_STOP) {
         aim_speed = 0;
-        aim_angle = 0;
-    }
-    else if (flag_work == WORK_RIGHT) {
-        aim_speed = (_config->speed_work);
-        aim_angle = _config->work_right_angle;
+        aim_angle = -45;
     }
     // 施工区
     else if (flag_gas == GAS_RUN) {

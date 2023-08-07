@@ -49,17 +49,12 @@ struct ControlConfig {
     uint8_t gas_rou_out2;    // 加油站驶离 #2 积分
     uint8_t gas_rou_none;    // 加油站结束积分
     uint8_t gas_rou_over;    // 加油站完成积分
-    uint16_t work_error;      //施工区错误
+    uint8_t work_error;      //施工区错误
     uint8_t work_rou_in_total; //施工区进入的总路程
     uint8_t work_rou_ready;  // 施工区准备进入积分
     uint8_t work_rou_in;     // 施工区进入积分
-    float  work_in_angle;    //入库角度
-    float  work_run_angle;    //入库运行角度
-    float  work_out_angle;    //出库角度
-    float  work_right_angle; //出库右转
     uint8_t work_rou_run;    // 施工区内部积分
     uint8_t work_rou_out;    // 施工区驶离积分
-    uint8_t work_rou_right;
     uint8_t work_rou_none;   // 施工区完成积分
     uint8_t work_rou_over;   // 施工区完成积分
     uint8_t farm_rou_ready;  // 农场识别积分
@@ -141,13 +136,8 @@ struct ControlConfig {
         AUTOCFG(work_rou_in_total);
         AUTOCFG(work_rou_ready);
         AUTOCFG(work_rou_in);
-        AUTOCFG(work_in_angle);
-        AUTOCFG(work_run_angle);
-        AUTOCFG(work_out_angle);
-        AUTOCFG(work_right_angle);
         AUTOCFG(work_rou_run);
         AUTOCFG(work_rou_out);
-        AUTOCFG(work_rou_right);
         AUTOCFG(work_rou_none);
         AUTOCFG(work_rou_over);
         AUTOCFG(farm_rou_ready);
