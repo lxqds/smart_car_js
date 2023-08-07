@@ -235,7 +235,7 @@ void run_yroad() {
                     }
                     else{
                         POINT startPoint_right = POINT(IMAGE_HEIGHT-50,IMAGE_WIDTH - 1);
-                        IMG.cones_edge_left.push_back(startPoint_right);
+                        IMG.cones_edge_right.push_back(startPoint_right);
                     }
                 }
 
