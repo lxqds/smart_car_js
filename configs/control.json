@@ -39,7 +39,7 @@
     "work_rou_over": 1,
     "farm_rou_ready": 1,
     "farm_rou_in": 1,
-    "farm_rou_run": 100,
+    "farm_rou_run": 130,
     "*****-speed_level-******": 0,
     "speed_level": "1500",
     "1700": {
