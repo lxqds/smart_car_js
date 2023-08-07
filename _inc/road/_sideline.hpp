@@ -71,7 +71,7 @@ bool sort_x_up(POINT a, POINT b);    // 升序
 bool sort_x_down(POINT a, POINT b);  // 降序
 
 //两点距离公式
-double distance_for_points(POINT a, POINT b);
+float distance_for_points(POINT a, POINT b);
 //搜索左右边缘的锥桶
 void search_cones_edge(std::vector<POINT> cones,std::vector<POINT> *left_cones,std::vector<POINT> *right_cones);
 

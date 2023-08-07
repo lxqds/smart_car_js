@@ -537,6 +537,11 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             flag_gas == GAS_NONE && flag_yroad == YROAD_NONE)
             check_slow();  // 慢行区 - 识别标志
 
+        if (_config->check_cross_ == 1 &&
+            flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
+            flag_gas == GAS_NONE && flag_yroad == YROAD_NONE &&
+            flag_ramp == RAMP_NONE && flag_slow == SLOW_NONE && flag_circle <= 2)
+            check_cross();  // 十字路 - 识别角点特征
         if (_config->check_circle_ == 1 &&
             flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
             flag_gas == GAS_NONE && flag_yroad == YROAD_NONE &&
@@ -544,11 +549,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             flag_slow == SLOW_NONE)
             check_circle();  // 环岛路 - 识别角点特征
 
-        if (_config->check_cross_ == 1 &&
-            flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
-            flag_gas == GAS_NONE && flag_yroad == YROAD_NONE &&
-            flag_ramp == RAMP_NONE && flag_slow == SLOW_NONE && flag_circle <= 2)
-            check_cross();  // 十字路 - 识别角点特征
+        
     }
 
     // 根据检查结果执行模式
@@ -817,18 +818,20 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         aim_angle_p += _config->deviation_garage_in_p;
     }  // 入库
     else if (flag_work == WORK_READY) {
-        aim_speed = _config->speed_work * 0.7f;
+        aim_speed = _config->speed_work;
     } else if (flag_work == WORK_RUN) {
-        aim_speed = _config->speed_work * 0.7f;
+        aim_speed = _config->speed_work;
     }  // 施工区 内
     else if (flag_work == WORK_STOP) {
         aim_speed = 0;
         aim_angle = 0;
     } else if (flag_work == WORK_OUT) {
-        aim_speed = (_config->speed_work * -0.7f);
-    } else if (flag_work != WORK_NONE) {
-        aim_speed = (int16_t)_config->speed_work * 0.9f;
-    }  // 施工区
+        aim_speed = (_config->speed_work * -1.0f);
+    }else if (flag_work == WORK_OUT_STOP) {
+        aim_speed = 0;
+        aim_angle = -45;
+    }
+    // 施工区
     else if (flag_gas == GAS_RUN) {
         aim_speed = _config->speed_gas;
     }  // 加油站 内
@@ -990,12 +993,16 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             for (auto p : edge_det)  // 白色 //列 |  行———
                 cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
             // 锥桶
-            for (auto p : cones_edge_left)//蓝色 //列 |  行———
-                cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(0,191,255), 2);
-            // 锥桶
-            for (auto p : cones_edge_right)//紫色 //列 |  行———
-                cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(138,43,226), 2);
+            for (auto p : cones_edge_left)  // 蓝色 //列 |  行———
+                cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(0, 191, 255), 2);
 
+            // 锥桶
+            for (auto p : cones_edge_right)  // 紫色 //列 |  行———
+                cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(138, 43, 226), 2);
+            if(cones_edge_left.size()>0)
+            cv::circle(mat_result, cv::Point(cones_edge_left[0].y, cones_edge_left[0].x), 2, cv::Scalar(0, 0, 0), 2);
+            if(cones_edge_right.size()>0)
+            cv::circle(mat_result, cv::Point(cones_edge_right[0].y, cones_edge_right[0].x), 2, cv::Scalar(0, 255, 0), 2);
             // 边线
             for (auto p : edge_left)  // 青蓝色
                 cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(0, 238, 238), -1);

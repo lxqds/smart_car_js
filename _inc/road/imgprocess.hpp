@@ -95,6 +95,8 @@ class ImageProcess {
 
    public:
     bool detection_new = false;
+    
+    /*
     string detection_labels[20] = {
         "cone", "granary", "bridge", "tractor", "corn", "pig", "crosswalk", "bump",
         "background",
@@ -110,6 +112,32 @@ class ImageProcess {
         label_pig,
         label_crosswalk,
         label_bump,
+        label_ramp,   // 坡道
+        label_three,  // 泛行区
+        label_work,   // 施工区
+        label_red,    // 锥桶
+        label_gas,    // 加油站
+        label_wone,   // 赛道 1
+        label_wtwo,   // 赛道 2
+    };
+    
+    */
+    
+    string detection_labels[20] = {
+        "bump", "granary", "crosswalk", "cone", "bridge", "pig", "tractor", "corn",
+        "background",
+        "ramp", "three", "work",
+        "red", "gas", "wone", "wtwo"};
+
+    enum DetectionLabel {
+        label_bump = 0,
+        label_granary,
+        label_crosswalk,
+        label_cone,
+        label_bridge,
+        label_pig,
+        label_tractor,
+        label_corn,
         label_ramp,   // 坡道
         label_three,  // 泛行区
         label_work,   // 施工区
