@@ -49,7 +49,7 @@ void run_gas() {
         gas_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
 
         // 当车辆开始靠近右边锥桶: 准备进入
-        if (gas_near_cone.x > IMAGE_HEIGHT * 0.25f) {
+        if (gas_near_cone.x > IMAGE_HEIGHT * 0.5f) {
             gas_route = IMG.encoder.route;
             flag_gas = GAS_READY;
             MAT_LOG("GAS_READY");
