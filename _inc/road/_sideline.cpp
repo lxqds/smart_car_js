@@ -402,11 +402,11 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                 // 先前左边缘只到中间，拓展左边缘
                 if (points_cones[i].x < left_cones->at(left_cones->size() - 1).x) {
                     if (!left_cnt) {
-                        if (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) < 85) {
+                        if (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) < 105) {
                             index = i;
                         }
                     } else if ((distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance < 1.2) && (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance > 0.3)) {
-                        if (fabs(atan((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (left_cones->at(left_cones->size() - 1).x - points_cones[i].x)) - Left_Last_angle) < 1.0) {
+                        if (fabs(atan((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (left_cones->at(left_cones->size() - 1).x - points_cones[i].x)) - Left_Last_angle) < 1.4) {
                             index = i;
                         }
                     }
