@@ -114,7 +114,7 @@ void run_circle() {
         if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
             none_right_line++;
         if (IMG.rpts1s_num > 1.0 / SAMPLE_DIST && none_right_line > 0) {
-            if (have_right_line > 0&&IMG.encoder.route - circle_route > 50) {
+            if (have_right_line > 0&&IMG.encoder.route - circle_route > 100) {
                 none_right_line = 0;
                 have_right_line = 0;
                 IMG.element_over = true;
@@ -198,7 +198,7 @@ void run_circle() {
         if (IMG.rpts0s_num < 0.2 / SAMPLE_DIST)
             none_left_line++;
         if (IMG.rpts0s_num > 1.0 / SAMPLE_DIST && none_left_line > 0) {
-            if (have_left_line > 0&&IMG.encoder.route - circle_route > 50) {
+            if (have_left_line > 0&&IMG.encoder.route - circle_route > 100) {
                 none_left_line = 0;
                 have_left_line = 0;
                 IMG.element_over = true;
