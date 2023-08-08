@@ -517,6 +517,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
 
     // 识别元素
     if (!element_over) {
+        if(flag_ramp==RAMP_NONE)
         check_garage();  // 斑马线 - 识别特殊特征
 
         if (flag_garage == GARAGE_NONE)
