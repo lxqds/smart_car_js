@@ -227,7 +227,7 @@ void run_work() {
                     IMG.path_last_edge_right.pop_back();
                     MAT_LOG("TRACK_R");
                 } else{
-                    flag_work = WORK_OUT_STOP;
+                    //flag_work = WORK_OUT_STOP;
                     MAT_LOG("AIM_SPEED = 0");
                 }
 
