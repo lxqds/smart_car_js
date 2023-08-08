@@ -21,6 +21,7 @@ void check_ramp() {
     if (flag_ramp == RAMP_DETECTION) {
         IMG.flag_track = TRACK_MIDDLE;
         IMG.element_identify = 1;
+        IMG.element_over = false;
         ramp_route = IMG.encoder.route;
         flag_ramp = RAMP_UP;
         MAT_LOG("BRIDGE_UP");

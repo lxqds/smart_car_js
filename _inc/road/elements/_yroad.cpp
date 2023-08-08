@@ -36,6 +36,7 @@ int yroad_ipts_num, yroad_rptss_num;
 void check_yroad() {
     if (flag_yroad == YROAD_DETECTION) {
         IMG.element_identify = 1;
+        IMG.element_over = false;
         yroad_route = IMG.encoder.route;
         flag_yroad = YROAD_FOUND;
         MAT_LOG("Farmland_FOUND");
