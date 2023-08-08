@@ -213,7 +213,7 @@ void run_work() {
         }
 
         if (flag_work == WORK_OUT) {
-            if ((work_route - IMG.encoder.route  >= IMG._config->work_rou_out)||(IMG.path_last_edge_left.size() < 1 && IMG.path_last_edge_right.size() < 1  )) {
+            if ((work_route - IMG.encoder.route  >= IMG._config->work_rou_out)&&(IMG.path_last_edge_left.size() < 1 && IMG.path_last_edge_right.size() < 1  )) {
                 flag_work = WORK_OUT_STOP;
             } else {
                 if(IMG.path_last_edge_left.size() >= 1){//先左边线
