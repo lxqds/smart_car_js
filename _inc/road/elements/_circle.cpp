@@ -80,12 +80,13 @@ void run_circle() {
         // 先丢右线后有线
         if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
             none_right_line++;
-        if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST && none_right_line > 0&&IMG.encoder.route - circle_route > 100) {
+        if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST && none_right_line > 0) {
             if (IMG.encoder.route - circle_route > 60)
                 have_right_line++;
             if (have_right_line > 0) {
                 none_right_line = 0;
                 have_right_line = 0;
+                circle_route = IMG.encoder.route;
                 flag_circle = CIRCLE_LEFT_RUNNING;
                 MAT_LOG("CIRCLE_LEFT_RUNNING");
             }
@@ -98,7 +99,7 @@ void run_circle() {
         // 外环存在拐点, 可再加拐点距离判据 (左L点)
         if (IMG.Lpt1_found)
             IMG.ipts1_num = IMG.rpts1s_num = IMG.rptsc1_num = IMG.Lpt1_rpts1s_id;
-        if (IMG.Lpt1_found && IMG.Lpt1_rpts1s_id < 0.6 / SAMPLE_DIST) {
+        if (IMG.Lpt1_found && IMG.Lpt1_rpts1s_id < 0.6 / SAMPLE_DIST&&IMG.encoder.route - circle_route > 60) {
             flag_circle = CIRCLE_LEFT_OUT;
             MAT_LOG("CIRCLE_LEFT_OUT");
         }
@@ -114,7 +115,7 @@ void run_circle() {
         if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
             none_right_line++;
         if (IMG.rpts1s_num > 1.0 / SAMPLE_DIST && none_right_line > 0) {
-            if (have_right_line > 0&&IMG.encoder.route - circle_route > 150) {
+            if (have_right_line > 0&&IMG.encoder.route - circle_route > 100) {
                 none_right_line = 0;
                 have_right_line = 0;
                 IMG.element_over = true;
@@ -170,6 +171,7 @@ void run_circle() {
             if (have_left_line > 0) {
                 none_left_line = 0;
                 have_left_line = 0;
+                circle_route = IMG.encoder.route;
                 flag_circle = CIRCLE_RIGHT_RUNNING;
                 MAT_LOG("CIRCLE_RIGHT_RUNNING");
             }
@@ -182,7 +184,7 @@ void run_circle() {
         // 外环存在拐点, 可再加拐点距离判据 (左L点)
         if (IMG.Lpt0_found)
             IMG.ipts0_num = IMG.rpts0s_num = IMG.rptsc0_num = IMG.Lpt0_rpts0s_id;
-        if (IMG.Lpt0_found && IMG.Lpt0_rpts0s_id < 0.6 / SAMPLE_DIST&&IMG.encoder.route - circle_route > 100) {
+        if (IMG.Lpt0_found && IMG.Lpt0_rpts0s_id < 0.6 / SAMPLE_DIST&&IMG.encoder.route - circle_route > 60) {
             flag_circle = CIRCLE_RIGHT_OUT;
             MAT_LOG("CIRCLE_RIGHT_OUT");
         }
@@ -198,7 +200,7 @@ void run_circle() {
         if (IMG.rpts0s_num < 0.2 / SAMPLE_DIST)
             none_left_line++;
         if (IMG.rpts0s_num > 1.0 / SAMPLE_DIST && none_left_line > 0) {
-            if (have_left_line > 0&&IMG.encoder.route - circle_route > 150) {
+            if (have_left_line > 0&&IMG.encoder.route - circle_route > 100) {
                 none_left_line = 0;
                 have_left_line = 0;
                 IMG.element_over = true;
