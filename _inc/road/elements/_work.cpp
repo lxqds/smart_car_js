@@ -228,6 +228,9 @@ void run_work() {
                     MAT_LOG("TRACK_R");
                 } else{
                     //flag_work = WORK_OUT_STOP;
+                    if(work_route - IMG.encoder.route  >= IMG._config->work_rou_out){
+                        flag_work = WORK_OUT_STOP;
+                    }
                     MAT_LOG("AIM_SPEED = 0");
                 }
 
