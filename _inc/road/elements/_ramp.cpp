@@ -31,13 +31,12 @@ void check_ramp() {
 
 void run_ramp() {
     if (flag_ramp == RAMP_UP && (IMG.encoder.route - ramp_route > 130)) {
-        IMG.flag_track = TRACK_MIDDLE;
         flag_ramp = RAMP_DOWN;
         MAT_LOG("BRIDGE_DOWN");
+        ramp_route = IMG.encoder.route;
     }
 
     if (flag_ramp == RAMP_DOWN && (IMG.encoder.route - ramp_route > 180)) {
-        IMG.flag_track = TRACK_MIDDLE;
         IMG.element_over = true;
         IMG.element_over_route = IMG.encoder.route;
         flag_ramp = RAMP_NONE;
