@@ -473,6 +473,13 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                             log_i("PIG_DETECTION");
                         }
                         break;
+                    case label_crosswalk:  // 出入库口
+                        if (flag_garage == GARAGE_NONE ) {
+                            flag_garage = GARAGE_DETECTION;
+                            sprintf(string_log, "GARAGE_DETECTION");
+                            log_i("GARAGE_DETECTION");
+                        }
+                        break;
                     default:
                         break;
                 }
