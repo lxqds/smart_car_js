@@ -11,6 +11,7 @@
     "check_lab_": 0,
     "over_route_": 15,
     "check_garage_times_": 1,
+    "check_garage_AI": 1,
     "check_work_": 1,
     "check_gas_": 1,
     "check_yroad_": 1,
