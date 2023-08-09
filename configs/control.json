@@ -44,8 +44,8 @@
     "farm_rou_run": 120,
     "pass_garage_left": 60,
     "pass_garage_right": 60,
-    "ramp_up_rou": 100,
-    "ramp_down_rou": 100,
+    "ramp_up_rou": 60,
+    "ramp_down_rou": 60,
     "*****-speed_level-******": 0,
     "speed_level": "1500",
     "1700": {
