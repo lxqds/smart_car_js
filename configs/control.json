@@ -9,8 +9,14 @@
     "*****-aim_distance-*****": 0,
     "check_binary_": 0,
     "check_lab_": 0,
+<<<<<<< HEAD
     "over_route_": 5,
     "check_garage_times_": 2,
+=======
+    "over_route_": 15,
+    "check_garage_times_": 1,
+    "check_garage_AI": 1,
+>>>>>>> 8a8bec2a25257fac12b031b143c0278870ae2007
     "check_work_": 1,
     "check_gas_": 1,
     "check_yroad_": 1,
