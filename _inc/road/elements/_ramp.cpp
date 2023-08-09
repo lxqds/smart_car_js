@@ -29,13 +29,13 @@ void check_ramp() {
 /* ********************************************************************* */
 
 void run_ramp() {
-    if (flag_ramp == RAMP_UP && (IMG.encoder.route - ramp_route > 130)) {
+    if (flag_ramp == RAMP_UP && (IMG.encoder.route - ramp_route > IMG._config->ramp_up_rou)) {
         flag_ramp = RAMP_DOWN;
         MAT_LOG("BRIDGE_DOWN");
         ramp_route = IMG.encoder.route;
     }
 
-    if (flag_ramp == RAMP_DOWN && (IMG.encoder.route - ramp_route > 180)) {
+    if (flag_ramp == RAMP_DOWN && (IMG.encoder.route - ramp_route > ramp_down_rou)) {
         IMG.element_over = true;
         IMG.element_over_route = IMG.encoder.route;
         flag_ramp = RAMP_NONE;
