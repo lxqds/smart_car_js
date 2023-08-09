@@ -35,7 +35,7 @@ void run_ramp() {
         ramp_route = IMG.encoder.route;
     }
 
-    if (flag_ramp == RAMP_DOWN && (IMG.encoder.route - ramp_route > ramp_down_rou)) {
+    if (flag_ramp == RAMP_DOWN && (IMG.encoder.route - ramp_route > IMG._config->ramp_down_rou)) {
         IMG.element_over = true;
         IMG.element_over_route = IMG.encoder.route;
         flag_ramp = RAMP_NONE;
