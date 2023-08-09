@@ -56,7 +56,9 @@ void check_garage() {
             MAT_LOG("GARAGE_DETECTION");
         }
     }
-
+    if(flag_garage ==GARAGE_AI_DETECTION){
+        flag_garage = GARAGE_DETECTION;
+    }
     /* ***************************************************************** */
 
     // 非出库, 找到斑马线
@@ -185,7 +187,7 @@ void run_garage() {
 
         case GARAGE_PASS_LEFT:
             IMG.flag_track = TRACK_RIGHT;
-            if (IMG.encoder.route - garage_route > 110) {
+            if (IMG.encoder.route - garage_route > IMG._config->pass_garage_right) {
                 IMG.element_over = true;
                 IMG.element_over_route = IMG.encoder.route;
                 flag_garage = GARAGE_NONE;
@@ -194,7 +196,7 @@ void run_garage() {
             break;
         case GARAGE_PASS_RIGHT:
             IMG.flag_track = TRACK_LEFT;
-            if (IMG.encoder.route - garage_route > 110) {
+            if (IMG.encoder.route - garage_route > IMG._config->pass_garage_left) {
                 IMG.element_over = true;
                 IMG.element_over_route = IMG.encoder.route;
                 flag_garage = GARAGE_NONE;

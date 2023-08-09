@@ -41,6 +41,8 @@
     "farm_rou_ready": 10,
     "farm_rou_in": 10,
     "farm_rou_run": 120,
+    "pass_garage_left": 110,
+    "pass_garage_right": 110,
     "*****-speed_level-******": 0,
     "speed_level": "1500",
     "1700": {

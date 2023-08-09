@@ -475,9 +475,9 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                         break;
                     case label_crosswalk:  // 出入库口
                         if (flag_garage == GARAGE_NONE && _config->check_garage_AI==1) {
-                            flag_garage = GARAGE_DETECTION;
-                            sprintf(string_log, "GARAGE_DETECTION");
-                            log_i("GARAGE_DETECTION");
+                            flag_garage = GARAGE_AI_DETECTION;
+                            sprintf(string_log, "GARAGE_AI_DETECTION");
+                            log_i("GARAGE_AI_DETECTION");
                         }
                         break;
                     default:
