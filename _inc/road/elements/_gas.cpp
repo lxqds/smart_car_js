@@ -187,7 +187,7 @@ void run_gas() {
         }
 
         // 出加油站
-        if (gas_which == 1) {
+        if (gas_which == 1&&IMG._config->gas_which ==1) {
             if (IMG.encoder.route - gas_route >= IMG._config->gas_rou_run1) {
                 gas_route = IMG.encoder.route;
                 flag_gas = GAS_OUT;

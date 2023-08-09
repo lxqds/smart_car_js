@@ -43,6 +43,7 @@ struct ControlConfig {
     float ai_p;    // 特殊元素 P
     float ai_d;    // 特殊元素 D
 
+    uint8_t gas_which;       //自定义谷仓出口
     uint8_t gas_rou_ready;   // 加油站准备进入积分
     uint8_t gas_rou_run1;    // 加油站内部 #1 积分
     uint8_t gas_rou_run2;    // 加油站内部 #2 积分
@@ -63,6 +64,8 @@ struct ControlConfig {
     uint8_t farm_rou_run;    // 农场行进距离
     uint8_t pass_garage_left;//左车库通过距离
     uint8_t pass_garage_right;//右车库通过入库距离
+    uint8_t ramp_up_rou;      //坡道上升积分
+    uint8_t ramp_down_rou;    //坡道下坡积分
 
     float aim_distance_far;   // 远预瞄点
     float aim_distance_near;  // 近预瞄点
@@ -129,6 +132,7 @@ struct ControlConfig {
         AUTOCFG(ai_p);
         AUTOCFG(ai_d);
 
+        AUTOCFG(gas_which);
         AUTOCFG(gas_rou_ready);
         AUTOCFG(gas_rou_run1);
         AUTOCFG(gas_rou_run2);
@@ -148,6 +152,9 @@ struct ControlConfig {
         AUTOCFG(farm_rou_in);
         AUTOCFG(farm_rou_run);
         AUTOCFG(pass_garage_left);
+        AUTOCFG(pass_garage_right);
+        AUTOCFG(ramp_up_rou);
+        AUTOCFG(ramp_down_rou);
 
         AUTOCFG(speed_level);
         nlohmann::json speed = root[speed_level];
