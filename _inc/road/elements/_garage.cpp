@@ -30,7 +30,7 @@ void check_garage() {
     ///>    (也就是黑胶的宽度), black_blocks++, 否则不加. 然后将栈中元素清掉
     ///> 5、如果此行的black_blocks在6个左右, times++
     ///> 6、遍历18——23行, 如果times在4个左右, 则确定为起跑线。
-    if (flag_garage == GARAGE_NONE) {
+    if (flag_garage == GARAGE_NONE&&IMG._config->check_garage_AI==0) {
         int16_t black_blocks = 0;
         int16_t cursor = 0;
         int16_t times = 0;
