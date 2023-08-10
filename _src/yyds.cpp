@@ -18,6 +18,10 @@ int main(int argc, char const *argv[]) {
     bool _windows, _video;  // 命令行参数
     int ret = 0;            // 初始化返回
     Payload_t payload;      // 数据包 (EB -> TC212)
+    Payload_t payload_exit;      // 数据包 (EB -> TC212)
+    payload_exit.tAngle=0;
+    payload_exit.tSpeed=0;
+    payload_exit.element=0;
 
     char fps_buffer[16];  // 帧率图像显示缓存
     double fps_time = 0;  // 帧率计时变量
@@ -121,6 +125,7 @@ int main(int argc, char const *argv[]) {
     }
 
     /* 结束程序 */
+    serial->sendPack(payload_exit);
     callbackSignal(0);
     exit(EXIT_SUCCESS);
 }
