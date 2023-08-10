@@ -94,33 +94,13 @@ private:
         Bint32_Union speed_union;
         Bint16_Union direction_union;
 
-        while (true)
+        while (_loop)
         {
-            if (_loop == false && _can_close)
-            {
-                break;
-            }
             if (_queue.Size() >= 1)
             {
                 _can_close = false;
 
                 payload = _queue.Take();
-
-                // OLD send data preparation
-                // packet->dirty = 0x66;
-                // packet->head[0] = 0xF1;
-                // packet->head[1] = 0xE1;
-                // packet->tail = 0xF2;
-
-                // packet->data[0] = (uint8_t)(payload.tSpeed >> 8);
-                // packet->data[1] = (uint8_t)(payload.tSpeed & 0xff);
-                // packet->data[2] = (uint8_t)(payload.tAngle >> 8);
-                // packet->data[3] = (uint8_t)(payload.tAngle & 0xff);
-                // packet->data[4] = payload.element;
-
-                // uint16_t CRC16 = CRC_CHECK(packet->data, 5);
-                // packet->check[0] = (uint8_t)(CRC16 >> 8);
-                // packet->check[1] = (uint8_t)(CRC16 & 0xff);
 
                 // NEW send preration
 
@@ -275,6 +255,43 @@ public:
 
         return -1;
     };
+
+    void buzzerSound(const uint8_t sound)
+    {
+        Payload_t payload;
+        DataBuffer pkt_buf(sizeof(uint8_t) * 7);
+        uint8_t *sendBuff = (uint8_t *)&pkt_buf[0];
+        
+        if (_loop)
+        {
+            // uint8_t sendBuff[7];
+            uint8_t check = 0;
+
+            sendBuff[0] = 0x42;  // 帧头
+            sendBuff[1] = 0x04;  // 地址
+            sendBuff[2] = 5;     // 帧长
+            sendBuff[3] = sound; // 音效
+
+            for (size_t i = 0; i < 4; i++)
+            {
+                check += sendBuff[i];
+            }
+            sendBuff[4] = check;
+
+            try
+            {
+                _serial_port->Write(pkt_buf);
+            }
+            catch (const std::runtime_error &)
+            {
+                log_e("The Write() runtime_error.");
+            }
+            catch (const NotOpen &)
+            {
+                log_e("Port not open.");
+            }
+        }
+    }
 
     int close()
     {

@@ -3,32 +3,32 @@
 #undef LOG_TAG
 #define LOG_TAG "Main"
 
-ImageProcess imgprocess;  // 图像处理
-logger_helper logger;     // 日志
+ImageProcess imgprocess; // 图像处理
+logger_helper logger;    // 日志
 
-std::shared_ptr<CaptureInterface> capture = nullptr;  // 线程 -> 摄像头
-std::shared_ptr<Detection> detection = nullptr;       // 线程 -> 目标检测
-std::shared_ptr<Display> display = nullptr;           // 线程 -> 图像显示及视频录制
-std::shared_ptr<SerialDriver> serial = nullptr;       // 线程 -> 串口接收及发送
-
+std::shared_ptr<CaptureInterface> capture = nullptr; // 线程 -> 摄像头
+std::shared_ptr<Detection> detection = nullptr;      // 线程 -> 目标检测
+std::shared_ptr<Display> display = nullptr;          // 线程 -> 图像显示及视频录制
+std::shared_ptr<SerialDriver> serial = nullptr;      // 线程 -> 串口接收及发送
 
 /* 主函数 */
-int main(int argc, char const *argv[]) {
+int main(int argc, char const *argv[])
+{
     /* 数据定义 */
     bool _windows, _video;  // 命令行参数
     int ret = 0;            // 初始化返回
     Payload_t payload;      // 数据包 (EB -> TC212)
-    Payload_t payload_exit;      // 数据包 (EB -> TC212)
-    payload_exit.tAngle=0;
-    payload_exit.tSpeed=0;
-    payload_exit.element=0;
+    Payload_t payload_exit; // 数据包 (EB -> TC212)
+    payload_exit.tAngle = 0;
+    payload_exit.tSpeed = 0;
+    payload_exit.element = 0;
 
-    char fps_buffer[16];  // 帧率图像显示缓存
-    double fps_time = 0;  // 帧率计时变量
-    StopWatch fps_sw;     // 帧率计时器
+    char fps_buffer[16]; // 帧率图像显示缓存
+    double fps_time = 0; // 帧率计时变量
+    StopWatch fps_sw;    // 帧率计时器
 
-    cv::Mat frame_origin;  // 摄像头原始图像
-    cv::Mat frame_imgpro;  // 图像处理输出
+    cv::Mat frame_origin; // 摄像头原始图像
+    cv::Mat frame_imgpro; // 图像处理输出
 
     /* 命令行参数 */
     auto args = util::argparser("yyds car command line parameters explained.");
@@ -77,7 +77,9 @@ int main(int argc, char const *argv[]) {
     display->start();
 
     /* 开跑 */
-    while (capture->_loop) {
+    serial->buzzerSound(1);
+    while (capture->_loop)
+    {
         // 开始计时
         fps_sw.tic();
 
@@ -88,8 +90,10 @@ int main(int argc, char const *argv[]) {
         detection->run(frame_origin);
 
         // 加油站 & 施工区 等待检测结果
-        if (flag_gas > GAS_DETECTION || flag_work > WORK_DETECTION) {
-            if (detection->_is_predicted) {
+        if (flag_gas > GAS_DETECTION || flag_work > WORK_DETECTION)
+        {
+            if (detection->_is_predicted)
+            {
                 // 获取检测结果
                 std::shared_ptr<DetectionResult> det_res = detection->getResult();
                 imgprocess._det_result = det_res->result;
@@ -99,17 +103,20 @@ int main(int argc, char const *argv[]) {
             }
         }
         // 正常巡线
-        else {
+        else
+        {
             // 图像处理 正常帧率
             imgprocess.process(frame_origin, frame_imgpro, payload);
             ret = 1;
         }
 
-        if (ret != 0) {
+        if (ret != 0)
+        {
             ret = 0;
 
             // 发送指令
-            if (capture->_launch) {
+            if (capture->_launch)
+            {
                 serial->sendPack(payload);
             }
 
@@ -134,12 +141,14 @@ int main(int argc, char const *argv[]) {
 #define LOG_TAG "System"
 
 /* 系统信号回调函数: 系统退出 (Ctrl+C) */
-void callbackSignal(int signum) {
+void callbackSignal(int signum)
+{
     /* 防止多次退出系统 */
     static uint8_t is_exit = 0;
     is_exit += 1;
 
-    if (is_exit == 1) {
+    if (is_exit == 1)
+    {
         /* 结束线程 */
         capture->stop();
         log_i("capture stopped.");
