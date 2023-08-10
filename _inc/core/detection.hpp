@@ -29,7 +29,8 @@
 #undef LOG_TAG
 #define LOG_TAG "Detection"
 
-struct DetectionPredictResult {
+struct DetectionPredictResult
+{
     int type;
     float score;
     int x;
@@ -38,19 +39,21 @@ struct DetectionPredictResult {
     int height;
 };
 
-struct DetectionResult {
-    cv::Mat org_frame;                           // 原图
-    cv::Mat det_frame;                           // 结果图
-    std::vector<DetectionPredictResult> result;  // 预测结果
+struct DetectionResult
+{
+    cv::Mat org_frame;                          // 原图
+    cv::Mat det_frame;                          // 结果图
+    std::vector<DetectionPredictResult> result; // 预测结果
 };
 
-class DetectionPredictor {
-   public:
+class DetectionPredictor
+{
+public:
     // 传入的是模型目录
     DetectionPredictor(std::string config_path) : _config_path(config_path){};
     ~DetectionPredictor(){};
 
-   private:
+private:
     std::string _config_path;
     // std::shared_ptr<ModelConfig> _model_config;
     // std::shared_ptr<PaddlePredictor> _predictor;
@@ -68,7 +71,7 @@ class DetectionPredictor {
 
     void _boundaryCorrection(DetectionPredictResult &r, int width_range, int height_range);
 
-   public:
+public:
     int init();
 
     void build_nms(const std::string &model_dir);
@@ -89,12 +92,13 @@ class DetectionPredictor {
     */
 };
 
-class Detection {
-   public:
+class Detection
+{
+public:
     Detection(){};
     ~Detection(){};
 
-   private:
+private:
     std::shared_ptr<SystemConfig> _system_config;
     std::shared_ptr<DetectionPredictor> _predictor;
     std::shared_ptr<DetectionResult> _result;
@@ -108,10 +112,13 @@ class Detection {
 
     StopWatch stopwatch;
 
-   private:
-    void work() {
-        while (_loop) {
-            if (_queue.Size() >= 1) {
+private:
+    void work()
+    {
+        while (_loop)
+        {
+            if (_queue.Size() >= 1)
+            {
                 _can_predict = false;
 
                 // stopwatch.tic();
@@ -129,10 +136,11 @@ class Detection {
         }
     };
 
-   public:
+public:
     bool _is_predicted = false;
 
-    int init(std::string system_config_path) {
+    int init(std::string system_config_path)
+    {
         _system_config = make_shared<SystemConfig>(system_config_path);
 
         LOG_I << "SystemConfig Path:" << system_config_path << LOG_END;
@@ -150,7 +158,8 @@ class Detection {
         return 0;
     };
 
-    int start() {
+    int start()
+    {
         _loop = true;
         _can_predict = true;
         _is_predicted = false;
@@ -160,7 +169,8 @@ class Detection {
         return 0;
     };
 
-    int stop() {
+    int stop()
+    {
         _loop = false;
         _can_predict = false;
         _is_predicted = false;
@@ -171,14 +181,18 @@ class Detection {
         return 0;
     };
 
-    void run(cv::Mat frame_wraper) {
-        if (_can_predict && _queue.Size() < 2) {
+    void run(cv::Mat frame_wraper)
+    {
+        if (_can_predict && _queue.Size() < 2)
+        {
             _queue.Put(frame_wraper);
         }
     };
 
-    std::shared_ptr<DetectionResult> getResult() {
-        if (_is_predicted) {
+    std::shared_ptr<DetectionResult> getResult()
+    {
+        if (_is_predicted)
+        {
             _is_predicted = false;
             return _result;
         }

@@ -11,6 +11,8 @@ std::shared_ptr<Detection> detection = nullptr;      // 线程 -> 目标检测
 std::shared_ptr<Display> display = nullptr;          // 线程 -> 图像显示及视频录制
 std::shared_ptr<SerialDriver> serial = nullptr;      // 线程 -> 串口接收及发送
 
+extern uint8_t gas_which;
+
 /* 主函数 */
 int main(int argc, char const *argv[])
 {
@@ -98,6 +100,17 @@ int main(int argc, char const *argv[])
                 std::shared_ptr<DetectionResult> det_res = detection->getResult();
                 imgprocess._det_result = det_res->result;
                 // 图像处理
+                int num = 0;
+                for (int i = 0; i < imgprocess._det_result.size(); i++)
+                {
+                    if (imgprocess._det_result[i].type == 1)
+                    {
+                        num++;
+                    }
+                }
+
+                gas_which = (num == 0) ? 1 : num;
+
                 imgprocess.process(det_res->org_frame, frame_imgpro, payload);
                 ret = 1;
             }
