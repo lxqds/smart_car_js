@@ -11,13 +11,13 @@ std::shared_ptr<Detection> detection = nullptr;       // 线程 -> 目标检测
 std::shared_ptr<Display> display = nullptr;           // 线程 -> 图像显示及视频录制
 std::shared_ptr<SerialDriver> serial = nullptr;       // 线程 -> 串口接收及发送
 
-Payload_t payload;      // 数据包 (EB -> TC212)
 
 /* 主函数 */
 int main(int argc, char const *argv[]) {
     /* 数据定义 */
     bool _windows, _video;  // 命令行参数
     int ret = 0;            // 初始化返回
+    Payload_t payload;      // 数据包 (EB -> TC212)
 
     char fps_buffer[16];  // 帧率图像显示缓存
     double fps_time = 0;  // 帧率计时变量
@@ -121,6 +121,8 @@ int main(int argc, char const *argv[]) {
     }
 
     /* 结束程序 */
+    payload.tSpeed = 0;
+    payload.tAngle = 0;
     callbackSignal(0);
     exit(EXIT_SUCCESS);
 }
@@ -136,8 +138,6 @@ void callbackSignal(int signum) {
 
     if (is_exit == 1) {
         /* 结束线程 */
-        payload.tSpeed = 0;
-        payload.tAngle = 0;
         capture->stop();
         detection->stop();
         display->stop();
