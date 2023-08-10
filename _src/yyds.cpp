@@ -77,7 +77,7 @@ int main(int argc, char const *argv[])
     display->start();
 
     /* 开跑 */
-    serial->buzzerSound(1);
+    serial->buzzerSound(3);
     while (capture->_loop)
     {
         // 开始计时
