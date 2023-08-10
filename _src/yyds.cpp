@@ -121,8 +121,6 @@ int main(int argc, char const *argv[]) {
     }
 
     /* 结束程序 */
-    payload.tSpeed = 0;
-    payload.tAngle = 0;
     callbackSignal(0);
     exit(EXIT_SUCCESS);
 }
