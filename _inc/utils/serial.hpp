@@ -94,13 +94,11 @@ private:
         Bint32_Union speed_union;
         Bint16_Union direction_union;
 
-        bool isFirst = true;
-
-        while (_loop && _queue.Size() == 0 || isFirst)
+        while (true)
         {
-            if (isFirst)
+            if (_loop == false && _can_close)
             {
-                isFirst = false;
+                break;
             }
             if (_queue.Size() >= 1)
             {
