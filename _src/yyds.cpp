@@ -109,9 +109,10 @@ int main(int argc, char const *argv[])
                     }
                 }
 
-                gas_which = (num == 0) ? 1 : num;
-
-                LOG_I << "Granary num: " << gas_which << LOG_END;
+                if (num > gas_which)
+                {
+                    gas_which = num;
+                }
 
                 imgprocess.process(det_res->org_frame, frame_imgpro, payload);
                 ret = 1;

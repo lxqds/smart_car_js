@@ -19,6 +19,8 @@ int garage_num = 0;        // 记录当前第几次车库
 int none_left = 0, none_right = 0;
 int have_left = 0, have_right = 0;
 
+extern uint8_t gas_which;
+
 /* ********************************************************************* */
 
 void check_garage() {
@@ -73,6 +75,7 @@ void check_garage() {
                 MAT_LOG("GARAGE_IN_LEFT");
             } else {
                 flag_garage = GARAGE_PASS_LEFT;  // 第一次不入库
+                gas_which = 0;
                 MAT_LOG("GARAGE_PASS_LEFT");
             }
         } else if (IMG._config->direction_garage == 1) {  // 右库
