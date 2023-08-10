@@ -78,7 +78,9 @@ void check_garage()
     {
         IMG.element_identify = 1;
         garage_route = IMG.encoder.route;
-        gas_which = 1;
+
+        // clear granary mark
+        gas_which = 0;
 
         if (IMG._config->direction_garage == 0)
         { // 左库
