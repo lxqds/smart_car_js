@@ -142,9 +142,13 @@ void callbackSignal(int signum) {
     if (is_exit == 1) {
         /* 结束线程 */
         capture->stop();
+        log_i("capture stopped.");
         detection->stop();
+        log_i("detection stopped.");
         display->stop();
+        log_i("display stopped.");
         serial->close();
+        log_i("serial stopped.");
 
         /* 结束日志 */
         log_i("Exit Code: %d", signum);
