@@ -76,7 +76,7 @@ class ImageProcess {
     int element_identify = 0;         // 识别元素
 
     char string_buf[64];               // 窗口信息缓存
-    char string_log[32] = "yyds car";  // 窗口日志缓存
+    char string_log[32] = "yyds_hardware car";  // 窗口日志缓存
 
     bool special_w_c = false;  // 施工区到十字慢速处理
     bool special_w = false;    // 施工区结束特殊处理
