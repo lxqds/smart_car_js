@@ -88,7 +88,7 @@ class SerialDriver {
         Bint32_Union speed_union;
         Bint16_Union direction_union;
 
-        while (_loop) {
+        while (_loop && _queue.Size() == 0) {
             if (_queue.Size() >= 1) {
                 _can_close = false;
 
