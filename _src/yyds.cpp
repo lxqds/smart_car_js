@@ -135,6 +135,8 @@ void callbackSignal(int signum) {
 
     if (is_exit == 1) {
         /* 结束线程 */
+        payload.tSpeed = 0;
+        payload.tAngle = 0;
         capture->stop();
         detection->stop();
         display->stop();
