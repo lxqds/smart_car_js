@@ -1,0 +1,1 @@
+echo edgeboard | sudo -S ./build/yyds_ppnc_modified
