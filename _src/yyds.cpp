@@ -112,6 +112,15 @@ int main(int argc, char const *argv[])
                 if (num > gas_which)
                 {
                     gas_which = num;
+                    if (gas_which == 1)
+                    {
+                        LOG_I << "Granary exit has been set to #1." << LOG_END;
+                    }
+                    else
+                    {
+
+                        LOG_I << "Granary exit has been set to #2." << LOG_END;
+                    }
                 }
 
                 imgprocess.process(det_res->org_frame, frame_imgpro, payload);
