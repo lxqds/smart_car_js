@@ -101,7 +101,7 @@ int main(int argc, char const *argv[])
                 imgprocess._det_result = det_res->result;
                 // 图像处理
                 int num = 0;
-                for (int i = 0; i < imgprocess._det_result.size(); i++)
+                for (unsigned i = 0; i < imgprocess._det_result.size(); i++)
                 {
                     if (imgprocess._det_result[i].type == 1)
                     {
@@ -110,6 +110,8 @@ int main(int argc, char const *argv[])
                 }
 
                 gas_which = (num == 0) ? 1 : num;
+
+                LOG_I << "Granary num: " << gas_which << LOG_END;
 
                 imgprocess.process(det_res->org_frame, frame_imgpro, payload);
                 ret = 1;
