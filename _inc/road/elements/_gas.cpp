@@ -18,7 +18,7 @@ extern ImageProcess imgprocess;
 float gas_route = 0;        // 加油站编码器积分
 POINT gas_near_cone;        // 较近的锥桶
 bool gas_which_is = false;  // 加油站出站口号检测标志
-uint8_t gas_which = 1;      // 加油站出站口号
+uint8_t gas_which = 0;      // 加油站出站口号
 uint8_t gas_which_last = 0; // 加油站出站口号 上一次
 
 /* ********************************************************************* */
@@ -209,7 +209,7 @@ void run_gas()
             IMG.edge_left = IMG.last_edge_left;
         }
 
-        
+
 
         // 出加油站
         if (gas_which == 1)
