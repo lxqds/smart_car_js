@@ -239,7 +239,7 @@ void run_work() {
 
             }
         }
-        if(flag_work == WORK_OUT_STOP&&IMG.encoder.speed==0){
+        if(flag_work == WORK_OUT_STOP){
             if (IMG.rpts0s_num > 0.2 / SAMPLE_DIST) {
                 IMG.element_begin_id = IMG.rpts0s_num * 0.25f;
                 IMG.flag_track = TRACK_LEFT;
