@@ -19,6 +19,7 @@ float work_route = 0;  // 施工区编码器积分
 float work_route2 = 0; // 施工区编码器积分
 POINT work_near_cone;  // 较近的锥桶
 StopWatch stop_clock;
+StopWatch stop_clock_2;
 double stop_time;
 
 /* ********************************************************************* */
@@ -272,7 +273,7 @@ void run_work()
                     {
                         flag_work = WORK_OUT_STOP;
                         MAT_LOG("AIM_SPEED = 0");
-                        stop_clock.tic();
+                        stop_clock_2.tic();
                     }
                     MAT_LOG("NONE_POINT = 0");
                 }
@@ -280,16 +281,16 @@ void run_work()
         }
         if (flag_work == WORK_OUT_STOP)
         {
-            if (stop_clock.toc() > IMG._config->work_out_stop_time)
+            if (stop_clock_2.toc() > IMG._config->work_out_stop_time)
             {
-                stop_clock.tic();
+                stop_clock_2.tic();
                 MAT_LOG("WORK_OUT_SPEEDUP");
                 flag_work = WORK_OUT_SPEEDUP;
             }
         }
         if (flag_work == WORK_OUT_SPEEDUP)
         {
-            if (stop_clock.toc() > IMG._config->work_out_speedup_time)
+            if (stop_clock_2.toc() > IMG._config->work_out_speedup_time)
             {
                 MAT_LOG("WORK_OUT_RUN");
                 flag_work = WORK_OUT_RUN;
