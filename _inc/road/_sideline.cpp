@@ -393,27 +393,27 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
     int right_cnt = 0;
     // MAT_LOG("qpoint1");
 
-    for (int i = IMG.edge_det.size() - 1; i >= 0; i--)
+    for (int i = points_cones.size() - 1; i >= 0; i--)
     {
 
         // 左边底部锥桶
         //if (IMG.edge_det[i].y < IMAGE_WIDTH / 3 && IMG.edge_det[i].x > IMAGE_HEIGHT / 3)
         if (!left_cnt){
-            IMG.cones_edge_left[1] = IMG.edge_det[i];
-            Left_Last_distance = dis_point_point(IMG.edge_det[i],IMG.edge_det[0]);
+            left_cones[1] = points_cones[i];
+            Left_Last_distance = dis_point_point(points_cones[i],left_cones[0]);
             left_cnt ++;
-        }else if(dis_point_point(IMG.edge_det[i],IMG.edge_det[0]) < Left_Last_distance){
-            IMG.cones_edge_left[1] = IMG.edge_det[i];
-            Left_Last_distance = dis_point_point(IMG.edge_det[i],IMG.edge_det[0]);
+        }else if(dis_point_point(points_cones[i],left_cones[0]) < Left_Last_distance){
+            left_cones[1] = points_cones[i];
+            Left_Last_distance = dis_point_point(points_cones[i],left_cones[0]);
         }
 
         if (!right_cnt){
-            IMG.cones_edge_right[1] = IMG.edge_det[i];
-            Right_Last_distance = dis_point_point(IMG.edge_det[i],IMG.edge_det[0]);
+            right_cones[1] = points_cones[i];
+            Right_Last_distance = dis_point_point(points_cones[i],right_cones[0]);
             right_cnt ++;
-        }else if(dis_point_point(IMG.edge_det[i],IMG.edge_det[0]) < Right_Last_distance){
-            IMG.cones_edge_right[1] = IMG.edge_det[i];
-            Right_Last_distance = dis_point_point(IMG.edge_det[i],IMG.edge_det[0]);
+        }else if(dis_point_point(points_cones[i],right_cones[0]) < Right_Last_distance){
+            right_cones[1] = points_cones[i];
+            Right_Last_distance = dis_point_point(points_cones[i],right_cones[0]);
         }
     }
 
