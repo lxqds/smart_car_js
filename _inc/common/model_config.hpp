@@ -177,12 +177,14 @@ struct ControlConfig
         AUTOCFG(speed_up);
         AUTOCFG(speed_steady);
         AUTOCFG(speed_garage_in);
+        AUTOCFG(speed_work_out_speedup);
         AUTOCFG(garage_in_route_);
         AUTOCFG(garage_out_route_);
         AUTOCFG(speed_garage_out);
         AUTOCFG(speed_work);
         AUTOCFG(work_stop_time);
         AUTOCFG(work_out_stop_time);
+        AUTOCFG(work_out_speedup_time);
         AUTOCFG(speed_gas);
         AUTOCFG(speed_yroad);
         AUTOCFG(deviation_Farm_in_p);
