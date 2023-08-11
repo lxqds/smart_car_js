@@ -205,7 +205,7 @@ void run_work() {
         // *****************************************************************
 
         if(flag_work == WORK_STOP){
-            if(stop_clock.toc() > IMG._config->work_stop_time){
+            if(stop_clock.toc() > IMG._config->work_out_stop_time){
                 MAT_LOG("WORK_STOPFINISH");
                 flag_work = WORK_OUT;
             } else {
@@ -243,6 +243,7 @@ void run_work() {
         if(flag_work == WORK_OUT_STOP){
             if(stop_clock.toc()>IMG._config->work_stop_time)
             {
+                MAT_LOG("WORK_OUT_RUN");
                 flag_work = WORK_OUT_RUN;
             }
         }

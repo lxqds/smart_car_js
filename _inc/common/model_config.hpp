@@ -80,6 +80,7 @@ struct ControlConfig {
     uint16_t garage_out_route_;  // 出库距离判断
     uint16_t speed_work;         // 出入施工区速度
     uint16_t work_stop_time;     // 停在施工区时间
+    uint16_t work_out_stop_time; //出去停车的时间
     uint16_t speed_gas;          // 出入加油站速度
     uint16_t speed_yroad;        // 泛行区速度
     float deviation_Farm_in_p;
@@ -177,6 +178,7 @@ struct ControlConfig {
         AUTOCFG(speed_garage_out);
         AUTOCFG(speed_work);
         AUTOCFG(work_stop_time);
+        AUTOCFG(work_out_stop_time);
         AUTOCFG(speed_gas);
         AUTOCFG(speed_yroad);
         AUTOCFG(deviation_Farm_in_p);
