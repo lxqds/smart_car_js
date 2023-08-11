@@ -46,6 +46,7 @@
     "pass_garage_right": 50,
     "ramp_up_rou": 60,
     "ramp_down_rou": 60,
+    "ramp_p": 0.5,
     "*****-speed_level-******": 0,
     "speed_level": "1700",
     "1700": {

@@ -985,12 +985,12 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     } // 泛行区 出
     else if (flag_ramp == RAMP_UP)
     {
-        aim_angle = 0;
+        aim_angle = aim_angle*(_config->ramp_p);
         aim_speed = _config->speed_ramp_up;
     } // 坡道 上
     else if (flag_ramp == RAMP_DOWN)
     {
-        aim_angle = 0;
+        aim_angle = aim_angle*(_config->ramp_p);
         aim_speed = _config->speed_ramp_down;
     } // 坡道 下
     else if (flag_slow == SLOW_DOWN)
