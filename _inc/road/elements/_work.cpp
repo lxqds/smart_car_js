@@ -243,7 +243,7 @@ void run_work() {
         if(flag_work == WORK_OUT_STOP){
             if(stop_clock.toc()>IMG._config->work_stop_time)
             {
-                flag_work == WORK_OUT_RUN;
+                flag_work = WORK_OUT_RUN;
             }
         }
         if(flag_work == WORK_OUT_RUN){
