@@ -267,12 +267,13 @@ void run_yroad()
                             IMG.cones_edge_left[0] = IMG.edge_det[i];
                         }
                     }
+                    /*
                     else
                     {
                         POINT startPoint_left = POINT(IMAGE_HEIGHT - 1, 0);
                         IMG.cones_edge_left.push_back(startPoint_left);
                     }
-
+                    */
                     // 右边底部锥桶
                     if (IMG.edge_det[i].y > (IMAGE_WIDTH / 2) && IMG.edge_det[i].x > IMAGE_HEIGHT * (1 / 2))
                     {
@@ -285,11 +286,13 @@ void run_yroad()
                             IMG.cones_edge_right[0] = IMG.edge_det[i];
                         }
                     }
+                    /*
                     else
                     {
                         POINT startPoint_right = POINT(IMAGE_HEIGHT - 1, IMAGE_WIDTH - 1);
                         IMG.cones_edge_right.push_back(startPoint_right);
                     }
+                     */
                 }
 
                 MAT_LOG("search_cones_edges");
