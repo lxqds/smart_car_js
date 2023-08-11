@@ -282,6 +282,15 @@ void run_work()
         {
             if (stop_clock.toc() > IMG._config->work_out_stop_time)
             {
+                stop_clock.tic();
+                MAT_LOG("WORK_OUT_SPEEDUP");
+                flag_work = WORK_OUT_SPEEDUP;
+            }
+        }
+        if (flag_work == WORK_OUT_SPEEDUP)
+        {
+            if (stop_clock.toc() > IMG._config->work_out_speedup_time)
+            {
                 MAT_LOG("WORK_OUT_RUN");
                 flag_work = WORK_OUT_RUN;
             }
@@ -302,16 +311,8 @@ void run_work()
             IMG.special_w = true;*/
             IMG.element_over = true;
             IMG.element_over_route = IMG.encoder.route + IMG._config->work_rou_over;
-            flag_work = WORK_OUT_SPEEDUP;
-            MAT_LOG("WORK_OUT_SPEEDUP");
-        }
-    }
-    if (flag_work == WORK_OUT_SPEEDUP)
-    {
-        if (stop_clock.toc() > IMG._config->work_out_speedup_time)
-        {
-            MAT_LOG("WORK_NONE");
             flag_work = WORK_NONE;
+            MAT_LOG("WORK_NONE");
         }
     }
 
