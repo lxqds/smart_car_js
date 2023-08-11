@@ -1,5 +1,5 @@
 #pragma once
-#include <chrono>  // NOLINT
+#include <chrono> // NOLINT
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -14,62 +14,63 @@ using namespace std;
 // using json = nlohmann::json;
 
 // 车模控制配置项
-struct ControlConfig {
+struct ControlConfig
+{
     std::string config_dir;
     std::string speed_level;
 
-    uint16_t threshold;            // 二值化阈值
-    uint16_t threshold_detection;  // 目标检测阈值
+    uint16_t threshold;           // 二值化阈值
+    uint16_t threshold_detection; // 目标检测阈值
 
-    uint8_t direction_garage;  // 出库方向   0: 左   1: 右
-    uint8_t direction_yroad;   // 泛行区方向  0: 左   1: 右
-    uint8_t direction_work;    // 施工区方向  0: 左   1: 右
-    uint8_t direction_gas;     // 加油站方向  0: 左   1: 右
+    uint8_t direction_garage; // 出库方向   0: 左   1: 右
+    uint8_t direction_yroad;  // 泛行区方向  0: 左   1: 右
+    uint8_t direction_work;   // 施工区方向  0: 左   1: 右
+    uint8_t direction_gas;    // 加油站方向  0: 左   1: 右
 
-    uint8_t check_binary_;        // 是否显示二值化图像
-    uint8_t check_lab_;           // 是否显示lab
-    uint8_t over_route_;          // 识别元素后经过的路程再开启新的元素检测距离
-    uint8_t check_garage_times_;  // 第几次入库
-    uint8_t check_garage_AI;      //是否使用AI识别入库，会关闭传统入库
-    uint8_t check_work_;          // 是否识别施工区
-    uint8_t check_gas_;           // 是否识别加油站
-    uint8_t check_yroad_;         // 是否识别泛行区
-    uint8_t check_ramp_;          // 是否识别坡道
-    uint8_t check_slow_;          // 是否识别慢行区
-    uint8_t check_circle_;        // 是否识别环岛
-    uint8_t check_cross_;         // 是否识别十字
+    uint8_t check_binary_;       // 是否显示二值化图像
+    uint8_t check_lab_;          // 是否显示lab
+    uint8_t over_route_;         // 识别元素后经过的路程再开启新的元素检测距离
+    uint8_t check_garage_times_; // 第几次入库
+    uint8_t check_garage_AI;     // 是否使用AI识别入库，会关闭传统入库
+    uint8_t check_work_;         // 是否识别施工区
+    uint8_t check_gas_;          // 是否识别加油站
+    uint8_t check_yroad_;        // 是否识别泛行区
+    uint8_t check_ramp_;         // 是否识别坡道
+    uint8_t check_slow_;         // 是否识别慢行区
+    uint8_t check_circle_;       // 是否识别环岛
+    uint8_t check_cross_;        // 是否识别十字
 
-    float ai_p_k;  // 特殊元素 动态 P
-    float ai_p;    // 特殊元素 P
-    float ai_d;    // 特殊元素 D
+    float ai_p_k; // 特殊元素 动态 P
+    float ai_p;   // 特殊元素 P
+    float ai_d;   // 特殊元素 D
 
-    uint8_t gas_which;       //自定义谷仓出口
-    uint8_t gas_rou_ready;   // 加油站准备进入积分
-    uint8_t gas_rou_run1;    // 加油站内部 #1 积分
-    uint8_t gas_rou_run2;    // 加油站内部 #2 积分
-    uint8_t gas_rou_out1;    // 加油站驶离 #1 积分
-    uint8_t gas_rou_out2;    // 加油站驶离 #2 积分
-    uint8_t gas_rou_none;    // 加油站结束积分
-    uint8_t gas_rou_over;    // 加油站完成积分
-    uint8_t work_error;      //施工区错误
-    uint8_t work_rou_in_total; //施工区进入的总路程
-    uint8_t work_rou_ready;  // 施工区准备进入积分
-    uint8_t work_rou_in;     // 施工区进入积分
-    uint8_t work_rou_run;    // 施工区内部积分
-    uint8_t work_rou_out;    // 施工区驶离积分
-    uint8_t work_rou_none;   // 施工区完成积分
-    uint8_t work_rou_over;   // 施工区完成积分
-    uint8_t farm_rou_ready;  // 农场识别积分
-    uint8_t farm_rou_in;     // 农场进入积分
-    uint8_t farm_rou_run;    // 农场行进距离
-    uint8_t pass_garage_left;//左车库通过距离
-    uint8_t pass_garage_right;//右车库通过入库距离
-    uint8_t ramp_up_rou;      //坡道上升积分
-    uint8_t ramp_down_rou;    //坡道下坡积分
-    float ramp_p;             //过坡道系数
+    uint8_t gas_which;         // 自定义谷仓出口
+    uint8_t gas_rou_ready;     // 加油站准备进入积分
+    uint8_t gas_rou_run1;      // 加油站内部 #1 积分
+    uint8_t gas_rou_run2;      // 加油站内部 #2 积分
+    uint8_t gas_rou_out1;      // 加油站驶离 #1 积分
+    uint8_t gas_rou_out2;      // 加油站驶离 #2 积分
+    uint8_t gas_rou_none;      // 加油站结束积分
+    uint8_t gas_rou_over;      // 加油站完成积分
+    uint8_t work_error;        // 施工区错误
+    uint8_t work_rou_in_total; // 施工区进入的总路程
+    uint8_t work_rou_ready;    // 施工区准备进入积分
+    uint8_t work_rou_in;       // 施工区进入积分
+    uint8_t work_rou_run;      // 施工区内部积分
+    uint8_t work_rou_out;      // 施工区驶离积分
+    uint8_t work_rou_none;     // 施工区完成积分
+    uint8_t work_rou_over;     // 施工区完成积分
+    uint8_t farm_rou_ready;    // 农场识别积分
+    uint8_t farm_rou_in;       // 农场进入积分
+    uint8_t farm_rou_run;      // 农场行进距离
+    uint8_t pass_garage_left;  // 左车库通过距离
+    uint8_t pass_garage_right; // 右车库通过入库距离
+    uint8_t ramp_up_rou;       // 坡道上升积分
+    uint8_t ramp_down_rou;     // 坡道下坡积分
+    float ramp_p;              // 过坡道系数
 
-    float aim_distance_far;   // 远预瞄点
-    float aim_distance_near;  // 近预瞄点
+    float aim_distance_far;  // 远预瞄点
+    float aim_distance_near; // 近预瞄点
 
     uint16_t speed_base;         // 速度基准
     uint16_t speed_up;           // 直道速度
@@ -80,24 +81,27 @@ struct ControlConfig {
     uint16_t garage_out_route_;  // 出库距离判断
     uint16_t speed_work;         // 出入施工区速度
     uint16_t work_stop_time;     // 停在施工区时间
-    uint16_t work_out_stop_time; //出去停车的时间
-    uint16_t speed_gas;          // 出入加油站速度
-    uint16_t speed_yroad;        // 泛行区速度
+    uint16_t work_out_stop_time; // 出去停车的时间
+    uint16_t work_out_speedup_time;
+    uint16_t speed_gas;   // 出入加油站速度
+    uint16_t speed_yroad; // 泛行区速度
     float deviation_Farm_in_p;
-    uint16_t speed_circle;     // 出入环岛速度
-    uint16_t speed_cross;      // 十字速度
-    uint16_t speed_ramp_up;    // 上坡速度
-    uint16_t speed_ramp_down;  // 下坡速度
-    uint16_t speed_slow_down;  // 慢行速度
+    uint16_t speed_circle;    // 出入环岛速度
+    uint16_t speed_cross;     // 十字速度
+    uint16_t speed_ramp_up;   // 上坡速度
+    uint16_t speed_ramp_down; // 下坡速度
+    uint16_t speed_slow_down; // 慢行速度
+    uint16_t speed_work_out_speedup;
 
-    float deviation_garage_in_p;  // 入库偏差 (P项增大值)
-    float deviation_garage_out;   // 出库偏差
+    float deviation_garage_in_p; // 入库偏差 (P项增大值)
+    float deviation_garage_out;  // 出库偏差
 
-    float steering_p_k;  // 转向环动态 P 系数
-    float steering_p;    // 转向环 P
-    float steering_d;    // 转向环 D
+    float steering_p_k; // 转向环动态 P 系数
+    float steering_p;   // 转向环 P
+    float steering_d;   // 转向环 D
 
-    ControlConfig(std::string dir) : config_dir(dir) {
+    ControlConfig(std::string dir) : config_dir(dir)
+    {
         nlohmann::json root;
         std::ifstream is(config_dir);
         CHECK(is.good()) << "File: " << config_dir << "not found" << LOG_END;
@@ -330,13 +334,15 @@ struct  ModelConfig {
 #define LOG_TAG "System Json"
 
 // 获取文件路径
-inline std::string get_file_path(const std::string &fname) {
+inline std::string get_file_path(const std::string &fname)
+{
     size_t pos = fname.find_last_of("/");
     return (std::string::npos == pos) ? "" : fname.substr(0, pos);
 }
 
 // 系统配置项
-struct SystemConfig {
+struct SystemConfig
+{
     std::string config_dir;
     std::string model_config_path;
 
@@ -350,7 +356,8 @@ struct SystemConfig {
     bool predict_log_enable;
     bool display_enable;
 
-    SystemConfig(std::string dir) : config_dir(dir) {
+    SystemConfig(std::string dir) : config_dir(dir)
+    {
         nlohmann::json value;
         std::ifstream is(config_dir);
 
@@ -367,39 +374,56 @@ struct SystemConfig {
         nlohmann::json input_config = value["input"];
         input_type = input_config["type"];
 
-        if (input_config["path"] != nullptr) {
+        if (input_config["path"] != nullptr)
+        {
             input_path = input_config["path"];
-            if (input_type == "image") {
+            if (input_type == "image")
+            {
                 input_path = confiig_path + input_path;
             }
         }
 
-        if (value["fpga_preprocess"] == nullptr) {
+        if (value["fpga_preprocess"] == nullptr)
+        {
             use_fpga_preprocess = true;
-        } else {
+        }
+        else
+        {
             use_fpga_preprocess = value["fpga_preprocess"];
         }
 
-        if (value["debug"] != nullptr) {
+        if (value["debug"] != nullptr)
+        {
             nlohmann::json debug_config = value["debug"];
-            if (debug_config["predict_time_log_enable"] == nullptr) {
+            if (debug_config["predict_time_log_enable"] == nullptr)
+            {
                 predict_time_log_enable = true;
-            } else {
+            }
+            else
+            {
                 predict_time_log_enable = debug_config["predict_time_log_enable"];
             }
 
-            if (debug_config["predict_log_enable"] == nullptr) {
+            if (debug_config["predict_log_enable"] == nullptr)
+            {
                 predict_log_enable = true;
-            } else {
+            }
+            else
+            {
                 predict_log_enable = debug_config["predict_log_enable"];
             }
 
-            if (debug_config["display_enable"] == nullptr) {
+            if (debug_config["display_enable"] == nullptr)
+            {
                 display_enable = true;
-            } else {
+            }
+            else
+            {
                 display_enable = debug_config["display_enable"];
             }
-        } else {
+        }
+        else
+        {
             display_enable = false;
             predict_log_enable = false;
             predict_time_log_enable = false;

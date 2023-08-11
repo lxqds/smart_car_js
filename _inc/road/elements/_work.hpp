@@ -11,6 +11,7 @@ enum flag_work_e {
     WORK_STOP,       // 库内停止
     WORK_OUT_STOP,   // 库外停止
     WORK_OUT_RUN,    // 库外跑
+    WORK_OUT_SPEEDUP,
 };
 extern flag_work_e flag_work;
 
