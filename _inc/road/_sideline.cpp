@@ -392,6 +392,31 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
     int left_cnt = 0;
     int right_cnt = 0;
     // MAT_LOG("qpoint1");
+
+    for (int i = IMG.edge_det.size() - 1; i >= 0; i--)
+    {
+
+        // 左边底部锥桶
+        //if (IMG.edge_det[i].y < IMAGE_WIDTH / 3 && IMG.edge_det[i].x > IMAGE_HEIGHT / 3)
+        if (!left_cnt){
+            IMG.cones_edge_left[1] = IMG.edge_det[i];
+            Left_Last_distance = dis_point_point(IMG.edge_det[i],IMG.edge_det[0]);
+            left_cnt ++;
+        }else if(dis_point_point(IMG.edge_det[i],IMG.edge_det[0]) < Left_Last_distance){
+            IMG.cones_edge_left[1] = IMG.edge_det[i];
+            Left_Last_distance = dis_point_point(IMG.edge_det[i],IMG.edge_det[0]);
+        }
+
+        if (!right_cnt){
+            IMG.cones_edge_right[1] = IMG.edge_det[i];
+            Right_Last_distance = dis_point_point(IMG.edge_det[i],IMG.edge_det[0]);
+            right_cnt ++;
+        }else if(dis_point_point(IMG.edge_det[i],IMG.edge_det[0]) < Right_Last_distance){
+            IMG.cones_edge_right[1] = IMG.edge_det[i];
+            Right_Last_distance = dis_point_point(IMG.edge_det[i],IMG.edge_det[0]);
+        }
+    }
+
     for (int j = 0; j < points_cones.size() * points_cones.size(); j++) {
         bool searched = false;
         int index = -1;
@@ -405,7 +430,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                         if (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) < 105) {
                             index = i;
                         }
-                    } else if ((distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance < 1.2) && (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance > 0.3)) {
+                    }else if ((distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance < 1.2) && (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance > 0.3)) {
                         if (fabs(atan((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (left_cones->at(left_cones->size() - 1).x - points_cones[i].x)) - Left_Last_angle) < 1.4) {
                             index = i;
                         }
