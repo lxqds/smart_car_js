@@ -16,15 +16,17 @@ extern ImageProcess imgprocess;
 
 // 变量定义
 float work_route = 0;  // 施工区编码器积分
-float work_route2 = 0;  // 施工区编码器积分
+float work_route2 = 0; // 施工区编码器积分
 POINT work_near_cone;  // 较近的锥桶
 StopWatch stop_clock;
 double stop_time;
 
 /* ********************************************************************* */
 
-void check_work() {
-    if (flag_work == WORK_DETECTION) {
+void check_work()
+{
+    if (flag_work == WORK_DETECTION)
+    {
         IMG.element_identify = 1;
         work_route = IMG.encoder.route;
         flag_work = WORK_FOUND;
@@ -34,13 +36,15 @@ void check_work() {
 
 /* ********************************************************************* */
 
-void run_work() {
+void run_work()
+{
     work_near_cone = POINT(0, 0);
     IMG.edge_det.clear();
 
     /* ***************************************************************** */
 
-    if (flag_work == WORK_FOUND) {
+    if (flag_work == WORK_FOUND)
+    {
         // 清弯道防止加大 P 项, 提高稳定性
         IMG.is_curve0 = IMG.is_curve1 = false;
 
@@ -54,14 +58,16 @@ void run_work() {
             work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);
 
         // 当车辆开始靠近锥桶: 准备进入
-        if (work_near_cone.x > IMAGE_HEIGHT * 0.55f) {
+        if (work_near_cone.x > IMAGE_HEIGHT * 0.55f)
+        {
             work_route = IMG.encoder.route;
             flag_work = WORK_READY;
             MAT_LOG("WORK_READY");
         }
 
         // 超过指定距离未进入绕行区, 元素行驶失败
-        if (flag_work != WORK_READY && (IMG.encoder.route - work_route > IMG._config->work_error)) {
+        if (flag_work != WORK_READY && (IMG.encoder.route - work_route > IMG._config->work_error))
+        {
             IMG.element_over = true;
             IMG.element_over_route = IMG.encoder.route;
             flag_work = WORK_NONE;
@@ -73,8 +79,10 @@ void run_work() {
     /* *************************** 左侧施工区 **************************** */
     /* ***************************************************************** */
 
-    if (IMG._config->direction_work == 0) {
-        if (flag_work == WORK_READY) {
+    if (IMG._config->direction_work == 0)
+    {
+        if (flag_work == WORK_READY)
+        {
             // 清弯道防止加大 P 项, 提高稳定性
             IMG.is_curve0 = IMG.is_curve1 = false;
 
@@ -87,13 +95,15 @@ void run_work() {
             POINT cone_RU = search_rightUp_cone(IMG.edge_det);
 
             // 补线
-            if (IMG.encoder.route - work_route < IMG._config->work_rou_in_total) {
+            if (IMG.encoder.route - work_route < IMG._config->work_rou_in_total)
+            {
                 // 第一阶段: 当赛道边缘存在时
-                if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST ||IMG.encoder.route - work_route < IMG._config->work_rou_ready) {
+                if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST || IMG.encoder.route - work_route < IMG._config->work_rou_ready)
+                {
                     // 补线起点: 右
-                    POINT startPoint = POINT(IMAGE_HEIGHT-40,IMAGE_WIDTH-1);
-                    POINT endPoint = POINT(70,0);  // 补线终点: 左
-                    POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
+                    POINT startPoint = POINT(IMAGE_HEIGHT - 40, IMAGE_WIDTH - 1);
+                    POINT endPoint = POINT(70, 0);                                                                // 补线终点: 左
+                    POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5); // 补线中点
 
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.05, input);
@@ -101,15 +111,17 @@ void run_work() {
                     IMG.edge_right = repair;
                     IMG.path_last_edge_right.push_back(IMG.edge_right);
                     MAT_LOG("WORK_FIRST");
-                    work_route2 = IMG.encoder.route;//为积分第二段路程
+                    work_route2 = IMG.encoder.route; // 为积分第二段路程
                 }
                 // 第二阶段: 检查右上锥桶坐标满足巡航条件
-                else {
-                    if (cone_RU.x > 0) {
+                else
+                {
+                    if (cone_RU.x > 0)
+                    {
                         // 补线起点: 右
-                        POINT startPoint = POINT(IMAGE_HEIGHT-50,IMAGE_WIDTH-1);
-                        POINT endPoint = POINT(80,0);  // 补线终点: 左
-                        POINT midPoint = POINT((startPoint.x+endPoint.x)*0.5,(startPoint.y+endPoint.y)*0.5);      // 补线中点
+                        POINT startPoint = POINT(IMAGE_HEIGHT - 50, IMAGE_WIDTH - 1);
+                        POINT endPoint = POINT(80, 0);                                                                // 补线终点: 左
+                        POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5); // 补线中点
 
                         vector<POINT> input = {startPoint, midPoint, endPoint};
                         vector<POINT> repair = bezier(0.05, input);
@@ -118,14 +130,17 @@ void run_work() {
                         IMG.path_last_edge_right.push_back(IMG.edge_right);
                         MAT_LOG("WORK_SECOND");
 
-                        if(IMG.encoder.route - work_route2 >IMG._config->work_rou_in){
+                        if (IMG.encoder.route - work_route2 > IMG._config->work_rou_in)
+                        {
                             work_route = IMG.encoder.route;
                             flag_work = WORK_RUN;
                             MAT_LOG("WORK_RUN");
                         }
                     }
                 }
-            } else {
+            }
+            else
+            {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_RUN;
                 MAT_LOG("WORK_RUN");
@@ -134,7 +149,8 @@ void run_work() {
 
         // *****************************************************************
 
-        if (flag_work == WORK_RUN) {
+        if (flag_work == WORK_RUN)
+        {
             // 清弯道防止加大 P 项, 提高稳定性
             IMG.is_curve0 = IMG.is_curve1 = false;
 
@@ -143,11 +159,12 @@ void run_work() {
 
             // 找目标点
             IMG.edge_det = search_targets(IMG._det_result);
-            vector<POINT> conesLeft = search_left_cones(IMG.edge_det);  // 左方锥桶
-            POINT cone_RU = search_rightUp_cone(IMG.edge_det);          // 右上锥桶
+            vector<POINT> conesLeft = search_left_cones(IMG.edge_det); // 左方锥桶
+            POINT cone_RU = search_rightUp_cone(IMG.edge_det);         // 右上锥桶
 
             // 补线
-            if (conesLeft.size() >= 2) {
+            if (conesLeft.size() >= 2)
+            {
                 uint8_t endd = conesLeft.size() > 2 ? conesLeft.size() - 2 : conesLeft.size() - 1;
                 double k = 0, b = 0;
                 k = (float)(conesLeft[0].y - conesLeft[endd].y) /
@@ -155,31 +172,38 @@ void run_work() {
                 b = conesLeft[0].y - k * conesLeft[0].x;
 
                 IMG.edge_left = IMG.last_edge_left;
-                if (k != 0 && b != 0) {
-                    POINT startPoint = POINT(-b / k, 0);  // 补线起点: 左
-                    POINT endPoint = POINT(0, b);         // 补线终点: 右
+                if (k != 0 && b != 0)
+                {
+                    POINT startPoint = POINT(-b / k, 0); // 补线起点: 左
+                    POINT endPoint = POINT(0, b);        // 补线终点: 右
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5,
-                                           (startPoint.y + endPoint.y) * 0.5);  // 补线中点
+                                           (startPoint.y + endPoint.y) * 0.5); // 补线中点
 
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.02, input);
 
                     // 左边缘切行, 提升右拐能力
-                    if (repair.size() > 10) {
+                    if (repair.size() > 10)
+                    {
                         int index = repair.size() * 0.33f;
                         IMG.edge_left.clear();
-                        for (size_t i = index; i < repair.size(); i++) {
+                        for (size_t i = index; i < repair.size(); i++)
+                        {
                             IMG.edge_left.push_back(repair[i]);
                         }
                         IMG.path_last_edge_left.push_back(IMG.edge_left);
-                    } else {
+                    }
+                    else
+                    {
                         IMG.edge_left = repair;
                         IMG.path_last_edge_left.push_back(IMG.edge_left);
                     }
 
                     IMG.last_edge_left = IMG.edge_left;
                 }
-            } else {
+            }
+            else
+            {
                 IMG.edge_left = IMG.last_edge_left;
                 IMG.path_last_edge_left.push_back(IMG.edge_left);
             }
@@ -195,7 +219,8 @@ void run_work() {
             MAT_LOG("WORK_RUN_ING");
 
             // 积分延迟一定距离出施工区
-            if ((cone_RU.x >= IMAGE_HEIGHT*0.8) || (IMG.encoder.route - work_route >= IMG._config->work_rou_run)) {
+            if ((cone_RU.x >= IMAGE_HEIGHT * 0.8) || (IMG.encoder.route - work_route >= IMG._config->work_rou_run))
+            {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_STOP;
                 stop_clock.tic();
@@ -204,54 +229,72 @@ void run_work() {
         }
         // *****************************************************************
 
-        if(flag_work == WORK_STOP){
-            if(stop_clock.toc() > IMG._config->work_stop_time){
+        if (flag_work == WORK_STOP)
+        {
+            if (stop_clock.toc() > IMG._config->work_stop_time)
+            {
                 MAT_LOG("WORK_STOPFINISH");
                 flag_work = WORK_OUT;
-            } else {
+            }
+            else
+            {
                 work_route = IMG.encoder.route;
                 MAT_LOG("WORK_STOPPING");
             }
         }
 
-        if (flag_work == WORK_OUT) {
-            if ((work_route - IMG.encoder.route  >= IMG._config->work_rou_out)&&(IMG.path_last_edge_left.size() < 1 && IMG.path_last_edge_right.size() < 1  )) {
+        if (flag_work == WORK_OUT)
+        {
+            if ((work_route - IMG.encoder.route >= IMG._config->work_rou_out) && (IMG.path_last_edge_left.size() < 1 && IMG.path_last_edge_right.size() < 1))
+            {
                 flag_work = WORK_OUT_STOP;
-            } else {
-                if(IMG.path_last_edge_left.size() >= 1){//先左边线
+            }
+            else
+            {
+                if (IMG.path_last_edge_left.size() >= 1)
+                { // 先左边线
                     IMG.flag_track = TRACK_LEFT;
                     IMG.edge_left = IMG.path_last_edge_left[IMG.path_last_edge_left.size() - 1];
                     IMG.path_last_edge_left.pop_back();
                     MAT_LOG("TRACK_L");
-                } else if(IMG.path_last_edge_right.size() > 1){//再右边线
+                }
+                else if (IMG.path_last_edge_right.size() > 1)
+                { // 再右边线
                     IMG.flag_track = TRACK_RIGHT;
                     IMG.edge_right = IMG.path_last_edge_right[IMG.path_last_edge_right.size() - 1];
                     IMG.path_last_edge_right.pop_back();
                     MAT_LOG("TRACK_R");
-                } else{
-                    //flag_work = WORK_OUT_STOP;
-                    if(work_route - IMG.encoder.route  >= IMG._config->work_rou_out){
+                }
+                else
+                {
+                    // flag_work = WORK_OUT_STOP;
+                    if (work_route - IMG.encoder.route >= IMG._config->work_rou_out)
+                    {
                         flag_work = WORK_OUT_STOP;
                         MAT_LOG("AIM_SPEED = 0");
                         stop_clock.tic();
                     }
                     MAT_LOG("NONE_POINT = 0");
                 }
-
             }
         }
-        if(flag_work == WORK_OUT_STOP){
-            if(stop_clock.toc()>IMG._config->work_out_stop_time)
+        if (flag_work == WORK_OUT_STOP)
+        {
+            if (stop_clock.toc() > IMG._config->work_out_stop_time)
             {
                 MAT_LOG("WORK_OUT_RUN");
                 flag_work = WORK_OUT_RUN;
             }
         }
-        if(flag_work == WORK_OUT_RUN){
-            if (IMG.rpts0s_num > 0.2 / SAMPLE_DIST) {
+        if (flag_work == WORK_OUT_RUN)
+        {
+            if (IMG.rpts0s_num > 0.2 / SAMPLE_DIST)
+            {
                 IMG.element_begin_id = IMG.rpts0s_num * 0.25f;
                 IMG.flag_track = TRACK_LEFT;
-            } else {
+            }
+            else
+            {
                 IMG.element_begin_id = IMG.rpts1s_num * 0.25f;
                 IMG.flag_track = TRACK_RIGHT;
             }
@@ -259,8 +302,16 @@ void run_work() {
             IMG.special_w = true;*/
             IMG.element_over = true;
             IMG.element_over_route = IMG.encoder.route + IMG._config->work_rou_over;
-            flag_work = WORK_NONE;
+            flag_work = WORK_OUT_SPEEDUP;
+            MAT_LOG("WORK_OUT_SPEEDUP");
+        }
+    }
+    if (flag_work == WORK_OUT_SPEEDUP)
+    {
+        if (stop_clock.toc() > IMG._config->work_out_speedup_time)
+        {
             MAT_LOG("WORK_NONE");
+            flag_work = WORK_NONE;
         }
     }
 
@@ -271,8 +322,10 @@ void run_work() {
     /* ************* 国赛前没调右侧施工区, 比赛的时候没有进入施工区 ************* */
     /* **************** 比赛完就没管了, 这个地方需要看图像调试 **************** */
 
-    else {
-        if (flag_work == WORK_READY) {
+    else
+    {
+        if (flag_work == WORK_READY)
+        {
             // 清弯道防止加大 P 项, 提高稳定性
             IMG.is_curve0 = IMG.is_curve1 = false;
 
@@ -285,9 +338,11 @@ void run_work() {
             POINT cone_LD = search_leftDown_cone(IMG.edge_det);
 
             // 补线
-            if (IMG.encoder.route - work_route < IMG._config->work_rou_ready) {
+            if (IMG.encoder.route - work_route < IMG._config->work_rou_ready)
+            {
                 // 第一阶段: 当赛道边缘存在时
-                if (IMG.rpts0s_num > 0.5 / SAMPLE_DIST) {
+                if (IMG.rpts0s_num > 0.5 / SAMPLE_DIST)
+                {
                     // 补线起点: 左
                     POINT startPoint = POINT((work_near_cone.x + IMAGE_HEIGHT) / 2,
                                              work_near_cone.y / 2);
@@ -301,8 +356,8 @@ void run_work() {
                     else if (b >= IMAGE_WIDTH)
                         b = IMAGE_WIDTH - 1;
 
-                    POINT endPoint = POINT(0, b);     // 补线终点: 右
-                    POINT midPoint = work_near_cone;  // 补线中点
+                    POINT endPoint = POINT(0, b);    // 补线终点: 右
+                    POINT midPoint = work_near_cone; // 补线中点
                     POINT SSPoint = POINT(BEGIN_Y, IMG.edge_left[0].y);
 
                     vector<POINT> input = {endPoint, midPoint, startPoint, SSPoint};
@@ -312,8 +367,10 @@ void run_work() {
                     IMG.last_edge_left = IMG.edge_left;
                 }
                 // 第二阶段: 检查左下锥桶坐标满足巡航条件
-                else {
-                    if (cone_LD.x > IMAGE_HEIGHT / 3) {
+                else
+                {
+                    if (cone_LD.x > IMAGE_HEIGHT / 3)
+                    {
                         // 补线起点: 左
                         POINT startPoint = POINT((cone_LD.x + IMAGE_HEIGHT) / 2,
                                                  cone_LD.y / 2);
@@ -327,19 +384,23 @@ void run_work() {
                         else if (b >= IMAGE_WIDTH)
                             b = IMAGE_WIDTH - 1;
 
-                        POINT endPoint = POINT(0, b);  // 补线终点: 右
-                        POINT midPoint = cone_LD;      // 补线中点
+                        POINT endPoint = POINT(0, b); // 补线终点: 右
+                        POINT midPoint = cone_LD;     // 补线中点
 
                         vector<POINT> input = {startPoint, midPoint, endPoint};
                         vector<POINT> repair = bezier(0.02, input);
 
                         IMG.edge_left = repair;
                         IMG.last_edge_left = IMG.edge_left;
-                    } else {
+                    }
+                    else
+                    {
                         IMG.edge_left = IMG.last_edge_left;
                     }
                 }
-            } else {
+            }
+            else
+            {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_RUN;
                 MAT_LOG("WORK_RUN");
@@ -348,7 +409,8 @@ void run_work() {
 
         /* ***************************************************************** */
 
-        if (flag_work == WORK_RUN) {
+        if (flag_work == WORK_RUN)
+        {
             // 清弯道防止加大 P 项, 提高稳定性
             IMG.is_curve0 = IMG.is_curve1 = false;
 
@@ -357,18 +419,22 @@ void run_work() {
 
             // 找目标点
             IMG.edge_det = search_targets(IMG._det_result);
-            vector<POINT> conesRight = search_right_cones(IMG.edge_det);  // 右方锥桶
+            vector<POINT> conesRight = search_right_cones(IMG.edge_det); // 右方锥桶
 
             // 补线
-            if (conesRight.size() >= 2) {
+            if (conesRight.size() >= 2)
+            {
                 uint8_t endd = conesRight.size() > 2 ? conesRight.size() - 2 : conesRight.size() - 1;
                 double k = 0, b = 0;
 
                 double m = conesRight[endd].y - conesRight[0].y;
-                if (0 == m) {
+                if (0 == m)
+                {
                     k = 10000.0f;
                     b = conesRight[0].x - k * conesRight[0].y;
-                } else {
+                }
+                else
+                {
                     k = (conesRight[endd].x - conesRight[0].x) /
                         (conesRight[endd].y - conesRight[0].y);
                     b = conesRight[0].x - k * conesRight[0].y;
@@ -378,30 +444,36 @@ void run_work() {
                 int yyy = int(k * (IMAGE_WIDTH - 1) + b);
                 yyy = clip(yyy, 0, IMAGE_HEIGHT - 1);
 
-                POINT startPoint = POINT(yyy, IMAGE_WIDTH - 1);  // 补线起点
-                POINT endPoint = POINT(0, xxx);                  // 补线终点
+                POINT startPoint = POINT(yyy, IMAGE_WIDTH - 1); // 补线起点
+                POINT endPoint = POINT(0, xxx);                 // 补线终点
                 POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5,
-                                       (startPoint.y + endPoint.y) * 0.5);  // 补线中点
+                                       (startPoint.y + endPoint.y) * 0.5); // 补线中点
 
                 vector<POINT> input = {startPoint, midPoint, endPoint};
                 vector<POINT> repair = bezier(0.02, input);
 
                 // 右边缘切行, 提升左拐能力
-                if (repair.size() > 10) {
+                if (repair.size() > 10)
+                {
                     int index = repair.size() * 0.33f;
                     IMG.edge_right.clear();
-                    for (size_t i = index; i < repair.size(); i++) {
+                    for (size_t i = index; i < repair.size(); i++)
+                    {
                         IMG.edge_right.push_back(repair[i]);
                     }
-                } else
+                }
+                else
                     IMG.edge_right = repair;
                 IMG.last_edge_right = IMG.edge_right;
-            } else {
+            }
+            else
+            {
                 IMG.edge_right = IMG.last_edge_right;
             }
 
             // 积分延迟一定距离出施工区
-            if (IMG.encoder.route - work_route >= IMG._config->work_rou_run) {
+            if (IMG.encoder.route - work_route >= IMG._config->work_rou_run)
+            {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_OUT;
                 MAT_LOG("WORK_OUT");
@@ -410,7 +482,8 @@ void run_work() {
 
         /* ***************************************************************** */
 
-        if (flag_work == WORK_OUT) {
+        if (flag_work == WORK_OUT)
+        {
             // 加大 P 项, 提升出区域稳定性
             IMG.is_curve0 = IMG.is_curve1 = true;
 
@@ -420,14 +493,18 @@ void run_work() {
 
             // 找目标点
             IMG.edge_det = search_targets(IMG._det_result);
-            POINT cone_LU = search_leftUp_cone(IMG.edge_det);  // 左上锥桶
+            POINT cone_LU = search_leftUp_cone(IMG.edge_det); // 左上锥桶
 
             if ((AT_IMAGE(IMG.mat_bin, (int)(IMAGE_WIDTH / 2 - IMG._config->work_rou_none), (int)(IMAGE_HEIGHT / 2)) > IMG._config->threshold) ||
-                (IMG.encoder.route - work_route >= IMG._config->work_rou_out)) {
-                if (IMG.rpts0s_num > 0.2 / SAMPLE_DIST) {
+                (IMG.encoder.route - work_route >= IMG._config->work_rou_out))
+            {
+                if (IMG.rpts0s_num > 0.2 / SAMPLE_DIST)
+                {
                     IMG.element_begin_id = IMG.rpts0s_num * 0.25f;
                     IMG.flag_track = TRACK_LEFT;
-                } else {
+                }
+                else
+                {
                     IMG.element_begin_id = IMG.rpts1s_num * 0.25f;
                     IMG.flag_track = TRACK_RIGHT;
                 }
@@ -437,8 +514,11 @@ void run_work() {
                 IMG.element_over_route = IMG.encoder.route + IMG._config->work_rou_over;
                 flag_work = WORK_NONE;
                 MAT_LOG("WORK_NONE");
-            } else {
-                if (cone_LU.x > 0) {
+            }
+            else
+            {
+                if (cone_LU.x > 0)
+                {
                     POINT p2 = POINT((cone_LU.x + IMAGE_HEIGHT) / 2, (cone_LU.y + IMAGE_WIDTH) / 2);
                     POINT p3 = cone_LU;
                     POINT p4 = POINT(cone_LU.x / 2, cone_LU.y / 2);
@@ -447,17 +527,22 @@ void run_work() {
                     vector<POINT> repair = bezier(0.02, input);
 
                     // 左边缘切行, 提升右拐能力
-                    if (repair.size() > 10) {
+                    if (repair.size() > 10)
+                    {
                         int index = repair.size() * 0.2f;
                         IMG.edge_right.clear();
-                        for (size_t i = index; i < repair.size(); i++) {
+                        for (size_t i = index; i < repair.size(); i++)
+                        {
                             IMG.edge_right.push_back(repair[i]);
                         }
-                    } else
+                    }
+                    else
                         IMG.edge_right = repair;
 
                     IMG.last_edge_right = IMG.edge_right;
-                } else {
+                }
+                else
+                {
                     IMG.edge_right = IMG.last_edge_right;
                 }
             }
@@ -467,23 +552,29 @@ void run_work() {
     /* ***************************************************************** */
     /* ***************************************************************** */
 
-    if (flag_work > WORK_FOUND) {
+    if (flag_work > WORK_FOUND)
+    {
         IMG.det_ipts_num = 0;
 
-        if (IMG.flag_track == TRACK_LEFT) {
+        if (IMG.flag_track == TRACK_LEFT)
+        {
             // 进行降序排序
             std::sort(IMG.edge_left.begin(), IMG.edge_left.end(), sort_x_down);
-            for (size_t i = 0; i < IMG.edge_left.size(); i++) {
+            for (size_t i = 0; i < IMG.edge_left.size(); i++)
+            {
                 if (i >= IMAGE_HEIGHT)
                     break;
                 IMG.det_ipts[i][0] = IMG.edge_left[i].y;
                 IMG.det_ipts[i][1] = IMG.edge_left[i].x;
                 IMG.det_ipts_num++;
             }
-        } else {
+        }
+        else
+        {
             // 进行降序排序
             std::sort(IMG.edge_right.begin(), IMG.edge_right.end(), sort_x_down);
-            for (size_t i = 0; i < IMG.edge_right.size(); i++) {
+            for (size_t i = 0; i < IMG.edge_right.size(); i++)
+            {
                 if (i >= IMAGE_HEIGHT)
                     break;
                 IMG.det_ipts[i][0] = IMG.edge_right[i].y;

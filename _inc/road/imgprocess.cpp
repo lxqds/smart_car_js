@@ -952,6 +952,11 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     {
         aim_speed = 0;
     }
+    else if (flag_work == WORK_OUT_SPEEDUP)
+    {
+        aim_speed = _config->speed_work_speedup;
+    }
+
     // 施工区
     else if (flag_gas == GAS_RUN)
     {

@@ -81,6 +81,7 @@ struct ControlConfig {
     uint16_t speed_work;         // 出入施工区速度
     uint16_t work_stop_time;     // 停在施工区时间
     uint16_t work_out_stop_time; //出去停车的时间
+    uint16_t work_out_speedup_time;
     uint16_t speed_gas;          // 出入加油站速度
     uint16_t speed_yroad;        // 泛行区速度
     float deviation_Farm_in_p;
@@ -89,6 +90,7 @@ struct ControlConfig {
     uint16_t speed_ramp_up;    // 上坡速度
     uint16_t speed_ramp_down;  // 下坡速度
     uint16_t speed_slow_down;  // 慢行速度
+    uint16_t speed_work_speedup;
 
     float deviation_garage_in_p;  // 入库偏差 (P项增大值)
     float deviation_garage_out;   // 出库偏差
@@ -179,6 +181,7 @@ struct ControlConfig {
         AUTOCFG(speed_work);
         AUTOCFG(work_stop_time);
         AUTOCFG(work_out_stop_time);
+        AUTOCFG(work_out_speedup_time);
         AUTOCFG(speed_gas);
         AUTOCFG(speed_yroad);
         AUTOCFG(deviation_Farm_in_p);
@@ -187,6 +190,7 @@ struct ControlConfig {
         AUTOCFG(speed_ramp_up);
         AUTOCFG(speed_ramp_down);
         AUTOCFG(speed_slow_down);
+        AUTOCFG(speed_work_speedup);
 
         AUTOCFG(deviation_garage_in_p);
         AUTOCFG(deviation_garage_out);
