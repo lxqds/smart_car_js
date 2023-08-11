@@ -399,21 +399,21 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
         // 左边底部锥桶
         //if (IMG.edge_det[i].y < IMAGE_WIDTH / 3 && IMG.edge_det[i].x > IMAGE_HEIGHT / 3)
         if (!left_cnt){
-            left_cones[1] = points_cones[i];
-            Left_Last_distance = dis_point_point(points_cones[i],left_cones[0]);
+            left_cones->push_back(points_cones[i]);
+            Left_Last_distance = dis_point_point(points_cones[i],left_cones->at(0));
             left_cnt ++;
-        }else if(dis_point_point(points_cones[i],left_cones[0]) < Left_Last_distance){
-            left_cones[1] = points_cones[i];
-            Left_Last_distance = dis_point_point(points_cones[i],left_cones[0]);
+        }else if(dis_point_point(points_cones[i],left_cones->at(0)) < Left_Last_distance){
+            left_cones->at(1) = points_cones[i];
+            Left_Last_distance = dis_point_point(points_cones[i],left_cones->at(0));
         }
 
         if (!right_cnt){
-            right_cones[1] = points_cones[i];
-            Right_Last_distance = dis_point_point(points_cones[i],right_cones[0]);
+            right_cones->push_back(points_cones[i]);
+            Right_Last_distance = dis_point_point(points_cones[i],right_cones->at(0));
             right_cnt ++;
-        }else if(dis_point_point(points_cones[i],right_cones[0]) < Right_Last_distance){
-            right_cones[1] = points_cones[i];
-            Right_Last_distance = dis_point_point(points_cones[i],right_cones[0]);
+        }else if(dis_point_point(points_cones[i],right_cones->at(0)) < Right_Last_distance){
+            right_cones->at(1) = points_cones[i];
+            Right_Last_distance = dis_point_point(points_cones[i],right_cones->at(0));
         }
     }
 
