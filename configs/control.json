@@ -73,7 +73,7 @@
         "speed_ramp_up": 1900,
         "speed_ramp_down": 1600,
         "speed_slow_down": 1800,
-        "speed_work_speedup": 1300,
+        "speed_work_speedup": 1000,
         "******-deviation-*******": 0,
         "deviation_garage_in_p": 0.3,
         "deviation_garage_out": 60,
