@@ -253,9 +253,10 @@ void run_yroad()
                 // IMG.cones_edge_left[0] = (POINT(0, 50));
                 // IMG.cones_edge_right[0] = (POINT(0, IMAGE_WIDTH - 50));
                 std::sort(IMG.edge_det.begin(), IMG.edge_det.end(), sort_x_up); // 纵坐标升序排序
-                for (int i = IMG.edge_det.size() - 1; i >= 0; i--)
+                //for (int i = IMG.edge_det.size() - 1; i >= 0; i--)
                 {
                     // 左边底部锥桶
+                    /*
                     if (IMG.edge_det[i].y < IMAGE_WIDTH / 2 && IMG.edge_det[i].x > IMAGE_HEIGHT * (1 / 2))
                     {
                         if (IMG.cones_edge_left.size() == 0)
@@ -273,7 +274,7 @@ void run_yroad()
                         POINT startPoint_left = POINT(IMAGE_HEIGHT - 1, 0);
                         IMG.cones_edge_left.push_back(startPoint_left);
                     }
-                    */
+
                     // 右边底部锥桶
                     if (IMG.edge_det[i].y > (IMAGE_WIDTH / 2) && IMG.edge_det[i].x > IMAGE_HEIGHT * (1 / 2))
                     {
@@ -309,6 +310,37 @@ void run_yroad()
                 // 搜左右边缘，在以划分的点加左右边缘点
                 IMG.edge_right.clear();
                 IMG.edge_left.clear();
+
+
+                for (int i = IMG.edge_det.size() - 1; i >= 0; i--)
+                {
+                    // 左边底部锥桶
+                    //if (IMG.edge_det[i].y < IMAGE_WIDTH / 3 && IMG.edge_det[i].x > IMAGE_HEIGHT / 3)
+                    if(dis_point_point(IMG.edge_det[i],POINT(IMAGE_HEIGHT - 1, 0))<110)
+                    {
+                        if (IMG.cones_edge_left.size() == 0)
+                        {
+                            IMG.cones_edge_left.push_back(IMG.edge_det[i]);
+                        }
+                        else if (IMG.edge_det[i].x > IMG.cones_edge_left[0].x)
+                        {
+                            IMG.cones_edge_left[0] = IMG.edge_det[i];
+                        }
+                    }
+                    // 右边底部锥桶
+                    //if (IMG.edge_det[i].y > (IMAGE_WIDTH * 2 / 3) && IMG.edge_det[i].x > IMAGE_HEIGHT / 3)
+                    if(dis_point_point(IMG.edge_det[i],POINT(IMAGE_HEIGHT - 1, IMAGE_WIDTH-1))<110)
+                    {
+                        if (IMG.cones_edge_right.size() == 0)
+                        {
+                            IMG.cones_edge_right.push_back(IMG.edge_det[i]);
+                        }
+                        else if (IMG.edge_det[i].x > IMG.cones_edge_right[0].x)
+                        {
+                            IMG.cones_edge_right[0] = IMG.edge_det[i];
+                        }
+                    }
+                }
                 // 搜左右边缘，在以划分的点加左右边缘点
                 std::sort(IMG.edge_det.begin(), IMG.edge_det.end(), sort_x_up); // 纵坐标升序排序
                 search_cones_edge(IMG.edge_det, &IMG.cones_edge_left, &IMG.cones_edge_right);
