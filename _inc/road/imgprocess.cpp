@@ -951,7 +951,6 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     else if (flag_work == WORK_OUT_STOP)
     {
         aim_speed = 0;
-        aim_angle = -45;
     }
     // 施工区
     else if (flag_gas == GAS_RUN)

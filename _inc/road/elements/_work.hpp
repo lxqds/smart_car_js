@@ -9,7 +9,8 @@ enum flag_work_e {
     WORK_RUN,        // 进车库
     WORK_OUT,        // 驶离
     WORK_STOP,       // 库内停止
-    WORK_OUT_STOP,       // 库外停止
+    WORK_OUT_STOP,   // 库外停止
+    WORK_OUT_RUN,    // 库外跑
 };
 extern flag_work_e flag_work;
 
