@@ -382,9 +382,9 @@ float distance_for_points(POINT a, POINT b) {
 // 搜索左右边缘的锥桶
 void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones, std::vector<POINT> *right_cones) {
     std::vector<POINT> points_cones = cones;
-    if (left_cones->size() == 0 && right_cones->size() == 0) {
-        return;
-    }
+    // if (left_cones->size() == 0 && right_cones->size() == 0) {
+    //    return;
+    //}
     float Left_Last_distance = 0.0f;
     double Left_Last_angle = 0.0f;
     float Right_Last_distance = 0.0f;
