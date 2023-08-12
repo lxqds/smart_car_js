@@ -441,7 +441,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
             if (left_cones->size() == 1) {
                 Left_Last_distance = distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]);
                 Left_Last_angle = atan((double)(points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (double)(left_cones->at(left_cones->size() - 1).x - points_cones[i].x));
-                left_cones.push_back(points_cones[i]);
+                left_cones->push_back(points_cones[i]);
 
             } else if (points_cones[i].x > left_cones[0].x) {
                 Left_Last_distance = distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]);
@@ -455,7 +455,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
             if (rigtht_cones->size() == 1) {
                 Right_Last_distance = distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]);
                 Right_Last_angle = atan((double)(points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (double)(right_cones->at(right_cones->size() - 1).x - points_cones[i].x));
-                rigtht_cones.push_back(points_cones[i]);
+                rigtht_cones->push_back(points_cones[i]);
 
             } else if (points_cones[i].x > right_cones[0].x) {
                 Right_Last_angle = atan((double)(points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (double)(right_cones->at(right_cones->size() - 1).x - points_cones[i].x));
