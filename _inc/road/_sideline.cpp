@@ -443,7 +443,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                 // log_i("in1");
                 if (points_cones[i].x < left_cones->at(left_cones->size() - 1).x) {
                     if (!left_cnt) {
-                        if (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) < 120) {
+                        if (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) < 128) {
                             index = i;
                             // log_i("in2");
                         }
@@ -477,7 +477,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                 if (points_cones[i].x < right_cones->at(right_cones->size() - 1).x) {
                     // log_i("in1-1");
                     if (!right_cnt) {
-                        if (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) < 120) {
+                        if (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) < 128) {
                             index = i;
                             // log_i("in2");
                         }
@@ -492,7 +492,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
         }
         if (index >= 0) {
             Right_Last_distance = distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[index]);
-            log_i("ird:%f", Left_Last_distance);
+            log_i("ird:%f", Right_Last_distance);
             Right_Last_angle = atan((double)(points_cones[index].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (double)(right_cones->at(right_cones->size() - 1).x - points_cones[index].x));
             right_cnt++;
             right_cones->push_back(points_cones[index]);
