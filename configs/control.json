@@ -23,6 +23,7 @@
     "ai_p_k": 0.0388,
     "ai_p": 1.555,
     "ai_d": 6.666,
+    "send_k": 3.0,
     "gas_which": 2,
     "gas_rou_ready": 90,
     "gas_rou_run1": 55,

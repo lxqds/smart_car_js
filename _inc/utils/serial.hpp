@@ -15,7 +15,7 @@
 #undef LOG_TAG
 #define LOG_TAG "Serial"
 
-#define PWM_MIDDLE 1520
+#define PWM_MIDDLE 1500
 
 using namespace LibSerial;
 
@@ -106,7 +106,7 @@ private:
 
                 speed_union.Float = payload.tSpeed / 1000.0;
 
-                direction_union.U16 = (uint16_t)(payload.tAngle * (-3.0f) + PWM_MIDDLE);
+                direction_union.U16 = (uint16_t)(payload.tAngle * (-(IMG._config->send_k)) + PWM_MIDDLE);
 
                 packet->head = 0x42;
                 packet->addr = 0x01;

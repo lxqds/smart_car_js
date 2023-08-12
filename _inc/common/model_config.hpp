@@ -44,6 +44,7 @@ struct ControlConfig
     float ai_p;   // 特殊元素 P
     float ai_d;   // 特殊元素 D
 
+    float send_k;              // 舵机发送系数
     uint8_t gas_which;         // 自定义谷仓出口
     uint8_t gas_rou_ready;     // 加油站准备进入积分
     uint8_t gas_rou_run1;      // 加油站内部 #1 积分
@@ -137,6 +138,7 @@ struct ControlConfig
         AUTOCFG(ai_p_k);
         AUTOCFG(ai_p);
         AUTOCFG(ai_d);
+        AUTOCFG(send_k);
 
         AUTOCFG(gas_which);
         AUTOCFG(gas_rou_ready);
