@@ -432,6 +432,39 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
             }
         }
     */
+    left_cones.push_back(POINT(IMAGE_HEIGHT - 1, 0));
+    right_cones.push_back(POINT(IMAGE_HEIGHT - 1, IMAGE_WIDTH - 1));
+    for (int i = IMG.edge_det.size() - 1; i >= 0; i--) {
+        // 左边底部锥桶
+        // if (IMG.edge_det[i].y < IMAGE_WIDTH / 3 && IMG.edge_det[i].x > IMAGE_HEIGHT / 3)
+        if (points_cones[i].y < (IMAGE_WIDTH / 2) && dis_point_point(points_cones[i], POINT(IMAGE_HEIGHT - 1, 0)) < 160) {
+            if (left_cones->size() == 1) {
+                Left_Last_distance = distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]);
+                Left_Last_angle = atan((double)(points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (double)(left_cones->at(left_cones->size() - 1).x - points_cones[i].x));
+                left_cones.push_back(points_cones[i]);
+
+            } else if (points_cones[i].x > left_cones[0].x) {
+                Left_Last_distance = distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]);
+                Left_Last_angle = atan((double)(points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (double)(left_cones->at(left_cones->size() - 1).x - points_cones[i].x));
+                left_cones[1] = points_cones[i];
+            }
+        }
+        // 右边底部锥桶
+        // if (IMG.edge_det[i].y > (IMAGE_WIDTH * 2 / 3) && IMG.edge_det[i].x > IMAGE_HEIGHT / 3)
+        if (points_cones[i].y > (IMAGE_WIDTH / 2) && dis_point_point(points_cones[i], POINT(IMAGE_HEIGHT - 1, IMAGE_WIDTH - 1)) < 160) {
+            if (rigtht_cones->size() == 1) {
+                Right_Last_distance = distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]);
+                Right_Last_angle = atan((double)(points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (double)(right_cones->at(right_cones->size() - 1).x - points_cones[i].x));
+                rigtht_cones.push_back(points_cones[i]);
+
+            } else if (points_cones[i].x > right_cones[0].x) {
+                Right_Last_angle = atan((double)(points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (double)(right_cones->at(right_cones->size() - 1).x - points_cones[i].x));
+                Right_Last_distance = distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]);
+                rigtht_cones[1] = points_cones[i];
+            }
+        }
+    }
+
     for (int j = 0; j < points_cones.size() * points_cones.size(); j++) {
         bool searched = false;
         int index = -1;
@@ -442,12 +475,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                 // 先前左边缘只到中间，拓展左边缘
                 // log_i("in1");
                 if (points_cones[i].x < left_cones->at(left_cones->size() - 1).x) {
-                    if (!left_cnt) {
-                        if (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) < 130) {
-                            index = i;
-                            // log_i("in2");
-                        }
-                    } else if ((distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance < 1.15) && (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance > 0.3)) {
+                    if ((distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance < 1.15) && (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance > 0.3)) {
                         if (fabs(atan((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (left_cones->at(left_cones->size() - 1).x - points_cones[i].x)) - Left_Last_angle) < 1.0) {
                             index = i;
                             log_i("leftconeidx2");
@@ -476,12 +504,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                 // log_i("in1");
                 if (points_cones[i].x < right_cones->at(right_cones->size() - 1).x) {
                     // log_i("in1-1");
-                    if (!right_cnt) {
-                        if (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) < 130) {
-                            index = i;
-                            // log_i("in2");
-                        }
-                    } else if ((distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) * 1.0 / Right_Last_distance < 1.15) && (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) / Right_Last_distance > 0.3)) {
+                    if ((distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) * 1.0 / Right_Last_distance < 1.15) && (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) / Right_Last_distance > 0.3)) {
                         if (fabs(atan((double)(points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (double)(right_cones->at(right_cones->size() - 1).x - points_cones[i].x)) - Right_Last_angle) < 1.0) {
                             index = i;
                             log_i("rightconeidx2");
