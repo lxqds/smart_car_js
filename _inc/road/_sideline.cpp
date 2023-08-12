@@ -443,7 +443,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                 // log_i("in1");
                 if (points_cones[i].x < left_cones->at(left_cones->size() - 1).x) {
                     if (!left_cnt) {
-                        if (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) < 128) {
+                        if (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) < 130) {
                             index = i;
                             // log_i("in2");
                         }
@@ -477,7 +477,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                 if (points_cones[i].x < right_cones->at(right_cones->size() - 1).x) {
                     // log_i("in1-1");
                     if (!right_cnt) {
-                        if (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) < 128) {
+                        if (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) < 130) {
                             index = i;
                             // log_i("in2");
                         }
