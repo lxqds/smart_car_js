@@ -452,14 +452,14 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
         // 右边底部锥桶
         // if (IMG.edge_det[i].y > (IMAGE_WIDTH * 2 / 3) && IMG.edge_det[i].x > IMAGE_HEIGHT / 3)
         if (points_cones[i].y > (IMAGE_WIDTH / 2) && dis_point_point(points_cones[i], POINT(IMAGE_HEIGHT - 1, IMAGE_WIDTH - 1)) < 160) {
-            if (rigtht_cones->size() == 1) {
+            if (right_cones->size() == 1) {
                 Right_Last_distance = distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]);
                 Right_Last_angle = atan((double)(points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (double)(right_cones->at(right_cones->size() - 1).x - points_cones[i].x));
-                rigtht_cones->push_back(points_cones[i]);
+                right_cones->push_back(points_cones[i]);
             } else if (points_cones[i].x > right_cones->at(1).x) {
                 Right_Last_angle = atan((double)(points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (double)(right_cones->at(right_cones->size() - 1).x - points_cones[i].x));
                 Right_Last_distance = distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]);
-                rigtht_cones->at(1) = points_cones[i];
+                right_cones->at(1) = points_cones[i];
             }
         }
     }
