@@ -325,6 +325,7 @@ void run_yroad()
                         else if (IMG.edge_det[i].x > IMG.cones_edge_left[0].x)
                         {
                             IMG.cones_edge_left[0] = IMG.edge_det[i];
+                            log_i("leftconerefersh");
                         }
                     }
                     // 右边底部锥桶
@@ -338,8 +339,10 @@ void run_yroad()
                         else if (IMG.edge_det[i].x > IMG.cones_edge_right[0].x)
                         {
                             IMG.cones_edge_right[0] = IMG.edge_det[i];
+                            log_i("rightconerefersh");
                         }
                     }
+                    log_i("finish");
                 }
                 // 搜左右边缘，在以划分的点加左右边缘点
                 std::sort(IMG.edge_det.begin(), IMG.edge_det.end(), sort_x_up); // 纵坐标升序排序

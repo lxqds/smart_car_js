@@ -1182,8 +1182,10 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             if (flag_gas != GAS_NONE || flag_work != WORK_NONE)
             {
                 // 锥桶
-                for (auto p : edge_det) // 白色 //列 |  行———
+                for (auto p : edge_det){
                     cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
+                } // 白色 //列 |  行———
+
 
                 // 边线
                 for (auto p : edge_left) // 青蓝色

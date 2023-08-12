@@ -405,6 +405,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
         }else if(dis_point_point(points_cones[i],left_cones->at(0)) < Left_Last_distance){
             left_cones->at(1) = points_cones[i];
             Left_Last_distance = dis_point_point(points_cones[i],left_cones->at(0));
+            log_i("leftconere2");
         }
 
         if (!right_cnt){
@@ -414,6 +415,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
         }else if(dis_point_point(points_cones[i],right_cones->at(0)) < Right_Last_distance){
             right_cones->at(1) = points_cones[i];
             Right_Last_distance = dis_point_point(points_cones[i],right_cones->at(0));
+            log_i("rightconere2");
         }
     }
 
@@ -433,6 +435,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                     }else if ((distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance < 1.2) && (distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]) / Left_Last_distance > 0.3)) {
                         //if (fabs(atan((points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (left_cones->at(left_cones->size() - 1).x - points_cones[i].x)) - Left_Last_angle) < 1.4) {
                             index = i;
+                            log_i("leftconeidx2");
                        // }
                     }
                 }
@@ -462,6 +465,7 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                     } else if ((distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) * 1.0 / Right_Last_distance < 1.2) && (distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]) / Right_Last_distance > 0.3)) {
                         //if (fabs(atan((double)(points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (double)(right_cones->at(right_cones->size() - 1).x - points_cones[i].x)) - Right_Last_angle) < 1.0) {
                             index = i;
+                            log_i("rightconeidx2");
                         //}
                     }
                 }
