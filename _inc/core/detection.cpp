@@ -60,7 +60,7 @@ int DetectionPredictor::init() {
     this->predictor_nms_ = std::make_shared<PPNCPredictor>("../configs/config_ppncnms.json");
     this->onnx_env_ = Ort::Env(OrtLoggingLevel::ORT_LOGGING_LEVEL_WARNING, "test");
     Ort::SessionOptions session_options;
-    session_options.SetIntraOpNumThreads(2);
+    session_options.SetIntraOpNumThreads(6);
     session_options.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_EXTENDED);
     std::string onnx_model = _config_path + "/post.onnx";
     this->predictor_onnx_ = std::make_shared<Ort::Session>(this->onnx_env_, onnx_model.c_str(), session_options);
