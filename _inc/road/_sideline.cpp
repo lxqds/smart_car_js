@@ -393,45 +393,45 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
     int right_cnt = 0;
     // MAT_LOG("qpoint1");
 
-    for (int i = points_cones.size() - 1; i >= 0; i--) {
-        // 左边底部锥桶
-        // if (IMG.edge_det[i].y < IMAGE_WIDTH / 3 && IMG.edge_det[i].x > IMAGE_HEIGHT / 3)
-        if (left_cones->size() > 0) {
-            if (!left_cnt) {
-                Left_Last_distance = distance_for_points(points_cones[i], left_cones->at(0));
-                left_cones->push_back(points_cones[i]);
+    /*
+        for (int i = points_cones.size() - 1; i >= 0; i--) {
+            // 左边底部锥桶
+            // if (IMG.edge_det[i].y < IMAGE_WIDTH / 3 && IMG.edge_det[i].x > IMAGE_HEIGHT / 3)
+            if (left_cones->size() > 0) {
+                if (!left_cnt) {
+                    Left_Last_distance = distance_for_points(points_cones[i], left_cones->at(0));
+                    left_cones->push_back(points_cones[i]);
 
-                left_cnt++;
-                log_i("ld:%f", Left_Last_distance);
-                log_i("l_cnt++");
-            } else if (distance_for_points(points_cones[i], left_cones->at(0)) < Left_Last_distance) {
-                Left_Last_distance = distance_for_points(points_cones[i], left_cones->at(0));
+                    left_cnt++;
+                    log_i("ld:%f", Left_Last_distance);
+                    log_i("l_cnt++");
+                } else if (distance_for_points(points_cones[i], left_cones->at(0)) < Left_Last_distance) {
+                    Left_Last_distance = distance_for_points(points_cones[i], left_cones->at(0));
 
-                left_cones->at(1) = points_cones[i];
+                    left_cones->at(1) = points_cones[i];
 
-                log_i("ld:%f", Left_Last_distance);
-                log_i("leftconere2");
+                    log_i("ld:%f", Left_Last_distance);
+                    log_i("leftconere2");
+                }
+            }
+
+            if (right_cones->size() > 0) {
+                if (!right_cnt) {
+                    Right_Last_distance = distance_for_points(points_cones[i], right_cones->at(0));
+                    right_cones->push_back(points_cones[i]);
+                    right_cnt++;
+                    log_i("rd:%f", Right_Last_distance);
+                    log_i("r_cnt++");
+                } else if (distance_for_points(points_cones[i], right_cones->at(0)) < Right_Last_distance) {
+                    Right_Last_distance = distance_for_points(points_cones[i], right_cones->at(0));
+                    right_cones->at(1) = points_cones[i];
+
+                    log_i("rd:%f", Right_Last_distance);
+                    log_i("rightconere2");
+                }
             }
         }
-
-        if (right_cones->size() > 0) {
-            if (!right_cnt) {
-                Right_Last_distance = distance_for_points(points_cones[i], right_cones->at(0));
-                right_cones->push_back(points_cones[i]);
-
-                right_cnt++;
-                log_i("rd:%f", Right_Last_distance);
-                log_i("r_cnt++");
-            } else if (distance_for_points(points_cones[i], right_cones->at(0)) < Right_Last_distance) {
-                Right_Last_distance = distance_for_points(points_cones[i], right_cones->at(0));
-                right_cones->at(1) = points_cones[i];
-
-                log_i("rd:%f", Right_Last_distance);
-                log_i("rightconere2");
-            }
-        }
-    }
-
+    */
     for (int j = 0; j < points_cones.size() * points_cones.size(); j++) {
         bool searched = false;
         int index = -1;
