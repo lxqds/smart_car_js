@@ -417,14 +417,16 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
         }
 
         if (!right_cnt){
-            right_cones->push_back(points_cones[i]);
             Right_Last_distance = dis_point_point(points_cones[i],right_cones->at(0));
+            right_cones->push_back(points_cones[i]);
+
             right_cnt ++;
             log_i("rd:%f",Right_Last_distance);
             log_i("r_cnt++");
         }else if(dis_point_point(points_cones[i],right_cones->at(0)) < Right_Last_distance){
-            right_cones->at(1) = points_cones[i];
             Right_Last_distance = dis_point_point(points_cones[i],right_cones->at(0));
+            right_cones->at(1) = points_cones[i];
+
             log_i("rd:%f",Right_Last_distance);
             log_i("rightconere2");
         }
