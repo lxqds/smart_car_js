@@ -133,7 +133,7 @@ void run_yroad() {
                     IMG.edge_left = repair;
                 } else if (IMG.cones_edge_left.size() >= 3) {
                     POINT startPoint = IMG.cones_edge_left[0];
-                    POINT endPoint = IMG.cones_edge_left[1];
+                    POINT endPoint = IMG.cones_edge_left[2];
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5);  // 补线中点
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.02, input);
@@ -148,7 +148,7 @@ void run_yroad() {
                     IMG.edge_right = repair;
                 } else if (IMG.cones_edge_right.size() >= 3) {
                     POINT startPoint = IMG.cones_edge_right[0];
-                    POINT endPoint = IMG.cones_edge_right[1];
+                    POINT endPoint = IMG.cones_edge_right[2];
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5);  // 补线中点
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.02, input);
@@ -275,7 +275,7 @@ void run_yroad() {
                     IMG.edge_left = repair;
                 } else if (IMG.cones_edge_left.size() >= 3) {
                     POINT startPoint = POINT(IMAGE_HEIGHT - 1, 0);
-                    POINT endPoint = IMG.cones_edge_left[1];
+                    POINT endPoint = IMG.cones_edge_left[2];
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5);  // 补线中点
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.02, input);
@@ -290,7 +290,7 @@ void run_yroad() {
                     IMG.edge_right = repair;
                 } else if (IMG.cones_edge_right.size() >= 3) {
                     POINT startPoint = POINT(IMAGE_HEIGHT - 1, IMAGE_WIDTH - 1);
-                    POINT endPoint = IMG.cones_edge_right[1];
+                    POINT endPoint = IMG.cones_edge_right[2];
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5);  // 补线中点
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.02, input);
