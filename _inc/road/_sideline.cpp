@@ -403,10 +403,12 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
             left_cones->push_back(points_cones[i]);
             Left_Last_distance = dis_point_point(points_cones[i],left_cones->at(0));
             left_cnt ++;
+            log_i("ld:%f",Left_Last_distance);
             log_i("l_cnt++");
         }else if(dis_point_point(points_cones[i],left_cones->at(0)) < Left_Last_distance){
             left_cones->at(1) = points_cones[i];
             Left_Last_distance = dis_point_point(points_cones[i],left_cones->at(0));
+            log_i("ld:%f",Left_Last_distance);
             log_i("leftconere2");
         }
 
@@ -414,10 +416,12 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
             right_cones->push_back(points_cones[i]);
             Right_Last_distance = dis_point_point(points_cones[i],right_cones->at(0));
             right_cnt ++;
+            log_i("rd:%f",Right_Last_distance);
             log_i("r_cnt++");
         }else if(dis_point_point(points_cones[i],right_cones->at(0)) < Right_Last_distance){
             right_cones->at(1) = points_cones[i];
             Right_Last_distance = dis_point_point(points_cones[i],right_cones->at(0));
+            log_i("rd:%f",Right_Last_distance);
             log_i("rightconere2");
         }
     }
