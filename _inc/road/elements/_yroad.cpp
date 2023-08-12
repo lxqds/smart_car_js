@@ -257,6 +257,26 @@ void run_yroad() {
                     }
                      */
                 }
+                for (int i = IMG.edge_det.size() - 1; i >= 0; i--) {
+                    // 左边底部锥桶
+                    // if (IMG.edge_det[i].y < IMAGE_WIDTH / 3 && IMG.edge_det[i].x > IMAGE_HEIGHT / 3)
+                    if (dis_point_point(IMG.edge_det[i], POINT(IMAGE_HEIGHT - 1, 0)) < 120) {
+                        if (IMG.cones_edge_left.size() == 0) {
+                            IMG.cones_edge_left.push_back(IMG.edge_det[i]);
+                        } else if (IMG.edge_det[i].x > IMG.cones_edge_left[0].x) {
+                            IMG.cones_edge_left[0] = IMG.edge_det[i];
+                        }
+                    }
+                    // 右边底部锥桶
+                    // if (IMG.edge_det[i].y > (IMAGE_WIDTH * 2 / 3) && IMG.edge_det[i].x > IMAGE_HEIGHT / 3)
+                    if (dis_point_point(IMG.edge_det[i], POINT(IMAGE_HEIGHT - 1, IMAGE_WIDTH - 1)) < 120) {
+                        if (IMG.cones_edge_right.size() == 0) {
+                            IMG.cones_edge_right.push_back(IMG.edge_det[i]);
+                        } else if (IMG.edge_det[i].x > IMG.cones_edge_right[0].x) {
+                            IMG.cones_edge_right[0] = IMG.edge_det[i];
+                        }
+                    }
+                }
 
                 MAT_LOG("search_cones_edges");
                 /*//判断是否是单边,清左右边
