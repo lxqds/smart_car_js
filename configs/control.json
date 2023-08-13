@@ -48,13 +48,13 @@
     "ramp_up_rou": 60,
     "ramp_down_rou": 60,
     "ramp_p": 0.5,
-    "circle_out_rou": 100,
+    "circle_out_rou": 120,
     "*****-speed_level-******": 0,
-    "speed_level": "2000",
+    "speed_level": "2300",
     "2300": {
         "*****-aim_distance-*****": 0,
         "aim_distance_far": 0.90,
-        "aim_distance_near": 0.30,
+        "aim_distance_near": 0.20,
         "********-speed-*********": 0,
         "speed_base": 2300,
         "speed_up": 2500,
@@ -69,7 +69,7 @@
         "work_out_speedup_time": 800,
         "speed_gas": 1055,
         "speed_yroad": 800,
-        "deviation_Farm_in_p": 1.6,
+        "deviation_Farm_in_p": 1,
         "speed_circle": 2000,
         "speed_cross": 2000,
         "speed_ramp_up": 2000,
@@ -81,8 +81,8 @@
         "deviation_garage_out": 60,
         "******-steering_pid-*******": 0,
         "steering_p_k": 0.0505,
-        "steering_p": 2.438,
-        "steering_d": 18.855
+        "steering_p": 2.538,
+        "steering_d": 12.855
     },
     "2000": {
         "*****-aim_distance-*****": 0,
@@ -102,7 +102,7 @@
         "work_out_speedup_time": 800,
         "speed_gas": 1055,
         "speed_yroad": 800,
-        "deviation_Farm_in_p": 1.6,
+        "deviation_Farm_in_p": 1,
         "speed_circle": 1800,
         "speed_cross": 1800,
         "speed_ramp_up": 1900,
@@ -114,8 +114,8 @@
         "deviation_garage_out": 60,
         "******-steering_pid-*******": 0,
         "steering_p_k": 0.0505,
-        "steering_p": 1.968,
-        "steering_d": 11.955
+        "steering_p": 2.328,
+        "steering_d": 10.255
     },
     "1700": {
         "*****-aim_distance-*****": 0,
