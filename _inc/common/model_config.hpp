@@ -68,6 +68,7 @@ struct ControlConfig
     uint8_t pass_garage_right; // 右车库通过入库距离
     uint8_t ramp_up_rou;       // 坡道上升积分
     uint8_t ramp_down_rou;     // 坡道下坡积分
+    uint8_t circle_out_rou;     //出环积分
     float ramp_p;              // 过坡道系数
 
     float aim_distance_far;  // 远预瞄点
@@ -164,7 +165,7 @@ struct ControlConfig
         AUTOCFG(ramp_up_rou);
         AUTOCFG(ramp_down_rou);
         AUTOCFG(ramp_p);
-
+        AUTOCFG(circle_out_rou);
         AUTOCFG(speed_level);
         nlohmann::json speed = root[speed_level];
 
