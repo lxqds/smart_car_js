@@ -2,7 +2,7 @@
     "threshold": 127,
     "threshold_detection": 0.55,
     "******-direction-*******": 0,
-    "direction_garage": 1,
+    "direction_garage": 0,
     "direction_yroad": 1,
     "direction_work": 0,
     "direction_gas": 0,
@@ -47,7 +47,7 @@
     "pass_garage_right": 50,
     "ramp_up_rou": 60,
     "ramp_down_rou": 60,
-    "ramp_p": 0.9,
+    "ramp_p": 0.5,
     "circle_out_rou": 100,
     "*****-speed_level-******": 0,
     "speed_level": "2000",
@@ -114,8 +114,8 @@
         "deviation_garage_out": 60,
         "******-steering_pid-*******": 0,
         "steering_p_k": 0.0505,
-        "steering_p": 1.858,
-        "steering_d": 10.155
+        "steering_p": 1.968,
+        "steering_d": 11.955
     },
     "1700": {
         "*****-aim_distance-*****": 0,
