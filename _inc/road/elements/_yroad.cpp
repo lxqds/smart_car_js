@@ -50,7 +50,7 @@ void run_yroad() {
         // 清弯道防止加大 P 项, 提高稳定性
         IMG.is_curve0 = IMG.is_curve1 = false;
         // 直走
-        IMG.flag_track = TRACK_MIDDLE;
+        //IMG.flag_track = TRACK_MIDDLE;
         // 找锥桶
         IMG.edge_det = search_targets(IMG._det_result);
 
@@ -124,31 +124,31 @@ void run_yroad() {
                 // 搜左右边缘，在以划分的点加左右边缘点
                 std::sort(IMG.edge_det.begin(), IMG.edge_det.end(), sort_x_up);  // 纵坐标升序排序
                 search_cones_edge(IMG.edge_det, &IMG.cones_edge_left, &IMG.cones_edge_right);
-                if (IMG.cones_edge_left.size() > 1 && IMG.cones_edge_left.size() < 3) {
-                    POINT startPoint = IMG.cones_edge_left[0];
-                    POINT endPoint = IMG.cones_edge_left[1];
+                if (IMG.cones_edge_left.size() >= 1 && IMG.cones_edge_left.size() < 3) {
+                    POINT startPoint = POINT(IMAGE_HEIGHT - 1, 0);//图像左下角点
+                    POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size()-1];
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5);  // 补线中点
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.02, input);
                     IMG.edge_left = repair;
                 } else if (IMG.cones_edge_left.size() >= 3) {
                     POINT startPoint = IMG.cones_edge_left[0];
-                    POINT endPoint = IMG.cones_edge_left[2];
+                    POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_right.size()-1];
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5);  // 补线中点
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.02, input);
                     IMG.edge_left = repair;
                 }
-                if (IMG.cones_edge_right.size() > 1 && IMG.cones_edge_right.size() < 3) {
-                    POINT startPoint = IMG.cones_edge_right[0];
-                    POINT endPoint = IMG.cones_edge_right[1];
+                if (IMG.cones_edge_right.size() >= 1 && IMG.cones_edge_right.size() < 3) {
+                    POINT startPoint = POINT(IMAGE_HEIGHT - 1, IMAGE_WIDTH-1);//图像右下角点
+                    POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size()-1];
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5);  // 补线中点
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.02, input);
                     IMG.edge_right = repair;
                 } else if (IMG.cones_edge_right.size() >= 3) {
                     POINT startPoint = IMG.cones_edge_right[0];
-                    POINT endPoint = IMG.cones_edge_right[2];
+                    POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size()-1];
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5);  // 补线中点
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.02, input);
@@ -157,11 +157,11 @@ void run_yroad() {
                     // IMG.cones_edge_left = IMG.last_cones_edge_left;
                     // IMG.cones_edge_right = IMG.last_cones_edge_right;
                     refreshed = false;
-                    MAT_LOG("UN_FARM_REFRESHED");
+                    MAT_LOG("UN_FARM_REFRESHED_IN");
                 }
 
                 if (refreshed) {  // 刷新
-                    MAT_LOG("FARM_REFRESHED");
+                    MAT_LOG("FARM_REFRESHED_IN");
                 }
 
                 // IMG.last_cones_edge_left = IMG.cones_edge_left;
@@ -176,7 +176,7 @@ void run_yroad() {
             // 路程积分或识别到边线或没有识别到锥桶
             yroad_out_num = 0;
             IMG.element_over = true;
-            IMG.element_over_route = IMG.encoder.route + 20;
+            IMG.element_over_route = IMG.encoder.route;
             flag_yroad = YROAD_OUT;
             MAT_LOG("Farmland_OUT");
         } else {
@@ -268,14 +268,14 @@ void run_yroad() {
                 */
                 if (IMG.cones_edge_left.size() >= 1 && IMG.cones_edge_left.size() < 3) {
                     POINT startPoint = POINT(IMAGE_HEIGHT - 1, 0);
-                    POINT endPoint = IMG.cones_edge_left[1];
+                    POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size()-1];
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5);  // 补线中点
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.02, input);
                     IMG.edge_left = repair;
                 } else if (IMG.cones_edge_left.size() >= 3) {
                     POINT startPoint = POINT(IMAGE_HEIGHT - 1, 0);
-                    POINT endPoint = IMG.cones_edge_left[2];
+                    POINT endPoint = IMG.cones_edge_left[IMG.cones_edge_left.size()-1];
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5);  // 补线中点
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.02, input);
@@ -283,14 +283,14 @@ void run_yroad() {
                 }
                 if (IMG.cones_edge_right.size() >= 1 && IMG.cones_edge_right.size() < 3) {
                     POINT startPoint = POINT(IMAGE_HEIGHT - 1, IMAGE_WIDTH - 1);
-                    POINT endPoint = IMG.cones_edge_right[1];
+                    POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size()-1];
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5);  // 补线中点
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.02, input);
                     IMG.edge_right = repair;
                 } else if (IMG.cones_edge_right.size() >= 3) {
                     POINT startPoint = POINT(IMAGE_HEIGHT - 1, IMAGE_WIDTH - 1);
-                    POINT endPoint = IMG.cones_edge_right[2];
+                    POINT endPoint = IMG.cones_edge_right[IMG.cones_edge_right.size()-1];
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5);  // 补线中点
                     vector<POINT> input = {startPoint, midPoint, endPoint};
                     vector<POINT> repair = bezier(0.02, input);
@@ -308,7 +308,7 @@ void run_yroad() {
                     MAT_LOG("LAST_CONES");
                 } else {
                     IMG.flag_track = TRACK_LEFT;
-                    MAT_LOG("TRACK_LEFT");
+                    MAT_LOG("TRACK_LEFT LEFT OR RIGHT 0");
                 }
                 /*if (IMG.cones_edge_left.size() >= IMG.cones_edge_right.size() && IMG.cones_edge_left.size() >= 2) {
                     //补左线
