@@ -259,7 +259,7 @@ void run_gas()
 
             else{
                 coneOut = POINT(IMAGE_HEIGHT / 2, IMAGE_WIDTH - 36);
-                MAT_LOG("GAS_OUT_#1_POINT);
+                MAT_LOG("GAS_OUT_#1_POINT");
             }
 
         }
