@@ -192,7 +192,7 @@ void run_gas()
                 // 左边缘切行, 提升右拐能力
                 if (repair.size() > 10)
                 {
-                    int index = repair.size() * 0.33f;
+                    int index = repair.size() * 0.45f;
                     IMG.edge_left.clear();
                     for (size_t i = index; i < repair.size(); i++)
                     {
@@ -248,14 +248,20 @@ void run_gas()
         POINT coneOut = search_rightUp_cone(IMG.edge_det);   // 右上锥桶: 2号出口
         POINT cone_RD = search_rightDown_cone(IMG.edge_det); // 右下锥桶: 1号出口
 
-        uint8_t route_out = IMG._config->gas_rou_out1;
+        uint8_t route_out = IMG._config->gas_rou_out2;       //出口默认为2积分
         if (gas_which == 1)
         {
-            route_out = IMG._config->gas_rou_out2;
-            if (IMG.encoder.route - gas_route >= 30)
+            route_out = IMG._config->gas_rou_out1;           //1积分
+            if (IMG.encoder.route - gas_route >= 30){
                 coneOut = cone_RD;
-            else
+                MAT_LOG("GAS_OUT_#1_cone_RD");
+            }
+
+            else{
                 coneOut = POINT(IMAGE_HEIGHT / 2, IMAGE_WIDTH - 36);
+                MAT_LOG("GAS_OUT_#1_POINT);
+            }
+
         }
 
         if ((AT_IMAGE(IMG.mat_bin, (int)(IMAGE_WIDTH / 2 + IMG._config->gas_rou_none), (int)(IMAGE_HEIGHT / 2)) > IMG._config->threshold) ||
@@ -284,7 +290,7 @@ void run_gas()
         }
         else
         {
-            if (coneOut.x > 0)
+            if (coneOut.x > IMAGE_WIDTH/3)//在大于图像1/3的位置
             {
                 POINT p2 = POINT((coneOut.x + IMAGE_HEIGHT) / 2, coneOut.y / 2);
                 POINT p3 = coneOut;
@@ -296,7 +302,7 @@ void run_gas()
                 // 左边缘切行, 提升右拐能力
                 if (repair.size() > 10)
                 {
-                    int index = repair.size() * 0.2f;
+                    int index = repair.size() * 0.3f;
                     IMG.edge_left.clear();
                     for (size_t i = index; i < repair.size(); i++)
                     {
