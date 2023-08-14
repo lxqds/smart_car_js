@@ -117,7 +117,7 @@ void run_gas()
             // 第二阶段: 检查右下锥桶坐标满足巡航条件
             else
             {
-                if (cone_RD.x > IMAGE_HEIGHT / 3)
+                if (cone_RD.x > 0)
                 {
                     // 补线起点: 右
                     POINT startPoint = POINT((cone_RD.x + IMAGE_HEIGHT) / 2,
@@ -291,7 +291,7 @@ void run_gas()
         }
         else
         {
-            if (coneOut.x > IMAGE_WIDTH/3)//在大于图像1/3的位置
+            if (coneOut.x > 0)//在大于图像1/3的位置
             {
                 POINT p2 = POINT((coneOut.x + IMAGE_HEIGHT) / 2, coneOut.y / 2);
                 POINT p3 = coneOut;
