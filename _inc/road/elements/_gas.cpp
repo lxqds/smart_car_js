@@ -264,6 +264,19 @@ void run_gas()
             }
 
         }
+        if (gas_which == 2)
+        {
+            route_out = IMG._config->gas_rou_out2;           //2积分
+            if (IMG.encoder.route - gas_route >= 30){
+                coneOut = coneOut;
+                MAT_LOG("GAS_OUT_#2_cone_RU");
+            }
+            else{
+                coneOut = POINT(IMAGE_HEIGHT / 2, IMAGE_WIDTH - 36);
+                MAT_LOG("GAS_OUT_#2_POINT");
+            }
+
+        }
 
         if ((AT_IMAGE(IMG.mat_bin, (int)(IMAGE_WIDTH / 2 + IMG._config->gas_rou_none), (int)(IMAGE_HEIGHT / 2)) > IMG._config->threshold) ||
             (IMG.encoder.route - gas_route >= route_out))
@@ -291,7 +304,7 @@ void run_gas()
         }
         else
         {
-            if (coneOut.x > 0)//在大于图像1/3的位置
+            if (coneOut.x > 0)//
             {
                 POINT p2 = POINT((coneOut.x + IMAGE_HEIGHT) / 2, coneOut.y / 2);
                 POINT p3 = coneOut;
