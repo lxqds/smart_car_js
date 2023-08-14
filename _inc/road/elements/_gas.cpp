@@ -143,6 +143,7 @@ void run_gas()
                 }
                 else
                 {
+                    MAT_LOG("gas_lost_right_line")
                     IMG.edge_right = IMG.last_edge_right;
                 }
             }
@@ -192,7 +193,7 @@ void run_gas()
                 // 左边缘切行, 提升右拐能力
                 if (repair.size() > 10)
                 {
-                    int index = repair.size() * 0.45f;
+                    int index = repair.size() * 0.1f;//从图像的第几个点开始repair
                     IMG.edge_left.clear();
                     for (size_t i = index; i < repair.size(); i++)
                     {
@@ -302,7 +303,7 @@ void run_gas()
                 // 左边缘切行, 提升右拐能力
                 if (repair.size() > 10)
                 {
-                    int index = repair.size() * 0.3f;
+                    int index = repair.size() * 0.1f;
                     IMG.edge_left.clear();
                     for (size_t i = index; i < repair.size(); i++)
                     {
