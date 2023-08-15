@@ -17,7 +17,7 @@ extern ImageProcess imgprocess;
 float yroad_route = 0;  // 泛行区编码器积分
 int yroad_out_num = 0;  // 泛行区结束计次
 POINT yroad_near_cone;  // 左右较近的锥桶
-
+uint8_t last_flag_track;
 // 泛行区角点
 int yroad_Lpt_id;      // 泛行区角点位置
 bool yroad_Lpt_found;  // 泛行区角点检测标志
@@ -298,8 +298,10 @@ void run_yroad() {
                 }
                 if (IMG.cones_edge_left.size() > IMG.cones_edge_right.size()) {
                     IMG.flag_track = TRACK_LEFT;
+                    last_flag_track = TRACK_LEFT;
                 } else if (IMG.cones_edge_left.size() < IMG.cones_edge_right.size()) {
                     IMG.flag_track = TRACK_RIGHT;
+                    last_flag_track =TRACK_RIGHT;
                 } else if (IMG.cones_edge_left.size() == 0 && IMG.cones_edge_right.size() == 0) {
                     /*IMG.edge_left = IMG.last_cones_edge_left;
                     IMG.edge_right = IMG.last_cones_edge_right;*/
@@ -307,7 +309,8 @@ void run_yroad() {
                     refreshed = false;
                     MAT_LOG("LAST_CONES");
                 } else {
-                    IMG.flag_track = TRACK_LEFT;
+                    IMG.flag_track = last_flag_track;//用上一次的置信
+                    //IMG.flag_track = TRACK_LEFT;
                     MAT_LOG("TRACK_LEFT LEFT OR RIGHT 0");
                 }
                 /*if (IMG.cones_edge_left.size() >= IMG.cones_edge_right.size() && IMG.cones_edge_left.size() >= 2) {
