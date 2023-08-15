@@ -298,10 +298,10 @@ void run_yroad() {
                 }
                 if (IMG.cones_edge_left.size() > IMG.cones_edge_right.size()) {
                     IMG.flag_track = TRACK_LEFT;
-                    last_flag_track = TRACK_LEFT;
+                    last_flag_track = 0;
                 } else if (IMG.cones_edge_left.size() < IMG.cones_edge_right.size()) {
                     IMG.flag_track = TRACK_RIGHT;
-                    last_flag_track =TRACK_RIGHT;
+                    last_flag_track =1;
                 } else if (IMG.cones_edge_left.size() == 0 && IMG.cones_edge_right.size() == 0) {
                     /*IMG.edge_left = IMG.last_cones_edge_left;
                     IMG.edge_right = IMG.last_cones_edge_right;*/
@@ -309,7 +309,11 @@ void run_yroad() {
                     refreshed = false;
                     MAT_LOG("LAST_CONES");
                 } else {
-                    IMG.flag_track = last_flag_track;//用上一次的置信
+                    if(last_flag_track==0){
+                        IMG.flag_track = TRACK_LEFT;
+                    } else{
+                        IMG.flag_track = TRACK_RIGHT;
+                    }//用上一次的置信
                     //IMG.flag_track = TRACK_LEFT;
                     MAT_LOG("TRACK_LEFT LEFT OR RIGHT 0");
                 }
