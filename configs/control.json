@@ -43,7 +43,7 @@
     "farm_rou_ready": 0,
     "farm_rou_in": 0,
     "farm_rou_run": 150,
-    "farm_left_distance": 150,
+    "farm_left_distance": 100,
     "farm_right_distance": 150,
     "farm_left_angle": 1.0,
     "farm_right_angle": 1.0,
