@@ -15,7 +15,7 @@ int Display::init() {
 
     if (_video) {
         _out_video.open("yyds.avi", cv::VideoWriter::fourcc('M', 'J', 'P', 'G'),
-                        60.0, cv::Size(600, 400), true);
+                        120.0, cv::Size(600, 400), true);
         if (!_out_video.isOpened())
             return -1;
 
