@@ -742,6 +742,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     if (flag_garage == GARAGE_IN_LEFT || flag_garage == GARAGE_IN_RIGHT || flag_cross == CROSS_IN)
         begin_id = 0;
 
+    int bseqx_y1 = 0, bseqx_y2 = 0, bseqx_y3 = 0;
     // 中线有点, 同时最近点不是最后几个点
     if (begin_id >= 0 && rpts_num - begin_id >= 3) {
         // 找到中线
@@ -759,11 +760,17 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
 
         std::vector<POINT> v_center(4);  // 三阶贝塞尔曲线
         v_center[0] = {(int)cx, (int)cy};
+
         v_center[1] = {(int)rptsn[aim_idx_near][0], (int)(IMAGE_HEIGHT * (1 - aim_distance_n))};
+        
         v_center[2] = {(int)rptsn[(int)((aim_idx__far + aim_idx_near) / 2)][0],
                        (int)(IMAGE_HEIGHT * (1 - (aim_distance_f + aim_distance_n) / 2))};
         v_center[3] = {(int)rptsn[aim_idx__far][0], (int)(IMAGE_HEIGHT * (1 - aim_distance_f))};
         bezier_line = bezier(0.03, v_center);
+
+        bseqx_y1 = (IMAGE_HEIGHT * (1 - aim_distance_n));
+        bseqx_y2 = (IMAGE_HEIGHT * (1 - (aim_distance_f + aim_distance_n) / 2));
+        bseqx_y3 = (IMAGE_HEIGHT * (1 - aim_distance_f));
 
         // 计算远锚点偏差值
         float dx = bezier_line[bezier_line.size() - 1].x - cx;  // rptsn[aim_idx__far][0] - cx;
@@ -1123,6 +1130,26 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                     mat_result.at<cv::Vec3b>((int)rptsn[a][1], (int)rptsn[a][0])[2] = 255;
                 }
             }
+
+            //绘制贝塞尔曲线所取点的y坐标线
+            for (int a = 0; a < 300; a += 10)
+            {
+                //circle(mat_result, cv::Point(0, p.y), 1, cv::Scalar(0, 0, 255), -1);
+                //circle(mat_result, cv::Point(0, p.y), 1, cv::Scalar(0, 0, 255), -1);
+                //circle(mat_result, cv::Point(0, p.y), 1, cv::Scalar(0, 0, 255), -1);
+                mat_result.at<cv::Vec3b>(bseqx_y1, a)[0] = 0;
+                mat_result.at<cv::Vec3b>(bseqx_y1, a)[1] = 0;
+                mat_result.at<cv::Vec3b>(bseqx_y1, a)[2] = 255;
+
+                mat_result.at<cv::Vec3b>(bseqx_y2, a)[0] = 0;
+                mat_result.at<cv::Vec3b>(bseqx_y2, a)[1] = 0;
+                mat_result.at<cv::Vec3b>(bseqx_y2, a)[2] = 255;
+
+                mat_result.at<cv::Vec3b>(bseqx_y3, a)[0] = 0;
+                mat_result.at<cv::Vec3b>(bseqx_y3, a)[1] = 0;
+                mat_result.at<cv::Vec3b>(bseqx_y3, a)[2] = 255;
+            }
+                
 
             // 预瞄点
             /*
