@@ -54,7 +54,7 @@
     "ramp_p": 0.95,
     "circle_out_rou": 120,
     "*****-speed_level-******": 0,
-    "speed_level": "1700",
+    "speed_level": "2000",
     "2300": {
         "*****-aim_distance-*****": 0,
         "aim_distance_far": 0.90,
