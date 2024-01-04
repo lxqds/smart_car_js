@@ -5296,3 +5296,1265 @@
 [36;22mI/System       [22:10:28] (yyds.cpp 185) serial stopped.[0m
 [36;22mI/System       [22:10:28] (yyds.cpp 188) Exit Code: 0[0m
 [36;22mI/System       [22:10:28] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:11:12] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:11:12] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:11:14] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:11:14] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:11:14] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:11:14] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:11:14] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:11:14] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:11:14] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:11:14] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:11:14] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:11:14] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:11:14] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:11:14] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:11:14] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:11:14] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:11:14] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:11:14] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:11:14] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:11:14] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:11:14] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:11:15] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:11:15] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:11:15] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:11:15] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:11:15] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:11:15] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:11:15] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:11:15] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:11:15] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:11:15] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:11:15] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:11:20] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [16:11:20] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:11:20] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:11:20] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:11:20] (display.cpp 35) Start![0m
+[31;22mE/Capture      [16:11:30] (capture.cpp 75) UsbCamera read failed.[0m
+[36;22mI/NO_TAG       [16:12:13] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:12:13] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:12:14] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:12:14] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:12:14] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:12:14] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:12:14] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:12:14] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:12:14] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:12:14] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:12:14] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:12:14] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:12:14] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:12:14] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:12:14] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:12:14] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:12:14] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:12:14] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:12:15] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:12:15] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:12:15] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:12:15] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:12:15] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:12:15] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:12:15] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:12:15] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:12:15] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:12:15] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:12:15] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:12:15] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:12:15] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:12:15] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:12:17] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [16:12:17] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:12:17] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:12:17] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:12:17] (display.cpp 35) Start![0m
+[36;22mI/Garage       [16:12:30] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/System       [16:12:37] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:12:37] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:12:37] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:12:37] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:12:37] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/Display      [16:12:37] (display.cpp 50) Stop.[0m
+[36;22mI/System       [16:12:37] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:12:37] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:12:37] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:12:37] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:12:37] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:12:49] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:12:49] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:12:51] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:12:51] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:12:51] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:12:51] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:12:51] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:12:51] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:12:51] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:12:51] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:12:53] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [16:12:53] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:12:53] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:12:53] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:12:53] (display.cpp 35) Start![0m
+[36;22mI/Garage       [16:12:54] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/System       [16:14:05] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:14:05] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:14:05] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:14:05] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:14:05] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/Display      [16:14:06] (display.cpp 50) Stop.[0m
+[36;22mI/System       [16:14:06] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:14:06] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:14:06] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:14:06] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:14:06] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:14:17] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:14:17] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:14:18] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:14:18] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:14:18] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:14:18] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:14:18] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:14:18] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:14:18] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:14:18] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:14:19] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:14:19] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [16:14:19] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:14:19] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:14:19] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:14:19] (display.cpp 35) Start![0m
+[36;22mI/System       [16:14:22] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [16:14:23] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/Cross        [16:14:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:14:23] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:14:24] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:14:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:14:24] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/System       [16:14:25] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:14:25] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:14:25] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:14:25] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:14:25] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/Display      [16:14:25] (display.cpp 50) Stop.[0m
+[36;22mI/System       [16:14:25] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:14:25] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:14:25] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:14:25] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:14:25] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:16:51] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:16:51] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:16:52] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:16:52] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:16:52] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:16:52] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:16:52] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:16:52] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:16:52] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:16:52] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:16:52] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [16:16:52] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:16:52] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:16:52] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:16:52] (display.cpp 35) Start![0m
+[36;22mI/System       [16:16:55] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [16:16:56] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/Cross        [16:16:56] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:16:56] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:16:56] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:16:57] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:16:57] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/System       [16:16:58] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:16:58] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:16:58] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:16:58] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:16:58] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/Display      [16:16:58] (display.cpp 50) Stop.[0m
+[36;22mI/System       [16:16:58] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:16:58] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:16:58] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:16:58] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:16:58] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:17:19] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:17:19] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:17:21] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:17:21] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:17:21] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:17:21] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:17:21] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:17:21] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:17:21] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:17:21] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:17:23] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [16:17:23] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:17:23] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:17:23] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:17:23] (display.cpp 35) Start![0m
+[36;22mI/Garage       [16:17:39] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/System       [16:20:37] (capture.cpp 94) Run![0m
+[36;22mI/Cross        [16:20:38] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:20:38] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:20:38] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:20:38] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:20:38] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:20:38] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:20:41] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:20:41] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:20:41] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:20:41] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:20:41] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:20:42] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:20:42] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:20:42] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/System       [16:20:42] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:20:42] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:20:42] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:20:42] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:20:42] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/Display      [16:20:47] (display.cpp 50) Stop.[0m
+[36;22mI/System       [16:20:47] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:20:47] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:20:47] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:20:47] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:20:47] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:21:32] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:21:32] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:21:34] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:21:34] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:21:34] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:21:34] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:21:34] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:21:34] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:21:34] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:21:34] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:21:34] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [16:21:34] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:21:34] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:21:34] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:21:34] (display.cpp 35) Start![0m
+[36;22mI/System       [16:21:45] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [16:21:46] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/Cross        [16:21:46] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:21:46] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:21:47] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:21:47] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:21:47] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:21:47] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:21:47] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:21:47] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/System       [16:21:48] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:21:48] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:21:48] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:21:48] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:21:48] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/Display      [16:21:48] (display.cpp 50) Stop.[0m
+[36;22mI/System       [16:21:48] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:21:48] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:21:48] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:21:48] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:21:48] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:23:52] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:23:52] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:23:53] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:23:53] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:23:53] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:23:53] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:23:53] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:23:53] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:23:53] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:23:53] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:23:53] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:23:53] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:23:53] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:23:53] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:23:53] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:23:53] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:23:53] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:23:53] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:23:53] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:23:53] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:23:53] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:23:54] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:23:54] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:23:54] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:23:54] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:23:54] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:23:54] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:23:54] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:23:54] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:23:54] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:23:54] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:23:54] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:23:54] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [16:23:54] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:23:54] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:23:54] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:23:54] (display.cpp 35) Start![0m
+[36;22mI/System       [16:24:29] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [16:24:30] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/Cross        [16:24:30] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:24:30] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:24:30] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:24:30] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:24:30] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:24:30] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:24:31] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:24:31] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:24:31] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:24:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:24:32] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/System       [16:24:33] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:24:34] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:24:34] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:24:34] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:24:34] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/Display      [16:24:34] (display.cpp 50) Stop.[0m
+[36;22mI/System       [16:24:34] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:24:57] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:24:57] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:24:57] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:24:57] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:25:31] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:25:31] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:25:33] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:25:33] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:25:33] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:25:33] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:25:33] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:25:33] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:25:33] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:25:33] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:25:33] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [16:25:33] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:25:33] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:25:33] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:25:33] (display.cpp 35) Start![0m
+[36;22mI/System       [16:25:49] (capture.cpp 94) Run![0m
+[36;22mI/System       [16:26:05] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:26:05] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:26:05] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:26:05] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:26:05] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/Display      [16:26:05] (display.cpp 50) Stop.[0m
+[36;22mI/System       [16:26:05] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:26:05] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:26:05] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:26:05] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:26:05] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:26:09] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:26:09] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:26:11] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:26:11] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:26:11] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:26:11] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:26:11] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:26:11] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:26:11] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:26:11] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:26:11] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [16:26:11] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:26:11] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:26:11] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:26:11] (display.cpp 35) Start![0m
+[36;22mI/System       [16:26:18] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [16:26:19] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/Cross        [16:26:20] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:26:20] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/System       [16:26:20] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:26:20] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:26:20] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:26:20] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:26:20] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/Display      [16:26:20] (display.cpp 50) Stop.[0m
+[36;22mI/System       [16:26:20] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:26:20] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:26:20] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:26:20] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:26:20] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:26:51] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:26:51] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:26:52] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:26:52] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:26:52] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:26:52] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:26:52] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:26:52] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:26:52] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:26:52] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:26:52] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:26:52] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:26:52] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:26:52] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:26:52] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:26:52] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:26:52] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:26:52] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:26:53] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:26:53] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:26:53] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:26:53] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:26:53] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:26:53] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:26:53] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:26:53] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:26:53] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:26:53] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:26:53] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:26:53] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:26:53] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:26:53] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:26:55] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [16:26:55] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:26:55] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:26:55] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:26:55] (display.cpp 35) Start![0m
+[36;22mI/Garage       [16:27:38] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/Cross        [16:28:39] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:28:39] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:28:53] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:29:48] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:29:48] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:30:13] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/System       [16:35:46] (capture.cpp 85) Exit...[0m
+[31;22mE/Serial       [16:35:46] (serial.hpp 142) The Write() runtime_error.[0m
+[36;22mI/Capture      [16:35:46] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:35:46] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:35:46] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:35:46] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/Display      [16:35:55] (display.cpp 50) Stop.[0m
+[36;22mI/System       [16:35:55] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:35:55] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:35:55] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:35:55] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:35:55] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:36:04] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:36:04] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:36:06] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:36:06] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:36:06] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:36:06] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:36:06] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:36:06] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:36:06] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:36:06] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:36:06] (display.cpp 22) Create Video Success.[0m
+[31;22mE/Serial       [16:36:06] (serial.hpp 242) [/dev/ttyUSB0] Open Failed.[0m
+[31;22mE/Main         [16:36:06] (yyds.cpp 74) /dev/ttyUSB0 can not open !![0m
+[36;22mI/NO_TAG       [16:36:34] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:36:34] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:36:35] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:36:35] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:36:35] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:36:35] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:36:35] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:36:35] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:36:35] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:36:35] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:36:35] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:36:35] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:36:35] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:36:35] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:36:35] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:36:35] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:36:35] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:36:35] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:36:36] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:36:36] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:36:36] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:36:36] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:36:36] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:36:36] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:36:36] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:36:36] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:36:36] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:36:36] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:36:36] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:36:36] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:36:36] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:36:36] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:36:36] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [16:36:36] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:36:36] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:36:36] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:36:36] (display.cpp 35) Start![0m
+[36;22mI/Garage       [16:36:39] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/Run          [16:36:40] (imgprocess.cpp 479) PIG_DETECTION[0m
+[36;22mI/System       [16:37:08] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:37:08] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:37:08] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:37:08] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:37:08] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/Display      [16:37:08] (display.cpp 50) Stop.[0m
+[36;22mI/System       [16:37:08] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:37:08] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:37:08] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:37:08] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:37:08] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:37:12] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:37:12] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:37:14] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:37:14] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:37:14] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:37:14] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:37:14] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:37:14] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:37:14] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:37:14] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:37:16] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [16:37:16] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:37:16] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:37:16] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:37:16] (display.cpp 35) Start![0m
+[36;22mI/System       [16:37:58] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:37:58] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:37:58] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:37:58] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:37:58] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/Display      [16:37:59] (display.cpp 50) Stop.[0m
+[36;22mI/System       [16:37:59] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:37:59] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:37:59] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:37:59] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:37:59] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:38:07] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:38:07] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:38:09] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:38:09] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:38:09] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:38:09] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:38:09] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:38:09] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:38:09] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:38:09] (detection.cpp 132) Done.[0m
+[36;22mI/Serial       [16:38:09] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:38:09] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:38:09] (detection.hpp 168) Start![0m
+[36;22mI/Garage       [16:38:14] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/System       [16:38:18] (capture.cpp 94) Run![0m
+[36;22mI/Cross        [16:38:18] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:38:18] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:38:19] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/System       [16:38:19] (capture.cpp 94) Run![0m
+[36;22mI/Cross        [16:38:19] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:38:19] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/System       [16:38:19] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:38:19] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:38:19] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:38:19] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:38:19] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/System       [16:38:19] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:38:19] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:38:19] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:38:19] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:38:19] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:38:32] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:38:32] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:38:33] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:38:33] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:38:33] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:38:33] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:38:33] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:38:33] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:38:33] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:38:33] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:38:33] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:38:33] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:38:33] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:38:33] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:38:33] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:38:33] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:38:33] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:38:33] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:38:33] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:38:33] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:38:33] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:38:34] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:38:34] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:38:34] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:38:34] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:38:34] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:38:34] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:38:34] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:38:34] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:38:34] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:38:34] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:38:34] (detection.cpp 132) Done.[0m
+[36;22mI/Serial       [16:38:34] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:38:34] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:38:34] (detection.hpp 168) Start![0m
+[36;22mI/Garage       [16:38:35] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/Cross        [16:38:39] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:38:39] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Garage       [16:38:41] (_garage.cpp 66) GARAGE_DETECTION[0m
+[36;22mI/Garage       [16:38:41] (_garage.cpp 108) GARAGE_PASS_RIGHT[0m
+[36;22mI/System       [16:38:42] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:38:42] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:38:42] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:38:42] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:38:42] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/System       [16:38:42] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:38:42] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:38:42] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:38:42] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:38:42] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:39:15] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:39:15] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:39:16] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:39:16] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:39:16] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:39:16] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:39:16] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:39:16] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:39:16] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:39:16] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:39:16] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:39:16] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:39:16] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:39:16] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:39:16] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:39:16] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:39:16] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:39:16] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:39:17] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:39:17] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:39:17] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:39:17] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:39:17] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:39:17] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:39:17] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:39:17] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:39:17] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:39:17] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:39:17] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:39:17] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:39:17] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:39:17] (detection.cpp 132) Done.[0m
+[36;22mI/Serial       [16:39:17] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:39:17] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:39:17] (detection.hpp 168) Start![0m
+[36;22mI/System       [16:39:22] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [16:39:22] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/Cross        [16:39:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:39:22] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:39:23] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:39:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:39:24] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:39:25] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Circle       [16:39:34] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Run          [16:39:34] (imgprocess.cpp 449) GAS_DETECTION[0m
+[36;22mI/Gas          [16:39:34] (_gas.cpp 33) GAS_FOUND[0m
+[36;22mI/Gas          [16:39:36] (_gas.cpp 69) GAS_ERROR[0m
+[36;22mI/Cross        [16:39:40] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:39:40] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:39:40] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Garage       [16:39:41] (_garage.cpp 66) GARAGE_DETECTION[0m
+[36;22mI/Garage       [16:39:41] (_garage.cpp 108) GARAGE_PASS_RIGHT[0m
+[36;22mI/Garage       [16:39:41] (_garage.cpp 249) GARAGE_NONE[0m
+[36;22mI/Circle       [16:39:50] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [16:39:50] (_circle.cpp 147) CIRCLE_RIGHT_IN[0m
+[36;22mI/Circle       [16:39:51] (_circle.cpp 176) CIRCLE_RIGHT_RUNNING[0m
+[36;22mI/Circle       [16:39:52] (_circle.cpp 189) CIRCLE_RIGHT_OUT[0m
+[36;22mI/Circle       [16:39:52] (_circle.cpp 209) CIRCLE_NONE[0m
+[36;22mI/Circle       [16:39:53] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [16:39:53] (_circle.cpp 158) CIRCLE_ERROR[0m
+[36;22mI/Cross        [16:39:57] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:39:57] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:39:57] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Circle       [16:39:58] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Garage       [16:39:58] (_garage.cpp 66) GARAGE_DETECTION[0m
+[36;22mI/Garage       [16:39:58] (_garage.cpp 103) GARAGE_IN_RIGHT[0m
+[36;22mI/Garage       [16:39:58] (_garage.cpp 226) GARAGE_STOP[0m
+[36;22mI/System       [16:40:05] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:40:05] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:40:05] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:40:05] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:40:05] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/System       [16:40:05] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:40:05] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:40:05] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:40:05] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:40:05] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:44:24] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:44:24] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:44:26] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:44:26] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:44:26] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:44:26] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:44:26] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:44:26] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:44:26] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:44:26] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:44:26] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [16:44:26] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:44:26] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:44:26] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:44:26] (display.cpp 35) Start![0m
+[36;22mI/System       [16:44:30] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [16:44:30] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/Cross        [16:44:30] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:44:30] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:44:31] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:44:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:44:32] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:44:32] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Circle       [16:44:41] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [16:44:41] (_circle.cpp 147) CIRCLE_RIGHT_IN[0m
+[36;22mI/Circle       [16:44:42] (_circle.cpp 176) CIRCLE_RIGHT_RUNNING[0m
+[36;22mI/Circle       [16:44:43] (_circle.cpp 189) CIRCLE_RIGHT_OUT[0m
+[36;22mI/Circle       [16:44:43] (_circle.cpp 209) CIRCLE_NONE[0m
+[36;22mI/Circle       [16:44:44] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [16:44:44] (_circle.cpp 158) CIRCLE_ERROR[0m
+[36;22mI/Circle       [16:44:49] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Garage       [16:44:49] (_garage.cpp 66) GARAGE_DETECTION[0m
+[36;22mI/Garage       [16:44:49] (_garage.cpp 108) GARAGE_PASS_RIGHT[0m
+[36;22mI/Garage       [16:44:49] (_garage.cpp 249) GARAGE_NONE[0m
+[36;22mI/System       [16:44:51] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:44:51] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:44:51] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:44:51] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:44:51] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/Display      [16:44:51] (display.cpp 50) Stop.[0m
+[36;22mI/System       [16:44:51] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:44:51] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:44:51] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:44:51] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:44:51] (yyds.cpp 189) Finish !!![0m
+[36;22mI/NO_TAG       [16:49:21] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:49:21] (model_config.hpp 215) Init Success.[0m
+[36;22mI/Capture      [16:49:22] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:49:22] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:49:22] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [16:49:22] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [16:49:22] (model_config.hpp 445) Init Success.[0m
+[36;22mI/Detection    [16:49:22] (detection.hpp 146) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [16:49:22] (detection.hpp 147) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [16:49:22] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [16:49:22] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [16:49:22] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [16:49:22] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [16:49:22] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [16:49:22] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [16:49:22] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [16:49:22] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [16:49:22] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [16:49:22] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [16:49:22] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [16:49:22] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [16:49:23] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [16:49:23] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [16:49:23] (detection.cpp 129) [Label 1] cone[0m
+[36;22mI/DetPredictor [16:49:23] (detection.cpp 129) [Label 2] granary[0m
+[36;22mI/DetPredictor [16:49:23] (detection.cpp 129) [Label 3] bridge[0m
+[36;22mI/DetPredictor [16:49:23] (detection.cpp 129) [Label 4] tractor[0m
+[36;22mI/DetPredictor [16:49:23] (detection.cpp 129) [Label 5] corn[0m
+[36;22mI/DetPredictor [16:49:23] (detection.cpp 129) [Label 6] pig[0m
+[36;22mI/DetPredictor [16:49:23] (detection.cpp 129) [Label 7] crosswalk[0m
+[36;22mI/DetPredictor [16:49:23] (detection.cpp 129) [Label 8] bump[0m
+[36;22mI/DetPredictor [16:49:23] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [16:49:23] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [16:49:23] (serial.hpp 237) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [16:49:23] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [16:49:23] (detection.hpp 168) Start![0m
+[36;22mI/Display      [16:49:23] (display.cpp 35) Start![0m
+[36;22mI/System       [16:49:31] (capture.cpp 94) Run![0m
+[36;22mI/Garage       [16:49:31] (_garage.cpp 166) GARAGE_NONE[0m
+[36;22mI/Cross        [16:49:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:49:32] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:49:32] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [16:49:33] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [16:49:33] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [16:49:34] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Circle       [16:49:40] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [16:49:40] (_circle.cpp 73) CIRCLE_ERROR[0m
+[36;22mI/Circle       [16:49:42] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [16:49:43] (_circle.cpp 147) CIRCLE_RIGHT_IN[0m
+[36;22mI/Circle       [16:49:43] (_circle.cpp 176) CIRCLE_RIGHT_RUNNING[0m
+[36;22mI/Circle       [16:49:44] (_circle.cpp 189) CIRCLE_RIGHT_OUT[0m
+[36;22mI/Circle       [16:49:45] (_circle.cpp 209) CIRCLE_NONE[0m
+[36;22mI/Circle       [16:49:45] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [16:49:45] (_circle.cpp 158) CIRCLE_ERROR[0m
+[36;22mI/Circle       [16:49:50] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Garage       [16:49:50] (_garage.cpp 66) GARAGE_DETECTION[0m
+[36;22mI/Garage       [16:49:50] (_garage.cpp 103) GARAGE_IN_RIGHT[0m
+[36;22mI/Garage       [16:49:51] (_garage.cpp 226) GARAGE_STOP[0m
+[36;22mI/Run          [16:49:51] (imgprocess.cpp 449) GAS_DETECTION[0m
+[36;22mI/Run          [16:49:51] (imgprocess.cpp 449) GAS_DETECTION[0m
+[36;22mI/Run          [16:49:52] (imgprocess.cpp 449) GAS_DETECTION[0m
+[36;22mI/Run          [16:49:52] (imgprocess.cpp 449) GAS_DETECTION[0m
+[36;22mI/Run          [16:49:52] (imgprocess.cpp 449) GAS_DETECTION[0m
+[36;22mI/Run          [16:53:17] (imgprocess.cpp 479) PIG_DETECTION[0m
+[36;22mI/Run          [16:53:18] (imgprocess.cpp 479) PIG_DETECTION[0m
+[36;22mI/Run          [16:53:18] (imgprocess.cpp 479) PIG_DETECTION[0m
+[36;22mI/Run          [16:53:19] (imgprocess.cpp 479) PIG_DETECTION[0m
+[36;22mI/Run          [16:53:19] (imgprocess.cpp 479) PIG_DETECTION[0m
+[36;22mI/Run          [16:53:19] (imgprocess.cpp 479) PIG_DETECTION[0m
+[36;22mI/Run          [16:53:19] (imgprocess.cpp 479) PIG_DETECTION[0m
+[36;22mI/Run          [16:53:19] (imgprocess.cpp 479) PIG_DETECTION[0m
+[36;22mI/Run          [16:53:19] (imgprocess.cpp 479) PIG_DETECTION[0m
+[36;22mI/Run          [16:53:28] (imgprocess.cpp 479) PIG_DETECTION[0m
+[36;22mI/Run          [16:53:29] (imgprocess.cpp 479) PIG_DETECTION[0m
+[36;22mI/Run          [16:53:30] (imgprocess.cpp 479) PIG_DETECTION[0m
+[36;22mI/Run          [16:53:30] (imgprocess.cpp 479) PIG_DETECTION[0m
+[36;22mI/System       [16:59:20] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [16:59:20] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [16:59:20] (yyds.cpp 179) capture stopped.[0m
+[36;22mI/Detection    [16:59:20] (detection.hpp 180) Stop.[0m
+[36;22mI/System       [16:59:20] (yyds.cpp 181) detection stopped.[0m
+[36;22mI/Display      [16:59:20] (display.cpp 50) Stop.[0m
+[36;22mI/System       [16:59:20] (yyds.cpp 183) display stopped.[0m
+[36;22mI/Serial       [16:59:20] (serial.hpp 309) Stop.[0m
+[36;22mI/System       [16:59:20] (yyds.cpp 185) serial stopped.[0m
+[36;22mI/System       [16:59:20] (yyds.cpp 188) Exit Code: 0[0m
+[36;22mI/System       [16:59:20] (yyds.cpp 189) Finish !!![0m
