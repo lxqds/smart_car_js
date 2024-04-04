@@ -834,8 +834,9 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         else
             aim_angle = 0.0f - _config->deviation_garage_out;
     }  // 出库
-    else if (flag_garage == GARAGE_IN_LEFT || flag_garage == GARAGE_IN_RIGHT) {
-        aim_speed = _config->speed_garage_in;
+	else if (flag_garage == GARAGE_IN_LEFT || flag_garage == GARAGE_IN_RIGHT ||
+		flag_garage == GARAGE_IN_MIDDLE) {
+		aim_speed = _config->speed_garage_in;
         /// 入库 加大角度 P 项
         aim_angle_p += _config->deviation_garage_in_p;
     }  // 入库

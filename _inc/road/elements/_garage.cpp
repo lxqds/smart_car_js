@@ -255,7 +255,7 @@ void run_garage()
             }
             break;
         case GARAGE_IN_MIDDLE:
-            if (IMG.encoder.route - garage_route > IMG._config->garage_in_route_)
+            if (IMG.encoder.route - garage_route > IMG._config->garage_pass_route_)
             {
                 flag_garage = GARAGE_STOP;
                 MAT_LOG("GARAGE_STOP");

@@ -85,6 +85,7 @@ struct ControlConfig
     uint16_t speed_garage_out;   // 出库速度
     uint16_t garage_in_route_;   // 入库距离判断
     uint16_t garage_out_route_;  // 出库距离判断
+    uint16_t garage_pass_route_; // 通过过斑马线停车距离判断
     uint16_t speed_work;         // 出入施工区速度
     uint16_t work_stop_time;     // 停在施工区时间
     uint16_t work_out_stop_time; // 出去停车的时间
@@ -191,6 +192,7 @@ struct ControlConfig
         AUTOCFG(speed_work_out_speedup);
         AUTOCFG(garage_in_route_);
         AUTOCFG(garage_out_route_);
+        AUTOCFG(garage_pass_route_);
         AUTOCFG(speed_garage_out);
         AUTOCFG(speed_work);
         AUTOCFG(work_stop_time);
