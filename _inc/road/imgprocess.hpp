@@ -21,15 +21,15 @@
 #include "elements/_slowzone.hpp"
 
 class ImageProcess {
-   public:
-    ImageProcess(){};
-    ~ImageProcess(){};
+public:
+    ImageProcess() {};
+    ~ImageProcess() {};
 
-   public:
+public:
     int init(std::string config_path, bool is_result);
-    void process(cv::Mat &mat_origin, cv::Mat &mat_result, Payload_t &payload);
+    void process(cv::Mat& mat_origin, cv::Mat& mat_result, Payload_t& payload);
 
-   private:
+private:
     bool _is_result = false;  // 是否生成处理后的图像
 
     float cx = IMAGE_WIDTH / 2.0f;  // 车轮对应点 (纯跟踪起始点)
@@ -49,7 +49,7 @@ class ImageProcess {
 
     uint16_t speed_diff = 0;  // 减速率
 
-   public:
+public:
     std::shared_ptr<ControlConfig> _config;           // 跑车配置文件
     std::vector<DetectionPredictResult> _det_result;  // 目标检测结果
 
@@ -86,16 +86,16 @@ class ImageProcess {
     /* ****************************** 下位机数据 ****************************** */
     /* *********************************************************************** */
 
-   public:
-    Encoder_t encoder = {0};
+public:
+    Encoder_t encoder = { 0 };
 
     /* *********************************************************************** */
     /* ***************************** 目标检测数据 ***************************** */
     /* *********************************************************************** */
 
-   public:
+public:
     bool detection_new = false;
-    
+
     /*
     string detection_labels[20] = {
         "cone", "granary", "bridge", "tractor", "corn", "pig", "crosswalk", "bump",
@@ -120,52 +120,58 @@ class ImageProcess {
         label_wone,   // 赛道 1
         label_wtwo,   // 赛道 2
     };
-    
+
     */
-    
+
     string detection_labels[20] = {
             "bomb"
-            "bridge"
-            "safety"
             "cone"
-            "crosswalk"
-            "danger"
-            "evil"
             "block"
-            "patient"
-            "prop"
-            "spy"
+            "bridge"
+            "crosswalk"
             "thief"
+            "evil"
+            "patient"
             "tumble"
+            "prop"
+            "safety"
+            "safety"
+            "danger"
     };
 
     enum DetectionLabel {
-        label_bomb = 0,//炸弹
-        label_bridge,   //桥
-        label_safety,   //安全
+        label_bomb = 0, //炸弹
         label_cone,     //锥桶
-        label_crosswalk,//斑马线
-        label_danger,   //危险
-        label_evil,     //恶人
         label_block,    //黑块
-        label_patient,  //病人
-        label_prop,     //道具
-        label_spy,      //监视
+
+        label_bridge,   //桥
+
+        label_crosswalk,//斑马线
+
         label_thief,    //贼
+        label_evil,     //恶人
+
+        label_patient,  //病人
         label_tumble,   //跌倒
+
+        label_prop,     //道具小车
+        label_safety,   //普通车辆
+        label_spy,      //嫌疑车辆
+        label_danger,   //危险车辆
+
     };
 
     /* *********************************************************************** */
     /* ******************************* 角点数据 ******************************* */
     /* *********************************************************************** */
 
-   private:
+private:
     // L 角点置信度 (角度)
     float Lpt0_found_conf, Lpt1_found_conf;
     // L 角点二次判断
     bool Lpt0_found_last = false, Lpt1_found_last = false;
 
-   public:
+public:
     // L 角点
     int Lpt0_rpts0s_id, Lpt1_rpts1s_id;
     bool Lpt0_found, Lpt1_found;
@@ -178,7 +184,7 @@ class ImageProcess {
     /* ******************************* 边线数据 ******************************* */
     /* *********************************************************************** */
 
-   public:
+public:
     // 原图左右中线数据定义
     int ipts0[IMAGE_HEIGHT][2];  // 左: 0
     int ipts1[IMAGE_HEIGHT][2];  // 右: 1
@@ -204,7 +210,7 @@ class ImageProcess {
     float rptsc1[IMAGE_HEIGHT][2];
     int rptsc0_num, rptsc1_num;
 
-   public:
+public:
     std::vector<POINT> edge_det;        // AI元素检测边缘点集
     std::vector<POINT> edge_left;       // 赛道左边缘点集   注意: 此点集 x 与 y 位置相反 !!!
     std::vector<POINT> edge_right;      // 赛道右边缘点集
@@ -224,9 +230,9 @@ public:
     float det_rptss[IMAGE_HEIGHT][2];  // 加油站 & 施工区 边线等距采样
     int det_ipts_num, det_rptss_num;
 
-   private:
+private:
     // 中线
-    float (*rpts)[2];
+    float(*rpts)[2];
     int rpts_num;
     // 归一化中线
     float rptsn[IMAGE_HEIGHT][2];
