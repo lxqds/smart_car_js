@@ -124,27 +124,35 @@ class ImageProcess {
     */
     
     string detection_labels[20] = {
-        "bump", "granary", "crosswalk", "cone", "bridge", "pig", "tractor", "corn",
-        "background",
-        "ramp", "three", "work",
-        "red", "gas", "wone", "wtwo"};
+            "bomb"
+            "bridge"
+            "safety"
+            "cone"
+            "crosswalk"
+            "danger"
+            "evil"
+            "block"
+            "patient"
+            "prop"
+            "spy"
+            "thief"
+            "tumble"
+    };
 
     enum DetectionLabel {
-        label_bump = 0,
-        label_granary,
-        label_crosswalk,
-        label_cone,
-        label_bridge,
-        label_pig,
-        label_tractor,
-        label_corn,
-        label_ramp,   // 坡道
-        label_three,  // 泛行区
-        label_work,   // 施工区
-        label_red,    // 锥桶
-        label_gas,    // 加油站
-        label_wone,   // 赛道 1
-        label_wtwo,   // 赛道 2
+        label_bomb = 0,//炸弹
+        label_bridge,   //桥
+        label_safety,   //安全
+        label_cone,     //锥桶
+        label_crosswalk,//斑马线
+        label_danger,   //危险
+        label_evil,     //恶人
+        label_block,    //黑块
+        label_patient,  //病人
+        label_prop,     //道具
+        label_spy,      //监视
+        label_thief,    //贼
+        label_tumble,   //跌倒
     };
 
     /* *********************************************************************** */
