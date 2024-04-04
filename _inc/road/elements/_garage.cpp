@@ -118,6 +118,11 @@ void check_garage()
             flag_garage = GARAGE_PASS_RIGHT;
             MAT_LOG("GARAGE_PASS_RIGHT");
         }
+        else if (IMG._config->direction_garage == 4)
+        { // 停车
+            flag_garage = GARAGE_IN_MIDDLE; // 过斑马线停车
+            MAT_LOG("GARAGE_IN_MIDDLE");
+        }
     }
 }
 
@@ -127,131 +132,137 @@ void run_garage()
 {
     switch (flag_garage)
     {
-    case GARAGE_OUT_LEFT:
-        IMG.flag_track = TRACK_LEFT;
-        // 先丢线后有线
-        if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
-            none_right++;
-        if (IMG.rpts1s_num > 1.0 / SAMPLE_DIST && none_right > 1)
-        {
-            // 未识别到双 L 角点, 识别到双线, 或者积分到一定距离出库完成
-            if ((!IMG.Lpt0_found && !IMG.Lpt1_found &&
-                 IMG.rpts0s_num > 0.2 / SAMPLE_DIST) ||
-                ((IMG.encoder.route) > IMG._config->garage_out_route_))
+        case GARAGE_OUT_LEFT:
+            IMG.flag_track = TRACK_LEFT;
+            // 先丢线后有线
+            if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
+                none_right++;
+            if (IMG.rpts1s_num > 1.0 / SAMPLE_DIST && none_right > 1)
             {
-                none_right = 0;
-                IMG.element_over = true;
-                IMG.element_over_route = IMG.encoder.route;
-                flag_garage = GARAGE_NONE;
-                MAT_LOG("GARAGE_NONE");
-            }
-        }
-        break;
-    case GARAGE_OUT_RIGHT:
-        IMG.flag_track = TRACK_RIGHT;
-        // 先丢线后有线
-        if (IMG.rpts0s_num < 0.2 / SAMPLE_DIST)
-            none_left++;
-        if (IMG.rpts0s_num > 1.0 / SAMPLE_DIST && none_left > 1)
-        {
-            // 未识别到双 L 角点, 识别到双线, 出库完成
-            if ((!IMG.Lpt0_found && !IMG.Lpt1_found &&
-                 IMG.rpts1s_num > 0.2 / SAMPLE_DIST) ||
-                ((IMG.encoder.route) > IMG._config->garage_out_route_))
-            {
-                none_left = 0;
-                IMG.element_over = true;
-                IMG.element_over_route = IMG.encoder.route;
-                flag_garage = GARAGE_NONE;
-                MAT_LOG("GARAGE_NONE");
-            }
-        }
-        break;
-
-        /* ********************************************************* */
-
-    case GARAGE_IN_LEFT:
-        IMG.flag_track = TRACK_LEFT;
-        // 先丢线后有线
-        if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
-            none_right++;
-        if ((IMG.rpts1s_num > 0.8 / SAMPLE_DIST && none_right > 1))
-        {
-            if (IMG.Lpt0_found)
-                IMG.rptsc0_num = IMG.rpts0s_num = IMG.Lpt0_rpts0s_id;
-            if (IMG.Lpt1_found)
-                IMG.rptsc1_num = IMG.rpts1s_num = IMG.Lpt1_rpts1s_id;
-            if (have_right++ > 1)
-            {
-                if ((IMG.Lpt0_found && IMG.Lpt0_rpts0s_id < 55) ||
-                    (IMG.Lpt1_found && IMG.Lpt1_rpts1s_id < 55))
+                // 未识别到双 L 角点, 识别到双线, 或者积分到一定距离出库完成
+                if ((!IMG.Lpt0_found && !IMG.Lpt1_found &&
+                    IMG.rpts0s_num > 0.2 / SAMPLE_DIST) ||
+                    ((IMG.encoder.route) > IMG._config->garage_out_route_))
                 {
                     none_right = 0;
-                    have_right = 0;
-                    garage_stop = true;
+                    IMG.element_over = true;
+                    IMG.element_over_route = IMG.encoder.route;
+                    flag_garage = GARAGE_NONE;
+                    MAT_LOG("GARAGE_NONE");
                 }
             }
-        }
-        if (garage_stop && IMG.encoder.route - garage_route >= IMG._config->garage_in_route_)
-        {
-            flag_garage = GARAGE_STOP;
-            MAT_LOG("GARAGE_STOP");
-        }
-        break;
-    case GARAGE_IN_RIGHT:
-        IMG.flag_track = TRACK_RIGHT;
-        // 先丢线后有线
-        if (IMG.rpts0s_num < 0.2 / SAMPLE_DIST)
-            none_left++;
-        if ((IMG.rpts0s_num > 0.8 / SAMPLE_DIST && none_left > 1))
-        {
-            if (IMG.Lpt0_found)
-                IMG.rptsc0_num = IMG.rpts0s_num = IMG.Lpt0_rpts0s_id;
-            if (IMG.Lpt1_found)
-                IMG.rptsc1_num = IMG.rpts1s_num = IMG.Lpt1_rpts1s_id;
-            if (have_left++ > 1)
+            break;
+        case GARAGE_OUT_RIGHT:
+            IMG.flag_track = TRACK_RIGHT;
+            // 先丢线后有线
+            if (IMG.rpts0s_num < 0.2 / SAMPLE_DIST)
+                none_left++;
+            if (IMG.rpts0s_num > 1.0 / SAMPLE_DIST && none_left > 1)
             {
-                if ((IMG.Lpt0_found && IMG.Lpt0_rpts0s_id < 55) ||
-                    (IMG.Lpt1_found && IMG.Lpt1_rpts1s_id < 55))
+                // 未识别到双 L 角点, 识别到双线, 出库完成
+                if ((!IMG.Lpt0_found && !IMG.Lpt1_found &&
+                    IMG.rpts1s_num > 0.2 / SAMPLE_DIST) ||
+                    ((IMG.encoder.route) > IMG._config->garage_out_route_))
                 {
                     none_left = 0;
-                    have_left = 0;
-                    garage_stop = true;
+                    IMG.element_over = true;
+                    IMG.element_over_route = IMG.encoder.route;
+                    flag_garage = GARAGE_NONE;
+                    MAT_LOG("GARAGE_NONE");
                 }
             }
-        }
-        if (garage_stop && IMG.encoder.route - garage_route >= IMG._config->garage_in_route_)
-        {
-            flag_garage = GARAGE_STOP;
-            MAT_LOG("GARAGE_STOP");
-        }
-        break;
+            break;
 
-        /* ********************************************************* */
+            /* ********************************************************* */
 
-    case GARAGE_PASS_LEFT:
-        IMG.flag_track = TRACK_RIGHT;
-        if (IMG.encoder.route - garage_route > IMG._config->pass_garage_right)
-        {
-            IMG.element_over = true;
-            IMG.element_over_route = IMG.encoder.route;
-            flag_garage = GARAGE_NONE;
-            MAT_LOG("GARAGE_NONE");
-        }
-        break;
-    case GARAGE_PASS_RIGHT:
-        IMG.flag_track = TRACK_LEFT;
-        if (IMG.encoder.route - garage_route > IMG._config->pass_garage_left)
-        {
-            IMG.element_over = true;
-            IMG.element_over_route = IMG.encoder.route;
-            flag_garage = GARAGE_NONE;
-            MAT_LOG("GARAGE_NONE");
-        }
-        break;
+        case GARAGE_IN_LEFT:
+            IMG.flag_track = TRACK_LEFT;
+            // 先丢线后有线
+            if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
+                none_right++;
+            if ((IMG.rpts1s_num > 0.8 / SAMPLE_DIST && none_right > 1))
+            {
+                if (IMG.Lpt0_found)
+                    IMG.rptsc0_num = IMG.rpts0s_num = IMG.Lpt0_rpts0s_id;
+                if (IMG.Lpt1_found)
+                    IMG.rptsc1_num = IMG.rpts1s_num = IMG.Lpt1_rpts1s_id;
+                if (have_right++ > 1)
+                {
+                    if ((IMG.Lpt0_found && IMG.Lpt0_rpts0s_id < 55) ||
+                        (IMG.Lpt1_found && IMG.Lpt1_rpts1s_id < 55))
+                    {
+                        none_right = 0;
+                        have_right = 0;
+                        garage_stop = true;
+                    }
+                }
+            }
+            if (garage_stop && IMG.encoder.route - garage_route >= IMG._config->garage_in_route_)
+            {
+                flag_garage = GARAGE_STOP;
+                MAT_LOG("GARAGE_STOP");
+            }
+            break;
+        case GARAGE_IN_RIGHT:
+            IMG.flag_track = TRACK_RIGHT;
+            // 先丢线后有线
+            if (IMG.rpts0s_num < 0.2 / SAMPLE_DIST)
+                none_left++;
+            if ((IMG.rpts0s_num > 0.8 / SAMPLE_DIST && none_left > 1))
+            {
+                if (IMG.Lpt0_found)
+                    IMG.rptsc0_num = IMG.rpts0s_num = IMG.Lpt0_rpts0s_id;
+                if (IMG.Lpt1_found)
+                    IMG.rptsc1_num = IMG.rpts1s_num = IMG.Lpt1_rpts1s_id;
+                if (have_left++ > 1)
+                {
+                    if ((IMG.Lpt0_found && IMG.Lpt0_rpts0s_id < 55) ||
+                        (IMG.Lpt1_found && IMG.Lpt1_rpts1s_id < 55))
+                    {
+                        none_left = 0;
+                        have_left = 0;
+                        garage_stop = true;
+                    }
+                }
+            }
+            if (garage_stop && IMG.encoder.route - garage_route >= IMG._config->garage_in_route_)
+            {
+                flag_garage = GARAGE_STOP;
+                MAT_LOG("GARAGE_STOP");
+            }
+            break;
 
-    default:
-        break;
+            /* ********************************************************* */
+
+        case GARAGE_PASS_LEFT:
+            IMG.flag_track = TRACK_RIGHT;
+            if (IMG.encoder.route - garage_route > IMG._config->pass_garage_right)
+            {
+                IMG.element_over = true;
+                IMG.element_over_route = IMG.encoder.route;
+                flag_garage = GARAGE_NONE;
+                MAT_LOG("GARAGE_NONE");
+            }
+            break;
+        case GARAGE_PASS_RIGHT:
+            IMG.flag_track = TRACK_LEFT;
+            if (IMG.encoder.route - garage_route > IMG._config->pass_garage_left)
+            {
+                IMG.element_over = true;
+                IMG.element_over_route = IMG.encoder.route;
+                flag_garage = GARAGE_NONE;
+                MAT_LOG("GARAGE_NONE");
+            }
+            break;
+        case GARAGE_IN_MIDDLE:
+            if (IMG.encoder.route - garage_route > IMG._config->garage_in_route_)
+            {
+                flag_garage = GARAGE_STOP;
+                MAT_LOG("GARAGE_STOP");
+            }
+            break;
+        default:
+            break;
     }
 }
 

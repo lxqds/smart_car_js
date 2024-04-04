@@ -9,6 +9,7 @@ enum flag_garage_e {
     GARAGE_OUT_RIGHT,   // 出库 右
     GARAGE_IN_LEFT,     // 入库 左
     GARAGE_IN_RIGHT,    // 入库 右
+    GARAGE_IN_MIDDLE,   // 入库 中
     GARAGE_PASS_LEFT,   // 不进库 左
     GARAGE_PASS_RIGHT,  // 不进库 右
     GARAGE_STOP,        // 进库完毕, 停车
