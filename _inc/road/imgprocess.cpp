@@ -473,6 +473,15 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                     //         log_i("PIG_DETECTION");
                     //     }
                     //     break;
+                    case label_tumble:      // 跌倒
+                    case label_patient:     // 病人
+                        if (flag_work == RAMP_NONE && _config->check_work_ == 1) {
+                            flag_work = WORK_DETECTION;
+                            sprintf(string_log, "PATIENT_DETECTION");
+                            log_i("PATIENT_DETECTION");
+                        }
+                        break;
+
                     case label_bridge:  // 桥
                         if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
                             flag_ramp = RAMP_DETECTION;
