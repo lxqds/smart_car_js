@@ -434,37 +434,45 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             if (flag_work == WORK_NONE && flag_gas == GAS_NONE &&
                 flag_yroad == YROAD_NONE && flag_ramp == RAMP_NONE && flag_slow == SLOW_NONE) {
                 switch (DetectionLabel(r.type)) {
-                    case label_tractor:  // 施工区 拖拉机
-                        if (flag_work == WORK_NONE && _config->check_work_ == 1) {
-                            flag_work = WORK_DETECTION;
-                            sprintf(string_log, "TRACTOR_DETECTION");
-                            log_i("TRACTOR_DETECTION");
-                        }
-                        break;
+                    // case label_tractor:  // 施工区 拖拉机
+                    //     if (flag_work == WORK_NONE && _config->check_work_ == 1) {
+                    //         flag_work = WORK_DETECTION;
+                    //         sprintf(string_log, "TRACTOR_DETECTION");
+                    //         log_i("TRACTOR_DETECTION");
+                    //     }
+                    //     break;
 
-                    case label_granary:  // 加油站 谷仓
-                        if (flag_gas == GAS_NONE && _config->check_gas_ == 1) {
-                            flag_gas = GAS_DETECTION;
-                            sprintf(string_log, "GAS_DETECTION");
-                            log_i("GAS_DETECTION");
-                        }
-                        break;
+                    // case label_granary:  // 加油站 谷仓
+                    //     if (flag_gas == GAS_NONE && _config->check_gas_ == 1) {
+                    //         flag_gas = GAS_DETECTION;
+                    //         sprintf(string_log, "GAS_DETECTION");
+                    //         log_i("GAS_DETECTION");
+                    //     }
+                    //     break;
 
-                    case label_corn:  // 泛行区 农场区
-                        if (flag_yroad == YROAD_NONE && _config->check_yroad_ == 1) {
-                            flag_yroad = YROAD_DETECTION;
-                            sprintf(string_log, "FARM_DETECTION");
-                            log_i("FARM_DETECTION");
-                        }
-                        break;
+                    // case label_corn:  // 泛行区 农场区
+                    //     if (flag_yroad == YROAD_NONE && _config->check_yroad_ == 1) {
+                    //         flag_yroad = YROAD_DETECTION;
+                    //         sprintf(string_log, "FARM_DETECTION");
+                    //         log_i("FARM_DETECTION");
+                    //     }
+                    //     break;
 
-                    case label_ramp:  // 坡道
-                        if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
-                            flag_ramp = RAMP_DETECTION;
-                            sprintf(string_log, "RAMP_DETECTION");
-                            log_i("RAMP_DETECTION");
-                        }
-                        break;
+                    // case label_ramp:  // 坡道
+                    //     if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
+                    //         flag_ramp = RAMP_DETECTION;
+                    //         sprintf(string_log, "RAMP_DETECTION");
+                    //         log_i("RAMP_DETECTION");
+                    //     }
+                    //     break;
+
+                    // case label_pig:  // 慢行区
+                    //     if (flag_slow == SLOW_NONE && _config->check_slow_ == 1) {
+                    //         flag_slow = SLOW_DETECTION;
+                    //         sprintf(string_log, "PIG_DETECTION");
+                    //         log_i("PIG_DETECTION");
+                    //     }
+                    //     break;
                     case label_bridge:  // 桥
                         if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
                             flag_ramp = RAMP_DETECTION;
@@ -472,14 +480,8 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                             log_i("BRIDGE_DETECTION");
                         }
                         break;
-                    case label_pig:  // 慢行区
-                        if (flag_slow == SLOW_NONE && _config->check_slow_ == 1) {
-                            flag_slow = SLOW_DETECTION;
-                            sprintf(string_log, "PIG_DETECTION");
-                            log_i("PIG_DETECTION");
-                        }
-                        break;
-                    case label_crosswalk:  // 出入库口
+
+                    case label_crosswalk:  // 斑马线
                         if (flag_garage == GARAGE_NONE && _config->check_garage_AI == 1) {
                             flag_garage = GARAGE_AI_DETECTION;
                             sprintf(string_log, "GARAGE_AI_DETECTION");

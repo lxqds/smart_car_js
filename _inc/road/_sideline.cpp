@@ -265,31 +265,31 @@ std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict) {
                                   p.x / 2 + p.width / 4));
         }
 
-        else if (ImageProcess::DetectionLabel(p.type) == ImageProcess::label_wone) {
-            gas_which = 1;
-            /*
-            if (gas_which_is == false) {
-                gas_which_is = true;
-                if (gas_which_last == 0)
-                    gas_which = 1;
-                else
-                    gas_which = 2;
-            }
-            */
-        }
+        // else if (ImageProcess::DetectionLabel(p.type) == ImageProcess::label_wone) {
+        //     gas_which = 1;
+        //     /*
+        //     if (gas_which_is == false) {
+        //         gas_which_is = true;
+        //         if (gas_which_last == 0)
+        //             gas_which = 1;
+        //         else
+        //             gas_which = 2;
+        //     }
+        //     */
+        // }
 
-        else if (ImageProcess::DetectionLabel(p.type) == ImageProcess::label_wtwo) {
-            gas_which = 2;
-            /*
-            if (gas_which_is == false) {
-                gas_which_is = true;
-                if (gas_which_last == 0)
-                    gas_which = 2;
-                else
-                    gas_which = 1;
-            }
-            */
-        }
+        // else if (ImageProcess::DetectionLabel(p.type) == ImageProcess::label_wtwo) {
+        //     gas_which = 2;
+        //     /*
+        //     if (gas_which_is == false) {
+        //         gas_which_is = true;
+        //         if (gas_which_last == 0)
+        //             gas_which = 2;
+        //         else
+        //             gas_which = 1;
+        //     }
+        //     */
+        // }
     }
 
     return cones;
