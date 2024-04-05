@@ -347,12 +347,10 @@ public:
         catch (const std::runtime_error&)
         {
             log_e("The Write() runtime_error.");
-            continue;
         }
         catch (const NotOpen&)
         {
             log_e("Port not open.");
-            continue;
         }
         _serial_port->DrainWriteBuffer(); // 直到写缓冲区耗尽
     }
