@@ -95,8 +95,8 @@ private:
             {
                 Payload Payload_Data;
                 Payload_Data = _queue.Take();
-                DataBuffer pkt_buf(Payload_Data.size + 3);
-                uint8_t* packet = (uint8_t*)pkt_buf.data;
+                DataBuffer pkt_buf(Payload_Data.size + 4);
+                uint8_t* packet = (uint8_t*)&pkt_buf[0];
                 packet[0] = 0x42;
                 packet[1] = Payload_Data.address;
                 packet[2] = Payload_Data.size + 4;
@@ -379,7 +379,7 @@ public:
         {
             Payload Payload_Data;
             Payload_Data.address = address;
-            memcpy(Payload_Data.data, pData, size);
+            memcpy(Payload_Data.pData, pData, size);
             Payload_Data.size = size;
             _queue.Put(Payload_Data);
         }
