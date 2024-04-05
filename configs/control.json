@@ -189,7 +189,10 @@
         "******-steering_pid-*******": 0,
         "steering_p_k": 0.0505,
         "steering_p": 1.788,
-        "steering_d": 8.555
+        "steering_d": 8.555,
+        "speed_kp": 0.0505,
+        "speed_ki": 1.788,
+        "speed_kd": 8.555
     },
     "1500": {
         "*****-aim_distance-*****": 0,

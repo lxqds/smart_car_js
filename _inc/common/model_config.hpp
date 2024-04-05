@@ -107,6 +107,10 @@ struct ControlConfig
     float steering_p;   // 转向环 P
     float steering_d;   // 转向环 D
 
+    float speed_kp;   // 速度环 P
+    float speed_ki;   // 转向环 I
+    float speed_kd;   // 转向环 D
+
     ControlConfig(std::string dir) : config_dir(dir)
     {
         nlohmann::json root;
@@ -213,6 +217,10 @@ struct ControlConfig
         AUTOCFG(steering_p_k);
         AUTOCFG(steering_p);
         AUTOCFG(steering_d);
+
+        AUTOCFG(speed_kp);
+        AUTOCFG(speed_ki);
+        AUTOCFG(speed_kd);
 
         log_i("Init Success.");
     }

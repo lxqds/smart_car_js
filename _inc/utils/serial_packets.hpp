@@ -2,7 +2,12 @@
 #define _DATAPACKET_HPP_
 
 #include <cstdint>
-
+// 向下位机传输的数据包
+struct Payload {
+    uint8_t address;    // 地址
+    uint8_t pData[50];  // 数据包数组
+    uint8_t size;       // 数据包长度
+};
 // 向下位机传输的数据包
 struct Payload_t {
     int16_t tSpeed;   // 速度

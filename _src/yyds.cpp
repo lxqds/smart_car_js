@@ -78,6 +78,13 @@ int main(int argc, char const *argv[])
     detection->start();
     display->start();
 
+    /* 初始化PID */
+    float speedPID[3] = {
+        imgprocess._config->speed_kp,
+        imgprocess._config->speed_ki,
+        imgprocess._config->speed_kp };
+    serial->transmit(0x02, (uint8_t*)speedPID, 12);
+
     /* 开跑 */
     serial->buzzerSound(3);
     while (capture->_loop)
