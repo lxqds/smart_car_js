@@ -101,11 +101,11 @@ private:
                 packet[1] = Payload_Data.address;
                 packet[2] = Payload_Data.size + 4;
                 memcpy(&packet[3], Payload_Data.pData, Payload_Data.size);
-                packet[Payload_Data.size + 3 - 1] = packet[0] + packet[1] + packet[2];
+                packet[Payload_Data.size + 4 - 1] = packet[0] + packet[1] + packet[2];
 
                 for (uint8_t i = 0; i < Payload_Data.size; i++)
                 {
-                    packet[Payload_Data.size + 3 - 1] += packet[3 + i];
+                    packet[Payload_Data.size + 4 - 1] += packet[3 + i];
                 }
                 try
                 {
