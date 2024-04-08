@@ -104,11 +104,11 @@ private:
                 packet[2] = Payload_Data.size + 4;
                 memcpy(&packet[3], Payload_Data.pData, Payload_Data.size);
                 packet[Payload_Data.size + 4 - 1] = packet[0] + packet[1] + packet[2];
-                
                 for (uint8_t i = 0; i < Payload_Data.size; i++)
                 {
                     packet[Payload_Data.size + 4 - 1] += packet[3 + i];
                 }
+                LOG_I << "check2" << packet[Payload_Data.size + 4 - 1] << LOG_END;
                 try
                 {
                     _serial_port->Write(pkt_buf);
@@ -342,6 +342,7 @@ public:
         packet[2] = 5;
         packet[3] = sound;
         packet[4] = packet[0] + packet[1] + packet[2] + packet[3];
+        LOG_I << "check1" << packet[4] << LOG_END;
         LOG_I << "serial send sound" << LOG_END;
         try
         {
