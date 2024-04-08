@@ -93,8 +93,10 @@ private:
         {
             if (_queue.Size() >= 1)
             {
+                LOG_I << "serial debug1" << LOG_END;
                 Payload Payload_Data;
                 Payload_Data = _queue.Take();
+                LOG_I << "serial debug2" << LOG_END;
                 DataBuffer pkt_buf(Payload_Data.size + 4);
                 uint8_t* packet = (uint8_t*)&pkt_buf[0];
                 packet[0] = 0x42;
