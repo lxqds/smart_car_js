@@ -265,6 +265,9 @@ public:
 
         try
         {
+            _loop = true;
+            _can_close = true;
+
             _serial_port->Open(_port_name);
             _serial_port->SetBaudRate(_bps);
             _serial_port->SetCharacterSize(CharacterSize::CHAR_SIZE_8);   // 8位数据位
@@ -275,8 +278,6 @@ public:
             _worker_thread_send = std::thread(&SerialDriver::run_send, this);
             _worker_thread_rece = std::thread(&SerialDriver::run_rece, this);
 
-            _loop = true;
-            _can_close = true;
 
             LOG_I << "[" << _port_name << "] Open Success." << LOG_END;
             return 0;
