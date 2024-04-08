@@ -303,7 +303,10 @@ public:
 
     void buzzerSound(const uint8_t sound)
     {
-        // transmit_packet(0x04, &sound, 1);
+        transmit_packet(0x04, &sound, 1);
+
+
+
         // DataBuffer pkt_buf(sizeof(uint8_t) * 7);
         // uint8_t *sendBuff = (uint8_t *)&pkt_buf[0];
 
@@ -336,28 +339,31 @@ public:
         //         log_e("Port not open.");
         //     }
         // }
-        DataBuffer pkt_buf(5);
-        uint8_t* packet = (uint8_t*)&pkt_buf[0];
-        packet[0] = 0x42;
-        packet[1] = 0x04;
-        packet[2] = 5;
-        packet[3] = sound;
-        packet[4] = packet[0] + packet[1] + packet[2] + packet[3];
-        LOG_I << "check1" << packet[4] << LOG_END;
-        LOG_I << "serial send sound" << LOG_END;
-        try
-        {
-            _serial_port->Write(pkt_buf);
-        }
-        catch (const std::runtime_error&)
-        {
-            log_e("The Write() runtime_error.");
-        }
-        catch (const NotOpen&)
-        {
-            log_e("Port not open.");
-        }
-        _serial_port->DrainWriteBuffer(); // 直到写缓冲区耗尽
+
+
+
+        // DataBuffer pkt_buf(5);
+        // uint8_t* packet = (uint8_t*)&pkt_buf[0];
+        // packet[0] = 0x42;
+        // packet[1] = 0x04;
+        // packet[2] = 5;
+        // packet[3] = sound;
+        // packet[4] = packet[0] + packet[1] + packet[2] + packet[3];
+        // LOG_I << "check1" << packet[4] << LOG_END;
+        // LOG_I << "serial send sound" << LOG_END;
+        // try
+        // {
+        //     _serial_port->Write(pkt_buf);
+        // }
+        // catch (const std::runtime_error&)
+        // {
+        //     log_e("The Write() runtime_error.");
+        // }
+        // catch (const NotOpen&)
+        // {
+        //     log_e("Port not open.");
+        // }
+        // _serial_port->DrainWriteBuffer(); // 直到写缓冲区耗尽
     }
 
     int close()
