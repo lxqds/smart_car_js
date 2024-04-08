@@ -88,7 +88,7 @@ private:
 
     void run_send()
     {
-
+        LOG_I << "serial send thread start" << LOG_END;
         while (_loop)
         {
             if (_queue.Size() >= 1)
@@ -102,7 +102,7 @@ private:
                 packet[2] = Payload_Data.size + 4;
                 memcpy(&packet[3], Payload_Data.pData, Payload_Data.size);
                 packet[Payload_Data.size + 4 - 1] = packet[0] + packet[1] + packet[2];
-                LOG_I << "serial " << packet[2] << LOG_END;
+                
                 for (uint8_t i = 0; i < Payload_Data.size; i++)
                 {
                     packet[Payload_Data.size + 4 - 1] += packet[3 + i];
@@ -128,6 +128,7 @@ private:
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
             }
         }
+        LOG_I << "serial send thread stop" << LOG_END;
         // Payload_t payload;
         // DataBuffer pkt_buf(sizeof(Packet));
         // Packet *packet = (Packet *)&pkt_buf[0];
