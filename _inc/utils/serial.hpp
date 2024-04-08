@@ -88,15 +88,12 @@ private:
 
     void run_send()
     {
-        LOG_I << "serial send thread start" << LOG_END;
         while (_loop)
         {
             if (_queue.Size() >= 1)
             {
-                LOG_I << "serial debug1" << LOG_END;
                 Payload Payload_Data;
                 Payload_Data = _queue.Take();
-                LOG_I << "serial debug2" << LOG_END;
                 DataBuffer pkt_buf(Payload_Data.size + 4);
                 uint8_t* packet = (uint8_t*)&pkt_buf[0];
                 packet[0] = 0x42;
@@ -108,7 +105,6 @@ private:
                 {
                     packet[Payload_Data.size + 4 - 1] += packet[3 + i];
                 }
-                LOG_I << "check2" << packet[Payload_Data.size + 4 - 1] << LOG_END;
                 try
                 {
                     _serial_port->Write(pkt_buf);
@@ -130,7 +126,6 @@ private:
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
             }
         }
-        LOG_I << "serial send thread stop" << LOG_END;
         // Payload_t payload;
         // DataBuffer pkt_buf(sizeof(Packet));
         // Packet *packet = (Packet *)&pkt_buf[0];
@@ -305,8 +300,6 @@ public:
     {
         transmit_packet(0x04, &sound, 1);
 
-
-
         // DataBuffer pkt_buf(sizeof(uint8_t) * 7);
         // uint8_t *sendBuff = (uint8_t *)&pkt_buf[0];
 
@@ -339,31 +332,6 @@ public:
         //         log_e("Port not open.");
         //     }
         // }
-
-
-
-        // DataBuffer pkt_buf(5);
-        // uint8_t* packet = (uint8_t*)&pkt_buf[0];
-        // packet[0] = 0x42;
-        // packet[1] = 0x04;
-        // packet[2] = 5;
-        // packet[3] = sound;
-        // packet[4] = packet[0] + packet[1] + packet[2] + packet[3];
-        // LOG_I << "check1" << packet[4] << LOG_END;
-        // LOG_I << "serial send sound" << LOG_END;
-        // try
-        // {
-        //     _serial_port->Write(pkt_buf);
-        // }
-        // catch (const std::runtime_error&)
-        // {
-        //     log_e("The Write() runtime_error.");
-        // }
-        // catch (const NotOpen&)
-        // {
-        //     log_e("Port not open.");
-        // }
-        // _serial_port->DrainWriteBuffer(); // 直到写缓冲区耗尽
     }
 
     int close()
