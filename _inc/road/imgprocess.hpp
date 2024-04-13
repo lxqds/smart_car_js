@@ -1,11 +1,11 @@
 #pragma once
-#include <onnxruntime_cxx_api.h>
+//#include <onnxruntime_cxx_api.h>
 
 #include <cstdint>
 #include <opencv2/opencv.hpp>
 
 #include "../common/model_config.hpp"
-#include "../core/detection.hpp"
+//#include "../core/detection.hpp"
 #include "../utils/logger_helper.hpp"
 #include "../utils/serial_packets.hpp"
 #include "_define.hpp"
@@ -19,6 +19,7 @@
 #include "elements/_work.hpp"
 #include "elements/_yroad.hpp"
 #include "elements/_slowzone.hpp"
+
 
 class ImageProcess {
 public:
@@ -50,6 +51,7 @@ private:
     uint16_t speed_diff = 0;  // 减速率
 
 public:
+
     std::shared_ptr<ControlConfig> _config;           // 跑车配置文件
     std::vector<DetectionPredictResult> _det_result;  // 目标检测结果
 

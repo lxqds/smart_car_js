@@ -1,6 +1,6 @@
 # some components
 add_library(capture    core/capture.cpp   )
-add_library(detection  core/detection.cpp )
+#add_library(detection  core/detection.cpp )
 add_library(display    core/display.cpp   )
 add_library(imgprocess road/imgprocess.cpp)
 add_library(sideline   road/_sideline.cpp )

@@ -11,6 +11,7 @@
 #include "../road/imgprocess.hpp"
 #include "serial_packets.hpp"
 #include "stop_watch.hpp"
+#include "blocking_queue.h"
 
 #undef LOG_TAG
 #define LOG_TAG "Serial"

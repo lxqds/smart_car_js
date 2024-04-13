@@ -407,7 +407,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     /* ***************************************************************** */
 
     // 检测完成判断 (加油站 & 施工区 跳过 防止重复获取检测结果)
-    if ((flag_gas <= GAS_DETECTION && flag_work <= WORK_DETECTION) &&
+    /*if ((flag_gas <= GAS_DETECTION && flag_work <= WORK_DETECTION) &&
         detection->_is_predicted) {
         _det_result = detection->getResult()->result;
 
@@ -521,7 +521,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                 }
             }
         }
-    }
+    }*/
 
     /* ***************************************************************** */
     /* **************************** 元素检测 **************************** */

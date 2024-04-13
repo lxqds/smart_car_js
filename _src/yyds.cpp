@@ -7,7 +7,7 @@ ImageProcess imgprocess; // 图像处理
 logger_helper logger;    // 日志
 
 std::shared_ptr<CaptureInterface> capture = nullptr; // 线程 -> 摄像头
-std::shared_ptr<Detection> detection = nullptr;      // 线程 -> 目标检测
+//std::shared_ptr<Detection> detection = nullptr;      // 线程 -> 目标检测
 std::shared_ptr<Display> display = nullptr;          // 线程 -> 图像显示及视频录制
 std::shared_ptr<SerialDriver> serial = nullptr;      // 线程 -> 串口接收及发送
 
@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
     cv::Mat frame_imgpro; // 图像处理输出
 
     /* 命令行参数 */
-    auto args = util::argparser("yyds car command line parameters explained.");
+    /*auto args = util::argparser("yyds car command line parameters explained.");
     args.set_program_name("yyds")
         .add_help_option()
         .add_option("-l", "--launch", "launch!!!")
@@ -41,7 +41,9 @@ int main(int argc, char const *argv[])
         .add_option("-v", "--video", "save video")
         .parse(argc, argv);
     _windows = args.has_option("--windows");
-    _video = args.has_option("--video");
+    _video = args.has_option("--video");*/
+
+    _windows =true;
 
     /* 日志初始化 */
     logger.init_logger();
@@ -59,9 +61,9 @@ int main(int argc, char const *argv[])
     CHECK(0 == ret) << "device video can not open !!" << LOG_END;
 
     /* 目标检测 */
-    detection = std::make_shared<Detection>();
-    ret = detection->init("../configs/usbcamera.json");
-    CHECK(0 == ret) << "../configs/usbcamera.json can not found !!" << LOG_END;
+    //detection = std::make_shared<Detection>();
+    //ret = detection->init("../configs/usbcamera.json");
+    //CHECK(0 == ret) << "../configs/usbcamera.json can not found !!" << LOG_END;
 
     /* 窗口 */
     display = std::make_shared<Display>(_windows, _video);
@@ -75,7 +77,7 @@ int main(int argc, char const *argv[])
 
     /* 启动多线程 */
     capture->start();
-    detection->start();
+    //detection->start();
     display->start();
 
     /* 初始化PID */
@@ -96,16 +98,16 @@ int main(int argc, char const *argv[])
         capture->get(frame_origin);
 
         // 目标检测
-        detection->run(frame_origin);
+        //detection->run(frame_origin);
 
         // 加油站 & 施工区 等待检测结果
-        if (flag_gas > GAS_DETECTION || flag_work > WORK_DETECTION)
+        /*if (flag_gas > GAS_DETECTION || flag_work > WORK_DETECTION)
         {
             if (detection->_is_predicted)
             {
                 // 获取检测结果
                 std::shared_ptr<DetectionResult> det_res = detection->getResult();
-                imgprocess._det_result = det_res->result;
+                mgprocess._det_result = det_res->result;
                 // 图像处理
                 int num = 0;
                 for (unsigned i = 0; i < imgprocess._det_result.size(); i++)
@@ -133,9 +135,9 @@ int main(int argc, char const *argv[])
                 imgprocess.process(det_res->org_frame, frame_imgpro, payload);
                 ret = 1;
             }
-        }
+        }*/
         // 正常巡线
-        else
+        //else
         {
             // 图像处理 正常帧率
             imgprocess.process(frame_origin, frame_imgpro, payload);
@@ -184,7 +186,7 @@ void callbackSignal(int signum)
         /* 结束线程 */
         capture->stop();
         log_i("capture stopped.");
-        detection->stop();
+        //detection->stop();
         log_i("detection stopped.");
         display->stop();
         log_i("display stopped.");

@@ -257,7 +257,8 @@ bool sort_x_down(POINT a, POINT b) {  // 降序
 }
 
 // 从AI检测结果中检索锥桶坐标集合
-std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict) {
+std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict)
+{
     std::vector<POINT> cones;
     for (auto p : predict) {
         if (ImageProcess::DetectionLabel(p.type) == ImageProcess::label_cone) {
@@ -267,7 +268,7 @@ std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict) {
 
         // else if (ImageProcess::DetectionLabel(p.type) == ImageProcess::label_wone) {
         //     gas_which = 1;
-        //     /*
+        //
         //     if (gas_which_is == false) {
         //         gas_which_is = true;
         //         if (gas_which_last == 0)
@@ -275,12 +276,12 @@ std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict) {
         //         else
         //             gas_which = 2;
         //     }
-        //     */
+        //
         // }
 
         // else if (ImageProcess::DetectionLabel(p.type) == ImageProcess::label_wtwo) {
         //     gas_which = 2;
-        //     /*
+        //
         //     if (gas_which_is == false) {
         //         gas_which_is = true;
         //         if (gas_which_last == 0)
@@ -288,7 +289,7 @@ std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict) {
         //         else
         //             gas_which = 1;
         //     }
-        //     */
+        //
         // }
     }
 

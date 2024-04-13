@@ -32,5 +32,16 @@ struct POINT {
     POINT(){};
     POINT(int x, int y) : x(x), y(y){};
 };
+struct DetectionPredictResult
+{
+    int type;
+    float score;
+    int x;
+    int y;
+    int width;
+    int height;
+};
+
+
 
 #endif

@@ -6,7 +6,7 @@
 #include "_define.hpp"
 
 // 目标检测线程
-extern std::shared_ptr<Detection> detection;
+//extern std::shared_ptr<Detection> detection;
 
 // 加油站
 extern uint8_t gas_which_last;  // 加油站出站口号 上一次

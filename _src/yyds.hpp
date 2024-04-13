@@ -1,6 +1,6 @@
 #pragma once
 
-#include <onnxruntime_cxx_api.h>
+//#include <onnxruntime_cxx_api.h>
 #include <unistd.h>
 
 #include <csignal>
@@ -10,7 +10,7 @@
 #include <opencv2/opencv.hpp>
 
 #include "../_inc/core/capture.hpp"
-#include "../_inc/core/detection.hpp"
+//#include "../_inc/core/detection.hpp"
 #include "../_inc/core/display.hpp"
 #include "../_inc/road/imgprocess.hpp"
 #include "../_inc/utils/argparse.hpp"
