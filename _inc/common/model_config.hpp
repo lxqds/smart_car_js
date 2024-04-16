@@ -27,6 +27,7 @@ struct ControlConfig
     uint8_t direction_work;   // 施工区方向  0: 左   1: 右
     uint8_t direction_gas;    // 加油站方向  0: 左   1: 右
 
+    uint8_t rec_video_format;    //录制视频格式：0原视频，1处理后的视频
     uint8_t check_binary_;       // 是否显示二值化图像
     uint8_t check_lab_;          // 是否显示lab
     uint8_t over_route_;         // 识别元素后经过的路程再开启新的元素检测距离
@@ -132,6 +133,7 @@ struct ControlConfig
         AUTOCFG(direction_work);
         AUTOCFG(direction_gas);
 
+        AUTOCFG(rec_video_format);
         AUTOCFG(check_binary_);
         AUTOCFG(check_lab_);
         AUTOCFG(over_route_);
