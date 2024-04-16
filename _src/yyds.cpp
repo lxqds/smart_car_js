@@ -91,7 +91,7 @@ int main(int argc, char const* argv[])
     serial->transmit_packet(0x09, speedPID_BUFF, 12);
 
     /* 开跑 */
-    serial->buzzerSound(3);
+    // serial->buzzerSound(3);
     while (capture->_loop)
     {
         // 开始计时
