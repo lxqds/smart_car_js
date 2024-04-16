@@ -154,11 +154,6 @@ int main(int argc, char const* argv[])
             {
                 serial->sendPack(payload);
             }
-            else
-            {
-                payload_exit.element = 1;
-                serial->sendPack(payload_exit);
-            }
 
             // 显示图像
             sprintf(fps_buffer, "FPS: %.2f", 1000 / fps_time);
@@ -170,12 +165,8 @@ int main(int argc, char const* argv[])
         // 停止计时
         fps_time = fps_sw.toc();
     }
-    StopWatch stop_clock;
-    stop_clock.tic();
-    while (stop_clock.toc() < 1000);
     
     /* 结束程序 */
-    payload_exit.element = 0;
     serial->sendPack(payload_exit);
     callbackSignal(0);
     exit(EXIT_SUCCESS);

@@ -169,7 +169,7 @@
         "speed_garage_out": 700,
         "garage_in_route_": 60,
         "garage_out_route_": 5,
-        "garage_pass_route_": 140,
+        "garage_pass_route_": 100,
         "speed_work": 1000,
         "work_stop_time": 500,
         "work_out_stop_time": 100,
