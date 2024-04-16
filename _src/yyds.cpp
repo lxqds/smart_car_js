@@ -83,10 +83,12 @@ int main(int argc, char const* argv[])
         imgprocess._config->speed_kp,
         imgprocess._config->speed_ki,
         imgprocess._config->speed_kd };
+    uint8_t speedPID_BUFF[12];
+    memcpy(speedPID_BUFF, speedPID, 12);
     LOG_I << "kp=" << speedPID[0] << LOG_END;
     LOG_I << "ki=" << speedPID[1] << LOG_END;
     LOG_I << "kd=" << speedPID[2] << LOG_END;
-    serial->transmit_packet(0x09, (uint8_t*)speedPID, 12);
+    serial->transmit_packet(0x09, speedPID_BUFF, 12);
 
     /* 开跑 */
     serial->buzzerSound(3);
