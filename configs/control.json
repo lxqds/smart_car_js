@@ -1,7 +1,7 @@
 {
     "threshold": 127,
     "threshold_detection": 0.55,
-    "rec_video_format": 1,
+    "rec_video_format": 0,
     "******-direction-*******": 0,
     "direction_garage": 4,
     "direction_yroad": 1,
@@ -192,7 +192,7 @@
         "steering_p": 1.788,
         "steering_d": 8.555,
         "speed_kp": 8,
-        "speed_ki": 0.08,
+        "speed_ki": 0.14,
         "speed_kd": 0
     },
     "1500": {
