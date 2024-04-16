@@ -82,7 +82,7 @@ int main(int argc, char const *argv[])
     float speedPID[3] = {
         imgprocess._config->speed_kp,
         imgprocess._config->speed_ki,
-        imgprocess._config->speed_kp };
+        imgprocess._config->speed_kd };
     LOG_I << "kp=" << speedPID[0] << LOG_END;
     LOG_I << "ki=" << speedPID[1] << LOG_END;
     LOG_I << "kd=" << speedPID[2] << LOG_END;
