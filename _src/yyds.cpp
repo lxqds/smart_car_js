@@ -83,6 +83,9 @@ int main(int argc, char const *argv[])
         imgprocess._config->speed_kp,
         imgprocess._config->speed_ki,
         imgprocess._config->speed_kp };
+    LOG_I << "kp=" << speedPID[0] << LOG_END;
+    LOG_I << "ki=" << speedPID[1] << LOG_END;
+    LOG_I << "kd=" << speedPID[2] << LOG_END;
     serial->transmit_packet(0x09, (uint8_t*)speedPID, 12);
 
     /* 开跑 */
