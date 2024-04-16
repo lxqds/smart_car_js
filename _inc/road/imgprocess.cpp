@@ -766,9 +766,10 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         resample_points(rpts + begin_id, rpts_num - begin_id, rptsn, &rptsn_num,
                         SAMPLE_DIST * PIXEL_PER_METER);
 
-        aim_idx__far = clip(round(aim_distance_f / SAMPLE_DIST), 0, rptsn_num - 1);
-        aim_idx_near = clip(round(aim_distance_n / SAMPLE_DIST), 0, rptsn_num - 1);
-
+        // aim_idx__far = clip(round(aim_distance_f / SAMPLE_DIST), 0, rptsn_num - 1);
+        // aim_idx_near = clip(round(aim_distance_n / SAMPLE_DIST), 0, rptsn_num - 1);
+        aim_idx__far = clip(round(rptsn_num - 1), 0, rptsn_num - 1);
+        aim_idx_near = clip(round((rptsn_num - 1) * 0.3), 0, rptsn_num - 1);
         std::vector<POINT> v_center(4);  // 三阶贝塞尔曲线
         v_center[0] = {(int)cx, (int)cy};
 
