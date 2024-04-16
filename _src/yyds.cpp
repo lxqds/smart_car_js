@@ -83,7 +83,7 @@ int main(int argc, char const *argv[])
         imgprocess._config->speed_kp,
         imgprocess._config->speed_ki,
         imgprocess._config->speed_kp };
-    serial->transmit_packet(0x02, (uint8_t*)speedPID, 12);
+    serial->transmit_packet(0x09, (uint8_t*)speedPID, 12);
 
     /* 开跑 */
     serial->buzzerSound(3);
