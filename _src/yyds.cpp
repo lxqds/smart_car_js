@@ -14,7 +14,7 @@ std::shared_ptr<SerialDriver> serial = nullptr;      // 线程 -> 串口接收�
 extern uint8_t gas_which;
 
 /* 主函数 */
-int main(int argc, char const *argv[])
+int main(int argc, char const* argv[])
 {
     /* 数据定义 */
     bool _windows, _video;  // 命令行参数
@@ -156,21 +156,26 @@ int main(int argc, char const *argv[])
             }
             else
             {
+                payload_exit.element = 1;
                 serial->sendPack(payload_exit);
             }
 
             // 显示图像
             sprintf(fps_buffer, "FPS: %.2f", 1000 / fps_time);
             cv::putText(frame_imgpro, (std::string)fps_buffer, cv::Point(5, 10),
-                        cv::FONT_HERSHEY_SIMPLEX, 0.4, cv::Scalar(0, 0, 255));
+                cv::FONT_HERSHEY_SIMPLEX, 0.4, cv::Scalar(0, 0, 255));
             display->put(frame_imgpro.clone());
         }
 
         // 停止计时
         fps_time = fps_sw.toc();
     }
-
+    StopWatch stop_clock;
+    stop_clock.tic();
+    while (stop_clock.toc() < 1000);
+    
     /* 结束程序 */
+    payload_exit.element = 0;
     serial->sendPack(payload_exit);
     callbackSignal(0);
     exit(EXIT_SUCCESS);
