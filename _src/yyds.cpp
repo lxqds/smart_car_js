@@ -154,6 +154,10 @@ int main(int argc, char const *argv[])
             {
                 serial->sendPack(payload);
             }
+            else
+            {
+                serial->sendPack(payload_exit);
+            }
 
             // 显示图像
             sprintf(fps_buffer, "FPS: %.2f", 1000 / fps_time);
