@@ -1,7 +1,7 @@
 {
     "threshold": 127,
     "threshold_detection": 0.55,
-    "rec_video_format": 0,
+    "rec_video_format": 1,
     "******-direction-*******": 0,
     "direction_garage": 4,
     "direction_yroad": 1,
