@@ -473,7 +473,31 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                     //         log_i("PIG_DETECTION");
                     //     }
                     //     break;
+                    case label_bomb:      // 炸弹
+                    {
+                        sprintf(string_log, "label_bomb_DETECTION");
+                        log_i("label_bomb_DETECTION");
+                    }break;
+                    case label_block:      // 黑块
+                    {
+                        sprintf(string_log, "label_block_DETECTION");
+                        log_i("label_block_DETECTION");
+                    }break;
+                    case label_thief:      // 贼
+                    {
+                        sprintf(string_log, "label_thief_DETECTION");
+                        log_i("label_thief_DETECTION");
+                    }break;
+                    case label_evil:      //恶人
+                    {
+                        sprintf(string_log, "label_evil_DETECTION");
+                        log_i("label_evil_DETECTION");
+                    }break;
                     case label_tumble:      // 跌倒
+                    {
+                        sprintf(string_log, "label_tumble_DETECTION");
+                        log_i("label_tumble_DETECTION");
+                    }break;
                     case label_patient:     // 病人
                         if (flag_work == RAMP_NONE && _config->check_work_ == 1) {
                             flag_work = WORK_DETECTION;
@@ -481,6 +505,26 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                             log_i("PATIENT_DETECTION");
                         }
                         break;
+                    case label_prop:      // 道具小车
+                    {
+                        sprintf(string_log, "label_prop_DETECTION");
+                        log_i("label_prop_DETECTION");
+                    }break;
+                    case label_safety:      // 普通小车
+                    {
+                        sprintf(string_log, "label_safety_DETECTION");
+                        log_i("label_safety_DETECTION");
+                    }break;
+                    case label_spy:      // 嫌犯小车
+                    {
+                        sprintf(string_log, "label_spy_DETECTION");
+                        log_i("label_spy_DETECTION");
+                    }break;
+                    case label_danger:      // 危险小车
+                    {
+                        sprintf(string_log, "label_danger_DETECTION");
+                        log_i("label_danger_DETECTION");
+                    }break;
 
                     case label_bridge:  // 桥
                         if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
