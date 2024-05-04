@@ -427,8 +427,8 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             int deH = r.height / 2, deW = r.width / 2;
 
             // 尺寸位置筛选
-            if ((deX < 25 || deX + deW > 275) || deY < 40 || (deH < 25 || deW < 25))
-                continue;
+         //   if ((deX < 25 || deX + deW > 275) || deY < 40 || (deH < 25 || deW < 25))
+          //      continue;
 
             // 禁止在元素内判断其他元素
             if (flag_work == WORK_NONE && flag_gas == GAS_NONE &&
