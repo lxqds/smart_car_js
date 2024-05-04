@@ -159,7 +159,7 @@ void run_save()
                         if (IMG.encoder.route - save_route2 > IMG._config->left_rou_in)
                         {
                             save_route = IMG.encoder.route;
-                            flag_save = LEFT_RUN;
+                            flag_save = Left_RUN;
                             MAT_LOG("LEFT_RUN");
                         }
                     }
@@ -168,14 +168,14 @@ void run_save()
             else
             {
                 save_route = IMG.encoder.route;
-                flag_save = LEFT_RUN;
+                flag_save = Left_RUN;
                 MAT_LOG("SAVE_RUN2222");
             }
         }
 
         // *****************************************************************
         //进去后直行一段距离
-        if (flag_save == LEFT_RUN)
+        if (flag_save == Left_RUN)
         {
             // 清弯道防止加大 P 项, 提高稳定性
             IMG.is_curve0 = IMG.is_curve1 = false;
@@ -273,7 +273,7 @@ void run_save()
         {
             if ((save_route - IMG.encoder.route >= IMG._config->left_rou_out) && (IMG.path_last_edge_left.size() < 1 && IMG.path_last_edge_right.size() < 1))
             {
-                flag_work = Left_OUT_STOP;
+                flag_save = Left_OUT_STOP;
             }
             else
             {
