@@ -47,17 +47,22 @@ struct ControlConfig
 
     float send_k;              // 舵机发送系数
 
-    uint8_t save_error;        //救援区域识别超出一定区域
-    uint8_t left_rou_in_total;    //区进入的总路程
-    uint8_t left_rou_ready;    //区准备进入积分
-    uint8_t left_rou_in;        //区进入积分
-    uint8_t left_rou_run;       //区内部积分
-    uint8_t left_rou_out;        //区驶离积分
-    uint8_t left_rou_none;        //区完成积分
-    uint8_t left_rou_over;        //区完成积分
-    uint8_t left_stop_time;        //停止时间
-    uint8_t left_out_stop_time;    //出来停止时间
-    uint8_t left_out_speedup_time;//加速时间
+    uint8_t check_save_;
+    uint8_t save_error;            //救援区域识别超出一定区域
+    uint8_t left_rou_in_total;     //区进入的总路程
+    uint8_t left_rou_ready;        //区准备进入积分
+    uint8_t left_rou_in;            //区进入积分
+    uint8_t left_rou_run;           //区内部积分
+    uint8_t left_rou_out;            //区驶离积分
+    uint8_t left_rou_none;            //区完成积分
+    uint8_t left_rou_over;            //区完成积分
+    uint8_t left_stop_time;            //停止时间
+    uint8_t left_out_stop_time;        //出来停止时间
+    uint8_t left_out_speedup_time;    //加速时间
+    uint16_t speed_save;             // 出入施工区速度
+    uint16_t save_stop_time;         // 停在施工区时间
+    uint16_t save_out_stop_time;     // 出去停车的时间
+    uint16_t save_out_speedup_time;
 
     uint8_t gas_which;         // 自定义谷仓出口
     uint8_t gas_rou_ready;     // 加油站准备进入积分
@@ -164,6 +169,23 @@ struct ControlConfig
         AUTOCFG(ai_p);
         AUTOCFG(ai_d);
         AUTOCFG(send_k);
+
+        AUTOCFG(check_save_);
+        AUTOCFG(save_error);
+        AUTOCFG(left_rou_in_total);
+        AUTOCFG(left_rou_ready);
+        AUTOCFG(left_rou_in);
+        AUTOCFG(left_rou_run);
+        AUTOCFG(left_rou_out);
+        AUTOCFG(left_rou_none);
+        AUTOCFG(left_rou_over);
+        AUTOCFG(left_stop_time);
+        AUTOCFG(left_out_stop_time);
+        AUTOCFG(left_out_speedup_time);
+        AUTOCFG(speed_save);
+        AUTOCFG(save_stop_time);
+        AUTOCFG(save_out_stop_time);
+        AUTOCFG(save_out_speedup_time);
 
         AUTOCFG(gas_which);
         AUTOCFG(gas_rou_ready);
