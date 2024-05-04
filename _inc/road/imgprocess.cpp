@@ -429,10 +429,10 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             // 尺寸位置筛选
          //   if ((deX < 25 || deX + deW > 275) || deY < 40 || (deH < 25 || deW < 25))
           //      continue;
-          log_i( "Detection GET %d ",r.type);
+          //log_i( "Detection GET %d ",r.type);
 
             // 禁止在元素内判断其他元素
-            if (1|(flag_work == WORK_NONE && flag_gas == GAS_NONE &&
+            if ((flag_work == WORK_NONE && flag_gas == GAS_NONE &&
                 flag_yroad == YROAD_NONE && flag_ramp == RAMP_NONE && flag_slow == SLOW_NONE)) {
                 
                 switch (DetectionLabel(r.type)) {
