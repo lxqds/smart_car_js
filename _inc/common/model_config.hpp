@@ -176,9 +176,6 @@ struct ControlConfig
         AUTOCFG(left_rou_out);
         AUTOCFG(left_rou_none);
         AUTOCFG(left_rou_over);
-        AUTOCFG(left_stop_time);
-        AUTOCFG(left_out_stop_time);
-        AUTOCFG(left_out_speedup_time);
         AUTOCFG(speed_save);
         AUTOCFG(save_stop_time);
         AUTOCFG(save_out_stop_time);
