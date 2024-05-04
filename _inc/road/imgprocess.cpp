@@ -592,7 +592,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
 
     // 识别元素
     if (!element_over) {
-        if(flag_save == SAVE_NONE)
+        if(flag_garage == GARAGE_NONE)
         {
             check_save();    //救援区 - 识别特殊特征
         }
