@@ -360,8 +360,8 @@ void printResults(
     DetectionPredictResult &results) {
 
         DetectionPredictResult r = results;
-        if (r.type >= 0 && (uint16_t)r.type < this->labels.size()) {
-            LOG_I << "label:" << this->labels[r.type] << LOG_END;
+        if (r.type >= 0 && (uint16_t)r.type < r.labels.size()) {
+            LOG_I << "label:" << r.labels[r.type] << LOG_END;
             LOG_I << "\t\tindex:" << r.type << ", score:" << r.score
                   << ", loc:" << r.x << ", " << r.y << ", " << r.width << ", "
                   << r.height << LOG_END;
@@ -376,9 +376,9 @@ void drawResults(
 
         DetectionPredictResult r = results;
         _boundaryCorrection(r, input_frame.cols, input_frame.rows);
-        if (r.type >= 0 && (uint16_t)r.type < this->labels.size()) {
+        if (r.type >= 0 && (uint16_t)r.type < r.labels.size()) {
             cv::Point origin(r.x, r.y);
-            std::string label_name = this->labels[r.type];
+            std::string label_name = r.labels[r.type];
             cv::putText(input_frame, label_name, origin, cv::FONT_HERSHEY_PLAIN, 1,
                         cv::Scalar(255, 0, 0, 255), 2);
         }
