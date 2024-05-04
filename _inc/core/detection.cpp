@@ -20,7 +20,7 @@ void DetectionPredictor::_boundaryCorrection(DetectionPredictResult &r,
 
 // 初始化
 int DetectionPredictor::init() {
-    /*
+   /* 
     _model_config = std::make_shared<ModelConfig>(_config_path);
 
     CHECK(_model_config != nullptr) << "Create Model config failed, config path: "
@@ -298,13 +298,15 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
         result.width = data[i + 4] - data[i + 2];
         result.height = data[i + 5] - data[i + 3];
 
-        // LOG_I << "result.type = " << result.type << "\r\n"
-        //       << "result.score = " << result.score << LOG_END;
+         //LOG_I << "result.type = " << result.type << "\r\n"
+         //      << "result.score = " << result.score << LOG_END;
         // LOG_I << "result.x = " << result.x << "\r\n"
         //       << "result.y = " << result.y << "\r\n"
         //       << "result.width = " << result.width << "\r\n"
         //       << "result.height = " << result.score << LOG_END;
-
+        //
+        //printResults(result);
+       // drawResults(input_frame,result);
         predict_ret.push_back(result);
     }
 
@@ -353,35 +355,33 @@ std::string DetectionPredictor::getLabel(uint16_t type) {
     return this->labels[type];
 }
 
-/*
+
 void DetectionPredictor::printResults(
-    std::vector<DetectionPredictResult> &results) {
-    for (uint32_t i = 0; i < results.size(); ++i) {
-        DetectionPredictResult r = results[i];
+    DetectionPredictResult &results) {
+
+        DetectionPredictResult r = results;
         if (r.type >= 0 && (uint16_t)r.type < this->labels.size()) {
             LOG_I << "label:" << this->labels[r.type] << LOG_END;
             LOG_I << "\t\tindex:" << r.type << ", score:" << r.score
                   << ", loc:" << r.x << ", " << r.y << ", " << r.width << ", "
                   << r.height << LOG_END;
         }
-    }
+    
 }
 
 
 // 针对检测结果, 进行画框操作
 void DetectionPredictor::drawResults(
-    cv::Mat &input_frame, std::vector<DetectionPredictResult> &results) {
-    for (uint32_t i = 0; i < results.size(); ++i) {
-        DetectionPredictResult r = results[i];
+    cv::Mat &input_frame, DetectionPredictResult &results) {
+
+        DetectionPredictResult r = results;
         _boundaryCorrection(r, input_frame.cols, input_frame.rows);
-        if (r.type >= 0 && (uint16_t)r.type < _model_config->labels.size()) {
+        if (r.type >= 0 && (uint16_t)r.type < this->labels.size()) {
             cv::Point origin(r.x, r.y);
-            std::string label_name = _model_config->labels[r.type];
+            std::string label_name = this->labels[r.type];
             cv::putText(input_frame, label_name, origin, cv::FONT_HERSHEY_PLAIN, 1,
                         cv::Scalar(255, 0, 0, 255), 2);
         }
         cv::Rect rect(r.x, r.y, r.width, r.height);
-        cv::rectangle(input_frame, rect, Scalar(0, 0, 224), 2);
-    }
+        cv::rectangle(input_frame, rect, cv::Scalar(0, 0, 224), 2);
 }
-*/
