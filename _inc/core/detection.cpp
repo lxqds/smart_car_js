@@ -356,7 +356,7 @@ std::string DetectionPredictor::getLabel(uint16_t type) {
 }
 
 
-void DetectionPredictor::printResults(
+void printResults(
     DetectionPredictResult &results) {
 
         DetectionPredictResult r = results;
@@ -371,7 +371,7 @@ void DetectionPredictor::printResults(
 
 
 // 针对检测结果, 进行画框操作
-void DetectionPredictor::drawResults(
+void drawResults(
     cv::Mat &input_frame, DetectionPredictResult &results) {
 
         DetectionPredictResult r = results;
