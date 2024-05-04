@@ -141,23 +141,29 @@ public:
 
     enum DetectionLabel {
         label_bomb = 0, //炸弹
-        label_cone,     //锥桶
-        label_block,    //黑块
 
         label_bridge,   //桥
 
+        label_safety,   //普通车辆
+
+        label_cone,     //锥桶
+        
         label_crosswalk,//斑马线
 
-        label_thief,    //贼
+        label_danger,   //危险车辆
+
         label_evil,     //恶人
+        label_block,    //黑块
 
         label_patient,  //病人
-        label_tumble,   //跌倒
 
         label_prop,     //道具小车
-        label_safety,   //普通车辆
+
         label_spy,      //嫌疑车辆
-        label_danger,   //危险车辆
+
+        label_thief,    //贼
+       
+        label_tumble,   //跌倒
 
     };
 
