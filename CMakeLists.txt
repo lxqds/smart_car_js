@@ -67,6 +67,8 @@ add_executable(
         _inc/road/elements/_slowzone.cpp _inc/road/elements/_slowzone.hpp
         _inc/road/elements/_save.cpp
         _inc/road/elements/_save.hpp
+        _inc/road/elements/_bomb.cpp
+        _inc/road/elements/_bomb.hpp
 )
 
 # add link some components

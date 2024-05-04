@@ -498,7 +498,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                     }break;
                     case label_tumble:      // 跌倒
                     {
-                        if (flag_save == RAMP_NONE && _config->check_save_ == 1) {
+                        if (flag_save == SAVE_NONE && _config->check_save_ == 1) {
                             flag_save = Left_DETECTION;
                             sprintf(string_log, "label_tumble_DETECTION");
                             log_i("label_tumble_DETECTION");
@@ -506,7 +506,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
 
                     }break;
                     case label_patient:     // 病人
-                        if (flag_work == RAMP_NONE && _config->check_work_ == 1) {
+                        if (flag_work == WORK_NONE && _config->check_work_ == 1) {
                             flag_work = WORK_DETECTION;
                             sprintf(string_log, "PATIENT_DETECTION");
                             log_i("PATIENT_DETECTION");
@@ -592,6 +592,10 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
 
     // 识别元素
     if (!element_over) {
+        if(flag_save == SAVE_NONE)
+        {
+            check_save();    //救援区 - 识别特殊特征
+        }
         if (flag_ramp == RAMP_NONE)
             check_garage();  // 斑马线 - 识别特殊特征
 
@@ -629,6 +633,16 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     // 根据检查结果执行模式
     if (flag_garage != GARAGE_NONE) {
         run_garage();
+        /* *** *** *** *** *** */
+        flag_work = WORK_NONE;
+        flag_gas = GAS_NONE;
+        flag_yroad = YROAD_NONE;
+        flag_ramp = RAMP_NONE;
+        flag_slow = SLOW_NONE;
+        flag_circle = CIRCLE_NONE;
+        flag_cross = CROSS_NONE;
+    } else if (flag_save != SAVE_NONE) {
+        run_save();
         /* *** *** *** *** *** */
         flag_work = WORK_NONE;
         flag_gas = GAS_NONE;

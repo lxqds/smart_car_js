@@ -23,7 +23,6 @@ float save_route2 = 0; // 施工区编码器积分
 POINT save_near_cone;  // 较近的锥桶
 StopWatch save_stop_clock;
 StopWatch save_stop_clock_2;
-double stop_time;
 
 /* ********************************************************************* */
 
