@@ -20,7 +20,6 @@ float work_route2 = 0; // 施工区编码器积分
 POINT work_near_cone;  // 较近的锥桶
 StopWatch stop_clock;
 StopWatch stop_clock_2;
-double stop_time;
 
 /* ********************************************************************* */
 
