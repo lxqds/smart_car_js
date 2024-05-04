@@ -21,8 +21,8 @@ extern ImageProcess imgprocess;
 float save_route = 0;  // 施工区编码器积分
 float save_route2 = 0; // 施工区编码器积分
 POINT save_near_cone;  // 较近的锥桶
-StopWatch stop_clock;
-StopWatch stop_clock_2;
+StopWatch save_stop_clock;
+StopWatch save_stop_clock_2;
 double stop_time;
 
 /* ********************************************************************* */
@@ -249,7 +249,7 @@ void run_save()
             {
                 save_route = IMG.encoder.route;
                 flag_save = Left_STOP;
-                stop_clock.tic();
+                save_stop_clock.tic();
                 MAT_LOG("LEFT_RUN_STOP");
             }
         }
@@ -257,7 +257,7 @@ void run_save()
 
         if (flag_save == Left_STOP)
         {
-            if (stop_clock.toc() > IMG._config->left_stop_time)
+            if (save_stop_clock.toc() > IMG._config->left_stop_time)
             {
                 MAT_LOG("Left_STOPFINISH");
                 flag_save = Left_OUT;
@@ -297,7 +297,7 @@ void run_save()
                     {
                         flag_save = Left_OUT_STOP;
                         MAT_LOG("AIM_SPEED = 0");
-                        stop_clock_2.tic();
+                        save_stop_clock_2.tic();
                     }
                     MAT_LOG("NONE_POINT = 0");
                 }
@@ -305,16 +305,16 @@ void run_save()
         }
         if (flag_save == Left_OUT_STOP)
         {
-            if (stop_clock_2.toc() > IMG._config->left_out_stop_time)
+            if (save_stop_clock_2.toc() > IMG._config->left_out_stop_time)
             {
-                stop_clock_2.tic();
+                save_stop_clock_2.tic();
                 MAT_LOG("Left_OUT_SPEEDUP");
                 flag_save = Left_OUT_SPEEDUP;
             }
         }
         if (flag_save == Left_OUT_SPEEDUP)
         {
-            if (stop_clock_2.toc() > IMG._config->left_out_speedup_time)
+            if (save_stop_clock_2.toc() > IMG._config->left_out_speedup_time)
             {
                 MAT_LOG("Left_OUT_RUN");
                 flag_save = Left_OUT_RUN;
