@@ -306,7 +306,7 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
         //       << "result.height = " << result.score << LOG_END;
         //
         //printResults(result);
-       // drawResults(input_frame,result);
+        drawResults(input_frame,result);
         predict_ret.push_back(result);
     }
 
