@@ -30,12 +30,6 @@ void check_bomb()
         MAT_LOG("BOMB_FOUND");
     }
 
-    if (flag_save == Right_DETECTION)
-    {
-        IMG.element_identify = 1;
-        flag_bomb = Right_FOUND;
-        MAT_LOG("BOMB_FOUND");
-    }
 }
 
 /* ********************************************************************* */
