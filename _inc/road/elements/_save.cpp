@@ -256,7 +256,7 @@ void run_save()
 
         if (flag_save == Left_STOP)
         {
-            if (save_stop_clock.toc() > IMG._config->left_stop_time)
+            if (save_stop_clock.toc() > IMG._config->save_stop_time)
             {
                 MAT_LOG("Left_STOPFINISH");
                 flag_save = Left_OUT;
@@ -304,7 +304,7 @@ void run_save()
         }
         if (flag_save == Left_OUT_STOP)
         {
-            if (save_stop_clock_2.toc() > IMG._config->left_out_stop_time)
+            if (save_stop_clock_2.toc() > IMG._config->save_out_stop_time)
             {
                 save_stop_clock_2.tic();
                 MAT_LOG("Left_OUT_SPEEDUP");
@@ -313,7 +313,7 @@ void run_save()
         }
         if (flag_save == Left_OUT_SPEEDUP)
         {
-            if (save_stop_clock_2.toc() > IMG._config->left_out_speedup_time)
+            if (save_stop_clock_2.toc() > IMG._config->save_out_speedup_time)
             {
                 MAT_LOG("Left_OUT_RUN");
                 flag_save = Left_OUT_RUN;
@@ -334,7 +334,7 @@ void run_save()
             /*IMG.special_w_c = true;
             IMG.special_w = true;*/
             IMG.element_over = true;
-            IMG.element_over_route = IMG.encoder.route + IMG._config->work_rou_over;
+            IMG.element_over_route = IMG.encoder.route + IMG._config->left_rou_over;
             flag_save = SAVE_NONE;
             MAT_LOG("SAVE_NONE");
         }

@@ -56,13 +56,10 @@ struct ControlConfig
     uint8_t left_rou_out;            //区驶离积分
     uint8_t left_rou_none;            //区完成积分
     uint8_t left_rou_over;            //区完成积分
-    uint8_t left_stop_time;            //停止时间
-    uint8_t left_out_stop_time;        //出来停止时间
-    uint8_t left_out_speedup_time;    //加速时间
-    uint16_t speed_save;             // 出入施工区速度
-    uint16_t save_stop_time;         // 停在施工区时间
+    uint16_t speed_save;             // 出入救援区速度
+    uint16_t save_stop_time;         // 停在救援区时间
     uint16_t save_out_stop_time;     // 出去停车的时间
-    uint16_t save_out_speedup_time;
+    uint16_t save_out_speedup_time;  // 出去救援区加速时间
 
     uint8_t gas_which;         // 自定义谷仓出口
     uint8_t gas_rou_ready;     // 加油站准备进入积分
