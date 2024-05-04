@@ -19,6 +19,7 @@
 #include "elements/_work.hpp"
 #include "elements/_yroad.hpp"
 #include "elements/_slowzone.hpp"
+#include "elements/_save.hpp"
 
 class ImageProcess {
 public:

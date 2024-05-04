@@ -13,6 +13,9 @@
     "over_route_": 5,
     "check_garage_times_": 1,
     "check_garage_AI": 0,
+
+    "check_save_": 1,
+
     "check_work_": 1,
     "check_gas_": 1,
     "check_yroad_": 0,
@@ -25,6 +28,21 @@
     "ai_p": 1.555,
     "ai_d": 7.666,
     "send_k": 3.0,
+
+    "save_error":170,
+    "left_rou_in_total": 55,
+    "left_rou_ready":30,
+    "left_rou_in":25,
+    "left_rou_run": 1,
+    "left_rou_out": 30,
+    "left_rou_none": 10,
+    "left_rou_over": 1,
+    "left_stop_time": 500,
+    "left_out_stop_time": 100,
+    "left_out_speedup_time": 800,
+    "speed_save": 1000,
+    "speed_save_out_speedup": 700,
+
     "gas_which": 2,
     "gas_rou_ready": 80,
     "gas_rou_run1": 55,

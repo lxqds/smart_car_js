@@ -498,8 +498,12 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                     }break;
                     case label_tumble:      // 跌倒
                     {
-                        sprintf(string_log, "label_tumble_DETECTION");
-                        log_i("label_tumble_DETECTION");
+                        if (flag_save == RAMP_NONE && _config->check_save_ == 1) {
+                            flag_save = Left_DETECTION;
+                            sprintf(string_log, "label_tumble_DETECTION");
+                            log_i("label_tumble_DETECTION");
+                        }
+
                     }break;
                     case label_patient:     // 病人
                         if (flag_work == RAMP_NONE && _config->check_work_ == 1) {
@@ -686,8 +690,28 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     /* **************************** 中线处理 **************************** */
     /* ***************************************************************** */
 
+    // 救援区 锥桶拟合边线
+    if (flag_save > Left_FOUND) {
+        int dist = 0;  // 边线偏移
+        if (flag_gas == GAS_RUN || flag_work == WORK_RUN)
+            dist = 50;
+
+        if (flag_track == TRACK_LEFT) {
+            track_leftline(det_rptss, det_rptss_num, rpts,
+                           (int)round(ANGLE_DIST / SAMPLE_DIST),
+                           PIXEL_PER_METER * ROAD_WIDTH / 2 + dist);
+        } else {
+            track_rightline(det_rptss, det_rptss_num, rpts,
+                            (int)round(ANGLE_DIST / SAMPLE_DIST),
+                            PIXEL_PER_METER * ROAD_WIDTH / 2 + dist);
+        }
+        rpts_num = det_rptss_num;
+        // 透视 -> 原图
+        for (int i = 0; i < rpts_num; i++)
+            map_perspective(rpts[i][0], rpts[i][1], rpts[i], 1);
+    }
     // 加油站 & 施工区 锥桶拟合边线
-    if (flag_gas > GAS_FOUND || flag_work > WORK_FOUND) {
+    else if (flag_gas > GAS_FOUND || flag_work > WORK_FOUND) {
         int dist = 0;  // 边线偏移
         if (flag_gas == GAS_RUN || flag_work == WORK_RUN)
             dist = 50;
@@ -851,6 +875,10 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         aim_angle = aim_angle_last;
         aim_sigma = 100.0f;
 
+        // 救援区丢线
+        if (flag_save != SAVE_NONE)
+            aim_angle = aim_angle_last;
+
         // 加油站丢线
         if (flag_gas != GAS_NONE)
             aim_angle = aim_angle_last;
@@ -896,6 +924,24 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         /// 入库 加大角度 P 项
         aim_angle_p += _config->deviation_garage_in_p;
     }  // 入库
+    //
+	else if (flag_save == Left_READY) {
+	    aim_speed = _config->speed_save;
+	} else if (flag_save == Left_RUN) {
+	    aim_speed = _config->speed_save;
+	}  // 施工区 内
+	else if (flag_save == Left_STOP) {
+	    aim_speed = 0;
+	    aim_angle = 0;
+	} else if (flag_save == Left_OUT) {
+	    aim_speed = (_config->speed_save * -1.0f);
+	} else if (flag_save == Left_OUT_STOP) {
+	    aim_speed = 0;
+	} else if (flag_save == Left_OUT_SPEEDUP) {
+	    aim_speed = _config->speed_work_out_speedup;
+	}
+
+
     else if (flag_work == WORK_READY) {
         aim_speed = _config->speed_work;
     } else if (flag_work == WORK_RUN) {
@@ -1102,8 +1148,8 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         }
         // 其他情况 ------------------------------------------------
         else {
-            // 施工区 & 加油站---------------------------------------
-            if (flag_gas != GAS_NONE || flag_work != WORK_NONE) {
+            // 施工区 & 加油站 & 救援区---------------------------------------
+            if (flag_gas != GAS_NONE || flag_work != WORK_NONE||flag_gas != SAVE_NONE) {
                 // 锥桶
                 for (auto p : edge_det) {
                     cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);

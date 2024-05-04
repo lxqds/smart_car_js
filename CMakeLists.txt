@@ -64,7 +64,10 @@ aux_source_directory(_src YYDS_SOURCES)
 add_executable(
     ${YYDS}
     ${YYDS_SOURCES}
-        _inc/road/elements/_slowzone.cpp _inc/road/elements/_slowzone.hpp)
+        _inc/road/elements/_slowzone.cpp _inc/road/elements/_slowzone.hpp
+        _inc/road/elements/_save.cpp
+        _inc/road/elements/_save.hpp
+)
 
 # add link some components
 target_link_libraries(${YYDS} PRIVATE capture)

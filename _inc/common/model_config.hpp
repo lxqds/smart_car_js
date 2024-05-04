@@ -46,6 +46,19 @@ struct ControlConfig
     float ai_d;   // 特殊元素 D
 
     float send_k;              // 舵机发送系数
+
+    uint8_t save_error;        //救援区域识别超出一定区域
+    uint8_t left_rou_in_total;    //区进入的总路程
+    uint8_t left_rou_ready;    //区准备进入积分
+    uint8_t left_rou_in;        //区进入积分
+    uint8_t left_rou_run;       //区内部积分
+    uint8_t left_rou_out;        //区驶离积分
+    uint8_t left_rou_none;        //区完成积分
+    uint8_t left_rou_over;        //区完成积分
+    uint8_t left_stop_time;        //停止时间
+    uint8_t left_out_stop_time;    //出来停止时间
+    uint8_t left_out_speedup_time;//加速时间
+
     uint8_t gas_which;         // 自定义谷仓出口
     uint8_t gas_rou_ready;     // 加油站准备进入积分
     uint8_t gas_rou_run1;      // 加油站内部 #1 积分
