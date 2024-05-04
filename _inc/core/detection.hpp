@@ -84,12 +84,11 @@ public:
     void TransposeAndCopyToTensor(const cv::Mat &src, NDTensor &dst);
     std::string getLabel(uint16_t type);
 
-    /*
+
     void printResults(std::vector<DetectionPredictResult> &results);
 
 
     void drawResults(cv::Mat &input_frame, std::vector<DetectionPredictResult> &results);
-    */
 };
 
 class Detection
