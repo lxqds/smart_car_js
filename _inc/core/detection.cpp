@@ -356,12 +356,12 @@ std::string DetectionPredictor::getLabel(uint16_t type) {
 }
 
 
-void printResults(
+void DetectionPredictor::printResults(
     DetectionPredictResult &results) {
 
         DetectionPredictResult r = results;
-        if (r.type >= 0 && (uint16_t)r.type < r.labels.size()) {
-            LOG_I << "label:" << r.labels[r.type] << LOG_END;
+        if (r.type >= 0 && (uint16_t)r.type < this->labels.size()) {
+            LOG_I << "label:" << this->labels[r.type] << LOG_END;
             LOG_I << "\t\tindex:" << r.type << ", score:" << r.score
                   << ", loc:" << r.x << ", " << r.y << ", " << r.width << ", "
                   << r.height << LOG_END;
@@ -371,17 +371,18 @@ void printResults(
 
 
 // 针对检测结果, 进行画框操作
-void drawResults(
+void DetectionPredictor::drawResults(
     cv::Mat &input_frame, DetectionPredictResult &results) {
 
         DetectionPredictResult r = results;
         _boundaryCorrection(r, input_frame.cols, input_frame.rows);
-        if (r.type >= 0 && (uint16_t)r.type < r.labels.size()) {
+        if (r.type >= 0 && (uint16_t)r.type < this->labels.size()) {
             cv::Point origin(r.x, r.y);
-            std::string label_name = r.labels[r.type];
+            std::string label_name = this->labels[r.type];
             cv::putText(input_frame, label_name, origin, cv::FONT_HERSHEY_PLAIN, 1,
                         cv::Scalar(255, 0, 0, 255), 2);
         }
         cv::Rect rect(r.x, r.y, r.width, r.height);
         cv::rectangle(input_frame, rect, cv::Scalar(0, 0, 224), 2);
 }
+
