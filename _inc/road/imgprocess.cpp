@@ -617,7 +617,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             flag_gas == GAS_NONE && flag_yroad == YROAD_NONE)
             check_slow();  // 慢行区 - 识别标志
 
-        if (_config->check_cross_ == 1 &&
+        if (_config->check_cross_ == 1 && flag_save == SAVE_NONE &&
             flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
             flag_gas == GAS_NONE && flag_yroad == YROAD_NONE &&
             flag_ramp == RAMP_NONE && flag_slow == SLOW_NONE && flag_circle <= 2)
@@ -889,6 +889,9 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         aim_angle = aim_angle_last;
         aim_sigma = 100.0f;
 
+        // 救援区丢线
+        if (flag_save != SAVE_NONE)
+            aim_angle = aim_angle_last;
         // 救援区丢线
         if (flag_save != SAVE_NONE)
             aim_angle = aim_angle_last;
