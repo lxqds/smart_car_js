@@ -429,7 +429,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
             log_i( "Detection GET %d ",r.type);
             // 尺寸位置筛选
             if ((deX < 10 || deX + deW > 300) || deY < 20 || (deH < 25 || deW < 25))
-                continue;
+                //continue;
 
             // 禁止在元素内判断其他元素
             if ((flag_work == WORK_NONE && flag_gas == GAS_NONE &&
