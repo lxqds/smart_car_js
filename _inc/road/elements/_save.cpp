@@ -154,7 +154,7 @@ void run_save()
                         IMG.edge_right = repair;
                         IMG.path_last_edge_right.push_back(IMG.edge_right);
                         MAT_LOG("LEFT_SECOND");
-
+                        LOG_I << "route= " << IMG.encoder.route << "   save_route2= " << save_route2 << LOG_END;
                         if (IMG.encoder.route - save_route2 > IMG._config->left_rou_in)
                         {
                             save_route = IMG.encoder.route;
