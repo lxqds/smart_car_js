@@ -9301,3 +9301,1947 @@
 [36;22mI/System       [04:31:49] (yyds.cpp 204) serial stopped.[0m
 [36;22mI/System       [04:31:49] (yyds.cpp 207) Exit Code: 0[0m
 [36;22mI/System       [04:31:49] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [21:10:07] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [21:10:07] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [21:10:08] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [21:10:08] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [21:10:08] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [21:10:08] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [21:10:08] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [21:10:08] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [21:10:08] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [21:10:08] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [21:10:09] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [21:10:09] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [21:10:09] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [21:10:09] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [21:10:09] (detection.hpp 164) Start![0m
+[36;22mI/Display      [21:10:09] (display.cpp 35) Start![0m
+[36;22mI/Main         [21:10:09] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [21:10:09] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [21:10:09] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/System       [21:10:53] (capture.cpp 94) Run![0m
+[36;22mI/System       [21:10:56] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [21:10:56] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [21:10:56] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [21:10:57] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [21:10:57] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [21:10:57] (display.cpp 50) Stop.[0m
+[36;22mI/System       [21:10:57] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [21:10:57] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [21:10:57] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [21:10:57] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [21:10:57] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [21:11:22] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [21:11:22] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [21:11:24] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [21:11:24] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [21:11:24] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [21:11:24] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [21:11:24] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [21:11:24] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [21:11:24] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [21:11:24] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [21:11:25] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [21:11:25] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [21:11:25] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [21:11:25] (detection.hpp 164) Start![0m
+[36;22mI/Display      [21:11:25] (display.cpp 35) Start![0m
+[36;22mI/Main         [21:11:25] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [21:11:25] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [21:11:25] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/System       [21:11:31] (capture.cpp 94) Run![0m
+[36;22mI/Cross        [21:11:33] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:11:33] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:11:33] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [21:11:33] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:11:33] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:11:33] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/System       [21:11:35] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [21:11:35] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [21:11:35] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [21:11:35] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [21:11:35] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [21:11:35] (display.cpp 50) Stop.[0m
+[36;22mI/System       [21:11:35] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [21:11:35] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [21:11:35] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [21:11:35] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [21:11:35] (yyds.cpp 208) Finish !!![0m
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       [36;22mI/NO_TAG       [21:19:22] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [21:19:22] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [21:19:24] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [21:19:24] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [21:19:24] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [21:19:24] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [21:19:24] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [21:19:24] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [21:19:24] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [21:19:24] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [21:19:25] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [21:19:25] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [21:19:25] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [21:19:25] (detection.hpp 164) Start![0m
+[36;22mI/Display      [21:19:25] (display.cpp 35) Start![0m
+[36;22mI/Main         [21:19:25] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [21:19:25] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [21:19:25] (yyds.cpp 90) kd=0.00[0m
+[31;22mE/Capture      [21:19:35] (capture.cpp 75) UsbCamera read failed.[0m
+[36;22mI/NO_TAG       [21:19:45] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [21:19:45] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [21:19:46] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [21:19:46] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [21:19:46] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [21:19:46] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [21:19:46] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [21:19:46] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [21:19:46] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [21:19:47] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [21:19:47] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [21:19:47] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [21:19:47] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [21:19:47] (detection.hpp 164) Start![0m
+[36;22mI/Display      [21:19:47] (display.cpp 35) Start![0m
+[36;22mI/Main         [21:19:47] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [21:19:47] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [21:19:47] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/DetPredictor [21:19:53] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:53] (detection.cpp 365) 		index:1, score:0.55, loc:21, 12, 61, 28[0m
+[36;22mI/Run          [21:19:53] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:19:53] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [21:19:53] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/DetPredictor [21:19:53] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:53] (detection.cpp 365) 		index:1, score:0.55, loc:23, 2, 61, 28[0m
+[36;22mI/Run          [21:19:53] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:54] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:54] (detection.cpp 365) 		index:1, score:0.72, loc:24, 2, 61, 28[0m
+[36;22mI/Run          [21:19:54] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:54] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:54] (detection.cpp 365) 		index:1, score:0.70, loc:24, 2, 61, 28[0m
+[36;22mI/Run          [21:19:54] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:54] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:54] (detection.cpp 365) 		index:1, score:0.61, loc:22, 1, 61, 28[0m
+[36;22mI/Run          [21:19:54] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:54] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:54] (detection.cpp 365) 		index:1, score:0.62, loc:19, 2, 61, 28[0m
+[36;22mI/Run          [21:19:54] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:54] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:54] (detection.cpp 365) 		index:1, score:0.75, loc:22, 1, 61, 28[0m
+[36;22mI/Run          [21:19:54] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:54] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:54] (detection.cpp 365) 		index:1, score:0.61, loc:24, 2, 61, 28[0m
+[36;22mI/Run          [21:19:54] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:55] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:55] (detection.cpp 365) 		index:1, score:0.61, loc:31, 2, 61, 28[0m
+[36;22mI/Run          [21:19:55] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:57] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:57] (detection.cpp 365) 		index:1, score:0.70, loc:23, 9, 61, 28[0m
+[36;22mI/Run          [21:19:57] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:57] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:57] (detection.cpp 365) 		index:1, score:0.53, loc:22, 8, 61, 28[0m
+[36;22mI/Run          [21:19:58] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 365) 		index:1, score:0.52, loc:15, 7, 79, 28[0m
+[36;22mI/Run          [21:19:58] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 365) 		index:1, score:0.66, loc:20, 9, 61, 28[0m
+[36;22mI/Run          [21:19:58] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 365) 		index:1, score:0.65, loc:23, 8, 61, 28[0m
+[36;22mI/Run          [21:19:58] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 365) 		index:1, score:0.75, loc:20, 7, 61, 28[0m
+[36;22mI/Run          [21:19:58] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 365) 		index:1, score:0.81, loc:21, 8, 61, 28[0m
+[36;22mI/Run          [21:19:58] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 365) 		index:1, score:0.73, loc:23, 9, 61, 28[0m
+[36;22mI/Run          [21:19:58] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 365) 		index:1, score:0.69, loc:21, 8, 61, 28[0m
+[36;22mI/Run          [21:19:58] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 365) 		index:1, score:0.76, loc:22, 8, 61, 28[0m
+[36;22mI/Run          [21:19:58] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 365) 		index:1, score:0.67, loc:22, 10, 61, 28[0m
+[36;22mI/Run          [21:19:58] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 365) 		index:1, score:0.76, loc:23, 8, 61, 28[0m
+[36;22mI/Run          [21:19:58] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:58] (detection.cpp 365) 		index:1, score:0.66, loc:21, 10, 61, 28[0m
+[36;22mI/Run          [21:19:58] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 365) 		index:1, score:0.65, loc:24, 11, 61, 28[0m
+[36;22mI/Run          [21:19:59] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 365) 		index:1, score:0.77, loc:22, 5, 61, 36[0m
+[36;22mI/Run          [21:19:59] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 365) 		index:1, score:0.65, loc:23, 11, 61, 28[0m
+[36;22mI/Run          [21:19:59] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 365) 		index:1, score:0.73, loc:24, 11, 61, 28[0m
+[36;22mI/Run          [21:19:59] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 365) 		index:1, score:0.56, loc:25, 11, 61, 28[0m
+[36;22mI/Run          [21:19:59] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 365) 		index:1, score:0.81, loc:23, 11, 61, 28[0m
+[36;22mI/Run          [21:19:59] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 365) 		index:1, score:0.67, loc:22, 10, 61, 28[0m
+[36;22mI/Run          [21:19:59] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 365) 		index:1, score:0.62, loc:21, 11, 61, 28[0m
+[36;22mI/Run          [21:19:59] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 365) 		index:1, score:0.56, loc:21, 11, 61, 28[0m
+[36;22mI/Run          [21:19:59] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:19:59] (detection.cpp 365) 		index:1, score:0.56, loc:23, 11, 61, 28[0m
+[36;22mI/Run          [21:19:59] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:00] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:00] (detection.cpp 365) 		index:1, score:0.61, loc:19, 12, 61, 28[0m
+[36;22mI/Run          [21:20:00] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:00] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:00] (detection.cpp 365) 		index:1, score:0.61, loc:21, 12, 61, 28[0m
+[36;22mI/Run          [21:20:00] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:00] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:00] (detection.cpp 365) 		index:1, score:0.73, loc:19, 11, 61, 28[0m
+[36;22mI/Run          [21:20:00] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:01] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:01] (detection.cpp 365) 		index:1, score:0.55, loc:18, 11, 61, 28[0m
+[36;22mI/Run          [21:20:01] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:01] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:01] (detection.cpp 365) 		index:1, score:0.58, loc:17, 18, 61, 28[0m
+[36;22mI/Run          [21:20:01] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:01] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:01] (detection.cpp 365) 		index:1, score:0.77, loc:9, 20, 61, 28[0m
+[36;22mI/Run          [21:20:01] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:01] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:01] (detection.cpp 365) 		index:1, score:0.72, loc:10, 21, 61, 28[0m
+[36;22mI/Run          [21:20:01] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:01] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:01] (detection.cpp 365) 		index:1, score:0.85, loc:9, 22, 61, 28[0m
+[36;22mI/Run          [21:20:01] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 365) 		index:1, score:0.81, loc:9, 20, 61, 28[0m
+[36;22mI/Run          [21:20:02] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 365) 		index:1, score:0.85, loc:8, 21, 61, 28[0m
+[36;22mI/Run          [21:20:02] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 365) 		index:1, score:0.68, loc:10, 22, 61, 28[0m
+[36;22mI/Run          [21:20:02] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 365) 		index:1, score:0.85, loc:9, 21, 61, 28[0m
+[36;22mI/Run          [21:20:02] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 365) 		index:1, score:0.62, loc:8, 21, 61, 28[0m
+[36;22mI/Run          [21:20:02] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 365) 		index:1, score:0.68, loc:5, 21, 61, 28[0m
+[36;22mI/Run          [21:20:02] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 365) 		index:1, score:0.55, loc:3, 28, 61, 28[0m
+[36;22mI/Run          [21:20:02] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 365) 		index:1, score:0.78, loc:4, 30, 61, 28[0m
+[36;22mI/Run          [21:20:02] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 365) 		index:1, score:0.56, loc:3, 29, 61, 28[0m
+[36;22mI/Run          [21:20:02] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 365) 		index:1, score:0.55, loc:1, 30, 61, 28[0m
+[36;22mI/Run          [21:20:02] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:02] (detection.cpp 365) 		index:1, score:0.78, loc:2, 30, 61, 28[0m
+[36;22mI/Run          [21:20:02] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:03] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:03] (detection.cpp 365) 		index:1, score:0.56, loc:3, 28, 61, 28[0m
+[36;22mI/Run          [21:20:03] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:03] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:03] (detection.cpp 365) 		index:1, score:0.68, loc:3, 30, 61, 28[0m
+[36;22mI/Run          [21:20:03] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:03] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:03] (detection.cpp 365) 		index:1, score:0.73, loc:53, 30, 61, 28[0m
+[36;22mI/Run          [21:20:03] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:04] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:04] (detection.cpp 365) 		index:1, score:0.53, loc:531, 0, 61, 28[0m
+[36;22mI/Run          [21:20:04] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:04] (detection.cpp 364) label:tumble[0m
+[36;22mI/DetPredictor [21:20:04] (detection.cpp 365) 		index:12, score:0.55, loc:245, 3, 61, 36[0m
+[36;22mI/Run          [21:20:04] (imgprocess.cpp 429) Detection GET 12 [0m
+[36;22mI/DetPredictor [21:20:05] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:05] (detection.cpp 365) 		index:1, score:0.55, loc:23, 20, 61, 28[0m
+[36;22mI/Run          [21:20:05] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:05] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:05] (detection.cpp 365) 		index:1, score:0.66, loc:10, 0, 61, 28[0m
+[36;22mI/Run          [21:20:05] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:05] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:05] (detection.cpp 365) 		index:1, score:0.80, loc:17, 1, 61, 28[0m
+[36;22mI/Run          [21:20:05] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:05] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:05] (detection.cpp 365) 		index:1, score:0.58, loc:16, 1, 61, 28[0m
+[36;22mI/Run          [21:20:05] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:05] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:05] (detection.cpp 365) 		index:1, score:0.61, loc:18, 0, 61, 28[0m
+[36;22mI/Run          [21:20:05] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:05] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:05] (detection.cpp 365) 		index:1, score:0.53, loc:18, 0, 61, 28[0m
+[36;22mI/Run          [21:20:05] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:05] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:05] (detection.cpp 365) 		index:1, score:0.55, loc:10, 0, 61, 28[0m
+[36;22mI/Run          [21:20:05] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:06] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:06] (detection.cpp 365) 		index:1, score:0.62, loc:16, 1, 61, 28[0m
+[36;22mI/Run          [21:20:06] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:08] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:08] (detection.cpp 365) 		index:1, score:0.73, loc:6, 1, 61, 28[0m
+[36;22mI/Run          [21:20:08] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:10] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:10] (detection.cpp 365) 		index:1, score:0.51, loc:6, 0, 61, 28[0m
+[36;22mI/Run          [21:20:10] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Ramp         [21:20:19] (_ramp.cpp 34) BRIDGE_DOWN[0m
+[36;22mI/Ramp         [21:20:19] (_ramp.cpp 42) BRIDGE_NONE[0m
+[36;22mI/System       [21:20:28] (capture.cpp 94) Run![0m
+[36;22mI/DetPredictor [21:20:40] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:40] (detection.cpp 365) 		index:3, score:0.90, loc:197, 25, 29, 37[0m
+[36;22mI/DetPredictor [21:20:40] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:40] (detection.cpp 365) 		index:3, score:0.68, loc:188, 25, 38, 37[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 365) 		index:3, score:0.56, loc:191, 17, 38, 29[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 365) 		index:3, score:0.62, loc:188, 1, 38, 22[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 365) 		index:3, score:0.94, loc:184, 1, 38, 22[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 365) 		index:3, score:0.68, loc:168, 0, 38, 29[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 365) 		index:3, score:0.95, loc:167, 1, 38, 29[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 365) 		index:3, score:0.82, loc:165, 1, 38, 29[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 365) 		index:3, score:0.56, loc:164, 4, 38, 29[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:41] (detection.cpp 365) 		index:3, score:0.82, loc:161, 9, 38, 29[0m
+[36;22mI/DetPredictor [21:20:42] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:42] (detection.cpp 365) 		index:3, score:0.68, loc:182, 28, 38, 37[0m
+[36;22mI/DetPredictor [21:20:45] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:45] (detection.cpp 365) 		index:1, score:0.54, loc:0, 18, 58, 28[0m
+[36;22mI/Run          [21:20:45] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:20:45] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [21:20:45] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/DetPredictor [21:20:45] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:45] (detection.cpp 365) 		index:1, score:0.53, loc:2, 17, 61, 36[0m
+[36;22mI/Run          [21:20:45] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:45] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:45] (detection.cpp 365) 		index:1, score:0.58, loc:3, 22, 61, 28[0m
+[36;22mI/Run          [21:20:45] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:45] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:45] (detection.cpp 365) 		index:1, score:0.65, loc:1, 28, 61, 28[0m
+[36;22mI/Run          [21:20:45] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:45] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:45] (detection.cpp 365) 		index:1, score:0.71, loc:0, 27, 59, 28[0m
+[36;22mI/Run          [21:20:45] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:46] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:46] (detection.cpp 365) 		index:1, score:0.81, loc:5, 38, 61, 28[0m
+[36;22mI/Run          [21:20:46] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:46] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:46] (detection.cpp 365) 		index:1, score:0.56, loc:6, 31, 61, 28[0m
+[36;22mI/Run          [21:20:46] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 365) 		index:1, score:0.85, loc:10, 22, 61, 28[0m
+[36;22mI/Run          [21:20:47] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 365) 		index:1, score:0.72, loc:16, 21, 61, 28[0m
+[36;22mI/Run          [21:20:47] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 365) 		index:1, score:0.90, loc:10, 22, 61, 28[0m
+[36;22mI/Run          [21:20:47] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 365) 		index:1, score:0.78, loc:11, 22, 61, 28[0m
+[36;22mI/Run          [21:20:47] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 365) 		index:1, score:0.87, loc:10, 23, 61, 28[0m
+[36;22mI/Run          [21:20:47] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 365) 		index:1, score:0.56, loc:11, 22, 61, 28[0m
+[36;22mI/Run          [21:20:47] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 365) 		index:1, score:0.68, loc:9, 29, 61, 28[0m
+[36;22mI/Run          [21:20:47] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 365) 		index:1, score:0.56, loc:10, 25, 61, 36[0m
+[36;22mI/Run          [21:20:47] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 365) 		index:1, score:0.68, loc:11, 31, 61, 28[0m
+[36;22mI/Run          [21:20:47] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:47] (detection.cpp 365) 		index:1, score:0.66, loc:19, 32, 61, 28[0m
+[36;22mI/Run          [21:20:47] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:48] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:48] (detection.cpp 365) 		index:1, score:0.64, loc:21, 38, 61, 28[0m
+[36;22mI/Run          [21:20:48] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:48] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:48] (detection.cpp 365) 		index:1, score:0.85, loc:21, 40, 61, 28[0m
+[36;22mI/Run          [21:20:48] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:49] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:49] (detection.cpp 365) 		index:1, score:0.66, loc:28, 40, 48, 28[0m
+[36;22mI/Run          [21:20:49] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:49] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:49] (detection.cpp 365) 		index:1, score:0.81, loc:8, 38, 61, 28[0m
+[36;22mI/Run          [21:20:49] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:50] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:50] (detection.cpp 365) 		index:1, score:0.89, loc:3, 27, 61, 28[0m
+[36;22mI/Run          [21:20:50] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:50] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:50] (detection.cpp 365) 		index:1, score:0.83, loc:8, 27, 61, 28[0m
+[36;22mI/Run          [21:20:50] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:50] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:50] (detection.cpp 365) 		index:1, score:0.82, loc:4, 30, 61, 28[0m
+[36;22mI/Run          [21:20:50] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:50] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:50] (detection.cpp 365) 		index:1, score:0.72, loc:3, 29, 61, 28[0m
+[36;22mI/Run          [21:20:50] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:50] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:50] (detection.cpp 365) 		index:1, score:0.90, loc:0, 30, 58, 28[0m
+[36;22mI/Run          [21:20:50] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:50] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:50] (detection.cpp 365) 		index:1, score:0.56, loc:3, 27, 48, 36[0m
+[36;22mI/Run          [21:20:50] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:52] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:52] (detection.cpp 365) 		index:1, score:0.86, loc:18, 20, 61, 28[0m
+[36;22mI/Run          [21:20:52] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:52] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:52] (detection.cpp 365) 		index:3, score:0.56, loc:206, 0, 29, 28[0m
+[36;22mI/DetPredictor [21:20:53] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:53] (detection.cpp 365) 		index:3, score:0.78, loc:318, 0, 38, 22[0m
+[36;22mI/DetPredictor [21:20:54] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:54] (detection.cpp 365) 		index:3, score:0.56, loc:199, 0, 30, 16[0m
+[36;22mI/DetPredictor [21:20:54] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:20:54] (detection.cpp 365) 		index:1, score:0.69, loc:528, 0, 61, 27[0m
+[36;22mI/DetPredictor [21:20:54] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:54] (detection.cpp 365) 		index:3, score:0.82, loc:188, 9, 38, 29[0m
+[36;22mI/Run          [21:20:54] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:20:54] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:54] (detection.cpp 365) 		index:3, score:0.88, loc:167, 16, 38, 37[0m
+[36;22mI/DetPredictor [21:20:55] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:55] (detection.cpp 365) 		index:3, score:0.68, loc:137, 4, 38, 29[0m
+[36;22mI/DetPredictor [21:20:55] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:55] (detection.cpp 365) 		index:3, score:0.67, loc:10, 55, 110, 190[0m
+[36;22mI/DetPredictor [21:20:55] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:55] (detection.cpp 365) 		index:3, score:0.56, loc:201, 0, 29, 28[0m
+[36;22mI/DetPredictor [21:20:55] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:55] (detection.cpp 365) 		index:3, score:0.56, loc:191, 3, 38, 29[0m
+[36;22mI/DetPredictor [21:20:56] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:56] (detection.cpp 365) 		index:3, score:0.78, loc:184, 3, 38, 29[0m
+[36;22mI/DetPredictor [21:20:56] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:56] (detection.cpp 365) 		index:3, score:0.82, loc:180, 0, 38, 28[0m
+[36;22mI/DetPredictor [21:20:56] (detection.cpp 364) label:prop[0m
+[36;22mI/DetPredictor [21:20:56] (detection.cpp 365) 		index:9, score:0.60, loc:117, 1, 38, 29[0m
+[36;22mI/Run          [21:20:56] (imgprocess.cpp 429) Detection GET 9 [0m
+[36;22mI/DetPredictor [21:20:56] (detection.cpp 364) label:prop[0m
+[36;22mI/DetPredictor [21:20:56] (detection.cpp 365) 		index:9, score:0.64, loc:93, 4, 38, 22[0m
+[36;22mI/Run          [21:20:56] (imgprocess.cpp 429) Detection GET 9 [0m
+[36;22mI/DetPredictor [21:20:56] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:56] (detection.cpp 365) 		index:3, score:0.56, loc:551, 24, 38, 37[0m
+[36;22mI/DetPredictor [21:20:56] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:56] (detection.cpp 365) 		index:3, score:0.85, loc:32, 9, 38, 37[0m
+[36;22mI/DetPredictor [21:20:56] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:56] (detection.cpp 365) 		index:3, score:0.56, loc:526, 33, 38, 37[0m
+[36;22mI/DetPredictor [21:20:57] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:57] (detection.cpp 365) 		index:3, score:0.90, loc:29, 26, 38, 37[0m
+[36;22mI/DetPredictor [21:20:57] (detection.cpp 364) label:prop[0m
+[36;22mI/DetPredictor [21:20:57] (detection.cpp 365) 		index:9, score:0.62, loc:374, 3, 48, 36[0m
+[36;22mI/Run          [21:20:57] (imgprocess.cpp 429) Detection GET 9 [0m
+[36;22mI/DetPredictor [21:20:58] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:20:58] (detection.cpp 365) 		index:3, score:0.56, loc:145, 131, 374, 247[0m
+[36;22mI/DetPredictor [21:21:00] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:21:00] (detection.cpp 365) 		index:1, score:0.73, loc:99, 18, 61, 28[0m
+[36;22mI/Run          [21:21:00] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:21:01] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:21:01] (detection.cpp 365) 		index:1, score:0.55, loc:62, 21, 61, 28[0m
+[36;22mI/Run          [21:21:01] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:21:03] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:21:03] (detection.cpp 365) 		index:1, score:0.68, loc:69, 2, 61, 28[0m
+[36;22mI/Run          [21:21:03] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:21:07] (detection.cpp 364) label:safety[0m
+[36;22mI/DetPredictor [21:21:07] (detection.cpp 365) 		index:2, score:0.67, loc:14, 108, 48, 28[0m
+[36;22mI/Run          [21:21:07] (imgprocess.cpp 429) Detection GET 2 [0m
+[36;22mI/DetPredictor [21:21:08] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:08] (detection.cpp 365) 		index:3, score:0.62, loc:55, 105, 29, 37[0m
+[36;22mI/DetPredictor [21:21:08] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:08] (detection.cpp 365) 		index:3, score:0.78, loc:102, 139, 29, 37[0m
+[36;22mI/DetPredictor [21:21:08] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:08] (detection.cpp 365) 		index:3, score:0.62, loc:22, 122, 38, 29[0m
+[36;22mI/DetPredictor [21:21:09] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:09] (detection.cpp 365) 		index:3, score:0.62, loc:291, 0, 29, 28[0m
+[36;22mI/DetPredictor [21:21:10] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:10] (detection.cpp 365) 		index:3, score:0.68, loc:283, 2, 29, 22[0m
+[36;22mI/DetPredictor [21:21:10] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:10] (detection.cpp 365) 		index:3, score:0.62, loc:282, 0, 29, 28[0m
+[36;22mI/DetPredictor [21:21:10] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:10] (detection.cpp 365) 		index:3, score:0.90, loc:298, 8, 29, 37[0m
+[36;22mI/DetPredictor [21:21:11] (detection.cpp 364) label:block[0m
+[36;22mI/DetPredictor [21:21:11] (detection.cpp 365) 		index:7, score:0.51, loc:312, 0, 79, 28[0m
+[36;22mI/Run          [21:21:11] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/DetPredictor [21:21:12] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:12] (detection.cpp 365) 		index:3, score:0.95, loc:558, 70, 38, 37[0m
+[36;22mI/DetPredictor [21:21:12] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:12] (detection.cpp 365) 		index:3, score:0.85, loc:559, 65, 38, 37[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 365) 		index:3, score:0.68, loc:565, 48, 29, 37[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 365) 		index:3, score:0.78, loc:559, 27, 38, 37[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 365) 		index:3, score:0.81, loc:555, 8, 38, 37[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 365) 		index:3, score:0.62, loc:554, 6, 38, 37[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 365) 		index:3, score:0.61, loc:554, 2, 38, 37[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 365) 		index:3, score:0.74, loc:550, 0, 47, 35[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 365) 		index:3, score:0.55, loc:549, 1, 48, 28[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 365) 		index:3, score:0.85, loc:557, 2, 38, 37[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:13] (detection.cpp 365) 		index:3, score:0.68, loc:557, 4, 38, 37[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.88, loc:556, 3, 38, 37[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.82, loc:558, 2, 38, 37[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.62, loc:252, 0, 38, 22[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.78, loc:557, 4, 38, 37[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.94, loc:559, 7, 38, 37[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.85, loc:254, 0, 38, 27[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.88, loc:557, 4, 38, 37[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.78, loc:253, 0, 38, 22[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.88, loc:557, 0, 38, 37[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.62, loc:554, 0, 38, 36[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.56, loc:554, 0, 38, 35[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.56, loc:554, 0, 38, 35[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.73, loc:554, 0, 38, 36[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.62, loc:553, 0, 38, 36[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.62, loc:553, 0, 38, 36[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:1, score:0.68, loc:470, 1, 61, 28[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.73, loc:555, 0, 38, 36[0m
+[36;22mI/Run          [21:21:14] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.68, loc:554, 0, 38, 37[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.82, loc:554, 0, 38, 37[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:14] (detection.cpp 365) 		index:3, score:0.88, loc:554, 0, 38, 37[0m
+[36;22mI/DetPredictor [21:21:15] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:15] (detection.cpp 365) 		index:3, score:0.68, loc:555, 0, 38, 36[0m
+[36;22mI/DetPredictor [21:21:15] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:15] (detection.cpp 365) 		index:3, score:0.56, loc:555, 0, 38, 35[0m
+[36;22mI/DetPredictor [21:21:15] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:15] (detection.cpp 365) 		index:3, score:0.56, loc:555, 0, 38, 35[0m
+[36;22mI/DetPredictor [21:21:15] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:15] (detection.cpp 365) 		index:3, score:0.62, loc:555, 0, 38, 29[0m
+[36;22mI/DetPredictor [21:21:15] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:15] (detection.cpp 365) 		index:3, score:0.73, loc:557, 0, 38, 29[0m
+[36;22mI/DetPredictor [21:21:15] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:15] (detection.cpp 365) 		index:3, score:0.62, loc:560, 0, 37, 27[0m
+[36;22mI/DetPredictor [21:21:17] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:17] (detection.cpp 365) 		index:3, score:0.56, loc:153, 11, 29, 29[0m
+[36;22mI/DetPredictor [21:21:20] (detection.cpp 364) label:bridge[0m
+[36;22mI/DetPredictor [21:21:20] (detection.cpp 365) 		index:1, score:0.82, loc:443, 0, 90, 56[0m
+[36;22mI/Run          [21:21:20] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/DetPredictor [21:21:20] (detection.cpp 364) label:evil[0m
+[36;22mI/DetPredictor [21:21:20] (detection.cpp 365) 		index:6, score:0.85, loc:534, 5, 56, 76[0m
+[36;22mI/Run          [21:21:20] (imgprocess.cpp 429) Detection GET 6 [0m
+[36;22mI/DetPredictor [21:21:20] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:20] (detection.cpp 365) 		index:3, score:0.85, loc:527, 150, 38, 37[0m
+[36;22mI/DetPredictor [21:21:20] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:20] (detection.cpp 365) 		index:3, score:0.73, loc:527, 160, 38, 29[0m
+[36;22mI/DetPredictor [21:21:21] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:21] (detection.cpp 365) 		index:3, score:0.73, loc:535, 157, 29, 37[0m
+[36;22mI/DetPredictor [21:21:21] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:21] (detection.cpp 365) 		index:3, score:0.56, loc:540, 159, 38, 29[0m
+[36;22mI/DetPredictor [21:21:21] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:21] (detection.cpp 365) 		index:3, score:0.62, loc:553, 147, 38, 37[0m
+[36;22mI/DetPredictor [21:21:22] (detection.cpp 364) label:danger[0m
+[36;22mI/DetPredictor [21:21:22] (detection.cpp 365) 		index:5, score:0.52, loc:1, 140, 79, 28[0m
+[36;22mI/Run          [21:21:22] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/DetPredictor [21:21:25] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:25] (detection.cpp 365) 		index:3, score:0.82, loc:307, 128, 18, 26[0m
+[36;22mI/DetPredictor [21:21:26] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:26] (detection.cpp 365) 		index:3, score:0.85, loc:558, 9, 38, 37[0m
+[36;22mI/DetPredictor [21:21:31] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:31] (detection.cpp 365) 		index:3, score:0.56, loc:198, 141, 374, 247[0m
+[36;22mI/DetPredictor [21:21:31] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:31] (detection.cpp 365) 		index:3, score:0.56, loc:282, 0, 72, 71[0m
+[36;22mI/DetPredictor [21:21:32] (detection.cpp 364) label:cone[0m
+[36;22mI/DetPredictor [21:21:32] (detection.cpp 365) 		index:3, score:0.56, loc:198, 141, 374, 247[0m
+[36;22mI/Ramp         [21:21:41] (_ramp.cpp 34) BRIDGE_DOWN[0m
+[36;22mI/System       [21:21:45] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [21:21:45] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [21:21:45] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [21:21:45] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [21:21:45] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [21:21:46] (display.cpp 50) Stop.[0m
+[36;22mI/System       [21:21:46] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [21:21:46] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [21:21:46] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [21:21:46] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [21:21:46] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [21:22:40] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [21:22:40] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [21:22:41] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [21:22:41] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [21:22:41] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [21:22:41] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [21:22:41] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [21:22:41] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [21:22:41] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [21:22:41] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [21:22:42] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [21:22:42] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [21:22:42] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [21:22:42] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [21:22:42] (detection.hpp 164) Start![0m
+[36;22mI/Display      [21:22:42] (display.cpp 35) Start![0m
+[36;22mI/Main         [21:22:42] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [21:22:42] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [21:22:42] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/Run          [21:22:43] (imgprocess.cpp 429) Detection GET 10 [0m
+[36;22mI/Run          [21:22:43] (imgprocess.cpp 528) label_spy_DETECTION[0m
+[36;22mI/System       [21:22:45] (capture.cpp 94) Run![0m
+[36;22mI/Cross        [21:22:46] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:22:47] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:22:48] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [21:22:51] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:22:51] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [21:22:51] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/Ramp         [21:22:52] (_ramp.cpp 34) BRIDGE_DOWN[0m
+[36;22mI/Run          [21:22:53] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:22:53] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:22:53] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:22:53] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Ramp         [21:22:54] (_ramp.cpp 42) BRIDGE_NONE[0m
+[36;22mI/Run          [21:22:54] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:22:54] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [21:22:54] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/Ramp         [21:22:55] (_ramp.cpp 34) BRIDGE_DOWN[0m
+[36;22mI/Ramp         [21:22:57] (_ramp.cpp 42) BRIDGE_NONE[0m
+[36;22mI/Run          [21:22:58] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:22:58] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [21:22:58] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/Run          [21:22:58] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Ramp         [21:22:59] (_ramp.cpp 34) BRIDGE_DOWN[0m
+[36;22mI/Run          [21:22:59] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:23:00] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:23:00] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Ramp         [21:23:01] (_ramp.cpp 42) BRIDGE_NONE[0m
+[36;22mI/Cross        [21:23:19] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:23:19] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Run          [21:23:23] (imgprocess.cpp 429) Detection GET 6 [0m
+[36;22mI/Run          [21:23:23] (imgprocess.cpp 497) label_evil_DETECTION[0m
+[36;22mI/Run          [21:23:23] (imgprocess.cpp 429) Detection GET 2 [0m
+[36;22mI/Run          [21:23:23] (imgprocess.cpp 523) label_safety_DETECTION[0m
+[36;22mI/Run          [21:23:23] (imgprocess.cpp 429) Detection GET 6 [0m
+[36;22mI/Run          [21:23:23] (imgprocess.cpp 497) label_evil_DETECTION[0m
+[36;22mI/Run          [21:23:25] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:23:25] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [21:23:25] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/Run          [21:23:25] (imgprocess.cpp 429) Detection GET 12 [0m
+[36;22mI/Run          [21:23:25] (imgprocess.cpp 429) Detection GET 12 [0m
+[36;22mI/Run          [21:23:25] (imgprocess.cpp 429) Detection GET 12 [0m
+[36;22mI/Run          [21:23:25] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:23:26] (imgprocess.cpp 429) Detection GET 9 [0m
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           [36;22mI/NO_TAG       [21:28:57] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [21:28:57] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [21:28:58] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [21:28:58] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [21:28:58] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [21:28:58] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [21:28:58] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [21:28:58] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [21:28:58] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [21:28:58] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [21:28:58] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [21:28:58] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [21:28:58] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [21:28:58] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [21:28:58] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [21:28:58] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [21:28:58] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [21:28:58] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [21:28:58] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [21:28:58] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [21:28:58] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [21:28:59] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [21:28:59] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [21:28:59] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [21:28:59] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [21:28:59] (detection.hpp 164) Start![0m
+[36;22mI/Display      [21:28:59] (display.cpp 35) Start![0m
+[36;22mI/Main         [21:28:59] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [21:28:59] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [21:28:59] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/System       [21:29:04] (capture.cpp 94) Run![0m
+[36;22mI/Cross        [21:29:06] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:29:06] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Run          [21:29:07] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:29:07] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [21:29:07] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/Run          [21:29:07] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:29:08] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:29:08] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:29:08] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Ramp         [21:29:08] (_ramp.cpp 34) BRIDGE_DOWN[0m
+[36;22mI/Run          [21:29:08] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:29:09] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:29:09] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:29:09] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Ramp         [21:29:10] (_ramp.cpp 42) BRIDGE_NONE[0m
+[36;22mI/Run          [21:29:10] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:29:10] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [21:29:10] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/Run          [21:29:10] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Ramp         [21:29:12] (_ramp.cpp 34) BRIDGE_DOWN[0m
+[36;22mI/Run          [21:29:12] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:29:12] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:29:12] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:29:13] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:29:13] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Ramp         [21:29:14] (_ramp.cpp 42) BRIDGE_NONE[0m
+[36;22mI/Run          [21:29:14] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:29:14] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [21:29:14] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/Run          [21:29:15] (imgprocess.cpp 429) Detection GET 0 [0m
+[36;22mI/Ramp         [21:29:16] (_ramp.cpp 34) BRIDGE_DOWN[0m
+[36;22mI/Run          [21:29:17] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Ramp         [21:29:17] (_ramp.cpp 42) BRIDGE_NONE[0m
+[36;22mI/Run          [21:29:27] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:29:27] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [21:29:27] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/Ramp         [21:29:28] (_ramp.cpp 34) BRIDGE_DOWN[0m
+[36;22mI/Ramp         [21:29:30] (_ramp.cpp 42) BRIDGE_NONE[0m
+[36;22mI/Cross        [21:29:46] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:29:46] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:29:47] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [21:29:47] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:29:47] (_cross.cpp 76) CROSS_IN[0m
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          [36;22mI/NO_TAG       [21:31:32] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [21:31:32] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [21:31:33] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [21:31:33] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [21:31:33] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [21:31:33] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [21:31:33] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [21:31:33] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [21:31:33] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [21:31:33] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [21:31:33] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [21:31:33] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [21:31:33] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [21:31:33] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [21:31:33] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [21:31:33] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [21:31:33] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [21:31:33] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [21:31:34] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [21:31:34] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [21:31:34] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [21:31:34] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [21:31:34] (detection.hpp 164) Start![0m
+[36;22mI/Display      [21:31:34] (display.cpp 35) Start![0m
+[36;22mI/Main         [21:31:34] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [21:31:34] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [21:31:34] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/System       [21:31:38] (capture.cpp 94) Run![0m
+[36;22mI/Cross        [21:31:38] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:31:38] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:31:39] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [21:31:42] (imgprocess.cpp 429) Detection GET 0 [0m
+[36;22mI/Run          [21:31:42] (imgprocess.cpp 482) label_bomb_DETECTION[0m
+[36;22mI/Circle       [21:31:45] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Cross        [21:31:47] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:31:47] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:31:48] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [21:31:48] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:31:48] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:31:49] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [21:31:55] (imgprocess.cpp 429) Detection GET 9 [0m
+[36;22mI/Run          [21:31:55] (imgprocess.cpp 518) label_prop_DETECTION[0m
+[36;22mI/Cross        [21:32:03] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:32:03] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Run          [21:32:05] (imgprocess.cpp 429) Detection GET 0 [0m
+[36;22mI/Run          [21:32:05] (imgprocess.cpp 482) label_bomb_DETECTION[0m
+[36;22mI/Cross        [21:32:05] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [21:32:05] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:32:05] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:32:05] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Circle       [21:32:14] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Cross        [21:32:15] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:32:15] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:32:15] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [21:32:19] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:32:19] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:32:20] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [21:32:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:32:21] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Run          [21:32:21] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:32:21] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:32:22] (imgprocess.cpp 429) Detection GET 6 [0m
+[36;22mI/Run          [21:32:22] (imgprocess.cpp 497) label_evil_DETECTION[0m
+[36;22mI/Cross        [21:32:22] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [21:32:22] (imgprocess.cpp 429) Detection GET 6 [0m
+[36;22mI/Run          [21:32:22] (imgprocess.cpp 497) label_evil_DETECTION[0m
+[36;22mI/Run          [21:32:22] (imgprocess.cpp 429) Detection GET 6 [0m
+[36;22mI/Run          [21:32:22] (imgprocess.cpp 497) label_evil_DETECTION[0m
+[36;22mI/Run          [21:32:22] (imgprocess.cpp 429) Detection GET 6 [0m
+[36;22mI/Run          [21:32:22] (imgprocess.cpp 497) label_evil_DETECTION[0m
+[36;22mI/Run          [21:32:22] (imgprocess.cpp 429) Detection GET 6 [0m
+[36;22mI/Run          [21:32:22] (imgprocess.cpp 497) label_evil_DETECTION[0m
+[36;22mI/Cross        [21:32:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:32:22] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Run          [21:32:22] (imgprocess.cpp 429) Detection GET 6 [0m
+[36;22mI/Run          [21:32:22] (imgprocess.cpp 497) label_evil_DETECTION[0m
+[36;22mI/Run          [21:32:22] (imgprocess.cpp 429) Detection GET 6 [0m
+[36;22mI/Run          [21:32:22] (imgprocess.cpp 497) label_evil_DETECTION[0m
+[36;22mI/Cross        [21:32:23] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [21:32:23] (imgprocess.cpp 429) Detection GET 12 [0m
+[36;22mI/Run          [21:32:23] (imgprocess.cpp 504) label_tumble_DETECTION[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 36) Left_FOUND[0m
+[36;22mI/Cross        [21:32:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 82) Left_READY[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Cross        [21:32:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Cross        [21:32:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:23] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Cross        [21:32:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Cross        [21:32:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Cross        [21:32:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Cross        [21:32:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Run          [21:32:24] (imgprocess.cpp 429) Detection GET 2 [0m
+[36;22mI/Run          [21:32:24] (imgprocess.cpp 523) label_safety_DETECTION[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 171) SAVE_RUN2222[0m
+[36;22mI/Save         [21:32:24] (_save.cpp 244) LEFT_RUN_ING[0m
+[36;22mI/System       [21:32:25] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [21:32:25] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [21:32:25] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [21:32:25] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [21:32:25] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [21:32:25] (display.cpp 50) Stop.[0m
+[36;22mI/System       [21:32:25] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [21:32:26] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [21:32:26] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [21:32:26] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [21:32:26] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [21:37:34] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [21:37:34] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [21:37:36] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [21:37:36] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [21:37:36] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [21:37:36] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [21:37:36] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [21:37:36] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [21:37:36] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [21:37:36] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [21:37:36] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [21:37:36] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [21:37:36] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [21:37:36] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [21:37:36] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [21:37:36] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [21:37:36] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [21:37:36] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [21:37:36] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [21:37:36] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [21:37:36] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [21:37:37] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [21:37:37] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [21:37:37] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [21:37:37] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [21:37:37] (detection.hpp 164) Start![0m
+[36;22mI/Display      [21:37:37] (display.cpp 35) Start![0m
+[36;22mI/Main         [21:37:37] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [21:37:37] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [21:37:37] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/Cross        [21:37:38] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:37:38] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:37:40] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [21:37:47] (imgprocess.cpp 429) Detection GET 2 [0m
+[36;22mI/Run          [21:37:47] (imgprocess.cpp 523) label_safety_DETECTION[0m
+[36;22mI/Run          [21:37:47] (imgprocess.cpp 429) Detection GET 2 [0m
+[36;22mI/Run          [21:37:47] (imgprocess.cpp 523) label_safety_DETECTION[0m
+[36;22mI/Run          [21:37:48] (imgprocess.cpp 429) Detection GET 2 [0m
+[36;22mI/Run          [21:37:48] (imgprocess.cpp 523) label_safety_DETECTION[0m
+[36;22mI/Run          [21:37:48] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:48] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:48] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:48] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:48] (imgprocess.cpp 429) Detection GET 2 [0m
+[36;22mI/Run          [21:37:48] (imgprocess.cpp 523) label_safety_DETECTION[0m
+[36;22mI/Run          [21:37:49] (imgprocess.cpp 429) Detection GET 2 [0m
+[36;22mI/Run          [21:37:49] (imgprocess.cpp 523) label_safety_DETECTION[0m
+[36;22mI/Run          [21:37:49] (imgprocess.cpp 429) Detection GET 2 [0m
+[36;22mI/Run          [21:37:49] (imgprocess.cpp 523) label_safety_DETECTION[0m
+[36;22mI/Run          [21:37:49] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:49] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:49] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:49] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:51] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Display      [21:37:52] (display.cpp 78) Save Pic:./pic/0000.jpg[0m
+[36;22mI/Run          [21:37:52] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:52] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:53] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:53] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:54] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:54] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:56] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:56] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/Run          [21:37:56] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:37:56] (imgprocess.cpp 533) label_danger_DETECTION[0m
+[36;22mI/System       [21:37:56] (capture.cpp 94) Run![0m
+[36;22mI/Run          [21:38:00] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:38:00] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [21:38:00] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/Run          [21:38:01] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:38:01] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Ramp         [21:38:01] (_ramp.cpp 34) BRIDGE_DOWN[0m
+[36;22mI/Ramp         [21:38:03] (_ramp.cpp 42) BRIDGE_NONE[0m
+[36;22mI/Cross        [21:38:05] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:38:05] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Run          [21:38:05] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:38:05] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:38:05] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:38:05] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:38:05] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:38:05] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Cross        [21:38:06] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [21:38:07] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:38:07] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:38:07] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:38:07] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [21:38:07] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/Run          [21:38:07] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Ramp         [21:38:08] (_ramp.cpp 34) BRIDGE_DOWN[0m
+[36;22mI/Ramp         [21:38:10] (_ramp.cpp 42) BRIDGE_NONE[0m
+[36;22mI/System       [21:38:11] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [21:38:11] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [21:38:11] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [21:38:11] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [21:38:11] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [21:38:11] (display.cpp 50) Stop.[0m
+[36;22mI/System       [21:38:11] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [21:38:11] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [21:38:11] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [21:38:11] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [21:38:11] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [21:38:44] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [21:38:44] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [21:38:45] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [21:38:45] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [21:38:45] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [21:38:45] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [21:38:45] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [21:38:45] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [21:38:45] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [21:38:45] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [21:38:45] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [21:38:45] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [21:38:45] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [21:38:45] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [21:38:45] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [21:38:45] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [21:38:45] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [21:38:45] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [21:38:46] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [21:38:46] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [21:38:46] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [21:38:46] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [21:38:46] (detection.hpp 164) Start![0m
+[36;22mI/Display      [21:38:46] (display.cpp 35) Start![0m
+[36;22mI/Main         [21:38:46] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [21:38:46] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [21:38:46] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/System       [21:38:50] (capture.cpp 94) Run![0m
+[36;22mI/Cross        [21:38:59] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:39:00] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:39:00] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [21:39:01] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:39:01] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:39:01] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [21:39:05] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:39:05] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:39:05] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:39:05] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:39:06] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:39:06] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:39:06] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:39:06] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:39:06] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:39:06] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:39:06] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:39:06] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Cross        [21:39:08] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:39:08] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:39:08] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [21:39:10] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:39:10] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Cross        [21:39:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:39:10] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:39:10] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [21:39:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:39:12] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:39:12] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [21:39:12] (imgprocess.cpp 429) Detection GET 0 [0m
+[36;22mI/Run          [21:39:12] (imgprocess.cpp 482) label_bomb_DETECTION[0m
+[36;22mI/Cross        [21:39:14] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:39:14] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [21:39:14] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [21:39:15] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:39:15] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/System       [21:39:15] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [21:39:15] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [21:39:15] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [21:39:15] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [21:39:15] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [21:39:15] (display.cpp 50) Stop.[0m
+[36;22mI/System       [21:39:15] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [21:39:15] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [21:39:15] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [21:39:15] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [21:39:15] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [21:39:21] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [21:39:21] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [21:39:22] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [21:39:22] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [21:39:22] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [21:39:22] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [21:39:22] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [21:39:22] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [21:39:22] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [21:39:22] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [21:39:22] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [21:39:22] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [21:39:22] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [21:39:22] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [21:39:22] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [21:39:22] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [21:39:22] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [21:39:22] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [21:39:22] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [21:39:22] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [21:39:22] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [21:39:23] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [21:39:23] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [21:39:23] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [21:39:23] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [21:39:23] (detection.hpp 164) Start![0m
+[36;22mI/Display      [21:39:23] (display.cpp 35) Start![0m
+[36;22mI/Main         [21:39:23] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [21:39:23] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [21:39:23] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/Cross        [21:39:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:39:24] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Run          [21:39:26] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:39:26] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [21:39:26] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/Run          [21:39:27] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:40:27] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:40:51] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [21:40:51] (imgprocess.cpp 429) Detection GET 10 [0m
+[36;22mI/Run          [21:40:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:40:51] (imgprocess.cpp 429) Detection GET 5 [0m
+[36;22mI/Run          [21:40:52] (imgprocess.cpp 429) Detection GET 6 [0m
+[36;22mI/System       [21:40:56] (capture.cpp 94) Run![0m
+[36;22mI/Ramp         [21:40:56] (_ramp.cpp 34) BRIDGE_DOWN[0m
+[36;22mI/Ramp         [21:40:57] (_ramp.cpp 42) BRIDGE_NONE[0m
+[36;22mI/Circle       [21:41:04] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [21:41:04] (_circle.cpp 147) CIRCLE_RIGHT_IN[0m
+[36;22mI/Circle       [21:41:05] (_circle.cpp 176) CIRCLE_RIGHT_RUNNING[0m
+[36;22mI/Circle       [21:41:06] (_circle.cpp 189) CIRCLE_RIGHT_OUT[0m
+[36;22mI/Circle       [21:41:06] (_circle.cpp 209) CIRCLE_NONE[0m
+[36;22mI/Circle       [21:41:06] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [21:41:07] (_circle.cpp 158) CIRCLE_ERROR[0m
+[36;22mI/Run          [21:41:08] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:08] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:41:08] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:08] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:41:08] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:08] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:41:08] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:08] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:41:08] (imgprocess.cpp 429) Detection GET 12 [0m
+[36;22mI/Run          [21:41:08] (imgprocess.cpp 504) label_tumble_DETECTION[0m
+[36;22mI/Save         [21:41:08] (_save.cpp 36) Left_FOUND[0m
+[36;22mI/Run          [21:41:08] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:08] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:41:08] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:08] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:41:09] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:09] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [21:41:09] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [21:41:09] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [21:41:09] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [21:41:09] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [21:41:09] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [21:41:09] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Run          [21:41:09] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:09] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [21:41:09] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [21:41:09] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [21:41:09] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [21:41:09] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Run          [21:41:09] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:09] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [21:41:09] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 82) Left_READY[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Run          [21:41:09] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:09] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Circle       [21:41:09] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Circle       [21:41:09] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Circle       [21:41:09] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 156) LEFT_SECOND[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 156) LEFT_SECOND[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 156) LEFT_SECOND[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 156) LEFT_SECOND[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 156) LEFT_SECOND[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 156) LEFT_SECOND[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 156) LEFT_SECOND[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 156) LEFT_SECOND[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 156) LEFT_SECOND[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 156) LEFT_SECOND[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 156) LEFT_SECOND[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 171) SAVE_RUN2222[0m
+[36;22mI/Save         [21:41:09] (_save.cpp 244) LEFT_RUN_ING[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [21:41:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [21:41:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [21:41:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [21:41:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [21:41:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [21:41:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [21:41:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [21:41:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [21:41:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [21:41:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [21:41:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [21:41:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [21:41:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [21:41:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [21:41:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [21:41:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [21:41:11] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [21:41:14] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:14] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:41:14] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:14] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:41:14] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:14] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [21:41:15] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:15] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Cross        [21:41:16] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:16] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:16] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:16] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:16] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [21:41:19] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [21:41:19] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Cross        [21:41:20] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:20] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:20] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:20] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:20] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:20] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:20] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:20] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:20] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:20] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:20] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:20] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:21] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [21:41:22] (imgprocess.cpp 429) Detection GET 12 [0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:22] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [21:41:24] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [21:41:24] (imgprocess.cpp 429) Detection GET 12 [0m
+[36;22mI/System       [21:41:24] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [21:41:24] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [21:41:24] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [21:41:24] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [21:41:24] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [21:41:25] (display.cpp 50) Stop.[0m
+[36;22mI/System       [21:41:25] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [21:41:25] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [21:41:25] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [21:41:25] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [21:41:25] (yyds.cpp 208) Finish !!![0m
