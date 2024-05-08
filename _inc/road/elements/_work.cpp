@@ -58,7 +58,7 @@ void run_work()
             work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);
 
         // 当车辆开始靠近锥桶: 准备进入
-        if (work_near_cone.x > IMAGE_HEIGHT * 0.55f)
+        if (work_near_cone.y > IMAGE_HEIGHT * 0.55f)
         {
             work_route = IMG.encoder.route;
             flag_work = WORK_READY;
@@ -102,7 +102,7 @@ void run_work()
                 {
                     // 补线起点: 右
                     POINT startPoint = POINT(IMAGE_HEIGHT - 40, IMAGE_WIDTH - 1);
-                    POINT endPoint = POINT(70, 0);                                                                // 补线终点: 左
+                    POINT endPoint = POINT(70, 0);     //蓝线                                                           // 补线终点: 左
                     POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5); // 补线中点
 
                     vector<POINT> input = {startPoint, midPoint, endPoint};

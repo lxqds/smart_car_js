@@ -956,7 +956,7 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
 	}
 
 
-    else if (flag_work == WORK_READY) {
+    else if (flag_work == WORK_FOUND) {
         aim_speed = _config->speed_work;
     } else if (flag_work == WORK_RUN) {
         aim_speed = _config->speed_work;
