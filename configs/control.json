@@ -50,7 +50,7 @@
     "gas_rou_none": 10,
     "gas_rou_over": 50,
     "work_error": 170,
-    "work_rou_in_total": 55,
+    "work_rou_in_total": 100,
     "work_rou_ready": 30,
     "work_rou_in": 25,
     "work_rou_run": 1,

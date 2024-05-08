@@ -11245,3 +11245,1028 @@
 [36;22mI/System       [21:41:25] (yyds.cpp 204) serial stopped.[0m
 [36;22mI/System       [21:41:25] (yyds.cpp 207) Exit Code: 0[0m
 [36;22mI/System       [21:41:25] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [22:13:11] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [22:13:11] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [22:13:13] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [22:13:13] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [22:13:13] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [22:13:13] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [22:13:13] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [22:13:13] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [22:13:13] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [22:13:13] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [22:13:13] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [22:13:13] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [22:13:13] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [22:13:13] (detection.hpp 164) Start![0m
+[36;22mI/Display      [22:13:13] (display.cpp 35) Start![0m
+[36;22mI/Main         [22:13:13] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [22:13:13] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [22:13:13] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/System       [22:13:17] (capture.cpp 94) Run![0m
+[36;22mI/Run          [22:13:18] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:13:18] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [22:13:18] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:13:18] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [22:13:25] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [22:13:25] (_circle.cpp 147) CIRCLE_RIGHT_IN[0m
+[36;22mI/Circle       [22:13:26] (_circle.cpp 176) CIRCLE_RIGHT_RUNNING[0m
+[36;22mI/Circle       [22:13:27] (_circle.cpp 189) CIRCLE_RIGHT_OUT[0m
+[36;22mI/Circle       [22:13:27] (_circle.cpp 209) CIRCLE_NONE[0m
+[36;22mI/Run          [22:13:28] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:13:28] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [22:13:28] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [22:13:28] (_circle.cpp 158) CIRCLE_ERROR[0m
+[36;22mI/Run          [22:13:29] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:13:29] (imgprocess.cpp 429) Detection GET 9 [0m
+[36;22mI/Run          [22:13:29] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:13:29] (imgprocess.cpp 429) Detection GET 8 [0m
+[36;22mI/Run          [22:13:29] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:13:30] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:13:30] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:13:30] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:13:30] (imgprocess.cpp 429) Detection GET 12 [0m
+[36;22mI/Run          [22:13:30] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:13:30] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:13:30] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [22:13:30] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:13:30] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [22:13:30] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Run          [22:13:30] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:13:30] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [22:13:30] (_circle.cpp 158) CIRCLE_ERROR[0m
+[36;22mI/Circle       [22:13:32] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Cross        [22:13:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [22:13:32] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Run          [22:13:33] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Cross        [22:13:33] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [22:13:33] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Cross        [22:13:34] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [22:13:34] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Run          [22:13:34] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:13:34] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:34] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:34] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:34] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [22:13:34] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Garage       [22:13:34] (_garage.cpp 66) GARAGE_DETECTION[0m
+[36;22mI/Garage       [22:13:34] (_garage.cpp 124) GARAGE_IN_MIDDLE[0m
+[36;22mI/Run          [22:13:34] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:35] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:35] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:35] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:35] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:35] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Garage       [22:13:35] (_garage.cpp 261) GARAGE_STOP[0m
+[36;22mI/Run          [22:13:35] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:35] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:35] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:35] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:35] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:35] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:41] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:41] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:41] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:41] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:41] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:13:42] (imgprocess.cpp 429) Detection GET 2 [0m
+[36;22mI/Run          [22:13:43] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:13:43] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:13:43] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:13:43] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:13:46] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:13:46] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:13:46] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:13:50] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:13:53] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:13:54] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/System       [22:13:55] (capture.cpp 85) Exit...[0m
+[36;22mI/NO_TAG       [22:18:07] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [22:18:07] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [22:18:08] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [22:18:08] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [22:18:08] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [22:18:08] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [22:18:08] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [22:18:08] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [22:18:08] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [22:18:08] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [22:18:08] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [22:18:08] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [22:18:08] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [22:18:08] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [22:18:08] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [22:18:08] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [22:18:08] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [22:18:08] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [22:18:08] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [22:18:08] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [22:18:08] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [22:18:09] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [22:18:09] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [22:18:09] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [22:18:09] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [22:18:09] (detection.hpp 164) Start![0m
+[36;22mI/Display      [22:18:09] (display.cpp 35) Start![0m
+[36;22mI/Main         [22:18:09] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [22:18:09] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [22:18:09] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/Run          [22:18:10] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:18:10] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/System       [22:18:12] (capture.cpp 94) Run![0m
+[36;22mI/Circle       [22:18:19] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [22:18:20] (_circle.cpp 147) CIRCLE_RIGHT_IN[0m
+[36;22mI/Circle       [22:18:20] (_circle.cpp 176) CIRCLE_RIGHT_RUNNING[0m
+[36;22mI/Circle       [22:18:21] (_circle.cpp 189) CIRCLE_RIGHT_OUT[0m
+[36;22mI/Circle       [22:18:22] (_circle.cpp 209) CIRCLE_NONE[0m
+[36;22mI/Circle       [22:18:22] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [22:18:23] (_circle.cpp 158) CIRCLE_ERROR[0m
+[36;22mI/Run          [22:18:24] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:18:24] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [22:18:24] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [22:18:24] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [22:18:24] (imgprocess.cpp 429) Detection GET 8 [0m
+[36;22mI/Run          [22:18:24] (imgprocess.cpp 512) PATIENT_DETECTION[0m
+[36;22mI/Run          [22:18:24] (imgprocess.cpp 429) Detection GET 12 [0m
+[36;22mI/Work         [22:18:24] (_work.cpp 33) WORK_FOUND[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 65) WORK_READY[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 113) WORK_FIRST[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 113) WORK_FIRST[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 113) WORK_FIRST[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 113) WORK_FIRST[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 113) WORK_FIRST[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 113) WORK_FIRST[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 113) WORK_FIRST[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 146) WORK_RUN[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 219) WORK_RUN_ING[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 219) WORK_RUN_ING[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 227) WORK_RUN_STOP[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 236) WORK_STOPFINISH[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 259) TRACK_L[0m
+[36;22mI/Work         [22:18:25] (_work.cpp 259) TRACK_L[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 266) TRACK_R[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 266) TRACK_R[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 266) TRACK_R[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 266) TRACK_R[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 266) TRACK_R[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 266) TRACK_R[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:26] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:27] (_work.cpp 274) AIM_SPEED = 0[0m
+[36;22mI/Work         [22:18:27] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [22:18:27] (_work.cpp 286) WORK_OUT_SPEEDUP[0m
+[36;22mI/Work         [22:18:27] (_work.cpp 294) WORK_OUT_RUN[0m
+[36;22mI/Work         [22:18:27] (_work.cpp 315) WORK_NONE[0m
+[36;22mI/Cross        [22:18:28] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [22:18:28] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [22:18:28] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [22:18:28] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:28] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:28] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [22:18:28] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [22:18:28] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:28] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [22:18:28] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Run          [22:18:28] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:28] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [22:18:29] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Garage       [22:18:29] (_garage.cpp 66) GARAGE_DETECTION[0m
+[36;22mI/Garage       [22:18:29] (_garage.cpp 124) GARAGE_IN_MIDDLE[0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Garage       [22:18:29] (_garage.cpp 261) GARAGE_STOP[0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:29] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:32] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:32] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Run          [22:18:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 9 [0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 518) label_prop_DETECTION[0m
+[36;22mI/Run          [22:18:33] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:34] (imgprocess.cpp 429) Detection GET 9 [0m
+[36;22mI/Run          [22:18:34] (imgprocess.cpp 518) label_prop_DETECTION[0m
+[36;22mI/Run          [22:18:35] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:35] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:35] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:35] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:36] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:38] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:38] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:38] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:38] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:38] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:38] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:38] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:39] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:39] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:39] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:39] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:39] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:39] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:40] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:40] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:40] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:41] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:41] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:41] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:41] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:41] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:41] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:43] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:43] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:43] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:44] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:44] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:44] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:44] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:44] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:44] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:45] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:45] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:45] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:45] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:45] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:45] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:45] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:45] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:45] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:46] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:46] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:46] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:46] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:47] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:47] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:47] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:47] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:48] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:48] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [22:18:48] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/System       [22:18:55] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [22:18:55] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [22:18:55] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [22:18:55] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [22:18:55] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [22:18:55] (display.cpp 50) Stop.[0m
+[36;22mI/System       [22:18:55] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [22:18:55] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [22:18:55] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [22:18:55] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [22:18:55] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [23:30:06] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [23:30:06] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [23:30:08] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [23:30:08] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [23:30:08] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [23:30:08] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [23:30:08] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [23:30:08] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [23:30:08] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [23:30:08] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [23:30:08] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [23:30:08] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [23:30:08] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [23:30:08] (detection.hpp 164) Start![0m
+[36;22mI/Display      [23:30:08] (display.cpp 35) Start![0m
+[36;22mI/Main         [23:30:08] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [23:30:08] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [23:30:08] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/Run          [23:30:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/System       [23:30:11] (capture.cpp 94) Run![0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Circle       [23:30:11] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:11] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:12] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:12] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Circle       [23:30:12] (_circle.cpp 147) CIRCLE_RIGHT_IN[0m
+[36;22mI/Run          [23:30:12] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:12] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Circle       [23:30:12] (_circle.cpp 176) CIRCLE_RIGHT_RUNNING[0m
+[36;22mI/Run          [23:30:16] (imgprocess.cpp 429) Detection GET 9 [0m
+[36;22mI/Run          [23:30:16] (imgprocess.cpp 518) label_prop_DETECTION[0m
+[36;22mI/Circle       [23:30:16] (_circle.cpp 189) CIRCLE_RIGHT_OUT[0m
+[36;22mI/Run          [23:30:16] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [23:30:16] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [23:30:16] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:16] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:16] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Circle       [23:30:16] (_circle.cpp 209) CIRCLE_NONE[0m
+[36;22mI/Run          [23:30:18] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [23:30:25] (imgprocess.cpp 429) Detection GET 0 [0m
+[36;22mI/Run          [23:30:25] (imgprocess.cpp 482) label_bomb_DETECTION[0m
+[36;22mI/Circle       [23:30:25] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [23:30:25] (_circle.cpp 147) CIRCLE_RIGHT_IN[0m
+[36;22mI/Circle       [23:30:26] (_circle.cpp 176) CIRCLE_RIGHT_RUNNING[0m
+[36;22mI/Circle       [23:30:27] (_circle.cpp 189) CIRCLE_RIGHT_OUT[0m
+[36;22mI/Circle       [23:30:27] (_circle.cpp 209) CIRCLE_NONE[0m
+[36;22mI/Circle       [23:30:28] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [23:30:28] (_circle.cpp 158) CIRCLE_ERROR[0m
+[36;22mI/Run          [23:30:30] (imgprocess.cpp 429) Detection GET 12 [0m
+[36;22mI/Run          [23:30:30] (imgprocess.cpp 504) label_tumble_DETECTION[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 36) Left_FOUND[0m
+[36;22mI/Run          [23:30:30] (imgprocess.cpp 429) Detection GET 12 [0m
+[36;22mI/Save         [23:30:30] (_save.cpp 82) Left_READY[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 138) LEFT_FIRST[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 156) LEFT_SECOND[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 157) route= 3525.00   save_route2= 3507.00[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 171) SAVE_RUN2222[0m
+[36;22mI/Save         [23:30:30] (_save.cpp 244) LEFT_RUN_ING[0m
+[36;22mI/Cross        [23:30:31] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:31] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:31] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:31] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:31] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:31] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:31] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:31] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:31] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:31] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [23:30:32] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:33] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [23:30:33] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:33] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:33] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:33] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [23:30:33] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:33] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:30:33] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Garage       [23:30:33] (_garage.cpp 66) GARAGE_DETECTION[0m
+[36;22mI/Garage       [23:30:33] (_garage.cpp 124) GARAGE_IN_MIDDLE[0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Garage       [23:30:33] (_garage.cpp 261) GARAGE_STOP[0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:30:33] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/System       [23:30:38] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [23:30:38] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [23:30:38] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [23:30:38] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [23:30:38] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [23:30:38] (display.cpp 50) Stop.[0m
+[36;22mI/System       [23:30:38] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [23:30:38] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [23:30:38] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [23:30:38] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [23:30:38] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [23:33:47] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [23:33:47] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [23:33:48] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [23:33:48] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [23:33:48] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [23:33:48] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [23:33:48] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [23:33:48] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [23:33:48] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [23:33:48] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [23:33:48] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [23:33:48] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [23:33:48] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [23:33:48] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [23:33:48] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [23:33:48] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [23:33:48] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [23:33:48] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [23:33:48] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [23:33:48] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [23:33:48] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [23:33:49] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [23:33:49] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [23:33:49] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [23:33:49] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [23:33:49] (detection.hpp 164) Start![0m
+[36;22mI/Display      [23:33:49] (display.cpp 35) Start![0m
+[36;22mI/Main         [23:33:49] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [23:33:49] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [23:33:49] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/Run          [23:33:49] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:49] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:49] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:49] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:49] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:49] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:49] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:50] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:51] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:52] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:52] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:52] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:52] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:52] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:52] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/System       [23:33:52] (capture.cpp 94) Run![0m
+[36;22mI/Run          [23:33:52] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:52] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:52] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Circle       [23:33:52] (_circle.cpp 31) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Run          [23:33:52] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:52] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:52] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:33:52] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [23:33:52] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:33:53] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [23:33:53] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [23:33:54] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:33:55] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [23:33:55] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Circle       [23:34:03] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [23:34:04] (_circle.cpp 147) CIRCLE_RIGHT_IN[0m
+[36;22mI/Circle       [23:34:04] (_circle.cpp 176) CIRCLE_RIGHT_RUNNING[0m
+[36;22mI/Run          [23:34:06] (imgprocess.cpp 429) Detection GET 8 [0m
+[36;22mI/Run          [23:34:06] (imgprocess.cpp 429) Detection GET 8 [0m
+[36;22mI/Run          [23:34:07] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [23:34:07] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Run          [23:34:07] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Run          [23:34:07] (imgprocess.cpp 487) label_block_DETECTION[0m
+[36;22mI/Circle       [23:34:09] (_circle.cpp 189) CIRCLE_RIGHT_OUT[0m
+[36;22mI/Circle       [23:34:09] (_circle.cpp 209) CIRCLE_NONE[0m
+[36;22mI/Run          [23:34:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:34:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:34:09] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:34:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Circle       [23:34:10] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Run          [23:34:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:34:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:34:10] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [23:34:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:34:10] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [23:34:10] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [23:34:10] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:34:10] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [23:34:10] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [23:34:11] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [23:34:11] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [23:34:11] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/Ramp         [23:34:11] (_ramp.cpp 34) BRIDGE_DOWN[0m
+[36;22mI/Ramp         [23:34:12] (_ramp.cpp 42) BRIDGE_NONE[0m
+[36;22mI/Cross        [23:34:12] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:34:12] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [23:34:12] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [23:34:14] (imgprocess.cpp 429) Detection GET 7 [0m
+[36;22mI/Circle       [23:34:21] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [23:34:21] (_circle.cpp 147) CIRCLE_RIGHT_IN[0m
+[36;22mI/Circle       [23:34:22] (_circle.cpp 176) CIRCLE_RIGHT_RUNNING[0m
+[36;22mI/Circle       [23:34:23] (_circle.cpp 189) CIRCLE_RIGHT_OUT[0m
+[36;22mI/Circle       [23:34:23] (_circle.cpp 209) CIRCLE_NONE[0m
+[36;22mI/Circle       [23:34:23] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [23:34:24] (_circle.cpp 158) CIRCLE_ERROR[0m
+[36;22mI/Run          [23:34:25] (imgprocess.cpp 429) Detection GET 8 [0m
+[36;22mI/Run          [23:34:25] (imgprocess.cpp 512) PATIENT_DETECTION[0m
+[36;22mI/Work         [23:34:25] (_work.cpp 33) WORK_FOUND[0m
+[36;22mI/Work         [23:34:27] (_work.cpp 74) WORK_ERROR[0m
+[36;22mI/Run          [23:34:28] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:34:28] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [23:34:28] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:34:28] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [23:34:29] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [23:34:29] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:34:29] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [23:34:29] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [23:34:29] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:34:30] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [23:34:30] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [23:34:30] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:34:30] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [23:34:31] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [23:34:31] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:34:31] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [23:34:31] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [23:34:32] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:34:32] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [23:34:32] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/System       [23:34:32] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [23:34:32] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [23:34:32] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [23:34:32] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [23:34:32] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [23:34:32] (display.cpp 50) Stop.[0m
+[36;22mI/System       [23:34:32] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [23:34:32] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [23:34:32] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [23:34:32] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [23:34:32] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [23:36:21] (logger_helper.cc 36) Build: Aug 11 2023 20:39:54
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [23:36:21] (model_config.hpp 256) Init Success.[0m
+[36;22mI/Capture      [23:36:22] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [23:36:22] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [23:36:22] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [23:36:22] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [23:36:22] (model_config.hpp 486) Init Success.[0m
+[36;22mI/Detection    [23:36:22] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [23:36:22] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [23:36:22] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [23:36:22] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [23:36:22] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [23:36:22] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [23:36:22] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [23:36:22] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [23:36:22] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [23:36:22] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [23:36:22] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [23:36:22] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [23:36:22] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [23:36:22] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [23:36:23] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [23:36:23] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [23:36:23] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [23:36:23] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [23:36:23] (detection.hpp 164) Start![0m
+[36;22mI/Display      [23:36:23] (display.cpp 35) Start![0m
+[36;22mI/Main         [23:36:23] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [23:36:23] (yyds.cpp 89) ki=0.14[0m
+[36;22mI/Main         [23:36:23] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/Cross        [23:36:23] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:36:23] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/System       [23:36:25] (capture.cpp 94) Run![0m
+[36;22mI/Cross        [23:36:25] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Cross        [23:36:27] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:36:27] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [23:36:27] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Run          [23:36:27] (imgprocess.cpp 429) Detection GET 1 [0m
+[36;22mI/Run          [23:36:27] (imgprocess.cpp 540) BRIDGE_DETECTION[0m
+[36;22mI/Ramp         [23:36:27] (_ramp.cpp 25) BRIDGE_UP[0m
+[36;22mI/Ramp         [23:36:28] (_ramp.cpp 34) BRIDGE_DOWN[0m
+[36;22mI/Ramp         [23:36:28] (_ramp.cpp 42) BRIDGE_NONE[0m
+[36;22mI/Circle       [23:36:36] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [23:36:36] (_circle.cpp 147) CIRCLE_RIGHT_IN[0m
+[36;22mI/Circle       [23:36:37] (_circle.cpp 176) CIRCLE_RIGHT_RUNNING[0m
+[36;22mI/Circle       [23:36:38] (_circle.cpp 189) CIRCLE_RIGHT_OUT[0m
+[36;22mI/Circle       [23:36:38] (_circle.cpp 209) CIRCLE_NONE[0m
+[36;22mI/Circle       [23:36:39] (_circle.cpp 41) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [23:36:39] (_circle.cpp 158) CIRCLE_ERROR[0m
+[36;22mI/Run          [23:36:41] (imgprocess.cpp 429) Detection GET 8 [0m
+[36;22mI/Run          [23:36:41] (imgprocess.cpp 512) PATIENT_DETECTION[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 33) WORK_FOUND[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 65) WORK_READY[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 113) WORK_FIRST[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 113) WORK_FIRST[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 113) WORK_FIRST[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 113) WORK_FIRST[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 113) WORK_FIRST[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 113) WORK_FIRST[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 131) WORK_SECOND[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 131) WORK_SECOND[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 146) WORK_RUN[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 219) WORK_RUN_ING[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 219) WORK_RUN_ING[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 227) WORK_RUN_STOP[0m
+[36;22mI/Work         [23:36:41] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 242) WORK_STOPPING[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 236) WORK_STOPFINISH[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 259) TRACK_L[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 259) TRACK_L[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 266) TRACK_R[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 266) TRACK_R[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 266) TRACK_R[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 266) TRACK_R[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 266) TRACK_R[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 266) TRACK_R[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 266) TRACK_R[0m
+[36;22mI/Work         [23:36:42] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 274) AIM_SPEED = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 277) NONE_POINT = 0[0m
+[36;22mI/Work         [23:36:43] (_work.cpp 286) WORK_OUT_SPEEDUP[0m
+[36;22mI/Work         [23:36:44] (_work.cpp 294) WORK_OUT_RUN[0m
+[36;22mI/Work         [23:36:44] (_work.cpp 315) WORK_NONE[0m
+[36;22mI/Cross        [23:36:45] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:36:45] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Run          [23:36:45] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:36:45] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Cross        [23:36:45] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/Garage       [23:36:45] (_garage.cpp 66) GARAGE_DETECTION[0m
+[36;22mI/Garage       [23:36:45] (_garage.cpp 124) GARAGE_IN_MIDDLE[0m
+[36;22mI/Run          [23:36:45] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:36:46] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:36:46] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:36:46] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:36:46] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:36:46] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Garage       [23:36:46] (_garage.cpp 261) GARAGE_STOP[0m
+[36;22mI/Run          [23:36:46] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:36:46] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:36:46] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:36:46] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:36:46] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/Run          [23:36:46] (imgprocess.cpp 429) Detection GET 4 [0m
+[36;22mI/System       [23:36:53] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [23:36:53] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [23:36:53] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [23:36:53] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [23:36:53] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [23:36:53] (display.cpp 50) Stop.[0m
+[36;22mI/System       [23:36:53] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [23:36:53] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [23:36:53] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [23:36:53] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [23:36:53] (yyds.cpp 208) Finish !!![0m
