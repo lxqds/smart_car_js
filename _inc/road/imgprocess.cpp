@@ -966,9 +966,9 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         aim_speed = _config->speed_work;
     }  // 施工区 内
     else if (flag_work == WORK_STOP) {
-        aim_speed = 0;
-        aim_angle = 0;
+        aim_speed = 0;//角度不归0
     } else if (flag_work == WORK_OUT) {
+        //aim_angle = -aim_angle;
         aim_speed = (_config->speed_work * -1.0f);
     } else if (flag_work == WORK_OUT_STOP) {
         aim_speed = 0;
