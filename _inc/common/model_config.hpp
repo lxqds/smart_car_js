@@ -77,7 +77,7 @@ struct ControlConfig
     uint8_t work_rou_out;      // 施工区驶离积分
     uint8_t work_rou_none;     // 施工区完成积分
     uint8_t work_rou_over;     // 施工区完成积分
-    uint8_t work_read_cone_thresholdy // 施工区进入时，锥桶阈值
+    uint8_t work_read_cone_thresholdy;// 施工区进入时，锥桶阈值
     uint8_t farm_rou_ready;    // 农场识别积分
     uint8_t farm_rou_in;       // 农场进入积分
     uint8_t farm_rou_run;      // 农场行进距离
