@@ -149,7 +149,7 @@ void run_work()
 
         // *****************************************************************
 
-        if (flag_work == WORK_RUN)
+        if (flag_work == WORK_RUN)//摆正车头，现无用
         {
             // 清弯道防止加大 P 项, 提高稳定性
             IMG.is_curve0 = IMG.is_curve1 = false;
@@ -231,7 +231,7 @@ void run_work()
 
         if (flag_work == WORK_STOP)
         {
-            if (stop_clock.toc() > IMG._config->work_stop_time)
+            if (stop_clock.toc() > IMG._config->work_stop_time)//调小一点?
             {
                 MAT_LOG("WORK_STOPFINISH");
                 flag_work = WORK_OUT;
@@ -243,7 +243,7 @@ void run_work()
             }
         }
 
-        if (flag_work == WORK_OUT)
+        if (flag_work == WORK_OUT)//倒车
         {
             if ((work_route - IMG.encoder.route >= IMG._config->work_rou_out) && (IMG.path_last_edge_left.size() < 1 && IMG.path_last_edge_right.size() < 1))
             {
@@ -289,7 +289,7 @@ void run_work()
         }
         if (flag_work == WORK_OUT_SPEEDUP)
         {
-            if (stop_clock_2.toc() > IMG._config->work_out_speedup_time)
+            if (stop_clock_2.toc() > IMG._config->work_out_speedup_time)//推出时间太少？
             {
                 MAT_LOG("WORK_OUT_RUN");
                 flag_work = WORK_OUT_RUN;

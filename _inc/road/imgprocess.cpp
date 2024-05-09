@@ -958,7 +958,11 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
 
     else if (flag_work == WORK_FOUND) {
         aim_speed = _config->speed_work;
-    } else if (flag_work == WORK_RUN) {
+    } 
+    else if (flag_work == WORK_READY) {
+        aim_speed = _config->speed_work;
+    }  // 准备进入施工区
+    else if (flag_work == WORK_RUN) {
         aim_speed = _config->speed_work;
     }  // 施工区 内
     else if (flag_work == WORK_STOP) {
