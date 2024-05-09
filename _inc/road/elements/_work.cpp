@@ -56,9 +56,9 @@ void run_work()
             work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
         else
             work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);
-
+        
         // 当车辆开始靠近锥桶: 准备进入
-        if (work_near_cone.x > IMAGE_HEIGHT * 0.7f)
+        if (work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy)
         {
             work_route = IMG.encoder.route;
             flag_work = WORK_READY;
