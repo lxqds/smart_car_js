@@ -252,3 +252,27 @@ private:
     /* *********************************************************************** */
     /* *********************************************************************** */
 };
+
+
+class control_flag {
+private:
+    vector<int> data;
+
+public:
+    void push(int value) {
+        data.push_back(value);
+    }
+
+    void pop() {
+        if (!data.empty()) {
+            data.pop_back();
+        }
+    }
+
+    int get() {
+        if (!data.empty()) {
+            return data.back();
+        }
+        return -1; // 栈为空时返回一个特定的值，你可以根据需要进行修改
+    }
+};

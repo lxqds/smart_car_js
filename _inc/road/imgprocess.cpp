@@ -436,46 +436,6 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                 flag_yroad == YROAD_NONE && flag_ramp == RAMP_NONE && flag_slow == SLOW_NONE)) {
                 
                 switch (DetectionLabel(r.type)) {
-                   // sprintf(string_log, "0"+r.type);
-                    // case label_tractor:  // 施工区 拖拉机
-                    //     if (flag_work == WORK_NONE && _config->check_work_ == 1) {
-                    //         flag_work = WORK_DETECTION;
-                    //         sprintf(string_log, "TRACTOR_DETECTION");
-                    //         log_i("TRACTOR_DETECTION");
-                    //     }
-                    //     break;
-
-                    // case label_granary:  // 加油站 谷仓
-                    //     if (flag_gas == GAS_NONE && _config->check_gas_ == 1) {
-                    //         flag_gas = GAS_DETECTION;
-                    //         sprintf(string_log, "GAS_DETECTION");
-                    //         log_i("GAS_DETECTION");
-                    //     }
-                    //     break;
-
-                    // case label_corn:  // 泛行区 农场区
-                    //     if (flag_yroad == YROAD_NONE && _config->check_yroad_ == 1) {
-                    //         flag_yroad = YROAD_DETECTION;
-                    //         sprintf(string_log, "FARM_DETECTION");
-                    //         log_i("FARM_DETECTION");
-                    //     }
-                    //     break;
-
-                    // case label_ramp:  // 坡道
-                    //     if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
-                    //         flag_ramp = RAMP_DETECTION;
-                    //         sprintf(string_log, "RAMP_DETECTION");
-                    //         log_i("RAMP_DETECTION");
-                    //     }
-                    //     break;
-
-                    // case label_pig:  // 慢行区
-                    //     if (flag_slow == SLOW_NONE && _config->check_slow_ == 1) {
-                    //         flag_slow = SLOW_DETECTION;
-                    //         sprintf(string_log, "PIG_DETECTION");
-                    //         log_i("PIG_DETECTION");
-                    //     }
-                    //     break;
                     case label_bomb:      // 炸弹
                     {
                         sprintf(string_log, "label_bomb_DETECTION");
@@ -592,30 +552,11 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
 
     // 识别元素
     if (!element_over) {
-        if(flag_garage == GARAGE_NONE)
-        {
-            check_save();    //救援区 - 识别特殊特征
-        }
         if (flag_ramp == RAMP_NONE)
             check_garage();  // 斑马线 - 识别特殊特征
 
         if (flag_garage == GARAGE_NONE)
             check_work();  // 施工区 - 识别标志
-
-        if (flag_garage == GARAGE_NONE && flag_work == WORK_NONE)
-            check_gas();  // 加油站 - 识别标志
-
-        if (flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
-            flag_gas == GAS_NONE)
-            check_yroad();  // 泛行区 - 识别标志
-
-        if (flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
-            flag_gas == GAS_NONE && flag_yroad == YROAD_NONE)
-            check_ramp();  // 坡道 - 识别标志
-
-        if (flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
-            flag_gas == GAS_NONE && flag_yroad == YROAD_NONE)
-            check_slow();  // 慢行区 - 识别标志
 
         if (_config->check_cross_ == 1 &&
             flag_garage == GARAGE_NONE && flag_work == WORK_NONE &&
@@ -641,16 +582,6 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         flag_slow = SLOW_NONE;
         flag_circle = CIRCLE_NONE;
         flag_cross = CROSS_NONE;
-    } else if (flag_save != SAVE_NONE) {
-        run_save();
-        /* *** *** *** *** *** */
-        flag_work = WORK_NONE;
-        flag_gas = GAS_NONE;
-        flag_yroad = YROAD_NONE;
-        flag_ramp = RAMP_NONE;
-        flag_slow = SLOW_NONE;
-        flag_circle = CIRCLE_NONE;
-        flag_cross = CROSS_NONE;
     } else if (flag_work != WORK_NONE) {
         run_work();
         /* *** *** *** *** *** */
@@ -658,31 +589,6 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
         flag_yroad = YROAD_NONE;
         flag_ramp = RAMP_NONE;
         flag_slow = SLOW_NONE;
-        flag_circle = CIRCLE_NONE;
-        flag_cross = CROSS_NONE;
-    } else if (flag_gas != GAS_NONE) {
-        run_gas();
-        /* *** *** *** *** *** */
-        flag_yroad = YROAD_NONE;
-        flag_ramp = RAMP_NONE;
-        flag_slow = SLOW_NONE;
-        flag_circle = CIRCLE_NONE;
-        flag_cross = CROSS_NONE;
-    } else if (flag_yroad != YROAD_NONE) {
-        run_yroad();
-        /* *** *** *** *** *** */
-        flag_ramp = RAMP_NONE;
-        flag_slow = SLOW_NONE;
-        flag_circle = CIRCLE_NONE;
-        flag_cross = CROSS_NONE;
-    } else if (flag_ramp != RAMP_NONE) {
-        run_ramp();
-        /* *** *** *** *** *** */
-        flag_circle = CIRCLE_NONE;
-        flag_cross = CROSS_NONE;
-    } else if (flag_slow != SLOW_NONE) {
-        run_slow();
-        /* *** *** *** *** *** */
         flag_circle = CIRCLE_NONE;
         flag_cross = CROSS_NONE;
     } else if (flag_cross != CROSS_NONE) {
@@ -704,48 +610,8 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
     /* **************************** 中线处理 **************************** */
     /* ***************************************************************** */
 
-    // 救援区 锥桶拟合边线
-    if (flag_save > Left_FOUND) {
-        int dist = 0;  // 边线偏移
-        if (flag_gas == GAS_RUN || flag_work == WORK_RUN)
-            dist = 50;
-
-        if (flag_track == TRACK_LEFT) {
-            track_leftline(det_rptss, det_rptss_num, rpts,
-                           (int)round(ANGLE_DIST / SAMPLE_DIST),
-                           PIXEL_PER_METER * ROAD_WIDTH / 2 + dist);
-        } else {
-            track_rightline(det_rptss, det_rptss_num, rpts,
-                            (int)round(ANGLE_DIST / SAMPLE_DIST),
-                            PIXEL_PER_METER * ROAD_WIDTH / 2 + dist);
-        }
-        rpts_num = det_rptss_num;
-        // 透视 -> 原图
-        for (int i = 0; i < rpts_num; i++)
-            map_perspective(rpts[i][0], rpts[i][1], rpts[i], 1);
-    }
-    // 加油站 & 施工区 锥桶拟合边线
-    else if (flag_gas > GAS_FOUND || flag_work > WORK_FOUND) {
-        int dist = 0;  // 边线偏移
-        if (flag_gas == GAS_RUN || flag_work == WORK_RUN)
-            dist = 50;
-
-        if (flag_track == TRACK_LEFT) {
-            track_leftline(det_rptss, det_rptss_num, rpts,
-                           (int)round(ANGLE_DIST / SAMPLE_DIST),
-                           PIXEL_PER_METER * ROAD_WIDTH / 2 + dist);
-        } else {
-            track_rightline(det_rptss, det_rptss_num, rpts,
-                            (int)round(ANGLE_DIST / SAMPLE_DIST),
-                            PIXEL_PER_METER * ROAD_WIDTH / 2 + dist);
-        }
-        rpts_num = det_rptss_num;
-        // 透视 -> 原图
-        for (int i = 0; i < rpts_num; i++)
-            map_perspective(rpts[i][0], rpts[i][1], rpts[i], 1);
-    }
     // 十字根据远线
-    else if (flag_cross == CROSS_IN) {
+    if (flag_cross == CROSS_IN) {
         if (flag_track == TRACK_LEFT) {
             track_leftline(far_rpts0s + far_Lpt0_rpts0s_id,
                            far_rpts0s_num - far_Lpt0_rpts0s_id, rpts,
@@ -759,26 +625,6 @@ void ImageProcess::process(cv::Mat &mat_origin, cv::Mat &mat_result,
                             PIXEL_PER_METER * ROAD_WIDTH / 2);
             rpts_num = far_rpts1s_num - far_Lpt1_rpts1s_id;
         }
-        // 透视 -> 原图
-        for (int i = 0; i < rpts_num; i++)
-            map_perspective(rpts[i][0], rpts[i][1], rpts[i], 1);
-    }
-    // 泛行区根据 锥桶拟合边线
-    else if (flag_yroad > YROAD_FOUND) {
-        int dist = 0;  // 边线偏移
-        if (flag_yroad == YROAD_RUN)
-            dist = 50;
-
-        if (flag_track == TRACK_LEFT) {
-            track_leftline(det_rptss, det_rptss_num, rpts,
-                           (int)round(ANGLE_DIST / SAMPLE_DIST),
-                           PIXEL_PER_METER * ROAD_WIDTH / 2 + dist);
-        } else {
-            track_rightline(det_rptss, det_rptss_num, rpts,
-                            (int)round(ANGLE_DIST / SAMPLE_DIST),
-                            PIXEL_PER_METER * ROAD_WIDTH / 2 + dist);
-        }
-        rpts_num = det_rptss_num;
         // 透视 -> 原图
         for (int i = 0; i < rpts_num; i++)
             map_perspective(rpts[i][0], rpts[i][1], rpts[i], 1);
