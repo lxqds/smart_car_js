@@ -47,15 +47,12 @@ float far_rpts1an[IMAGE_HEIGHT];
 void check_cross() {
     if (!IMG.element_over &&
         !control_flag.contains(cross_element) &&    //当前没在十字路口中
+        !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&   //当前没在入库中
         ((IMG.Lpt0_found && IMG.Lpt1_found) ||
             (IMG.Lpt0_found && IMG.rpts1s_num < 0.25 / SAMPLE_DIST) ||
             (IMG.Lpt1_found && IMG.rpts0s_num < 0.25 / SAMPLE_DIST))) {
-        if (control_flag.contains(circle_element)){//如果在环岛中则删除环岛
-            control_flag.remove(circle_element);
-            flag_circle = CIRCLE_NONE;
-        }
         control_flag.push(cross_element);
         IMG.element_identify = 1;
         flag_cross = CROSS_BEGIN;

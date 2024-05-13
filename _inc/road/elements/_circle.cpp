@@ -25,6 +25,7 @@ void check_circle() {
 
     if (IMG._config->check_circle_ == 1 &&
         !IMG.element_over &&
+        !control_flag.contains(cross_element) &&    //当前没在十字路口中
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element)      //当前没在入库中
@@ -38,10 +39,6 @@ void check_circle() {
             have_left_line = 0;
             IMG.element_identify = 1;
             circle_route = IMG.encoder.route;
-            if (control_flag.contains(cross_element)) {//如果在十字路口中则删除十字路口
-                control_flag.remove(cross_element);
-                flag_cross = CROSS_NONE;
-            }
             control_flag.push(circle_element);
             flag_circle = CIRCLE_LEFT_BEGIN;
             MAT_LOG("CIRCLE_LEFT_BEGIN");
