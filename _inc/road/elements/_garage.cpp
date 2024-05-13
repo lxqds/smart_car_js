@@ -334,7 +334,6 @@ void run_garage()
             IMG.aim_angle = 0;
         }
         
-        IMG.aim_angle = 0;
     }
 }
 
