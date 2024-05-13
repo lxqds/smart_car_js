@@ -45,7 +45,7 @@ float far_rpts1an[IMAGE_HEIGHT];
 /* ********************************************************************* */
 
 void check_cross() {
-    if (!element_over &&
+    if (!IMG.element_over &&
         !control_flag.contains(cross_element) &&    //当前没在十字路口中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&   //当前没在入库中

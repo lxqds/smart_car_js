@@ -24,7 +24,7 @@ void check_circle() {
 
 
     if (IMG._config->check_circle_ == 1 &&
-        !element_over &&
+        !IMG.element_over &&
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element)      //当前没在入库中
