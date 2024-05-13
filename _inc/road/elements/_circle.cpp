@@ -66,7 +66,7 @@ void check_circle() {
 
 void run_circle() {
     if (control_flag.top() == circle_element) {//当前为圆环元素
-        IMG.aim_speed = _config->speed_circle;
+        IMG.aim_speed =IMG._config->speed_circle;
         // 左环开始, 寻外直道右线
         if (flag_circle == CIRCLE_LEFT_BEGIN) {
             IMG.flag_track = TRACK_RIGHT;

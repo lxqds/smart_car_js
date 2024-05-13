@@ -21,7 +21,7 @@
 #include "elements/_slowzone.hpp"
 #include "elements/_save.hpp"
 
-extern Control_Flag control_flag;
+
 
 
 class ImageProcess {
@@ -304,4 +304,4 @@ public:
     }
 };
 
-
+extern Control_Flag control_flag;

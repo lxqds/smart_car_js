@@ -67,7 +67,7 @@ void check_cross() {
 void run_cross() {
     
     if (control_flag.top() == cross_element) {// 当前为十字路口元素时
-        IMG.aim_speed = _config->speed_cross;
+        IMG.aim_speed = IMG._config->speed_cross;
         // 检测到十字, 先按照近线走
         if (flag_cross == CROSS_BEGIN) {
             if (IMG.Lpt0_found) {
@@ -131,21 +131,21 @@ void run_cross() {
         if (flag_cross == CROSS_IN) {
             if (IMG.flag_track == TRACK_LEFT) {
                 track_leftline(far_rpts0s + far_Lpt0_rpts0s_id,
-                    far_rpts0s_num - far_Lpt0_rpts0s_id, rpts,
+                    far_rpts0s_num - far_Lpt0_rpts0s_id,IMG.rpts,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * ROAD_WIDTH / 2);
                 IMG.rpts_num = far_rpts0s_num - far_Lpt0_rpts0s_id;
             }
             else {
                 track_rightline(far_rpts1s + far_Lpt1_rpts1s_id,
-                    far_rpts1s_num - far_Lpt1_rpts1s_id, rpts,
+                    far_rpts1s_num - far_Lpt1_rpts1s_id,IMG.rpts,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * ROAD_WIDTH / 2);
                 IMG.rpts_num = far_rpts1s_num - far_Lpt1_rpts1s_id;
             }
             // 透视 -> 原图
-            for (int i = 0; i < rpts_num; i++)
-                map_perspective(rpts[i][0], rpts[i][1], rpts[i], 1);
+            for (int i = 0; i < IMG.rpts_num; i++)
+                map_perspective(IMG.rpts[i][0], IMG.rpts[i][1], IMG.rpts[i], 1);
         }
         // 正常巡线
         else {

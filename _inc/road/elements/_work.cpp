@@ -44,7 +44,7 @@ void run_work()
 {
 
     if (control_flag.top() == work_element) {
-        IMG.aim_speed = _config->speed_work;
+        IMG.aim_speed =IMG._config->speed_work;
 
         work_near_cone = POINT(0, 0);
         IMG.edge_det.clear();
