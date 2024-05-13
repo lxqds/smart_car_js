@@ -265,42 +265,13 @@ enum Control_element {
 };
 class Control_Flag {
 private:
-    vector<int> data;
+    std::vector<int> data;
 
 public:
-    void push(int value) {//入栈
-        data.push_back(value);
-    }
-
-    void pop() {//出栈
-        if (!data.empty()) {
-            data.pop_back();
-        }
-    }
-
-    int top() {//获取栈顶元素
-        if (!data.empty()) {
-            return data.back();
-        }
-        return none_element;
-    }
-
-    bool contains(int value) {//判断栈中是否包含元素
-        for (int i = 0; i < data.size(); i++) {
-            if (data[i] == value) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    void remove(int value) {//删除栈中指定元素
-        for (int i = 0; i < data.size(); i++) {
-            if (data[i] == value) {
-                data.erase(data.begin() + i);
-                break;
-            }
-        }
-    }
+    void push(int value); //入栈
+    void pop(); //出栈
+    int top(); //获取栈顶元素
+    bool contains(int value); //判断栈中是否包含元素
+    void remove(int value); //删除栈中指定元素
 };
 

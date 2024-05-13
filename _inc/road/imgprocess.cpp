@@ -976,3 +976,38 @@ void ImageProcess::calculate_angle(void)
             aim_angle = aim_angle_last * 1.35f;
     }
 }
+
+void Control_Flag::push(int value) {
+    data.push_back(value);
+}
+
+void Control_Flag::pop() {
+    if (!data.empty()) {
+        data.pop_back();
+    }
+}
+
+int Control_Flag::top() {
+    if (!data.empty()) {
+        return data.back();
+    }
+    return none_element;
+}
+
+bool Control_Flag::contains(int value) {
+    for (int i = 0; i < data.size(); i++) {
+        if (data[i] == value) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Control_Flag::remove(int value) {
+    for (int i = 0; i < data.size(); i++) {
+        if (data[i] == value) {
+            data.erase(data.begin() + i);
+            break;
+        }
+    }
+}
