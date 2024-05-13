@@ -10,6 +10,7 @@ flag_cross_e flag_cross = CROSS_NONE;
 
 // 引用图像处理
 extern ImageProcess imgprocess;
+extern Control_Flag control_flag;
 #define IMG imgprocess
 
 // 变量定义
@@ -47,10 +48,9 @@ void check_cross() {
     if (!control_flag.contains(cross_element) &&    //当前没在十字路口中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element)      //当前没在入库中
-        (
-            (IMG.Lpt0_found && IMG.Lpt1_found) ||
-            (IMG.Lpt0_found && IMG.rpts1s_num < 0.25 / SAMPLE_DIST) ||
-            (IMG.Lpt1_found && IMG.rpts0s_num < 0.25 / SAMPLE_DIST))) {
+        (IMG.Lpt0_found && IMG.Lpt1_found ||
+            IMG.Lpt0_found && IMG.rpts1s_num < 0.25 / SAMPLE_DIST ||
+            IMG.Lpt1_found && IMG.rpts0s_num < 0.25 / SAMPLE_DIST)) {
         if (control_flag.contains(circle_element)){//如果在环岛中则删除环岛
             control_flag.remove(circle_element);
             flag_circle = CIRCLE_NONE;
@@ -120,7 +120,7 @@ void run_cross() {
                 not_have_line = 0;
                 IMG.element_over = true;
                 IMG.element_over_route = IMG.encoder.route;
-                control_flag.pop(cross_element);
+                control_flag.pop();
                 flag_cross = CROSS_NONE;
                 MAT_LOG("CROSS_NONE");
             }

@@ -304,4 +304,3 @@ public:
     }
 };
 
-extern Control_Flag control_flag;

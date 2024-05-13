@@ -12,6 +12,7 @@ flag_work_e flag_work = WORK_NONE;
 
 // 引用图像处理
 extern ImageProcess imgprocess;
+extern Control_Flag control_flag;
 #define IMG imgprocess
 
 // 变量定义

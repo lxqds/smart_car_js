@@ -844,24 +844,24 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 }
             }
 
-            //绘制贝塞尔曲线所取点的y坐标线
-            for (int a = 0; a < 300; a += 10)
-            {
-                //circle(mat_result, cv::Point(0, p.y), 1, cv::Scalar(0, 0, 255), -1);
-                //circle(mat_result, cv::Point(0, p.y), 1, cv::Scalar(0, 0, 255), -1);
-                //circle(mat_result, cv::Point(0, p.y), 1, cv::Scalar(0, 0, 255), -1);
-                mat_result.at<cv::Vec3b>(bseqx_y1, a)[0] = 0;
-                mat_result.at<cv::Vec3b>(bseqx_y1, a)[1] = 0;
-                mat_result.at<cv::Vec3b>(bseqx_y1, a)[2] = 255;
+            // //绘制贝塞尔曲线所取点的y坐标线
+            // for (int a = 0; a < 300; a += 10)
+            // {
+            //     //circle(mat_result, cv::Point(0, p.y), 1, cv::Scalar(0, 0, 255), -1);
+            //     //circle(mat_result, cv::Point(0, p.y), 1, cv::Scalar(0, 0, 255), -1);
+            //     //circle(mat_result, cv::Point(0, p.y), 1, cv::Scalar(0, 0, 255), -1);
+            //     mat_result.at<cv::Vec3b>(bseqx_y1, a)[0] = 0;
+            //     mat_result.at<cv::Vec3b>(bseqx_y1, a)[1] = 0;
+            //     mat_result.at<cv::Vec3b>(bseqx_y1, a)[2] = 255;
 
-                mat_result.at<cv::Vec3b>(bseqx_y2, a)[0] = 0;
-                mat_result.at<cv::Vec3b>(bseqx_y2, a)[1] = 0;
-                mat_result.at<cv::Vec3b>(bseqx_y2, a)[2] = 255;
+            //     mat_result.at<cv::Vec3b>(bseqx_y2, a)[0] = 0;
+            //     mat_result.at<cv::Vec3b>(bseqx_y2, a)[1] = 0;
+            //     mat_result.at<cv::Vec3b>(bseqx_y2, a)[2] = 255;
 
-                mat_result.at<cv::Vec3b>(bseqx_y3, a)[0] = 0;
-                mat_result.at<cv::Vec3b>(bseqx_y3, a)[1] = 0;
-                mat_result.at<cv::Vec3b>(bseqx_y3, a)[2] = 255;
-            }
+            //     mat_result.at<cv::Vec3b>(bseqx_y3, a)[0] = 0;
+            //     mat_result.at<cv::Vec3b>(bseqx_y3, a)[1] = 0;
+            //     mat_result.at<cv::Vec3b>(bseqx_y3, a)[2] = 255;
+            // }
 
 
             // 预瞄点

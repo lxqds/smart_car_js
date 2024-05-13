@@ -10,6 +10,8 @@ flag_garage_e flag_garage = GARAGE_NONE;
 
 // 引用图像处理
 extern ImageProcess imgprocess;
+extern Control_Flag control_flag;
+
 #define IMG imgprocess
 
 // 变量定义
@@ -185,7 +187,7 @@ void run_garage()
                         none_right = 0;
                         IMG.element_over = true;
                         IMG.element_over_route = IMG.encoder.route;
-                        control_flag.pop(garage_element);
+                        control_flag.pop();
                         flag_garage = GARAGE_NONE;
                         MAT_LOG("GARAGE_NONE");
                     }
@@ -208,7 +210,7 @@ void run_garage()
                         none_left = 0;
                         IMG.element_over = true;
                         IMG.element_over_route = IMG.encoder.route;
-                        control_flag.pop(garage_element);
+                        control_flag.pop();
                         flag_garage = GARAGE_NONE;
                         MAT_LOG("GARAGE_NONE");
                     }
@@ -285,7 +287,7 @@ void run_garage()
                 {
                     IMG.element_over = true;
                     IMG.element_over_route = IMG.encoder.route;
-                    control_flag.pop(garage_element);
+                    control_flag.pop();
                     flag_garage = GARAGE_NONE;
                     MAT_LOG("GARAGE_NONE");
                 }
@@ -297,7 +299,7 @@ void run_garage()
                 {
                     IMG.element_over = true;
                     IMG.element_over_route = IMG.encoder.route;
-                    control_flag.pop(garage_element);
+                    control_flag.pop();
                     flag_garage = GARAGE_NONE;
                     MAT_LOG("GARAGE_NONE");
                 }
