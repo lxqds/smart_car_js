@@ -97,6 +97,7 @@ void run_circle() {
                 have_left_line = 0;
                 IMG.element_over = true;
                 IMG.element_over_route = IMG.encoder.route;
+                control_flag.pop();//移除环岛
                 flag_circle = CIRCLE_NONE;
                 MAT_LOG("CIRCLE_ERROR");
             }
@@ -184,6 +185,7 @@ void run_circle() {
                 have_right_line = 0;
                 IMG.element_over = true;
                 IMG.element_over_route = IMG.encoder.route;
+                control_flag.pop();//移除环岛
                 flag_circle = CIRCLE_NONE;
                 MAT_LOG("CIRCLE_ERROR");
             }
