@@ -21,6 +21,9 @@
 #include "elements/_slowzone.hpp"
 #include "elements/_save.hpp"
 
+extern Control_Flag control_flag;
+
+
 class ImageProcess {
 public:
     ImageProcess() {};
@@ -29,7 +32,7 @@ public:
 public:
     int init(std::string config_path, bool is_result);
     void process(cv::Mat& mat_origin, cv::Mat& mat_result, Payload_t& payload);
-
+    void calculate_angle(void);
 private:
     bool _is_result = false;  // 是否生成处理后的图像
 
@@ -148,7 +151,7 @@ public:
         label_safety,   //普通车辆
 
         label_cone,     //锥桶
-        
+
         label_crosswalk,//斑马线
 
         label_danger,   //危险车辆
@@ -163,7 +166,7 @@ public:
         label_spy,      //嫌疑车辆
 
         label_thief,    //贼
-       
+
         label_tumble,   //跌倒
 
     };
@@ -237,7 +240,7 @@ public:
     float det_rptss[IMAGE_HEIGHT][2];  // 加油站 & 施工区 边线等距采样
     int det_ipts_num, det_rptss_num;
 
-private:
+public:
     // 中线
     float(*rpts)[2];
     int rpts_num;
@@ -253,26 +256,52 @@ private:
     /* *********************************************************************** */
 };
 
-
-class control_flag {
+enum Control_element {
+    none_element,   //无元素    
+    cross_element,  //十字
+    circle_element, //环岛
+    work_element,   //工作区
+    garage_element  //车库
+};
+class Control_Flag {
 private:
     vector<int> data;
 
 public:
-    void push(int value) {
+    void push(int value) {//入栈
         data.push_back(value);
     }
 
-    void pop() {
+    void pop() {//出栈
         if (!data.empty()) {
             data.pop_back();
         }
     }
 
-    int get() {
+    int top() {//获取栈顶元素
         if (!data.empty()) {
             return data.back();
         }
-        return -1; // 栈为空时返回一个特定的值，你可以根据需要进行修改
+        return none_element;
+    }
+
+    bool contains(int value) {//判断栈中是否包含元素
+        for (int i = 0; i < data.size(); i++) {
+            if (data[i] == value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void remove(int value) {//删除栈中指定元素
+        for (int i = 0; i < data.size(); i++) {
+            if (data[i] == value) {
+                data.erase(data.begin() + i);
+                break;
+            }
+        }
     }
 };
+
+

@@ -44,10 +44,18 @@ float far_rpts1an[IMAGE_HEIGHT];
 /* ********************************************************************* */
 
 void check_cross() {
-    if (flag_cross == CROSS_NONE &&
-        ((IMG.Lpt0_found && IMG.Lpt1_found) ||
-         (IMG.Lpt0_found && IMG.rpts1s_num < 0.25 / SAMPLE_DIST) ||
-         (IMG.Lpt1_found && IMG.rpts0s_num < 0.25 / SAMPLE_DIST))) {
+    if (!control_flag.contains(cross_element) &&    //当前没在十字路口中
+        !control_flag.contains(work_element) &&     //当前没在工作区中
+        !control_flag.contains(garage_element)      //当前没在入库中
+        (
+            (IMG.Lpt0_found && IMG.Lpt1_found) ||
+            (IMG.Lpt0_found && IMG.rpts1s_num < 0.25 / SAMPLE_DIST) ||
+            (IMG.Lpt1_found && IMG.rpts0s_num < 0.25 / SAMPLE_DIST))) {
+        if (control_flag.contains(circle_element)){//如果在环岛中则删除环岛
+            control_flag.remove(circle_element);
+            flag_circle = CIRCLE_NONE;
+        }
+        control_flag.push(cross_element);
         IMG.element_identify = 1;
         flag_cross = CROSS_BEGIN;
         MAT_LOG("CROSS_BEGIN");
@@ -57,61 +65,108 @@ void check_cross() {
 /* ********************************************************************* */
 
 void run_cross() {
-    // 检测到十字, 先按照近线走
-    if (flag_cross == CROSS_BEGIN) {
-        if (IMG.Lpt0_found) {
-            IMG.ipts0_num = IMG.rpts0s_num = IMG.rptsc0_num = IMG.Lpt0_rpts0s_id;
-        }
-        if (IMG.Lpt1_found) {
-            IMG.ipts1_num = IMG.rpts1s_num = IMG.rptsc1_num = IMG.Lpt1_rpts1s_id;
+    
+    if (control_flag.top() == cross_element) {// 当前为十字路口元素时
+        IMG.aim_speed = _config->speed_cross;
+        // 检测到十字, 先按照近线走
+        if (flag_cross == CROSS_BEGIN) {
+            if (IMG.Lpt0_found) {
+                IMG.ipts0_num = IMG.rpts0s_num = IMG.rptsc0_num = IMG.Lpt0_rpts0s_id;
+            }
+            if (IMG.Lpt1_found) {
+                IMG.ipts1_num = IMG.rpts1s_num = IMG.rptsc1_num = IMG.Lpt1_rpts1s_id;
+            }
+
+            // 近角点过少, 进入远线控制
+            if ((!IMG.Lpt0_found && !IMG.Lpt0_found) ||
+                (IMG.Lpt0_found && IMG.Lpt0_rpts0s_id < 0.10 / SAMPLE_DIST) ||
+                (IMG.Lpt1_found && IMG.Lpt1_rpts1s_id < 0.10 / SAMPLE_DIST) ||
+                (IMG.rpts0s_num < 0.10 / SAMPLE_DIST && IMG.rpts1s_num < 0.10 / SAMPLE_DIST)) {
+                cross_route = IMG.encoder.route;
+                flag_cross = CROSS_IN;
+                MAT_LOG("CROSS_IN");
+            }
         }
 
-        // 近角点过少, 进入远线控制
-        if ((!IMG.Lpt0_found && !IMG.Lpt0_found) ||
-            (IMG.Lpt0_found && IMG.Lpt0_rpts0s_id < 0.10 / SAMPLE_DIST) ||
-            (IMG.Lpt1_found && IMG.Lpt1_rpts1s_id < 0.10 / SAMPLE_DIST) ||
-            (IMG.rpts0s_num < 0.10 / SAMPLE_DIST && IMG.rpts1s_num < 0.10 / SAMPLE_DIST)) {
-            cross_route = IMG.encoder.route;
-            flag_cross = CROSS_IN;
-            MAT_LOG("CROSS_IN");
+        /* ***************************************************************** */
+
+        // 远线控制进十字
+        if (flag_cross == CROSS_IN) {
+            // 寻远线, 算法与近线相同
+            cross_farline();
+
+            if (far_Lpt0_found && far_Lpt1_found && far_rpts0s[far_rpts0s_num - 1][0] > IMAGE_WIDTH / 2)
+                IMG.flag_track = TRACK_LEFT;
+            else if (far_Lpt0_found && far_Lpt1_found && far_rpts1s[far_rpts1s_num - 1][0] < IMAGE_WIDTH / 2)
+                IMG.flag_track = TRACK_RIGHT;
+            else if (far_rpts0s_num > far_rpts1s_num)
+                IMG.flag_track = TRACK_LEFT;
+            else if (far_rpts0s_num < far_rpts1s_num)
+                IMG.flag_track = TRACK_RIGHT;
+            else
+                IMG.flag_track = TRACK_LEFT;
+
+            // 正常巡线先丢线后有线
+            if (IMG.rpts0s_num < 0.1 / SAMPLE_DIST &&
+                IMG.rpts1s_num < 0.1 / SAMPLE_DIST) {
+                not_have_line++;
+            }
+            // 出圈
+            if ((IMG.rpts0s_num > 1.0 / SAMPLE_DIST &&
+                IMG.rpts1s_num > 1.0 / SAMPLE_DIST &&
+                !IMG.Lpt0_found && !IMG.Lpt1_found &&
+                not_have_line > 1) ||
+                (IMG.encoder.route - cross_route >= 55)) {
+                not_have_line = 0;
+                IMG.element_over = true;
+                IMG.element_over_route = IMG.encoder.route;
+                control_flag.pop(cross_element);
+                flag_cross = CROSS_NONE;
+                MAT_LOG("CROSS_NONE");
+            }
         }
+        /* *** *** *** *** *** */
+
+        // 十字根据远线
+        if (flag_cross == CROSS_IN) {
+            if (IMG.flag_track == TRACK_LEFT) {
+                track_leftline(far_rpts0s + far_Lpt0_rpts0s_id,
+                    far_rpts0s_num - far_Lpt0_rpts0s_id, rpts,
+                    (int)round(ANGLE_DIST / SAMPLE_DIST),
+                    PIXEL_PER_METER * ROAD_WIDTH / 2);
+                IMG.rpts_num = far_rpts0s_num - far_Lpt0_rpts0s_id;
+            }
+            else {
+                track_rightline(far_rpts1s + far_Lpt1_rpts1s_id,
+                    far_rpts1s_num - far_Lpt1_rpts1s_id, rpts,
+                    (int)round(ANGLE_DIST / SAMPLE_DIST),
+                    PIXEL_PER_METER * ROAD_WIDTH / 2);
+                IMG.rpts_num = far_rpts1s_num - far_Lpt1_rpts1s_id;
+            }
+            // 透视 -> 原图
+            for (int i = 0; i < rpts_num; i++)
+                map_perspective(rpts[i][0], rpts[i][1], rpts[i], 1);
+        }
+        // 正常巡线
+        else {
+            if (IMG.flag_track == TRACK_LEFT) {
+                IMG.rpts = IMG.rptsc0;
+                IMG.rpts_num = IMG.rptsc0_num;
+            }
+            else if (IMG.flag_track == TRACK_RIGHT) {
+                IMG.rpts = IMG.rptsc1;
+                IMG.rpts_num = IMG.rptsc1_num;
+            }
+            else {
+                IMG.rpts = IMG.rptscs;
+                IMG.rpts_num = IMG.rptscs_num;
+            }
+        }
+        IMG.calculate_angle();//计算角度
+
     }
 
-    /* ***************************************************************** */
-
-    // 远线控制进十字
-    if (flag_cross == CROSS_IN) {
-        // 寻远线, 算法与近线相同
-        cross_farline();
-
-        if (far_Lpt0_found && far_Lpt1_found && far_rpts0s[far_rpts0s_num - 1][0] > IMAGE_WIDTH / 2)
-            IMG.flag_track = TRACK_LEFT;
-        else if (far_Lpt0_found && far_Lpt1_found && far_rpts1s[far_rpts1s_num - 1][0] < IMAGE_WIDTH / 2)
-            IMG.flag_track = TRACK_RIGHT;
-        else if (far_rpts0s_num > far_rpts1s_num)
-            IMG.flag_track = TRACK_LEFT;
-        else if (far_rpts0s_num < far_rpts1s_num)
-            IMG.flag_track = TRACK_RIGHT;
-        else
-            IMG.flag_track = TRACK_LEFT;
-
-        // 正常巡线先丢线后有线
-        if (IMG.rpts0s_num < 0.1 / SAMPLE_DIST &&
-            IMG.rpts1s_num < 0.1 / SAMPLE_DIST) {
-            not_have_line++;
-        }
-        if ((IMG.rpts0s_num > 1.0 / SAMPLE_DIST &&
-             IMG.rpts1s_num > 1.0 / SAMPLE_DIST &&
-             !IMG.Lpt0_found && !IMG.Lpt1_found &&
-             not_have_line > 1) ||
-            (IMG.encoder.route - cross_route >= 55)) {
-            not_have_line = 0;
-            IMG.element_over = true;
-            IMG.element_over_route = IMG.encoder.route;
-            flag_cross = CROSS_NONE;
-            MAT_LOG("CROSS_NONE");
-        }
-    }
+   
 }
 
 /* ********************************************************************* */
@@ -129,14 +184,14 @@ void cross_farline() {
     if (IMG.Lpt0_found && IMG.encoder.route - cross_route < 25) {
         float trans[2];
         map_perspective(IMG.rpts0s[IMG.Lpt0_rpts0s_id][0],
-                        IMG.rpts0s[IMG.Lpt0_rpts0s_id][1], trans, 1);
+            IMG.rpts0s[IMG.Lpt0_rpts0s_id][1], trans, 1);
         yy1 = trans[1] - 5;
         far_x1 = trans[0];
     }
     if (IMG.Lpt1_found && IMG.encoder.route - cross_route < 25) {
         float trans[2];
         map_perspective(IMG.rpts1s[IMG.Lpt1_rpts1s_id][0],
-                        IMG.rpts1s[IMG.Lpt1_rpts1s_id][1], trans, 1);
+            IMG.rpts1s[IMG.Lpt1_rpts1s_id][1], trans, 1);
         yy2 = trans[1] - 5;
         far_x2 = trans[0];
     }
@@ -168,7 +223,7 @@ void cross_farline() {
     if (AT_IMAGE(IMG.mat_bin, far_x1, far_y1 + 1) >= IMG._config->threshold &&
         black_found)
         findline_lefthand_adaptive(IMG.mat_bin, BLOCK_SIZE, CLIP_VALUE, far_x1,
-                                   far_y1 + 1, far_ipts0, &far_ipts0_num);
+            far_y1 + 1, far_ipts0, &far_ipts0_num);
     else
         far_ipts0_num = 0;
 
@@ -199,7 +254,7 @@ void cross_farline() {
     if (AT_IMAGE(IMG.mat_bin, far_x2, far_y2 + 1) >= IMG._config->threshold &&
         black_found)
         findline_righthand_adaptive(IMG.mat_bin, BLOCK_SIZE, CLIP_VALUE, far_x2,
-                                    far_y2 + 1, far_ipts1, &far_ipts1_num);
+            far_y2 + 1, far_ipts1, &far_ipts1_num);
     else
         far_ipts1_num = 0;
 
@@ -213,29 +268,29 @@ void cross_farline() {
 
     // 边线滤波
     blur_points(far_rpts0, far_ipts0_num, far_rpts0b,
-                (int)round(LINE_BLUR_KERNEL));
+        (int)round(LINE_BLUR_KERNEL));
     blur_points(far_rpts1, far_ipts1_num, far_rpts1b,
-                (int)round(LINE_BLUR_KERNEL));
+        (int)round(LINE_BLUR_KERNEL));
 
     // 边线等距采样
     far_rpts0s_num = sizeof(far_rpts0s) / sizeof(far_rpts0s[0]);
     resample_points(far_rpts0b, far_ipts0_num, far_rpts0s, &far_rpts0s_num,
-                    SAMPLE_DIST * PIXEL_PER_METER);
+        SAMPLE_DIST * PIXEL_PER_METER);
     far_rpts1s_num = sizeof(far_rpts1s) / sizeof(far_rpts1s[0]);
     resample_points(far_rpts1b, far_ipts1_num, far_rpts1s, &far_rpts1s_num,
-                    SAMPLE_DIST * PIXEL_PER_METER);
+        SAMPLE_DIST * PIXEL_PER_METER);
 
     // 边线局部角度变化率
     local_angle_points(far_rpts0s, far_rpts0s_num, far_rpts0a,
-                       (int)round(ANGLE_DIST / SAMPLE_DIST));
+        (int)round(ANGLE_DIST / SAMPLE_DIST));
     local_angle_points(far_rpts1s, far_rpts1s_num, far_rpts1a,
-                       (int)round(ANGLE_DIST / SAMPLE_DIST));
+        (int)round(ANGLE_DIST / SAMPLE_DIST));
 
     // 角度变化率非极大抑制
     nms_angle(far_rpts0a, far_rpts0s_num, far_rpts0an,
-              (int)round(ANGLE_DIST / SAMPLE_DIST) * 2 + 1);
+        (int)round(ANGLE_DIST / SAMPLE_DIST) * 2 + 1);
     nms_angle(far_rpts1a, far_rpts1s_num, far_rpts1an,
-              (int)round(ANGLE_DIST / SAMPLE_DIST) * 2 + 1);
+        (int)round(ANGLE_DIST / SAMPLE_DIST) * 2 + 1);
 
     // 找远线上的 L 角点
     far_Lpt0_found = far_Lpt1_found = false;
@@ -247,7 +302,7 @@ void cross_farline() {
         int ip1 =
             clip(i + (int)round(ANGLE_DIST / SAMPLE_DIST), 0, far_rpts0s_num - 1);
         float conf = fabs(far_rpts0a[i]) -
-                     (fabs(far_rpts0a[im1]) + fabs(far_rpts0a[ip1])) / 2;
+            (fabs(far_rpts0a[im1]) + fabs(far_rpts0a[ip1])) / 2;
 
         if (30. / 180. * PI < conf && conf < 150. / 180. * PI && i < 100) {
             far_Lpt0_rpts0s_id = i;
@@ -263,7 +318,7 @@ void cross_farline() {
         int ip1 =
             clip(i + (int)round(ANGLE_DIST / SAMPLE_DIST), 0, far_rpts1s_num - 1);
         float conf = fabs(far_rpts1a[i]) -
-                     (fabs(far_rpts1a[im1]) + fabs(far_rpts1a[ip1])) / 2;
+            (fabs(far_rpts1a[im1]) + fabs(far_rpts1a[ip1])) / 2;
 
         if (30. / 180. * PI < conf && conf < 150. / 180. * PI && i < 100) {
             far_Lpt1_rpts1s_id = i;
