@@ -26,7 +26,8 @@ StopWatch stop_clock_2;
 
 void check_work()
 {
-    if (!control_flag.contains(circle_element) &&   //当前没在环岛中
+    if (!element_over &&
+        !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&   //当前没在入库中
         flag_work == WORK_DETECTION)
@@ -45,7 +46,7 @@ void run_work()
 {
 
     if (control_flag.top() == work_element) {
-        IMG.aim_speed =IMG._config->speed_work;
+        IMG.aim_speed = IMG._config->speed_work;
 
         work_near_cone = POINT(0, 0);
         IMG.edge_det.clear();

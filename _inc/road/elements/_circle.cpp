@@ -22,49 +22,46 @@ int have_left_line = 0, have_right_line = 0;
 
 void check_circle() {
 
-    if (IMG._config->check_circle_ == 1 &&
-        flag_garage == GARAGE_NONE &&
-        flag_work == WORK_NONE)
-    {
-        if (!control_flag.contains(circle_element) &&   //当前没在环岛中
-            !control_flag.contains(work_element) &&     //当前没在工作区中
-            !control_flag.contains(garage_element)      //当前没在入库中
-            )    
-        {
-            //左圆环
-            if (IMG.Lpt0_found &&   // 右线找到
-                !IMG.Lpt1_found &&  // 左线未找到
-                IMG.is_straight1) {
-                none_left_line = 0;
-                have_left_line = 0;
-                IMG.element_identify = 1;
-                circle_route = IMG.encoder.route;
-                if (control_flag.contains(cross_element)) {//如果在十字路口中则删除十字路口
-                    control_flag.remove(cross_element);
-                    flag_cross = CROSS_NONE;
-                }
-                control_flag.push(circle_element);
-                flag_circle = CIRCLE_LEFT_BEGIN;
-                MAT_LOG("CIRCLE_LEFT_BEGIN");
-            }
-            //右圆环
-            if (!IMG.Lpt0_found &&  // 左线找到
-                IMG.Lpt1_found &&   // 右线未找到
-                IMG.is_straight0) {
-                none_right_line = 0;
-                have_right_line = 0;
-                IMG.element_identify = 1;
-                circle_route = IMG.encoder.route;
-                if (control_flag.contains(cross_element)) {//如果在十字路口中则删除十字路口
-                    control_flag.remove(cross_element);
-                    flag_cross = CROSS_NONE;
-                }
-                control_flag.push(circle_element);
-                flag_circle = CIRCLE_RIGHT_BEGIN;
-                MAT_LOG("CIRCLE_RIGHT_BEGIN");
-            }
-        }
 
+    if (IMG._config->check_circle_ == 1 &&
+        !element_over &&
+        !control_flag.contains(circle_element) &&   //当前没在环岛中
+        !control_flag.contains(work_element) &&     //当前没在工作区中
+        !control_flag.contains(garage_element)      //当前没在入库中
+        )
+    {
+        //左圆环
+        if (IMG.Lpt0_found &&   // 右线找到
+            !IMG.Lpt1_found &&  // 左线未找到
+            IMG.is_straight1) {
+            none_left_line = 0;
+            have_left_line = 0;
+            IMG.element_identify = 1;
+            circle_route = IMG.encoder.route;
+            if (control_flag.contains(cross_element)) {//如果在十字路口中则删除十字路口
+                control_flag.remove(cross_element);
+                flag_cross = CROSS_NONE;
+            }
+            control_flag.push(circle_element);
+            flag_circle = CIRCLE_LEFT_BEGIN;
+            MAT_LOG("CIRCLE_LEFT_BEGIN");
+        }
+        //右圆环
+        if (!IMG.Lpt0_found &&  // 左线找到
+            IMG.Lpt1_found &&   // 右线未找到
+            IMG.is_straight0) {
+            none_right_line = 0;
+            have_right_line = 0;
+            IMG.element_identify = 1;
+            circle_route = IMG.encoder.route;
+            if (control_flag.contains(cross_element)) {//如果在十字路口中则删除十字路口
+                control_flag.remove(cross_element);
+                flag_cross = CROSS_NONE;
+            }
+            control_flag.push(circle_element);
+            flag_circle = CIRCLE_RIGHT_BEGIN;
+            MAT_LOG("CIRCLE_RIGHT_BEGIN");
+        }
     }
 }
 
@@ -72,7 +69,7 @@ void check_circle() {
 
 void run_circle() {
     if (control_flag.top() == circle_element) {//当前为圆环元素
-        IMG.aim_speed =IMG._config->speed_circle;
+        IMG.aim_speed = IMG._config->speed_circle;
         // 左环开始, 寻外直道右线
         if (flag_circle == CIRCLE_LEFT_BEGIN) {
             IMG.flag_track = TRACK_RIGHT;
@@ -262,7 +259,7 @@ void run_circle() {
         }
         IMG.calculate_angle();//计算角度
     }
-    
+
 }
 
 /* ********************************************************************* */

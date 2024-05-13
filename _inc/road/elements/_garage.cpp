@@ -36,8 +36,9 @@ void check_garage()
     ///> 5、如果此行的black_blocks在6个左右, times++
     ///> 6、遍历18——23行, 如果times在4个左右, 则确定为起跑线。
 
-    if (!control_flag.contains(work_element) &&         //当前没在工作区中
-        !control_flag.contains(garage_element)&&       //当前没在出入库中
+    if (!element_over &&
+        !control_flag.contains(work_element) &&         //当前没在工作区中
+        !control_flag.contains(garage_element) &&       //当前没在出入库中
         IMG.encoder.route > IMG._config->garage_out_route_  //出了车库之后
         )
     {

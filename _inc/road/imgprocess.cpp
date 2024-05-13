@@ -566,12 +566,12 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     }
 
     // 识别元素
-    if (!element_over) {
-        check_garage();  // 斑马线 - 识别特殊特征
-        check_work();  // 施工区 - 识别标志
-        check_cross();  // 十字路 - 识别角点特征
-        check_circle();  // 环岛路 - 识别角点特征
-    }
+
+    check_garage();  // 斑马线 - 识别特殊特征
+    check_work();  // 施工区 - 识别标志
+    check_cross();  // 十字路 - 识别角点特征
+    check_circle();  // 环岛路 - 识别角点特征
+
 
     run_cross();
     run_circle();
