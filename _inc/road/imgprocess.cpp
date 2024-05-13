@@ -598,6 +598,21 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 
     if (control_flag.top() == none_element)
     {
+        // 正常巡线
+        if (IMG.flag_track == TRACK_LEFT) {
+            IMG.rpts = IMG.rptsc0;
+            IMG.rpts_num = IMG.rptsc0_num;
+        }
+        else if (IMG.flag_track == TRACK_RIGHT) {
+            IMG.rpts = IMG.rptsc1;
+            IMG.rpts_num = IMG.rptsc1_num;
+        }
+        else {
+            IMG.rpts = IMG.rptscs;
+            IMG.rpts_num = IMG.rptscs_num;
+        }
+        IMG.calculate_angle();//计算角度
+
         aim_speed = _config->speed_base;
         // 根据偏差方差加减速
         if (abs(aim_sigma) < 10.0) {
@@ -617,7 +632,9 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     /* ***************************************************************** */
     /* **************************** 运行控制 **************************** */
     /* ***************************************************************** */
-
+    aim_angle_p_k = _config->steering_p_k;
+    aim_angle_p = _config->steering_p;
+    aim_angle_d = _config->steering_d;
     // 偏差限幅
     aim_angle = aim_angle > 500.0f ? 500.0f : aim_angle < -500.0f ? -500.0f
         : aim_angle;
@@ -868,9 +885,7 @@ void ImageProcess::calculate_angle(void)
 {
     aim_distance_f = _config->aim_distance_far;
     aim_distance_n = _config->aim_distance_near;
-    aim_angle_p_k = _config->steering_p_k;
-    aim_angle_p = _config->steering_p;
-    aim_angle_d = _config->steering_d;
+
 
 
     // 找最近点(起始点中线归一化)
