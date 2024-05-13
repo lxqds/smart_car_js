@@ -22,7 +22,7 @@ int have_left_line = 0, have_right_line = 0;
 
 void check_circle() {
 
-    if (_config->check_circle_ == 1 &&
+    if (IMG._config->check_circle_ == 1 &&
         flag_garage == GARAGE_NONE &&
         flag_work == WORK_NONE)
     {

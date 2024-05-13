@@ -247,7 +247,7 @@ public:
     // 归一化中线
     float rptsn[IMAGE_HEIGHT][2];
     int rptsn_num;
-
+    bool flag_rpts = false;
     // 透视变换临时变量
     float trans[2];
 
