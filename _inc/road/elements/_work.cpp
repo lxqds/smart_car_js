@@ -219,12 +219,10 @@ void run_work()
 
                 // 计算所有锥桶的平均高度
                 int num = 0;
-                int levelCones;
                 // uint8_t counterRec;
                 for (unsigned int i = 0; i < IMG.edge_det.size(); i++)
                     num += IMG.edge_det[i].x;
 
-                levelCones = num / IMG.edge_det.size();
                 MAT_LOG("WORK_RUN_ING");
 
                 // 积分延迟一定距离出施工区

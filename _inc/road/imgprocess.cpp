@@ -757,7 +757,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         // 其他情况 ------------------------------------------------
         else {
             // 施工区 & 加油站 & 救援区---------------------------------------
-            if (flag_gas != GAS_NONE || flag_work != WORK_NONE || flag_gas != SAVE_NONE) {
+            if (flag_gas != GAS_NONE || flag_work != WORK_NONE || flag_gas != GAS_NONE) {
                 // 锥桶
                 for (auto p : edge_det) {
                     cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
@@ -891,7 +891,7 @@ void ImageProcess::calculate_angle(void)
     // 找最近点(起始点中线归一化)
     float min_dist = 1e10;
     int begin_id = -1;
-    bool flag_rpts = false;
+    flag_rpts = false;
     for (int i = 0; i < rpts_num; i++) {
         float dx = rpts[i][0] - cx;
         float dy = rpts[i][1] - cy;
@@ -908,7 +908,7 @@ void ImageProcess::calculate_angle(void)
     if (flag_garage == GARAGE_IN_LEFT || flag_garage == GARAGE_IN_RIGHT || flag_cross == CROSS_IN)
         begin_id = 0;
 
-    int bseqx_y1 = 0, bseqx_y2 = 0, bseqx_y3 = 0;
+    // int bseqx_y1 = 0, bseqx_y2 = 0, bseqx_y3 = 0;
     // 中线有点, 同时最近点不是最后几个点
     if (begin_id >= 0 && rpts_num - begin_id >= 3) {
         // 找到中线
@@ -934,9 +934,9 @@ void ImageProcess::calculate_angle(void)
         v_center[3] = { (int)rptsn[aim_idx__far][0], (int)(IMAGE_HEIGHT * (1 - aim_distance_f)) };
         bezier_line = bezier(0.03, v_center);
 
-        bseqx_y1 = (IMAGE_HEIGHT * (1 - aim_distance_n));
-        bseqx_y2 = (IMAGE_HEIGHT * (1 - (aim_distance_f + aim_distance_n) / 2));
-        bseqx_y3 = (IMAGE_HEIGHT * (1 - aim_distance_f));
+        // bseqx_y1 = (IMAGE_HEIGHT * (1 - aim_distance_n));
+        // bseqx_y2 = (IMAGE_HEIGHT * (1 - (aim_distance_f + aim_distance_n) / 2));
+        // bseqx_y3 = (IMAGE_HEIGHT * (1 - aim_distance_f));
 
         // 计算远锚点偏差值
         float dx = bezier_line[bezier_line.size() - 1].x - cx;  // rptsn[aim_idx__far][0] - cx;
@@ -995,7 +995,7 @@ int Control_Flag::top() {
 }
 
 bool Control_Flag::contains(int value) {
-    for (int i = 0; i < data.size(); i++) {
+    for (size_t i = 0; i < data.size(); i++) {
         if (data[i] == value) {
             return true;
         }
@@ -1004,7 +1004,7 @@ bool Control_Flag::contains(int value) {
 }
 
 void Control_Flag::remove(int value) {
-    for (int i = 0; i < data.size(); i++) {
+    for (size_t i = 0; i < data.size(); i++) {
         if (data[i] == value) {
             data.erase(data.begin() + i);
             break;
