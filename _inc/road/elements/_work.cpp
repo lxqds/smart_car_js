@@ -30,7 +30,7 @@ void check_work()
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&   //当前没在入库中
-        flag_work == WORK_DETECTION)
+        (flag_work == WORK_DETECTION))
     {
         IMG.element_identify = 1;
         work_route = IMG.encoder.route;

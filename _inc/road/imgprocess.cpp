@@ -474,7 +474,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                         case label_tumble:      // 跌倒
                         {
                             if (flag_save == SAVE_NONE && _config->check_save_ == 1) {
-                                flag_save = Left_DETECTION;
+                                flag_work = WORK_DETECTION;
                                 sprintf(string_log, "label_tumble_DETECTION");
                                 log_i("label_tumble_DETECTION");
                             }
