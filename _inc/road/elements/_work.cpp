@@ -245,7 +245,7 @@ void run_work()
                 IMG.aim_speed = 0;
                 if (IMG.encoder.speed < 0.1 && IMG.encoder.speed > -0.1)
                 {
-                    flag_work = WORK_STOP;
+                    flag_work = WORK_PARKING;
                     MAT_LOG("WORK_STOPFINISH");
                     stop_clock.tic();
                 }
