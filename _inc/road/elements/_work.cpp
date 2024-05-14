@@ -246,20 +246,25 @@ void run_work()
                 else
                 {
 
-                    if (IMG.path_last_edge_left.size() >= 1)
-                    { // 先左边线
-                        IMG.flag_track = TRACK_LEFT;
-                        IMG.edge_left = IMG.path_last_edge_left[IMG.path_last_edge_left.size() - 1];
-                        IMG.path_last_edge_left.pop_back();
-                        MAT_LOG("TRACK_L");
+                    if (IMG.encoder.route - work_route <= IMG._config->work_recback_angle_route)
+                    {
+                        IMG.aim_angle = IMG._config->work_recback_angle;
+                        IMG.aim_angle = IMG._config->work_recback_speed;
                     }
-                    else if (IMG.path_last_edge_right.size() > 1)
-                    { // 再右边线
-                        IMG.flag_track = TRACK_RIGHT;
-                        IMG.edge_right = IMG.path_last_edge_right[IMG.path_last_edge_right.size() - 1];
-                        IMG.path_last_edge_right.pop_back();
-                        MAT_LOG("TRACK_R");
-                    }
+                    //if (IMG.path_last_edge_left.size() >= 1)
+                    //{ // 先左边线
+                    //    IMG.flag_track = TRACK_LEFT;
+                    //    IMG.edge_left = IMG.path_last_edge_left[IMG.path_last_edge_left.size() - 1];
+                    //    IMG.path_last_edge_left.pop_back();
+                    //    MAT_LOG("TRACK_L");
+                    //}
+                    //else if (IMG.path_last_edge_right.size() > 1)
+                    //{ // 再右边线
+                    //    IMG.flag_track = TRACK_RIGHT;
+                    //    IMG.edge_right = IMG.path_last_edge_right[IMG.path_last_edge_right.size() - 1];
+                    //    IMG.path_last_edge_right.pop_back();
+                    //    MAT_LOG("TRACK_R");
+                    //}
                     else
                     {
                         // flag_work = WORK_OUT_STOP;
