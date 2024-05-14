@@ -246,7 +246,6 @@ void run_work()
                 else
                 {
 
-                    if()
                     if (IMG.path_last_edge_left.size() >= 1)
                     { // 先左边线
                         IMG.flag_track = TRACK_LEFT;
