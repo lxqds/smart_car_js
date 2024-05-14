@@ -607,14 +607,14 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         aim_speed = _config->speed_base;
         // 根据偏差方差加减速
         if (abs(aim_sigma) < 10.0) {
-            aim_speed_shift += 10;
+            aim_speed_shift += 10.0 / aim_sigma;
         }
         else {
             aim_speed_shift -= speed_diff;
         }
 
         // 速度限幅
-        aim_speed_shift = clip(aim_speed_shift, _config->speed_base, _config->speed_up);
+        aim_speed_shift = clip(aim_speed_shift, _config->speed_base * 0.75, _config->speed_up);
         aim_speed = aim_speed_shift;
     }
 
