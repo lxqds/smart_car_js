@@ -205,11 +205,11 @@ struct ControlConfig
         AUTOCFG(work_rou_run);
         AUTOCFG(work_rou_out);
 
-        AUTOCFG(work_angle_in_2);
-        AUTOCFG(work_angle_in_1);
-        AUTOCFG(work_recback_angle_route);
-        AUTOCFG(work_recback_angle);
-        AUTOCFG(work_recback_speed);
+        //AUTOCFG(work_angle_in_2);
+        //AUTOCFG(work_angle_in_1);
+        //AUTOCFG(work_recback_angle_route);
+        //AUTOCFG(work_recback_angle);
+        //AUTOCFG(work_recback_speed);
 
         AUTOCFG(work_rou_none);
         AUTOCFG(work_rou_over);
