@@ -467,14 +467,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                             log_i("label_evil_DETECTION");
                         }break;
                         case label_tumble:      // 跌倒
-                        {
-                            if (flag_save == SAVE_NONE && _config->check_save_ == 1) {
-                                flag_save = Left_DETECTION;
-                                sprintf(string_log, "label_tumble_DETECTION");
-                                log_i("label_tumble_DETECTION");
-                            }
-
-                        }break;
                         case label_patient:     // 病人
                             if (flag_work == WORK_NONE && _config->check_work_ == 1) {
                                 flag_work = WORK_DETECTION;
