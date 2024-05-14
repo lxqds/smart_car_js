@@ -111,7 +111,7 @@ void run_work()
                     if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST || IMG.encoder.route - work_route < IMG._config->work_rou_ready)
                     {
                         // 补线起点: 右
-                        IMG.aim_angle = IMG.work_angle_in_1;
+                        IMG.aim_angle = IMG._config->work_angle_in_1;
 
                         MAT_LOG("WORK_FIRST");
                         work_route2 = IMG.encoder.route; // 为积分第二段路程
@@ -122,7 +122,7 @@ void run_work()
                         if (cone_RU.x > 0)
                         {
                             // 补线起点: 右
-                            IMG.aim_angle = IMG.work_angle_in_2;
+                            IMG.aim_angle = IMG._config->work_angle_in_2;
 
                             MAT_LOG("WORK_SECOND");
 
