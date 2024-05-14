@@ -234,68 +234,79 @@ void run_work()
                 if ((cone_RU.x >= IMAGE_HEIGHT * 0.8) || (IMG.encoder.route - work_route >= IMG._config->work_rou_run))
                 {
                     work_route = IMG.encoder.route;
-                    flag_work = WORK_STOP;
-                    stop_clock.tic();
+                    flag_work = WORK_STOPPING;
                     MAT_LOG("WORK_RUN_STOP");
                 }
             }
             // *****************************************************************
 
-            if (flag_work == WORK_STOP)
+            if (flag_work == WORK_STOPPING)//停车
             {
                 IMG.aim_speed = 0;
+                if (IMG.encoder.speed < 0.1 && IMG.encoder.speed > -0.1)
+                {
+                    flag_work = WORK_STOP;
+                    MAT_LOG("WORK_STOPFINISH");
+                    stop_clock.tic();
+                }
+                MAT_LOG("WORK_STOPPING");
+            }
 
+
+
+            if (flag_work == WORK_PARKING)//泊车
+            {
+                IMG.aim_speed = 0;
                 if (stop_clock.toc() > IMG._config->work_stop_time)//调小一点?
                 {
-                    MAT_LOG("WORK_STOPFINISH");
+
+                    MAT_LOG("WORK_PARKINISH"); //泊车中
                     flag_work = WORK_OUT;
                 }
                 else
                 {
-       
-                    work_route = IMG.encoder.route;
-                    MAT_LOG("WORK_STOPPING");
+                    MAT_LOG("WORK_PARKING");
                 }
             }
 
             if (flag_work == WORK_OUT)//倒车
             {
 
-                    if ( work_route - IMG.encoder.route  <= IMG._config->work_recback_angle_route)
-                    {   
-                        MAT_LOG("WORK_OUTING");
-                        IMG.aim_angle = IMG._config->work_recback_angle;
-                        IMG.aim_speed = -IMG._config->work_recback_speed;
-                    }
-                    //if (IMG.path_last_edge_left.size() >= 1)
-                    //{ // 先左边线
-                    //    IMG.flag_track = TRACK_LEFT;
-                    //    IMG.edge_left = IMG.path_last_edge_left[IMG.path_last_edge_left.size() - 1];
-                    //    IMG.path_last_edge_left.pop_back();
-                    //    MAT_LOG("TRACK_L");
+                if (work_route - IMG.encoder.route <= IMG._config->work_recback_angle_route)
+                {
+                    MAT_LOG("WORK_OUTING");
+                    IMG.aim_angle = IMG._config->work_recback_angle;
+                    IMG.aim_speed = -IMG._config->work_recback_speed;
+                }
+                //if (IMG.path_last_edge_left.size() >= 1)
+                //{ // 先左边线
+                //    IMG.flag_track = TRACK_LEFT;
+                //    IMG.edge_left = IMG.path_last_edge_left[IMG.path_last_edge_left.size() - 1];
+                //    IMG.path_last_edge_left.pop_back();
+                //    MAT_LOG("TRACK_L");
+                //}
+                //else if (IMG.path_last_edge_right.size() > 1)
+                //{ // 再右边线
+                //    IMG.flag_track = TRACK_RIGHT;
+                //    IMG.edge_right = IMG.path_last_edge_right[IMG.path_last_edge_right.size() - 1];
+                //    IMG.path_last_edge_right.pop_back();
+                //    MAT_LOG("TRACK_R");
+                //}
+                else
+                {
+                    // flag_work = WORK_OUT_STOP;
+                    //if (work_route - IMG.encoder.route >= IMG._config->work_rou_out)
+                    //{
+                    //    //flag_work = WORK_OUT_STOP;
+                    //    MAT_LOG("AIM_SPEED = 0");
+                    //    stop_clock_2.tic();
                     //}
-                    //else if (IMG.path_last_edge_right.size() > 1)
-                    //{ // 再右边线
-                    //    IMG.flag_track = TRACK_RIGHT;
-                    //    IMG.edge_right = IMG.path_last_edge_right[IMG.path_last_edge_right.size() - 1];
-                    //    IMG.path_last_edge_right.pop_back();
-                    //    MAT_LOG("TRACK_R");
-                    //}
-                    else
-                    {
-                        // flag_work = WORK_OUT_STOP;
-                        //if (work_route - IMG.encoder.route >= IMG._config->work_rou_out)
-                        //{
-                        //    //flag_work = WORK_OUT_STOP;
-                        //    MAT_LOG("AIM_SPEED = 0");
-                        //    stop_clock_2.tic();
-                        //}
-                        //MAT_LOG("NONE_POINT = 0");
-                        control_flag.pop();//移除
-                        flag_work = WORK_NONE;
-                        MAT_LOG("WORK_NONE");
-                    }
-                
+                    //MAT_LOG("NONE_POINT = 0");
+                    control_flag.pop();//移除
+                    flag_work = WORK_NONE;
+                    MAT_LOG("WORK_NONE");
+                }
+
             }
             //if (flag_work == WORK_OUT_STOP)
             //{
