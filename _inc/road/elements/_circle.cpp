@@ -35,7 +35,7 @@ void check_circle() {
         if (IMG.Lpt0_found &&   // 左角点找到
             !IMG.Lpt1_found &&  // 右角点未找到
             IMG.is_straight1 &&  // 右边长直道
-            IMG.rpts1s_num < 0.6 / SAMPLE_DIST) {// 左线点比较少
+            IMG.rpts1s_num < 0.8 / SAMPLE_DIST) {// 左线点比较少
             none_left_line = 0;
             have_left_line = 0;
             IMG.element_identify = 1;
@@ -49,7 +49,7 @@ void check_circle() {
         if (!IMG.Lpt0_found &&  // 右角点找到
             IMG.Lpt1_found &&   // 左角点未找到
             IMG.is_straight0 &&  // 左边长直道
-            IMG.rpts0s_num < 0.6 / SAMPLE_DIST) {// 右线点比较少
+            IMG.rpts0s_num < 0.8 / SAMPLE_DIST) {// 右线点比较少
             none_right_line = 0;
             have_right_line = 0;
             IMG.element_identify = 1;
