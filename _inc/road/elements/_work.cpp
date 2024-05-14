@@ -111,15 +111,8 @@ void run_work()
                     if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST || IMG.encoder.route - work_route < IMG._config->work_rou_ready)
                     {
                         // 补线起点: 右
-                        POINT startPoint = POINT(IMAGE_HEIGHT - 40, IMAGE_WIDTH - 1);
-                        POINT endPoint = POINT(70, 0);     //蓝线                                                           // 补线终点: 左
-                        POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5); // 补线中点
+                        IMG.aim_angle = IMG.work_angle_in_1;
 
-                        vector<POINT> input = { startPoint, midPoint, endPoint };
-                        vector<POINT> repair = bezier(0.05, input);
-
-                        IMG.edge_right = repair;
-                        IMG.path_last_edge_right.push_back(IMG.edge_right);
                         MAT_LOG("WORK_FIRST");
                         work_route2 = IMG.encoder.route; // 为积分第二段路程
                     }
@@ -129,15 +122,8 @@ void run_work()
                         if (cone_RU.x > 0)
                         {
                             // 补线起点: 右
-                            POINT startPoint = POINT(IMAGE_HEIGHT - 50, IMAGE_WIDTH - 1);
-                            POINT endPoint = POINT(80, 0);                                                                // 补线终点: 左
-                            POINT midPoint = POINT((startPoint.x + endPoint.x) * 0.5, (startPoint.y + endPoint.y) * 0.5); // 补线中点
+                            IMG.aim_angle = IMG.work_angle_in_2;
 
-                            vector<POINT> input = { startPoint, midPoint, endPoint };
-                            vector<POINT> repair = bezier(0.05, input);
-
-                            IMG.edge_right = repair;
-                            IMG.path_last_edge_right.push_back(IMG.edge_right);
                             MAT_LOG("WORK_SECOND");
 
                             if (IMG.encoder.route - work_route2 > IMG._config->work_rou_in)
@@ -259,6 +245,8 @@ void run_work()
                 }
                 else
                 {
+
+                    if()
                     if (IMG.path_last_edge_left.size() >= 1)
                     { // 先左边线
                         IMG.flag_track = TRACK_LEFT;
