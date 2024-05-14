@@ -456,11 +456,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                             sprintf(string_log, "label_bomb_DETECTION");
                             log_i("label_bomb_DETECTION");
                         }break;
-                        case label_block:      // 黑块
-                        {
-                            sprintf(string_log, "label_block_DETECTION");
-                            log_i("label_block_DETECTION");
-                        }break;
                         case label_thief:      // 贼
                         {
                             sprintf(string_log, "label_thief_DETECTION");
@@ -515,7 +510,11 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                                 log_i("BRIDGE_DETECTION");
                             }
                             break;
-
+                        case label_block:      // 黑块
+                        {
+                            sprintf(string_log, "label_block_DETECTION");
+                            log_i("label_block_DETECTION");
+                        }break;
                         case label_crosswalk:  // 斑马线
                             if (flag_garage == GARAGE_NONE && _config->check_garage_AI == 1) {
                                 flag_garage = GARAGE_AI_DETECTION;
