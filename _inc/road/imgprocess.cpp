@@ -257,7 +257,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     // 左线直线拟合
     if (rpts0s_num > 10) {
         mea_0 = fit_line(rpts0s, rpts0s_num, 60);
-        if (mea_0 < 10.0f && rpts0s_num > 60)
+        if (mea_0 < 2.5f && rpts0s_num > 60)
             is_straight0 = true;
         else
             is_curve0 = true;
@@ -265,7 +265,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     // 右线直线拟合
     if (rpts1s_num > 10) {
         mea_1 = fit_line(rpts1s, rpts1s_num, 60);
-        if (mea_1 < 10.0f && rpts1s_num > 60)
+        if (mea_1 < 2.5f && rpts1s_num > 60)
             is_straight1 = true;
         else
             is_curve1 = true;
@@ -474,7 +474,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                         case label_tumble:      // 跌倒
                         {
                             if (flag_save == SAVE_NONE && _config->check_save_ == 1) {
-                                flag_work = WORK_DETECTION;
+                                flag_save = Left_DETECTION;
                                 sprintf(string_log, "label_tumble_DETECTION");
                                 log_i("label_tumble_DETECTION");
                             }

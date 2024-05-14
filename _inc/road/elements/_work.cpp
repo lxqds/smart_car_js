@@ -260,13 +260,12 @@ void run_work()
 
             if (flag_work == WORK_OUT)//倒车
             {
-                IMG.aim_speed = -IMG._config->speed_work;
 
                     if ( work_route - IMG.encoder.route  <= IMG._config->work_recback_angle_route)
                     {   
                         MAT_LOG("WORK_OUTING");
                         IMG.aim_angle = IMG._config->work_recback_angle;
-                        IMG.aim_angle = IMG._config->work_recback_speed;
+                        IMG.aim_speed = -IMG._config->work_recback_speed;
                     }
                     //if (IMG.path_last_edge_left.size() >= 1)
                     //{ // 先左边线
