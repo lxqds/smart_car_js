@@ -119,7 +119,7 @@ private:
                     log_e("Port not open.");
                     continue;
                 }
-                _serial_port->DrainWriteBuffer(); // 直到写缓冲区耗尽
+                // _serial_port->DrainWriteBuffer(); // 直到写缓冲区耗尽
             }
             else
             {
