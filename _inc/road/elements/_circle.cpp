@@ -44,6 +44,7 @@ void check_circle() {
             flag_circle = CIRCLE_LEFT_BEGIN;
             MAT_LOG("CIRCLE_LEFT_BEGIN");
         }
+        
         //右圆环
         if (!IMG.Lpt0_found &&  // 右角点找到
             IMG.Lpt1_found &&   // 左角点未找到
