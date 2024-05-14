@@ -112,6 +112,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         }
         if (AT_IMAGE(mat_bin, x1, y1) >= _config->threshold) {
             ipts0_num = y1 + (IMAGE_HEIGHT - BEGIN_Y);
+            ipts0_num *= 1.5;
             findline_lefthand_adaptive(mat_bin, BLOCK_SIZE, CLIP_VALUE,
                 x1, y1, ipts0, &ipts0_num);
             begin_x_l = x1 + 50 > IMAGE_WIDTH - 1 ? IMAGE_WIDTH - 1 : x1 + 50;
@@ -142,6 +143,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         }
         if (AT_IMAGE(mat_bin, x2, y2) >= _config->threshold) {
             ipts1_num = y2 + (IMAGE_HEIGHT - BEGIN_Y);
+            ipts1_num *= 1.5;
             findline_righthand_adaptive(mat_bin, BLOCK_SIZE, CLIP_VALUE,
                 x2, y2, ipts1, &ipts1_num);
             begin_x_r = x2 - 50 < 0 ? 0 : x2 - 50;
