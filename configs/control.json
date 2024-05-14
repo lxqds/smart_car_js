@@ -55,6 +55,9 @@
   "work_rou_run": 1,
   "work_rou_out": 20,
   "work_rou_none": 10,
+  "work_angle_in_1": 30,
+  "work_angle_in_2": 30,
+
   "work_rou_over": 1,
   "farm_rou_ready": 0,
   "farm_rou_in": 0,
@@ -227,6 +230,11 @@
     "work_stop_time": 500,
     "work_out_stop_time": 100,
     "work_out_speedup_time": 500,
+
+    "work_recback_angle_route": 20,
+    "work_recback_angle": 30,
+    "work_recback_speed": 1200,
+
     "speed_gas": 1055,
     "speed_yroad": 800,
     "deviation_Farm_in_p": 1.0,
