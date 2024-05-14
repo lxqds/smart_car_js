@@ -83,6 +83,7 @@ struct ControlConfig
     float work_angle_in_2;           //施工区一段进入角度
     float work_recback_angle_route;  //施工区倒车角度积分
     float work_recback_anglg;          //施工区倒车角度
+
     uint16_t work_recback_speed;           //施工区倒车速度
 
     uint8_t farm_rou_ready;    // 农场识别积分
