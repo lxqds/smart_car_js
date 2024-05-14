@@ -113,6 +113,7 @@ void run_work()
                         // 补线起点: 右
                         IMG.aim_angle = IMG._config->work_angle_in_1;
 
+
                         MAT_LOG("WORK_FIRST");
                         work_route2 = IMG.encoder.route; // 为积分第二段路程
                     }
@@ -225,6 +226,8 @@ void run_work()
 
             if (flag_work == WORK_STOP)
             {
+                IMG.aim_speed = 0;
+
                 if (stop_clock.toc() > IMG._config->work_stop_time)//调小一点?
                 {
                     MAT_LOG("WORK_STOPFINISH");
@@ -232,6 +235,7 @@ void run_work()
                 }
                 else
                 {
+       
                     work_route = IMG.encoder.route;
                     MAT_LOG("WORK_STOPPING");
                 }
@@ -239,6 +243,8 @@ void run_work()
 
             if (flag_work == WORK_OUT)//倒车
             {
+                IMG.aim_speed = -IMG._config->speed_work;
+
                 if ((work_route - IMG.encoder.route >= IMG._config->work_rou_out) && (IMG.path_last_edge_left.size() < 1 && IMG.path_last_edge_right.size() < 1))
                 {
                     flag_work = WORK_OUT_STOP;
@@ -268,52 +274,55 @@ void run_work()
                     else
                     {
                         // flag_work = WORK_OUT_STOP;
-                        if (work_route - IMG.encoder.route >= IMG._config->work_rou_out)
-                        {
-                            flag_work = WORK_OUT_STOP;
-                            MAT_LOG("AIM_SPEED = 0");
-                            stop_clock_2.tic();
-                        }
-                        MAT_LOG("NONE_POINT = 0");
+                        //if (work_route - IMG.encoder.route >= IMG._config->work_rou_out)
+                        //{
+                        //    //flag_work = WORK_OUT_STOP;
+                        //    MAT_LOG("AIM_SPEED = 0");
+                        //    stop_clock_2.tic();
+                        //}
+                        //MAT_LOG("NONE_POINT = 0");
+                        control_flag.pop();//移除
+                        flag_work = WORK_NONE;
+                        MAT_LOG("WORK_NONE");
                     }
                 }
             }
-            if (flag_work == WORK_OUT_STOP)
-            {
-                if (stop_clock_2.toc() > IMG._config->work_out_stop_time)
-                {
-                    stop_clock_2.tic();
-                    MAT_LOG("WORK_OUT_SPEEDUP");
-                    flag_work = WORK_OUT_SPEEDUP;
-                }
-            }
-            if (flag_work == WORK_OUT_SPEEDUP)
-            {
-                if (stop_clock_2.toc() > IMG._config->work_out_speedup_time)//推出时间太少？
-                {
-                    MAT_LOG("WORK_OUT_RUN");
-                    flag_work = WORK_OUT_RUN;
-                }
-            }
-            if (flag_work == WORK_OUT_RUN)
-            {
-                if (IMG.rpts0s_num > 0.2 / SAMPLE_DIST)
-                {
-                    IMG.element_begin_id = IMG.rpts0s_num * 0.25f;
-                    IMG.flag_track = TRACK_LEFT;
-                }
-                else
-                {
-                    IMG.element_begin_id = IMG.rpts1s_num * 0.25f;
-                    IMG.flag_track = TRACK_RIGHT;
-                }
-                /*IMG.special_w_c = true;
-                IMG.special_w = true;*/
-                IMG.element_over = true;
-                IMG.element_over_route = IMG.encoder.route + IMG._config->work_rou_over;
-                flag_work = WORK_NONE;
-                MAT_LOG("WORK_NONE");
-            }
+            //if (flag_work == WORK_OUT_STOP)
+            //{
+            //    if (stop_clock_2.toc() > IMG._config->work_out_stop_time)
+            //    {
+            //        stop_clock_2.tic();
+            //        MAT_LOG("WORK_OUT_SPEEDUP");
+            //        flag_work = WORK_OUT_SPEEDUP;
+            //    }
+            //}
+            //if (flag_work == WORK_OUT_SPEEDUP)
+            //{
+            //    if (stop_clock_2.toc() > IMG._config->work_out_speedup_time)//推出时间太少？
+            //    {
+            //        MAT_LOG("WORK_OUT_RUN");
+            //        flag_work = WORK_OUT_RUN;
+            //    }
+            //}
+            //if (flag_work == WORK_OUT_RUN)
+            //{
+            //    if (IMG.rpts0s_num > 0.2 / SAMPLE_DIST)
+            //    {
+            //        IMG.element_begin_id = IMG.rpts0s_num * 0.25f;
+            //        IMG.flag_track = TRACK_LEFT;
+            //    }
+            //    else
+            //    {
+            //        IMG.element_begin_id = IMG.rpts1s_num * 0.25f;
+            //        IMG.flag_track = TRACK_RIGHT;
+            //    }
+            //    /*IMG.special_w_c = true;
+            //    IMG.special_w = true;*/
+            //    IMG.element_over = true;
+            //    IMG.element_over_route = IMG.encoder.route + IMG._config->work_rou_over;
+            //    flag_work = WORK_NONE;
+            //    MAT_LOG("WORK_NONE");
+            //}
         }
 
         /* ***************************************************************** */
