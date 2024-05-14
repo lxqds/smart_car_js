@@ -181,7 +181,7 @@
     "aim_distance_near": 0.20,
     "********-speed-*********": 0,
     "speed_base": 1700,
-    "speed_up": 1850,
+    "speed_up": 2000,
     "speed_steady": 1700,
     "speed_garage_in": 1700,
     "speed_garage_out": 700,

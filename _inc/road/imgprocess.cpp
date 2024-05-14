@@ -613,7 +613,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         //     aim_speed_shift -= speed_diff;
         // }
         aim_speed_shift = _config->speed_base +
-            (1 - clip(abs(aim_sigma), 0, 20) / 20.0) * (_config->speed_up - _config->speed_base);
+            (1 - clip(abs(aim_sigma), 0, 30) / 30.0) * (_config->speed_up - _config->speed_base);
         // 速度限幅
         aim_speed_shift = clip(aim_speed_shift, _config->speed_base, _config->speed_up);
         aim_speed = aim_speed_shift;
