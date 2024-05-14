@@ -370,7 +370,7 @@ public:
         buf[4] = direction_union.U8_Buff[0];
         buf[5] = direction_union.U8_Buff[1];
         transmit_packet(0x01, buf, 6);
-        
+
         return 0;
     }
     void transmit_packet(uint8_t address, const uint8_t* pData, uint8_t size)
@@ -383,6 +383,17 @@ public:
             Payload_Data.size = size;
             _queue.Put(Payload_Data);
         }
+        else
+        {
+            Payload Payload_Data = _queue.Take();;
+            Payload_Data.address = address;
+            memcpy(Payload_Data.pData, pData, size);
+            Payload_Data.size = size;
+            _queue.Put(Payload_Data);
+            LOG_I << "fulllll" << LOG_END;
+        }
+
+
     }
 
 private:
