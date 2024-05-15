@@ -291,14 +291,14 @@ void run_work()
                 }
                 else if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST)
                 {
-                    IMG.flag_track == TRACK_RIGHT;
+                    IMG.flag_track = TRACK_RIGHT;
                     control_flag.pop();//移除
                     flag_work = WORK_NONE;
                     MAT_LOG("WORK_RIGHT");
                 }
                 else if (IMG.rpts0s_num > 0.8 / SAMPLE_DIST)
                 {
-                    IMG.flag_track == TRACK_LEFT;
+                    IMG.flag_track = TRACK_LEFT;
                     control_flag.pop();//移除
                     flag_work = WORK_NONE;
                     MAT_LOG("WORK_LEFT");
