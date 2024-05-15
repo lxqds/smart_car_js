@@ -56,8 +56,8 @@
   "work_rou_out": 20,
   "work_rou_none": 10,
 
-  "work_angle_in_1": 28,
-  "work_angle_in_2": -5,
+  "work_angle_in_1": 25,
+  "work_angle_in_2": 5,
 
   "work_recback_line_route": 27,
   "work_recback_line_angle": -15,
