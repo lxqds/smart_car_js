@@ -434,7 +434,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
             if (r.score < _config->threshold_detection)
                 continue;
             if (DetectionLabel(r.type) == label_cone) {
-                continue;
+                // continue;
             }
 
             // 转换到处理图像坐标
@@ -447,85 +447,85 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 //continue;
 
             // 禁止在元素内判断其他元素
-                if (!control_flag.contains(circle_element) &&   //当前没在环岛中
-                    !control_flag.contains(work_element) &&     //当前没在工作区中
-                    !control_flag.contains(garage_element) &&      //当前没在入库中
-                    !control_flag.contains(bomb_element)      //当前没在炸弹中
-                    ) {
+            if (!control_flag.contains(circle_element) &&   //当前没在环岛中
+                !control_flag.contains(work_element) &&     //当前没在工作区中
+                !control_flag.contains(garage_element) &&      //当前没在入库中
+                !control_flag.contains(bomb_element)      //当前没在炸弹中
+                ) {
 
-                    switch (DetectionLabel(r.type)) {
-                        case label_bomb:      // 炸弹
-                        {
-                            flag_bomb = BOMB_DETECTION;
-                            sprintf(string_log, "label_bomb_DETECTION");
-                            log_i("label_bomb_DETECTION");
-                        }break;
-                        case label_thief:      // 贼 和 恶人处理方式一样 不 break
-                        case label_evil:      //恶人
-                        {
-                            if (flag_work == WORK_NONE && _config->check_work_ == 1) {
-                                flag_work = WORK_EVEI_DETECTION;
-                                sprintf(string_log, "WORK_EVEI_DETECTION");
-                            }
+                switch (DetectionLabel(r.type)) {
+                    case label_bomb:      // 炸弹
+                    {
+                        flag_bomb = BOMB_DETECTION;
+                        sprintf(string_log, "label_bomb_DETECTION");
+                        log_i("label_bomb_DETECTION");
+                    }break;
+                    case label_thief:      // 贼 和 恶人处理方式一样 不 break
+                    case label_evil:      //恶人
+                    {
+                        if (flag_work == WORK_NONE && _config->check_work_ == 1) {
+                            flag_work = WORK_EVEI_DETECTION;
+                            sprintf(string_log, "WORK_EVEI_DETECTION");
+                        }
 
-                            if(flag_work != WORK_NONE) sprintf(string_log, "flag_work != WORK_NONE");
+                        if (flag_work != WORK_NONE) sprintf(string_log, "flag_work != WORK_NONE");
 
-                            sprintf(string_log, "label_evil_thief");
-                            log_i("label_evil_DETECTION or label_thief");
-                        }break;
-                        case label_tumble:      // 跌倒
-                        case label_patient:     // 病人
-                            if (flag_work == WORK_NONE && _config->check_work_ == 1) {
+                        sprintf(string_log, "label_evil_thief");
+                        log_i("label_evil_DETECTION or label_thief");
+                    }break;
+                    case label_tumble:      // 跌倒
+                    case label_patient:     // 病人
+                        if (flag_work == WORK_NONE && _config->check_work_ == 1) {
 
-                                flag_work = WORK_DETECTION;
-                                sprintf(string_log, "PATIENT_DETECTION");
-                                log_i("PATIENT_DETECTION");
-                            }
-                            break;
-                        case label_prop:      // 道具小车
-                        {
-                            sprintf(string_log, "label_prop_DETECTION");
-                            log_i("label_prop_DETECTION");
-                        }break;
-                        case label_safety:      // 普通小车
-                        {
-                            sprintf(string_log, "label_safety_DETECTION");
-                            log_i("label_safety_DETECTION");
-                        }break;
-                        case label_spy:      // 嫌犯小车
-                        {
-                            sprintf(string_log, "label_spy_DETECTION");
-                            log_i("label_spy_DETECTION");
-                        }break;
-                        case label_danger:      // 危险小车
-                        {
-                            sprintf(string_log, "label_danger_DETECTION");
-                            log_i("label_danger_DETECTION");
-                        }break;
+                            flag_work = WORK_DETECTION;
+                            sprintf(string_log, "PATIENT_DETECTION");
+                            log_i("PATIENT_DETECTION");
+                        }
+                        break;
+                    case label_prop:      // 道具小车
+                    {
+                        sprintf(string_log, "label_prop_DETECTION");
+                        log_i("label_prop_DETECTION");
+                    }break;
+                    case label_safety:      // 普通小车
+                    {
+                        sprintf(string_log, "label_safety_DETECTION");
+                        log_i("label_safety_DETECTION");
+                    }break;
+                    case label_spy:      // 嫌犯小车
+                    {
+                        sprintf(string_log, "label_spy_DETECTION");
+                        log_i("label_spy_DETECTION");
+                    }break;
+                    case label_danger:      // 危险小车
+                    {
+                        sprintf(string_log, "label_danger_DETECTION");
+                        log_i("label_danger_DETECTION");
+                    }break;
 
-                        case label_bridge:  // 桥
-                            if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
-                                flag_ramp = RAMP_DETECTION;
-                                sprintf(string_log, "BRIDGE_DETECTION");
-                                log_i("BRIDGE_DETECTION");
-                            }
-                            break;
-                        case label_block:      // 黑块
-                        {
-                            sprintf(string_log, "label_block_DETECTION");
-                            log_i("label_block_DETECTION");
-                        }break;
-                        case label_crosswalk:  // 斑马线
-                            if (flag_garage == GARAGE_NONE && _config->check_garage_AI == 1) {
-                                flag_garage = GARAGE_AI_DETECTION;
-                                sprintf(string_log, "GARAGE_AI_DETECTION");
-                                log_i("GARAGE_AI_DETECTION");
-                            }
-                            break;
-                        default:
-                            break;
-                    }
+                    case label_bridge:  // 桥
+                        if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
+                            flag_ramp = RAMP_DETECTION;
+                            sprintf(string_log, "BRIDGE_DETECTION");
+                            log_i("BRIDGE_DETECTION");
+                        }
+                        break;
+                    case label_block:      // 黑块
+                    {
+                        sprintf(string_log, "label_block_DETECTION");
+                        log_i("label_block_DETECTION");
+                    }break;
+                    case label_crosswalk:  // 斑马线
+                        if (flag_garage == GARAGE_NONE && _config->check_garage_AI == 1) {
+                            flag_garage = GARAGE_AI_DETECTION;
+                            sprintf(string_log, "GARAGE_AI_DETECTION");
+                            log_i("GARAGE_AI_DETECTION");
+                        }
+                        break;
+                    default:
+                        break;
                 }
+            }
 
             if (r.type > 0 && r.type < 16) {
                 // 计算偏移
@@ -577,7 +577,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     run_cross();
     run_circle();
     run_bomb();
-    
+
     if (element_identify == 1) {
         serial->buzzerSound(1);
     }
@@ -724,42 +724,43 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 }
             }
         }
-        // 泛行区 --------------------------------------------------
-        else if (flag_yroad >= YROAD_FOUND) {
-            // 锥桶
-            for (auto p : edge_det)  // 白色 //列 |  行———
-                cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
-            // 锥桶
-            for (auto p : cones_edge_left)  // 蓝色 //列 |  行———
-                cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(0, 191, 255), 2);
+        // // 泛行区 --------------------------------------------------
+        // else if (flag_yroad >= YROAD_FOUND) {
+        //     // 锥桶
+        //     for (auto p : edge_det)  // 白色 //列 |  行———
+        //         cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
+        //     // 锥桶
+        //     for (auto p : cones_edge_left)  // 蓝色 //列 |  行———
+        //         cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(0, 191, 255), 2);
 
-            // 锥桶
-            for (auto p : cones_edge_right)  // 紫色 //列 |  行———
-                cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(138, 43, 226), 2);
-            if (cones_edge_left.size() > 0)
-                cv::circle(mat_result, cv::Point(cones_edge_left[0].y, cones_edge_left[0].x), 2, cv::Scalar(0, 0, 0), 2);
-            if (cones_edge_right.size() > 0)
-                cv::circle(mat_result, cv::Point(cones_edge_right[0].y, cones_edge_right[0].x), 2, cv::Scalar(0, 255, 0), 2);
-            // 边线
-            for (auto p : edge_left)  // 青蓝色
-                cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(0, 238, 238), -1);
-            for (auto p : edge_right)  // 黄色
-                cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(238, 238, 0), -1);
-            // 边线
-            /*for (int a = 0; a < yroad_rptss_num; a++) {  // 边线等距采样 泛行区边线
-                map_perspective(yroad_rptss[a][0], yroad_rptss[a][1], trans, 1);
-                if ((int)trans[1] >= 0 && (int)trans[1] < mat_result.rows &&
-                    (int)trans[0] >= 0 && (int)trans[0] < mat_result.cols) {
-                    mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[0] = 0;
-                    mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[1] = 238;
-                    mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[2] = 238;
-                }
-            }*/
-        }
+        //     // 锥桶
+        //     for (auto p : cones_edge_right)  // 紫色 //列 |  行———
+        //         cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(138, 43, 226), 2);
+        //     if (cones_edge_left.size() > 0)
+        //         cv::circle(mat_result, cv::Point(cones_edge_left[0].y, cones_edge_left[0].x), 2, cv::Scalar(0, 0, 0), 2);
+        //     if (cones_edge_right.size() > 0)
+        //         cv::circle(mat_result, cv::Point(cones_edge_right[0].y, cones_edge_right[0].x), 2, cv::Scalar(0, 255, 0), 2);
+        //     // 边线
+        //     for (auto p : edge_left)  // 青蓝色
+        //         cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(0, 238, 238), -1);
+        //     for (auto p : edge_right)  // 黄色
+        //         cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(238, 238, 0), -1);
+        //     // 边线
+        //     /*for (int a = 0; a < yroad_rptss_num; a++) {  // 边线等距采样 泛行区边线
+        //         map_perspective(yroad_rptss[a][0], yroad_rptss[a][1], trans, 1);
+        //         if ((int)trans[1] >= 0 && (int)trans[1] < mat_result.rows &&
+        //             (int)trans[0] >= 0 && (int)trans[0] < mat_result.cols) {
+        //             mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[0] = 0;
+        //             mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[1] = 238;
+        //             mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[2] = 238;
+        //         }
+        //     }*/
+        // }
         // 其他情况 ------------------------------------------------
         else {
             // 施工区 & 加油站 & 救援区---------------------------------------
-            if (flag_gas != GAS_NONE || flag_work != WORK_NONE || flag_gas != GAS_NONE) {
+            if (control_flag.contains(cross_element) ||
+                control_flag.contains(work_element)) {
                 // 锥桶
                 for (auto p : edge_det) {
                     cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
