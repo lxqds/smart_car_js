@@ -49,17 +49,18 @@
   "gas_rou_over": 50,
   "work_error": 170,
   "work_rou_in_total": 60,
-  "work_read_cone_thresholdy": 0.7,
+  "work_read_cone_thresholdy": 0.75,
   "work_rou_ready": 45,
-  "work_rou_in": 8,
+  "work_rou_in": 20,
   "work_rou_run": 1,
   "work_rou_out": 20,
   "work_rou_none": 10,
+  
   "work_angle_in_1": 30,
-  "work_angle_in_2": 30,
+  "work_angle_in_2": 5,
 
-  "work_recback_line_route": 5,
-  "work_recback_line_angle": -30,
+  "work_recback_line_route": 10,
+  "work_recback_line_angle": -25,
   "speed_bomb": 1000,
 
   "work_rou_over": 1,
@@ -249,9 +250,11 @@
     "work_stop_time": 500,
     "work_out_stop_time": 100,
     "work_out_speedup_time": 500,
-    "work_recback_angle_route": 75,
-    "work_recback_angle": 0,
+    
+    "work_recback_angle_route": 60,
+    "work_recback_angle": 25,
     "work_recback_speed": 1200,
+    
     "speed_gas": 1055,
     "speed_yroad": 800,
     "deviation_Farm_in_p": 1.0,
