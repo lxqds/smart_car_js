@@ -147,11 +147,9 @@ void run_circle() {
                 if (have_right_line > 0 && IMG.encoder.route - circle_route > IMG._config->circle_out_rou) {
                     none_right_line = 0;
                     have_right_line = 0;
-                    IMG.element_over = true;
-                    IMG.element_over_route = IMG.encoder.route;
-                    control_flag.pop();//移除环岛
-                    flag_circle = CIRCLE_NONE;
-                    MAT_LOG("CIRCLE_NONE");
+                    circle_route = IMG.encoder.route;
+                    flag_circle = CIRCLE_OUT;
+                    MAT_LOG("CIRCLE_OUT");
                 }
                 else {
                     have_right_line++;
@@ -235,17 +233,29 @@ void run_circle() {
                 if (have_left_line > 0 && IMG.encoder.route - circle_route > IMG._config->circle_out_rou) {
                     none_left_line = 0;
                     have_left_line = 0;
-                    IMG.element_over = true;
-                    IMG.element_over_route = IMG.encoder.route;
-                    control_flag.pop();//移除环岛
-                    flag_circle = CIRCLE_NONE;
-                    MAT_LOG("CIRCLE_NONE");
+                    circle_route = IMG.encoder.route;
+                    flag_circle = CIRCLE_OUT;
+                    MAT_LOG("CIRCLE_OUT");
                 }
                 else {
                     have_left_line++;
                 }
             }
         }
+
+
+        if (flag_circle == CIRCLE_OUT)
+        {
+            if (IMG.is_straight0 || IMG.is_straight1 || IMG.encoder.route - circle_route > 100)
+            {
+                IMG.element_over = true;
+                IMG.element_over_route = IMG.encoder.route;
+                control_flag.pop();//移除环岛
+                flag_circle = CIRCLE_NONE;
+                MAT_LOG("CIRCLE_NONE");
+            }
+        }
+
         /* *** *** *** *** *** */
         // 正常巡线
         if (IMG.flag_track == TRACK_LEFT) {

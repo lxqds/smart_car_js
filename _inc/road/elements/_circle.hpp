@@ -11,6 +11,7 @@ enum flag_circle_e {
     CIRCLE_RIGHT_OUT,  // 准备出环岛, 即识别到出环处的 L 角点。
     CIRCLE_LEFT_RUNNING,
     CIRCLE_RIGHT_RUNNING,  // 环岛内部。
+    CIRCLE_OUT,          //最终退出
 };
 extern flag_circle_e flag_circle;
 
