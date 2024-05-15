@@ -453,6 +453,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                     switch (DetectionLabel(r.type)) {
                         case label_bomb:      // 炸弹
                         {
+                            flag_bomb = BOMB_DETECTION;
                             sprintf(string_log, "label_bomb_DETECTION");
                             log_i("label_bomb_DETECTION");
                         }break;
@@ -567,12 +568,14 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     check_work();  // 施工区 - 识别标志
     check_cross();  // 十字路 - 识别角点特征
     check_circle();  // 环岛路 - 识别角点特征
+    check_bomb();   //炸弹
 
-
+    run_garage();
+    run_work();
     run_cross();
     run_circle();
-    run_work();
-    run_garage();
+    run_bomb();
+    
     if (element_identify == 1) {
         serial->buzzerSound(1);
     }
