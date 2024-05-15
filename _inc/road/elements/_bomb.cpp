@@ -52,7 +52,7 @@ void check_bomb()
 void run_bomb()
 {
     if (control_flag.top() == bomb_element) {//当前为炸弹元素
-        
+
         if (flag_bomb == BOMB_FOUND)
         {
             IMG.aim_speed = IMG._config->speed_bomb1;
@@ -85,7 +85,7 @@ void run_bomb()
         {
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.flag_track = TRACK_RIGHT;
-            IMG.aim_angle_p *= 1.5;
+            IMG.aim_angle_p *= 1.7;
             //右边线预测的中线更靠近右边
             track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
@@ -118,7 +118,7 @@ void run_bomb()
         {
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.flag_track = TRACK_LEFT;
-            IMG.aim_angle_p *= 1.5;
+            IMG.aim_angle_p *= 1.7;
             track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
                 PIXEL_PER_METER * (ROAD_WIDTH * 0.5) / 2);
@@ -134,7 +134,7 @@ void run_bomb()
         {
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.flag_track = TRACK_RIGHT;
-            IMG.aim_angle_p *= 1.8;
+            IMG.aim_angle_p *= 2;
             //右边线预测的中线更靠近右边
             track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
