@@ -46,6 +46,8 @@ void run_work()
 {
 
     if (control_flag.top() == work_element) {
+
+        //工作区基准速度
         IMG.aim_speed = IMG._config->speed_work;
 
         work_near_cone = POINT(0, 0);
@@ -85,7 +87,8 @@ void run_work()
                 MAT_LOG("WORK_ERROR");
             }
 
-            /* *** *** *** *** *** */// 正常巡线
+            /* *** *** ***正常巡线 *** *** */  //发现元素时正常巡线，ready状态接管控制
+
             if (IMG.flag_track == TRACK_LEFT) {
                 IMG.rpts = IMG.rptsc0;
                 IMG.rpts_num = IMG.rptsc0_num;
@@ -98,6 +101,7 @@ void run_work()
                 IMG.rpts = IMG.rptscs;
                 IMG.rpts_num = IMG.rptscs_num;
             }
+
             IMG.calculate_angle();//计算角度
 
 
@@ -125,13 +129,11 @@ void run_work()
                 // 补线
                 if (IMG.encoder.route - work_route < IMG._config->work_rou_in_total)
                 {
-                    // 第一阶段: 当赛道边缘存在时
-                    if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST || IMG.encoder.route - work_route < IMG._config->work_rou_ready)
+                    // 第一阶段: 当赛道 右 边缘存在时
+                    if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST || IMG.encoder.route - work_route < IMG._config->work_rou_ready) 
                     {
-                        // 补线起点: 右
+                        // 第一阶段打角
                         IMG.aim_angle = IMG._config->work_angle_in_1;
-
-
                         MAT_LOG("WORK_FIRST");
                         work_route2 = IMG.encoder.route; // 为积分第二段路程
                     }
@@ -140,12 +142,12 @@ void run_work()
                     {
                         if (cone_RU.x > 0)
                         {
-                            // 补线起点: 右
+                            // 第二阶段打角
                             IMG.aim_angle = IMG._config->work_angle_in_2;
 
                             MAT_LOG("WORK_SECOND");
 
-                            if (IMG.encoder.route - work_route2 > IMG._config->work_rou_in)
+                            if (IMG.encoder.route - work_route2 > IMG._config->work_rou_in) //进入工作区距离
                             {
                                 work_route = IMG.encoder.route;
                                 flag_work = WORK_RUN;
@@ -241,13 +243,13 @@ void run_work()
             }
             // *****************************************************************
 
-            if (flag_work == WORK_STOPPING)//停车
+            if (flag_work == WORK_STOPPING)//刹车中
             {
                 IMG.aim_speed = 0;
                 if (IMG.encoder.speed < 0.1 && IMG.encoder.speed > -0.1)
                 {
                     flag_work = WORK_PARKING;
-                    MAT_LOG("WORK_STOPFINISH");
+                    MAT_LOG("WORK_STOPFINISH");//刹车完成
                     stop_clock.tic();
                 }
                 MAT_LOG("WORK_STOPPING");
@@ -258,7 +260,7 @@ void run_work()
             if (flag_work == WORK_PARKING)//泊车
             {
                 IMG.aim_speed = 0;
-                if (stop_clock.toc() > IMG._config->work_stop_time)//调小一点?
+                if (stop_clock.toc() > IMG._config->work_stop_time)
                 {
 
                     MAT_LOG("WORK_PARKINISH"); //泊车中
@@ -273,78 +275,20 @@ void run_work()
             if (flag_work == WORK_OUT)//倒车
             {
 
-                if (work_route - IMG.encoder.route <= IMG._config->work_recback_angle_route)
+                if (work_route - IMG.encoder.route <= IMG._config->work_recback_angle_route) //出去路程
                 {
                     MAT_LOG("WORK_OUTING");
-                    IMG.aim_angle = IMG._config->work_recback_angle;
-                    IMG.aim_speed = -IMG._config->work_recback_speed;
+                    IMG.aim_angle = IMG._config->work_recback_angle; //出区 角度
+                    IMG.aim_speed = -IMG._config->work_recback_speed;//出去 距离
                 }
-                //if (IMG.path_last_edge_left.size() >= 1)
-                //{ // 先左边线
-                //    IMG.flag_track = TRACK_LEFT;
-                //    IMG.edge_left = IMG.path_last_edge_left[IMG.path_last_edge_left.size() - 1];
-                //    IMG.path_last_edge_left.pop_back();
-                //    MAT_LOG("TRACK_L");
-                //}
-                //else if (IMG.path_last_edge_right.size() > 1)
-                //{ // 再右边线
-                //    IMG.flag_track = TRACK_RIGHT;
-                //    IMG.edge_right = IMG.path_last_edge_right[IMG.path_last_edge_right.size() - 1];
-                //    IMG.path_last_edge_right.pop_back();
-                //    MAT_LOG("TRACK_R");
-                //}
                 else
                 {
-                    // flag_work = WORK_OUT_STOP;
-                    //if (work_route - IMG.encoder.route >= IMG._config->work_rou_out)
-                    //{
-                    //    //flag_work = WORK_OUT_STOP;
-                    //    MAT_LOG("AIM_SPEED = 0");
-                    //    stop_clock_2.tic();
-                    //}
-                    //MAT_LOG("NONE_POINT = 0");
                     control_flag.pop();//移除
                     flag_work = WORK_NONE;
                     MAT_LOG("WORK_NONE");
                 }
 
             }
-            //if (flag_work == WORK_OUT_STOP)
-            //{
-            //    if (stop_clock_2.toc() > IMG._config->work_out_stop_time)
-            //    {
-            //        stop_clock_2.tic();
-            //        MAT_LOG("WORK_OUT_SPEEDUP");
-            //        flag_work = WORK_OUT_SPEEDUP;
-            //    }
-            //}
-            //if (flag_work == WORK_OUT_SPEEDUP)
-            //{
-            //    if (stop_clock_2.toc() > IMG._config->work_out_speedup_time)//推出时间太少？
-            //    {
-            //        MAT_LOG("WORK_OUT_RUN");
-            //        flag_work = WORK_OUT_RUN;
-            //    }
-            //}
-            //if (flag_work == WORK_OUT_RUN)
-            //{
-            //    if (IMG.rpts0s_num > 0.2 / SAMPLE_DIST)
-            //    {
-            //        IMG.element_begin_id = IMG.rpts0s_num * 0.25f;
-            //        IMG.flag_track = TRACK_LEFT;
-            //    }
-            //    else
-            //    {
-            //        IMG.element_begin_id = IMG.rpts1s_num * 0.25f;
-            //        IMG.flag_track = TRACK_RIGHT;
-            //    }
-            //    /*IMG.special_w_c = true;
-            //    IMG.special_w = true;*/
-            //    IMG.element_over = true;
-            //    IMG.element_over_route = IMG.encoder.route + IMG._config->work_rou_over;
-            //    flag_work = WORK_NONE;
-            //    MAT_LOG("WORK_NONE");
-            //}
         }
 
         /* ***************************************************************** */
