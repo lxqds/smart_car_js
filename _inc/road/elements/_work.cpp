@@ -78,7 +78,7 @@ void run_work()
             else
                 work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
 
-            //LOG_I << " work_near_cone :" << work_near_cone.x << " IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy :" << IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy << LOG_END;
+            LOG_I << " work_near_cone :" << work_near_cone.x << " IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy :" << IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy << LOG_END;
             
             // 当车辆开始靠近锥桶: 准备进入
             if (work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy)
@@ -329,7 +329,8 @@ void run_work()
                     {
                         // 第一阶段打角
                         IMG.aim_angle = -IMG._config->work_angle_in_1;
-                        MAT_LOG("WORK_FIRST");
+                        //MAT_LOG("WORK_FIRST");
+                        log_i("WORK_FIRST");
                         work_route2 = IMG.encoder.route;
                     }
                     // 第二阶段: 检查左下锥桶坐标满足巡航条件
@@ -339,6 +340,7 @@ void run_work()
                         {
                             // 第二阶段打角
                             IMG.aim_angle = -IMG._config->work_angle_in_2;
+                            log_i("WORK_SECOND");
                             MAT_LOG("WORK_SECOND");
                         }
                         else {
@@ -443,7 +445,6 @@ void run_work()
                     MAT_LOG("WORK_STOPFINISH");//刹车完成
                     stop_clock.tic();
                 }
-                MAT_LOG("WORK_STOPPING");
             }
 
 
@@ -457,10 +458,6 @@ void run_work()
                     MAT_LOG("WORK_PARKINISH"); //泊车完成
                     flag_work = WORK_OUT;
                 }
-                else
-                {
-                    MAT_LOG("WORK_PARKING");
-                }
             }
 
             if (flag_work == WORK_OUT)
@@ -470,7 +467,7 @@ void run_work()
 
                 if (work_route - IMG.encoder.route <= IMG._config->work_recback_angle_route) //出去路程
                 {
-                    MAT_LOG("WORK_OUTING");
+               
                     IMG.aim_angle = -IMG._config->work_recback_angle; //出区 角度
                     IMG.aim_speed = -IMG._config->work_recback_speed;//出去 距离
                 }
