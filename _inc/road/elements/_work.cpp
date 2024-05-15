@@ -22,6 +22,7 @@ POINT work_near_cone;  // 较近的锥桶
 StopWatch stop_clock;
 StopWatch stop_clock_2;
 
+bool direction_work = true;//true : 左工作区 false : 右工作区
 /* ********************************************************************* */
 
 void check_work()
@@ -30,13 +31,21 @@ void check_work()
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&   //当前没在入库中
-        (flag_work == WORK_DETECTION))
+        (flag_work == WORK_DETECTION || flag_work == WORK_EVEI_DETECTION))
     {
+        if (flag_work == WORK_EVEI_DETECTION) {
+            MAT_LOG("WORK_FOUND_R");
+            direction_work = false;
+        }
+        else {
+            MAT_LOG("WORK_FOUND_L");
+            direction_work = true;
+        }
+
         IMG.element_identify = 1;
         work_route = IMG.encoder.route;
         control_flag.push(work_element);
         flag_work = WORK_FOUND;
-        MAT_LOG("WORK_FOUND");
     }
 }
 
@@ -64,11 +73,13 @@ void run_work()
             IMG.edge_det = search_targets(IMG._det_result);
 
             // 进入方向
-            if (IMG._config->direction_work == 0)
-                work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
+            if (direction_work == true)
+                work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
             else
-                work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);
-            LOG_I << " work_near_cone :" << work_near_cone.x << " IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy :" << IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy << LOG_END;
+                work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
+
+            //LOG_I << " work_near_cone :" << work_near_cone.x << " IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy :" << IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy << LOG_END;
+            
             // 当车辆开始靠近锥桶: 准备进入
             if (work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy)
             {
@@ -111,7 +122,7 @@ void run_work()
         /* *************************** 左侧施工区 **************************** */
         /* ***************************************************************** */
 
-        if (IMG._config->direction_work == 0)
+        if (direction_work == true)
         {
             if (flag_work == WORK_READY)
             {
@@ -140,19 +151,16 @@ void run_work()
                     // 第二阶段: 检查右上锥桶坐标满足巡航条件
                     else
                     {
-                        if (cone_RU.x > 0)
+                        if (cone_RU.x > 0 && IMG.encoder.route - work_route2 <= IMG._config->work_rou_in)
                         {
                             // 第二阶段打角
                             IMG.aim_angle = IMG._config->work_angle_in_2;
-
                             MAT_LOG("WORK_SECOND");
-
-                            if (IMG.encoder.route - work_route2 > IMG._config->work_rou_in) //进入工作区距离
-                            {
-                                work_route = IMG.encoder.route;
-                                flag_work = WORK_RUN;
-                                MAT_LOG("WORK_RUN");
-                            }
+                        }
+                        else {
+                            work_route = IMG.encoder.route;
+                            flag_work = WORK_RUN;
+                            MAT_LOG("WORK_RUN");
                         }
                     }
                 }
@@ -262,7 +270,7 @@ void run_work()
                 IMG.aim_speed = 0;
                 if (stop_clock.toc() > IMG._config->work_stop_time)
                 {
-
+                    work_route = IMG.encoder.route;
                     MAT_LOG("WORK_PARKINISH"); //泊车中
                     flag_work = WORK_OUT;
                 }
@@ -314,64 +322,29 @@ void run_work()
                 POINT cone_LD = search_leftDown_cone(IMG.edge_det);
 
                 // 补线
-                if (IMG.encoder.route - work_route < IMG._config->work_rou_ready)
+                if (IMG.encoder.route - work_route < IMG._config->work_rou_in_total)
                 {
                     // 第一阶段: 当赛道边缘存在时
-                    if (IMG.rpts0s_num > 0.5 / SAMPLE_DIST)
+                    if (IMG.rpts0s_num > 0.5 / SAMPLE_DIST || IMG.encoder.route - work_route < IMG._config->work_rou_ready)
                     {
-                        // 补线起点: 左
-                        POINT startPoint = POINT((work_near_cone.x + IMAGE_HEIGHT) / 2,
-                            work_near_cone.y / 2);
-
-                        double k = 0, b = 0;
-                        k = (float)(work_near_cone.y - startPoint.y) /
-                            (float)(work_near_cone.x - startPoint.x);
-                        b = work_near_cone.y - k * work_near_cone.x;
-                        if (b < 0)
-                            b = 0;
-                        else if (b >= IMAGE_WIDTH)
-                            b = IMAGE_WIDTH - 1;
-
-                        POINT endPoint = POINT(0, b);    // 补线终点: 右
-                        POINT midPoint = work_near_cone; // 补线中点
-                        POINT SSPoint = POINT(BEGIN_Y, IMG.edge_left[0].y);
-
-                        vector<POINT> input = { endPoint, midPoint, startPoint, SSPoint };
-                        vector<POINT> repair = bezier(0.03, input);
-
-                        IMG.edge_left = repair;
-                        IMG.last_edge_left = IMG.edge_left;
+                        // 第一阶段打角
+                        IMG.aim_angle = -IMG._config->work_angle_in_1;
+                        MAT_LOG("WORK_FIRST");
+                        work_route2 = IMG.encoder.route;
                     }
                     // 第二阶段: 检查左下锥桶坐标满足巡航条件
                     else
                     {
-                        if (cone_LD.x > IMAGE_HEIGHT / 3)
+                        if (cone_LD.x > IMAGE_HEIGHT / 3 && IMG.encoder.route - work_route2 <= IMG._config->work_rou_in)
                         {
-                            // 补线起点: 左
-                            POINT startPoint = POINT((cone_LD.x + IMAGE_HEIGHT) / 2,
-                                cone_LD.y / 2);
-
-                            double k = 0, b = 0;
-                            k = (float)(cone_LD.y - startPoint.y) /
-                                (float)(cone_LD.x - startPoint.x);
-                            b = cone_LD.y - k * cone_LD.x;
-                            if (b < 0)
-                                b = 0;
-                            else if (b >= IMAGE_WIDTH)
-                                b = IMAGE_WIDTH - 1;
-
-                            POINT endPoint = POINT(0, b); // 补线终点: 右
-                            POINT midPoint = cone_LD;     // 补线中点
-
-                            vector<POINT> input = { startPoint, midPoint, endPoint };
-                            vector<POINT> repair = bezier(0.02, input);
-
-                            IMG.edge_left = repair;
-                            IMG.last_edge_left = IMG.edge_left;
+                            // 第二阶段打角
+                            IMG.aim_angle = -IMG._config->work_angle_in_2;
+                            MAT_LOG("WORK_SECOND");
                         }
-                        else
-                        {
-                            IMG.edge_left = IMG.last_edge_left;
+                        else {
+                            work_route = IMG.encoder.route;
+                            flag_work = WORK_RUN;
+                            MAT_LOG("WORK_RUN");
                         }
                     }
                 }
@@ -396,6 +369,7 @@ void run_work()
                 // 找目标点
                 IMG.edge_det = search_targets(IMG._det_result);
                 vector<POINT> conesRight = search_right_cones(IMG.edge_det); // 右方锥桶
+                POINT cone_LU = search_leftUp_cones(IMG.edge_det);//左上锥桶
 
                 // 补线
                 if (conesRight.size() >= 2)
@@ -447,81 +421,66 @@ void run_work()
                     IMG.edge_right = IMG.last_edge_right;
                 }
 
+                MAT_LOG("WORK_RUN_ING");
+
                 // 积分延迟一定距离出施工区
-                if (IMG.encoder.route - work_route >= IMG._config->work_rou_run)
+                if ((cone_LU.x >= IMAGE_HEIGHT * 0.8)||(IMG.encoder.route - work_route >= IMG._config->work_rou_run))
                 {
                     work_route = IMG.encoder.route;
-                    flag_work = WORK_OUT;
-                    MAT_LOG("WORK_OUT");
+                    flag_work = WORK_STOPPING;
+                    MAT_LOG("WORK_STOPPING");
                 }
             }
 
             /* ***************************************************************** */
+
+            if (flag_work == WORK_STOPPING)//刹车中
+            {
+                IMG.aim_speed = 0;
+                if (IMG.encoder.speed < 0.1 && IMG.encoder.speed > -0.1)
+                {
+                    flag_work = WORK_PARKING;
+                    MAT_LOG("WORK_STOPFINISH");//刹车完成
+                    stop_clock.tic();
+                }
+                MAT_LOG("WORK_STOPPING");
+            }
+
+
+
+            if (flag_work == WORK_PARKING)//泊车
+            {
+                IMG.aim_speed = 0;
+                if (stop_clock.toc() > IMG._config->work_stop_time)
+                {
+                    work_route = IMG.encoder.route;
+                    MAT_LOG("WORK_PARKINISH"); //泊车完成
+                    flag_work = WORK_OUT;
+                }
+                else
+                {
+                    MAT_LOG("WORK_PARKING");
+                }
+            }
 
             if (flag_work == WORK_OUT)
             {
                 // 加大 P 项, 提升出区域稳定性
                 IMG.is_curve0 = IMG.is_curve1 = true;
 
-                // 左出口 巡右线
-                IMG.flag_track = TRACK_RIGHT;
-                IMG.begin_x_r = 0;
-
-                // 找目标点
-                IMG.edge_det = search_targets(IMG._det_result);
-                POINT cone_LU = search_leftUp_cone(IMG.edge_det); // 左上锥桶
-
-                if ((AT_IMAGE(IMG.mat_bin, (int)(IMAGE_WIDTH / 2 - IMG._config->work_rou_none), (int)(IMAGE_HEIGHT / 2)) > IMG._config->threshold) ||
-                    (IMG.encoder.route - work_route >= IMG._config->work_rou_out))
+                if (work_route - IMG.encoder.route <= IMG._config->work_recback_angle_route) //出去路程
                 {
-                    if (IMG.rpts0s_num > 0.2 / SAMPLE_DIST)
-                    {
-                        IMG.element_begin_id = IMG.rpts0s_num * 0.25f;
-                        IMG.flag_track = TRACK_LEFT;
-                    }
-                    else
-                    {
-                        IMG.element_begin_id = IMG.rpts1s_num * 0.25f;
-                        IMG.flag_track = TRACK_RIGHT;
-                    }
-                    IMG.special_w_c = true;
-                    IMG.special_w = true;
-                    IMG.element_over = true;
-                    IMG.element_over_route = IMG.encoder.route + IMG._config->work_rou_over;
-                    flag_work = WORK_NONE;
-                    MAT_LOG("WORK_NONE");
+                    MAT_LOG("WORK_OUTING");
+                    IMG.aim_angle = -IMG._config->work_recback_angle; //出区 角度
+                    IMG.aim_speed = -IMG._config->work_recback_speed;//出去 距离
                 }
                 else
                 {
-                    if (cone_LU.x > 0)
-                    {
-                        POINT p2 = POINT((cone_LU.x + IMAGE_HEIGHT) / 2, (cone_LU.y + IMAGE_WIDTH) / 2);
-                        POINT p3 = cone_LU;
-                        POINT p4 = POINT(cone_LU.x / 2, cone_LU.y / 2);
-
-                        vector<POINT> input = { p2, p3, p4 };
-                        vector<POINT> repair = bezier(0.02, input);
-
-                        // 左边缘切行, 提升右拐能力
-                        if (repair.size() > 10)
-                        {
-                            int index = repair.size() * 0.2f;
-                            IMG.edge_right.clear();
-                            for (size_t i = index; i < repair.size(); i++)
-                            {
-                                IMG.edge_right.push_back(repair[i]);
-                            }
-                        }
-                        else
-                            IMG.edge_right = repair;
-
-                        IMG.last_edge_right = IMG.edge_right;
-                    }
-                    else
-                    {
-                        IMG.edge_right = IMG.last_edge_right;
-                    }
+                    control_flag.pop();//移除
+                    flag_work = WORK_NONE;
+                    MAT_LOG("WORK_NONE");
                 }
+
             }
         }
 

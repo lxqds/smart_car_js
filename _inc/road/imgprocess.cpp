@@ -456,19 +456,23 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                             sprintf(string_log, "label_bomb_DETECTION");
                             log_i("label_bomb_DETECTION");
                         }break;
-                        case label_thief:      // 贼
+                        case label_thief:      // 贼 和 恶人处理方式一样 不 break
                         {
                             sprintf(string_log, "label_thief_DETECTION");
                             log_i("label_thief_DETECTION");
-                        }break;
+                        }
                         case label_evil:      //恶人
                         {
+                            if (flag_work == WORK_NONE && _config->check_work_ == 1) {
+                                flag_work = WORK_EVEI_DETECTION;
+
                             sprintf(string_log, "label_evil_DETECTION");
                             log_i("label_evil_DETECTION");
                         }break;
                         case label_tumble:      // 跌倒
                         case label_patient:     // 病人
                             if (flag_work == WORK_NONE && _config->check_work_ == 1) {
+
                                 flag_work = WORK_DETECTION;
                                 sprintf(string_log, "PATIENT_DETECTION");
                                 log_i("PATIENT_DETECTION");

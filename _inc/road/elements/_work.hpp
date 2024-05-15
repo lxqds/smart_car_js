@@ -12,7 +12,9 @@ enum flag_work_e {
     WORK_OUT_STOP,   // 库外停止
     WORK_OUT_RUN,    // 库外跑
     WORK_OUT_SPEEDUP,
-    WORK_STOPPING //停车中
+    WORK_STOPPING, //停车中
+
+    WORK_EVEI_DETECTION // 事件工作区
 };
 extern flag_work_e flag_work;
 
