@@ -59,6 +59,10 @@ void run_bomb()
             // bomb_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
             LOG_I << "cone1 :" <<
                 bomb_near_cone.x << LOG_END;
+            if (bomb_near_cone.x > 10)  //有锥桶重置编码值
+            {
+                bomb_route = IMG.encoder.route;
+            }
             // 当车辆开始靠近第一个锥桶:
             if (bomb_near_cone.x > IMAGE_HEIGHT * 0.4)
             {
@@ -66,7 +70,7 @@ void run_bomb()
                 flag_bomb = BOMB_FIRST_CONE;
                 MAT_LOG("BOMB_FIRST_CONE");
             }
-            else if (IMG.encoder.route - bomb_route > 100)
+            else if (IMG.encoder.route - bomb_route > 40)
             {
                 flag_bomb = BOMB_NONE;
                 control_flag.pop();
