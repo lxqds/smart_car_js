@@ -115,20 +115,18 @@ struct ControlConfig
     uint16_t garage_pass_route_; // 通过过斑马线停车距离判断
     uint16_t speed_work;         // 出入施工区速度
 
-    uint16_t speed_bomb;        //危险区速度
+    uint16_t speed_bomb1;        //危险区速度1
+    uint16_t speed_bomb2;        //危险区速度2
 
     uint16_t work_stop_time;     // 停在施工区时间
     uint16_t work_out_stop_time; // 出去停车的时间
     uint16_t work_out_speedup_time;
-    uint16_t speed_gas;   // 出入加油站速度
-    uint16_t speed_yroad; // 泛行区速度
-    float deviation_Farm_in_p;
     uint16_t speed_circle;    // 出入环岛速度
     uint16_t speed_cross;     // 十字速度
     uint16_t speed_ramp_up;   // 上坡速度
     uint16_t speed_ramp_down; // 下坡速度
     uint16_t speed_slow_down; // 慢行速度
-    uint16_t speed_work_out_speedup;
+
 
     float deviation_garage_in_p; // 入库偏差 (P项增大值)
     float deviation_garage_out;  // 出库偏差
@@ -234,13 +232,13 @@ struct ControlConfig
         AUTOCFG(ramp_down_rou);
         AUTOCFG(ramp_p);
 
-        AUTOCFG(speed_bomb);
+
 
         AUTOCFG(circle_out_rou);
         AUTOCFG(speed_level);
         nlohmann::json speed = root[speed_level];
 
-/* 改写当前配置项节点 */
+        /* 改写当前配置项节点 */
 #undef P_CUR
 #define P_CUR speed
 
@@ -251,7 +249,6 @@ struct ControlConfig
         AUTOCFG(speed_up);
         AUTOCFG(speed_steady);
         AUTOCFG(speed_garage_in);
-        AUTOCFG(speed_work_out_speedup);
         AUTOCFG(garage_in_route_);
         AUTOCFG(garage_out_route_);
         AUTOCFG(garage_pass_route_);
@@ -261,14 +258,11 @@ struct ControlConfig
         AUTOCFG(work_stop_time);
         AUTOCFG(work_out_stop_time);
         AUTOCFG(work_out_speedup_time);
-        AUTOCFG(speed_gas);
-        AUTOCFG(speed_yroad);
-        AUTOCFG(deviation_Farm_in_p);
+
+        AUTOCFG(speed_bomb1);
+        AUTOCFG(speed_bomb2);
         AUTOCFG(speed_circle);
         AUTOCFG(speed_cross);
-        AUTOCFG(speed_ramp_up);
-        AUTOCFG(speed_ramp_down);
-        AUTOCFG(speed_slow_down);
 
         AUTOCFG(deviation_garage_in_p);
         AUTOCFG(deviation_garage_out);
@@ -416,7 +410,7 @@ struct  ModelConfig {
 #define LOG_TAG "System Json"
 
 // 获取文件路径
-inline std::string get_file_path(const std::string &fname)
+inline std::string get_file_path(const std::string& fname)
 {
     size_t pos = fname.find_last_of("/");
     return (std::string::npos == pos) ? "" : fname.substr(0, pos);

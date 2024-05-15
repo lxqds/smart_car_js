@@ -75,7 +75,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 
     // 预瞄点纵坐标黑点检测 ------------------------------------------------
     begin_y_t = BEGIN_Y;
-    if ((flag_gas <= GAS_FOUND && flag_work <= WORK_FOUND &&
+    if ((flag_work <= WORK_FOUND &&
         (flag_garage != GARAGE_IN_LEFT) && (flag_garage != GARAGE_IN_RIGHT) &&
         (!(is_curve0 && flag_track == TRACK_LEFT) && !(is_curve1 && flag_track == TRACK_RIGHT))) ||
         (flag_garage == GARAGE_PASS_LEFT || flag_garage == GARAGE_PASS_RIGHT)) {
@@ -397,32 +397,13 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     else
         flag_track = TRACK_MIDDLE;
 
-    // // 经过施工区后的特殊处理
-    // if (special_w) {  // 施工区
-    //     if (_config->direction_work == 0)
-    //         flag_track = TRACK_LEFT;
-    //     else
-    //         flag_track = TRACK_RIGHT;
-
-    //     is_curve0 = is_curve1 = true;
-    //     is_straight0 = is_straight1 = false;
-    // }
-    // if (special_g) {  // 加油站
-    //     if (_config->direction_gas == 0)
-    //         flag_track = TRACK_LEFT;
-    //     else
-    //         flag_track = TRACK_RIGHT;
-
-    //     is_curve0 = is_curve1 = true;
-    //     is_straight0 = is_straight1 = false;
-    // }
 
     /* ***************************************************************** */
     /* *************************** 目标检测结果 ************************** */
     /* ***************************************************************** */
 
     // 检测完成判断 (加油站 & 施工区 跳过 防止重复获取检测结果)
-    if ((flag_gas <= GAS_DETECTION && flag_work <= WORK_DETECTION) &&
+    if ((flag_work <= WORK_DETECTION) &&
         detection->_is_predicted) {
         _det_result = detection->getResult()->result;
 

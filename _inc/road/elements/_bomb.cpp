@@ -52,9 +52,10 @@ void check_bomb()
 void run_bomb()
 {
     if (control_flag.top() == bomb_element) {//当前为炸弹元素
-        IMG.aim_speed = IMG._config->speed_bomb;
+        
         if (flag_bomb == BOMB_FOUND)
         {
+            IMG.aim_speed = IMG._config->speed_bomb1;
             bomb_near_cone = POINT(0, 0);
             IMG.edge_det.clear();
             // IMG.edge_det = search_targets(IMG._det_result);
@@ -82,6 +83,7 @@ void run_bomb()
         }
         if (flag_bomb == BOMB_FIRST_CONE)
         {
+            IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.flag_track = TRACK_RIGHT;
             IMG.aim_angle_p *= 1.5;
             //右边线预测的中线更靠近右边
@@ -114,6 +116,7 @@ void run_bomb()
         }
         if (flag_bomb == BOMB_SECOND_CONE)
         {
+            IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.flag_track = TRACK_LEFT;
             IMG.aim_angle_p *= 1.5;
             track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
@@ -129,6 +132,7 @@ void run_bomb()
         }
         if (flag_bomb == BOMB_BLOCK)
         {
+            IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.flag_track = TRACK_RIGHT;
             IMG.aim_angle_p *= 1.8;
             //右边线预测的中线更靠近右边
