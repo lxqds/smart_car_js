@@ -80,6 +80,7 @@ void run_work()
             {
                 IMG.element_over = true;
                 IMG.element_over_route = IMG.encoder.route;
+                control_flag.pop();//移除
                 flag_work = WORK_NONE;
                 MAT_LOG("WORK_ERROR");
             }
