@@ -289,7 +289,7 @@ void run_work()
                     IMG.aim_angle = IMG._config->work_recback_line_angle; //出区 角度
                     IMG.aim_speed = -IMG._config->work_recback_speed;//出去 距离
                 }
-                else if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST && IMG.rpts0s_num > 0.8 / SAMPLE_DIST)
+                else if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST && IMG.rpts0s_num > 0.8 / SAMPLE_DIST && work_route - IMG.encoder.route > IMG._config->work_recback_line_route )
                 {
                     IMG.flag_track = TRACK_RIGHT;
                     control_flag.pop();//移除
