@@ -76,8 +76,6 @@ void run_bomb()
                 control_flag.pop();
                 MAT_LOG("BOMB_ERROR1");
             }
-
-
         }
         if (flag_bomb == BOMB_FIRST_CONE)
         {
@@ -109,8 +107,6 @@ void run_bomb()
                     MAT_LOG("BOMB_ERROR2");
                 }
             }
-
-
         }
         if (flag_bomb == BOMB_SECOND_CONE)
         {
@@ -142,7 +138,6 @@ void run_bomb()
                 MAT_LOG("BOMB_NONE");
             }
         }
-
         // 正常巡线
         if (IMG.flag_track == TRACK_LEFT) {
             IMG.rpts = IMG.rptsc0;
@@ -159,6 +154,7 @@ void run_bomb()
 
         if (IMG.rpts_num > 0.3 / SAMPLE_DIST) {
             IMG.calculate_angle();//计算角度
+            IMG.aim_angle *= 1.3;
         }
         else if (IMG.flag_track == TRACK_LEFT)
         {
