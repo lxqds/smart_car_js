@@ -57,7 +57,7 @@ void run_bomb()
             IMG.edge_det = search_targets(IMG._det_result);
             bomb_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
             // 当车辆开始靠近第一个锥桶:
-            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.3)
+            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.5)
             {
                 bomb_route = IMG.encoder.route;
                 flag_bomb = BOMB_FIRST_CONE;
@@ -80,7 +80,7 @@ void run_bomb()
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
                 PIXEL_PER_METER * (ROAD_WIDTH * 0.5) / 2);
             IMG.rptsc1_num = IMG.rpts1s_num;
-            if (IMG.encoder.route - bomb_route > 20)  //通过一段距离后
+            if (IMG.encoder.route - bomb_route > 30)  //通过一段距离后
             {
                 //开始找第二个锥桶
                 bomb_near_cone = POINT(0, 0);
@@ -88,7 +88,7 @@ void run_bomb()
                 IMG.edge_det = search_targets(IMG._det_result);
                 bomb_near_cone = search_right_near(IMG.edge_left, IMG.mat_lab);
                 // 当车辆开始靠近第一个锥桶:
-                if (bomb_near_cone.x > IMAGE_HEIGHT * 0.3)
+                if (bomb_near_cone.x > IMAGE_HEIGHT * 0.5)
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
