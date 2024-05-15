@@ -329,7 +329,7 @@ void run_work()
                     {
                         // 第一阶段打角
                         IMG.aim_angle = -IMG._config->work_angle_in_1;
-                        MAT_LOG("WORK_FIRST");
+                        //MAT_LOG("WORK_FIRST");
                         work_route2 = IMG.encoder.route;
                     }
                     // 第二阶段: 检查左下锥桶坐标满足巡航条件
@@ -443,7 +443,6 @@ void run_work()
                     MAT_LOG("WORK_STOPFINISH");//刹车完成
                     stop_clock.tic();
                 }
-                MAT_LOG("WORK_STOPPING");
             }
 
 
@@ -457,10 +456,6 @@ void run_work()
                     MAT_LOG("WORK_PARKINISH"); //泊车完成
                     flag_work = WORK_OUT;
                 }
-                else
-                {
-                    MAT_LOG("WORK_PARKING");
-                }
             }
 
             if (flag_work == WORK_OUT)
@@ -470,7 +465,7 @@ void run_work()
 
                 if (work_route - IMG.encoder.route <= IMG._config->work_recback_angle_route) //出去路程
                 {
-                    MAT_LOG("WORK_OUTING");
+               
                     IMG.aim_angle = -IMG._config->work_recback_angle; //出区 角度
                     IMG.aim_speed = -IMG._config->work_recback_speed;//出去 距离
                 }
