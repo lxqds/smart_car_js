@@ -16,6 +16,8 @@ enum flag_bomb_e {
 extern flag_bomb_e flag_bomb;
 extern int bomb_x;           //横坐标
 extern int bomb_y;           //纵坐标
+extern int bomb_block_x;           //黑块横坐标
+extern int bomb_block_y;           //黑块纵坐标
 void check_bomb();
 void run_bomb();
 

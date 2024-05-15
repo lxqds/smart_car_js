@@ -495,6 +495,9 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                         break;
                     case label_block:      // 黑块
                     {
+
+                        bomb_block_y = deY + deH / 2;
+                        bomb_block_x = deX + deW / 2;
                         sprintf(string_log, "label_block_DETECTION");
                         log_i("label_block_DETECTION");
                     }break;
@@ -555,7 +558,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     check_circle();  // 环岛路 - 识别角点特征
     check_bomb();   //炸弹
 
-
+    aim_distance_f = _config->aim_distance_far;
+    aim_distance_n = _config->aim_distance_near;
     aim_angle_p_k = _config->steering_p_k;
     aim_angle_p = _config->steering_p;
     aim_angle_d = _config->steering_d;
@@ -871,8 +875,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 
 void ImageProcess::calculate_angle(void)
 {
-    aim_distance_f = _config->aim_distance_far;
-    aim_distance_n = _config->aim_distance_near;
+
 
 
 

@@ -24,6 +24,8 @@ POINT bomb_near_cone;  // 较近的锥桶
 float bomb_route = 0;  // 炸弹区编码器积分
 int bomb_x = 0;           //横坐标
 int bomb_y = 0;           //纵坐标
+int bomb_block_x = 0;           //横坐标
+int bomb_block_y = 0;           //纵坐标
 /* ********************************************************************* */
 
 void check_bomb()
@@ -85,7 +87,9 @@ void run_bomb()
         {
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.flag_track = TRACK_RIGHT;
-            IMG.aim_angle_p *= 1.7;
+            IMG.aim_distance_f = 0.5;
+            IMG.aim_distance_n = 0.1;
+            IMG.aim_angle_p *= 1.5;
             //右边线预测的中线更靠近右边
             track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
@@ -106,7 +110,7 @@ void run_bomb()
                     flag_bomb = BOMB_SECOND_CONE;
                     MAT_LOG("BOMB_SECOND_CONE");
                 }
-                else if (IMG.encoder.route - bomb_route > 60)
+                else if (IMG.encoder.route - bomb_route > 90)
                 {
                     flag_bomb = BOMB_NONE;
                     control_flag.pop();
@@ -118,23 +122,37 @@ void run_bomb()
         {
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.flag_track = TRACK_LEFT;
-            IMG.aim_angle_p *= 1.7;
+            IMG.aim_distance_f = 0.5;
+            IMG.aim_distance_n = 0.1;
+            IMG.aim_angle_p *= 1.5;
             track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
                 PIXEL_PER_METER * (ROAD_WIDTH * 0.5) / 2);
             IMG.rptsc0_num = IMG.rpts0s_num;
             if (IMG.encoder.route - bomb_route > 30)  //通过一段距离后
             {
-                bomb_route = IMG.encoder.route;
-                flag_bomb = BOMB_BLOCK;
-                MAT_LOG("BOMB_BLOCK");
+                if (bomb_block_y > IMAGE_HEIGHT * 0.4)
+                {
+                    bomb_route = IMG.encoder.route;
+                    flag_bomb = BOMB_BLOCK;
+                    MAT_LOG("BOMB_BLOCK");
+                }
+                else if (IMG.encoder.route - bomb_route > 90)
+                {
+                    flag_bomb = BOMB_NONE;
+                    control_flag.pop();
+                    MAT_LOG("BOMB_ERROR3");
+                }
+
             }
         }
         if (flag_bomb == BOMB_BLOCK)
         {
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.flag_track = TRACK_RIGHT;
-            IMG.aim_angle_p *= 2;
+            IMG.aim_distance_f = 0.5;
+            IMG.aim_distance_n = 0.1;
+            IMG.aim_angle_p *= 1.8;
             //右边线预测的中线更靠近右边
             track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
