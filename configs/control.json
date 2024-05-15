@@ -49,20 +49,20 @@
   "gas_rou_over": 50,
   "work_error": 170,
   "work_rou_in_total": 80,
-  "work_read_cone_thresholdy": 0.60,
-  "work_rou_ready": 5,
-  "work_rou_in": 35,
+  "work_read_cone_thresholdy": 0.62,
+  "work_rou_ready": 10,
+  "work_rou_in": 30,
   "work_rou_run": 1,
   "work_rou_out": 20,
   "work_rou_none": 10,
 
-  "work_angle_in_1": 25,
+  "work_angle_in_1": 28,
   "work_angle_in_2": -5,
 
-  "work_recback_line_route": 25,
+  "work_recback_line_route": 27,
   "work_recback_line_angle": -15,
-  "work_recback_angle_route": 80,
-  "work_recback_angle": 30,
+  "work_recback_angle_route": 60,
+  "work_recback_angle": 28,
   "work_recback_speed": 800,
 
   "speed_bomb": 1000,
@@ -271,8 +271,8 @@
     "steering_p_k": 0.0505,
     "steering_p": 2,
     "steering_d": 8.555,
-    "speed_kp": 8,
-    "speed_ki": 0.2,
+    "speed_kp": 10,
+    "speed_ki": 0.1,
     "speed_kd": 0
   },
   "1500": {
