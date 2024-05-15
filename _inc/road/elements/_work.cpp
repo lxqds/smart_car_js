@@ -141,7 +141,7 @@ void run_work()
                 if (IMG.encoder.route - work_route < IMG._config->work_rou_in_total)
                 {
                     // 第一阶段: 当赛道 右 边缘存在时
-                    if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST || IMG.encoder.route - work_route < IMG._config->work_rou_ready) 
+                    if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST) 
                     {
                         // 第一阶段打角
                         IMG.aim_angle = IMG._config->work_angle_in_1;
