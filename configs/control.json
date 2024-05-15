@@ -50,18 +50,18 @@
   "work_error": 170,
   "work_rou_in_total": 80,
   "work_read_cone_thresholdy": 0.60,
-  "work_rou_ready": 5,
+  "work_rou_ready": 10,
   "work_rou_in": 35,
   "work_rou_run": 1,
   "work_rou_out": 20,
   "work_rou_none": 10,
 
-  "work_angle_in_1": 25,
+  "work_angle_in_1": 35,
   "work_angle_in_2": -5,
 
-  "work_recback_line_route": 25,
+  "work_recback_line_route": 15,
   "work_recback_line_angle": -15,
-  "work_recback_angle_route": 80,
+  "work_recback_angle_route": 60,
   "work_recback_angle": 30,
   "work_recback_speed": 800,
 
