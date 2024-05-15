@@ -330,6 +330,7 @@ void run_work()
                         // 第一阶段打角
                         IMG.aim_angle = -IMG._config->work_angle_in_1;
                         //MAT_LOG("WORK_FIRST");
+                        log_i("WORK_FIRST");
                         work_route2 = IMG.encoder.route;
                     }
                     // 第二阶段: 检查左下锥桶坐标满足巡航条件
@@ -339,6 +340,7 @@ void run_work()
                         {
                             // 第二阶段打角
                             IMG.aim_angle = -IMG._config->work_angle_in_2;
+                            log_i("WORK_SECOND");
                             MAT_LOG("WORK_SECOND");
                         }
                         else {
