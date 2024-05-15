@@ -63,7 +63,7 @@ void run_bomb()
                 flag_bomb = BOMB_FIRST_CONE;
                 MAT_LOG("BOMB_FIRST_CONE");
             }
-            else if (IMG.encoder.route - bomb_route > 40)
+            else if (IMG.encoder.route - bomb_route > 100)
             {
                 flag_bomb = BOMB_NONE;
                 control_flag.pop();
