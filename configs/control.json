@@ -60,7 +60,7 @@
 
   "work_recback_line_route": 5,
   "work_recback_line_angle": -30,
-  "speed_boom": 1000,
+  "speed_bomb": 1000,
 
   "work_rou_over": 1,
   "farm_rou_ready": 0,

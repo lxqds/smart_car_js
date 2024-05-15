@@ -115,7 +115,7 @@ struct ControlConfig
     uint16_t garage_pass_route_; // 通过过斑马线停车距离判断
     uint16_t speed_work;         // 出入施工区速度
 
-    uint16_t speed_boom;        //危险区速度
+    uint16_t speed_bomb;        //危险区速度
 
     uint16_t work_stop_time;     // 停在施工区时间
     uint16_t work_out_stop_time; // 出去停车的时间
@@ -231,7 +231,7 @@ struct ControlConfig
         AUTOCFG(ramp_down_rou);
         AUTOCFG(ramp_p);
 
-        AUTOCFG(speed_boom);
+        AUTOCFG(speed_bomb);
 
         AUTOCFG(circle_out_rou);
         AUTOCFG(speed_level);
