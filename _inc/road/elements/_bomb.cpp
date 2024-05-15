@@ -85,7 +85,7 @@ void run_bomb()
             //右边线预测的中线更靠近右边
             track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
-                PIXEL_PER_METER * (ROAD_WIDTH * 0.5) / 2);
+                PIXEL_PER_METER * (ROAD_WIDTH * 0.2) / 2);
             IMG.rptsc1_num = IMG.rpts1s_num;
             if (IMG.encoder.route - bomb_route > 30)  //通过一段距离后
             {
@@ -132,9 +132,9 @@ void run_bomb()
             //右边线预测的中线更靠近右边
             track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
-                PIXEL_PER_METER * (ROAD_WIDTH * 0.5) / 2);
+                PIXEL_PER_METER * (ROAD_WIDTH * 0.1) / 2);
             IMG.rptsc1_num = IMG.rpts1s_num;
-            if (IMG.encoder.route - bomb_route > 35)  //通过一段距离后
+            if (IMG.encoder.route - bomb_route > 60)  //通过一段距离后
             {
                 bomb_route = IMG.encoder.route;
                 control_flag.pop();//退出元素
