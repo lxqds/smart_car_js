@@ -434,7 +434,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
             if (r.score < _config->threshold_detection)
                 continue;
             if (DetectionLabel(r.type) == label_cone) {
-                continue;
+                // continue;
             }
 
             // 转换到处理图像坐标
