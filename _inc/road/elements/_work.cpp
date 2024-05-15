@@ -349,7 +349,7 @@ void run_work()
                     // 第二阶段: 检查左下锥桶坐标满足巡航条件
                     else
                     {
-                        if (cone_LD.x > IMAGE_HEIGHT / 3 && IMG.encoder.route - work_route2 <= IMG._config->work_rou_in)
+                        if (cone_LD.x > 0&& IMG.encoder.route - work_route2 <= IMG._config->work_rou_in)
                         {
                             // 第二阶段打角
                             IMG.aim_angle = -IMG._config->work_angle_in_2;
@@ -477,14 +477,27 @@ void run_work()
             {
                 // 加大 P 项, 提升出区域稳定性
                 IMG.is_curve0 = IMG.is_curve1 = true;
-
-                if (work_route - IMG.encoder.route <= IMG._config->work_recback_angle_route) //出去路程
+                //退出一阶段打角
+                if (work_route - IMG.encoder.route <= IMG._config->work_recback_line_route)
                 {
-               
+                    MAT_LOG("WORK_LINE_OUT");
+                    IMG.aim_angle = -IMG._config->work_recback_line_angle; //出区 角度
+                    IMG.aim_speed = -IMG._config->work_recback_speed;//出去 距离
+                }
+                else if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST && IMG.rpts0s_num > 0.8 / SAMPLE_DIST && work_route - IMG.encoder.route > IMG._config->work_recback_line_route)
+                {
+                    IMG.flag_track = TRACK_RIGHT;
+                    control_flag.pop();//移除
+                    flag_work = WORK_NONE;
+                    MAT_LOG("WORK_LINE");
+                }
+                else if (work_route - IMG.encoder.route > IMG._config->work_recback_line_route && work_route - IMG.encoder.route <= IMG._config->work_recback_angle_route) //出去路程
+                {
+                    MAT_LOG("WORK_OUTING");
                     IMG.aim_angle = -IMG._config->work_recback_angle; //出区 角度
                     IMG.aim_speed = -IMG._config->work_recback_speed;//出去 距离
                 }
-                else
+                else if (work_route - IMG.encoder.route > IMG._config->work_recback_angle_route)
                 {
                     control_flag.pop();//移除
                     flag_work = WORK_NONE;
