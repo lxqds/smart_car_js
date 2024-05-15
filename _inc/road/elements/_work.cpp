@@ -369,7 +369,7 @@ void run_work()
                 // 找目标点
                 IMG.edge_det = search_targets(IMG._det_result);
                 vector<POINT> conesRight = search_right_cones(IMG.edge_det); // 右方锥桶
-                vector<POINT> cone_LU = search_leftUp_cones(IMG.edge_det);//左上锥桶
+                POINT cone_LU = search_leftUp_cone(IMG.edge_det);//左上锥桶
 
                 // 补线
                 if (conesRight.size() >= 2)
