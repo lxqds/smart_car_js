@@ -36,7 +36,7 @@ void check_bomb()
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&      //当前没在入库中
-        flag_bomb == BOMB_DETECTION && bomb_y > IMAGE_HEIGHT * 0.3 //找到炸弹
+        flag_bomb == BOMB_DETECTION && bomb_y > IMAGE_HEIGHT * 0.15 //找到炸弹
         )
     {
         IMG.element_identify = 1;
