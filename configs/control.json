@@ -57,6 +57,11 @@
   "work_rou_none": 10,
   "work_angle_in_1": 30,
   "work_angle_in_2": 0,
+
+  "work_recback_line_route": 5,
+  "work_recback_line_angle": 45,
+  "speed_boom": 1000,
+
   "work_rou_over": 1,
   "farm_rou_ready": 0,
   "farm_rou_in": 0,

@@ -282,8 +282,14 @@ void run_work()
 
             if (flag_work == WORK_OUT)//倒车
             {
-
-                if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST)
+                //退出一阶段打角
+                if (work_route - IMG.encoder.route <= IMG._config->work_recback_line_route)
+                {
+                    MAT_LOG("WORK_LINE_OUT");
+                    IMG.aim_angle = IMG._config->work_recback_line_angle; //出区 角度
+                    IMG.aim_speed = -IMG._config->work_recback_speed;//出去 距离
+                }
+                else if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST)
                 {
                     IMG.flag_track == TRACK_RIGHT;
                     control_flag.pop();//移除
@@ -297,13 +303,13 @@ void run_work()
                     flag_work = WORK_NONE;
                     MAT_LOG("WORK_NONE");
                 }
-                else if (work_route - IMG.encoder.route <= IMG._config->work_recback_angle_route ) //出去路程
+                else if (work_route - IMG.encoder.route >  IMG._config->work_recback_line_route &&  work_route - IMG.encoder.route <= IMG._config->work_recback_angle_route ) //出去路程
                 {
                     MAT_LOG("WORK_OUTING");
                     IMG.aim_angle = IMG._config->work_recback_angle; //出区 角度
                     IMG.aim_speed = -IMG._config->work_recback_speed;//出去 距离
                 }
-                else
+                else if(work_route - IMG.encoder.route > IMG._config->work_recback_angle_route)
                 {
                     control_flag.pop();//移除
                     flag_work = WORK_NONE;

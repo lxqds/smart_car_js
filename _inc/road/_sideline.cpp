@@ -294,6 +294,22 @@ std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict) {
 
     return cones;
 }
+// AI搜索距离小车最近的黄色锥桶
+POINT AI_search_height_near(std::vector<DetectionPredictResult> predict) {
+    POINT cones = POINT(0,0);
+    float ai_y = 0;
+    for (auto p : predict) {
+        if (ImageProcess::DetectionLabel(p.type) == ImageProcess::label_cone) {
+            //p.y / 2 + p.height / 4,p.x / 2 + p.width / 4));
+            ai_y = p.y / 2 + p.height / 4;
+
+            if (ai_y > cones.x)cones = POINT(ai_y, p.x / 2 + p.width / 4);
+
+        }
+    }
+
+    return cones;
+}
 
 // 搜索距离赛道左边缘最近的黄色色块 (黄色锥桶)
 POINT search_left_near(std::vector<POINT> pointsEdge, cv::Mat matt) {

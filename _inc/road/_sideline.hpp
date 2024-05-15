@@ -77,7 +77,8 @@ void search_cones_edge(std::vector<POINT> cones,std::vector<POINT> *left_cones,s
 
 // 从AI检测结果中检索锥桶坐标集合
 std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict);
-
+//AI搜索距离小车高度最近锥桶
+POINT AI_search_height_near(std::vector<DetectionPredictResult> predict);
 // 搜索距离赛道左边缘最近的红色色块 (红色锥桶)
 POINT search_left_near(std::vector<POINT> pointsEdge, cv::Mat matt);
 

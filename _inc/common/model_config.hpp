@@ -82,6 +82,9 @@ struct ControlConfig
     float work_angle_in_1;           //施工区一段进入角度
     float work_angle_in_2;           //施工区一段进入角度
     float work_recback_angle_route;  //施工区倒车角度积分
+
+    float work_recback_line_route;   //施工区 一阶段 退出打角积分
+    float work_recback_line_angle;    //施工区 一阶段 退出打角
     float work_recback_angle;          //施工区倒车角度
     uint16_t work_recback_speed;           //施工区倒车速度
 
@@ -111,6 +114,9 @@ struct ControlConfig
     uint16_t garage_out_route_;  // 出库距离判断
     uint16_t garage_pass_route_; // 通过过斑马线停车距离判断
     uint16_t speed_work;         // 出入施工区速度
+
+    uint16_t speed_boom;        //危险区速度
+
     uint16_t work_stop_time;     // 停在施工区时间
     uint16_t work_out_stop_time; // 出去停车的时间
     uint16_t work_out_speedup_time;
@@ -207,6 +213,8 @@ struct ControlConfig
 
         AUTOCFG(work_angle_in_2);
         AUTOCFG(work_angle_in_1);
+        AUTOCFG(work_recback_line_angle);
+        AUTOCFG(work_recback_line_route);
 
         AUTOCFG(work_rou_none);
         AUTOCFG(work_rou_over);
@@ -222,6 +230,9 @@ struct ControlConfig
         AUTOCFG(ramp_up_rou);
         AUTOCFG(ramp_down_rou);
         AUTOCFG(ramp_p);
+
+        AUTOCFG(speed_boom);
+
         AUTOCFG(circle_out_rou);
         AUTOCFG(speed_level);
         nlohmann::json speed = root[speed_level];
