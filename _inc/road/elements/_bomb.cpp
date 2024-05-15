@@ -111,7 +111,7 @@ void run_bomb()
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
                 PIXEL_PER_METER * (ROAD_WIDTH * 0.5) / 2);
             IMG.rptsc0_num = IMG.rpts0s_num;
-            if (IMG.encoder.route - bomb_route > 20)  //通过一段距离后
+            if (IMG.encoder.route - bomb_route > 35)  //通过一段距离后
             {
                 bomb_route = IMG.encoder.route;
                 flag_bomb = BOMB_BLOCK;
@@ -126,7 +126,7 @@ void run_bomb()
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
                 PIXEL_PER_METER * (ROAD_WIDTH * 0.5) / 2);
             IMG.rptsc1_num = IMG.rpts1s_num;
-            if (IMG.encoder.route - bomb_route > 30)  //通过一段距离后
+            if (IMG.encoder.route - bomb_route > 35)  //通过一段距离后
             {
                 bomb_route = IMG.encoder.route;
                 control_flag.pop();//退出元素
