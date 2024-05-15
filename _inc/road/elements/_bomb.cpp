@@ -57,7 +57,7 @@ void run_bomb()
             IMG.edge_det = search_targets(IMG._det_result);
             bomb_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
             LOG_I << "cone1 :" <<
-                work_near_cone.x << LOG_END;
+                bomb_near_cone.x << LOG_END;
             // 当车辆开始靠近第一个锥桶:
             if (bomb_near_cone.x > IMAGE_HEIGHT * 0.4)
             {
@@ -90,7 +90,7 @@ void run_bomb()
                 IMG.edge_det = search_targets(IMG._det_result);
                 bomb_near_cone = search_right_near(IMG.edge_left, IMG.mat_lab);
                 LOG_I << "cone2 :" <<
-                    work_near_cone.x << LOG_END;
+                    bomb_near_cone.x << LOG_END;
                 // 当车辆开始靠近第一个锥桶:
                 if (bomb_near_cone.x > IMAGE_HEIGHT * 0.4)
                 {
