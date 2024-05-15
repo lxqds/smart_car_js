@@ -13291,3 +13291,598 @@
 [36;22mI/System       [23:30:10] (yyds.cpp 204) serial stopped.[0m
 [36;22mI/System       [23:30:10] (yyds.cpp 207) Exit Code: 0[0m
 [36;22mI/System       [23:30:10] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [23:32:10] (logger_helper.cc 36) Build: May 14 2024 22:01:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [23:32:10] (model_config.hpp 274) Init Success.[0m
+[36;22mI/Capture      [23:32:12] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [23:32:12] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [23:32:12] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [23:32:12] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [23:32:12] (model_config.hpp 504) Init Success.[0m
+[36;22mI/Detection    [23:32:12] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [23:32:12] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [23:32:12] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [23:32:12] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [23:32:12] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [23:32:12] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [23:32:12] (detection.hpp 164) Start![0m
+[36;22mI/Display      [23:32:12] (display.cpp 35) Start![0m
+[36;22mI/Main         [23:32:12] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [23:32:12] (yyds.cpp 89) ki=0.08[0m
+[36;22mI/Main         [23:32:12] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/System       [23:32:15] (capture.cpp 94) Run![0m
+[36;22mI/Circle       [23:32:15] (_circle.cpp 49) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [23:32:16] (_circle.cpp 90) CIRCLE_LEFT_IN[0m
+[36;22mI/Circle       [23:32:16] (_circle.cpp 120) CIRCLE_LEFT_RUNNING[0m
+[36;22mI/Circle       [23:32:18] (_circle.cpp 133) CIRCLE_LEFT_OUT[0m
+[36;22mI/Circle       [23:32:18] (_circle.cpp 154) CIRCLE_NONE[0m
+[36;22mI/Run          [23:32:19] (imgprocess.cpp 444) Detection GET 11 [0m
+[36;22mI/Run          [23:32:19] (imgprocess.cpp 470) label_evil_DETECTION or label_thief[0m
+[36;22mI/Work         [23:32:19] (_work.cpp 37) WORK_FOUND_R[0m
+[36;22mI/Work         [23:32:20] (_work.cpp 88) WORK_READY[0m
+[36;22mI/Work         [23:32:20] (_work.cpp 347) WORK_RUN[0m
+[36;22mI/Work         [23:32:20] (_work.cpp 424) WORK_RUN_ING[0m
+[36;22mI/Work         [23:32:20] (_work.cpp 424) WORK_RUN_ING[0m
+[36;22mI/Work         [23:32:20] (_work.cpp 431) WORK_STOPPING[0m
+[36;22mI/Work         [23:32:21] (_work.cpp 443) WORK_STOPFINISH[0m
+[36;22mI/Work         [23:32:21] (_work.cpp 456) WORK_PARKINISH[0m
+[36;22mI/Work         [23:32:23] (_work.cpp 476) WORK_NONE[0m
+[36;22mI/Cross        [23:32:27] (_cross.cpp 61) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:32:28] (_cross.cpp 87) CROSS_IN[0m
+[36;22mI/Cross        [23:32:28] (_cross.cpp 125) CROSS_NONE[0m
+[36;22mI/Cross        [23:32:30] (_cross.cpp 61) CROSS_BEGIN[0m
+[36;22mI/Cross        [23:32:30] (_cross.cpp 87) CROSS_IN[0m
+[36;22mI/Cross        [23:32:30] (_cross.cpp 125) CROSS_NONE[0m
+[36;22mI/Run          [23:32:30] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:30] (imgprocess.cpp 506) BRIDGE_DETECTION[0m
+[36;22mI/Run          [23:32:30] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:31] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Cross        [23:32:31] (_cross.cpp 61) CROSS_BEGIN[0m
+[36;22mI/Run          [23:32:31] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:31] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:31] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Cross        [23:32:31] (_cross.cpp 87) CROSS_IN[0m
+[36;22mI/Run          [23:32:31] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:31] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:31] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:31] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:31] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Cross        [23:32:31] (_cross.cpp 125) CROSS_NONE[0m
+[36;22mI/Cross        [23:32:33] (_cross.cpp 61) CROSS_BEGIN[0m
+[36;22mI/Run          [23:32:33] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:33] (imgprocess.cpp 444) Detection GET 7 [0m
+[36;22mI/Run          [23:32:33] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Cross        [23:32:33] (_cross.cpp 87) CROSS_IN[0m
+[36;22mI/Run          [23:32:33] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:33] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:33] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:33] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:33] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:33] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Cross        [23:32:33] (_cross.cpp 125) CROSS_NONE[0m
+[36;22mI/Run          [23:32:33] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:33] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:33] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:34] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:34] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:34] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:34] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:34] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:34] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:32:36] (imgprocess.cpp 444) Detection GET 9 [0m
+[36;22mI/Run          [23:32:36] (imgprocess.cpp 444) Detection GET 7 [0m
+[36;22mI/Circle       [23:32:36] (_circle.cpp 66) CIRCLE_RIGHT_BEGIN[0m
+[36;22mI/Circle       [23:32:36] (_circle.cpp 178) CIRCLE_RIGHT_IN[0m
+[36;22mI/Circle       [23:32:37] (_circle.cpp 208) CIRCLE_RIGHT_RUNNING[0m
+[36;22mI/Circle       [23:32:38] (_circle.cpp 221) CIRCLE_RIGHT_OUT[0m
+[36;22mI/Circle       [23:32:39] (_circle.cpp 242) CIRCLE_NONE[0m
+[36;22mI/Run          [23:32:39] (imgprocess.cpp 444) Detection GET 7 [0m
+[36;22mI/System       [23:32:40] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [23:32:40] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [23:32:40] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [23:32:40] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [23:32:40] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [23:32:40] (display.cpp 50) Stop.[0m
+[36;22mI/System       [23:32:40] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [23:32:40] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [23:32:40] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [23:32:40] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [23:32:40] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [23:40:25] (logger_helper.cc 36) Build: May 14 2024 22:01:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [23:40:25] (model_config.hpp 274) Init Success.[0m
+[36;22mI/Capture      [23:40:27] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [23:40:27] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [23:40:27] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [23:40:27] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [23:40:27] (model_config.hpp 504) Init Success.[0m
+[36;22mI/Detection    [23:40:27] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [23:40:27] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [23:40:27] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [23:40:27] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [23:40:27] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [23:40:27] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [23:40:27] (detection.hpp 164) Start![0m
+[36;22mI/Display      [23:40:27] (display.cpp 35) Start![0m
+[36;22mI/Main         [23:40:27] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [23:40:27] (yyds.cpp 89) ki=0.08[0m
+[36;22mI/Main         [23:40:27] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/System       [23:40:29] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [23:40:29] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [23:40:29] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [23:40:29] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [23:40:29] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [23:40:29] (display.cpp 50) Stop.[0m
+[36;22mI/System       [23:40:29] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [23:40:29] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [23:40:29] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [23:40:29] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [23:40:29] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [23:40:31] (logger_helper.cc 36) Build: May 14 2024 22:01:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [23:40:31] (model_config.hpp 274) Init Success.[0m
+[36;22mI/Capture      [23:40:33] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [23:40:33] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [23:40:33] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [23:40:33] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [23:40:33] (model_config.hpp 504) Init Success.[0m
+[36;22mI/Detection    [23:40:33] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [23:40:33] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [23:40:33] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [23:40:33] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [23:40:33] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [23:40:33] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [23:40:33] (detection.hpp 164) Start![0m
+[36;22mI/Display      [23:40:33] (display.cpp 35) Start![0m
+[36;22mI/Main         [23:40:33] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [23:40:33] (yyds.cpp 89) ki=0.08[0m
+[36;22mI/Main         [23:40:33] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/System       [23:40:34] (capture.cpp 94) Run![0m
+[36;22mI/Run          [23:40:35] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:40:35] (imgprocess.cpp 506) BRIDGE_DETECTION[0m
+[36;22mI/Circle       [23:40:35] (_circle.cpp 49) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [23:40:35] (_circle.cpp 90) CIRCLE_LEFT_IN[0m
+[36;22mI/Circle       [23:40:36] (_circle.cpp 120) CIRCLE_LEFT_RUNNING[0m
+[36;22mI/Circle       [23:40:38] (_circle.cpp 133) CIRCLE_LEFT_OUT[0m
+[36;22mI/Circle       [23:40:38] (_circle.cpp 154) CIRCLE_NONE[0m
+[36;22mI/Run          [23:40:39] (imgprocess.cpp 444) Detection GET 11 [0m
+[36;22mI/Run          [23:40:39] (imgprocess.cpp 444) Detection GET 11 [0m
+[36;22mI/System       [23:40:40] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [23:40:40] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [23:40:40] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [23:40:40] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [23:40:40] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [23:40:40] (display.cpp 50) Stop.[0m
+[36;22mI/System       [23:40:40] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [23:40:40] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [23:40:40] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [23:40:40] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [23:40:40] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [23:41:35] (logger_helper.cc 36) Build: May 14 2024 22:01:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [23:41:35] (model_config.hpp 274) Init Success.[0m
+[36;22mI/Capture      [23:41:37] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [23:41:37] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [23:41:37] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [23:41:37] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [23:41:37] (model_config.hpp 504) Init Success.[0m
+[36;22mI/Detection    [23:41:37] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [23:41:37] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [23:41:37] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [23:41:37] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [23:41:37] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [23:41:37] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [23:41:37] (detection.hpp 164) Start![0m
+[36;22mI/Display      [23:41:37] (display.cpp 35) Start![0m
+[36;22mI/Main         [23:41:37] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [23:41:37] (yyds.cpp 89) ki=0.08[0m
+[36;22mI/Main         [23:41:37] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/System       [23:41:38] (capture.cpp 94) Run![0m
+[36;22mI/Circle       [23:41:39] (_circle.cpp 49) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [23:41:39] (_circle.cpp 90) CIRCLE_LEFT_IN[0m
+[36;22mI/Circle       [23:41:40] (_circle.cpp 120) CIRCLE_LEFT_RUNNING[0m
+[36;22mI/Circle       [23:41:41] (_circle.cpp 133) CIRCLE_LEFT_OUT[0m
+[36;22mI/Circle       [23:41:42] (_circle.cpp 154) CIRCLE_NONE[0m
+[36;22mI/Run          [23:41:42] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Run          [23:41:42] (imgprocess.cpp 506) BRIDGE_DETECTION[0m
+[36;22mI/Run          [23:41:42] (imgprocess.cpp 444) Detection GET 11 [0m
+[36;22mI/Run          [23:41:42] (imgprocess.cpp 444) Detection GET 11 [0m
+[36;22mI/Run          [23:41:42] (imgprocess.cpp 444) Detection GET 11 [0m
+[36;22mI/Run          [23:41:42] (imgprocess.cpp 444) Detection GET 11 [0m
+[36;22mI/Run          [23:41:44] (imgprocess.cpp 444) Detection GET 0 [0m
+[36;22mI/System       [23:41:44] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [23:41:44] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [23:41:44] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [23:41:44] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [23:41:44] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [23:41:44] (display.cpp 50) Stop.[0m
+[36;22mI/System       [23:41:44] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [23:41:44] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [23:41:44] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [23:41:44] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [23:41:44] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [23:44:08] (logger_helper.cc 36) Build: May 14 2024 22:01:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [23:44:08] (model_config.hpp 274) Init Success.[0m
+[36;22mI/Capture      [23:44:09] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [23:44:09] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [23:44:09] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [23:44:09] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [23:44:09] (model_config.hpp 504) Init Success.[0m
+[36;22mI/Detection    [23:44:09] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [23:44:09] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [23:44:09] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [23:44:10] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [23:44:10] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [23:44:10] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [23:44:10] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [23:44:10] (detection.hpp 164) Start![0m
+[36;22mI/Display      [23:44:10] (display.cpp 35) Start![0m
+[36;22mI/Main         [23:44:10] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [23:44:10] (yyds.cpp 89) ki=0.08[0m
+[36;22mI/Main         [23:44:10] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/System       [23:44:11] (capture.cpp 94) Run![0m
+[36;22mI/Circle       [23:44:11] (_circle.cpp 49) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [23:44:12] (_circle.cpp 90) CIRCLE_LEFT_IN[0m
+[36;22mI/Circle       [23:44:13] (_circle.cpp 120) CIRCLE_LEFT_RUNNING[0m
+[36;22mI/Circle       [23:44:14] (_circle.cpp 133) CIRCLE_LEFT_OUT[0m
+[36;22mI/Circle       [23:44:15] (_circle.cpp 154) CIRCLE_NONE[0m
+[36;22mI/Run          [23:44:15] (imgprocess.cpp 444) Detection GET 6 [0m
+[36;22mI/Run          [23:44:15] (imgprocess.cpp 470) label_evil_DETECTION or label_thief[0m
+[36;22mI/Work         [23:44:15] (_work.cpp 37) WORK_FOUND_R[0m
+[36;22mI/Work         [23:44:16] (_work.cpp 98) WORK_ERROR[0m
+[36;22mI/Run          [23:44:17] (imgprocess.cpp 444) Detection GET 0 [0m
+[36;22mI/System       [23:44:19] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [23:44:19] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [23:44:19] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [23:44:19] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [23:44:19] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [23:44:19] (display.cpp 50) Stop.[0m
+[36;22mI/System       [23:44:19] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [23:44:19] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [23:44:19] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [23:44:19] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [23:44:19] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [23:44:50] (logger_helper.cc 36) Build: May 14 2024 22:01:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [23:44:50] (model_config.hpp 274) Init Success.[0m
+[36;22mI/Capture      [23:44:51] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [23:44:51] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [23:44:51] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [23:44:51] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [23:44:51] (model_config.hpp 504) Init Success.[0m
+[36;22mI/Detection    [23:44:51] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [23:44:51] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [23:44:51] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [23:44:51] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [23:44:51] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [23:44:51] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [23:44:51] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [23:44:51] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [23:44:51] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [23:44:51] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [23:44:51] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [23:44:51] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [23:44:51] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [23:44:51] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [23:44:52] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [23:44:52] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [23:44:52] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [23:44:52] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [23:44:52] (detection.hpp 164) Start![0m
+[36;22mI/Display      [23:44:52] (display.cpp 35) Start![0m
+[36;22mI/Main         [23:44:52] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [23:44:52] (yyds.cpp 89) ki=0.08[0m
+[36;22mI/Main         [23:44:52] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/System       [23:44:53] (capture.cpp 94) Run![0m
+[36;22mI/Circle       [23:44:54] (_circle.cpp 49) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [23:44:54] (_circle.cpp 90) CIRCLE_LEFT_IN[0m
+[36;22mI/Circle       [23:44:55] (_circle.cpp 120) CIRCLE_LEFT_RUNNING[0m
+[36;22mI/Run          [23:44:56] (imgprocess.cpp 444) Detection GET 1 [0m
+[36;22mI/Circle       [23:44:56] (_circle.cpp 133) CIRCLE_LEFT_OUT[0m
+[36;22mI/Circle       [23:44:57] (_circle.cpp 154) CIRCLE_NONE[0m
+[36;22mI/Run          [23:44:57] (imgprocess.cpp 444) Detection GET 6 [0m
+[36;22mI/Run          [23:44:57] (imgprocess.cpp 470) label_evil_DETECTION or label_thief[0m
+[36;22mI/Work         [23:44:57] (_work.cpp 37) WORK_FOUND_R[0m
+[36;22mI/Work         [23:44:58] (_work.cpp 98) WORK_ERROR[0m
+[36;22mI/Run          [23:44:59] (imgprocess.cpp 444) Detection GET 0 [0m
+[36;22mI/Run          [23:44:59] (imgprocess.cpp 457) label_bomb_DETECTION[0m
+[36;22mI/System       [23:44:59] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [23:45:00] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [23:45:00] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [23:45:00] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [23:45:00] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [23:45:00] (display.cpp 50) Stop.[0m
+[36;22mI/System       [23:45:00] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [23:45:00] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [23:45:00] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [23:45:00] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [23:45:00] (yyds.cpp 208) Finish !!![0m
+[36;22mI/NO_TAG       [23:47:04] (logger_helper.cc 36) Build: May 14 2024 22:01:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [23:47:04] (model_config.hpp 274) Init Success.[0m
+[36;22mI/Capture      [23:47:05] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [23:47:05] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [23:47:05] (capture.cpp 18) >>> fps    = 120.10[0m
+[36;22mI/Capture      [23:47:05] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/System Json  [23:47:05] (model_config.hpp 504) Init Success.[0m
+[36;22mI/Detection    [23:47:05] (detection.hpp 142) SystemConfig Path:../configs/usbcamera.json[0m
+[36;22mI/Detection    [23:47:05] (detection.hpp 143) Model Config Path:../configs/../models[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 58) [PPNC] Initialize model.[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 67) Done.[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 70) [PPNC] Load ONNX model.[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 74) Done.[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 77) [PPNC] Read io_paddle.[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 79) Done.[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 82) [PPNC] Read JSON file.[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 86) Done.[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 89) [PPNC] Compile NMS .so file.[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 160) Compile done.[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 108) Done.[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 111) [PPNC] Load Predictor.[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 114) Done.[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 117) [PPNC] Load labels.[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 129) [Label 0] bomb[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 129) [Label 1] bridge[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 129) [Label 2] safety[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 129) [Label 3] cone[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 129) [Label 4] crosswalk[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 129) [Label 5] danger[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 129) [Label 6] evil[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 129) [Label 7] block[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 129) [Label 8] patient[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 129) [Label 9] prop[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 129) [Label 10] spy[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 129) [Label 11] thief[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 129) [Label 12] tumble[0m
+[36;22mI/DetPredictor [23:47:06] (detection.cpp 132) Done.[0m
+[36;22mI/Display      [23:47:06] (display.cpp 22) Create Video Success.[0m
+[36;22mI/Serial       [23:47:06] (serial.hpp 277) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [23:47:06] (capture.cpp 28) Start![0m
+[36;22mI/Detection    [23:47:06] (detection.hpp 164) Start![0m
+[36;22mI/Display      [23:47:06] (display.cpp 35) Start![0m
+[36;22mI/Main         [23:47:06] (yyds.cpp 88) kp=8.00[0m
+[36;22mI/Main         [23:47:06] (yyds.cpp 89) ki=0.08[0m
+[36;22mI/Main         [23:47:06] (yyds.cpp 90) kd=0.00[0m
+[36;22mI/System       [23:47:07] (capture.cpp 94) Run![0m
+[36;22mI/Circle       [23:47:07] (_circle.cpp 49) CIRCLE_LEFT_BEGIN[0m
+[36;22mI/Circle       [23:47:08] (_circle.cpp 90) CIRCLE_LEFT_IN[0m
+[36;22mI/Circle       [23:47:08] (_circle.cpp 120) CIRCLE_LEFT_RUNNING[0m
+[36;22mI/Circle       [23:47:10] (_circle.cpp 133) CIRCLE_LEFT_OUT[0m
+[36;22mI/Circle       [23:47:10] (_circle.cpp 154) CIRCLE_NONE[0m
+[36;22mI/Run          [23:47:11] (imgprocess.cpp 444) Detection GET 6 [0m
+[36;22mI/Run          [23:47:11] (imgprocess.cpp 470) label_evil_DETECTION or label_thief[0m
+[36;22mI/Work         [23:47:11] (_work.cpp 37) WORK_FOUND_R[0m
+[36;22mI/Work         [23:47:12] (_work.cpp 98) WORK_ERROR[0m
+[36;22mI/Run          [23:47:13] (imgprocess.cpp 444) Detection GET 0 [0m
+[36;22mI/Run          [23:47:13] (imgprocess.cpp 457) label_bomb_DETECTION[0m
+[36;22mI/System       [23:47:13] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [23:47:13] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [23:47:13] (yyds.cpp 198) capture stopped.[0m
+[36;22mI/Detection    [23:47:13] (detection.hpp 176) Stop.[0m
+[36;22mI/System       [23:47:13] (yyds.cpp 200) detection stopped.[0m
+[36;22mI/Display      [23:47:14] (display.cpp 50) Stop.[0m
+[36;22mI/System       [23:47:14] (yyds.cpp 202) display stopped.[0m
+[36;22mI/Serial       [23:47:14] (serial.hpp 351) Stop.[0m
+[36;22mI/System       [23:47:14] (yyds.cpp 204) serial stopped.[0m
+[36;22mI/System       [23:47:14] (yyds.cpp 207) Exit Code: 0[0m
+[36;22mI/System       [23:47:14] (yyds.cpp 208) Finish !!![0m
