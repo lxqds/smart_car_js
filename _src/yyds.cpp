@@ -161,10 +161,11 @@ int main(int argc, char const* argv[])
             sprintf(fps_buffer, "FPS: %.2f", 1000 / fps_time);
             cv::putText(frame_imgpro, (std::string)fps_buffer, cv::Point(5, 10),
                 cv::FONT_HERSHEY_SIMPLEX, 0.4, cv::Scalar(0, 0, 255));
-            if(imgprocess._config->rec_video_format)
+            if (imgprocess._config->rec_video_format)
             {
                 display->put(frame_imgpro.clone());
-            } else
+            }
+            else
             {
                 display->put(frame_origin.clone());
             }
@@ -174,8 +175,12 @@ int main(int argc, char const* argv[])
         // 停止计时
         fps_time = fps_sw.toc();
     }
-    
+
     /* 结束程序 */
+    serial->sendPack(payload_exit);
+    serial->sendPack(payload_exit);
+    serial->sendPack(payload_exit);
+    serial->sendPack(payload_exit);
     serial->sendPack(payload_exit);
     callbackSignal(0);
     exit(EXIT_SUCCESS);
