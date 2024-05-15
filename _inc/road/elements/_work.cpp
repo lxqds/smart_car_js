@@ -475,8 +475,7 @@ void run_work()
 
             if (flag_work == WORK_OUT)
             {
-                // 加大 P 项, 提升出区域稳定性
-                IMG.is_curve0 = IMG.is_curve1 = true;
+                MAT_LOG("WORK_OUT");
                 //退出一阶段打角
                 if (work_route - IMG.encoder.route <= IMG._config->work_recback_line_route)
                 {
