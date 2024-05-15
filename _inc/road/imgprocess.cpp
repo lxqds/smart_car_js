@@ -465,7 +465,10 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                         {
                             if (flag_work == WORK_NONE && _config->check_work_ == 1) {
                                 flag_work = WORK_EVEI_DETECTION;
+                                sprintf(string_log, "WORK_EVEI_DETECTION");
                             }
+
+                            if(flag_work != WORK_NONE) sprintf(string_log, "flag_work != WORK_NONE");
 
                             sprintf(string_log, "label_evil_DETECTION");
                             log_i("label_evil_DETECTION");
