@@ -115,7 +115,7 @@ void run_bomb()
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
                 PIXEL_PER_METER * (ROAD_WIDTH * 0.5) / 2);
             IMG.rptsc0_num = IMG.rpts0s_num;
-            if (IMG.encoder.route - bomb_route > 35)  //通过一段距离后
+            if (IMG.encoder.route - bomb_route > 100)  //通过一段距离后
             {
                 bomb_route = IMG.encoder.route;
                 flag_bomb = BOMB_BLOCK;
@@ -153,7 +153,7 @@ void run_bomb()
         }
 
         if (IMG.rpts_num > 0.3 / SAMPLE_DIST) {
-            IMG.aim_angle_p *= 1.4;
+            IMG.aim_angle_p *= 1.6;
             IMG.calculate_angle();//计算角度
         }
         else if (IMG.flag_track == TRACK_LEFT)
