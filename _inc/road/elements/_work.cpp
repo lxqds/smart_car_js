@@ -300,8 +300,8 @@ void run_work()
                 {
                     IMG.flag_track == TRACK_LEFT;
                     control_flag.pop();//移除
-                    flag_work = WORK_LEFT;
-                    MAT_LOG("WORK_NONE");
+                    flag_work = WORK_NONE;
+                    MAT_LOG("WORK_LEFT");
                 }
                 else if (work_route - IMG.encoder.route >  IMG._config->work_recback_line_route &&  work_route - IMG.encoder.route <= IMG._config->work_recback_angle_route ) //出去路程
                 {
