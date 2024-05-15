@@ -50,22 +50,12 @@ void check_cross() {
         // !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&   //当前没在入库中
-        (IMG.Lpt0_found || IMG.Lpt1_found)
+        (IMG.Lpt0_found && IMG.Lpt1_found)
         ) {
-        int checkLpt = 0;
-        cross_farline();
-        if (IMG.Lpt0_found && IMG.Lpt1_found) checkLpt = 1;
-        else if (IMG.Lpt0_found && far_Lpt0_found) checkLpt = 2;
-        else if (IMG.Lpt1_found && far_Lpt1_found) checkLpt = 3;
-        MAT_LOG("L0=%d,L1=%d,fL0=%d,fL2=%d", IMG.Lpt0_found, IMG.Lpt1_found, far_Lpt0_found, far_Lpt1_found);
-        if (checkLpt > 0)
-        {
-            control_flag.push(cross_element);
-            IMG.element_identify = 1;
-            flag_cross = CROSS_BEGIN;
-            MAT_LOG("CROSS_BEGIN");
-        }
-
+        control_flag.push(cross_element);
+        IMG.element_identify = 1;
+        flag_cross = CROSS_BEGIN;
+        MAT_LOG("CROSS_BEGIN");
     }
 }
 
