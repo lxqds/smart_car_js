@@ -51,12 +51,12 @@
   "work_rou_in_total": 60,
   "work_read_cone_thresholdy": 0.75,
   "work_rou_ready": 45,
-  "work_rou_in": 20,
+  "work_rou_in": 28,
   "work_rou_run": 1,
   "work_rou_out": 20,
   "work_rou_none": 10,
   
-  "work_angle_in_1": 30,
+  "work_angle_in_1": 42,
   "work_angle_in_2": 5,
 
   "work_recback_line_route": 10,
