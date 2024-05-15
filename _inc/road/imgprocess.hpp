@@ -14,13 +14,13 @@
 #include "elements/_circle.hpp"
 #include "elements/_cross.hpp"
 #include "elements/_garage.hpp"
-// #include "elements/_gas.hpp"
-// #include "elements/_ramp.hpp"
+#include "elements/_gas.hpp"
+#include "elements/_ramp.hpp"
 #include "elements/_work.hpp"
 #include "elements/_bomb.hpp"
-// #include "elements/_yroad.hpp"
-// #include "elements/_slowzone.hpp"
-// #include "elements/_save.hpp"
+#include "elements/_yroad.hpp"
+#include "elements/_slowzone.hpp"
+#include "elements/_save.hpp"
 #include <vector>
 
 
