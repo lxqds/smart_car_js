@@ -80,6 +80,7 @@ void run_bomb()
         if (flag_bomb == BOMB_FIRST_CONE)
         {
             IMG.flag_track = TRACK_RIGHT;
+            IMG.aim_angle_p *= 1.5;
             //右边线预测的中线更靠近右边
             track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
@@ -111,6 +112,7 @@ void run_bomb()
         if (flag_bomb == BOMB_SECOND_CONE)
         {
             IMG.flag_track = TRACK_LEFT;
+            IMG.aim_angle_p *= 1.5;
             track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
                 PIXEL_PER_METER * (ROAD_WIDTH * 0.5) / 2);
@@ -125,6 +127,7 @@ void run_bomb()
         if (flag_bomb == BOMB_BLOCK)
         {
             IMG.flag_track = TRACK_RIGHT;
+            IMG.aim_angle_p *= 1.8;
             //右边线预测的中线更靠近右边
             track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                 (int)round(ANGLE_DIST / SAMPLE_DIST),
@@ -153,7 +156,6 @@ void run_bomb()
         }
 
         if (IMG.rpts_num > 0.3 / SAMPLE_DIST) {
-            IMG.aim_angle_p *= 1.6;
             IMG.calculate_angle();//计算角度
         }
         else if (IMG.flag_track == TRACK_LEFT)
