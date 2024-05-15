@@ -447,8 +447,11 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 //continue;
 
             // 禁止在元素内判断其他元素
-                if ((flag_work == WORK_NONE && flag_gas == GAS_NONE &&
-                    flag_yroad == YROAD_NONE && flag_ramp == RAMP_NONE && flag_slow == SLOW_NONE)) {
+                if (!control_flag.contains(circle_element) &&   //当前没在环岛中
+                    !control_flag.contains(work_element) &&     //当前没在工作区中
+                    !control_flag.contains(garage_element) &&      //当前没在入库中
+                    !control_flag.contains(bomb_element)      //当前没在炸弹中
+                    ) {
 
                     switch (DetectionLabel(r.type)) {
                         case label_bomb:      // 炸弹
