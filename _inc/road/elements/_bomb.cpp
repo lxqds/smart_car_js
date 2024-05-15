@@ -15,6 +15,7 @@ flag_bomb_e flag_bomb = BOMB_NONE;
 
 // 引用图像处理
 extern ImageProcess imgprocess;
+extern Control_Flag control_flag;
 #define IMG imgprocess
 
 // 变量定义
@@ -48,7 +49,7 @@ void check_bomb()
 void run_bomb()
 {
     if (control_flag.top() == bomb_element) {//当前为炸弹元素
-        IMG.aim_speed = IMG._config->_config->speed_base;
+        IMG.aim_speed = IMG._config->speed_base;
         if (flag_bomb == BOMB_FOUND)
         {
             bomb_near_cone = POINT(0, 0);
@@ -59,7 +60,7 @@ void run_bomb()
             if (bomb_near_cone.x > IMAGE_HEIGHT * 0.3)
             {
                 bomb_route = IMG.encoder.route;
-                flag_work = BOMB_FIRST_CONE;
+                flag_bomb = BOMB_FIRST_CONE;
                 MAT_LOG("BOMB_FIRST_CONE");
             }
             else if (IMG.encoder.route - bomb_route > 40)
@@ -90,7 +91,7 @@ void run_bomb()
                 if (bomb_near_cone.x > IMAGE_HEIGHT * 0.3)
                 {
                     bomb_route = IMG.encoder.route;
-                    flag_work = BOMB_SECOND_CONE;
+                    flag_bomb = BOMB_SECOND_CONE;
                     MAT_LOG("BOMB_SECOND_CONE");
                 }
                 else if (IMG.encoder.route - bomb_route > 60)
@@ -113,7 +114,7 @@ void run_bomb()
             if (IMG.encoder.route - bomb_route > 20)  //通过一段距离后
             {
                 bomb_route = IMG.encoder.route;
-                flag_work = BOMB_BLOCK;
+                flag_bomb = BOMB_BLOCK;
                 MAT_LOG("BOMB_BLOCK");
             }
         }
@@ -129,7 +130,7 @@ void run_bomb()
             {
                 bomb_route = IMG.encoder.route;
                 control_flag.pop();//退出元素
-                flag_work = BOMB_NONE;
+                flag_bomb = BOMB_NONE;
                 MAT_LOG("BOMB_NONE");
             }
         }
