@@ -30,7 +30,7 @@ public:
     ImageProcess() {};
     ~ImageProcess() {};
 
-public:
+
     int init(std::string config_path, bool is_result);
     void process(cv::Mat& mat_origin, cv::Mat& mat_result, Payload_t& payload);
     void calculate_angle(void);
@@ -47,7 +47,7 @@ private:
     float mea_1 = 0.0f;  // 右直线拟合平均绝对误差
 
     std::vector<POINT> bezier_line;  // 中线贝塞尔曲线拟合
-
+public:
     float aim_angle_p_k;
     float aim_angle_p;
     float aim_angle_d;
