@@ -153,8 +153,8 @@ void run_bomb()
         }
 
         if (IMG.rpts_num > 0.3 / SAMPLE_DIST) {
-            IMG.aim_angle_p *= 1.4
-                IMG.calculate_angle();//计算角度
+            IMG.aim_angle_p *= 1.4;
+            IMG.calculate_angle();//计算角度
         }
         else if (IMG.flag_track == TRACK_LEFT)
         {
