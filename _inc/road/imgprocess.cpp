@@ -572,6 +572,10 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     check_circle();  // 环岛路 - 识别角点特征
     check_bomb();   //炸弹
 
+
+    aim_angle_p_k = _config->steering_p_k;
+    aim_angle_p = _config->steering_p;
+    aim_angle_d = _config->steering_d;
     run_garage();
     run_work();
     run_cross();
@@ -634,9 +638,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     /* ***************************************************************** */
     /* **************************** 运行控制 **************************** */
     /* ***************************************************************** */
-    aim_angle_p_k = _config->steering_p_k;
-    aim_angle_p = _config->steering_p;
-    aim_angle_d = _config->steering_d;
+
     // 偏差限幅
     aim_angle = aim_angle > 500.0f ? 500.0f : aim_angle < -500.0f ? -500.0f
         : aim_angle;
