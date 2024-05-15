@@ -49,7 +49,7 @@
   "gas_rou_over": 50,
   "work_error": 170,
   "work_rou_in_total": 60,
-  "work_read_cone_thresholdy": 0.55,
+  "work_read_cone_thresholdy": 0.7,
   "work_rou_ready": 45,
   "work_rou_in": 8,
   "work_rou_run": 1,
