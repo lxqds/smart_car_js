@@ -54,7 +54,7 @@ void check_cross() {
         ) {
         int checkLpt = 0;
         cross_farline();
-        if (IMG.Lpt0_found && IMG.Lpt1_found) = 1;
+        if (IMG.Lpt0_found && IMG.Lpt1_found) checkLpt = 1;
         else if (IMG.Lpt0_found && far_Lpt0_found) checkLpt = 2;
         else if (IMG.Lpt1_found && far_Lpt1_found) checkLpt = 3;
         MAT_LOG("L0=%d,L1=%d,fL0=%d,fL2=%d", IMG.Lpt0_found, IMG.Lpt1_found, far_Lpt0_found, far_Lpt1_found);
