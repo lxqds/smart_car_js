@@ -89,7 +89,10 @@ int main(int argc, char const* argv[])
     LOG_I << "ki=" << speedPID[1] << LOG_END;
     LOG_I << "kd=" << speedPID[2] << LOG_END;
     serial->transmit_packet(0x09, speedPID_BUFF, 12);
-
+    serial->transmit_packet(0x09, speedPID_BUFF, 12);
+    serial->transmit_packet(0x09, speedPID_BUFF, 12);
+    serial->transmit_packet(0x09, speedPID_BUFF, 12);
+    serial->transmit_packet(0x09, speedPID_BUFF, 12);
     /* 开跑 */
     // serial->buzzerSound(3);
     while (capture->_loop)

@@ -52,9 +52,9 @@ void check_cross() {
         !control_flag.contains(garage_element) &&   //当前没在入库中
         ((IMG.Lpt0_found && IMG.Lpt1_found) ||
             (!control_flag.contains(circle_element) &&
-                (IMG.Lpt0_found && IMG.rpts1s_num < 0.10 / SAMPLE_DIST) ||
-                (IMG.Lpt1_found && IMG.rpts0s_num < 0.10 / SAMPLE_DIST)))
-        ) {
+                (
+                    (IMG.Lpt0_found && IMG.rpts1s_num < 0.10 / SAMPLE_DIST) ||
+                    (IMG.Lpt1_found && IMG.rpts0s_num < 0.10 / SAMPLE_DIST))))) {
         control_flag.push(cross_element);
         IMG.element_identify = 1;
         flag_cross = CROSS_BEGIN;
