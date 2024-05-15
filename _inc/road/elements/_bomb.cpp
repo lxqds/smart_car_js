@@ -49,13 +49,14 @@ void check_bomb()
 void run_bomb()
 {
     if (control_flag.top() == bomb_element) {//当前为炸弹元素
-        IMG.aim_speed = IMG._config->speed_base;
+        IMG.aim_speed = IMG._config->speed_bomb;
         if (flag_bomb == BOMB_FOUND)
         {
             bomb_near_cone = POINT(0, 0);
             IMG.edge_det.clear();
-            IMG.edge_det = search_targets(IMG._det_result);
-            bomb_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
+            // IMG.edge_det = search_targets(IMG._det_result);
+            bomb_near_cone = AI_search_height_near(IMG._det_result);
+            // bomb_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
             LOG_I << "cone1 :" <<
                 bomb_near_cone.x << LOG_END;
             // 当车辆开始靠近第一个锥桶:
@@ -87,8 +88,7 @@ void run_bomb()
                 //开始找第二个锥桶
                 bomb_near_cone = POINT(0, 0);
                 IMG.edge_det.clear();
-                IMG.edge_det = search_targets(IMG._det_result);
-                bomb_near_cone = search_right_near(IMG.edge_left, IMG.mat_lab);
+                bomb_near_cone = AI_search_height_near(IMG._det_result);
                 LOG_I << "cone2 :" <<
                     bomb_near_cone.x << LOG_END;
                 // 当车辆开始靠近第一个锥桶:
@@ -152,7 +152,20 @@ void run_bomb()
             IMG.rpts = IMG.rptscs;
             IMG.rpts_num = IMG.rptscs_num;
         }
-        IMG.calculate_angle();//计算角度
+
+        if (IMG.rpts_num > 0.3 / SAMPLE_DIST) {
+            IMG.calculate_angle();//计算角度
+        }
+        else if (IMG.flag_track == TRACK_LEFT)
+        {
+            IMG.aim_angle = 45;
+        }
+        else if (IMG.flag_track == TRACK_RIGHT)
+        {
+            IMG.aim_angle = -45;
+        }
+
+
     }
 }
 /* ********************************************************************* */
