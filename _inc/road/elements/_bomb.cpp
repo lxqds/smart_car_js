@@ -131,6 +131,7 @@ void run_bomb()
             IMG.rptsc0_num = IMG.rpts0s_num;
             if (IMG.encoder.route - bomb_route > 30)  //通过一段距离后
             {
+                MAT_LOG("bomb_block_y=%d", bomb_block_y);
                 if (bomb_block_y > IMAGE_HEIGHT * 0.4)
                 {
                     bomb_route = IMG.encoder.route;
