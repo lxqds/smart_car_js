@@ -251,9 +251,9 @@
     "work_out_stop_time": 100,
     "work_out_speedup_time": 500,
     
-    "work_recback_angle_route": 60,
-    "work_recback_angle": 25,
-    "work_recback_speed": 1200,
+    "work_recback_angle_route": 80,
+    "work_recback_angle": 30,
+    "work_recback_speed": 800,
     
     "speed_gas": 1055,
     "speed_yroad": 800,
