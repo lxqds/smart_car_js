@@ -283,7 +283,21 @@ void run_work()
             if (flag_work == WORK_OUT)//倒车
             {
 
-                if (work_route - IMG.encoder.route <= IMG._config->work_recback_angle_route) //出去路程
+                if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST)
+                {
+                    IMG.flag_track == TRACK_RIGHT;
+                    control_flag.pop();//移除
+                    flag_work = WORK_NONE;
+                    MAT_LOG("WORK_NONE");
+                }
+                else if (IMG.rpts0s_num > 0.5 / SAMPLE_DIST)
+                {
+                    IMG.flag_track == TRACK_LEFT;
+                    control_flag.pop();//移除
+                    flag_work = WORK_NONE;
+                    MAT_LOG("WORK_NONE");
+                }
+                else if (work_route - IMG.encoder.route <= IMG._config->work_recback_angle_route ) //出去路程
                 {
                     MAT_LOG("WORK_OUTING");
                     IMG.aim_angle = IMG._config->work_recback_angle; //出区 角度
@@ -325,7 +339,7 @@ void run_work()
                 if (IMG.encoder.route - work_route < IMG._config->work_rou_in_total)
                 {
                     // 第一阶段: 当赛道边缘存在时
-                    if (IMG.rpts0s_num > 0.5 / SAMPLE_DIST || IMG.encoder.route - work_route < IMG._config->work_rou_ready)
+                    if (IMG.rpts0s_num > 0.5 / SAMPLE_DIST )
                     {
                         // 第一阶段打角
                         IMG.aim_angle = -IMG._config->work_angle_in_1;
