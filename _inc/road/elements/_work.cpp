@@ -289,18 +289,18 @@ void run_work()
                     IMG.aim_angle = IMG._config->work_recback_line_angle; //出区 角度
                     IMG.aim_speed = -IMG._config->work_recback_speed;//出去 距离
                 }
-                else if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST)
+                else if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST)
                 {
                     IMG.flag_track == TRACK_RIGHT;
                     control_flag.pop();//移除
                     flag_work = WORK_NONE;
-                    MAT_LOG("WORK_NONE");
+                    MAT_LOG("WORK_RIGHT");
                 }
-                else if (IMG.rpts0s_num > 0.5 / SAMPLE_DIST)
+                else if (IMG.rpts0s_num > 0.8 / SAMPLE_DIST)
                 {
                     IMG.flag_track == TRACK_LEFT;
                     control_flag.pop();//移除
-                    flag_work = WORK_NONE;
+                    flag_work = WORK_LEFT;
                     MAT_LOG("WORK_NONE");
                 }
                 else if (work_route - IMG.encoder.route >  IMG._config->work_recback_line_route &&  work_route - IMG.encoder.route <= IMG._config->work_recback_angle_route ) //出去路程
