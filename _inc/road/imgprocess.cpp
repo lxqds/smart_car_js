@@ -466,7 +466,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 
                             if(flag_work != WORK_NONE) sprintf(string_log, "flag_work != WORK_NONE");
 
-                            sprintf(string_log, "label_evil_DETECTION or label_thief");
+                            sprintf(string_log, "label_evil_thief");
                             log_i("label_evil_DETECTION or label_thief");
                         }break;
                         case label_tumble:      // 跌倒
