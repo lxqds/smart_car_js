@@ -457,6 +457,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                     case label_bomb:      // 炸弹
                     {
                         flag_bomb = BOMB_DETECTION;
+                        bomb_y = p.y / 2 + p.height / 4;
                         sprintf(string_log, "label_bomb_DETECTION");
                         log_i("label_bomb_DETECTION");
                     }break;

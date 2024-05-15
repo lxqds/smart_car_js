@@ -13,6 +13,7 @@
 
 flag_bomb_e flag_bomb = BOMB_NONE;
 
+
 // 引用图像处理
 extern ImageProcess imgprocess;
 extern Control_Flag control_flag;
@@ -21,6 +22,8 @@ extern Control_Flag control_flag;
 // 变量定义
 POINT bomb_near_cone;  // 较近的锥桶
 float bomb_route = 0;  // 炸弹区编码器积分
+int bomb_x = 0;           //横坐标
+int bomb_y = 0;           //纵坐标
 /* ********************************************************************* */
 
 void check_bomb()
@@ -31,7 +34,7 @@ void check_bomb()
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&      //当前没在入库中
-        flag_bomb == BOMB_DETECTION                 //找到炸弹
+        flag_bomb == BOMB_DETECTION && bomb_y > IMAGE_HEIGHT * 0.3 //找到炸弹
         )
     {
         IMG.element_identify = 1;
