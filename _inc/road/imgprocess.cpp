@@ -428,24 +428,31 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 //continue;
 
             // 禁止在元素内判断其他元素
-            if (!control_flag.contains(circle_element) &&   //当前没在环岛中
-                !control_flag.contains(work_element) &&     //当前没在工作区中
-                !control_flag.contains(garage_element) &&      //当前没在入库中
-                !control_flag.contains(bomb_element)      //当前没在炸弹中
-                ) {
 
-                switch (DetectionLabel(r.type)) {
-                    case label_bomb:      // 炸弹
-                    {
+
+            switch (DetectionLabel(r.type)) {
+                case label_bomb:      // 炸弹
+                {
+                    if (!control_flag.contains(circle_element) &&   //当前没在环岛中
+                        !control_flag.contains(work_element) &&     //当前没在工作区中
+                        !control_flag.contains(garage_element) &&      //当前没在入库中
+                        !control_flag.contains(bomb_element)      //当前没在炸弹中
+                        ) {
                         flag_bomb = BOMB_DETECTION;
                         bomb_y = deY + deH / 2;
                         bomb_x = deX + deW / 2;
                         sprintf(string_log, "label_bomb_DETECTION");
                         log_i("label_bomb_DETECTION");
-                    }break;
-                    case label_thief:      // 贼 和 恶人处理方式一样 不 break
-                    case label_evil:      //恶人
-                    {
+                    }
+                }break;
+                case label_thief:      // 贼 和 恶人处理方式一样 不 break
+                case label_evil:      //恶人
+                {
+                    if (!control_flag.contains(circle_element) &&   //当前没在环岛中
+                        !control_flag.contains(work_element) &&     //当前没在工作区中
+                        !control_flag.contains(garage_element) &&      //当前没在入库中
+                        !control_flag.contains(bomb_element)      //当前没在炸弹中
+                        ) {
                         if (flag_work == WORK_NONE && _config->check_work_ == 1) {
                             flag_work = WORK_EVEI_DETECTION;
                             sprintf(string_log, "WORK_EVEI_DETECTION");
@@ -455,62 +462,68 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 
                         sprintf(string_log, "label_evil_thief");
                         log_i("label_evil_DETECTION or label_thief");
-                    }break;
-                    case label_tumble:      // 跌倒
-                    case label_patient:     // 病人
+                    }
+                }break;
+                case label_tumble:      // 跌倒
+                case label_patient:     // 病人
+                    if (!control_flag.contains(circle_element) &&   //当前没在环岛中
+                        !control_flag.contains(work_element) &&     //当前没在工作区中
+                        !control_flag.contains(garage_element) &&      //当前没在入库中
+                        !control_flag.contains(bomb_element)      //当前没在炸弹中
+                        ) {
                         if (flag_work == WORK_NONE && _config->check_work_ == 1) {
 
                             flag_work = WORK_DETECTION;
                             sprintf(string_log, "PATIENT_DETECTION");
                             log_i("PATIENT_DETECTION");
                         }
-                        break;
-                    case label_prop:      // 道具小车
-                    {
-                        sprintf(string_log, "label_prop_DETECTION");
-                        log_i("label_prop_DETECTION");
-                    }break;
-                    case label_safety:      // 普通小车
-                    {
-                        sprintf(string_log, "label_safety_DETECTION");
-                        log_i("label_safety_DETECTION");
-                    }break;
-                    case label_spy:      // 嫌犯小车
-                    {
-                        sprintf(string_log, "label_spy_DETECTION");
-                        log_i("label_spy_DETECTION");
-                    }break;
-                    case label_danger:      // 危险小车
-                    {
-                        sprintf(string_log, "label_danger_DETECTION");
-                        log_i("label_danger_DETECTION");
-                    }break;
+                    }
 
-                    case label_bridge:  // 桥
-                        if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
-                            flag_ramp = RAMP_DETECTION;
-                            sprintf(string_log, "BRIDGE_DETECTION");
-                            log_i("BRIDGE_DETECTION");
-                        }
-                        break;
-                    case label_block:      // 黑块
-                    {
+                    break;
+                case label_prop:      // 道具小车
+                {
+                    sprintf(string_log, "label_prop_DETECTION");
+                    log_i("label_prop_DETECTION");
+                }break;
+                case label_safety:      // 普通小车
+                {
+                    sprintf(string_log, "label_safety_DETECTION");
+                    log_i("label_safety_DETECTION");
+                }break;
+                case label_spy:      // 嫌犯小车
+                {
+                    sprintf(string_log, "label_spy_DETECTION");
+                    log_i("label_spy_DETECTION");
+                }break;
+                case label_danger:      // 危险小车
+                {
+                    sprintf(string_log, "label_danger_DETECTION");
+                    log_i("label_danger_DETECTION");
+                }break;
 
-                        bomb_block_y = deY + deH / 2;
-                        bomb_block_x = deX + deW / 2;
-                        sprintf(string_log, "label_block_DETECTION");
-                        log_i("label_block_DETECTION");
-                    }break;
-                    case label_crosswalk:  // 斑马线
-                        if (flag_garage == GARAGE_NONE && _config->check_garage_AI == 1) {
-                            flag_garage = GARAGE_AI_DETECTION;
-                            sprintf(string_log, "GARAGE_AI_DETECTION");
-                            log_i("GARAGE_AI_DETECTION");
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                case label_bridge:  // 桥
+                    if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
+                        flag_ramp = RAMP_DETECTION;
+                        sprintf(string_log, "BRIDGE_DETECTION");
+                        log_i("BRIDGE_DETECTION");
+                    }
+                    break;
+                case label_block:      // 黑块
+                {
+                    bomb_block_y = deY + deH / 2;
+                    bomb_block_x = deX + deW / 2;
+                    // sprintf(string_log, "label_block_DETECTION");
+                    // log_i("label_block_DETECTION");
+                }break;
+                case label_crosswalk:  // 斑马线
+                    if (flag_garage == GARAGE_NONE && _config->check_garage_AI == 1) {
+                        flag_garage = GARAGE_AI_DETECTION;
+                        sprintf(string_log, "GARAGE_AI_DETECTION");
+                        log_i("GARAGE_AI_DETECTION");
+                    }
+                    break;
+                default:
+                    break;
             }
 
             if (r.type > 0 && r.type < 16) {
