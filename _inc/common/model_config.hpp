@@ -83,8 +83,8 @@ struct ControlConfig
     float work_angle_in_2;           //施工区一段进入角度
     float work_recback_angle_route;  //施工区倒车角度积分
 
-    float work_recback_line_route;   //施工区 一阶段 退出打角积分
-    float work_recback_line_angle;    //施工区 一阶段 退出打角
+    float work_recback_line_route;   //施工区  退出打角积分
+    float work_recback_line_angle;    //施工区 一阶段 退出打角 
     float work_recback_angle;          //施工区倒车角度
     uint16_t work_recback_speed;           //施工区倒车速度
 

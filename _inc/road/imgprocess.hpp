@@ -265,6 +265,7 @@ enum Control_element {
     garage_element, //车库
     bomb_element    //炸弹
 };
+
 class Control_Flag {
 private:
     std::vector<int> data;

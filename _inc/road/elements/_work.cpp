@@ -154,7 +154,7 @@ void run_work()
                 {
 
                     // 第一阶段: 当赛道 右 边缘存在时
-                    if (IMG.rpts1s_num > 0.5 / SAMPLE_DIST || IMG.encoder.route - work_route < IMG._config->work_rou_ready)
+                    if (IMG.encoder.route - work_route < IMG._config->work_rou_ready)
                     {
                         // 调整 进入角度
                         IMG.aim_angle = IMG._config->work_angle_in_1;
@@ -178,14 +178,13 @@ void run_work()
                 IMG.aim_angle = 0;
 
                 //开始靠近锥桶
-
                 if (avg_y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avgy && IMG.encoder.route - work_route < IMG._config->work_rou_in )
                 {
                     float k = 1- (IMG.encoder.route - work_route) / (IMG._config->work_rou_in );//速度逐渐减小
                     if (k < 0) k = 0;
                     if (k > 1)k = 1;
 
-                    IMG.aim_speed = (int16_t)IMG._config->work_run_speed * k;
+                    IMG.aim_speed = (int16_t)(IMG._config->work_run_speed - 500) * k +500;
 
                 }
                 else {
@@ -228,6 +227,35 @@ void run_work()
 
             if (flag_work == WORK_OUT)
             {
+                //退出速度赋值
+                if (work_route - IMG.encoder.route < work_route2 * work_recback_line_k)
+                {
+                    float k = 1 - (work_route - IMG.encoder.route) / (work_route2 * work_recback_line_k);//速度逐渐减小
+                    if (k < 0) k = 0;
+                    if (k > 1)k = 1;
+
+                    IMG.aim_speed = (int16_t)(IMG._config->work_run_speed - 500) * k + 500; //逐渐减速
+
+                    IMG.aim_speed = -IMG.aim_speed;//倒车         
+
+                    //退出角度赋值
+                    if (work_route - IMG.encoder.route  > work_route2 * work_recback_angle_route_k )//大于退出 某阶段时开始打角
+                    {
+                        IMG.aim_angle = IMG._config->work_recback_angle;
+                    }
+
+                }
+
+                if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST && IMG.rpts0s_num > 0.8 / SAMPLE_DIST)
+                {
+
+                }
+
+                if (true)
+                {
+
+                }
+
 
             }
     
