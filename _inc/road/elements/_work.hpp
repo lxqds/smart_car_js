@@ -4,7 +4,8 @@
 enum flag_work_e {
     WORK_NONE = 0,
     WORK_DETECTION,  // 检测到标志
-    WORK_FOUND,      // 准备进入车库
+    WORK_FOUND_1,      // 准备进入车库
+    WORK_FOUND_2,      // 准备进入车库
     WORK_READY,      // 正在进入车库
     WORK_RUN,        // 进车库
     WORK_OUT,        // 驶离

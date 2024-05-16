@@ -307,9 +307,62 @@ POINT AI_search_height_near(std::vector<DetectionPredictResult> predict) {
 
         }
     }
-
     return cones;
 }
+
+//得到全图 锥桶 剔除异常值后得到的 y轴平均
+float get_AIorcolor_AVG_Y(std::vector<DetectionPredictResult> predict) {
+    vector<POINT> AI_cones = search_targets(predict);
+    int num = AI_cones.size();
+
+    std::float z_scores;
+    std::vector<int> avers;
+
+    int sum = 0;
+    float aver = 0;
+    float sigma = 0;
+
+    for (int i = 0; i < num ; i++) {
+        sum += AI_cones[i].x;
+    }
+    
+    aver = (float)(sum / num);
+
+    for (int i = 0; i < num; i++)
+        sigma += ( AI_cones[i].x - aver) * ( AI_cones[i].x - aver);
+    sigma /= (float)num;
+
+    //计算 Z-score 
+    int outnum = 0;
+    sum = 0;
+    for (int i = 0; i < num ; i++)
+    {
+        z_scores = ((AI_cones[i].x - aver) * (AI_cones[i].x - aver)) / sigma;// 与均值差的平方除以方差
+
+        if (z_scores < 2.5) {
+            outnum += 1;
+            sum += AI_cones[i].x;
+        }
+    }
+
+    //剃掉异常值后的平均值
+    return (float)sum / outnum;
+   
+}
+
+// AI搜索距离赛道左边缘最近的黄色色块 (黄色锥桶)
+POINT AI_search_left_near(std::vector<DetectionPredictResult> predict, std::vector<POINT> pointsEdge,cv::Mat matt){
+    vector<POINT> AI_cones = search_targets(predict);
+
+    for (size_t i = 0; i < pointsEdge.size(); i++) {
+        for (size_t a = 0; a < AI_cones.size(); a++)
+        {
+            if((pointsEdge[i].y -35 < AI_cones[a].y && AI_cones[a].y < pointsEdge[i].y ) && (pointsEdge[i].x - 25 < AI_cones[a].x && AI_cones[a].x < pointsEdge[i].x) )
+        }
+    }
+    return POINT(0, 0);
+}
+
 
 // 搜索距离赛道左边缘最近的黄色色块 (黄色锥桶)
 POINT search_left_near(std::vector<POINT> pointsEdge, cv::Mat matt) {

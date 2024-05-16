@@ -97,7 +97,7 @@ class ImageProcess {
     bool detection_new = false;
     
     /*
-    string detection_labels[20] = {
+    string detection_labels[20] = {d
         "cone", "granary", "bridge", "tractor", "corn", "pig", "crosswalk", "bump",
         "background",
         "ramp", "three", "work",
