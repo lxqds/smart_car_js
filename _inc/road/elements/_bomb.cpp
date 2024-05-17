@@ -20,6 +20,8 @@ extern Control_Flag control_flag;
 #define IMG imgprocess
 
 // 变量定义
+POINT bomb_near_cone_L;  // 较近的左锥桶
+POINT bomb_near_cone_R;  // 较近的右锥桶
 POINT bomb_near_cone;  // 较近的锥桶
 float bomb_route = 0;  // 炸弹区编码器积分
 int bomb_x = 0;           //横坐标
@@ -29,7 +31,7 @@ int bomb_block_y = 0;           //纵坐标
 
 int first_cone = 0;        //第一个锥桶的位置
 int first_cone_count = 0;    //第一个锥桶计数 
-int second_cone_count = 0;   //第二个锥桶计数
+
 /* ********************************************************************* */
 
 void check_bomb()
@@ -63,60 +65,91 @@ void run_bomb()
         {
             IMG.aim_speed = IMG._config->speed_bomb1;
             bomb_near_cone = POINT(0, 0);
-            IMG.edge_det.clear();
-            // IMG.edge_det = search_targets(IMG._det_result);
-            bomb_near_cone = AI_search_height_near(IMG._det_result);
-            // bomb_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
+            bomb_near_cone_L = POINT(0, 0);
+            bomb_near_cone_R = POINT(0, 0);
+            bomb_near_cone_L = search_left_near_in(IMG.edge_left, IMG.mat_lab);
+            bomb_near_cone_R = search_right_near_in(IMG.edge_right, IMG.mat_lab);
+
+            if (bomb_near_cone_L.y > bomb_near_cone_R.y)
+            {
+                first_cone_count++;
+                bomb_near_cone = bomb_near_cone_L;
+            }
+            else
+            {
+                first_cone_count--;
+                bomb_near_cone = bomb_near_cone_R;
+            }
+            if (first_cone_count >= 3)
+            {
+                first_cone = 0;
+            }
+            else if (first_cone_count <= -3)
+            {
+                first_cone = 1;
+            }
             if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
             {
-                float rnear_cone_x;//透视后锥桶x
-                float cone_line_min0 = 999.0;//左边线和锥桶最小距离
-                float cone_line_min1 = 999.0;//右边线和锥桶最小距离
-                map_perspective(bomb_near_cone.y, bomb_near_cone.x, &rnear_cone_x, 0);//锥桶透视变化
-                for (int i = 0;i < IMG.rpts0s_num;i++)
-                {
-                    float dx = IMG.rpts0s[i][0] - rnear_cone_x;
-                    float dy = IMG.rpts0s[i][1] - bomb_near_cone.x;
-                    float length = sqrt(dx * dx + dy * dy);
-                    if (length < cone_line_min0)
-                    {
-                        cone_line_min0 = length;
-                    }
-                }
-                for (int i = 0;i < IMG.rpts1s_num;i++)
-                {
-                    float dx = IMG.rpts1s[i][0] - rnear_cone_x;
-                    float dy = IMG.rpts1s[i][1] - bomb_near_cone.x;
-                    float length = sqrt(dx * dx + dy * dy);
-                    if (length < cone_line_min1)
-                    {
-                        cone_line_min1 = length;
-                    }
-                }
-                MAT_LOG("L=%.1lf R=%.1lf", cone_line_min0, cone_line_min1);
-                if (cone_line_min0 < cone_line_min1)
-                    first_cone_count++;
-                else
-                    first_cone_count--;
-                if (first_cone_count >= 3)
-                {
-                    first_cone = 0;
-                }
-
-                else if (first_cone_count <= -3)
-                {
-                    first_cone = 1;
-                }
                 bomb_route = IMG.encoder.route;
                 if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
                 {
                     IMG._config->speed_bomb2;
                 }
-
             }
+            // IMG.edge_det.clear();
+        // // IMG.edge_det = search_targets(IMG._det_result);
+        // bomb_near_cone = AI_search_height_near(IMG._det_result);
+        // bomb_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
+        // if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
+        // {
+        //     float rnear_cone_x;//透视后锥桶x
+        //     float cone_line_min0 = 999.0;//左边线和锥桶最小距离
+        //     float cone_line_min1 = 999.0;//右边线和锥桶最小距离
+        //     map_perspective(bomb_near_cone.y, bomb_near_cone.x, &rnear_cone_x, 0);//锥桶透视变化
+        //     for (int i = 0;i < IMG.rpts0s_num;i++)
+        //     {
+        //         float dx = IMG.rpts0s[i][0] - rnear_cone_x;
+        //         float dy = IMG.rpts0s[i][1] - bomb_near_cone.x;
+        //         float length = sqrt(dx * dx + dy * dy);
+        //         if (length < cone_line_min0)
+        //         {
+        //             cone_line_min0 = length;
+        //         }
+        //     }
+        //     for (int i = 0;i < IMG.rpts1s_num;i++)
+        //     {
+        //         float dx = IMG.rpts1s[i][0] - rnear_cone_x;
+        //         float dy = IMG.rpts1s[i][1] - bomb_near_cone.x;
+        //         float length = sqrt(dx * dx + dy * dy);
+        //         if (length < cone_line_min1)
+        //         {
+        //             cone_line_min1 = length;
+        //         }
+        //     }
+        //     MAT_LOG("L=%.1lf R=%.1lf", cone_line_min0, cone_line_min1);
+        //     if (cone_line_min0 < cone_line_min1)
+        //         first_cone_count++;
+        //     else
+        //         first_cone_count--;
+        //     if (first_cone_count >= 3)
+        //     {
+        //         first_cone = 0;
+        //     }
+
+        //     else if (first_cone_count <= -3)
+        //     {
+        //         first_cone = 1;
+        //     }
+        //     bomb_route = IMG.encoder.route;
+        //     if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
+        //     {
+        //         IMG._config->speed_bomb2;
+        //     }
+
+        // }
 
 
-            // 当车辆开始靠近第一个锥桶:
+        // 当车辆开始靠近第一个锥桶:
             if (bomb_near_cone.x > IMAGE_HEIGHT * 0.3 && (first_cone_count > 3 || first_cone_count < -3))
             {
                 first_cone_count = 0;
@@ -140,59 +173,54 @@ void run_bomb()
             IMG.aim_angle_p *= 1.5;
 
             bomb_near_cone = POINT(0, 0);
-            IMG.edge_det.clear();
-            bomb_near_cone = AI_search_height_near(IMG._det_result);
+            bomb_near_cone_L = POINT(0, 0);
+            bomb_near_cone_R = POINT(0, 0);
+            bomb_near_cone_L = search_left_near_in(IMG.edge_left, IMG.mat_lab);
+            bomb_near_cone_R = search_right_near_in(IMG.edge_right, IMG.mat_lab);
 
-            float rnear_cone_x;//透视后锥桶x
-            float cone_line_min0 = 999.0;//左边线和锥桶最小距离
-            float cone_line_min1 = 999.0;//右边线和锥桶最小距离
-            map_perspective(bomb_near_cone.y, bomb_near_cone.x, &rnear_cone_x, 0);//锥桶透视变化
-            for (int i = 0;i < IMG.rpts0s_num;i++)
-            {
-                float dx = IMG.rpts0s[i][0] - rnear_cone_x;
-                float dy = IMG.rpts0s[i][1] - bomb_near_cone.x;
-                float length = sqrt(dx * dx + dy * dy);
-                if (length < cone_line_min0)
-                {
-                    cone_line_min0 = length;
-                }
-            }
-            for (int i = 0;i < IMG.rpts1s_num;i++)
-            {
-                float dx = IMG.rpts1s[i][0] - rnear_cone_x;
-                float dy = IMG.rpts1s[i][1] - bomb_near_cone.x;
-                float length = sqrt(dx * dx + dy * dy);
-                if (length < cone_line_min1)
-                {
-                    cone_line_min1 = length;
-                }
-            }
-            if (cone_line_min0 < cone_line_min1)
-            {
-                if (second_cone_count < 0)
-                    second_cone_count = 0;
-                second_cone_count++;
-            }
-            else
-            {
-                if (second_cone_count > 0)
-                    second_cone_count = 0;
-                second_cone_count--;
-            }
+            // bomb_near_cone = POINT(0, 0);
+            // IMG.edge_det.clear();
+            // bomb_near_cone = AI_search_height_near(IMG._det_result);
+
+            // float rnear_cone_x;//透视后锥桶x
+            // float cone_line_min0 = 999.0;//左边线和锥桶最小距离
+            // float cone_line_min1 = 999.0;//右边线和锥桶最小距离
+            // map_perspective(bomb_near_cone.y, bomb_near_cone.x, &rnear_cone_x, 0);//锥桶透视变化
+            // for (int i = 0;i < IMG.rpts0s_num;i++)
+            // {
+            //     float dx = IMG.rpts0s[i][0] - rnear_cone_x;
+            //     float dy = IMG.rpts0s[i][1] - bomb_near_cone.x;
+            //     float length = sqrt(dx * dx + dy * dy);
+            //     if (length < cone_line_min0)
+            //     {
+            //         cone_line_min0 = length;
+            //     }
+            // }
+            // for (int i = 0;i < IMG.rpts1s_num;i++)
+            // {
+            //     float dx = IMG.rpts1s[i][0] - rnear_cone_x;
+            //     float dy = IMG.rpts1s[i][1] - bomb_near_cone.x;
+            //     float length = sqrt(dx * dx + dy * dy);
+            //     if (length < cone_line_min1)
+            //     {
+            //         cone_line_min1 = length;
+            //     }
+            // }
+
 
 
             if (first_cone == 0)    //第一个锥桶在左边，循右线
             {
                 IMG.flag_track = TRACK_RIGHT;
+                bomb_near_cone = bomb_near_cone_R;
                 //右边线预测中线
                 track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * 0.2 / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
 
-                if (second_cone_count < -3 &&
-                    IMG.encoder.route - bomb_route > 30 &&
-                    bomb_near_cone.x > IMAGE_HEIGHT * 0.55)//最近的是右边锥桶
+                if (IMG.encoder.route - bomb_route > 30 &&
+                    bomb_near_cone.x > IMAGE_HEIGHT * 0.55)
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
@@ -202,21 +230,21 @@ void run_bomb()
                 {
                     flag_bomb = BOMB_NONE;
                     control_flag.pop();
-                    MAT_LOG("BOMB_ERROR1");
+                    MAT_LOG("BOMB_ERROR3");
                 }
 
             }
             else
             {
                 IMG.flag_track = TRACK_LEFT;
+                bomb_near_cone = bomb_near_cone_L;
                 //左边线预测中线
                 track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * 0.2 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
-                if (second_cone_count > 3 &&
-                    IMG.encoder.route - bomb_route > 40 &&
+                if (IMG.encoder.route - bomb_route > 40 &&
                     bomb_near_cone.x > IMAGE_HEIGHT * 0.55)//最近的是左边锥桶
                 {
                     bomb_route = IMG.encoder.route;
@@ -227,7 +255,7 @@ void run_bomb()
                 {
                     flag_bomb = BOMB_NONE;
                     control_flag.pop();
-                    MAT_LOG("BOMB_ERROR1");
+                    MAT_LOG("BOMB_ERROR3");
                 }
             }
         }
@@ -238,34 +266,6 @@ void run_bomb()
             IMG.aim_distance_n = 0.1;
             IMG.aim_angle_p *= 1.5;
 
-            bomb_near_cone = POINT(0, 0);
-            IMG.edge_det.clear();
-            bomb_near_cone = AI_search_height_near(IMG._det_result);
-
-            float rnear_cone_x;//透视后锥桶x
-            float cone_line_min0 = 999.0;//左边线和锥桶最小距离
-            float cone_line_min1 = 999.0;//右边线和锥桶最小距离
-            map_perspective(bomb_near_cone.y, bomb_near_cone.x, &rnear_cone_x, 0);//锥桶透视变化
-            for (int i = 0;i < IMG.rpts0s_num;i++)
-            {
-                float dx = IMG.rpts0s[i][0] - rnear_cone_x;
-                float dy = IMG.rpts0s[i][1] - bomb_near_cone.x;
-                float length = sqrt(dx * dx + dy * dy);
-                if (length < cone_line_min0)
-                {
-                    cone_line_min0 = length;
-                }
-            }
-            for (int i = 0;i < IMG.rpts1s_num;i++)
-            {
-                float dx = IMG.rpts1s[i][0] - rnear_cone_x;
-                float dy = IMG.rpts1s[i][1] - bomb_near_cone.x;
-                float length = sqrt(dx * dx + dy * dy);
-                if (length < cone_line_min1)
-                {
-                    cone_line_min1 = length;
-                }
-            }
 
             if (first_cone == 1)    //第一个锥桶在右边，第二个锥桶在左边，寻右线
             {
@@ -275,19 +275,6 @@ void run_bomb()
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * 0.15 / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
-
-                if (IMG.encoder.route - bomb_route > 30 && bomb_block_y > IMAGE_HEIGHT * 0.5)//靠近黑块
-                {
-                    bomb_route = IMG.encoder.route;
-                    flag_bomb = BOMB_BLOCK;
-                    MAT_LOG("BOMB_BLOCK");
-                }
-                else if (IMG.encoder.route - bomb_route > 120)
-                {
-                    flag_bomb = BOMB_NONE;
-                    control_flag.pop();
-                    MAT_LOG("BOMB_ERROR2");
-                }
 
             }
             else
@@ -299,18 +286,24 @@ void run_bomb()
                     PIXEL_PER_METER * 0.15 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
-                if (IMG.encoder.route - bomb_route > 30 && bomb_block_y > IMAGE_HEIGHT * 0.6)//靠近黑块
-                {
-                    bomb_route = IMG.encoder.route;
-                    flag_bomb = BOMB_BLOCK;
-                    MAT_LOG("BOMB_BLOCK");
-                }
-                else if (IMG.encoder.route - bomb_route > 120)
-                {
-                    flag_bomb = BOMB_NONE;
-                    control_flag.pop();
-                    MAT_LOG("BOMB_ERROR2");
-                }
+            }
+
+            if (bomb_block_y > IMAGE_HEIGHT * 0.1)
+            {
+                bomb_route = IMG.encoder.route;
+            }
+
+            if (bomb_block_y > IMAGE_HEIGHT * 0.45)//靠近黑块
+            {
+                bomb_route = IMG.encoder.route;
+                flag_bomb = BOMB_BLOCK;
+                MAT_LOG("BOMB_BLOCK");
+            }
+            else if (IMG.encoder.route - bomb_route > 40)
+            {
+                flag_bomb = BOMB_NONE;
+                control_flag.pop();
+                MAT_LOG("BOMB_ERROR3");
             }
         }
         if (flag_bomb == BOMB_BLOCK)
