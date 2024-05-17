@@ -324,7 +324,11 @@ void run_bomb()
                     PIXEL_PER_METER * 0.2 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
-                if (bomb_block_y > IMAGE_HEIGHT * 0.5)//靠近黑块
+                if (bomb_block_y < IMAGE_HEIGHT * 0.8)//靠近黑块
+                {
+                    bomb_route = IMG.encoder.route;
+                }
+                if (IMG.encoder.route - bomb_route > 40)//靠近黑块
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_BLOCK;
@@ -336,13 +340,6 @@ void run_bomb()
                     control_flag.pop();
                     MAT_LOG("BOMB_ERROR2");
                 }
-            }
-            if (IMG.encoder.route - bomb_route > 60)  //通过一段距离后
-            {
-                bomb_route = IMG.encoder.route;
-                control_flag.pop();//退出元素
-                flag_bomb = BOMB_NONE;
-                MAT_LOG("BOMB_NONE");
             }
         }
         // 正常巡线
