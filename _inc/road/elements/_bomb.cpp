@@ -112,7 +112,7 @@ void run_bomb()
                 {
                     IMG._config->speed_bomb2;
                 }
-                
+
             }
 
 
@@ -315,7 +315,7 @@ void run_bomb()
         }
         if (flag_bomb == BOMB_BLOCK)
         {
-            IMG.aim_speed = IMG._config->speed_bomb1;
+            IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.aim_distance_f = 0.3;
             IMG.aim_distance_n = 0.1;
             IMG.aim_angle_p *= 1.5;
@@ -342,6 +342,11 @@ void run_bomb()
                     control_flag.pop();
                     MAT_LOG("BOMB_ERROR2");
                 }
+                if (IMG.encoder.route - bomb_route > 30)
+                {
+                    IMG.aim_speed = IMG._config->speed_bomb1;
+                }
+
 
             }
             else
@@ -353,7 +358,7 @@ void run_bomb()
                     PIXEL_PER_METER * 0.2 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
-                if (IMG.encoder.route - bomb_route > 40)//靠近黑块
+                if (IMG.encoder.route - bomb_route > 60)//靠近黑块
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_NONE;
@@ -365,6 +370,10 @@ void run_bomb()
                     flag_bomb = BOMB_NONE;
                     control_flag.pop();
                     MAT_LOG("BOMB_ERROR2");
+                }
+                if (IMG.encoder.route - bomb_route > 30)
+                {
+                    IMG.aim_speed = IMG._config->speed_bomb1;
                 }
             }
         }
