@@ -80,6 +80,12 @@ std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict);
 
 // 从AI检测结果中检索锥桶y坐标 平均值
 float get_AIorcolor_AVG_Y(std::vector<DetectionPredictResult> predict);
+
+//在赛道内找黄色锥桶
+POINT search_right_near_in(std::vector<POINT> pointsEdge, cv::Mat matt);
+//在赛道内找黄色锥桶
+POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt);
+
 // AI搜索距离赛道左边缘最近的黄色色块 (黄色锥桶)
 POINT AI_search_left_near(std::vector<DetectionPredictResult> predict, std::vector<POINT> pointsEdge);
 // AI搜索距离赛道右边缘最近的黄色色块 (黄色锥桶)
