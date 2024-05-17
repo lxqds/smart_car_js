@@ -46,10 +46,10 @@ void run_ramp() {
         if (flag_ramp == RAMP_UP)
         {
             IMG.flag_track = TRACK_MIDDLE;
-            IMG.aim_speed = 1000;
+            IMG.aim_speed = IMG._config->speed_ramp;
             IMG.aim_distance_f = 0.4;
             IMG.aim_distance_n = 0.1;
-            if (IMG.encoder.route - ramp_route > 200)
+            if (IMG.encoder.route - ramp_route > IMG._config->ramp_rou)
             {
                 control_flag.pop();
                 flag_ramp = RAMP_NONE;
