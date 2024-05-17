@@ -301,11 +301,8 @@ void run_bomb()
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * 0.2 / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
-                if (bomb_block_y < IMAGE_HEIGHT * 0.8)//靠近黑块
-                {
-                    bomb_route = IMG.encoder.route;
-                }
-                if (IMG.encoder.route - bomb_route > 40)//靠近黑块
+
+                if (IMG.encoder.route - bomb_route > 80)//靠近黑块
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_BLOCK;
