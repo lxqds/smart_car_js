@@ -410,7 +410,7 @@ uint16_t search_mid_cone_getH(cv::Mat matt) {
     int sum = 5;
     for (size_t y = IMAGE_HEIGHT - 1; y > IMAGE_HEIGHT / 2; y--) {
         sum = 5;
-        for (size_t x = IMAGE_WIDTH / 2; x < IMAGE_WIDTH - 30; x++)
+        for (size_t x = IMAGE_WIDTH / 2; x < IMAGE_WIDTH / 2 + 30; x++)
         {
             if (AT_IMAGE(matt, x, y) > 0)
                 sum--;
@@ -418,7 +418,7 @@ uint16_t search_mid_cone_getH(cv::Mat matt) {
                 return y;
         }
 
-        for (size_t x = IMAGE_WIDTH / 2; x > 30; x--)
+        for (size_t x = IMAGE_WIDTH / 2; x > IMAGE_WIDTH / 2 - 30; x--)
         {
             if (AT_IMAGE(matt, x, y) > 0)
                 sum--;
