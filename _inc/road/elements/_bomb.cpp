@@ -98,7 +98,7 @@ void run_bomb()
             IMG.edge_det.clear();
             bomb_near_cone = AI_search_height_near(IMG._det_result);
 
-            map_perspective(bomb_near_cone.y, bomb_near_cone.x, rnear_cone_x, 0);//锥桶透视变化
+            map_perspective(bomb_near_cone.y, bomb_near_cone.x, &rnear_cone_x, 0);//锥桶透视变化
             for (int i = 0;i < IMG.rpts0s_num;i++)
             {
                 float dx = IMG.rpts0s[i][0] - rnear_cone_x;
@@ -206,7 +206,7 @@ void run_bomb()
             IMG.edge_det.clear();
             bomb_near_cone = AI_search_height_near(IMG._det_result);
 
-            map_perspective(bomb_near_cone.y, bomb_near_cone.x, rnear_block_x, 0);//锥桶透视变化
+            map_perspective(bomb_near_cone.y, bomb_near_cone.x, &rnear_block_x, 0);//锥桶透视变化
             for (int i = 0;i < IMG.rpts0s_num;i++)
             {
                 float dx = IMG.rpts0s[i][0] - rnear_block_x;
