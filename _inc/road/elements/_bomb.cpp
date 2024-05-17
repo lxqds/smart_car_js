@@ -93,7 +93,7 @@ void run_bomb()
                         cone_line_min1 = length;
                     }
                 }
-                MAT_LOG("cone_line_min0=%d cone_line_min1=%d", cone_line_min0, cone_line_min1);
+                MAT_LOG("cone_line_min0=%.1lf cone_line_min1=%.1lf", cone_line_min0, cone_line_min1);
                 if (cone_line_min0 < cone_line_min1)
                     first_cone_count++;
                 else
