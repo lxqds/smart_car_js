@@ -85,6 +85,8 @@ float get_AIorcolor_AVG_Y(std::vector<DetectionPredictResult> predict);
 POINT search_right_near_in(std::vector<POINT> pointsEdge, cv::Mat matt);
 //在赛道内找黄色锥桶
 POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt);
+// 搜索 屏幕中间以下 黄色锥桶 距离屏幕最下方距离
+uint16_t search_mid_cone_getH(cv::Mat matt);
 
 // AI搜索距离赛道左边缘最近的黄色色块 (黄色锥桶)
 POINT AI_search_left_near(std::vector<DetectionPredictResult> predict, std::vector<POINT> pointsEdge);

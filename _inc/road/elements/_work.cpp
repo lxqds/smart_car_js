@@ -160,9 +160,10 @@ void run_work()
 
             if (flag_work == WORK_RUN) {
 
-                float avg_y= get_AIorcolor_AVG_Y(IMG._det_result);
+                float avg_y = search_mid_cone_getH(IMG.mat_lab);
+
                 IMG.aim_angle = 0;
-                LOG_I << "  get_AIorcolor_AVG_Y :" << get_AIorcolor_AVG_Y << LOG_END;
+                LOG_I << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
                 //开始靠近锥桶
                 if (avg_y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg&& IMG.encoder.route - work_route < IMG._config->work_rou_in )
                 {

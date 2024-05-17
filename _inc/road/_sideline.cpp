@@ -400,18 +400,42 @@ POINT search_left_near2(std::vector<POINT> pointsEdge, cv::Mat matt) {
     return POINT(0, 0);
 }
 
+// 搜索 屏幕中间以下 黄色锥桶 距离屏幕最下方距离
+uint16_t search_mid_cone_getH(cv::Mat matt ) {
+    int sum = 5;
+    for (size_t y = IMAGE_HEIGHT-1 ; y > IMAGE_HEIGHT/2 ; y-- ) {
+
+        for (size_t x = IMAGE_WIDTH /2 ; x < IMAGE_WIDTH-50; x++)
+        {
+                if (AT_IMAGE(matt, x, y) > 0)
+                    sum--;
+                if (sum <= 0)
+                    return (IMAGE_HEIGHT - y );
+        }
+
+        for (size_t x = IMAGE_WIDTH / 2; x >50 ; x --)
+        {
+            if (AT_IMAGE(matt, x, y) > 0)
+                sum--;
+            if (sum <= 0)
+                return 1;
+        }
+    }
+    return 0;
+}
+
 // 搜索距离赛道左边缘最近的黄色色块 (黄色锥桶) 赛道内
-POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
+bool search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
     int sum = 5;
     for (size_t i = 0; i < pointsEdge.size(); i++) {
         for (int y = pointsEdge[i].y; y < pointsEdge[i].y + 25; y++) {
-                if ((y >= 0) && (y <= IMAGE_WIDTH - 1)){
-                    if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
-                        sum--;
-                    if (sum <=0)
-                        return POINT(pointsEdge[i].x, y);
-                }
+            if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) {
+                if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
+                    sum--;
+                if (sum <= 0)
+                    return POINT(pointsEdge[i].x, y);
             }
+        }
     }
     return POINT(0, 0);
 }
