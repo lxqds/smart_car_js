@@ -425,7 +425,7 @@ uint16_t search_mid_cone_getH(cv::Mat matt ) {
 }
 
 // 搜索距离赛道左边缘最近的黄色色块 (黄色锥桶) 赛道内
-bool search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
+POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
     int sum = 5;
     for (size_t i = 0; i < pointsEdge.size(); i++) {
         for (int y = pointsEdge[i].y; y < pointsEdge[i].y + 25; y++) {
