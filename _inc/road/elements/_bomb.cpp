@@ -174,13 +174,17 @@ void run_bomb()
             if (IMG.encoder.route - bomb_route > 80)  //通过一段距离后
             {
                 MAT_LOG("bomb_block_y=%d", bomb_block_y);
+                if (bomb_block_y > 10)
+                {
+                    bomb_route = IMG.encoder.route - 80;
+                }
                 if (bomb_block_y > IMAGE_HEIGHT * 0.4)
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_BLOCK;
                     MAT_LOG("BOMB_BLOCK");
                 }
-                else if (IMG.encoder.route - bomb_route > 90)
+                else if (IMG.encoder.route - bomb_route > 120)
                 {
                     flag_bomb = BOMB_NONE;
                     control_flag.pop();
