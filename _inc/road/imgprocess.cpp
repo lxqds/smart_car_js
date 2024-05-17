@@ -455,7 +455,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                         !control_flag.contains(garage_element) &&      //当前没在入库中
                         !control_flag.contains(ramp_element) &&      //当前没在桥中
                         !control_flag.contains(bomb_element) &&     //当前没在炸弹中
-                        r.score > 0.75) {
+                        r.score > 0.65) {
                         if (flag_work == WORK_NONE && _config->check_work_ == 1) {
                             flag_work = WORK_EVEI_DETECTION;
                             sprintf(string_log, "WORK_EVEI_DETECTION");
@@ -474,7 +474,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                         !control_flag.contains(garage_element) &&      //当前没在入库中
                         !control_flag.contains(ramp_element) &&      //当前没在桥中
                         !control_flag.contains(bomb_element) &&     //当前没在炸弹中
-                        r.score > 0.75
+                        r.score > 0.65
                         ) {
                         if (flag_work == WORK_NONE && _config->check_work_ == 1) {
 
@@ -517,7 +517,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                         !control_flag.contains(garage_element) &&      //当前没在入库中
                         !control_flag.contains(ramp_element) &&      //当前没在桥中
                         !control_flag.contains(bomb_element) &&     //当前没在炸弹中
-                        r.score > 0.75
+                        r.score > 0.7
                         ) {
                         flag_ramp = RAMP_DETECTION;
                         sprintf(string_log, "label_bomb_DETECTION");
