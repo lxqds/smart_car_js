@@ -40,7 +40,7 @@ void check_ramp() {
 /* ********************************************************************* */
 
 void run_ramp() {
-    if (control_flag.top() == bomb_element) {//当前为炸弹元素
+    if (control_flag.top() == ramp_element) {//当前为炸弹元素
 
         if (flag_ramp == RAMP_UP)
         {
