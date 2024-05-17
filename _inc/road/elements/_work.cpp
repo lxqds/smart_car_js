@@ -165,7 +165,7 @@ void run_work()
 
             if (flag_work == WORK_RUN) {
 
-                float avg_y = search_mid_cone_getH(IMG.mat_lab);
+                int16_t avg_y = search_mid_cone_getH(IMG.mat_lab);
 
                 IMG.aim_angle = 0;
                 LOG_I << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
