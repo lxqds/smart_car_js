@@ -442,7 +442,7 @@ POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
                     sum--;
                 if (sum <= 0 && y - pointsEdge[i].y < resw )
                 {
-                    find.x = POINT(pointsEdge[i].x, y);
+                    find= POINT(pointsEdge[i].x, y);
                     resw = y - pointsEdge[i].y;
                 }
             }

@@ -356,7 +356,7 @@ void run_bomb()
                 //左边线预测中线
                 track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * IMG._config->boom_block_run_wide / 2);
+                    PIXEL_PER_METER * IMG._config->bomb_block_run_wide / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
                 if (IMG.encoder.route - bomb_route > 60)//靠近黑块
