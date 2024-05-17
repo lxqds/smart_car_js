@@ -149,14 +149,14 @@ void run_work()
 
                 // 清弯道防止加大 P 项, 提高稳定性
                 IMG.is_curve0 = IMG.is_curve1 = false;
-
+                 // 调整 进入角度
+                 IMG.aim_angle = IMG._config->work_angle_in_1;
                  if (IMG.encoder.route - work_route > IMG._config->work_rou_ready)
                  {      
-                       IMG.aim_angle = IMG._config->work_angle_in_1;
+                
                         work_route = IMG.encoder.route;
                         flag_work =  WORK_RUN;
-                        // 调整 进入角度
-                        IMG.aim_angle = IMG._config->work_angle_in_1;
+
                         MAT_LOG("WORK_RUN");
                  }
 
