@@ -39,10 +39,12 @@ void check_work()
         if (flag_work == WORK_EVEI_DETECTION) {
             MAT_LOG("WORK_FOUND_R");
             direction_work = false;
+            IMG.flag_track = TRACK_LEFT;
         }
         else {
             MAT_LOG("WORK_FOUND_L");
             direction_work = true;
+            IMG.flag_track = TRACK_RIGHT;
         }
 
         IMG.element_identify = 1;
@@ -59,7 +61,7 @@ void run_work()
 
 
     if (control_flag.top() == work_element) {
-    
+
             //工作区基准速度
             IMG.aim_speed = IMG._config->speed_work;
 
@@ -152,6 +154,7 @@ void run_work()
                 IMG.is_curve0 = IMG.is_curve1 = false;
                  // 调整 进入角度
                  IMG.aim_angle = IMG._config->work_angle_in_1;
+                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
                  if (IMG.encoder.route - work_route > IMG._config->work_rou_ready)
                  {      
                 
@@ -224,6 +227,8 @@ void run_work()
                 if (work_route - IMG.encoder.route > work_route2 * IMG._config->work_recback_angle_route_k)//大于退出 某阶段时开始打角
                 {
                     IMG.aim_angle = IMG._config->work_recback_angle;
+
+                    if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
                 }
                 //退出速度赋值
                 if (work_route - IMG.encoder.route < work_route2 * IMG._config-> work_recback_line_k)
@@ -250,6 +255,9 @@ void run_work()
 
             }
 
+
+
+    
             
     
     }
