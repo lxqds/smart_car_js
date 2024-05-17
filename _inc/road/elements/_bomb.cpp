@@ -220,7 +220,7 @@ void run_bomb()
                 IMG.rptsc1_num = IMG.rpts1s_num;
                 MAT_LOG(" R_near_y=%d", bomb_near_cone.x);
                 if (IMG.encoder.route - bomb_route > 30 &&
-                    bomb_near_cone.x > IMAGE_HEIGHT * 0.7)
+                    bomb_near_cone.x > IMAGE_HEIGHT * 0.65)
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
@@ -245,7 +245,7 @@ void run_bomb()
                 IMG.rptsc0_num = IMG.rpts0s_num;
                 MAT_LOG(" L_near_y=%d", bomb_near_cone.x);
                 if (IMG.encoder.route - bomb_route > 40 &&
-                    bomb_near_cone.x > IMAGE_HEIGHT * 0.7)//最近的是左边锥桶
+                    bomb_near_cone.x > IMAGE_HEIGHT * 0.65)//最近的是左边锥桶
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
@@ -273,7 +273,7 @@ void run_bomb()
                 //右边线预测中线
                 track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * 0.15 / 2);
+                    PIXEL_PER_METER * 0.1 / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
 
             }
@@ -283,7 +283,7 @@ void run_bomb()
                 //左边线预测中线
                 track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * 0.15 / 2);
+                    PIXEL_PER_METER * 0.1 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
             }
