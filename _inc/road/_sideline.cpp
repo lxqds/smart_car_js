@@ -357,8 +357,10 @@ POINT AI_search_left_near(std::vector<DetectionPredictResult> predict, std::vect
     for (size_t i = 0; i < pointsEdge.size(); i++) {
         for (size_t a = 0; a < AI_cones.size(); a++)
         {   //锥桶中心在 任意边线点 左方宽35 高40区域内时:
-            if ((pointsEdge[i].y - 35 < AI_cones[a].y && AI_cones[a].y < pointsEdge[i].y) && ((pointsEdge[i].x - 20 < AI_cones[a].x && AI_cones[a].x < pointsEdge[i].x) || pointsEdge[i].x + 20 > AI_cones[a].x && AI_cones[a].x > pointsEdge[i].x))
-                return POINT(pointsEdge[i].x, AI_cones[a].y);
+            if (      (pointsEdge[i].y - 35 < AI_cones[a].y && AI_cones[a].y < pointsEdge[i].y) 
+                && (  (pointsEdge[i].x - 20 < AI_cones[a].x && AI_cones[a].x < pointsEdge[i].x) 
+                ||     (pointsEdge[i].x + 20 > AI_cones[a].x && AI_cones[a].x > pointsEdge[i].x)  ) )
+                             return POINT(pointsEdge[i].x, AI_cones[a].y);
         }
     }
     return POINT(0, 0);
@@ -371,8 +373,10 @@ POINT AI_search_right_near(std::vector<DetectionPredictResult> predict, std::vec
     for (size_t i = 0; i < pointsEdge.size(); i++) {
         for (size_t a = 0; a < AI_cones.size(); a++)
         {   //锥桶中心在 任意边线点 右方宽35 高40区域内时:
-            if ((pointsEdge[i].y < AI_cones[a].y && AI_cones[a].y < pointsEdge[i].y + 35 ) && ((pointsEdge[i].x - 20 < AI_cones[a].x && AI_cones[a].x < pointsEdge[i].x) || pointsEdge[i].x + 20 > AI_cones[a].x && AI_cones[a].x > pointsEdge[i].x))
-                return POINT(pointsEdge[i].x, AI_cones[a].y);
+            if (        (pointsEdge[i].y < AI_cones[a].y && AI_cones[a].y < pointsEdge[i].y + 35 ) 
+                && (    (pointsEdge[i].x - 20 < AI_cones[a].x && AI_cones[a].x < pointsEdge[i].x) 
+                    ||  (pointsEdge[i].x + 20 > AI_cones[a].x && AI_cones[a].x > pointsEdge[i].x)   )   )
+                             return POINT(pointsEdge[i].x, AI_cones[a].y);
         }
     }
     return POINT(0, 0);
