@@ -623,6 +623,14 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 
     if (control_flag.top() == none_element)
     {
+        aim_speed = _config->speed_base;
+        // // 根据偏差方差加减速
+// if (abs(aim_sigma) < 10.0) {
+//     aim_speed_shift += 10.0 / aim_sigma;
+// }
+// else {
+//     aim_speed_shift -= speed_diff;
+// }
         aim_speed_shift = _config->speed_base +
             (1 - clip(abs(aim_sigma), 0, 30) / 30.0) * (_config->speed_up - _config->speed_base);
         // 速度限幅
@@ -650,14 +658,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         }
         IMG.calculate_angle();//计算角度
 
-        aim_speed = _config->speed_base;
-        // // 根据偏差方差加减速
-        // if (abs(aim_sigma) < 10.0) {
-        //     aim_speed_shift += 10.0 / aim_sigma;
-        // }
-        // else {
-        //     aim_speed_shift -= speed_diff;
-        // }
+
+
 
     }
 
