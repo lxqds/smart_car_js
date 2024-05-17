@@ -203,7 +203,7 @@ void run_bomb()
         if (flag_bomb == BOMB_SECOND_CONE)
         {
             IMG.aim_speed = IMG._config->speed_bomb2;
-            IMG.aim_distance_f = 0.3;
+            IMG.aim_distance_f = 0.2;
             IMG.aim_distance_n = 0.1;
             IMG.aim_angle_p *= 1.5;
 
@@ -242,7 +242,7 @@ void run_bomb()
                 //右边线预测中线
                 track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * 0.2 / 2);
+                    PIXEL_PER_METER * 0.15 / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
 
                 if (bomb_block_y > IMAGE_HEIGHT * 0.5)//靠近黑块
@@ -265,7 +265,7 @@ void run_bomb()
                 //左边线预测中线
                 track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * 0.2 / 2);
+                    PIXEL_PER_METER * 0.15 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
                 if (bomb_block_y > IMAGE_HEIGHT * 0.6)//靠近黑块
