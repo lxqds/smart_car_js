@@ -108,6 +108,11 @@ void run_bomb()
                     first_cone = 1;
                 }
                 bomb_route = IMG.encoder.route;
+                if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
+                {
+                    IMG._config->speed_bomb2;
+                }
+                
             }
 
 
