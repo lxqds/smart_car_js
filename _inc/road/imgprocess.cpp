@@ -422,7 +422,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
             int deX = r.x / 2, deY = r.y / 2;
             int deH = r.height / 2, deW = r.width / 2;
 
-            log_i("Detection GET %d ,%f", r.type,r.score);
+            log_i("Detection GET %d ,%f", r.type, r.score);
             // 尺寸位置筛选
             // if ((deX < 10 || deX + deW > 300) || deY < 20 || (deH < 25 || deW < 25))
                 //continue;
@@ -507,11 +507,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 }break;
 
                 case label_bridge:  // 桥
-                    if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
-                        flag_ramp = RAMP_DETECTION;
-                        sprintf(string_log, "RAMP_DETECTION");
-                        log_i("RAMP_DETECTION");
-                    }
                     if (!control_flag.contains(circle_element) &&   //当前没在环岛中
                         !control_flag.contains(work_element) &&     //当前没在工作区中
                         !control_flag.contains(garage_element) &&      //当前没在入库中
