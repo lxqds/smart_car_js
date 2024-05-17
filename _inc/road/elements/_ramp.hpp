@@ -10,6 +10,7 @@ enum flag_ramp_e {
 extern flag_ramp_e flag_ramp;
 extern int ramp_x;           //横坐标
 extern int ramp_y;           //纵坐标
+extern float ramp_score;   //置信度
 void check_ramp();
 void run_ramp();
 
