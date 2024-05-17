@@ -60,7 +60,6 @@
   "work_read_cone_thresholdy": 0.62,
   "work_read_cone_thresholdy_in": 0.3,
   "work_angle_in_1": 25,
-
   "work_rou_ready": 10,
   "work_read_cone_thresholdy_avg": 0.45,
   "work_run_speed": 800,
@@ -69,9 +68,7 @@
   "work_recback_line_k": 1.1,
   "work_recback_angle_route_k": 0.8,
   "work_recback_max_route": 60,
-
   "speed_bomb": 300,
-
   "work_rou_over": 1,
   "farm_rou_ready": 0,
   "farm_rou_in": 0,
@@ -82,9 +79,6 @@
   "farm_right_angle": 1.0,
   "pass_garage_left": 100,
   "pass_garage_right": 100,
-  "ramp_up_rou": 60,
-  "ramp_down_rou": 60,
-  "ramp_p": 0.95,
   "circle_out_rou": 120,
   "*****-speed_level-******": 0,
   "speed_level": "1700",
@@ -220,6 +214,8 @@
     "bomb_second_run_wide": 0.15,
     "bomb_block_ready": 0.45,
     "bomb_block_run_wide": 0.2,
+    "speed_ramp": 1500,
+    "ramp_rou": 200,
     "deviation_Farm_in_p": 1.0,
     "speed_circle": 1700,
     "speed_cross": 1700,
@@ -272,7 +268,6 @@
     "speed_kp": 10,
     "speed_ki": 0.1,
     "speed_kd": 0
-
   },
   "1500": {
     "*****-aim_distance-*****": 0,

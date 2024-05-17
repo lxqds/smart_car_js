@@ -117,10 +117,9 @@ struct ControlConfig
     float farm_right_angle;    // 右边搜索角度
     uint8_t pass_garage_left;  // 左车库通过距离
     uint8_t pass_garage_right; // 右车库通过入库距离
-    uint8_t ramp_up_rou;       // 坡道上升积分
-    uint8_t ramp_down_rou;     // 坡道下坡积分
+
     uint8_t circle_out_rou;     //出环积分
-    float ramp_p;              // 过坡道系数
+
 
     float aim_distance_far;  // 远预瞄点
     float aim_distance_near; // 近预瞄点
@@ -141,10 +140,13 @@ struct ControlConfig
     uint16_t work_stop_time;     // 停在施工区时间
     uint16_t work_out_stop_time; // 出去停车的时间
     uint16_t work_out_speedup_time;
+
+    uint16_t speed_ramp;        // 桥路程
+    uint16_t ramp_rou;           // 桥速度
+
     uint16_t speed_circle;    // 出入环岛速度
     uint16_t speed_cross;     // 十字速度
-    uint16_t speed_ramp_up;   // 上坡速度
-    uint16_t speed_ramp_down; // 下坡速度
+
     uint16_t speed_slow_down; // 慢行速度
 
 
@@ -256,9 +258,7 @@ struct ControlConfig
         AUTOCFG(farm_right_angle);
         AUTOCFG(pass_garage_left);
         AUTOCFG(pass_garage_right);
-        AUTOCFG(ramp_up_rou);
-        AUTOCFG(ramp_down_rou);
-        AUTOCFG(ramp_p);
+
 
 
 
@@ -295,6 +295,9 @@ struct ControlConfig
         AUTOCFG(bomb_first_cone_run_wide);
         AUTOCFG(bomb_second_run_wide);
         AUTOCFG(bomb_block_run_wide);
+
+        AUTOCFG(speed_ramp);
+        AUTOCFG(ramp_rou);
 
         AUTOCFG(speed_circle);
         AUTOCFG(speed_cross);
