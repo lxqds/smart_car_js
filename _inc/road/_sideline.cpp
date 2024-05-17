@@ -404,7 +404,7 @@ POINT search_left_near2(std::vector<POINT> pointsEdge, cv::Mat matt) {
 POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
     int sum = 5;
     for (size_t i = 0; i < pointsEdge.size(); i++) {
-        for (int y = pointsEdge[i].y; y < pointsEdge[i] + 25.y; y++) {
+        for (int y = pointsEdge[i].y; y < pointsEdge[i] + 25; y++) {
                 if ((y >= 0) && (y <= IMAGE_WIDTH - 1)){
                     if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
                         sum--;
