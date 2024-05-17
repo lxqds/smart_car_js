@@ -8,15 +8,15 @@ extern ImageProcess imgprocess;
 
 // 原图 -> 俯视  透视矩阵
 cv::Mat warpMatrix =
-    (cv::Mat_<float>(3, 3) << 4.830985915493104, 7.481690140845294,
-     -559.9154929577662, 1.3374922084896e-14, 14.74647887323986,
-     -725.1690140845323, 7.62235112648736e-17, 0.05070422535211418, 1);
+(cv::Mat_<float>(3, 3) << 4.830985915493104, 7.481690140845294,
+    -559.9154929577662, 1.3374922084896e-14, 14.74647887323986,
+    -725.1690140845323, 7.62235112648736e-17, 0.05070422535211418, 1);
 
 // 俯视 -> 原图  透视矩阵
 cv::Mat warpMatrixT =
-    (cv::Mat_<float>(3, 3) << 0.7231273024969306, -0.503533906399236,
-     39.74299358711961, 4.254746920719163e-16, 0.06781279847182463,
-     49.17574021012407, 1.303269874835107e-18, -0.003438395415472779, 1);
+(cv::Mat_<float>(3, 3) << 0.7231273024969306, -0.503533906399236,
+    39.74299358711961, 4.254746920719163e-16, 0.06781279847182463,
+    49.17574021012407, 1.303269874835107e-18, -0.003438395415472779, 1);
 
 // 透视变换 (0:原图 -> 俯视, 1:俯视 -> 原图)
 void map_perspective(float x, float y, float loc[2], uint8_t mode) {
@@ -24,31 +24,32 @@ void map_perspective(float x, float y, float loc[2], uint8_t mode) {
 
     if (mode == 0) {
         zz = warpMatrix.at<float>(2, 0) * x +
-             warpMatrix.at<float>(2, 1) * y +
-             warpMatrix.at<float>(2, 2);
+            warpMatrix.at<float>(2, 1) * y +
+            warpMatrix.at<float>(2, 2);
         xx = (warpMatrix.at<float>(0, 0) * x +
-              warpMatrix.at<float>(0, 1) * y +
-              warpMatrix.at<float>(0, 2)) /
-             zz;
+            warpMatrix.at<float>(0, 1) * y +
+            warpMatrix.at<float>(0, 2)) /
+            zz;
         yy = (warpMatrix.at<float>(1, 0) * x +
-              warpMatrix.at<float>(1, 1) * y +
-              warpMatrix.at<float>(1, 2)) /
-             zz;
+            warpMatrix.at<float>(1, 1) * y +
+            warpMatrix.at<float>(1, 2)) /
+            zz;
 
         loc[0] = xx;
         loc[1] = yy;
-    } else {
+    }
+    else {
         zz = warpMatrixT.at<float>(2, 0) * x +
-             warpMatrixT.at<float>(2, 1) * y +
-             warpMatrixT.at<float>(2, 2);
+            warpMatrixT.at<float>(2, 1) * y +
+            warpMatrixT.at<float>(2, 2);
         xx = (warpMatrixT.at<float>(0, 0) * x +
-              warpMatrixT.at<float>(0, 1) * y +
-              warpMatrixT.at<float>(0, 2)) /
-             zz;
+            warpMatrixT.at<float>(0, 1) * y +
+            warpMatrixT.at<float>(0, 2)) /
+            zz;
         yy = (warpMatrixT.at<float>(1, 0) * x +
-              warpMatrixT.at<float>(1, 1) * y +
-              warpMatrixT.at<float>(1, 2)) /
-             zz;
+            warpMatrixT.at<float>(1, 1) * y +
+            warpMatrixT.at<float>(1, 2)) /
+            zz;
 
         loc[0] = xx;
         loc[1] = yy;
@@ -111,7 +112,7 @@ int pid_realize_o(int actual, int set, float _p, float _d) {
 
 // 偏差滑动平均滤波
 float filter(float value) {
-    static float filter_buf[3] = {0};
+    static float filter_buf[3] = { 0 };
 
     filter_buf[2] = filter_buf[1];
     filter_buf[1] = filter_buf[0];
@@ -226,7 +227,7 @@ std::vector<POINT> bezier(double dt, std::vector<POINT> input) {
         int n = input.size() - 1;
         while (i <= n) {
             double k = factorial(n) / (factorial(i) * factorial(n - i)) * pow(t, i) *
-                       pow(1 - t, n - i);
+                pow(1 - t, n - i);
             x_sum += k * input[i].x;
             y_sum += k * input[i].y;
             i++;
@@ -262,7 +263,7 @@ std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict) {
     for (auto p : predict) {
         if (ImageProcess::DetectionLabel(p.type) == ImageProcess::label_cone) {
             cones.push_back(POINT(p.y / 2 + p.height / 4,
-                                  p.x / 2 + p.width / 4));
+                p.x / 2 + p.width / 4));
         }
 
         // else if (ImageProcess::DetectionLabel(p.type) == ImageProcess::label_wone) {
@@ -296,7 +297,7 @@ std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict) {
 }
 // AI搜索距离小车最近的黄色锥桶
 POINT AI_search_height_near(std::vector<DetectionPredictResult> predict) {
-    POINT cones = POINT(0,0);
+    POINT cones = POINT(0, 0);
     float ai_y = 0;
     for (auto p : predict) {
         if (ImageProcess::DetectionLabel(p.type) == ImageProcess::label_cone) {
@@ -322,20 +323,20 @@ float get_AIorcolor_AVG_Y(std::vector<DetectionPredictResult> predict) {
     float aver = 0;
     float sigma = 0;
 
-    for (int i = 0; i < num ; i++) {
+    for (int i = 0; i < num; i++) {
         sum += AI_cones[i].x;
     }
-    
+
     aver = (float)(sum / num);
 
     for (int i = 0; i < num; i++)
-        sigma += ( AI_cones[i].x - aver) * ( AI_cones[i].x - aver);
+        sigma += (AI_cones[i].x - aver) * (AI_cones[i].x - aver);
     sigma /= (float)num;
 
     //计算 Z-score 
     int outnum = 0;
     sum = 0;
-    for (int i = 0; i < num ; i++)
+    for (int i = 0; i < num; i++)
     {
         z_scores = ((AI_cones[i].x - aver) * (AI_cones[i].x - aver)) / sigma;// 与均值差的平方除以方差
 
@@ -347,20 +348,20 @@ float get_AIorcolor_AVG_Y(std::vector<DetectionPredictResult> predict) {
 
     //剃掉异常值后的平均值
     return (float)sum / outnum;
-   
+
 }
 
 // AI搜索距离赛道左边缘最近的黄色色块 (黄色锥桶)
-POINT AI_search_left_near(std::vector<DetectionPredictResult> predict, std::vector<POINT> pointsEdge){
+POINT AI_search_left_near(std::vector<DetectionPredictResult> predict, std::vector<POINT> pointsEdge) {
     vector<POINT> AI_cones = search_targets(predict);
 
     for (size_t i = 0; i < pointsEdge.size(); i++) {
         for (size_t a = 0; a < AI_cones.size(); a++)
         {   //锥桶中心在 任意边线点 左方宽35 高40区域内时:
-            if (      (pointsEdge[i].y - 35 < AI_cones[a].y && AI_cones[a].y < pointsEdge[i].y) 
-                && (  (pointsEdge[i].x - 20 < AI_cones[a].x && AI_cones[a].x < pointsEdge[i].x) 
-                ||     (pointsEdge[i].x + 20 > AI_cones[a].x && AI_cones[a].x > pointsEdge[i].x)  ) )
-                             return POINT(pointsEdge[i].x, AI_cones[a].y);
+            if ((pointsEdge[i].y - 35 < AI_cones[a].y && AI_cones[a].y < pointsEdge[i].y)
+                && ((pointsEdge[i].x - 20 < AI_cones[a].x && AI_cones[a].x < pointsEdge[i].x)
+                    || (pointsEdge[i].x + 20 > AI_cones[a].x && AI_cones[a].x > pointsEdge[i].x)))
+                return POINT(pointsEdge[i].x, AI_cones[a].y);
         }
     }
     return POINT(0, 0);
@@ -373,10 +374,10 @@ POINT AI_search_right_near(std::vector<DetectionPredictResult> predict, std::vec
     for (size_t i = 0; i < pointsEdge.size(); i++) {
         for (size_t a = 0; a < AI_cones.size(); a++)
         {   //锥桶中心在 任意边线点 右方宽35 高40区域内时:
-            if (        (pointsEdge[i].y < AI_cones[a].y && AI_cones[a].y < pointsEdge[i].y + 35 ) 
-                && (    (pointsEdge[i].x - 20 < AI_cones[a].x && AI_cones[a].x < pointsEdge[i].x) 
-                    ||  (pointsEdge[i].x + 20 > AI_cones[a].x && AI_cones[a].x > pointsEdge[i].x)   )   )
-                             return POINT(pointsEdge[i].x, AI_cones[a].y);
+            if ((pointsEdge[i].y < AI_cones[a].y && AI_cones[a].y < pointsEdge[i].y + 35)
+                && ((pointsEdge[i].x - 20 < AI_cones[a].x && AI_cones[a].x < pointsEdge[i].x)
+                    || (pointsEdge[i].x + 20 > AI_cones[a].x && AI_cones[a].x > pointsEdge[i].x)))
+                return POINT(pointsEdge[i].x, AI_cones[a].y);
         }
     }
     return POINT(0, 0);
@@ -405,19 +406,19 @@ POINT search_left_near2(std::vector<POINT> pointsEdge, cv::Mat matt) {
 }
 
 // 搜索 屏幕中间以下 黄色锥桶 距离屏幕最下方距离
-uint16_t search_mid_cone_getH(cv::Mat matt ) {
+uint16_t search_mid_cone_getH(cv::Mat matt) {
     int sum = 5;
-    for (size_t y = IMAGE_HEIGHT-1 ; y > IMAGE_HEIGHT/2 ; y-- ) {
+    for (size_t y = IMAGE_HEIGHT - 1; y > IMAGE_HEIGHT / 2; y--) {
 
-        for (size_t x = IMAGE_WIDTH /2 ; x < IMAGE_WIDTH-50; x++)
+        for (size_t x = IMAGE_WIDTH / 2; x < IMAGE_WIDTH - 50; x++)
         {
-                if (AT_IMAGE(matt, x, y) > 0)
-                    sum--;
-                if (sum <= 0)
-                    return (IMAGE_HEIGHT - y );
+            if (AT_IMAGE(matt, x, y) > 0)
+                sum--;
+            if (sum <= 0)
+                return (IMAGE_HEIGHT - y);
         }
 
-        for (size_t x = IMAGE_WIDTH / 2; x >50 ; x --)
+        for (size_t x = IMAGE_WIDTH / 2; x > 50; x--)
         {
             if (AT_IMAGE(matt, x, y) > 0)
                 sum--;
@@ -432,7 +433,7 @@ uint16_t search_mid_cone_getH(cv::Mat matt ) {
 POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
     int sum = 5;
     for (size_t i = 0; i < pointsEdge.size(); i++) {
-        for (int y = pointsEdge[i].y; y < pointsEdge[i].y + 25; y++) {
+        for (int y = pointsEdge[i].y; y < pointsEdge[i].y + 50; y++) {
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) {
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
                     sum--;
@@ -448,11 +449,11 @@ POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
 POINT search_right_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
     int sum = 5;
     for (size_t i = 0; i < pointsEdge.size(); i++) {
-        for (int y = pointsEdge[i].y; y > pointsEdge[i].y - 25; y--) {
-            if ((y >= 0) && (y <= IMAGE_WIDTH - 1)){
+        for (int y = pointsEdge[i].y; y > pointsEdge[i].y - 50; y--) {
+            if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) {
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
                     sum--;
-                if(sum<=0)
+                if (sum <= 0)
                     return POINT(pointsEdge[i].x, y);
             }
         }
@@ -469,21 +470,9 @@ uint16_t search_break_left(std::vector<POINT> pointsEdge, cv::Mat matt) {
             if ((x >= 0) && (x <= IMAGE_HEIGHT - 1))
                 if (AT_IMAGE(matt, pointsEdge[i].y, x) > 0)
                     return i;
+    return 0;
 }
-// 左线预测右线
-std::vector<POINT> predict_edge_right(vector<POINT> &point_edge_left, POINT point_l, POINT point_r) {
-    int offset = 100;
-    vector<POINT> points_edge_right;
-    POINT start_point(0, 0);
-    POINT end_point(0, 0);
 
-    // start
-    if (point_r.x > 0 && point_r.y > 0) {
-    }
-    /*// 透视 -> 原图
-    for (int i = 0; i < rpts_num; i++)
-        map_perspective(rpts[i][0], rpts[i][1], rpts[i], 1);*/
-}
 
 // 找右边线离锥桶最近的边线点的位次,x为行，第几行
 uint16_t search_break_right(std::vector<POINT> pointsEdge, cv::Mat matt) {
@@ -492,6 +481,7 @@ uint16_t search_break_right(std::vector<POINT> pointsEdge, cv::Mat matt) {
             if ((x >= 0) && (x <= IMAGE_HEIGHT - 1))
                 if (AT_IMAGE(matt, pointsEdge[i].y, x) > 0)
                     return i;
+    return 0;
 }
 // 搜索距离赛道左边缘上15最近的黄色色块 (黄色锥桶)
 POINT search_left_near15(std::vector<POINT> pointsEdge, cv::Mat matt) {
@@ -529,7 +519,7 @@ float distance_for_points(POINT a, POINT b) {
     return (float)(sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)));
 }
 // 搜索左右边缘的锥桶
-void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones, std::vector<POINT> *right_cones) {
+void search_cones_edge(std::vector<POINT> cones, std::vector<POINT>* left_cones, std::vector<POINT>* right_cones) {
     std::vector<POINT> points_cones = cones;
     // if (left_cones->size() == 0 && right_cones->size() == 0) {
     //    return;
@@ -592,7 +582,8 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                 Left_Last_angle = atan((double)(points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (double)(left_cones->at(left_cones->size() - 1).x - points_cones[i].x));
                 left_cones->push_back(points_cones[i]);
 
-            } else if (points_cones[i].x > left_cones->at(1).x) {
+            }
+            else if (points_cones[i].x > left_cones->at(1).x) {
                 Left_Last_distance = distance_for_points(left_cones->at(left_cones->size() - 1), points_cones[i]);
                 Left_Last_angle = atan((double)(points_cones[i].y - left_cones->at(left_cones->size() - 1).y) * 1.0 / (double)(left_cones->at(left_cones->size() - 1).x - points_cones[i].x));
                 left_cones->at(1) = points_cones[i];
@@ -605,7 +596,8 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
                 Right_Last_distance = distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]);
                 Right_Last_angle = atan((double)(points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (double)(right_cones->at(right_cones->size() - 1).x - points_cones[i].x));
                 right_cones->push_back(points_cones[i]);
-            } else if (points_cones[i].x > right_cones->at(1).x) {
+            }
+            else if (points_cones[i].x > right_cones->at(1).x) {
                 Right_Last_angle = atan((double)(points_cones[i].y - right_cones->at(right_cones->size() - 1).y) * 1.0 / (double)(right_cones->at(right_cones->size() - 1).x - points_cones[i].x));
                 Right_Last_distance = distance_for_points(right_cones->at(right_cones->size() - 1), points_cones[i]);
                 right_cones->at(1) = points_cones[i];
@@ -613,12 +605,11 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
         }
     }
 
-    for (int j = 0; j < points_cones.size() * points_cones.size(); j++) {
-        bool searched = false;
+    for (int j = 0; j < (int)(points_cones.size() * points_cones.size()); j++) {
         int index = -1;
 
         // 搜索左边缘
-        for (int i = 0; i < points_cones.size(); i++) {
+        for (int i = 0; i < (int)points_cones.size(); i++) {
             if (left_cones->size() > 0) {
                 // 先前左边缘只到中间，拓展左边缘
                 // log_i("in1");
@@ -641,12 +632,10 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
             swap(points_cones[index], points_cones[points_cones.size() - 1]);
             points_cones.pop_back();
             index = -1;
-            searched = true;
         }
-        searched = false;
         index = -1;
         // 搜索右边缘
-        for (int i = 0; i < points_cones.size(); i++) {
+        for (int i = 0; i < (int)points_cones.size(); i++) {
             if (right_cones->size() > 0) {
                 // 先前左边缘只到中间，拓展左边缘
                 // log_i("in1");
@@ -670,7 +659,6 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT> *left_cones,
             swap(points_cones[index], points_cones[points_cones.size() - 1]);
             points_cones.pop_back();
             index = -1;
-            searched = true;
         }
         // MAT_LOG("qpoint2");
     }
@@ -836,7 +824,7 @@ POINT search_leftDown_cone(std::vector<POINT> pointsCone) {
 // 限制范围
 int clip(int x, int low, int up) {
     return x > up ? up : x < low ? low
-                                 : x;
+        : x;
 }
 
 /* 前进方向定义：
@@ -844,13 +832,13 @@ int clip(int x, int low, int up) {
  * 3   1
  *   2
  */
-const int dir_front[4][2] = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
-const int dir_frontleft[4][2] = {{-1, -1}, {1, -1}, {1, 1}, {-1, 1}};
-const int dir_frontright[4][2] = {{1, -1}, {1, 1}, {-1, 1}, {-1, -1}};
+const int dir_front[4][2] = { {0, -1}, {1, 0}, {0, 1}, {-1, 0} };
+const int dir_frontleft[4][2] = { {-1, -1}, {1, -1}, {1, 1}, {-1, 1} };
+const int dir_frontright[4][2] = { {1, -1}, {1, 1}, {-1, 1}, {-1, -1} };
 
 // 左手迷宫巡线
 void findline_lefthand_adaptive(cv::Mat img, int block_size, int clip_value,
-                                int x, int y, int pts[][2], int *num) {
+    int x, int y, int pts[][2], int* num) {
     assert(num && *num >= 0);
     assert(block_size > 1 && block_size % 2 == 1);
 
@@ -858,7 +846,7 @@ void findline_lefthand_adaptive(cv::Mat img, int block_size, int clip_value,
     int step = 0, dir = 0, turn = 0;
 
     while ((step < *num) && (half <= x) && (x <= img.cols - half - 1) &&
-           (half <= y) && (y <= img.rows - half - 1) && (turn < 4)) {
+        (half <= y) && (y <= img.rows - half - 1) && (turn < 4)) {
         int local_thres = 0;
         for (int dy = -half; dy <= half; dy++) {
             for (int dx = -half; dx <= half; dx++) {
@@ -875,14 +863,16 @@ void findline_lefthand_adaptive(cv::Mat img, int block_size, int clip_value,
         if (front_value < local_thres) {
             dir = (dir + 1) % 4;
             turn++;
-        } else if (frontleft_value < local_thres) {
+        }
+        else if (frontleft_value < local_thres) {
             x += dir_front[dir][0];
             y += dir_front[dir][1];
             pts[step][0] = x;
             pts[step][1] = y;
             step++;
             turn = 0;
-        } else {
+        }
+        else {
             x += dir_frontleft[dir][0];
             y += dir_frontleft[dir][1];
             dir = (dir + 3) % 4;
@@ -897,7 +887,7 @@ void findline_lefthand_adaptive(cv::Mat img, int block_size, int clip_value,
 
 // 右手迷宫巡线
 void findline_righthand_adaptive(cv::Mat img, int block_size, int clip_value,
-                                 int x, int y, int pts[][2], int *num) {
+    int x, int y, int pts[][2], int* num) {
     assert(num && *num >= 0);
     assert(block_size > 1 && block_size % 2 == 1);
 
@@ -905,7 +895,7 @@ void findline_righthand_adaptive(cv::Mat img, int block_size, int clip_value,
     int step = 0, dir = 0, turn = 0;
 
     while ((step < *num) && (half <= x) && (x <= img.cols - half - 1) &&
-           (half <= y) && (y <= img.rows - half - 1) && (turn < 4)) {
+        (half <= y) && (y <= img.rows - half - 1) && (turn < 4)) {
         int local_thres = 0;
         for (int dy = -half; dy <= half; dy++) {
             for (int dx = -half; dx <= half; dx++) {
@@ -922,14 +912,16 @@ void findline_righthand_adaptive(cv::Mat img, int block_size, int clip_value,
         if (front_value < local_thres) {
             dir = (dir + 3) % 4;
             turn++;
-        } else if (frontright_value < local_thres) {
+        }
+        else if (frontright_value < local_thres) {
             x += dir_front[dir][0];
             y += dir_front[dir][1];
             pts[step][0] = x;
             pts[step][1] = y;
             step++;
             turn = 0;
-        } else {
+        }
+        else {
             x += dir_frontright[dir][0];
             y += dir_frontright[dir][1];
             dir = (dir + 1) % 4;
@@ -959,8 +951,8 @@ void blur_points(float pts_in[][2], int num, float pts_out[][2], int kernel) {
 }
 
 // 点集等距采样  使走过的采样前折线段的距离为`dist`
-void resample_points(float pts_in[][2], int num1, float pts_out[][2], int *num2,
-                     float dist) {
+void resample_points(float pts_in[][2], int num1, float pts_out[][2], int* num2,
+    float dist) {
     int remain = 0, len = 0;
     for (int i = 0; i < num1 - 1 && len < *num2; i++) {
         float x0 = pts_in[i][0];
@@ -988,7 +980,7 @@ void resample_points(float pts_in[][2], int num1, float pts_out[][2], int *num2,
 
 // 点集局部角度变化率
 void local_angle_points(float pts_in[][2], int num, float angle_out[],
-                        int dist) {
+    int dist) {
     for (int i = 0; i < num; i++) {
         if (i <= 0 || i >= num - 1) {
             angle_out[i] = 0;
@@ -1026,12 +1018,12 @@ void nms_angle(float angle_in[], int num, float angle_out[], int kernel) {
 
 // 左边线跟踪中线
 void track_leftline(float pts_in[][2], int num, float pts_out[][2],
-                    int approx_num, float dist) {
+    int approx_num, float dist) {
     for (int i = 0; i < num; i++) {
         float dx = pts_in[clip(i + approx_num, 0, num - 1)][0] -
-                   pts_in[clip(i - approx_num, 0, num - 1)][0];
+            pts_in[clip(i - approx_num, 0, num - 1)][0];
         float dy = pts_in[clip(i + approx_num, 0, num - 1)][1] -
-                   pts_in[clip(i - approx_num, 0, num - 1)][1];
+            pts_in[clip(i - approx_num, 0, num - 1)][1];
         float dn = sqrt(dx * dx + dy * dy);
 
         dx /= dn;
@@ -1044,12 +1036,12 @@ void track_leftline(float pts_in[][2], int num, float pts_out[][2],
 
 // 右边线跟踪中线
 void track_rightline(float pts_in[][2], int num, float pts_out[][2],
-                     int approx_num, float dist) {
+    int approx_num, float dist) {
     for (int i = 0; i < num; i++) {
         float dx = pts_in[clip(i + approx_num, 0, num - 1)][0] -
-                   pts_in[clip(i - approx_num, 0, num - 1)][0];
+            pts_in[clip(i - approx_num, 0, num - 1)][0];
         float dy = pts_in[clip(i + approx_num, 0, num - 1)][1] -
-                   pts_in[clip(i - approx_num, 0, num - 1)][1];
+            pts_in[clip(i - approx_num, 0, num - 1)][1];
         float dn = sqrt(dx * dx + dy * dy);
 
         dx /= dn;

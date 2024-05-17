@@ -436,14 +436,16 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                     if (!control_flag.contains(circle_element) &&   //当前没在环岛中
                         !control_flag.contains(work_element) &&     //当前没在工作区中
                         !control_flag.contains(garage_element) &&      //当前没在入库中
+                        !control_flag.contains(ramp_element) &&      //当前没在桥中
                         !control_flag.contains(bomb_element)      //当前没在炸弹中
                         ) {
                         flag_bomb = BOMB_DETECTION;
-                        bomb_y = deY + deH / 2;
-                        bomb_x = deX + deW / 2;
+
                         sprintf(string_log, "label_bomb_DETECTION");
                         log_i("label_bomb_DETECTION");
                     }
+                    bomb_y = deY + deH / 2;
+                    bomb_x = deX + deW / 2;
                 }break;
                 case label_thief:      // 贼 和 恶人处理方式一样 不 break
                 case label_evil:      //恶人
@@ -451,6 +453,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                     if (!control_flag.contains(circle_element) &&   //当前没在环岛中
                         !control_flag.contains(work_element) &&     //当前没在工作区中
                         !control_flag.contains(garage_element) &&      //当前没在入库中
+                        !control_flag.contains(ramp_element) &&      //当前没在桥中
                         !control_flag.contains(bomb_element)      //当前没在炸弹中
                         ) {
                         if (flag_work == WORK_NONE && _config->check_work_ == 1) {
@@ -469,6 +472,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                     if (!control_flag.contains(circle_element) &&   //当前没在环岛中
                         !control_flag.contains(work_element) &&     //当前没在工作区中
                         !control_flag.contains(garage_element) &&      //当前没在入库中
+                        !control_flag.contains(ramp_element) &&      //当前没在桥中
                         !control_flag.contains(bomb_element)      //当前没在炸弹中
                         ) {
                         if (flag_work == WORK_NONE && _config->check_work_ == 1) {
@@ -504,9 +508,21 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 case label_bridge:  // 桥
                     if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
                         flag_ramp = RAMP_DETECTION;
-                        sprintf(string_log, "BRIDGE_DETECTION");
+                        sprintf(string_log, "RAMP_DETECTION");
+                        log_i("RAMP_DETECTION");
+                    }
+                    if (!control_flag.contains(circle_element) &&   //当前没在环岛中
+                        !control_flag.contains(work_element) &&     //当前没在工作区中
+                        !control_flag.contains(garage_element) &&      //当前没在入库中
+                        !control_flag.contains(ramp_element) &&      //当前没在桥中
+                        !control_flag.contains(bomb_element)      //当前没在炸弹中
+                        ) {
+                        flag_ramp = RAMP_DETECTION;
+                        sprintf(string_log, "label_bomb_DETECTION");
                         log_i("BRIDGE_DETECTION");
                     }
+                    ramp_y = deY + deH / 2;
+                    ramp_x = deX + deW / 2;
                     break;
                 case label_block:      // 黑块
                 {
@@ -570,6 +586,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     check_cross();  // 十字路 - 识别角点特征
     check_circle();  // 环岛路 - 识别角点特征
     check_bomb();   //炸弹
+    check_ramp();   //桥
 
     aim_distance_f = _config->aim_distance_far;
     aim_distance_n = _config->aim_distance_near;
@@ -581,7 +598,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     run_cross();
     run_circle();
     run_bomb();
-
+    run_ramp();
     if (element_identify == 1) {
         serial->buzzerSound(1);
     }

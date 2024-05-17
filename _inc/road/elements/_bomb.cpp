@@ -42,6 +42,7 @@ void check_bomb()
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&      //当前没在入库中
+        !control_flag.contains(ramp_element) &&      //当前没在桥中
         flag_bomb == BOMB_DETECTION && bomb_y > IMAGE_HEIGHT * 0.1 //找到炸弹
         )
     {
@@ -225,7 +226,7 @@ void run_bomb()
                     PIXEL_PER_METER * IMG._config->bomb_first_cone_run_wide / 2);
 
                 IMG.rptsc1_num = IMG.rpts1s_num;
-
+                MAT_LOG(" R_near_y=%d", bomb_near_cone.x);
                 if (IMG.encoder.route - bomb_route > 30 &&
                     bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_second_cone_ready)
                 {
@@ -250,7 +251,7 @@ void run_bomb()
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * IMG._config->bomb_first_cone_run_wide / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
-
+                MAT_LOG(" L_near_y=%d", bomb_near_cone.x);
                 if (IMG.encoder.route - bomb_route > 40 &&
                     bomb_near_cone.x > IMAGE_HEIGHT * bomb_second_cone_ready )//最近的是左边锥桶
                 {
