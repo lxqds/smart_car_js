@@ -220,7 +220,7 @@ void run_bomb()
                 IMG.rptsc1_num = IMG.rpts1s_num;
 
                 if (IMG.encoder.route - bomb_route > 30 &&
-                    bomb_near_cone.x > IMAGE_HEIGHT * 0.55)
+                    bomb_near_cone.x > IMAGE_HEIGHT * 0.7)
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
@@ -245,7 +245,7 @@ void run_bomb()
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
                 if (IMG.encoder.route - bomb_route > 40 &&
-                    bomb_near_cone.x > IMAGE_HEIGHT * 0.55)//最近的是左边锥桶
+                    bomb_near_cone.x > IMAGE_HEIGHT * 0.7)//最近的是左边锥桶
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
