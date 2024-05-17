@@ -141,7 +141,7 @@ void run_bomb()
                 //左边线预测中线
                 track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * 0.3 / 2);
+                    PIXEL_PER_METER * 0.4 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
             }
             else
@@ -164,7 +164,7 @@ void run_bomb()
                 //右边线预测中线
                 track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * 0.3 / 2);
+                    PIXEL_PER_METER * 0.4 / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
             }
 
@@ -249,7 +249,7 @@ void run_bomb()
                 //左边线预测中线
                 track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * 0.3 / 2);
+                    PIXEL_PER_METER * 0.4 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
             }
             else
@@ -272,7 +272,7 @@ void run_bomb()
                 //右边线预测中线
                 track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * 0.3 / 2);
+                    PIXEL_PER_METER * 0.4 / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
             }
             if (IMG.encoder.route - bomb_route > 60)  //通过一段距离后
