@@ -222,7 +222,7 @@
     "steering_p": 2.4,
     "steering_d": 8.555,
     "speed_kp": 10,
-    "speed_ki": 0.2,
+    "speed_ki": 0.05,
     "speed_kd": 0
   },
   "1550": {
