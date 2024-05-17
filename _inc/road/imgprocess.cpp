@@ -628,7 +628,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         // 速度限幅
         aim_speed_shift = clip(aim_speed_shift, _config->speed_base, _config->speed_up);
         aim_speed = aim_speed_shift;
-        if (encoder.speed * 1000 < aim_speed * 0.5);
+        if (encoder.speed * 1000 < aim_speed * 0.5)
         {
             aim_angle_p *= 0.5;
         }
