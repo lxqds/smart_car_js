@@ -479,35 +479,56 @@ uint16_t search_mid_cone_getH(cv::Mat matt) {
 // 搜索距离赛道左边缘最近的黄色色块 (黄色锥桶) 赛道内
 POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
     int sum = 5;
+    POINT find = POINT(0, 0);
+    int resw = IMAGE_WIDTH;
     for (size_t i = 0; i < pointsEdge.size(); i++) {
+        sum = 5;
         for (int y = pointsEdge[i].y; y < pointsEdge[i].y + 50; y++) {
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) {
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
                     sum--;
                 if (sum <= 0)
-                    return POINT(pointsEdge[i].x, y);
+                {
+                    if (resw >  y - pointsEdge[i].y )
+                    {
+                        find = POINT(pointsEdge[i].x, y);
+                        resw = y - pointsEdge[i].y;
+                    }
+                    break;
+                }
             }
         }
     }
-    return POINT(0, 0);
+    return find;
 }
 
 // 搜索距离内外赛道右边缘上面最近的黄色色块 (黄色锥桶) 赛道内
 POINT search_right_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
     int sum = 5;
+    POINT find = POINT(0, 0);
+    int resw = IMAGE_WIDTH;
     for (size_t i = 0; i < pointsEdge.size(); i++) {
+        sum = 5;
         for (int y = pointsEdge[i].y; y > pointsEdge[i].y - 50; y--) {
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) {
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
                     sum--;
-                if (sum <= 0)
-                    return POINT(pointsEdge[i].x, y);
+                if (sum <= 0 )
+                {   
+                    if (resw > pointsEdge[i].y - y)
+                    {
+                        find = POINT(pointsEdge[i].x, y);
+                        resw = y - pointsEdge[i].y;
+                    }
+                    break;
+                }
+                    
             }
         }
 
     }
 
-    return POINT(0, 0);
+    return find;
 }
 
 // 找左边线离锥桶最近的边线点的位次,x为行，第几行
