@@ -165,7 +165,7 @@ void run_bomb()
 
                 if (cone_line_min0 > cone_line_min1 &&
                     IMG.encoder.route - bomb_route > 40 &&
-                    bomb_near_cone.x > IMAGE_HEIGHT * 0.6)//最近的是右边锥桶
+                    bomb_near_cone.x > IMAGE_HEIGHT * 0.55)//最近的是右边锥桶
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
@@ -190,7 +190,7 @@ void run_bomb()
 
                 if (cone_line_min0 < cone_line_min1 &&
                     IMG.encoder.route - bomb_route > 40 &&
-                    bomb_near_cone.x > IMAGE_HEIGHT * 0.6)//最近的是左边锥桶
+                    bomb_near_cone.x > IMAGE_HEIGHT * 0.55)//最近的是左边锥桶
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
