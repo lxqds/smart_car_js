@@ -69,7 +69,7 @@ void run_bomb()
             // bomb_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
             LOG_I << "cone1 :" <<
                 bomb_near_cone.x << LOG_END;
-
+            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)bomb_route = IMG.encoder.route;
 
 
             // 当车辆开始靠近第一个锥桶:
