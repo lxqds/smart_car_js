@@ -86,6 +86,7 @@ void run_work()
                 if (work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy)
                 {
                     flag_work = WORK_FOUND_2;
+                    work_route = IMG.encoder.route;
                     MAT_LOG("WORK_FOUND_2");
                 }
 
@@ -105,7 +106,7 @@ void run_work()
                 else
                     work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
 
-                if (work_near_cone.x < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy && work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in ) {
+                if (work_near_cone.x < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy && work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in  && IMG.encoder.route - work_route > 10) {
 
                         work_route = IMG.encoder.route;
                         flag_work = WORK_READY;
