@@ -470,6 +470,7 @@ uint16_t search_break_left(std::vector<POINT> pointsEdge, cv::Mat matt) {
             if ((x >= 0) && (x <= IMAGE_HEIGHT - 1))
                 if (AT_IMAGE(matt, pointsEdge[i].y, x) > 0)
                     return i;
+    return 0;
 }
 
 
@@ -480,6 +481,7 @@ uint16_t search_break_right(std::vector<POINT> pointsEdge, cv::Mat matt) {
             if ((x >= 0) && (x <= IMAGE_HEIGHT - 1))
                 if (AT_IMAGE(matt, pointsEdge[i].y, x) > 0)
                     return i;
+    return 0;
 }
 // 搜索距离赛道左边缘上15最近的黄色色块 (黄色锥桶)
 POINT search_left_near15(std::vector<POINT> pointsEdge, cv::Mat matt) {
@@ -603,12 +605,11 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT>* left_cones,
         }
     }
 
-    for (int j = 0; j < points_cones.size() * points_cones.size(); j++) {
-        bool searched = false;
+    for (int j = 0; j < (int)(points_cones.size() * points_cones.size()); j++) {
         int index = -1;
 
         // 搜索左边缘
-        for (int i = 0; i < points_cones.size(); i++) {
+        for (int i = 0; i < (int)points_cones.size(); i++) {
             if (left_cones->size() > 0) {
                 // 先前左边缘只到中间，拓展左边缘
                 // log_i("in1");
@@ -631,12 +632,10 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT>* left_cones,
             swap(points_cones[index], points_cones[points_cones.size() - 1]);
             points_cones.pop_back();
             index = -1;
-            searched = true;
         }
-        searched = false;
         index = -1;
         // 搜索右边缘
-        for (int i = 0; i < points_cones.size(); i++) {
+        for (int i = 0; i < (int)points_cones.size(); i++) {
             if (right_cones->size() > 0) {
                 // 先前左边缘只到中间，拓展左边缘
                 // log_i("in1");
@@ -660,7 +659,6 @@ void search_cones_edge(std::vector<POINT> cones, std::vector<POINT>* left_cones,
             swap(points_cones[index], points_cones[points_cones.size() - 1]);
             points_cones.pop_back();
             index = -1;
-            searched = true;
         }
         // MAT_LOG("qpoint2");
     }
