@@ -73,7 +73,7 @@ void run_bomb()
 
 
             // 当车辆开始靠近第一个锥桶:
-            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.4)
+            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.6)
             {
                 float rnear_cone_x;//透视后锥桶x
                 float cone_line_min0 = 999.0;//左边线和锥桶最小距离
@@ -163,7 +163,7 @@ void run_bomb()
                     PIXEL_PER_METER * 0.2 / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
 
-                if (cone_line_min0 > cone_line_min1 && bomb_near_cone.x > IMAGE_HEIGHT * 0.4)//最近的是右边锥桶
+                if (cone_line_min0 > cone_line_min1 && bomb_near_cone.x > IMAGE_HEIGHT * 0.6)//最近的是右边锥桶
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
@@ -186,7 +186,7 @@ void run_bomb()
                     PIXEL_PER_METER * 0.2 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
-                if (cone_line_min0 < cone_line_min1 && bomb_near_cone.x > IMAGE_HEIGHT * 0.4)//最近的是左边锥桶
+                if (cone_line_min0 < cone_line_min1 && bomb_near_cone.x > IMAGE_HEIGHT * 0.6)//最近的是左边锥桶
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
@@ -268,7 +268,7 @@ void run_bomb()
                     PIXEL_PER_METER * 0.2 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
-                if (bomb_block_y > IMAGE_HEIGHT * 0.5)//靠近黑块
+                if (bomb_block_y > IMAGE_HEIGHT * 0.6)//靠近黑块
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_BLOCK;
