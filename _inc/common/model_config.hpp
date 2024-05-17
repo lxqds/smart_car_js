@@ -69,14 +69,10 @@ struct ControlConfig
     uint8_t gas_rou_out2;      // 加油站驶离 #2 积分
     uint8_t gas_rou_none;      // 加油站结束积分
     uint8_t gas_rou_over;      // 加油站完成积分
+
     uint8_t work_error;        // 施工区错误
-    uint8_t work_rou_in_total; // 施工区进入的总路程
     uint8_t work_rou_ready;    // 施工区准备进入积分
     uint8_t work_rou_in;       // 施工区进入积分
-    uint8_t work_rou_run;      // 施工区内部积分
-    uint8_t work_rou_out;      // 施工区驶离积分
-    uint8_t work_rou_none;     // 施工区完成积分
-    uint8_t work_rou_over;     // 施工区完成积分
     float work_read_cone_thresholdy;// 施工区进入时，锥桶阈值
 
     float work_read_cone_thresholdy_in; //施工区二段进入阈值
@@ -92,11 +88,8 @@ struct ControlConfig
     uint16_t work_run_speed; //施工区 进入速度
 
     float work_angle_in_1;           //施工区一段进入角度
-    float work_angle_in_2;           //施工区一段进入角度
-    float work_recback_angle_route;  //施工区倒车角度积分
 
-    float work_recback_line_route;   //施工区  退出打角积分
-    float work_recback_line_angle;    //施工区 一阶段 退出打角 
+
     float work_recback_angle;          //施工区倒车角度
 
 
@@ -138,8 +131,7 @@ struct ControlConfig
     uint16_t speed_bomb2;        //危险区速度2
 
     uint16_t work_stop_time;     // 停在施工区时间
-    uint16_t work_out_stop_time; // 出去停车的时间
-    uint16_t work_out_speedup_time;
+
 
     uint16_t speed_ramp;        // 桥路程
     uint16_t ramp_rou;           // 桥速度
@@ -223,31 +215,6 @@ struct ControlConfig
         AUTOCFG(gas_rou_out2);
         AUTOCFG(gas_rou_none);
         AUTOCFG(gas_rou_over);
-        AUTOCFG(work_error);
-        AUTOCFG(work_rou_in_total);
-        AUTOCFG(work_read_cone_thresholdy);
-        AUTOCFG(work_rou_ready);
-        AUTOCFG(work_rou_in);
-        AUTOCFG(work_rou_run);
-        AUTOCFG(work_rou_out);
-
-        AUTOCFG(work_angle_in_2);
-        AUTOCFG(work_angle_in_1);
-        AUTOCFG(work_recback_line_angle);
-        AUTOCFG(work_recback_line_route);
-        AUTOCFG(work_recback_angle_route);
-        AUTOCFG(work_recback_angle);
-        AUTOCFG(work_recback_speed);
-
-        AUTOCFG(work_read_cone_thresholdy_in);
-        AUTOCFG(work_read_cone_thresholdy_avg);
-        AUTOCFG(work_recback_line_k);
-        AUTOCFG(work_recback_angle_route_k);
-        AUTOCFG(work_recback_max_route);
-        AUTOCFG(work_run_speed);
-
-        AUTOCFG(work_rou_none);
-        AUTOCFG(work_rou_over);
 
         AUTOCFG(farm_rou_ready);
         AUTOCFG(farm_rou_in);
@@ -283,9 +250,8 @@ struct ControlConfig
 
         AUTOCFG(speed_garage_out);
         AUTOCFG(speed_work);
-        AUTOCFG(work_stop_time);
-        AUTOCFG(work_out_stop_time);
-        AUTOCFG(work_out_speedup_time);
+        
+
 
         AUTOCFG(speed_bomb1);
         AUTOCFG(speed_bomb2);
@@ -295,6 +261,23 @@ struct ControlConfig
         AUTOCFG(bomb_first_cone_run_wide);
         AUTOCFG(bomb_second_run_wide);
         AUTOCFG(bomb_block_run_wide);
+
+        AUTOCFG(work_stop_time);
+        AUTOCFG(work_error);
+        AUTOCFG(work_read_cone_thresholdy);
+        AUTOCFG(work_rou_ready);
+        AUTOCFG(work_rou_in);
+        AUTOCFG(work_angle_in_1);
+        AUTOCFG(work_recback_angle);
+        AUTOCFG(work_recback_speed);
+        AUTOCFG(work_read_cone_thresholdy_in);
+        AUTOCFG(work_read_cone_thresholdy_avg);
+        AUTOCFG(work_recback_line_k);
+        AUTOCFG(work_recback_angle_route_k);
+        AUTOCFG(work_recback_max_route);
+        AUTOCFG(work_run_speed);
+
+
 
         AUTOCFG(speed_ramp);
         AUTOCFG(ramp_rou);

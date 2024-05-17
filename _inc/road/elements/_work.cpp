@@ -201,7 +201,16 @@ void run_work()
                 MAT_LOG("WORK_STOPPING");
             }
 
-
+            //"work_out_stop_time": 100,
+            //    "work_out_speedup_time" : 500,
+            //    "work_rou_in_total" : 80,
+            //    "work_rou_run" : 1,
+            //    "work_rou_out" : 20,
+            //    "work_rou_none" : 10,
+            //    "work_angle_in_2" : 5,
+            //    "work_recback_line_route" : 27,
+            //    "work_recback_line_angle" : -15,
+            //    "work_recback_angle_route" : 60,
 
             if (flag_work == WORK_PARKING)//泊车
             {
