@@ -69,12 +69,9 @@ void run_bomb()
             // bomb_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
             LOG_I << "cone1 :" <<
                 bomb_near_cone.x << LOG_END;
-            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)bomb_route = IMG.encoder.route;
-
-
-            // 当车辆开始靠近第一个锥桶:
-            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.4)
+            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
             {
+                static int first_cone_count = 0;    //第一个锥桶计数       
                 float rnear_cone_x;//透视后锥桶x
                 float cone_line_min0 = 999.0;//左边线和锥桶最小距离
                 float cone_line_min1 = 999.0;//右边线和锥桶最小距离
@@ -101,12 +98,27 @@ void run_bomb()
                 }
                 if (cone_line_min0 < cone_line_min1)
                 {
-                    first_cone = 0;
+                    first_cone_count++;
                 }
                 else
                 {
+                    first_cone_count--;
+                }
+                if (first_cone_count >= 3)
+                {
+                    first_cone = 0;
+                }
+                else if (first_cone_count <= -3)
+                {
                     first_cone = 1;
                 }
+                bomb_route = IMG.encoder.route
+            }
+
+
+            // 当车辆开始靠近第一个锥桶:
+            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.3)
+            {
                 bomb_route = IMG.encoder.route;
                 flag_bomb = BOMB_FIRST_CONE;
                 MAT_LOG("BOMB_FIRST_CONE");
@@ -305,8 +317,9 @@ void run_bomb()
                 if (IMG.encoder.route - bomb_route > 80)//靠近黑块
                 {
                     bomb_route = IMG.encoder.route;
-                    flag_bomb = BOMB_BLOCK;
-                    MAT_LOG("BOMB_BLOCK");
+                    flag_bomb = BOMB_NONE;
+                    control_flag.pop();
+                    MAT_LOG("BOMB_NONE");
                 }
                 else if (IMG.encoder.route - bomb_route > 120)
                 {
@@ -325,15 +338,12 @@ void run_bomb()
                     PIXEL_PER_METER * 0.2 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
-                if (bomb_block_y < IMAGE_HEIGHT * 0.8)//靠近黑块
-                {
-                    bomb_route = IMG.encoder.route;
-                }
                 if (IMG.encoder.route - bomb_route > 40)//靠近黑块
                 {
                     bomb_route = IMG.encoder.route;
-                    flag_bomb = BOMB_BLOCK;
-                    MAT_LOG("BOMB_BLOCK");
+                    flag_bomb = BOMB_NONE;
+                    control_flag.pop();
+                    MAT_LOG("BOMB_NONE");
                 }
                 else if (IMG.encoder.route - bomb_route > 120)
                 {
