@@ -253,7 +253,7 @@ void run_bomb()
                 IMG.rptsc0_num = IMG.rpts0s_num;
                 MAT_LOG(" L_near_y=%d", bomb_near_cone.x);
                 if (IMG.encoder.route - bomb_route > 40 &&
-                    bomb_near_cone.x > IMAGE_HEIGHT * bomb_second_cone_ready )//最近的是左边锥桶
+                    bomb_near_cone.x > IMAGE_HEIGHT * IMG._config-> bomb_second_cone_ready )//最近的是左边锥桶
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
