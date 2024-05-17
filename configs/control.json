@@ -71,12 +71,6 @@
   "work_recback_max_route": 60,
 
   "speed_bomb": 300,
-  "bomb_first_cone_ready": 0.3,
-  "bomb_first_cone_run_wide": 0.2,
-  "bomb_second_cone_ready": 0.7,
-  "bomb_second_run_wide": 0.15,
-  "bomb_block_ready": 0.45,
-  "bomb_block_run_wide": 0.2,
 
   "work_rou_over": 1,
   "farm_rou_ready": 0,
@@ -220,6 +214,12 @@
     "work_out_speedup_time": 500,
     "speed_bomb1": 1000,
     "speed_bomb2": 300,
+    "bomb_first_cone_ready": 0.3,
+    "bomb_first_cone_run_wide": 0.2,
+    "bomb_second_cone_ready": 0.7,
+    "bomb_second_run_wide": 0.15,
+    "bomb_block_ready": 0.45,
+    "bomb_block_run_wide": 0.2,
     "deviation_Farm_in_p": 1.0,
     "speed_circle": 1700,
     "speed_cross": 1700,
@@ -253,6 +253,12 @@
     "work_out_speedup_time": 500,
     "speed_bomb1": 1000,
     "speed_bomb2": 400,
+    "bomb_first_cone_ready": 0.3,
+    "bomb_first_cone_run_wide": 0.2,
+    "bomb_second_cone_ready": 0.7,
+    "bomb_second_run_wide": 0.15,
+    "bomb_block_ready": 0.45,
+    "bomb_block_run_wide": 0.2,
     "deviation_Farm_in_p": 1.0,
     "speed_circle": 1500,
     "speed_cross": 1500,
@@ -266,6 +272,7 @@
     "speed_kp": 10,
     "speed_ki": 0.1,
     "speed_kd": 0
+
   },
   "1500": {
     "*****-aim_distance-*****": 0,

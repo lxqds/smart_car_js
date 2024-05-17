@@ -247,13 +247,6 @@ struct ControlConfig
         AUTOCFG(work_rou_none);
         AUTOCFG(work_rou_over);
 
-        AUTOCFG(bomb_first_cone_ready);
-        AUTOCFG(bomb_second_cone_ready);
-        AUTOCFG(bomb_block_ready);
-        AUTOCFG(bomb_first_cone_run_wide);
-        AUTOCFG(bomb_second_run_wide);
-        AUTOCFG(bomb_block_run_wide);
-
         AUTOCFG(farm_rou_ready);
         AUTOCFG(farm_rou_in);
         AUTOCFG(farm_rou_run);
@@ -296,6 +289,13 @@ struct ControlConfig
 
         AUTOCFG(speed_bomb1);
         AUTOCFG(speed_bomb2);
+        AUTOCFG(bomb_first_cone_ready);
+        AUTOCFG(bomb_second_cone_ready);
+        AUTOCFG(bomb_block_ready);
+        AUTOCFG(bomb_first_cone_run_wide);
+        AUTOCFG(bomb_second_run_wide);
+        AUTOCFG(bomb_block_run_wide);
+
         AUTOCFG(speed_circle);
         AUTOCFG(speed_cross);
 
