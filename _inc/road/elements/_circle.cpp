@@ -46,6 +46,7 @@ void check_circle() {
                 control_flag.remove(cross_element);
                 flag_cross = CROSS_NONE;
             }
+
             control_flag.push(circle_element);
             flag_circle = CIRCLE_LEFT_BEGIN;
             MAT_LOG("CIRCLE_LEFT_BEGIN");
@@ -82,7 +83,8 @@ void run_circle() {
             // 先丢左线后有线
             if (IMG.rpts0s_num < 0.2 / SAMPLE_DIST)
                 none_left_line++;
-            if (IMG.rpts0s_num > 0.8 / SAMPLE_DIST && none_left_line > 1) {
+            if (IMG.encoder.route - circle_route > 10 &&
+                IMG.rpts0s_num > 0.8 / SAMPLE_DIST && none_left_line > 1) {
                 have_left_line++;
                 if (have_left_line > 1) {
                     none_left_line = 0;
@@ -168,7 +170,8 @@ void run_circle() {
             // 先丢右线后有线
             if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
                 none_right_line++;
-            if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST && none_right_line > 1) {
+            if (IMG.encoder.route - circle_route > 10 &&
+                IMG.rpts1s_num > 0.8 / SAMPLE_DIST && none_right_line > 1) {
                 have_right_line++;
                 if (have_right_line > 1) {
                     none_right_line = 0;
