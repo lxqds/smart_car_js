@@ -512,7 +512,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                         !control_flag.contains(garage_element) &&      //当前没在入库中
                         !control_flag.contains(ramp_element) &&      //当前没在桥中
                         !control_flag.contains(bomb_element) &&     //当前没在炸弹中
-                        r.score > 0.7
+                        r.score > 0.75
                         ) {
                         flag_ramp = RAMP_DETECTION;
                         sprintf(string_log, "label_bomb_DETECTION");

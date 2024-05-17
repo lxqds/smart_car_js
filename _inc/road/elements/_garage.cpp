@@ -39,6 +39,7 @@ void check_garage()
     if (!IMG.element_over &&
         !control_flag.contains(work_element) &&         //当前没在工作区中
         !control_flag.contains(garage_element) &&       //当前没在出入库中
+        !control_flag.contains(ramp_element) &&         //当前没在桥中
         IMG.encoder.route > IMG._config->garage_out_route_  //出了车库之后
         )
     {
@@ -173,7 +174,7 @@ void run_garage()
         switch (flag_garage)
         {
             case GARAGE_OUT_LEFT:
-                IMG.aim_speed =IMG._config->speed_garage_out;
+                IMG.aim_speed = IMG._config->speed_garage_out;
                 IMG.flag_track = TRACK_LEFT;
                 // 先丢线后有线
                 if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
@@ -193,10 +194,10 @@ void run_garage()
                         MAT_LOG("GARAGE_NONE");
                     }
                 }
-                
+
                 break;
             case GARAGE_OUT_RIGHT:
-                IMG.aim_speed =IMG._config->speed_garage_out;
+                IMG.aim_speed = IMG._config->speed_garage_out;
                 IMG.flag_track = TRACK_RIGHT;
                 // 先丢线后有线
                 if (IMG.rpts0s_num < 0.2 / SAMPLE_DIST)
@@ -221,7 +222,7 @@ void run_garage()
                 /* ********************************************************* */
 
             case GARAGE_IN_LEFT:
-                IMG.aim_speed =IMG._config->speed_garage_in;
+                IMG.aim_speed = IMG._config->speed_garage_in;
                 IMG.flag_track = TRACK_LEFT;
                 // 先丢线后有线
                 if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
@@ -250,7 +251,7 @@ void run_garage()
                 }
                 break;
             case GARAGE_IN_RIGHT:
-                IMG.aim_speed =IMG._config->speed_garage_in;
+                IMG.aim_speed = IMG._config->speed_garage_in;
                 IMG.flag_track = TRACK_RIGHT;
                 // 先丢线后有线
                 if (IMG.rpts0s_num < 0.2 / SAMPLE_DIST)
@@ -282,7 +283,7 @@ void run_garage()
                 /* ********************************************************* */
 
             case GARAGE_PASS_LEFT:
-                IMG.aim_speed =IMG._config->speed_base;
+                IMG.aim_speed = IMG._config->speed_base;
                 IMG.flag_track = TRACK_RIGHT;
                 if (IMG.encoder.route - garage_route > IMG._config->pass_garage_right)
                 {
@@ -294,7 +295,7 @@ void run_garage()
                 }
                 break;
             case GARAGE_PASS_RIGHT:
-                IMG.aim_speed =IMG._config->speed_base;
+                IMG.aim_speed = IMG._config->speed_base;
                 IMG.flag_track = TRACK_LEFT;
                 if (IMG.encoder.route - garage_route > IMG._config->pass_garage_left)
                 {
@@ -306,7 +307,7 @@ void run_garage()
                 }
                 break;
             case GARAGE_IN_MIDDLE://过斑马线停车
-                IMG.aim_speed =IMG._config->speed_garage_in;
+                IMG.aim_speed = IMG._config->speed_garage_in;
                 if (IMG.encoder.route - garage_route > IMG._config->garage_pass_route_)
                 {
                     flag_garage = GARAGE_STOP;
@@ -336,7 +337,7 @@ void run_garage()
             IMG.aim_speed = 0;
             IMG.aim_angle = 0;
         }
-        
+
     }
 }
 
