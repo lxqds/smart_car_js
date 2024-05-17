@@ -152,6 +152,8 @@ void run_work()
 
                  if (IMG.encoder.route - work_route < IMG._config->work_rou_ready)
                  {
+                        work_route = IMG.encoder.route;
+                        flag_work =  WORK_RUN;
                         // 调整 进入角度
                         IMG.aim_angle = IMG._config->work_angle_in_1;
                         MAT_LOG("WORK_RUN");
