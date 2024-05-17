@@ -79,6 +79,18 @@ struct ControlConfig
     uint8_t work_rou_over;     // 施工区完成积分
     float work_read_cone_thresholdy;// 施工区进入时，锥桶阈值
 
+    float work_read_cone_thresholdy_in; //施工区二段进入阈值
+
+    float work_read_cone_thresholdy_avg;  //施工区 进入锥桶平均阈值
+
+    float work_recback_line_k;//施工区 直线后退阈值
+
+    float work_recback_angle_route_k;//施工区 打角后退阈值
+
+    float work_recback_max_route;//施工区最大退出距离
+
+    uint16_t work_run_speed; //施工区 进入速度
+
     float work_angle_in_1;           //施工区一段进入角度
     float work_angle_in_2;           //施工区一段进入角度
     float work_recback_angle_route;  //施工区倒车角度积分
@@ -86,6 +98,7 @@ struct ControlConfig
     float work_recback_line_route;   //施工区  退出打角积分
     float work_recback_line_angle;    //施工区 一阶段 退出打角 
     float work_recback_angle;          //施工区倒车角度
+
     uint16_t work_recback_speed;           //施工区倒车速度
 
     uint8_t farm_rou_ready;    // 农场识别积分
@@ -216,6 +229,13 @@ struct ControlConfig
         AUTOCFG(work_recback_angle_route);
         AUTOCFG(work_recback_angle);
         AUTOCFG(work_recback_speed);
+
+        AUTOCFG(work_read_cone_thresholdy_in);
+        AUTOCFG(work_read_cone_thresholdy_avg);
+        AUTOCFG(work_recback_line_k);
+        AUTOCFG(work_recback_angle_route_k);
+        AUTOCFG(work_recback_max_route_k);
+        AUTOCFG(work_run_speed);
 
         AUTOCFG(work_rou_none);
         AUTOCFG(work_rou_over);

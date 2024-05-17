@@ -47,21 +47,32 @@
   "gas_rou_out2": 30,
   "gas_rou_none": 10,
   "gas_rou_over": 50,
-  "work_error": 170,
   "work_rou_in_total": 80,
-  "work_read_cone_thresholdy": 0.62,
-  "work_rou_ready": 10,
+
   "work_rou_in": 30,
   "work_rou_run": 1,
   "work_rou_out": 20,
   "work_rou_none": 10,
-  "work_angle_in_1": 25,
   "work_angle_in_2": 5,
   "work_recback_line_route": 27,
   "work_recback_line_angle": -15,
   "work_recback_angle_route": 60,
-  "work_recback_angle": 28,
+
+  "work_error": 170,
+  "work_read_cone_thresholdy": 0.62,
+  "work_read_cone_thresholdy_in": 0.3,
+
+  "work_angle_in_1": 25,
+  "work_rou_ready": 10,
+
+  "work_read_cone_thresholdy_avg": 0.7,  
+  "work_run_speed": 800,
+
+  "work_recback_angle": 25,
   "work_recback_speed": 800,
+  "work_recback_line_k": 1.1,
+  "work_recback_angle_route_k": 0.8,
+  "work_recback_max_route": 60,
 
   "speed_bomb": 300,
   "work_rou_over": 1,

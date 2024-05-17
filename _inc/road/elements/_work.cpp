@@ -83,7 +83,6 @@ void run_work()
                 // 当车辆开始靠近锥桶: 准备进入 识别或色块 识别到的锥桶大于一段阈值
                 if (work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy)
                 {
-                    work_route = IMG.encoder.route;
                     flag_work = WORK_FOUND_2;
                     MAT_LOG("WORK_FOUND_2");
                 }
@@ -149,26 +148,13 @@ void run_work()
                 // 清弯道防止加大 P 项, 提高稳定性
                 IMG.is_curve0 = IMG.is_curve1 = false;
 
-                // 补线
-                if (IMG.encoder.route - work_route < IMG._config->work_rou_in_total)
-                {
-
-                    // 第一阶段: 当赛道 右 边缘存在时
-                    if (IMG.encoder.route - work_route < IMG._config->work_rou_ready)
-                    {
+                 if (IMG.encoder.route - work_route < IMG._config->work_rou_ready)
+                 {
                         // 调整 进入角度
                         IMG.aim_angle = IMG._config->work_angle_in_1;
                         MAT_LOG("WORK_FIRST");
-                    }
-                }
-                else
-                {
-                    work_route = IMG.encoder.route
-                    work_route2 = IMG.encoder.route;//记录直线进入距离
+                 }
 
-                    flag_work = WORK_RUN;
-                    MAT_LOG("WORK_RUN");
-                }
             }
           
 
@@ -227,19 +213,22 @@ void run_work()
 
             if (flag_work == WORK_OUT)
             {
+               // POINT AI_cone_left = POINT AI_search_right_near(IMG._det_result, IMG.edge_left);
                 //退出速度赋值
-                if (work_route - IMG.encoder.route < work_route2 * work_recback_line_k)
+                if (work_route - IMG.encoder.route < work_route2 * IMG._config-> work_recback_line_k)
                 {
-                    float k = 1 - (work_route - IMG.encoder.route) / (work_route2 * work_recback_line_k);//速度逐渐减小
+                    float k = 1 - (work_route - IMG.encoder.route) / (work_route2 * IMG._config-> work_recback_line_k);//速度逐渐减小
                     if (k < 0) k = 0;
                     if (k > 1)k = 1;
 
-                    IMG.aim_speed = (int16_t)(IMG._config->work_run_speed - 500) * k + 500; //逐渐减速
+                    IMG.aim_angle = 0;
+
+                    IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed - 500) * k + 500; //逐渐减速
 
                     IMG.aim_speed = -IMG.aim_speed;//倒车         
 
                     //退出角度赋值
-                    if (work_route - IMG.encoder.route  > work_route2 * work_recback_angle_route_k )//大于退出 某阶段时开始打角
+                    if (work_route - IMG.encoder.route  > work_route2 * IMG._config-> work_recback_angle_route_k )//大于退出 某阶段时开始打角
                     {
                         IMG.aim_angle = IMG._config->work_recback_angle;
                     }
@@ -248,16 +237,66 @@ void run_work()
 
                 if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST && IMG.rpts0s_num > 0.8 / SAMPLE_DIST)
                 {
-
+                        control_flag.pop();//移除
+                        flag_work = WORK_NONE;
+                        MAT_LOG("WORK_NONE");
                 }
 
-                if (true)
+                if (work_route - IMG.encoder.route > IMG._config->work_recback_max_route)
                 {
-
+                        control_flag.pop();//移除
+                        flag_work = WORK_NONE;
+                        MAT_LOG("WORK_NONE");
                 }
 
 
             }
+
+            if (flag_work > WORK_FOUND_2)
+            {
+                IMG.det_ipts_num = 0;
+
+                if (IMG.flag_track == TRACK_LEFT)
+                {
+                    // 进行降序排序
+                    std::sort(IMG.edge_left.begin(), IMG.edge_left.end(), sort_x_down);
+                    for (size_t i = 0; i < IMG.edge_left.size(); i++)
+                    {
+                        if (i >= IMAGE_HEIGHT)
+                            break;
+                        IMG.det_ipts[i][0] = IMG.edge_left[i].y;
+                        IMG.det_ipts[i][1] = IMG.edge_left[i].x;
+                        IMG.det_ipts_num++;
+                    }
+                }
+                else
+                {
+                    // 进行降序排序
+                    std::sort(IMG.edge_right.begin(), IMG.edge_right.end(), sort_x_down);
+                    for (size_t i = 0; i < IMG.edge_right.size(); i++)
+                    {
+                        if (i >= IMAGE_HEIGHT)
+                            break;
+                        IMG.det_ipts[i][0] = IMG.edge_right[i].y;
+                        IMG.det_ipts[i][1] = IMG.edge_right[i].x;
+                        IMG.det_ipts_num++;
+                    }
+                }
+
+                // 原图边线 -> 透视边线
+                for (int i = 0; i < IMG.det_ipts_num; i++)
+                    map_perspective(IMG.det_ipts[i][0], IMG.det_ipts[i][1], IMG.det_rpts[i], 0);
+
+                // 边线滤波
+                blur_points(IMG.det_rpts, IMG.det_ipts_num, IMG.det_rptsb,
+                    (int)round(LINE_BLUR_KERNEL));
+
+                // 边线等距采样
+                IMG.det_rptss_num = sizeof(IMG.det_rptss) / sizeof(IMG.det_rptss[0]);
+                resample_points(IMG.det_rptsb, IMG.det_ipts_num, IMG.det_rptss,
+                    &IMG.det_rptss_num, SAMPLE_DIST * PIXEL_PER_METER);
+            }
+            
     
     }
     //if (control_flag.top() == work_element) {

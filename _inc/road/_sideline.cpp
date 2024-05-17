@@ -351,13 +351,27 @@ float get_AIorcolor_AVG_Y(std::vector<DetectionPredictResult> predict) {
 }
 
 // AI搜索距离赛道左边缘最近的黄色色块 (黄色锥桶)
-POINT AI_search_left_near(std::vector<DetectionPredictResult> predict, std::vector<POINT> pointsEdge,cv::Mat matt){
+POINT AI_search_left_near(std::vector<DetectionPredictResult> predict, std::vector<POINT> pointsEdge){
     vector<POINT> AI_cones = search_targets(predict);
 
     for (size_t i = 0; i < pointsEdge.size(); i++) {
         for (size_t a = 0; a < AI_cones.size(); a++)
         {   //锥桶中心在 任意边线点 左方宽35 高40区域内时:
             if ((pointsEdge[i].y - 35 < AI_cones[a].y && AI_cones[a].y < pointsEdge[i].y) && ((pointsEdge[i].x - 20 < AI_cones[a].x && AI_cones[a].x < pointsEdge[i].x) || pointsEdge[i].x + 20 > AI_cones[a].x && AI_cones[a].x > pointsEdge[i].x))
+                return POINT(pointsEdge[i].x, AI_cones[a].y);
+        }
+    }
+    return POINT(0, 0);
+}
+
+// AI搜索距离赛道左边缘最近的黄色色块 (黄色锥桶)
+POINT AI_search_right_near(std::vector<DetectionPredictResult> predict, std::vector<POINT> pointsEdge) {
+    vector<POINT> AI_cones = search_targets(predict);
+
+    for (size_t i = 0; i < pointsEdge.size(); i++) {
+        for (size_t a = 0; a < AI_cones.size(); a++)
+        {   //锥桶中心在 任意边线点 右方宽35 高40区域内时:
+            if ((pointsEdge[i].y < AI_cones[a].y && AI_cones[a].y < pointsEdge[i].y + 35 ) && ((pointsEdge[i].x - 20 < AI_cones[a].x && AI_cones[a].x < pointsEdge[i].x) || pointsEdge[i].x + 20 > AI_cones[a].x && AI_cones[a].x > pointsEdge[i].x))
                 return POINT(pointsEdge[i].x, AI_cones[a].y);
         }
     }
