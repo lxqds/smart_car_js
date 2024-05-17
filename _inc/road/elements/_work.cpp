@@ -150,7 +150,7 @@ void run_work()
                 // 清弯道防止加大 P 项, 提高稳定性
                 IMG.is_curve0 = IMG.is_curve1 = false;
 
-                 if (IMG.encoder.route - work_route < IMG._config->work_rou_ready)
+                 if (IMG.encoder.route - work_route > IMG._config->work_rou_ready)
                  {
                         work_route = IMG.encoder.route;
                         flag_work =  WORK_RUN;
