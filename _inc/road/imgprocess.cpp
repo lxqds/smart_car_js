@@ -931,11 +931,11 @@ void ImageProcess::calculate_angle(void)
         std::vector<POINT> v_center(4);  // 三阶贝塞尔曲线
         v_center[0] = { (int)cx, (int)cy };
 
-        v_center[1] = { (int)rptsn[aim_idx_near][0], (int)(IMAGE_HEIGHT * (1 - aim_distance_n)) };
+        v_center[1] = { (int)rptsn[aim_idx_near][0], (int)rptsn[aim_idx_near][1] };
 
         v_center[2] = { (int)rptsn[(int)((aim_idx__far + aim_idx_near) / 2)][0],
-                       (int)(IMAGE_HEIGHT * (1 - (aim_distance_f + aim_distance_n) / 2)) };
-        v_center[3] = { (int)rptsn[aim_idx__far][0], (int)(IMAGE_HEIGHT * (1 - aim_distance_f)) };
+                       (int)rptsn[(int)((aim_idx__far + aim_idx_near) / 2)][1] };
+        v_center[3] = { (int)rptsn[aim_idx__far][0], (int)rptsn[aim_idx__far][1] };
         bezier_line = bezier(0.03, v_center);
 
         // bseqx_y1 = (IMAGE_HEIGHT * (1 - aim_distance_n));
