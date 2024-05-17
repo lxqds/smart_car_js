@@ -88,10 +88,10 @@ void run_bomb()
             {
                 first_cone = 1;
             }
-            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
+            if (bomb_near_cone.y > IMAGE_HEIGHT * 0.1)
             {
                 bomb_route = IMG.encoder.route;
-                if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
+                if (bomb_near_cone.y > IMAGE_HEIGHT * 0.1)
                 {
                     IMG._config->speed_bomb2;
                 }
@@ -100,16 +100,16 @@ void run_bomb()
         // // IMG.edge_det = search_targets(IMG._det_result);
         // bomb_near_cone = AI_search_height_near(IMG._det_result);
         // bomb_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
-        // if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
+        // if (bomb_near_cone.y > IMAGE_HEIGHT * 0.1)
         // {
         //     float rnear_cone_x;//透视后锥桶x
         //     float cone_line_min0 = 999.0;//左边线和锥桶最小距离
         //     float cone_line_min1 = 999.0;//右边线和锥桶最小距离
-        //     map_perspective(bomb_near_cone.y, bomb_near_cone.x, &rnear_cone_x, 0);//锥桶透视变化
+        //     map_perspective(bomb_near_cone.y, bomb_near_cone.y, &rnear_cone_x, 0);//锥桶透视变化
         //     for (int i = 0;i < IMG.rpts0s_num;i++)
         //     {
         //         float dx = IMG.rpts0s[i][0] - rnear_cone_x;
-        //         float dy = IMG.rpts0s[i][1] - bomb_near_cone.x;
+        //         float dy = IMG.rpts0s[i][1] - bomb_near_cone.y;
         //         float length = sqrt(dx * dx + dy * dy);
         //         if (length < cone_line_min0)
         //         {
@@ -119,7 +119,7 @@ void run_bomb()
         //     for (int i = 0;i < IMG.rpts1s_num;i++)
         //     {
         //         float dx = IMG.rpts1s[i][0] - rnear_cone_x;
-        //         float dy = IMG.rpts1s[i][1] - bomb_near_cone.x;
+        //         float dy = IMG.rpts1s[i][1] - bomb_near_cone.y;
         //         float length = sqrt(dx * dx + dy * dy);
         //         if (length < cone_line_min1)
         //         {
@@ -141,7 +141,7 @@ void run_bomb()
         //         first_cone = 1;
         //     }
         //     bomb_route = IMG.encoder.route;
-        //     if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
+        //     if (bomb_near_cone.y > IMAGE_HEIGHT * 0.1)
         //     {
         //         IMG._config->speed_bomb2;
         //     }
@@ -150,7 +150,7 @@ void run_bomb()
 
 
         // 当车辆开始靠近第一个锥桶:
-            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.3 && (first_cone_count > 3 || first_cone_count < -3))
+            if (bomb_near_cone.y > IMAGE_HEIGHT * 0.3 && (first_cone_count > 3 || first_cone_count < -3))
             {
                 first_cone_count = 0;
                 bomb_route = IMG.encoder.route;
@@ -185,11 +185,11 @@ void run_bomb()
             // float rnear_cone_x;//透视后锥桶x
             // float cone_line_min0 = 999.0;//左边线和锥桶最小距离
             // float cone_line_min1 = 999.0;//右边线和锥桶最小距离
-            // map_perspective(bomb_near_cone.y, bomb_near_cone.x, &rnear_cone_x, 0);//锥桶透视变化
+            // map_perspective(bomb_near_cone.y, bomb_near_cone.y, &rnear_cone_x, 0);//锥桶透视变化
             // for (int i = 0;i < IMG.rpts0s_num;i++)
             // {
             //     float dx = IMG.rpts0s[i][0] - rnear_cone_x;
-            //     float dy = IMG.rpts0s[i][1] - bomb_near_cone.x;
+            //     float dy = IMG.rpts0s[i][1] - bomb_near_cone.y;
             //     float length = sqrt(dx * dx + dy * dy);
             //     if (length < cone_line_min0)
             //     {
@@ -199,7 +199,7 @@ void run_bomb()
             // for (int i = 0;i < IMG.rpts1s_num;i++)
             // {
             //     float dx = IMG.rpts1s[i][0] - rnear_cone_x;
-            //     float dy = IMG.rpts1s[i][1] - bomb_near_cone.x;
+            //     float dy = IMG.rpts1s[i][1] - bomb_near_cone.y;
             //     float length = sqrt(dx * dx + dy * dy);
             //     if (length < cone_line_min1)
             //     {
@@ -220,7 +220,7 @@ void run_bomb()
                 IMG.rptsc1_num = IMG.rpts1s_num;
 
                 if (IMG.encoder.route - bomb_route > 30 &&
-                    bomb_near_cone.x > IMAGE_HEIGHT * 0.55)
+                    bomb_near_cone.y > IMAGE_HEIGHT * 0.55)
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
@@ -245,7 +245,7 @@ void run_bomb()
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
                 if (IMG.encoder.route - bomb_route > 40 &&
-                    bomb_near_cone.x > IMAGE_HEIGHT * 0.55)//最近的是左边锥桶
+                    bomb_near_cone.y > IMAGE_HEIGHT * 0.55)//最近的是左边锥桶
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
