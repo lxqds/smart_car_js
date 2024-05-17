@@ -164,7 +164,7 @@ void run_bomb()
                 IMG.rptsc1_num = IMG.rpts1s_num;
 
                 if (cone_line_min0 > cone_line_min1 &&
-                    IMG.encoder.route - bomb_route > 40 &&
+                    IMG.encoder.route - bomb_route > 30 &&
                     bomb_near_cone.x > IMAGE_HEIGHT * 0.55)//最近的是右边锥桶
                 {
                     bomb_route = IMG.encoder.route;
@@ -189,7 +189,7 @@ void run_bomb()
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
                 if (cone_line_min0 < cone_line_min1 &&
-                    IMG.encoder.route - bomb_route > 40 &&
+                    IMG.encoder.route - bomb_route > 30 &&
                     bomb_near_cone.x > IMAGE_HEIGHT * 0.55)//最近的是左边锥桶
                 {
                     bomb_route = IMG.encoder.route;
@@ -249,7 +249,7 @@ void run_bomb()
                     PIXEL_PER_METER * 0.15 / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
 
-                if (IMG.encoder.route - bomb_route > 40 && bomb_block_y > IMAGE_HEIGHT * 0.5)//靠近黑块
+                if (IMG.encoder.route - bomb_route > 30 && bomb_block_y > IMAGE_HEIGHT * 0.5)//靠近黑块
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_BLOCK;
@@ -272,7 +272,7 @@ void run_bomb()
                     PIXEL_PER_METER * 0.15 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
-                if (IMG.encoder.route - bomb_route > 40 && bomb_block_y > IMAGE_HEIGHT * 0.6)//靠近黑块
+                if (IMG.encoder.route - bomb_route > 30 && bomb_block_y > IMAGE_HEIGHT * 0.6)//靠近黑块
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_BLOCK;

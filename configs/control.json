@@ -210,7 +210,7 @@
     "work_out_stop_time": 100,
     "work_out_speedup_time": 500,
     "speed_bomb1": 1000,
-    "speed_bomb2": 400,
+    "speed_bomb2": 300,
     "deviation_Farm_in_p": 1.0,
     "speed_circle": 1700,
     "speed_cross": 1700,
