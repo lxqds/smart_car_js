@@ -315,7 +315,7 @@ float get_AIorcolor_AVG_Y(std::vector<DetectionPredictResult> predict) {
     vector<POINT> AI_cones = search_targets(predict);
     int num = AI_cones.size();
 
-    std::float z_scores;
+    float z_scores;
     std::vector<int> avers;
 
     int sum = 0;

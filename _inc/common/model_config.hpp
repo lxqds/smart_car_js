@@ -234,7 +234,7 @@ struct ControlConfig
         AUTOCFG(work_read_cone_thresholdy_avg);
         AUTOCFG(work_recback_line_k);
         AUTOCFG(work_recback_angle_route_k);
-        AUTOCFG(work_recback_max_route_k);
+        AUTOCFG(work_recback_max_route);
         AUTOCFG(work_run_speed);
 
         AUTOCFG(work_rou_none);

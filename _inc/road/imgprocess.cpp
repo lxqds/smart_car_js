@@ -75,7 +75,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 
     // 预瞄点纵坐标黑点检测 ------------------------------------------------
     begin_y_t = BEGIN_Y;
-    if ((flag_work <= WORK_FOUND &&
+    if ((flag_work <= WORK_FOUND_2 &&
         (flag_garage != GARAGE_IN_LEFT) && (flag_garage != GARAGE_IN_RIGHT) &&
         (!(is_curve0 && flag_track == TRACK_LEFT) && !(is_curve1 && flag_track == TRACK_RIGHT))) ||
         (flag_garage == GARAGE_PASS_LEFT || flag_garage == GARAGE_PASS_RIGHT)) {
