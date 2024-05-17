@@ -37,7 +37,7 @@ int first_cone_count = 0;    //第一个锥桶计数
 void check_bomb()
 {
     if (!IMG.element_over &&
-        !control_flag.contains(cross_element) &&    //当前没在炸弹中
+        !control_flag.contains(bomb_element) &&    //当前没在炸弹中
         !control_flag.contains(cross_element) &&    //当前没在十字路口中
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
