@@ -518,7 +518,7 @@ POINT search_right_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
                     if (resw > pointsEdge[i].y - y)
                     {
                         find = POINT(pointsEdge[i].x, y);
-                        resw = y - pointsEdge[i].y;
+                        resw = pointsEdge[i].y - y;
                     }
                     break;
                 }
