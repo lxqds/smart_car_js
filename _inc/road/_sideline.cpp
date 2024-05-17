@@ -423,7 +423,7 @@ uint16_t search_mid_cone_getH(cv::Mat matt) {
             if (AT_IMAGE(matt, x, y) > 0)
                 sum--;
             if (sum <= 0)
-                return 1;
+                return y;
         }
     }
     return 0;
