@@ -55,6 +55,7 @@ void run_ramp() {
             }
             IMG.rpts = IMG.rptscs;
             IMG.rpts_num = IMG.rptscs_num;
+            IMG.calculate_angle();//计算角度
         }
     }
 }
