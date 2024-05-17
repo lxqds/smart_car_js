@@ -44,6 +44,7 @@ void run_ramp() {
 
         if (flag_ramp == RAMP_UP)
         {
+            IMG.flag_track = TRACK_MIDDLE;
             IMG.aim_speed = 1000;
             IMG.aim_distance_f = 0.4;
             IMG.aim_distance_n = 0.1;
