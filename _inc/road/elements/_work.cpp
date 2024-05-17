@@ -172,11 +172,8 @@ void run_work()
                 //开始靠近锥桶
                 if (avg_y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg&& IMG.encoder.route - work_route < IMG._config->work_rou_in )
                 {
-                    float k = 1- (IMG.encoder.route - work_route) / (IMG._config->work_rou_in );//速度逐渐减小
-                    if (k < 0) k = 0;
-                    if (k > 1)k = 1;
 
-                    IMG.aim_speed = (int16_t)(IMG._config->work_run_speed - 500) * k +500;
+                    IMG.aim_speed = (int16_t)(IMG._config->work_run_speed ) ;
 
                 }
                 else {
@@ -223,13 +220,10 @@ void run_work()
                 //退出速度赋值
                 if (work_route - IMG.encoder.route < work_route2 * IMG._config-> work_recback_line_k)
                 {
-                    float k = 1 - (work_route - IMG.encoder.route) / (work_route2 * IMG._config-> work_recback_line_k);//速度逐渐减小
-                    if (k < 0) k = 0;
-                    if (k > 1)k = 1;
 
                     IMG.aim_angle = 0;
 
-                    IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed - 500) * k + 500; //逐渐减速
+                    IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed ) ; //逐渐减速
 
                     IMG.aim_speed = -IMG.aim_speed;//倒车         
 
@@ -258,50 +252,6 @@ void run_work()
 
             }
 
-            if (flag_work > WORK_FOUND_2)
-            {
-                IMG.det_ipts_num = 0;
-
-                if (IMG.flag_track == TRACK_LEFT)
-                {
-                    // 进行降序排序
-                    std::sort(IMG.edge_left.begin(), IMG.edge_left.end(), sort_x_down);
-                    for (size_t i = 0; i < IMG.edge_left.size(); i++)
-                    {
-                        if (i >= IMAGE_HEIGHT)
-                            break;
-                        IMG.det_ipts[i][0] = IMG.edge_left[i].y;
-                        IMG.det_ipts[i][1] = IMG.edge_left[i].x;
-                        IMG.det_ipts_num++;
-                    }
-                }
-                else
-                {
-                    // 进行降序排序
-                    std::sort(IMG.edge_right.begin(), IMG.edge_right.end(), sort_x_down);
-                    for (size_t i = 0; i < IMG.edge_right.size(); i++)
-                    {
-                        if (i >= IMAGE_HEIGHT)
-                            break;
-                        IMG.det_ipts[i][0] = IMG.edge_right[i].y;
-                        IMG.det_ipts[i][1] = IMG.edge_right[i].x;
-                        IMG.det_ipts_num++;
-                    }
-                }
-
-                // 原图边线 -> 透视边线
-                for (int i = 0; i < IMG.det_ipts_num; i++)
-                    map_perspective(IMG.det_ipts[i][0], IMG.det_ipts[i][1], IMG.det_rpts[i], 0);
-
-                // 边线滤波
-                blur_points(IMG.det_rpts, IMG.det_ipts_num, IMG.det_rptsb,
-                    (int)round(LINE_BLUR_KERNEL));
-
-                // 边线等距采样
-                IMG.det_rptss_num = sizeof(IMG.det_rptss) / sizeof(IMG.det_rptss[0]);
-                resample_points(IMG.det_rptsb, IMG.det_ipts_num, IMG.det_rptss,
-                    &IMG.det_rptss_num, SAMPLE_DIST * PIXEL_PER_METER);
-            }
             
     
     }
