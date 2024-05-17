@@ -127,23 +127,19 @@ void run_bomb()
                 //靠近锥桶的线右移
                 for (int i = 0;i < IMG.rpts0s_num;i++)
                 {
-                    // while (true)
-                    // {
-                    //     float dx = IMG.rpts0s[i][0] - IMG.rpts0s[L_line_min_Number][0];
-                    //     float dy = IMG.rpts0s[i][1] - IMG.rpts0s[L_line_min_Number][1];
-                    //     float length = sqrt(dx * dx + dy * dy * 2);
-                    //     if ((length < cone_line_min0 * 1.2) && IMG.rpts0s[i][0] < IMAGE_WIDTH - 1)
-                    //         IMG.rpts0s[i][0]++;
-                    //     else
-                    //         break;
-                    // }
-                    if (abs(IMG.rpts0s[i][1] - bomb_near_cone.x) < 20)IMG.rpts0s[i][0] = rnear_cone_x;
-
-
-
+                    while (true)
+                    {
+                        float dx = IMG.rpts0s[i][0] - IMG.rpts0s[L_line_min_Number][0];
+                        float dy = IMG.rpts0s[i][1] - IMG.rpts0s[L_line_min_Number][1];
+                        float length = sqrt(dx * dx + dy * dy * 2);
+                        if ((length < cone_line_min0 * 1.2) && IMG.rpts0s[i][0] < IMAGE_WIDTH - 1)
+                            IMG.rpts0s[i][0]++;
+                        else
+                            break;
+                    }
                 }
                 //左边线预测中线
-                track_rightline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
+                track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * 0.3 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
@@ -154,20 +150,19 @@ void run_bomb()
                 //靠近锥桶的线左移
                 for (int i = 0;i < IMG.rpts1s_num;i++)
                 {
-                    // while (true)
-                    // {
-                    //     float dx = IMG.rpts1s[i][0] - IMG.rpts1s[R_line_min_Number][0];
-                    //     float dy = IMG.rpts1s[i][1] - IMG.rpts1s[R_line_min_Number][1];
-                    //     float length = sqrt(dx * dx + dy * dy * 2);
-                    //     if ((length < cone_line_min1 * 1.2) && IMG.rpts1s[i][0] > 1)
-                    //         IMG.rpts1s[i][0]--;
-                    //     else
-                    //         break;
-                    // }
-                    if (abs(IMG.rpts1s[i][1] - bomb_near_cone.x) < 20)IMG.rpts1s[i][0] = rnear_cone_x;
+                    while (true)
+                    {
+                        float dx = IMG.rpts1s[i][0] - IMG.rpts1s[R_line_min_Number][0];
+                        float dy = IMG.rpts1s[i][1] - IMG.rpts1s[R_line_min_Number][1];
+                        float length = sqrt(dx * dx + dy * dy * 2);
+                        if ((length < cone_line_min1 * 1.2) && IMG.rpts1s[i][0] > 1)
+                            IMG.rpts1s[i][0]--;
+                        else
+                            break;
+                    }
                 }
                 //右边线预测中线
-                track_leftline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
+                track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * 0.3 / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
@@ -197,8 +192,8 @@ void run_bomb()
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.flag_track = TRACK_RIGHT;
             IMG.aim_distance_f = 0.5;
-            IMG.aim_distance_n = 0.1;
-            IMG.aim_angle_p *= 1.8;
+            IMG.aim_distance_n = 0.2;
+            // IMG.aim_angle_p *= 1.8;
 
             float rnear_block_x;//透视后黑块x
             int L_line_min_Number = 0;//左边线和锥桶最小距离的点序号
@@ -252,7 +247,7 @@ void run_bomb()
                     }
                 }
                 //左边线预测中线
-                track_rightline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
+                track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * 0.3 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
@@ -275,7 +270,7 @@ void run_bomb()
                     }
                 }
                 //右边线预测中线
-                track_leftline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
+                track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * 0.3 / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
