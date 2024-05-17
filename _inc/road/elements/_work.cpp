@@ -78,7 +78,7 @@ void run_work()
                 else
                     work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
 
-                LOG_I << " work_near_cone :" << work_near_cone.x << " IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy :" << IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy << LOG_END;
+              //  LOG_I << " work_near_cone :" << work_near_cone.x << " IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy :" << IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy << LOG_END;
 
                 // 当车辆开始靠近锥桶: 准备进入 识别或色块 识别到的锥桶大于一段阈值
                 if (work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy)
@@ -152,7 +152,7 @@ void run_work()
                  {
                         // 调整 进入角度
                         IMG.aim_angle = IMG._config->work_angle_in_1;
-                        MAT_LOG("WORK_FIRST");
+                        MAT_LOG("WORK_RUN");
                  }
 
             }
@@ -162,7 +162,7 @@ void run_work()
 
                 float avg_y= get_AIorcolor_AVG_Y(IMG._det_result);
                 IMG.aim_angle = 0;
-                LOG_I << "  get_AIorcolor_AVG_Y :" << get_AIorcolor_AVG_Y;
+                LOG_I << "  get_AIorcolor_AVG_Y :" << get_AIorcolor_AVG_Y << LOG_END;
                 //开始靠近锥桶
                 if (avg_y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg&& IMG.encoder.route - work_route < IMG._config->work_rou_in )
                 {
