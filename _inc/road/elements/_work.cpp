@@ -151,7 +151,8 @@ void run_work()
                 IMG.is_curve0 = IMG.is_curve1 = false;
 
                  if (IMG.encoder.route - work_route > IMG._config->work_rou_ready)
-                 {
+                 {      
+                       IMG.aim_angle = IMG._config->work_angle_in_1;
                         work_route = IMG.encoder.route;
                         flag_work =  WORK_RUN;
                         // 调整 进入角度
