@@ -203,7 +203,7 @@ void run_bomb()
         if (flag_bomb == BOMB_SECOND_CONE)
         {
             IMG.aim_speed = IMG._config->speed_bomb2;
-            IMG.aim_distance_f = 0.5;
+            IMG.aim_distance_f = 0.3;
             IMG.aim_distance_n = 0.1;
             IMG.aim_angle_p *= 1.5;
 
