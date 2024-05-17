@@ -217,25 +217,22 @@ void run_work()
 
             if (flag_work == WORK_OUT)
             {
-               // POINT AI_cone_left = POINT AI_search_right_near(IMG._det_result, IMG.edge_left);
+                IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed); //逐渐减速
+                IMG.aim_speed = -IMG.aim_speed;//倒车         
+                // POINT AI_cone_left = POINT AI_search_right_near(IMG._det_result, IMG.edge_left);
+                //退出角度赋值
+                if (work_route - IMG.encoder.route > work_route2 * IMG._config->work_recback_angle_route_k)//大于退出 某阶段时开始打角
+                {
+                    IMG.aim_angle = IMG._config->work_recback_angle;
+                }
                 //退出速度赋值
                 if (work_route - IMG.encoder.route < work_route2 * IMG._config-> work_recback_line_k)
                 {
 
                     IMG.aim_angle = 0;
-
-                    IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed ) ; //逐渐减速
-
-                    IMG.aim_speed = -IMG.aim_speed;//倒车         
-
-                    //退出角度赋值
-                    if (work_route - IMG.encoder.route  > work_route2 * IMG._config-> work_recback_angle_route_k )//大于退出 某阶段时开始打角
-                    {
-                        IMG.aim_angle = IMG._config->work_recback_angle;
-                    }
                     MAT_LOG("out");
                 }
-
+  
                 if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST && IMG.rpts0s_num > 0.8 / SAMPLE_DIST && work_route - IMG.encoder.route > work_route2)
                 {
                         control_flag.pop();//移除
