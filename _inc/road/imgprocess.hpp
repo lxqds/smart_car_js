@@ -263,7 +263,8 @@ enum Control_element {
     circle_element, //环岛
     work_element,   //工作区
     garage_element, //车库
-    bomb_element    //炸弹
+    bomb_element,   //炸弹
+    ramp_element    //桥
 };
 
 class Control_Flag {
