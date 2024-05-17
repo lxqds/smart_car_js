@@ -40,7 +40,7 @@ void check_bomb()
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&      //当前没在入库中
-        flag_bomb == BOMB_DETECTION && bomb_y > IMAGE_HEIGHT * 0.15 //找到炸弹
+        flag_bomb == BOMB_DETECTION && bomb_y > IMAGE_HEIGHT * 0.1 //找到炸弹
         )
     {
         IMG.element_identify = 1;
@@ -67,8 +67,6 @@ void run_bomb()
             // IMG.edge_det = search_targets(IMG._det_result);
             bomb_near_cone = AI_search_height_near(IMG._det_result);
             // bomb_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
-            LOG_I << "cone1 :" <<
-                bomb_near_cone.x << LOG_END;
             if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
             {
                 float rnear_cone_x;//透视后锥桶x
@@ -95,6 +93,7 @@ void run_bomb()
                         cone_line_min1 = length;
                     }
                 }
+                MAT_LOG("cone_line_min0=%d cone_line_min1=%d", cone_line_min0, cone_line_min1);
                 if (cone_line_min0 < cone_line_min1)
                     first_cone_count++;
                 else
@@ -103,6 +102,7 @@ void run_bomb()
                 {
                     first_cone = 0;
                 }
+
                 else if (first_cone_count <= -3)
                 {
                     first_cone = 1;
