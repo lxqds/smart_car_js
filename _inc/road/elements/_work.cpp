@@ -156,7 +156,7 @@ void run_work()
                 
                         work_route = IMG.encoder.route;
                         flag_work =  WORK_RUN;
-
+                        work_route2= IMG.encoder.route;
                         MAT_LOG("WORK_RUN");
                  }
 
@@ -238,21 +238,21 @@ void run_work()
                     {
                         IMG.aim_angle = IMG._config->work_recback_angle;
                     }
-
+                    MAT_LOG("out");
                 }
 
-                if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST && IMG.rpts0s_num > 0.8 / SAMPLE_DIST)
+                if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST && IMG.rpts0s_num > 0.8 / SAMPLE_DIST && work_route - IMG.encoder.route > work_route2)
                 {
                         control_flag.pop();//移除
                         flag_work = WORK_NONE;
-                        MAT_LOG("WORK_NONE");
+                        MAT_LOG("WORK_HAVE_L");
                 }
 
                 if (work_route - IMG.encoder.route > IMG._config->work_recback_max_route)
                 {
                         control_flag.pop();//移除
                         flag_work = WORK_NONE;
-                        MAT_LOG("WORK_NONE");
+                        MAT_LOG("WORK_MAX");
                 }
 
 
