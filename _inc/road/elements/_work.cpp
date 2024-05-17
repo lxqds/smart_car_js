@@ -164,7 +164,7 @@ void run_work()
                 IMG.aim_angle = 0;
 
                 //开始靠近锥桶
-                if (avg_y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avgy && IMG.encoder.route - work_route < IMG._config->work_rou_in )
+                if (avg_y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg&& IMG.encoder.route - work_route < IMG._config->work_rou_in )
                 {
                     float k = 1- (IMG.encoder.route - work_route) / (IMG._config->work_rou_in );//速度逐渐减小
                     if (k < 0) k = 0;
