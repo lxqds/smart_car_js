@@ -410,7 +410,7 @@ uint16_t search_mid_cone_getH(cv::Mat matt) {
     int sum = 5;
     for (size_t y = IMAGE_HEIGHT - 1; y > IMAGE_HEIGHT / 2; y--) {
         sum = 5;
-        for (size_t x = IMAGE_WIDTH / 2; x < IMAGE_WIDTH - 35; x++)
+        for (size_t x = IMAGE_WIDTH / 2; x < IMAGE_WIDTH - 30; x++)
         {
             if (AT_IMAGE(matt, x, y) > 0)
                 sum--;
@@ -418,7 +418,7 @@ uint16_t search_mid_cone_getH(cv::Mat matt) {
                 return y;
         }
 
-        for (size_t x = IMAGE_WIDTH / 2; x > 35; x--)
+        for (size_t x = IMAGE_WIDTH / 2; x > 30; x--)
         {
             if (AT_IMAGE(matt, x, y) > 0)
                 sum--;
@@ -483,13 +483,13 @@ POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
     int resw = IMAGE_WIDTH;
     for (size_t i = 0; i < pointsEdge.size(); i++) {
         sum = 5;
-        for (int y = pointsEdge[i].y; y < pointsEdge[i].y + 50; y++) {
+        for (int y = pointsEdge[i].y; y < pointsEdge[i].y + 35; y++) {
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) {
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
                     sum--;
                 if (sum <= 0)
                 {
-                    if (resw >  y - pointsEdge[i].y )
+                    if (resw > y - pointsEdge[i].y)
                     {
                         find = POINT(pointsEdge[i].x, y);
                         resw = y - pointsEdge[i].y;
@@ -509,12 +509,12 @@ POINT search_right_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
     int resw = IMAGE_WIDTH;
     for (size_t i = 0; i < pointsEdge.size(); i++) {
         sum = 5;
-        for (int y = pointsEdge[i].y; y > pointsEdge[i].y - 50; y--) {
+        for (int y = pointsEdge[i].y; y > pointsEdge[i].y - 35; y--) {
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) {
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
                     sum--;
-                if (sum <= 0 )
-                {   
+                if (sum <= 0)
+                {
                     if (resw > pointsEdge[i].y - y)
                     {
                         find = POINT(pointsEdge[i].x, y);
@@ -522,7 +522,7 @@ POINT search_right_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
                     }
                     break;
                 }
-                    
+
             }
         }
 

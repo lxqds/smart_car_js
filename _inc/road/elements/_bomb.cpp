@@ -70,17 +70,20 @@ void run_bomb()
             bomb_near_cone_R = POINT(0, 0);
             bomb_near_cone_L = search_left_near_in(IMG.edge_left, IMG.mat_lab);
             bomb_near_cone_R = search_right_near_in(IMG.edge_right, IMG.mat_lab);
+            if (bomb_near_cone_L.x != 0 && bomb_near_cone_R.x != 0)
+            {
+                if (bomb_near_cone_L.x > bomb_near_cone_R.x)
+                {
+                    first_cone_count++;
+                    bomb_near_cone = bomb_near_cone_L;
+                }
+                else
+                {
+                    first_cone_count--;
+                    bomb_near_cone = bomb_near_cone_R;
+                }
+            }
 
-            if (bomb_near_cone_L.x > bomb_near_cone_R.x)
-            {
-                first_cone_count++;
-                bomb_near_cone = bomb_near_cone_L;
-            }
-            else
-            {
-                first_cone_count--;
-                bomb_near_cone = bomb_near_cone_R;
-            }
 
             if (first_cone_count >= 3)
             {
@@ -253,7 +256,7 @@ void run_bomb()
                 IMG.rptsc0_num = IMG.rpts0s_num;
                 MAT_LOG(" L_near_y=%d", bomb_near_cone.x);
                 if (IMG.encoder.route - bomb_route > 40 &&
-                    bomb_near_cone.x > IMAGE_HEIGHT * IMG._config-> bomb_second_cone_ready )//最近的是左边锥桶
+                    bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_second_cone_ready)//最近的是左边锥桶
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
@@ -301,7 +304,7 @@ void run_bomb()
                 bomb_route = IMG.encoder.route;
             }
 
-            if (bomb_block_y > IMAGE_HEIGHT * IMG._config-> bomb_block_ready)//靠近黑块
+            if (bomb_block_y > IMAGE_HEIGHT * IMG._config->bomb_block_ready)//靠近黑块
             {
                 bomb_route = IMG.encoder.route;
                 flag_bomb = BOMB_BLOCK;
