@@ -29,7 +29,7 @@ int bomb_block_y = 0;           //纵坐标
 
 int first_cone = 0;        //第一个锥桶的位置
 int first_cone_count = 0;    //第一个锥桶计数 
-
+int second_cone_count = 0;   //第二个锥桶计数
 /* ********************************************************************* */
 
 void check_bomb()
@@ -162,6 +162,19 @@ void run_bomb()
                     cone_line_min1 = length;
                 }
             }
+            if (cone_line_min0 < cone_line_min1)
+            {
+                if (second_cone_count < 0)
+                    second_cone_count = 0;
+                second_cone_count++;
+            }
+            else
+            {
+                if (second_cone_count > 0)
+                    second_cone_count = 0;
+                second_cone_count--;
+            }
+
 
             if (first_cone == 0)    //第一个锥桶在左边，循右线
             {
@@ -172,7 +185,7 @@ void run_bomb()
                     PIXEL_PER_METER * 0.2 / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
 
-                if (cone_line_min0 > cone_line_min1 &&
+                if (second_cone_count < -3 &&
                     IMG.encoder.route - bomb_route > 30 &&
                     bomb_near_cone.x > IMAGE_HEIGHT * 0.55)//最近的是右边锥桶
                 {
@@ -197,8 +210,8 @@ void run_bomb()
                     PIXEL_PER_METER * 0.2 / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
-                if (cone_line_min0 < cone_line_min1 &&
-                    IMG.encoder.route - bomb_route > 30 &&
+                if (second_cone_count > 3 &&
+                    IMG.encoder.route - bomb_route > 40 &&
                     bomb_near_cone.x > IMAGE_HEIGHT * 0.55)//最近的是左边锥桶
                 {
                     bomb_route = IMG.encoder.route;
