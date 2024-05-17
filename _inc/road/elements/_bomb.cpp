@@ -396,11 +396,11 @@ void run_bomb()
         }
         else if (IMG.flag_track == TRACK_RIGHT)
         {
-            IMG.aim_angle = 0;
+            IMG.aim_angle = -45;
         }
         else if (IMG.flag_track == TRACK_LEFT)
         {
-            IMG.aim_angle = 0;
+            IMG.aim_angle = 45;
         }
 
     }
