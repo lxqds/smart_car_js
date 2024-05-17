@@ -82,6 +82,7 @@ void run_bomb()
                     first_cone_count--;
                     bomb_near_cone = bomb_near_cone_R;
                 }
+                MAT_LOG("near_y L=%d R=%d ", bomb_near_cone_L.x, bomb_near_cone_R.x);
             }
 
 
