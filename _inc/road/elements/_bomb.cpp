@@ -310,10 +310,10 @@ void run_bomb()
         }
         if (flag_bomb == BOMB_BLOCK)
         {
-            IMG.aim_speed = IMG._config->speed_bomb2;
-            IMG.aim_distance_f = 0.5;
-            IMG.aim_distance_n = 0.2;
-            // IMG.aim_angle_p *= 1.8;
+            IMG.aim_speed = IMG._config->speed_bomb1;
+            IMG.aim_distance_f = 0.3;
+            IMG.aim_distance_n = 0.1;
+            IMG.aim_angle_p *= 1.5;
 
             if (first_cone == 0)    //第一个锥桶在右边，第二个锥桶在左边，寻右线
             {
@@ -324,7 +324,7 @@ void run_bomb()
                     PIXEL_PER_METER * 0.2 / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
 
-                if (IMG.encoder.route - bomb_route > 80)//靠近黑块
+                if (IMG.encoder.route - bomb_route > 60)//靠近黑块
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_NONE;
