@@ -47,9 +47,10 @@ float far_rpts1an[IMAGE_HEIGHT];
 void check_cross() {
     if (!IMG.element_over &&
         !control_flag.contains(cross_element) &&    //当前没在十字路口中
-        !control_flag.contains(bomb_element) &&   //当前没在炸弹中
+        !control_flag.contains(bomb_element) &&     //当前没在炸弹中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&   //当前没在入库中
+        !control_flag.contains(ramp_element) &&     //当前没在桥中
         ((IMG.Lpt0_found && IMG.Lpt1_found) ||
             (!control_flag.contains(circle_element) &&
                 (

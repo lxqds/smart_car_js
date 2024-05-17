@@ -32,6 +32,8 @@ void check_work()
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&   //当前没在入库中
+        !control_flag.contains(ramp_element) &&      //当前没在桥中
+        !control_flag.contains(cross_element) &&    //当前没在炸弹中
         (flag_work == WORK_DETECTION || flag_work == WORK_EVEI_DETECTION))
     {
         if (flag_work == WORK_EVEI_DETECTION) {
