@@ -647,14 +647,14 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     float aim_angle_filter = filter(aim_angle);
     aim_angle_last = aim_angle_filter;
 
-    // 动态 P 项, 出入库禁止
-    if ((flag_garage != GARAGE_OUT_LEFT && flag_garage != GARAGE_OUT_RIGHT) &&
-        (flag_garage != GARAGE_IN_LEFT && flag_garage != GARAGE_IN_RIGHT) &&
-        ((is_curve0 && flag_track == TRACK_LEFT) || (is_curve1 && flag_track == TRACK_RIGHT))) {
-        aim_angle_p += fabs(aim_angle_filter) * aim_angle_p_k;
-        aim_angle_p = aim_angle_p > _config->steering_p * 3.0f ? _config->steering_p * 3.0f
-            : aim_angle_p;
-    }
+    // // 动态 P 项, 出入库禁止
+    // if ((flag_garage != GARAGE_OUT_LEFT && flag_garage != GARAGE_OUT_RIGHT) &&
+    //     (flag_garage != GARAGE_IN_LEFT && flag_garage != GARAGE_IN_RIGHT) &&
+    //     ((is_curve0 && flag_track == TRACK_LEFT) || (is_curve1 && flag_track == TRACK_RIGHT))) {
+    //     aim_angle_p += fabs(aim_angle_filter) * aim_angle_p_k;
+    //     aim_angle_p = aim_angle_p > _config->steering_p * 3.0f ? _config->steering_p * 3.0f
+    //         : aim_angle_p;
+    // }
 
     // 计算舵机 PID
     int aim_angle_pwm = 0;
@@ -931,11 +931,11 @@ void ImageProcess::calculate_angle(void)
         std::vector<POINT> v_center(4);  // 三阶贝塞尔曲线
         v_center[0] = { (int)cx, (int)cy };
 
-        v_center[1] = { (int)rptsn[aim_idx_near][0], (int)(IMAGE_HEIGHT * (1 - aim_distance_n)) };
+        v_center[1] = { (int)rptsn[aim_idx_near][0], (int)(IMAGE_HEIGHT * (1 - aim_idx_near)) };
 
         v_center[2] = { (int)rptsn[(int)((aim_idx__far + aim_idx_near) / 2)][0],
-                       (int)(IMAGE_HEIGHT * (1 - (aim_distance_f + aim_distance_n) / 2)) };
-        v_center[3] = { (int)rptsn[aim_idx__far][0], (int)(IMAGE_HEIGHT * (1 - aim_distance_f)) };
+                       (int)(IMAGE_HEIGHT * (1 - (aim_idx__far + aim_distance_n) / 2)) };
+        v_center[3] = { (int)rptsn[aim_idx__far][0], (int)(IMAGE_HEIGHT * (1 - aim_idx__far)) };
         bezier_line = bezier(0.03, v_center);
 
         // bseqx_y1 = (IMAGE_HEIGHT * (1 - aim_distance_n));
