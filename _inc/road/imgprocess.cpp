@@ -422,7 +422,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
             int deX = r.x / 2, deY = r.y / 2;
             int deH = r.height / 2, deW = r.width / 2;
 
-            log_i("Detection GET %d ", r.type);
+            log_i("Detection GET %d ,%f", r.type,r.score);
             // 尺寸位置筛选
             // if ((deX < 10 || deX + deW > 300) || deY < 20 || (deH < 25 || deW < 25))
                 //continue;
@@ -455,7 +455,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                         !control_flag.contains(garage_element) &&      //当前没在入库中
                         !control_flag.contains(ramp_element) &&      //当前没在桥中
                         !control_flag.contains(bomb_element) &&     //当前没在炸弹中
-                        r.score > 0.65) {
+                        r.score > 0.6) {
                         if (flag_work == WORK_NONE && _config->check_work_ == 1) {
                             flag_work = WORK_EVEI_DETECTION;
                             sprintf(string_log, "WORK_EVEI_DETECTION");
@@ -474,7 +474,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                         !control_flag.contains(garage_element) &&      //当前没在入库中
                         !control_flag.contains(ramp_element) &&      //当前没在桥中
                         !control_flag.contains(bomb_element) &&     //当前没在炸弹中
-                        r.score > 0.65
+                        r.score > 0.6
                         ) {
                         if (flag_work == WORK_NONE && _config->check_work_ == 1) {
 
