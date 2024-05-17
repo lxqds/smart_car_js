@@ -99,8 +99,15 @@ struct ControlConfig
     float work_recback_line_angle;    //施工区 一阶段 退出打角 
     float work_recback_angle;          //施工区倒车角度
 
-    uint16_t work_recback_speed;           //施工区倒车速度
 
+    float bomb_first_cone_ready;     //第一个锥桶 准备拐弯阈值
+    float bomb_first_cone_run_wide;//第一个锥桶道路宽度系数： 靠近边线距离
+    float bomb_second_cone_ready; //第二个锥桶准备拐弯阈值
+    float bomb_second_run_wide;//第二个锥桶道路宽度系数： 靠近边线距离  
+    float bomb_block_ready;   //黑块准备拐弯阈值
+    float bomb_block_run_wide;//黑块道路系数
+
+    uint16_t work_recback_speed;           //施工区倒车速度
     uint8_t farm_rou_ready;    // 农场识别积分
     uint8_t farm_rou_in;       // 农场进入积分
     uint8_t farm_rou_run;      // 农场行进距离
@@ -239,6 +246,14 @@ struct ControlConfig
 
         AUTOCFG(work_rou_none);
         AUTOCFG(work_rou_over);
+
+        AUTOCFG(bomb_first_cone_ready);
+        AUTOCFG(bomb_second_cone_ready);
+        AUTOCFG(bomb_block_ready);
+        AUTOCFG(bomb_first_cone_run_wide);
+        AUTOCFG(bomb_second_run_wide);
+        AUTOCFG(bomb_block_run_wide);
+
         AUTOCFG(farm_rou_ready);
         AUTOCFG(farm_rou_in);
         AUTOCFG(farm_rou_run);

@@ -80,6 +80,7 @@ void run_bomb()
                 first_cone_count--;
                 bomb_near_cone = bomb_near_cone_R;
             }
+
             if (first_cone_count >= 3)
             {
                 first_cone = 0;
@@ -91,7 +92,7 @@ void run_bomb()
             if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
             {
                 bomb_route = IMG.encoder.route;
-                if (bomb_near_cone.x > IMAGE_HEIGHT * 0.3)
+                if (bomb_near_cone.x > IMAGE_HEIGHT * 0.4)
                 {
                     IMG._config->speed_bomb2;
                 }
@@ -148,9 +149,14 @@ void run_bomb()
 
         // }
 
-
+                //first_cone_ready    0.3
+                //first_cone_run_wide  0.2
+                //bomb_second_cone_ready 0.7
+                //bomb_second_run_wide  0.15
+                //boom_block_ready 0.45
+                //boom_block_run_wide 0.2
         // 当车辆开始靠近第一个锥桶:
-            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.3 && (first_cone_count > 3 || first_cone_count < -3))
+            if (bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_first_cone_ready && (first_cone_count > 3 || first_cone_count < -3))
             {
                 first_cone_count = 0;
                 bomb_route = IMG.encoder.route;
@@ -216,11 +222,12 @@ void run_bomb()
                 //右边线预测中线
                 track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * 0.2 / 2);
+                    PIXEL_PER_METER * IMG._config->bomb_first_cone_run_wide / 2);
+
                 IMG.rptsc1_num = IMG.rpts1s_num;
 
                 if (IMG.encoder.route - bomb_route > 30 &&
-                    bomb_near_cone.x > IMAGE_HEIGHT * 0.7)
+                    bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_second_cone_ready)
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
@@ -241,11 +248,11 @@ void run_bomb()
                 //左边线预测中线
                 track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * 0.2 / 2);
+                    PIXEL_PER_METER * IMG._config->bomb_first_cone_run_wide / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
                 if (IMG.encoder.route - bomb_route > 40 &&
-                    bomb_near_cone.x > IMAGE_HEIGHT * 0.7)//最近的是左边锥桶
+                    bomb_near_cone.x > IMAGE_HEIGHT * bomb_second_cone_ready )//最近的是左边锥桶
                 {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_SECOND_CONE;
@@ -273,7 +280,7 @@ void run_bomb()
                 //右边线预测中线
                 track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * 0.15 / 2);
+                    PIXEL_PER_METER * IMG._config->bomb_second_run_wide / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
 
             }
@@ -283,7 +290,7 @@ void run_bomb()
                 //左边线预测中线
                 track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * 0.15 / 2);
+                    PIXEL_PER_METER * IMG._config->bomb_second_run_wide / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
             }
@@ -293,7 +300,7 @@ void run_bomb()
                 bomb_route = IMG.encoder.route;
             }
 
-            if (bomb_block_y > IMAGE_HEIGHT * 0.45)//靠近黑块
+            if (bomb_block_y > IMAGE_HEIGHT * IMG._config-> bomb_block_ready)//靠近黑块
             {
                 bomb_route = IMG.encoder.route;
                 flag_bomb = BOMB_BLOCK;
@@ -319,7 +326,7 @@ void run_bomb()
                 //右边线预测中线
                 track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * 0.2 / 2);
+                    PIXEL_PER_METER * IMG._config->bomb_block_run_wide / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
 
                 if (IMG.encoder.route - bomb_route > 60)//靠近黑块
@@ -348,7 +355,7 @@ void run_bomb()
                 //左边线预测中线
                 track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
-                    PIXEL_PER_METER * 0.2 / 2);
+                    PIXEL_PER_METER * IMG._config->boom_block_run_wide / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
                 if (IMG.encoder.route - bomb_route > 60)//靠近黑块

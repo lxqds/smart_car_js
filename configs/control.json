@@ -60,6 +60,7 @@
   "work_read_cone_thresholdy": 0.62,
   "work_read_cone_thresholdy_in": 0.3,
   "work_angle_in_1": 25,
+
   "work_rou_ready": 10,
   "work_read_cone_thresholdy_avg": 0.45,
   "work_run_speed": 800,
@@ -68,7 +69,15 @@
   "work_recback_line_k": 1.1,
   "work_recback_angle_route_k": 0.8,
   "work_recback_max_route": 60,
+
   "speed_bomb": 300,
+  "bomb_first_cone_read": 0.3,
+  "bomb_first_cone_run_wide": 0.2,
+  "bomb_second_cone_ready": 0.7,
+  "bomb_second_run_wide": 0.15,
+  "bomb_block_ready": 0.45,
+  "bomb_block_run_wide": 0.2,
+
   "work_rou_over": 1,
   "farm_rou_ready": 0,
   "farm_rou_in": 0,
