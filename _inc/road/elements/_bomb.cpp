@@ -73,7 +73,7 @@ void run_bomb()
 
 
             // 当车辆开始靠近第一个锥桶:
-            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.6)
+            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.4)
             {
                 float rnear_cone_x;//透视后锥桶x
                 float cone_line_min0 = 999.0;//左边线和锥桶最小距离
@@ -121,7 +121,7 @@ void run_bomb()
         if (flag_bomb == BOMB_FIRST_CONE)
         {
             IMG.aim_speed = IMG._config->speed_bomb2;
-            IMG.aim_distance_f = 0.5;
+            IMG.aim_distance_f = 0.3;
             IMG.aim_distance_n = 0.1;
             IMG.aim_angle_p *= 1.5;
 
