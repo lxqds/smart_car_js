@@ -71,7 +71,7 @@
   "work_recback_max_route": 60,
 
   "speed_bomb": 300,
-  "bomb_first_cone_read": 0.3,
+  "bomb_first_cone_ready": 0.3,
   "bomb_first_cone_run_wide": 0.2,
   "bomb_second_cone_ready": 0.7,
   "bomb_second_run_wide": 0.15,
