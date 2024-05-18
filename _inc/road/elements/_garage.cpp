@@ -486,6 +486,32 @@ void run_garage()
                     IMG.aim_angle = 0;
                 }
                 break;
+            case GARAGE_STOP://停车
+                IMG.aim_speed = 0;
+                // 正常巡线
+                if (IMG.flag_track == TRACK_LEFT) {
+                    IMG.rpts = IMG.rptsc0;
+                    IMG.rpts_num = IMG.rptsc0_num;
+                }
+                else if (IMG.flag_track == TRACK_RIGHT) {
+                    IMG.rpts = IMG.rptsc1;
+                    IMG.rpts_num = IMG.rptsc1_num;
+                }
+                else {
+                    IMG.rpts = IMG.rptscs;
+                    IMG.rpts_num = IMG.rptscs_num;
+                }
+                if (IMG.rpts_num > 0.8 / SAMPLE_DIST)
+                {
+                    IMG.calculate_angle();//计算角度
+                }
+                else
+                {
+                    IMG.aim_angle = IMG.aim_angle_last;
+                }
+                if (IMG.encoder.speed < 0.1 && IMG.encoder.speed>-0.1)//停车了
+                    IMG.aim_angle = 0;
+                break;
             default:
                 break;
         }
