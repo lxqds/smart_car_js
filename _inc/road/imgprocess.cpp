@@ -24,6 +24,12 @@ int ImageProcess::init(std::string config_path, bool is_result) {
         control_flag.push(garage_element);
         flag_garage = GARAGE_OUT_RIGHT;
     }
+    else if (_config->direction_garage == 4)
+    {
+        control_flag.push(garage_element);
+        flag_garage = GARAGE_OUT_MIDDLE;
+        MAT_LOG("GARAGE_OUT_MIDDLE");
+    }
     else
         flag_garage = GARAGE_NONE;
 
@@ -422,7 +428,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
             int deX = r.x / 2, deY = r.y / 2;
             int deH = r.height / 2, deW = r.width / 2;
 
-            log_i("Detection GET %d ,%f", r.type,r.score);
+            log_i("Detection GET %d ,%f", r.type, r.score);
             // 尺寸位置筛选
             // if ((deX < 10 || deX + deW > 300) || deY < 20 || (deH < 25 || deW < 25))
                 //continue;
@@ -507,17 +513,12 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 }break;
 
                 case label_bridge:  // 桥
-                    if (flag_ramp == RAMP_NONE && _config->check_ramp_ == 1) {
-                        flag_ramp = RAMP_DETECTION;
-                        sprintf(string_log, "RAMP_DETECTION");
-                        log_i("RAMP_DETECTION");
-                    }
                     if (!control_flag.contains(circle_element) &&   //当前没在环岛中
                         !control_flag.contains(work_element) &&     //当前没在工作区中
                         !control_flag.contains(garage_element) &&      //当前没在入库中
                         !control_flag.contains(ramp_element) &&      //当前没在桥中
                         !control_flag.contains(bomb_element) &&     //当前没在炸弹中
-                        r.score > 0.7
+                        r.score > 0.75
                         ) {
                         flag_ramp = RAMP_DETECTION;
                         sprintf(string_log, "label_bomb_DETECTION");
@@ -631,15 +632,20 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 // else {
 //     aim_speed_shift -= speed_diff;
 // }
-        aim_speed_shift = _config->speed_base +
-            (1 - clip(abs(aim_sigma), 0, 30) / 30.0) * (_config->speed_up - _config->speed_base);
-        // 速度限幅
-        aim_speed_shift = clip(aim_speed_shift, _config->speed_base, _config->speed_up);
-        aim_speed = aim_speed_shift;
-        if (encoder.speed * 1000 < _config->speed_base * 0.6)
+        if (is_straight0 && is_straight1)
         {
-            aim_angle_p *= 0.5;
+            aim_speed_shift = _config->speed_base +
+                (1 - clip(abs(aim_sigma), 0, 30) / 30.0) * (_config->speed_up - _config->speed_base);
+            // 速度限幅
+            aim_speed_shift = clip(aim_speed_shift, _config->speed_base, _config->speed_up);
+            aim_speed = aim_speed_shift;
         }
+
+
+        // if (encoder.speed * 1000 < _config->speed_base * 0.6)
+        // {
+        //     aim_angle_p *= 0.5;
+        // }
 
 
 

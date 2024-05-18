@@ -7,6 +7,7 @@ enum flag_garage_e {
     GARAGE_AI_DETECTION,// AI检测到斑马线
     GARAGE_OUT_LEFT,    // 出库 左
     GARAGE_OUT_RIGHT,   // 出库 右
+    GARAGE_OUT_MIDDLE,  // 出库 中
     GARAGE_IN_LEFT,     // 入库 左
     GARAGE_IN_RIGHT,    // 入库 右
     GARAGE_IN_MIDDLE,   // 入库 中
