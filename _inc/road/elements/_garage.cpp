@@ -194,7 +194,26 @@ void run_garage()
                         MAT_LOG("GARAGE_NONE");
                     }
                 }
+                // 正常巡线
+                if (IMG.flag_track == TRACK_LEFT) {
+                    IMG.rpts = IMG.rptsc0;
+                    IMG.rpts_num = IMG.rptsc0_num;
+                }
+                else if (IMG.flag_track == TRACK_RIGHT) {
+                    IMG.rpts = IMG.rptsc1;
+                    IMG.rpts_num = IMG.rptsc1_num;
+                }
+                else {
+                    IMG.rpts = IMG.rptscs;
+                    IMG.rpts_num = IMG.rptscs_num;
+                }
+                IMG.calculate_angle();//计算角度
 
+                if (flag_garage == GARAGE_STOP)//停车
+                {
+                    IMG.aim_speed = 0;
+                    IMG.aim_angle = 0;
+                }
                 break;
             case GARAGE_OUT_RIGHT:
                 IMG.aim_speed = IMG._config->speed_garage_out;
@@ -217,6 +236,26 @@ void run_garage()
                         MAT_LOG("GARAGE_NONE");
                     }
                 }
+                // 正常巡线
+                if (IMG.flag_track == TRACK_LEFT) {
+                    IMG.rpts = IMG.rptsc0;
+                    IMG.rpts_num = IMG.rptsc0_num;
+                }
+                else if (IMG.flag_track == TRACK_RIGHT) {
+                    IMG.rpts = IMG.rptsc1;
+                    IMG.rpts_num = IMG.rptsc1_num;
+                }
+                else {
+                    IMG.rpts = IMG.rptscs;
+                    IMG.rpts_num = IMG.rptscs_num;
+                }
+                IMG.calculate_angle();//计算角度
+
+                if (flag_garage == GARAGE_STOP)//停车
+                {
+                    IMG.aim_speed = 0;
+                    IMG.aim_angle = 0;
+                }
                 break;
 
                 /* ********************************************************* */
@@ -230,6 +269,29 @@ void run_garage()
                     flag_garage = GARAGE_NONE;
                     MAT_LOG("GARAGE_NONE");
                 }
+                // 正常巡线
+                if (IMG.flag_track == TRACK_LEFT) {
+                    IMG.rpts = IMG.rptsc0;
+                    IMG.rpts_num = IMG.rptsc0_num;
+                }
+                else if (IMG.flag_track == TRACK_RIGHT) {
+                    IMG.rpts = IMG.rptsc1;
+                    IMG.rpts_num = IMG.rptsc1_num;
+                }
+                else {
+                    IMG.rpts = IMG.rptscs;
+                    IMG.rpts_num = IMG.rptscs_num;
+                }
+                if (IMG.rpts_num > 0.6 / SAMPLE_DIST)
+                {
+                    IMG.calculate_angle();//计算角度
+                }
+                else
+                {
+                    IMG.aim_angle = IMG.aim_angle_last;
+                }
+
+
                 break;
             case GARAGE_IN_LEFT:
                 IMG.aim_speed = IMG._config->speed_garage_in;
@@ -258,6 +320,26 @@ void run_garage()
                 {
                     flag_garage = GARAGE_STOP;
                     MAT_LOG("GARAGE_STOP");
+                }
+                // 正常巡线
+                if (IMG.flag_track == TRACK_LEFT) {
+                    IMG.rpts = IMG.rptsc0;
+                    IMG.rpts_num = IMG.rptsc0_num;
+                }
+                else if (IMG.flag_track == TRACK_RIGHT) {
+                    IMG.rpts = IMG.rptsc1;
+                    IMG.rpts_num = IMG.rptsc1_num;
+                }
+                else {
+                    IMG.rpts = IMG.rptscs;
+                    IMG.rpts_num = IMG.rptscs_num;
+                }
+                IMG.calculate_angle();//计算角度
+
+                if (flag_garage == GARAGE_STOP)//停车
+                {
+                    IMG.aim_speed = 0;
+                    IMG.aim_angle = 0;
                 }
                 break;
             case GARAGE_IN_RIGHT:
@@ -288,6 +370,26 @@ void run_garage()
                     flag_garage = GARAGE_STOP;
                     MAT_LOG("GARAGE_STOP");
                 }
+                // 正常巡线
+                if (IMG.flag_track == TRACK_LEFT) {
+                    IMG.rpts = IMG.rptsc0;
+                    IMG.rpts_num = IMG.rptsc0_num;
+                }
+                else if (IMG.flag_track == TRACK_RIGHT) {
+                    IMG.rpts = IMG.rptsc1;
+                    IMG.rpts_num = IMG.rptsc1_num;
+                }
+                else {
+                    IMG.rpts = IMG.rptscs;
+                    IMG.rpts_num = IMG.rptscs_num;
+                }
+                IMG.calculate_angle();//计算角度
+
+                if (flag_garage == GARAGE_STOP)//停车
+                {
+                    IMG.aim_speed = 0;
+                    IMG.aim_angle = 0;
+                }
                 break;
 
                 /* ********************************************************* */
@@ -303,6 +405,26 @@ void run_garage()
                     flag_garage = GARAGE_NONE;
                     MAT_LOG("GARAGE_NONE");
                 }
+                // 正常巡线
+                if (IMG.flag_track == TRACK_LEFT) {
+                    IMG.rpts = IMG.rptsc0;
+                    IMG.rpts_num = IMG.rptsc0_num;
+                }
+                else if (IMG.flag_track == TRACK_RIGHT) {
+                    IMG.rpts = IMG.rptsc1;
+                    IMG.rpts_num = IMG.rptsc1_num;
+                }
+                else {
+                    IMG.rpts = IMG.rptscs;
+                    IMG.rpts_num = IMG.rptscs_num;
+                }
+                IMG.calculate_angle();//计算角度
+
+                if (flag_garage == GARAGE_STOP)//停车
+                {
+                    IMG.aim_speed = 0;
+                    IMG.aim_angle = 0;
+                }
                 break;
             case GARAGE_PASS_RIGHT:
                 IMG.aim_speed = IMG._config->speed_base;
@@ -315,6 +437,26 @@ void run_garage()
                     flag_garage = GARAGE_NONE;
                     MAT_LOG("GARAGE_NONE");
                 }
+                // 正常巡线
+                if (IMG.flag_track == TRACK_LEFT) {
+                    IMG.rpts = IMG.rptsc0;
+                    IMG.rpts_num = IMG.rptsc0_num;
+                }
+                else if (IMG.flag_track == TRACK_RIGHT) {
+                    IMG.rpts = IMG.rptsc1;
+                    IMG.rpts_num = IMG.rptsc1_num;
+                }
+                else {
+                    IMG.rpts = IMG.rptscs;
+                    IMG.rpts_num = IMG.rptscs_num;
+                }
+                IMG.calculate_angle();//计算角度
+
+                if (flag_garage == GARAGE_STOP)//停车
+                {
+                    IMG.aim_speed = 0;
+                    IMG.aim_angle = 0;
+                }
                 break;
             case GARAGE_IN_MIDDLE://过斑马线停车
                 IMG.aim_speed = IMG._config->speed_garage_in;
@@ -323,30 +465,31 @@ void run_garage()
                     flag_garage = GARAGE_STOP;
                     MAT_LOG("GARAGE_STOP");
                 }
+                // 正常巡线
+                if (IMG.flag_track == TRACK_LEFT) {
+                    IMG.rpts = IMG.rptsc0;
+                    IMG.rpts_num = IMG.rptsc0_num;
+                }
+                else if (IMG.flag_track == TRACK_RIGHT) {
+                    IMG.rpts = IMG.rptsc1;
+                    IMG.rpts_num = IMG.rptsc1_num;
+                }
+                else {
+                    IMG.rpts = IMG.rptscs;
+                    IMG.rpts_num = IMG.rptscs_num;
+                }
+                IMG.calculate_angle();//计算角度
+
+                if (flag_garage == GARAGE_STOP)//停车
+                {
+                    IMG.aim_speed = 0;
+                    IMG.aim_angle = 0;
+                }
                 break;
             default:
                 break;
         }
-        // 正常巡线
-        if (IMG.flag_track == TRACK_LEFT) {
-            IMG.rpts = IMG.rptsc0;
-            IMG.rpts_num = IMG.rptsc0_num;
-        }
-        else if (IMG.flag_track == TRACK_RIGHT) {
-            IMG.rpts = IMG.rptsc1;
-            IMG.rpts_num = IMG.rptsc1_num;
-        }
-        else {
-            IMG.rpts = IMG.rptscs;
-            IMG.rpts_num = IMG.rptscs_num;
-        }
-        IMG.calculate_angle();//计算角度
 
-        if (flag_garage == GARAGE_STOP)//停车
-        {
-            IMG.aim_speed = 0;
-            IMG.aim_angle = 0;
-        }
 
     }
 }
