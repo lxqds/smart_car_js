@@ -632,15 +632,20 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 // else {
 //     aim_speed_shift -= speed_diff;
 // }
-        aim_speed_shift = _config->speed_base +
-            (1 - clip(abs(aim_sigma), 0, 30) / 30.0) * (_config->speed_up - _config->speed_base);
-        // 速度限幅
-        aim_speed_shift = clip(aim_speed_shift, _config->speed_base, _config->speed_up);
-        aim_speed = aim_speed_shift;
-        if (encoder.speed * 1000 < _config->speed_base * 0.6)
+        if (is_straight0 && is_straight1)
         {
-            aim_angle_p *= 0.5;
+            aim_speed_shift = _config->speed_base +
+                (1 - clip(abs(aim_sigma), 0, 30) / 30.0) * (_config->speed_up - _config->speed_base);
+            // 速度限幅
+            aim_speed_shift = clip(aim_speed_shift, _config->speed_base, _config->speed_up);
+            aim_speed = aim_speed_shift;
         }
+
+
+        // if (encoder.speed * 1000 < _config->speed_base * 0.6)
+        // {
+        //     aim_angle_p *= 0.5;
+        // }
 
 
 
