@@ -282,7 +282,7 @@ void run_garage()
                     IMG.rpts = IMG.rptscs;
                     IMG.rpts_num = IMG.rptscs_num;
                 }
-                if (IMG.rpts_num > 0.6 / SAMPLE_DIST)
+                if (IMG.rpts_num > 0.8 / SAMPLE_DIST)
                 {
                     IMG.calculate_angle();//计算角度
                 }
