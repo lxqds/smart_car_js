@@ -24,6 +24,12 @@ int ImageProcess::init(std::string config_path, bool is_result) {
         control_flag.push(garage_element);
         flag_garage = GARAGE_OUT_RIGHT;
     }
+    else if (_config->direction_garage == 4)
+    {
+        control_flag.push(garage_element);
+        flag_garage = GARAGE_OUT_MIDDLE;
+        MAT_LOG("GARAGE_OUT_MIDDLE");
+    }
     else
         flag_garage = GARAGE_NONE;
 

@@ -228,7 +228,7 @@
     "speed_garage_in": 1700,
     "speed_garage_out": 700,
     "garage_in_route_": 60,
-    "garage_out_route_": 5,
+    "garage_out_route_": 50,
     "garage_pass_route_": 70,
     "speed_work": 600,
     "speed_bomb1": 800,

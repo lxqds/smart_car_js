@@ -220,7 +220,17 @@ void run_garage()
                 break;
 
                 /* ********************************************************* */
-
+            case   GARAGE_OUT_MIDDLE:
+                IMG.aim_speed = IMG._config->speed_garage_out;
+                if (IMG.encoder.route > IMG._config->garage_out_route_)
+                {
+                    IMG.element_over = true;
+                    IMG.element_over_route = IMG.encoder.route;
+                    control_flag.pop();
+                    flag_garage = GARAGE_NONE;
+                    MAT_LOG("GARAGE_NONE");
+                }
+                break;
             case GARAGE_IN_LEFT:
                 IMG.aim_speed = IMG._config->speed_garage_in;
                 IMG.flag_track = TRACK_LEFT;
