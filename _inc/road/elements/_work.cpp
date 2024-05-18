@@ -149,13 +149,33 @@ void run_work()
 
 
         if (flag_work == WORK_READY) {
+            //若是大于设定停车阈值就直接停车
 
+            int16_t avg_y = search_mid_cone_getH(IMG.mat_lab);
+            IMG.aim_angle = 0;
+            LOG_I << "  ready_AVG_Y :" << avg_y << LOG_END;
+            //开始靠近锥桶
+            if (avg_y > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg )
+            {
+                work_route = IMG.encoder.route;
+                flag_work = WORK_STOPPING;
+                MAT_LOG("WORK_READY_ERROR");
+            }
+
+            //开始调整进入姿态，若是没找到线旁的锥桶 且 小于设定调整路程则开始深入工作区
+
+            // 进入方向
+            if (direction_work)
+                work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
+            else
+                work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
+             
             // 清弯道防止加大 P 项, 提高稳定性
             IMG.is_curve0 = IMG.is_curve1 = false;
             // 调整 进入角度
             IMG.aim_angle = IMG._config->work_angle_in_1;
             if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
-            if (IMG.encoder.route - work_route > IMG._config->work_rou_ready)
+            if ((IMG.encoder.route - work_route > IMG._config->work_rou_ready ) && (work_near_cone.x==0 && work_near_cone.y == 0 ))
             {
 
                 work_route = IMG.encoder.route;
