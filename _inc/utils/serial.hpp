@@ -201,7 +201,7 @@ private:
 
     void run_rece()
     {
-#define FRAME_LENGTH_RECE 11
+#define FRAME_LENGTH_RECE 13
         uint8_t datas[FRAME_LENGTH_RECE] = { 0 };
         uint8_t counter = 0;
         uint8_t recv_data;
