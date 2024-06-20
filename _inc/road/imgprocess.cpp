@@ -723,12 +723,13 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
             is_straight0 ? '^' : (is_curve0 ? '<' : ' '),
             flag_rpts ? '^' : ' ',
             is_straight1 ? '^' : (is_curve1 ? '>' : ' '));
-        MAT_INFO(mat_result, cv::Point(5, 100), 0.4, "sigma: %.2f", aim_sigma);
-        MAT_INFO(mat_result, cv::Point(5, 115), 0.4, "mea-0: %.2f", mea_0);
-        MAT_INFO(mat_result, cv::Point(5, 130), 0.4, "mea-1: %.2f", mea_1);
-        MAT_INFO(mat_result, cv::Point(5, 155), 0.4, "speed: %.2fm/s", encoder.speed);
-        MAT_INFO(mat_result, cv::Point(5, 170), 0.4, "route: %.0fcm", encoder.route);
-        MAT_INFO(mat_result, cv::Point(5, 185), 0.4, "log: %-20s", string_log);
+        MAT_INFO(mat_result, cv::Point(5, 90), 0.4, "sigma: %.2f", aim_sigma);
+        MAT_INFO(mat_result, cv::Point(5, 105), 0.4, "mea-0: %.2f", mea_0);
+        MAT_INFO(mat_result, cv::Point(5, 125), 0.4, "mea-1: %.2f", mea_1);
+        MAT_INFO(mat_result, cv::Point(5, 150), 0.4, "speed: %.2fm/s", encoder.speed);
+        MAT_INFO(mat_result, cv::Point(5, 165), 0.4, "route: %.0fcm", encoder.route);
+        MAT_INFO(mat_result, cv::Point(5, 180), 0.4, "YAW: %.2f°", encoder.yaw);
+        MAT_INFO(mat_result, cv::Point(5, 195), 0.4, "log: %-20s", string_log);
 
         // 十字 ----------------------------------------------------
         if (flag_cross == CROSS_IN) {
