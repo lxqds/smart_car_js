@@ -230,7 +230,7 @@ private:
                     {
                         check = (uint16_t)(((uint16_t)datas[FRAME_LENGTH_RECE - 3] << 8) | datas[FRAME_LENGTH_RECE - 2]);
 
-                        if (check == CRC_CHECK(&datas[2], 6))
+                        if (check == CRC_CHECK(&datas[2], 8))
                         {
                             byte2int32 b2i;
                             b2i.uc[0] = (unsigned char)datas[7];
@@ -242,6 +242,7 @@ private:
                             IMG.encoder.speed = (int16_t)(((int16_t)datas[2] << 8) | datas[3]) / 100.0f;
 
                             IMG.encoder.speed = (int16_t)(((int16_t)datas[8] << 8) | datas[9]) / 100.0f;
+
                         }
                     }
                     counter = 0;
