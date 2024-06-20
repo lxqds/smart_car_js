@@ -19,6 +19,7 @@ struct Payload_t {
 struct Encoder_t {
     float speed;  // 速度
     float route;  // 路程
+    float yaw;    //偏航角
 };
 
 #endif

@@ -240,6 +240,8 @@ private:
 
                             IMG.encoder.route = (float)(b2i.i);
                             IMG.encoder.speed = (int16_t)(((int16_t)datas[2] << 8) | datas[3]) / 100.0f;
+
+                            IMG.encoder.speed = (int16_t)(((int16_t)datas[8] << 8) | datas[9]) / 100.0f;
                         }
                     }
                     counter = 0;

@@ -65,6 +65,7 @@ private:
     std::pair<std::vector<std::string>, std::vector<const char *>> onnx_out_names_;
     Ort::Env onnx_env_;
     // predictor
+
     std::shared_ptr<PPNCPredictor> predictor_nna_;
     std::shared_ptr<PPNCPredictor> predictor_nms_;
     std::shared_ptr<Ort::Session> predictor_onnx_;
