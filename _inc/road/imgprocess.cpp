@@ -728,7 +728,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         MAT_INFO(mat_result, cv::Point(5, 125), 0.4, "mea-1: %.2f", mea_1);
         MAT_INFO(mat_result, cv::Point(5, 150), 0.4, "speed: %.2fm/s", encoder.speed);
         MAT_INFO(mat_result, cv::Point(5, 165), 0.4, "route: %.0fcm", encoder.route);
-        MAT_INFO(mat_result, cv::Point(5, 180), 0.4, "YAW: %.2d", encoder.yaw);
+        MAT_INFO(mat_result, cv::Point(5, 180), 0.4, "YAW: %.2f", encoder.yaw);
         MAT_INFO(mat_result, cv::Point(5, 195), 0.4, "log: %-20s", string_log);
 
         // 十字 ----------------------------------------------------
