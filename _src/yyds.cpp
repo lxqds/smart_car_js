@@ -12,6 +12,7 @@ std::shared_ptr<Display> display = nullptr;          // 线程 -> 图像显示�
 std::shared_ptr<SerialDriver> serial = nullptr;      // 线程 -> 串口接收及发送
 
 extern uint8_t gas_which;
+extern u8 serial_echo;
 
 /* 主函数 */
 int main(int argc, char const* argv[])
@@ -28,9 +29,10 @@ int main(int argc, char const* argv[])
     char fps_buffer[16]; // 帧率图像显示缓存
     double fps_time = 0; // 帧率计时变量
     StopWatch fps_sw;    // 帧率计时器
-
     cv::Mat frame_origin; // 摄像头原始图像
     cv::Mat frame_imgpro; // 图像处理输出
+
+    StopWatch echo_sw;   // 应答计时器
 
     /* 命令行参数 */
     auto args = util::argparser("yyds car command line parameters explained.");
@@ -88,15 +90,29 @@ int main(int argc, char const* argv[])
     LOG_I << "kp=" << speedPID[0] << LOG_END;
     LOG_I << "ki=" << speedPID[1] << LOG_END;
     LOG_I << "kd=" << speedPID[2] << LOG_END;
-    serial->transmit_packet(0x09, speedPID_BUFF, 12);
-    serial->transmit_packet(0x09, speedPID_BUFF, 12);
-    serial->transmit_packet(0x09, speedPID_BUFF, 12);
-    serial->transmit_packet(0x09, speedPID_BUFF, 12);
-    serial->transmit_packet(0x09, speedPID_BUFF, 12);
     /* 开跑 */
+
+    u8 init_slave_flag = 0;
     // serial->buzzerSound(3);
+    echo_sw.tic();
+    LOG_I << "PID Initing\n" << speedPID[0] << LOG_END;
     while (capture->_loop)
     {
+
+        if (!init_slave_flag) {
+
+            if (echo_sw.toc() % 100 == 0) {
+                serial->transmit_packet(0x09, speedPID_BUFF, 12);
+            }
+            else if (echo_sw.toc() > 1000) {
+                echo_sw.tic();
+                LOG_I << "..." << speedPID[0] << LOG_END;
+            }
+
+            if (serial_echo == 0xA1) init_slave_flag = 1;
+
+            continue;
+        }
         // 开始计时
         fps_sw.tic();
 
