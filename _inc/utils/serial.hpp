@@ -288,7 +288,7 @@ public:
     {
         _serial_port = std::make_shared<SerialPort>();
         CHECK(_serial_port != nullptr) << "Create Failed." << LOG_END;
-
+        serial_echo = 0;
         try
         {
             _loop = true;
