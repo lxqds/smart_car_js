@@ -22,7 +22,8 @@ using namespace LibSerial;
 // 引用图像处理
 extern ImageProcess imgprocess;
 
-u8 serial_echo;
+uint8_t serial_echo;
+
 #define IMG imgprocess
 
 typedef union

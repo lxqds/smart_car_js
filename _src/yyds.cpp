@@ -12,7 +12,7 @@ std::shared_ptr<Display> display = nullptr;          // 线程 -> 图像显示�
 std::shared_ptr<SerialDriver> serial = nullptr;      // 线程 -> 串口接收及发送
 
 extern uint8_t gas_which;
-extern u8 serial_echo;
+extern uint8_t serial_echo;
 
 /* 主函数 */
 int main(int argc, char const* argv[])
@@ -101,7 +101,7 @@ int main(int argc, char const* argv[])
 
         if (!init_slave_flag) {
 
-            if (echo_sw.toc() % 100 == 0) {
+            if (echo_sw.toc() % 300 == 0) {
                 serial->transmit_packet(0x09, speedPID_BUFF, 12);
             }
             else if (echo_sw.toc() > 1000) {
@@ -109,7 +109,7 @@ int main(int argc, char const* argv[])
                 LOG_I << "..." << speedPID[0] << LOG_END;
             }
 
-            if (serial_echo == 0xA1) init_slave_flag = 1;
+            if (serial_echo == 0xA1) init_slave_flag = 1;//如果有响应
 
             continue;
         }
