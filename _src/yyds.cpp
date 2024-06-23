@@ -111,7 +111,6 @@ int main(int argc, char const* argv[])
 
             if (serial_echo == 0xA1) init_slave_flag = 1;//如果有响应
 
-            continue;
         }
         // 开始计时
         fps_sw.tic();
