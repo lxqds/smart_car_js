@@ -222,7 +222,7 @@ private:
                     counter = 0;
                     continue;
                 }
-                if (0xE2 != datas[1] && counter >= 2)
+                if ((0xE2 != datas[1]|| 0xE4 != datas[1]) && counter >= 2)
                 {
                     counter = 0;
                     continue;
@@ -256,7 +256,7 @@ private:
                         counter = 0;
                     }
                 }
-                else if (0xE3 == datas[1]) { //应答包
+                else if (0xE4 == datas[1]) { //应答包
 
                     FRAME_LENGTH_RECE = 6;//包大小
                     if ((FRAME_LENGTH_RECE - 1) < counter)//检查包大小

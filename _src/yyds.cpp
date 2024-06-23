@@ -105,7 +105,7 @@ int main(int argc, char const* argv[])
             if (echo_sw.toc() > 500) {
                 echo_sw.tic();
                 serial->transmit_packet(0x09, speedPID_BUFF, 12);
-                LOG_I << "send!" << "..." << serial_echo + '0' << LOG_END;
+                LOG_I << "send!" << "..." << serial_echo  << LOG_END;
             }
 
             if (serial_echo == 0xA1) init_slave_flag = 1;//如果有响应
