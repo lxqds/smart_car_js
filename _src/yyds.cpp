@@ -101,13 +101,11 @@ int main(int argc, char const* argv[])
 
         if (!init_slave_flag) {
 
-            if (int(echo_sw.toc())% 500 == 0) {
-                serial->transmit_packet(0x09, speedPID_BUFF, 12);
-                LOG_I << "send!" << LOG_END;
-            }
-            else if (echo_sw.toc() > 1000) {
+
+            if (echo_sw.toc() > 500) {
                 echo_sw.tic();
-                LOG_I << "..." << serial_echo<< LOG_END;
+                serial->transmit_packet(0x09, speedPID_BUFF, 12);
+                LOG_I << "send!" << "..." << serial_echo + '0' << LOG_END;
             }
 
             if (serial_echo == 0xA1) init_slave_flag = 1;//如果有响应
