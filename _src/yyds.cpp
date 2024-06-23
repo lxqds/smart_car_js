@@ -92,7 +92,7 @@ int main(int argc, char const* argv[])
     LOG_I << "kd=" << speedPID[2] << LOG_END;
     /* 开跑 */
 
-    u8 init_slave_flag = 0;
+    uint8_t init_slave_flag = 0;
     // serial->buzzerSound(3);
     echo_sw.tic();
     LOG_I << "PID Initing\n" << speedPID[0] << LOG_END;
@@ -101,7 +101,7 @@ int main(int argc, char const* argv[])
 
         if (!init_slave_flag) {
 
-            if (echo_sw.toc() % 300 == 0) {
+            if (int(echo_sw.toc())% 300 == 0) {
                 serial->transmit_packet(0x09, speedPID_BUFF, 12);
             }
             else if (echo_sw.toc() > 1000) {
