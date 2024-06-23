@@ -22,7 +22,7 @@ using namespace LibSerial;
 // 引用图像处理
 extern ImageProcess imgprocess;
 
-extern uint8_t serial_echo
+extern uint8_t serial_echo;
 
 #define IMG imgprocess
 
