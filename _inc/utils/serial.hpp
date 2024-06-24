@@ -285,7 +285,7 @@ private:
                 }
                 else 
                 {
-                    LOG_I << "datas[1] err" << datas[1]<< LOG_END;
+                    LOG_I << "datas[1] err" << datas[1]%10+'0' << (datas[1]/10) % 10 + '0' << (datas[1] / 100) % 10 + '0' << LOG_END;
                 }
 
             }
