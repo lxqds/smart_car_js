@@ -222,7 +222,7 @@ private:
                     counter = 0;
                     continue;
                 }
-                if ((0xE2 != datas[1]|| 0xE4 != datas[1]) && counter >= 2)
+                if ((0xE2 != datas[1]&& 0xE4 != datas[1]) && counter >= 2)
                 {
                     counter = 0;
                     continue;
