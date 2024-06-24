@@ -224,7 +224,7 @@ private:
                 }
                 if ((0xE2 != datas[1]&& 0xE4 != datas[1]) && counter >= 2)
                 {
-                    LOG_I << datas[1]+48 << LOG_END;
+                    LOG_I << datas[1]+48 <<"data err" << LOG_END;
                     counter = 0;
                     continue;
                 }
@@ -270,12 +270,23 @@ private:
                             {
                                 //PID设置 ：0xA1
                                 serial_echo = datas[2];  
-
+                                LOG_I << "shou dao" << LOG_END;
                             }
+                        }
+                        else
+                        {
+                            LOG_I << "FRAME_LENGTH_RECE err" << LOG_END;
                         }
                         counter = 0;
                     }
+                    else {
+                        LOG_I << "data len err" << LOG_END;
+                    }
                 }
+                else {
+                    LOG_I << "datas[1] err" << LOG_END;
+                }
+
             }
             else
             {
