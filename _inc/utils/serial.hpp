@@ -233,7 +233,7 @@ private:
                     {
                         check = (uint16_t)(((uint16_t)datas[FRAME_LENGTH_RECE - 3] << 8) | datas[FRAME_LENGTH_RECE - 2]);
 
-                        if (check == CRC_CHECK(&datas[2], 8))
+                        if (check == CRC_CHECK(&datas[2], 9))
                         {
                             byte2int32 b2i;
                             b2i.uc[0] = (unsigned char)datas[7];
