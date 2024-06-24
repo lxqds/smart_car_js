@@ -222,12 +222,15 @@ private:
                     counter = 0;
                     continue;
                 }
-                if ((0xE2 != datas[1]&& 0xE4 != datas[1]) && counter >= 2)
+                if (0xE2 != datas[1] && 0xE4 != datas[1] && counter >= 2)
                 {
                     LOG_I << datas[1]+48 <<"data err" << LOG_END;
                     counter = 0;
                     continue;
                 }
+     
+                if(0xE2 == datas[1])  LOG_I <<"data" << LOG_END;
+                if (0xE4 == datas[1])  LOG_I << "echo" << LOG_END;
 
                 if (0xE2 == datas[1]) { //数据包
 
@@ -282,10 +285,6 @@ private:
                     else {
                         LOG_I << "data len err" << LOG_END;
                     }
-                }
-                else 
-                {
-                    LOG_I << "datas[1] err" << datas[1]%10+1 << (datas[1]/10) % 10 + 1 << (datas[1] / 100) % 10 +1 << LOG_END;
                 }
 
             }
