@@ -224,6 +224,7 @@ private:
                 }
                 if ((0xE2 != datas[1]&& 0xE4 != datas[1]) && counter >= 2)
                 {
+                    LOG_I << datas[1]+48 << LOG_END;
                     counter = 0;
                     continue;
                 }
