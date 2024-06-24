@@ -283,8 +283,9 @@ private:
                         LOG_I << "data len err" << LOG_END;
                     }
                 }
-                else {
-                    LOG_I << "datas[1] err" << LOG_END;
+                else 
+                {
+                    LOG_I << "datas[1] err" << datas[1]<< LOG_END;
                 }
 
             }
