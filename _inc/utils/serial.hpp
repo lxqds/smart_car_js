@@ -201,10 +201,9 @@ private:
         //     }
         // }
     };
-
     void run_rece()
     {
-        uint8_t FRAME_LENGTH_RECE = 0;
+        #define FRAME_LENGTH_RECE 14
         uint8_t datas[FRAME_LENGTH_RECE] = { 0 };
         uint8_t counter = 0;
         uint8_t recv_data;
@@ -222,71 +221,36 @@ private:
                     counter = 0;
                     continue;
                 }
-                if (0xE2 != datas[1] && 0xE4 != datas[1] && counter >= 2)
+                if ( 0xE2 != datas[1] && counter >= 2)
                 {
-                    LOG_I << datas[1]+48 <<"data err" << LOG_END;
                     counter = 0;
                     continue;
                 }
-     
 
-                if (0xE2 == datas[1]) { //数据包
-
-                    FRAME_LENGTH_RECE = 13;//包大小
-
-                    if ((FRAME_LENGTH_RECE - 1) < counter)
+                if ((FRAME_LENGTH_RECE - 1) < counter)
+                {
+                    if (0xE3 == datas[(FRAME_LENGTH_RECE - 1)])
                     {
-                        if (0xE3 == datas[(FRAME_LENGTH_RECE - 1)])
+                        check = (uint16_t)(((uint16_t)datas[FRAME_LENGTH_RECE - 3] << 8) | datas[FRAME_LENGTH_RECE - 2]);
+
+                        if (check == CRC_CHECK(&datas[2], 8))
                         {
-                            check = (uint16_t)(((uint16_t)datas[FRAME_LENGTH_RECE - 3] << 8) | datas[FRAME_LENGTH_RECE - 2]);
+                            byte2int32 b2i;
+                            b2i.uc[0] = (unsigned char)datas[7];
+                            b2i.uc[1] = (unsigned char)datas[6];
+                            b2i.uc[2] = (unsigned char)datas[5];
+                            b2i.uc[3] = (unsigned char)datas[4];
 
-                            if (check == CRC_CHECK(&datas[2], 8))
-                            {
-                                byte2int32 b2i;
-                                b2i.uc[0] = (unsigned char)datas[7];
-                                b2i.uc[1] = (unsigned char)datas[6];
-                                b2i.uc[2] = (unsigned char)datas[5];
-                                b2i.uc[3] = (unsigned char)datas[4];
+                            IMG.encoder.route = (float)(b2i.i);
+                            IMG.encoder.speed = (int16_t)(((int16_t)datas[2] << 8) | datas[3]) / 100.0f;
 
-                                IMG.encoder.route = (float)(b2i.i);
-                                IMG.encoder.speed = (int16_t)(((int16_t)datas[2] << 8) | datas[3]) / 100.0f;
-
-                                IMG.encoder.yaw = (int16_t)(((int16_t)datas[8] << 8) | datas[9]) / 100.0f;
-
-                            }
+                            IMG.encoder.yaw = (int16_t)(((int16_t)datas[8] << 8) | datas[9]) / 100.0f;
+                            if(datas[10]!=0)serial_echo = datas[10];
                         }
-                        counter = 0;
                     }
+                    counter = 0;
                 }
-                else if (0xE4 == datas[1]) { //应答包
 
-                    FRAME_LENGTH_RECE = 6;//包大小
-                    if ((FRAME_LENGTH_RECE - 1) < counter)//检查包大小
-                    {
-                        if (0xE3 == datas[(FRAME_LENGTH_RECE - 1)])//检察尾数据
-                        {
-                            check = (uint16_t)(((uint16_t)datas[FRAME_LENGTH_RECE - 3] << 8) | datas[FRAME_LENGTH_RECE - 2]);
-
-                            if (check == CRC_CHECK(&datas[2], 1))
-                            {
-                                //PID设置 ：0xA1
-                                serial_echo = datas[2];  
-                                LOG_I << "shou dao" << LOG_END;
-                            }
-                            else {
-                                LOG_I << "CRC_CHECK err" << LOG_END;
-                            }
-                        }
-                        else
-                        {
-                            LOG_I << "FRAME_LENGTH_RECE err" << LOG_END;
-                        }
-                        counter = 0;
-                    }
-                    else {
-                        LOG_I << "data len err" << LOG_END;
-                    }
-                }
 
             }
             else
