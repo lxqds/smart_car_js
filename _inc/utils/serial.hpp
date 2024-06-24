@@ -229,8 +229,6 @@ private:
                     continue;
                 }
      
-                if(0xE2 == datas[1])  LOG_I <<"data" << LOG_END;
-                if (0xE4 == datas[1])  LOG_I << "echo" << LOG_END;
 
                 if (0xE2 == datas[1]) { //数据包
 
@@ -274,6 +272,9 @@ private:
                                 //PID设置 ：0xA1
                                 serial_echo = datas[2];  
                                 LOG_I << "shou dao" << LOG_END;
+                            }
+                            else {
+                                LOG_I << "CRC_CHECK err" << LOG_END;
                             }
                         }
                         else
