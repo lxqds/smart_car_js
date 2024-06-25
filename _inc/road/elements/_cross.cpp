@@ -74,6 +74,9 @@ void run_cross() {
                     cv::line(IMG.mat_bin, cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
                         cv::Point((int)end_x, (int)end_y),
                         cv::Scalar(0, 0, 0), 2);
+                    cv::line(IMG.mat_result, cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
+                        cv::Point((int)end_x, (int)end_y),
+                        cv::Scalar(0, 0, 0), 2);
                 }
             }
             if (IMG.far_Lpt1_found) {
@@ -95,6 +98,9 @@ void run_cross() {
                     float end_y = 1;
                     float end_x = (end_y - IMG.ipts1[0][1]) / dy * dx;
                     cv::line(IMG.mat_bin, cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
+                        cv::Point((int)end_x, (int)end_y),
+                        cv::Scalar(0, 0, 0), 2);
+                    cv::line(IMG.mat_result, cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
                         cv::Point((int)end_x, (int)end_y),
                         cv::Scalar(0, 0, 0), 2);
                 }
@@ -151,6 +157,9 @@ void run_cross() {
                     cv::line(IMG.mat_bin, cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
                         cv::Point((int)end_x, (int)end_y),
                         cv::Scalar(0, 0, 0), 2);
+                    cv::line(IMG.mat_result, cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
+                        cv::Point((int)end_x, (int)end_y),
+                        cv::Scalar(0, 0, 0), 2);
                 }
             }
             if (IMG.far_Lpt1_found) {
@@ -183,6 +192,9 @@ void run_cross() {
                     float end_y = 1;
                     float end_x = (end_y - IMG.ipts1[0][1]) / dy * dx;
                     cv::line(IMG.mat_bin, cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
+                        cv::Point((int)end_x, (int)end_y),
+                        cv::Scalar(0, 0, 0), 2);
+                    cv::line(IMG.mat_result, cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
                         cv::Point((int)end_x, (int)end_y),
                         cv::Scalar(0, 0, 0), 2);
                 }
