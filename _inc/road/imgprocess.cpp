@@ -131,6 +131,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                                 White_row_start_point[i][0] = start;
                                 White_row_end_point[i][0] = x - count + 1;
                             }
+                            count = 0;
                             sign = 0;
                         }
                         else {//判断相邻直线是否由交集
@@ -151,6 +152,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                                     White_row_end_point[i][0] = x - count + 1;
                                 }
                             }
+                            count = 0;
                             sign = 0;
                         }
                     }
@@ -165,8 +167,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         begin_x = IMAGE_WIDTH / 2, begin_y = IMAGE_HEIGHT - 10;//近线向上找线的开始位置
         int far_begin_x = 0, far_begin_y = 0;//远线向下找线的开始位置
         int count = 0;
-        for (int i = 39; i > 20; i--) {
-            if (White_row_length[i] > 50 && White_row_length[i] < 160) count++;
+        for (int i = 34; i > 25; i--) {
+            if (White_row_length[i] > 50 && White_row_length[i] < 140) count++;
             else count = 0;
             if (count == 3) {
                 begin_x = (White_row_mid_point[i] + White_row_mid_point[i + 1] + White_row_mid_point[i + 2]) / 3;
@@ -593,16 +595,16 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
             if ((int)trans[1] >= 0 && (int)trans[1] < mat_result.rows &&
                 (int)trans[0] >= 0 && (int)trans[0] < mat_result.cols) {
                 mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[0] = 0;
-                mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[1] = 238;
-                mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[2] = 238;
+                mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[1] = 0;
+                mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[2] = 255;
             }
         }
         for (int a = 0; a < rpts1s_num; a++) {  // 边线等距采样 右
             map_perspective(rpts1s[a][0], rpts1s[a][1], trans, 1);
             if ((int)trans[1] >= 0 && (int)trans[1] < mat_result.rows &&
                 (int)trans[0] >= 0 && (int)trans[0] < mat_result.cols) {
-                mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[0] = 238;
-                mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[1] = 238;
+                mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[0] = 255;
+                mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[1] = 0;
                 mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[2] = 0;
             }
         }
@@ -673,12 +675,12 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 
         }
 
-        for (int i = 1; i < 40; i++)
-        {
-            cv::line(mat_result, cv::Point(White_row_start_point[i][0], White_row_start_point[i][1]),
-                cv::Point(White_row_end_point[i][0], White_row_end_point[i][1]), cv::Scalar(0, 255, 0), 1);
-            MAT_INFO(mat_result, cv::Point(IMAGE_WIDTH / 2, White_row_end_point[i][1]), 0.4, "%d", White_row_length[i]);
-        }
+        // for (int i = 1; i < 40; i++)
+        // {
+        //     cv::line(mat_result, cv::Point(White_row_start_point[i][0], White_row_start_point[i][1]),
+        //         cv::Point(White_row_end_point[i][0], White_row_end_point[i][1]), cv::Scalar(0, 255, 0), 1);
+        //     MAT_INFO(mat_result, cv::Point(IMAGE_WIDTH / 2, White_row_end_point[i][1]), 0.4, "%d", White_row_length[i]);
+        // }
     }
 }
 
