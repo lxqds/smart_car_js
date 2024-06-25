@@ -185,7 +185,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         Preprocess_ipts0_num = ipts0_num;
         Preprocess_ipts1_num = ipts1_num;
         count = 0;
-        int id = 0;
         for (int i = 4; i < 20; i++) {
 
             if (White_row_length[i] > 100 && White_row_length[i] < 160) count++;
@@ -455,18 +454,18 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     // cv::circle(mat_result, cv::Point(Lpt1_point[0], Lpt1_point[1]), 3, cv::Scalar(255, 0, 0), 2, 8);
     // cv::circle(mat_result, cv::Point(ipts0[0][0], ipts0[0][1]), 3, cv::Scalar(255, 0, 0), 2, 8);
     // cv::circle(mat_result, cv::Point(ipts1[0][0], ipts1[0][1]), 3, cv::Scalar(255, 0, 0), 2, 8);
-    float k = (Lpt0_point[1] - ipts0[0][1]) / (Lpt0_point[0] - ipts0[0][0]);
-    float end_y = 1;
-    float end_x = (end_y - ipts0[0][1]) / k + ipts0[0][0];
-    cv::line(mat_result, cv::Point(ipts0[0][0], ipts0[0][1]),
-        cv::Point((int)end_x, (int)end_y),
-        cv::Scalar(0, 0, 0), 2);
-    k = (Lpt1_point[1] - ipts1[0][1]) / (Lpt1_point[0] - ipts1[0][0]);
-    end_y = 1;
-    end_x = (end_y - ipts1[0][1]) / k + ipts1[0][0];
-    cv::line(mat_result, cv::Point(ipts1[0][0], ipts1[0][1]),
-        cv::Point((int)end_x, (int)end_y),
-        cv::Scalar(0, 0, 0), 2);
+    // float k = (Lpt0_point[1] - ipts0[0][1]) / (Lpt0_point[0] - ipts0[0][0]);
+    // float end_y = 1;
+    // float end_x = (end_y - ipts0[0][1]) / k + ipts0[0][0];
+    // cv::line(mat_result, cv::Point(ipts0[0][0], ipts0[0][1]),
+    //     cv::Point((int)end_x, (int)end_y),
+    //     cv::Scalar(0, 0, 0), 2);
+    // k = (Lpt1_point[1] - ipts1[0][1]) / (Lpt1_point[0] - ipts1[0][0]);
+    // end_y = 1;
+    // end_x = (end_y - ipts1[0][1]) / k + ipts1[0][0];
+    // cv::line(mat_result, cv::Point(ipts1[0][0], ipts1[0][1]),
+    //     cv::Point((int)end_x, (int)end_y),
+    //     cv::Scalar(0, 0, 0), 2);
 
     // 识别元素
     check_garage();  // 斑马线 - 识别特殊特征
@@ -669,12 +668,12 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 
         }
 
-        // for (int i = 1; i < 40; i++)
-        // {
-        //     cv::line(mat_result, cv::Point(White_row_start_point[i][0], White_row_start_point[i][1]),
-        //         cv::Point(White_row_end_point[i][0], White_row_end_point[i][1]), cv::Scalar(0, 255, 0), 1);
-        //     MAT_INFO(mat_result, cv::Point(IMAGE_WIDTH / 2, White_row_end_point[i][1]), 0.4, "%d", White_row_length[i]);
-        // }
+        for (int i = 1; i < 40; i++)
+        {
+            cv::line(mat_result, cv::Point(White_row_start_point[i][0], White_row_start_point[i][1]),
+                cv::Point(White_row_end_point[i][0], White_row_end_point[i][1]), cv::Scalar(0, 255, 0), 1);
+            MAT_INFO(mat_result, cv::Point(IMAGE_WIDTH / 2, White_row_end_point[i][1]), 0.4, "%d", White_row_length[i]);
+        }
     }
 }
 
