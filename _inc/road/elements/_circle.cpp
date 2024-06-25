@@ -107,7 +107,7 @@ void run_circle() {
                 cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
                     cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
                     cv::Scalar(0, 0, 0), 7);
-                cv::line(IMG._mat_result, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
+                cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
                     cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
                     cv::Scalar(0, 0, 0), 7);
                 IMG.get_edge();//获取边线
@@ -118,7 +118,7 @@ void run_circle() {
                 cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
                     cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
                     cv::Scalar(0, 0, 0), 7);
-                cv::line(IMG._mat_result, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
+                cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
                     cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
                     cv::Scalar(0, 0, 0), 7);
                 IMG.get_edge();//获取边线

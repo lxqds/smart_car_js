@@ -43,12 +43,12 @@ int ImageProcess::init(std::string config_path, bool is_result) {
 }
 
 /* 图像处理 */
-void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
+void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     Payload_t& payload) {
     /* ***************************************************************** */
     /* ***************************** 初始化 ***************************** */
     /* ***************************************************************** */
-
+    mat_result = _mat_result;
     // 图像预处理: 缩放 -> 灰度 -> 二值化
     cv::resize(mat_origin, mat_result, cv::Size(IMAGE_WIDTH, IMAGE_HEIGHT), 0, 0, cv::INTER_AREA);
     cv::cvtColor(mat_result, mat_bin, cv::COLOR_BGR2GRAY);
@@ -59,7 +59,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     std::vector<cv::Mat> channels_lab;
     cv::split(mat_lab, channels_lab);
     cv::threshold(channels_lab[2], mat_lab, 150, 255, cv::THRESH_BINARY);
-    _mat_result = mat_result;
+
     // 绘制处理结果图, 灰度格式转BGR格式
 
     if (_config->check_binary_ || _config->check_lab_) {
@@ -705,6 +705,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         //     MAT_INFO(mat_result, cv::Point(IMAGE_WIDTH / 2, White_row_end_point[i][1]), 0.4, "%d", White_row_length[i]);
         // }
     }
+    _mat_result = mat_result;
 }
 
 /* ******************************************************************* */
