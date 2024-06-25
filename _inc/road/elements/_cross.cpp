@@ -98,16 +98,21 @@ void run_cross() {
                         cv::Scalar(0, 0, 0), 2);
                 }
             }
+            int L_line_num = IMG.ipts0_num;
+            int R_line_num = IMG.ipts1_num;
+
             IMG.get_edge();
 
 
             // 近角点过少, 进入远线控制
             if ((!IMG.Lpt0_found && !IMG.Lpt1_found) ||
-                (IMG.ipts0_num < 20 && IMG.ipts1_num < 20)) {
+                (L_line_num < 20 && R_line_num < 20)) {
                 cross_route = IMG.encoder.route;
                 flag_cross = CROSS_IN;
                 MAT_LOG("CROSS_IN");
             }
+
+
         }
 
         /* ***************************************************************** */
@@ -165,19 +170,19 @@ void run_cross() {
                         cv::Scalar(0, 0, 0), 2);
                 }
             }
-
+            int L_line_num = IMG.ipts0_num;
+            int R_line_num = IMG.ipts1_num;
             IMG.get_edge();
-
             // 出圈
-            if ((IMG.ipts0_num > 50 && IMG.ipts1_num > 50 &&
-                !IMG.Lpt0_found && !IMG.Lpt1_found) ||
-                (IMG.encoder.route - cross_route >= 55)) {
+            if ((L_line_num > 50 && R_line_num > 50 &&
+                !IMG.Lpt0_found && !IMG.Lpt1_found)) {
                 IMG.element_over = true;
                 IMG.element_over_route = IMG.encoder.route;
                 control_flag.pop();
                 flag_cross = CROSS_NONE;
                 MAT_LOG("CROSS_NONE");
             }
+
         }
 
         IMG.calculate_angle();//计算角度

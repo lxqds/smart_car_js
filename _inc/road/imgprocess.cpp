@@ -606,7 +606,28 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 mat_result.at<cv::Vec3b>((int)rptsc1[a][1], (int)rptsc1[a][0])[2] = 0;
             }
         }
-
+        //远线绘制
+        if (far_ipts0_num != 0)
+        {
+            // 左线
+            for (int a = 0; a < far_ipts0_num; a++) {  // 原图中线
+                if ((int)far_ipts0[a][1] >= 0 && (int)far_ipts0[a][1] < mat_result.rows &&
+                    (int)far_ipts0[a][0] >= 0 && (int)far_ipts0[a][0] < mat_result.cols) {
+                    mat_result.at<cv::Vec3b>((int)far_ipts0[a][1], (int)far_ipts0[a][0])[0] = 255;
+                    mat_result.at<cv::Vec3b>((int)far_ipts0[a][1], (int)far_ipts0[a][0])[1] = 255;
+                    mat_result.at<cv::Vec3b>((int)far_ipts0[a][1], (int)far_ipts0[a][0])[2] = 0;
+                }
+            }
+            // 右线
+            for (int a = 0; a < far_ipts1_num; a++) {  // 原图中线
+                if ((int)far_ipts1[a][1] >= 0 && (int)far_ipts1[a][1] < mat_result.rows &&
+                    (int)far_ipts1[a][0] >= 0 && (int)far_ipts1[a][0] < mat_result.cols) {
+                    mat_result.at<cv::Vec3b>((int)far_ipts1[a][1], (int)far_ipts1[a][0])[0] = 0;
+                    mat_result.at<cv::Vec3b>((int)far_ipts1[a][1], (int)far_ipts1[a][0])[1] = 255;
+                    mat_result.at<cv::Vec3b>((int)far_ipts1[a][1], (int)far_ipts1[a][0])[2] = 255;
+                }
+            }
+        }
 
         if (flag_rpts) {
             // 贝塞尔曲线
