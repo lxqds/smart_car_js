@@ -184,8 +184,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         Preprocess_ipts0_num = ipts0_num;
         Preprocess_ipts1_num = ipts1_num;
         count = 0;
-        for (int i = 20; i > 4; i--) {
-            if (White_row_length[i] > 100 && White_row_length[i] < 180) count++;
+        for (int i = 15; i > 4; i--) {
+            if (White_row_length[i] > 100 && White_row_length[i] < 240) count++;
             else count = 0;
             if (count == 3) {
                 far_begin_x = (White_row_mid_point[i] +
@@ -647,16 +647,16 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
             }
 
         }
-        float k = (IMG.Lpt0_point[1] - IMG.ipts0[0][1]) / (IMG.Lpt0_point[0] - IMG.ipts0[0][0]);
+        float k = (Lpt0_point[1] - ipts0[0][1]) / (Lpt0_point[0] - ipts0[0][0]);
         float end_y = 1;
-        float end_x = (end_y - IMG.ipts0[0][1]) / k + IMG.ipts0[0][1];
-        cv::line(IMG.mat_bin, cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
+        float end_x = (end_y - ipts0[0][1]) / k + ipts0[0][1];
+        cv::line(mat_result, cv::Point(Lpt0_point[0], Lpt0_point[1]),
             cv::Point((int)end_x, (int)end_y),
             cv::Scalar(0, 0, 0), 2);
-        k = (IMG.Lpt1_point[1] - IMG.ipts1[0][1]) / (IMG.Lpt1_point[0] - IMG.ipts1[0][0]);
+        k = (Lpt1_point[1] - ipts1[0][1]) / (Lpt1_point[0] - ipts1[0][0]);
         end_y = 1;
-        end_x = (end_y - IMG.ipts1[0][1]) / k + IMG.ipts1[0][1];
-        cv::line(IMG.mat_bin, cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
+        end_x = (end_y - ipts1[0][1]) / k + ipts1[0][1];
+        cv::line(mat_result, cv::Point(Lpt1_point[0], Lpt1_point[1]),
             cv::Point((int)end_x, (int)end_y),
             cv::Scalar(0, 0, 0), 2);
 
