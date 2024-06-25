@@ -126,12 +126,12 @@ void run_circle() {
             }
             else {
                 IMG.get_edge();//获取边线
-                IMG.flag_track = TRACK_LEFT;
             }
             // 先丢右线后有线
             if (IMG.ipts1_num < 40)
                 none_right_line++;
-            if (!IMG.far_Lpt0_found && !IMG.far_Lpt1_found && IMG.ipts1_num > 80 && none_right_line > 0) {
+            if (!IMG.far_Lpt0_found && !IMG.far_Lpt1_found && IMG.ipts1_num > 80 &&
+                (none_right_line > 0 || IMG.encoder.route - circle_route > 120)) {
                 none_right_line = 0;
                 have_right_line = 0;
                 circle_route = IMG.encoder.route;
@@ -179,7 +179,8 @@ void run_circle() {
             // 先丢右线后有线
             if (IMG.ipts1_num < 40)
                 none_right_line++;
-            if (none_right_line > 0 && IMG.ipts1_num > 80 && IMG.encoder.route - circle_route > IMG._config->circle_out_rou) {
+            if (IMG.ipts1_num > 80 && IMG.encoder.route - circle_route > IMG._config->circle_out_rou &&
+                (none_right_line > 0 || IMG.encoder.route - circle_route > 50)) {
                 none_right_line = 0;
                 have_right_line = 0;
                 circle_route = IMG.encoder.route;

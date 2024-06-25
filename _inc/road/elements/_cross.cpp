@@ -36,7 +36,10 @@ void check_cross() {
         !control_flag.contains(garage_element) &&   //当前没在入库中
         !control_flag.contains(ramp_element) &&     //当前没在桥中
         found_Lpt) {
-
+        if (control_flag.contains(circle_element)) {//如果在十字路口中则删除十字路口
+            control_flag.remove(circle_element);
+            flag_cross = CROSS_NONE;
+        }
         control_flag.push(cross_element);
         IMG.element_identify = 1;
         flag_cross = CROSS_BEGIN;
