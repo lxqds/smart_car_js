@@ -39,7 +39,7 @@ void check_cross() {
 
         control_flag.push(cross_element);
         IMG.element_identify = 1;
-        flag_cross = CROSS_IN;
+        flag_cross = CROSS_BEGIN;
         MAT_LOG("CROSS_BEGIN");
     }
 }
@@ -69,8 +69,8 @@ void run_cross() {
                 if (IMG.Lpt0_found) {
                     float k = (IMG.Lpt0_point[1] - IMG.ipts0[0][1]) / (IMG.Lpt0_point[0] - IMG.ipts0[0][0]);
                     float end_y = 1;
-                    float end_x = (end_y - IMG.ipts0[0][1]) / k + IMG.ipts0[0][1];
-                    cv::line(IMG.mat_bin, cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
+                    float end_x = (end_y - IMG.ipts0[0][1]) / k + IMG.ipts0[0][0];
+                    cv::line(IMG.mat_bin, cv::Point(IMG.ipts0[0][0], IMG.ipts0[0][1]),
                         cv::Point((int)end_x, (int)end_y),
                         cv::Scalar(0, 0, 0), 2);
                 }
@@ -91,8 +91,8 @@ void run_cross() {
                 if (IMG.Lpt1_found) {
                     float k = (IMG.Lpt1_point[1] - IMG.ipts1[0][1]) / (IMG.Lpt1_point[0] - IMG.ipts1[0][0]);
                     float end_y = 1;
-                    float end_x = (end_y - IMG.ipts1[0][1]) / k + IMG.ipts1[0][1];
-                    cv::line(IMG.mat_bin, cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
+                    float end_x = (end_y - IMG.ipts1[0][1]) / k + IMG.ipts1[0][0];
+                    cv::line(IMG.mat_bin, cv::Point(IMG.ipts1[0][0], IMG.ipts1[0][1]),
                         cv::Point((int)end_x, (int)end_y),
                         cv::Scalar(0, 0, 0), 2);
                 }
@@ -115,7 +115,7 @@ void run_cross() {
         /* ***************************************************************** */
 
         // 远线控制进十字
-        if (flag_cross == CROSS_IN) {
+        else if (flag_cross == CROSS_IN) {
             //补黑线
             if (IMG.far_Lpt0_found) {
 
@@ -144,8 +144,8 @@ void run_cross() {
                 if (IMG.Lpt0_found) {
                     float k = (IMG.Lpt0_point[1] - IMG.ipts0[0][1]) / (IMG.Lpt0_point[0] - IMG.ipts0[0][0]);
                     float end_y = 1;
-                    float end_x = (end_y - IMG.ipts0[0][1]) / k + IMG.ipts0[0][1];
-                    cv::line(IMG.mat_bin, cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
+                    float end_x = (end_y - IMG.ipts0[0][1]) / k + IMG.ipts0[0][0];
+                    cv::line(IMG.mat_bin, cv::Point(IMG.ipts0[0][0], IMG.ipts0[0][1]),
                         cv::Point((int)end_x, (int)end_y),
                         cv::Scalar(0, 0, 0), 2);
                 }
@@ -177,8 +177,8 @@ void run_cross() {
                 if (IMG.Lpt1_found) {
                     float k = (IMG.Lpt1_point[1] - IMG.ipts1[0][1]) / (IMG.Lpt1_point[0] - IMG.ipts1[0][0]);
                     float end_y = 1;
-                    float end_x = (end_y - IMG.ipts1[0][1]) / k + IMG.ipts1[0][1];
-                    cv::line(IMG.mat_bin, cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
+                    float end_x = (end_y - IMG.ipts1[0][1]) / k + IMG.ipts1[0][0];
+                    cv::line(IMG.mat_bin, cv::Point(IMG.ipts1[0][0], IMG.ipts1[0][1]),
                         cv::Point((int)end_x, (int)end_y),
                         cv::Scalar(0, 0, 0), 2);
                 }
