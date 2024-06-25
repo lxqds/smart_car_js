@@ -503,7 +503,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     aim_angle_d = _config->steering_d;
     run_garage();
     run_work();
-    run_cross(mat_result);
+    run_cross();
     run_circle();
     run_bomb();
     run_ramp();
