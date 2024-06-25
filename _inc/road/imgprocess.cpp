@@ -194,7 +194,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         count = 0;
         for (int i = 4; i < 20; i++) {
 
-            if (White_row_length[i] > 100 && White_row_length[i] < 160) count++;
+            if (White_row_length[i] > 100 && White_row_length[i] < 200) count++;
             else count = 0;
             if (count == 3) {
                 far_begin_x = (White_row_mid_point[i] +

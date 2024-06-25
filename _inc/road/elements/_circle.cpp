@@ -131,7 +131,7 @@ void run_circle() {
             // 先丢右线后有线
             if (IMG.ipts1_num < 40)
                 none_right_line++;
-            if (!IMG.far_Lpt0_found && !IMG.far_Lpt1_found && IMG.ipts1_num > 80) {
+            if (!IMG.far_Lpt0_found && !IMG.far_Lpt1_found && IMG.ipts1_num > 80 && none_right_line > 0) {
                 none_right_line = 0;
                 have_right_line = 0;
                 circle_route = IMG.encoder.route;
