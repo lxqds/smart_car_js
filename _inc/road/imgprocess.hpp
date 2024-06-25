@@ -166,11 +166,7 @@ public:
     /* *********************************************************************** */
 
 public:
-    //预处理获取的白行数据
-    int White_row_start_point[40][2]{};//白行起始点
-    int White_row_end_point[40][2]{};//白行结束点
-    int White_row_mid_point[40]{};  //透视变换后白行中点x坐标
-    int White_row_length[40]{};
+
 
 
     // 原图左右中线数据定义

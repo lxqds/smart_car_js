@@ -80,6 +80,11 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     /* ***************************************************************** */
 
     //寻找最符合跑道的白行
+        //预处理获取的白行数据
+    int White_row_start_point[40][2]{};//白行起始点
+    int White_row_end_point[40][2]{};//白行结束点
+    int White_row_mid_point[40]{};  //透视变换后白行中点x坐标
+    int White_row_length[40]{}; 
     {
         int start_id = 39;  //起始白行的id
         for (int i = 39; i > 0; i--) {
