@@ -121,12 +121,21 @@ void run_cross() {
         if (flag_cross == CROSS_IN) {
             //补黑线
             if (IMG.far_Lpt0_found) {
-                double L = dis_point_point(POINT(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
-                    POINT(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]));
-                if (IMG.Lpt0_found && L > 10) {
-                    cv::line(IMG.mat_bin, cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
-                        cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
-                        cv::Scalar(0, 0, 0), 2);
+
+                if (IMG.Lpt0_found) {
+                    double L = dis_point_point(POINT(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
+                        POINT(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]));
+                    if (L > 10) {
+                        cv::line(IMG.mat_bin, cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
+                            cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
+                            cv::Scalar(0, 0, 0), 2);
+                    }
+                    else {
+                        cv::line(IMG.mat_bin, cv::Point((int)(IMAGE_WIDTH * 0.2), IMAGE_HEIGHT - 1),
+                            cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
+                            cv::Scalar(0, 0, 0), 2);
+                    }
+
                 }
                 else {
                     cv::line(IMG.mat_bin, cv::Point((int)(IMAGE_WIDTH * 0.2), IMAGE_HEIGHT - 1),
@@ -146,12 +155,21 @@ void run_cross() {
                 }
             }
             if (IMG.far_Lpt1_found) {
-                double L = dis_point_point(POINT(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
-                    POINT(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]));
-                if (IMG.Lpt1_found && L > 10) {
-                    cv::line(IMG.mat_bin, cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
-                        cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
-                        cv::Scalar(0, 0, 0), 2);
+
+                if (IMG.Lpt1_found) {
+                    double L = dis_point_point(POINT(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
+                        POINT(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]));
+                    if (L > 10) {
+                        cv::line(IMG.mat_bin, cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
+                            cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
+                            cv::Scalar(0, 0, 0), 2);
+                    }
+                    else {
+                        cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH * 0.8, IMAGE_HEIGHT - 1),
+                            cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
+                            cv::Scalar(0, 0, 0), 2);
+                    }
+
                 }
                 else {
                     cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH * 0.8, IMAGE_HEIGHT - 1),
@@ -182,7 +200,6 @@ void run_cross() {
                 flag_cross = CROSS_NONE;
                 MAT_LOG("CROSS_NONE");
             }
-
         }
 
         IMG.calculate_angle();//计算角度
