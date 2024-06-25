@@ -169,6 +169,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 float mid[2];
                 map_perspective((float)begin_x, (float)begin_y, mid, 1);
                 begin_x = (int)mid[0];
+                break;
             }
         }
         ipts0_num = 150;ipts1_num = 150;
@@ -184,7 +185,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         Preprocess_ipts0_num = ipts0_num;
         Preprocess_ipts1_num = ipts1_num;
         count = 0;
-        for (int i = 15; i > 4; i--) {
+        for (int i = 20; i > 4; i--) {
             if (White_row_length[i] > 100 && White_row_length[i] < 240) count++;
             else count = 0;
             if (count == 3) {
@@ -195,6 +196,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 float mid[2];
                 map_perspective((float)far_begin_x, (float)far_begin_y, mid, 1);
                 far_begin_x = (int)mid[0];
+                break;
             }
         }
         if (far_begin_x > 10 && far_begin_x < IMAGE_WIDTH - 10 && far_begin_y>5 && far_begin_y < IMAGE_HEIGHT - 5) {
