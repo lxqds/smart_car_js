@@ -98,15 +98,13 @@ void run_cross() {
                         cv::Scalar(0, 0, 0), 2);
                 }
             }
-            int L_line_num = IMG.ipts0_num;
-            int R_line_num = IMG.ipts1_num;
 
             IMG.get_edge();
 
 
             // 近角点过少, 进入远线控制
             if ((!IMG.Lpt0_found && !IMG.Lpt1_found) ||
-                (L_line_num < 20 && R_line_num < 20)) {
+                (IMG.Preprocess_ipts0_num < 20 && IMG.Preprocess_ipts1_num < 20)) {
                 cross_route = IMG.encoder.route;
                 flag_cross = CROSS_IN;
                 MAT_LOG("CROSS_IN");
@@ -118,7 +116,7 @@ void run_cross() {
         /* ***************************************************************** */
 
         // 远线控制进十字
-        else if (flag_cross == CROSS_IN) {
+        if (flag_cross == CROSS_IN) {
             //补黑线
             if (IMG.far_Lpt0_found) {
 
@@ -188,11 +186,9 @@ void run_cross() {
                         cv::Scalar(0, 0, 0), 2);
                 }
             }
-            int L_line_num = IMG.ipts0_num;
-            int R_line_num = IMG.ipts1_num;
             IMG.get_edge();
             // 出圈
-            if ((L_line_num > 50 && R_line_num > 50 &&
+            if ((IMG.Preprocess_ipts0_num > 50 && IMG.Preprocess_ipts1_num > 50 &&
                 !IMG.Lpt0_found && !IMG.Lpt1_found)) {
                 IMG.element_over = true;
                 IMG.element_over_route = IMG.encoder.route;

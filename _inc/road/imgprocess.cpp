@@ -181,6 +181,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
             find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
             find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
         }
+        Preprocess_ipts0_num = ipts0_num;
+        Preprocess_ipts1_num = ipts1_num;
         count = 0;
         for (int i = 20; i > 4; i--) {
             if (White_row_length[i] > 100 && White_row_length[i] < 180) count++;

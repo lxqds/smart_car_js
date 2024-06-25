@@ -179,7 +179,8 @@ public:
     int iptsc[IMAGE_HEIGHT];     // 中: c
     int ipts0_num, ipts1_num, rptsc_num;
 
-    
+    int Preprocess_ipts0_num, Preprocess_ipts1_num;
+
     //远线左右线定义
     int far_ipts0[IMAGE_HEIGHT][2];
     int far_ipts1[IMAGE_HEIGHT][2];
