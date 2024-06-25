@@ -171,6 +171,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 begin_x = (int)mid[0];
             }
         }
+        cv::line(mat_result, cv::Point(0, 0),
+            cv::Point(begin_x, begin_y), cv::Scalar(255, 0, 0), 1);
         ipts0_num = 150;ipts1_num = 150;
         if (begin_x > 1 && begin_x < IMAGE_WIDTH - 1 && begin_y>0 && begin_y < IMAGE_HEIGHT - 1) {
             find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num); // 原图找左边线
@@ -626,12 +628,12 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         }
 
 
-        for (int i = 1; i < 40; i++)
-        {
-            cv::line(mat_result, cv::Point(White_row_start_point[i][0], White_row_start_point[i][1]),
-                cv::Point(White_row_end_point[i][0], White_row_end_point[i][1]), cv::Scalar(0, 255, 0), 1);
-            MAT_INFO(mat_result, cv::Point(IMAGE_WIDTH / 2, White_row_end_point[i][1]), 0.4, "%d", White_row_length[i]);
-        }
+        // for (int i = 1; i < 40; i++)
+        // {
+        //     cv::line(mat_result, cv::Point(White_row_start_point[i][0], White_row_start_point[i][1]),
+        //         cv::Point(White_row_end_point[i][0], White_row_end_point[i][1]), cv::Scalar(0, 255, 0), 1);
+        //     MAT_INFO(mat_result, cv::Point(IMAGE_WIDTH / 2, White_row_end_point[i][1]), 0.4, "%d", White_row_length[i]);
+        // }
     }
 }
 
