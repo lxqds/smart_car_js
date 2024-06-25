@@ -166,10 +166,10 @@ void run_cross() {
                 }
             }
 
-
+            IMG.get_edge();
 
             // 出圈
-            if ((IMG.ipts0_num > 50 &&  IMG.ipts1_num > 50 &&
+            if ((IMG.ipts0_num > 50 && IMG.ipts1_num > 50 &&
                 !IMG.Lpt0_found && !IMG.Lpt1_found) ||
                 (IMG.encoder.route - cross_route >= 55)) {
                 IMG.element_over = true;

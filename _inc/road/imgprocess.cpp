@@ -485,6 +485,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 
     if (control_flag.top() == none_element)
     {
+        IMG.get_edge();
         aim_speed = _config->speed_base;
         if (is_straight0 && is_straight1)
         {
