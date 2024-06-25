@@ -446,8 +446,11 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         special_w = false;
         special_g = false;
     }
+
+    cv::circle(mat_result, cv::Point(Lpt0_point[0], Lpt0_point[1]), 3, cv::Scalar(255, 0, 0), 2, 8);
+    cv::circle(mat_result, cv::Point(Lpt1_point[0], Lpt1_point[1]), 3, cv::Scalar(255, 0, 0), 2, 8);
     cv::circle(mat_result, cv::Point(ipts0[0][0], ipts0[0][1]), 3, cv::Scalar(255, 0, 0), 2, 8);
-    cv::circle(mat_result, cv::Point(ipts0[0][0], ipts0[0][1]), 3, cv::Scalar(255, 0, 0), 2, 8);
+    cv::circle(mat_result, cv::Point(ipts0[1][0], ipts0[1][1]), 3, cv::Scalar(255, 0, 0), 2, 8);
     // 识别元素
     check_garage();  // 斑马线 - 识别特殊特征
     check_work();  // 施工区 - 识别标志
