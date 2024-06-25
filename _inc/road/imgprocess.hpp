@@ -59,6 +59,7 @@ public:
     std::shared_ptr<ControlConfig> _config;           // 跑车配置文件
     std::vector<DetectionPredictResult> _det_result;  // 目标检测结果
 
+    cv::Mat& __ARRAY_OPERATORS;
     cv::Mat mat_bin;  // 原图转二值化图
     cv::Mat mat_lab;  // 原图转 LAB 图
 

@@ -59,7 +59,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     std::vector<cv::Mat> channels_lab;
     cv::split(mat_lab, channels_lab);
     cv::threshold(channels_lab[2], mat_lab, 150, 255, cv::THRESH_BINARY);
-
+    _mat_result = mat_result;
     // 绘制处理结果图, 灰度格式转BGR格式
 
     if (_config->check_binary_ || _config->check_lab_) {
