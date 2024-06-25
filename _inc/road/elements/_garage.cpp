@@ -173,6 +173,40 @@ void run_garage()
         /* *** *** *** *** *** */
         switch (flag_garage)
         {
+            case GARAGE_OUT_MIDDLE:
+                IMG.aim_speed = IMG._config->speed_garage_out;
+                if (IMG.encoder.route > IMG._config->garage_out_route_)
+                {
+                    IMG.element_over = true;
+                    IMG.element_over_route = IMG.encoder.route;
+                    control_flag.pop();
+                    flag_garage = GARAGE_NONE;
+                    MAT_LOG("GARAGE_NONE");
+                }
+                // 正常巡线
+                if (IMG.flag_track == TRACK_LEFT) {
+                    IMG.rpts = IMG.rptsc0;
+                    IMG.rpts_num = IMG.rptsc0_num;
+                }
+                else if (IMG.flag_track == TRACK_RIGHT) {
+                    IMG.rpts = IMG.rptsc1;
+                    IMG.rpts_num = IMG.rptsc1_num;
+                }
+                else {
+                    IMG.rpts = IMG.rptscs;
+                    IMG.rpts_num = IMG.rptscs_num;
+                }
+                if (IMG.rpts_num > 0.8 / SAMPLE_DIST)
+                {
+                    IMG.calculate_angle();//计算角度
+                }
+                else
+                {
+                    IMG.aim_angle = IMG.aim_angle_last;
+                }
+
+
+                break;
             case GARAGE_IN_MIDDLE://过斑马线停车
                 IMG.aim_speed = IMG._config->speed_garage_in;
                 if (IMG.encoder.route - garage_route > IMG._config->garage_pass_route_)

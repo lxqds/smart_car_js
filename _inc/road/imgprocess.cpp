@@ -171,8 +171,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 begin_x = (int)mid[0];
             }
         }
-        cv::line(mat_result, cv::Point(0, 0),
-            cv::Point(begin_x, begin_y), cv::Scalar(255, 0, 0), 1);
         ipts0_num = 150;ipts1_num = 150;
         if (begin_x > 1 && begin_x < IMAGE_WIDTH - 1 && begin_y>0 && begin_y < IMAGE_HEIGHT - 1) {
             find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num); // 原图找左边线
