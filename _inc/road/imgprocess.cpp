@@ -84,7 +84,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     int White_row_start_point[40][2]{};//白行起始点
     int White_row_end_point[40][2]{};//白行结束点
     int White_row_mid_point[40]{};  //透视变换后白行中点x坐标
-    int White_row_length[40]{}; 
+    int White_row_length[40]{};
     {
         int start_id = 39;  //起始白行的id
         for (int i = 39; i > 0; i--) {
@@ -162,7 +162,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     }
     //从长度合适的白行开始摸线
     {
-        int begin_x = IMAGE_WIDTH / 2, begin_y = IMAGE_HEIGHT - 10;//近线向上找线的开始位置
+        begin_x = IMAGE_WIDTH / 2, begin_y = IMAGE_HEIGHT - 10;//近线向上找线的开始位置
         int far_begin_x = 0, far_begin_y = 0;//远线向下找线的开始位置
         int count = 0;
         for (int i = 39; i > 20; i--) {
@@ -688,30 +688,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 
 void ImageProcess::get_edge()
 {
-    //得到原始边线点集
-    int begin_x = IMAGE_WIDTH / 2, begin_y = IMAGE_HEIGHT - 10;//近线向上找线的开始位置
-    int count = 0;
-    for (int i = 39; i > 20; i--) {
-        if (White_row_length[i] > 50 && White_row_length[i] < 160) count++;
-        else count = 0;
-        if (count == 3) {
-            begin_x = (White_row_mid_point[i] + White_row_mid_point[i + 1] + White_row_mid_point[i + 2]) / 3;
-            begin_y = White_row_start_point[i + 1][1];
-            float mid[2];
-            map_perspective((float)begin_x, (float)begin_y, mid, 1);
-            begin_x = (int)mid[0];
-        }
-    }
-    ipts0_num = 150;ipts1_num = 150;
-    if (begin_x > 1 && begin_x < IMAGE_WIDTH - 1 && begin_y>0 && begin_y < IMAGE_HEIGHT - 1) {
-        find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num); // 原图找左边线
-        find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);// 原图找右边线
-    }
-    else {//开始点不在屏幕范围内
-        begin_x = IMAGE_WIDTH / 2, begin_y = IMAGE_HEIGHT - 10;
-        find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
-        find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
-    }
+    find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
+    find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
     // 变换后左右中线
     float rpts0[IMAGE_HEIGHT][2] = { 0 };
     float rpts1[IMAGE_HEIGHT][2] = { 0 };
