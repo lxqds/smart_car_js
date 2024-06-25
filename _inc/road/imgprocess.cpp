@@ -168,7 +168,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         int far_begin_x = 0, far_begin_y = 0;//远线向下找线的开始位置
         int count = 0;
         for (int i = 34; i > 25; i--) {
-            if (White_row_length[i] > 50 && White_row_length[i] < 140) count++;
+            if (White_row_length[i] > 50) count++;
             else count = 0;
             if (count == 3) {
                 begin_x = (White_row_mid_point[i] + White_row_mid_point[i + 1] + White_row_mid_point[i + 2]) / 3;
