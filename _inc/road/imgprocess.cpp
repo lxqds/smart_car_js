@@ -657,7 +657,16 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 }
             }
         }
+        if (Lpt0_found)
+            cv::circle(mat_result, cv::Point(Lpt0_point[0], Lpt0_point[1]), 3, cv::Scalar(255, 0, 0), 2, 8);
+        if (Lpt1_found)
+            cv::circle(mat_result, cv::Point(Lpt1_point[0], Lpt1_point[1]), 3, cv::Scalar(0, 0, 255), 2, 8);
+        if (far_Lpt0_found)
+            cv::circle(mat_result, cv::Point(far_Lpt0_point[0], far_Lpt0_point[1]), 3, cv::Scalar(0, 255, 255), 2, 8);
+        if (far_Lpt1_found)
+            cv::circle(mat_result, cv::Point(far_Lpt1_point[0], far_Lpt1_point[1]), 3, cv::Scalar(255, 255, 0), 2, 8);
 
+        cv::circle(mat_result, cv::Point(begin_x, begin_y), 3, cv::Scalar(255, 0, 255), 2, 8);
         if (flag_rpts) {
             // 贝塞尔曲线
             for (auto p : bezier_line)
