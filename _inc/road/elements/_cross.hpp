@@ -1,6 +1,6 @@
 #ifndef _CROSS_HPP_
 #define _CROSS_HPP_
-
+#include "imgprocess.hpp"
 enum flag_cross_e {
     CROSS_NONE = 0,  // 非十字模式
     CROSS_BEGIN,     // 找到左右两个 L 角点
