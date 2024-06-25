@@ -187,8 +187,8 @@ void run_cross() {
             // 出圈
             if ((IMG.Preprocess_ipts0_num > 50 && IMG.Preprocess_ipts1_num > 50 &&
                 ((!IMG.Lpt0_found && !IMG.Lpt1_found) ||
-                    IMG.Lpt0_found && IMG.Lpt1_found &&
-                    IMG.Lpt0_point[1] > 160 && IMG.Lpt1_point[1] > 160))) {
+                    (IMG.Lpt0_found && IMG.Lpt1_found &&
+                        IMG.Lpt0_point[1] > 160 && IMG.Lpt1_point[1] > 160)))) {
                 IMG.element_over = true;
                 IMG.element_over_route = IMG.encoder.route;
                 control_flag.pop();
