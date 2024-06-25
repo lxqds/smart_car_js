@@ -1216,7 +1216,7 @@ void Find_corner(float rpts[][2], int rpts_num, int corner_point[2], float* angl
 {
     *angle = 180;
     float angle_xy[2]{};
-    if (rpts_num > 20) {
+    if (rpts_num > 30) {
         float min_angle = 180;
         float min_angle_x = 0;
         float min_angle_y = 0;
@@ -1225,10 +1225,10 @@ void Find_corner(float rpts[][2], int rpts_num, int corner_point[2], float* angl
         while (true) {
             k[0][0] = rpts[i][0];
             k[0][1] = rpts[i][1];
-            k[1][0] = rpts[i + 10][0];
-            k[1][1] = rpts[i + 10][1];
-            k[2][0] = rpts[i + 20][0];
-            k[2][1] = rpts[i + 20][1];
+            k[1][0] = rpts[i + 15][0];
+            k[1][1] = rpts[i + 15][1];
+            k[2][0] = rpts[i + 30][0];
+            k[2][1] = rpts[i + 30][1];
             float BAx = (float)(k[0][0] - k[1][0]);
             float BAy = (float)(k[0][1] - k[1][1]);
             float BCx = (float)(k[2][0] - k[1][0]);
@@ -1250,7 +1250,7 @@ void Find_corner(float rpts[][2], int rpts_num, int corner_point[2], float* angl
                 min_angle_y = (float)k[1][1];
             }
             i += 5;
-            if (i + 20 >= rpts_num)break;
+            if (i + 30 >= rpts_num)break;
         }
         *angle = min_angle;
         map_perspective(min_angle_x, min_angle_y, angle_xy, 1);
