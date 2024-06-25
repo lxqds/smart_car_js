@@ -145,7 +145,7 @@ void run_circle() {
             IMG.flag_track = TRACK_RIGHT;
 
             // 外环存在拐点, 可再加拐点距离判据 (左L点)
-            if (IMG.Lpt1_found && IMG.encoder.route - circle_route > 100) {
+            if (IMG.ipts1_num < 80 && IMG.Lpt1_found && IMG.encoder.route - circle_route > 120) {
                 flag_circle = CIRCLE_LEFT_OUT;
                 MAT_LOG("CIRCLE_LEFT_OUT");
             }
@@ -171,6 +171,9 @@ void run_circle() {
                     cv::Scalar(0, 0, 0), 7);
                 IMG.get_edge();//获取边线
                 IMG.flag_track = TRACK_RIGHT;
+            }
+            else {
+                IMG.get_edge();//获取边线
             }
 
             // 先丢右线后有线
