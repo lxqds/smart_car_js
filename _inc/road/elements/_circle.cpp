@@ -153,18 +153,24 @@ void run_circle() {
         // 出环, 寻内圆
         else if (flag_circle == CIRCLE_LEFT_OUT) {
             if (IMG.Lpt1_found) {
-                cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH / 2, 1),
+                cv::line(IMG.mat_bin, cv::Point((int)(IMAGE_WIDTH * 0.3), 1),
                     cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
                     cv::Scalar(0, 0, 0), 7);
-                cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH / 2, 1),
+                cv::line(IMG.mat_result, cv::Point((int)(IMAGE_WIDTH * 0.3), 1),
                     cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
                     cv::Scalar(0, 0, 0), 7);
                 IMG.get_edge();//获取边线
                 IMG.flag_track = TRACK_RIGHT;
             }
-            else {
+            else if (IMG.ipts1_num < 40) {
+                cv::line(IMG.mat_bin, cv::Point((int)(IMAGE_WIDTH * 0.3), 1),
+                    cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
+                    cv::Scalar(0, 0, 0), 7);
+                cv::line(IMG.mat_result, cv::Point((int)(IMAGE_WIDTH * 0.3), 1),
+                    cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
+                    cv::Scalar(0, 0, 0), 7);
                 IMG.get_edge();//获取边线
-                IMG.flag_track = TRACK_LEFT;
+                IMG.flag_track = TRACK_RIGHT;
             }
 
             // 先丢右线后有线
