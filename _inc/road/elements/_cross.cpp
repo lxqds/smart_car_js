@@ -38,7 +38,7 @@ void check_cross() {
 
         control_flag.push(cross_element);
         IMG.element_identify = 1;
-        flag_cross = CROSS_BEGIN;
+        flag_cross = CROSS_IN;
         MAT_LOG("CROSS_BEGIN");
     }
 }
