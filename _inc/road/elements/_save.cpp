@@ -56,8 +56,6 @@ void run_save()
 
     if (flag_save == Left_FOUND||flag_save == Right_FOUND)
     {
-        // 清弯道防止加大 P 项, 提高稳定性
-        IMG.is_curve0 = IMG.is_curve1 = false;
 
         // 找锥桶
         IMG.edge_det = search_targets(IMG._det_result);
@@ -106,8 +104,6 @@ void run_save()
     {
         if (flag_save == Left_READY)
         {
-            // 清弯道防止加大 P 项, 提高稳定性
-            IMG.is_curve0 = IMG.is_curve1 = false;
 
             // 左入口 巡右线
             IMG.flag_track = TRACK_RIGHT;
@@ -176,8 +172,6 @@ void run_save()
         //进去后直行一段距离
         if (flag_save == Left_RUN)
         {
-            // 清弯道防止加大 P 项, 提高稳定性
-            IMG.is_curve0 = IMG.is_curve1 = false;
 
             // 左区域 巡左线
             IMG.flag_track = TRACK_LEFT;

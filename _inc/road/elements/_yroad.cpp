@@ -47,8 +47,6 @@ void check_yroad() {
 
 void run_yroad() {
     if (flag_yroad == YROAD_FOUND) {
-        // 清弯道防止加大 P 项, 提高稳定性
-        IMG.is_curve0 = IMG.is_curve1 = false;
         // 直走
         //IMG.flag_track = TRACK_MIDDLE;
         // 找锥桶
@@ -84,9 +82,6 @@ void run_yroad() {
             flag_yroad = YROAD_RUN;
             MAT_LOG("Farmland_RUN");
         } else {
-            // MAT_LOG("question2");
-            //  清弯道防止加大 P 项, 提高稳定性
-            IMG.is_curve0 = IMG.is_curve1 = false;
 
             IMG.edge_det = search_targets(IMG._det_result);
             IMG.cones_edge_left.clear();
@@ -181,9 +176,6 @@ void run_yroad() {
             MAT_LOG("Farmland_OUT");
         } else {
             bool refreshed = true;
-            // 清弯道防止加大 P 项, 提高稳定性
-            IMG.is_curve0 = IMG.is_curve1 = false;
-
             IMG.cones_edge_left.clear();
             IMG.cones_edge_right.clear();
             IMG.edge_det = search_targets(IMG._det_result);

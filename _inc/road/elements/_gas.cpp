@@ -45,8 +45,6 @@ void run_gas()
 
     if (flag_gas == GAS_FOUND)
     {
-        // 清弯道防止加大 P 项, 提高稳定性
-        IMG.is_curve0 = IMG.is_curve1 = false;
 
         // 找目标点
         IMG.edge_det = search_targets(IMG._det_result);
@@ -74,8 +72,6 @@ void run_gas()
 
     if (flag_gas == GAS_READY)
     {
-        // 清弯道防止加大 P 项, 提高稳定性
-        IMG.is_curve0 = IMG.is_curve1 = false;
 
         // 左入口 巡右线
         IMG.flag_track = TRACK_RIGHT;
@@ -160,8 +156,6 @@ void run_gas()
 
     if (flag_gas == GAS_RUN)
     {
-        // 清弯道防止加大 P 项, 提高稳定性
-        IMG.is_curve0 = IMG.is_curve1 = false;
 
         // 左区域 巡左线
         IMG.flag_track = TRACK_LEFT;
@@ -237,8 +231,6 @@ void run_gas()
 
     if (flag_gas == GAS_OUT)
     {
-        // 加大 P 项, 提升出区域稳定性
-        IMG.is_curve0 = IMG.is_curve1 = true;
 
         // 右出口 巡左线
         IMG.flag_track = TRACK_LEFT;

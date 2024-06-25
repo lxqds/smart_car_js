@@ -34,6 +34,7 @@ public:
     int init(std::string config_path, bool is_result);
     void process(cv::Mat& mat_origin, cv::Mat& mat_result, Payload_t& payload);
     void calculate_angle(void);
+    void get_edge(void);
 private:
     bool _is_result = false;  // 是否生成处理后的图像
 
@@ -148,26 +149,16 @@ public:
     /* *********************************************************************** */
     /* ******************************* 角点数据 ******************************* */
     /* *********************************************************************** */
-
-private:
-    // L 角点置信度 (角度)
-    float Lpt0_found_conf, Lpt1_found_conf;
-    // L 角点二次判断
-    bool Lpt0_found_last = false, Lpt1_found_last = false;
-
 public:
     // L 角点
-    int Lpt0_rpts0s_id, Lpt1_rpts1s_id;
     bool Lpt0_found, Lpt1_found;
     float Lpt0_angle, Lpt1_angle;
     int Lpt0_point[2], Lpt1_point[2];//左右角点坐标
+    bool far_Lpt0_found, far_Lpt1_found;
     float far_Lpt0_angle, far_Lpt1_angle;
     int far_Lpt0_point[2], far_Lpt1_point[2];//远处左右角点坐标
     // 长直道
     bool is_straight0, is_straight1;
-    // 弯道 左 右 强制
-    bool is_curve0, is_curve1;
-
 
 
     /* *********************************************************************** */
@@ -175,6 +166,13 @@ public:
     /* *********************************************************************** */
 
 public:
+    //预处理获取的白行数据
+    int White_row_start_point[40][2]{};//白行起始点
+    int White_row_end_point[40][2]{};//白行结束点
+    int White_row_mid_point[40]{};  //透视变换后白行中点x坐标
+    int White_row_length[40]{};
+
+
     // 原图左右中线数据定义
     int ipts0[IMAGE_HEIGHT][2];  // 左: 0
     int ipts1[IMAGE_HEIGHT][2];  // 右: 1

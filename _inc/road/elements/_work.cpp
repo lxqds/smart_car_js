@@ -70,8 +70,6 @@ void run_work()
         IMG.edge_det.clear();
         if (flag_work == WORK_FOUND_1)
         {
-            // 清弯道防止加大 P 项, 提高稳定性
-            IMG.is_curve0 = IMG.is_curve1 = false;
 
             // 找锥桶
             IMG.edge_det = search_targets(IMG._det_result);
@@ -96,9 +94,6 @@ void run_work()
 
         if (flag_work == WORK_FOUND_2)
         {
-            // 清弯道防止加大 P 项, 提高稳定性
-            IMG.is_curve0 = IMG.is_curve1 = false;
-
             // 找锥桶
             IMG.edge_det = search_targets(IMG._det_result);
 
@@ -170,8 +165,6 @@ void run_work()
             else
                 work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
              
-            // 清弯道防止加大 P 项, 提高稳定性
-            IMG.is_curve0 = IMG.is_curve1 = false;
             // 调整 进入角度
             IMG.aim_angle = IMG._config->work_angle_in_1;
             if (!direction_work) IMG.aim_angle = -IMG.aim_angle;

@@ -130,9 +130,7 @@ void run_circle() {
             IMG.flag_track = TRACK_RIGHT;
 
             // 外环存在拐点, 可再加拐点距离判据 (左L点)
-            if (IMG.Lpt1_found)
-                IMG.ipts1_num = IMG.rpts1s_num = IMG.rptsc1_num = IMG.Lpt1_rpts1s_id;
-            if (IMG.Lpt1_found && IMG.Lpt1_rpts1s_id < 0.6 / SAMPLE_DIST && IMG.encoder.route - circle_route > 100) {
+            if (IMG.Lpt1_found && IMG.encoder.route - circle_route > 100) {
                 flag_circle = CIRCLE_LEFT_OUT;
                 MAT_LOG("CIRCLE_LEFT_OUT");
             }
@@ -141,8 +139,6 @@ void run_circle() {
         if (flag_circle == CIRCLE_LEFT_OUT) {
             IMG.flag_track = TRACK_LEFT;
 
-            if (IMG.Lpt1_found)
-                IMG.ipts1_num = IMG.rpts1s_num = IMG.rptsc1_num = IMG.Lpt1_rpts1s_id;
 
             // 先丢右线后有线
             if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
@@ -216,10 +212,7 @@ void run_circle() {
         if (flag_circle == CIRCLE_RIGHT_RUNNING) {
             IMG.flag_track = TRACK_LEFT;
 
-            // 外环存在拐点, 可再加拐点距离判据 (左L点)
-            if (IMG.Lpt0_found)
-                IMG.ipts0_num = IMG.rpts0s_num = IMG.rptsc0_num = IMG.Lpt0_rpts0s_id;
-            if (IMG.Lpt0_found && IMG.Lpt0_rpts0s_id < 0.6 / SAMPLE_DIST && IMG.encoder.route - circle_route > 100) {
+            if (IMG.Lpt0_found && IMG.encoder.route - circle_route > 100) {
                 flag_circle = CIRCLE_RIGHT_OUT;
                 MAT_LOG("CIRCLE_RIGHT_OUT");
             }
@@ -228,8 +221,6 @@ void run_circle() {
         if (flag_circle == CIRCLE_RIGHT_OUT) {
             IMG.flag_track = TRACK_RIGHT;
 
-            if (IMG.Lpt0_found)
-                IMG.ipts0_num = IMG.rpts0s_num = IMG.rptsc0_num = IMG.Lpt0_rpts0s_id;
 
             // 先丢左线后有线
             if (IMG.rpts0s_num < 0.2 / SAMPLE_DIST)

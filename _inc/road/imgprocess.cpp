@@ -80,10 +80,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     /* ***************************************************************** */
 
     //寻找最符合跑道的白行
-    int White_row_start_point[40][2]{};//白行起始点
-    int White_row_end_point[40][2]{};//白行结束点
-    int White_row_mid_point[40]{};  //透视变换后白行中点x坐标
-    int White_row_length[40]{};
     {
         int start_id = 39;  //起始白行的id
         for (int i = 39; i > 0; i--) {
@@ -210,15 +206,11 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         }
     }
 
-    // 变换后左右中线
+    // 变换后左右线
     float rpts0[IMAGE_HEIGHT][2] = { 0 };
     float rpts1[IMAGE_HEIGHT][2] = { 0 };
     float far_rpts0[IMAGE_HEIGHT][2] = { 0 };
     float far_rpts1[IMAGE_HEIGHT][2] = { 0 };
-    float rptsc[IMAGE_HEIGHT][2] = { 0 };
-    // 原图边线转换数据定义
-    int iptsc0[IMAGE_HEIGHT] = { 0 };
-    int iptsc1[IMAGE_HEIGHT] = { 0 };
 
     //透视变换得到的线
     for (int i = 0; i < ipts0_num; i++)
@@ -235,229 +227,28 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     Find_corner(far_rpts0, far_ipts0_num, far_Lpt0_point, &far_Lpt0_angle);
     Find_corner(far_rpts1, far_ipts1_num, far_Lpt1_point, &far_Lpt1_angle);
 
+    Lpt0_found = IMG.Lpt0_angle > 50 && IMG.Lpt0_angle < 120;
+    Lpt1_found = IMG.Lpt1_angle > 50 && IMG.Lpt1_angle < 120;
+    far_Lpt0_found = IMG.far_Lpt0_angle > 50 && IMG.far_Lpt0_angle < 120;
+    far_Lpt1_found = IMG.far_Lpt1_angle > 50 && IMG.far_Lpt1_angle < 120;
 
 
-    // // 原图边线 -> 透视边线 左
-    // rptsc_num = 0;
-    // edge_left.clear();
-    // for (int i = 0; i < ipts0_num; i++, rptsc_num++) {
-    //     if (ipts0[i][1] < 10)
-    //         break;
-
-    //     map_perspective(ipts0[i][0], ipts0[i][1], rpts0[i], 0);
-    //     iptsc0[ipts0[i][1]] = ipts0[i][0];
-
-    //     // 注意: x 与 y 位置相反 !!!
-    //     POINT pointTmp(ipts0[i][1], ipts0[i][0]);
-    //     edge_left.push_back(pointTmp);
-    // }
-    // ipts0_num = rptsc_num;
-    // // 原图边线 -> 透视边线 右
-    // rptsc_num = 0;
-    // edge_right.clear();
-    // for (int i = 0; i < ipts1_num; i++, rptsc_num++) {
-    //     if (ipts1[i][1] < 10)
-    //         break;
-
-    //     map_perspective(ipts1[i][0], ipts1[i][1], rpts1[i], 0);
-    //     iptsc1[ipts1[i][1]] = ipts1[i][0];
-
-    //     // 注意: x 与 y 位置相反 !!!
-    //     POINT pointTmp(ipts1[i][1], ipts1[i][0]);
-    //     edge_right.push_back(pointTmp);
-    // };
-    // ipts1_num = rptsc_num;
-
-    // // 中线获取 图像顶部10个像素丢弃
-    // rptsc_num = 0;
-    // for (int ccy = IMAGE_HEIGHT - 1; ccy >= 10; ccy--) {
-    //     iptsc[ccy] = iptsc0[ccy] + iptsc1[ccy];
-
-    //     if (iptsc[ccy] != 0) {
-    //         // 如果右边线丢失
-    //         if (iptsc1[ccy] == 0)
-    //             iptsc[ccy] = (int)((IMAGE_WIDTH - iptsc[ccy]) / 2 + iptsc[ccy]);
-    //         else  // 左边线丢失
-    //             iptsc[ccy] = (int)(iptsc[ccy] / 2);
-
-    //         // 原图中线 -> 透视中线
-    //         map_perspective(iptsc[ccy], ccy, rptsc[rptsc_num++], 0);
-    //     }
-    // }
-
-    // 滤波
-    blur_points(rpts0, ipts0_num, rpts0b, (int)round(LINE_BLUR_KERNEL));
-    blur_points(rpts1, ipts1_num, rpts1b, (int)round(LINE_BLUR_KERNEL));
-    blur_points(rptsc, rptsc_num, rptscb, (int)round(LINE_BLUR_KERNEL));
-
-    // 边线等距采样
-    rpts0s_num = sizeof(rpts0s) / sizeof(rpts0s[0]);
-    resample_points(rpts0b, ipts0_num, rpts0s, &rpts0s_num, SAMPLE_DIST * PIXEL_PER_METER);
-    rpts1s_num = sizeof(rpts1s) / sizeof(rpts1s[0]);
-    resample_points(rpts1b, ipts1_num, rpts1s, &rpts1s_num, SAMPLE_DIST * PIXEL_PER_METER);
-    rptscs_num = sizeof(rptscs) / sizeof(rptscs[0]);
-    resample_points(rptscb, rptsc_num, rptscs, &rptscs_num, SAMPLE_DIST * PIXEL_PER_METER);
-
-    // 边线局部角度变化率
-    local_angle_points(rpts0s, rpts0s_num, rpts0a, (int)round(ANGLE_DIST / SAMPLE_DIST));
-    local_angle_points(rpts1s, rpts1s_num, rpts1a, (int)round(ANGLE_DIST / SAMPLE_DIST));
-
-    // 角度变化率非极大抑制
-    nms_angle(rpts0a, rpts0s_num, rpts0an, (int)round(ANGLE_DIST / SAMPLE_DIST) * 2 + 1);
-    nms_angle(rpts1a, rpts1s_num, rpts1an, (int)round(ANGLE_DIST / SAMPLE_DIST) * 2 + 1);
-
-    // 左右中线跟踪
-    track_leftline(rpts0s, rpts0s_num, rptsc0,
-        (int)round(ANGLE_DIST / SAMPLE_DIST),
-        PIXEL_PER_METER * ROAD_WIDTH / 2);
-    rptsc0_num = rpts0s_num;
-    track_rightline(rpts1s, rpts1s_num, rptsc1,
-        (int)round(ANGLE_DIST / SAMPLE_DIST),
-        PIXEL_PER_METER * ROAD_WIDTH / 2);
-    rptsc1_num = rpts1s_num;
-
-    // 透视中线 -> 原图中线
-    for (int i = 0; i < rptsc0_num; i++)
-        map_perspective(rptsc0[i][0], rptsc0[i][1], rptsc0[i], 1);
-    for (int i = 0; i < rptsc1_num; i++)
-        map_perspective(rptsc1[i][0], rptsc1[i][1], rptsc1[i], 1);
-    for (int i = 0; i < rptscs_num; i++)
-        map_perspective(rptscs[i][0], rptscs[i][1], rptscs[i], 1);
 
     /* ***************************************************************** */
     /* *************************** 弯直道检测 *************************** */
     /* ***************************************************************** */
 
-    // 标志位重置
-    is_curve0 = is_curve1 = is_straight0 = is_straight1 = false;
-    mea_0 = mea_1 = 10.0f;
-    // 左线直线拟合
-    if (rpts0s_num > 10) {
-        mea_0 = fit_line(rpts0s, rpts0s_num, 60);
-        if (mea_0 < 2.5f && rpts0s_num > 60)
-            is_straight0 = true;
-        else
-            is_curve0 = true;
-    }
-    // 右线直线拟合
-    if (rpts1s_num > 10) {
-        mea_1 = fit_line(rpts1s, rpts1s_num, 60);
-        if (mea_1 < 2.5f && rpts1s_num > 60)
-            is_straight1 = true;
-        else
-            is_curve1 = true;
-    }
 
-    /* ***************************************************************** */
-    /* **************************** 角点检测 **************************** */
-    /* ***************************************************************** */
 
-    // 角点重置
-    Lpt0_found = Lpt1_found = false;
-    // 左线角点
-    for (int i = 0; i < rpts0s_num; i++) {
-        if (rpts0an[i] == 0)
-            continue;
-        int im1 = clip(i - (int)round(ANGLE_DIST / SAMPLE_DIST), 0, rpts0s_num - 1);
-        int ip1 = clip(i + (int)round(ANGLE_DIST / SAMPLE_DIST), 0, rpts0s_num - 1);
-        float conf = fabs(rpts0a[i]) - (fabs(rpts0a[im1]) + fabs(rpts0a[ip1])) / 2;
-        // L 角点阈值 0.6981317 < x < 2.44346
-        if (Lpt0_found == false && 40. / 180. * PI < conf &&
-            conf < 140. / 180. * PI && i < 0.8 / SAMPLE_DIST) {
-            Lpt0_found_conf = conf;
-            Lpt0_rpts0s_id = i;
-            Lpt0_found = true;
-        }
-        if (Lpt0_found)
-            break;
-    }
-    // 右线角点
-    for (int i = 0; i < rpts1s_num; i++) {
-        if (rpts1an[i] == 0)
-            continue;
-        int im1 = clip(i - (int)round(ANGLE_DIST / SAMPLE_DIST), 0, rpts1s_num - 1);
-        int ip1 = clip(i + (int)round(ANGLE_DIST / SAMPLE_DIST), 0, rpts1s_num - 1);
-        float conf = fabs(rpts1a[i]) - (fabs(rpts1a[im1]) + fabs(rpts1a[ip1])) / 2;
-        // L 角点阈值
-        if (Lpt1_found == false && 40. / 180. * PI < conf &&
-            conf < 140. / 180. * PI && i < 0.8 / SAMPLE_DIST) {
-            Lpt1_found_conf = conf;
-            Lpt1_rpts1s_id = i;
-            Lpt1_found = true;
-        }
-        if (Lpt1_found)
-            break;
-    }
-
-    // L 点二次检查, 车库模式不检查, 依据两角点距离及角点后张开特性
-    if (flag_garage == GARAGE_NONE) {
-        if (Lpt0_found && Lpt1_found) {
-            float dx = rpts0s[Lpt0_rpts0s_id][0] - rpts1s[Lpt1_rpts1s_id][0];
-            float dy = rpts0s[Lpt0_rpts0s_id][1] - rpts1s[Lpt1_rpts1s_id][1];
-            float dn = sqrtf(dx * dx + dy * dy);
-            if (fabs(dn - 0.45 * PIXEL_PER_METER) < 0.15 * PIXEL_PER_METER) {
-                float dwx = rpts0s[clip(Lpt0_rpts0s_id + 50, 0, rpts0s_num - 1)][0] -
-                    rpts1s[clip(Lpt1_rpts1s_id + 50, 0, rpts1s_num - 1)][0];
-                float dwy = rpts0s[clip(Lpt0_rpts0s_id + 50, 0, rpts0s_num - 1)][1] -
-                    rpts1s[clip(Lpt1_rpts1s_id + 50, 0, rpts1s_num - 1)][1];
-                float dwn = sqrtf(dwx * dwx + dwy * dwy);
-                if (!(dwn > 0.7 * PIXEL_PER_METER &&
-                    rpts0s[clip(Lpt0_rpts0s_id + 50, 0, rpts0s_num - 1)][0] <
-                    rpts0s[Lpt0_rpts0s_id][0] &&
-                    rpts1s[clip(Lpt1_rpts1s_id + 50, 0, rpts1s_num - 1)][0] >
-                    rpts1s[Lpt1_rpts1s_id][0])) {
-                    Lpt0_found = Lpt1_found = false;
-                }
-            }
-            else
-                Lpt0_found = Lpt1_found = false;
-        }
-    }
-
-    // 角点二次确认 左
-    if (Lpt0_found) {
-        if (!Lpt0_found_last) {
-            Lpt0_found_last = true;
-            Lpt0_found = false;
-        }
-        else if (_is_result) {
-            map_perspective(rpts0s[Lpt0_rpts0s_id][0], rpts0s[Lpt0_rpts0s_id][1],
-                trans, 1);
-            MAT_INFO(mat_result, cv::Point(trans[0] + 5, trans[1]), 0.3, "L_%.3f",
-                Lpt0_found_conf);
-        }
-    }
-    else
-        Lpt0_found_last = false;
-    // 角点二次确认 右
-    if (Lpt1_found) {
-        if (!Lpt1_found_last) {
-            Lpt1_found_last = true;
-            Lpt1_found = false;
-        }
-        else if (_is_result) {
-            map_perspective(rpts1s[Lpt1_rpts1s_id][0], rpts1s[Lpt1_rpts1s_id][1],
-                trans, 1);
-            MAT_INFO(mat_result, cv::Point(trans[0] + 5, trans[1]), 0.3, "L_%.3f",
-                Lpt1_found_conf);
-        }
-    }
-    else
-        Lpt1_found_last = false;
 
     /* ***************************************************************** */
     /* **************************** 选定中线 **************************** */
     /* *********************** 单侧线少, 切换巡线方向 ********************** */
-
     if (is_straight0 && is_straight1)
         flag_track = TRACK_MIDDLE;
     else if (is_straight0)
         flag_track = TRACK_LEFT;
     else if (is_straight1)
-        flag_track = TRACK_RIGHT;
-    else if (is_curve0 && is_curve1 && rptscs[rptscs_num - 1][0] > IMAGE_WIDTH / 2)
-        flag_track = TRACK_LEFT;
-    else if (is_curve0 && is_curve1 && rptscs[rptscs_num - 1][0] < IMAGE_WIDTH / 2)
         flag_track = TRACK_RIGHT;
     else if (rpts0s_num == 0 && rpts1s_num != 0)
         flag_track = TRACK_RIGHT;
@@ -760,10 +551,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         MAT_INFO(mat_result, cv::Point(5, 40), 0.4, "speed: %d", aim_speed);
         MAT_INFO(mat_result, cv::Point(5, 55), 0.4, "angle: %.2f,pwm:%d", aim_angle_filter, aim_angle_pwm);
         MAT_INFO(mat_result, cv::Point(5, 70), 0.4, "stg_p: %.4f", aim_angle_p);
-        MAT_INFO(mat_result, cv::Point(120, 10), 0.4, "[%c][%c][%c]",
-            is_straight0 ? '^' : (is_curve0 ? '<' : ' '),
-            flag_rpts ? '^' : ' ',
-            is_straight1 ? '^' : (is_curve1 ? '>' : ' '));
         MAT_INFO(mat_result, cv::Point(5, 90), 0.4, "sigma: %.2f", aim_sigma);
         MAT_INFO(mat_result, cv::Point(5, 105), 0.4, "mea-0: %.2f", mea_0);
         MAT_INFO(mat_result, cv::Point(5, 125), 0.4, "mea-1: %.2f", mea_1);
@@ -772,112 +559,53 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
         MAT_INFO(mat_result, cv::Point(5, 180), 0.4, "YAW: %.2f", encoder.yaw);
         MAT_INFO(mat_result, cv::Point(5, 195), 0.4, "log: %-20s", string_log);
 
-        // 十字 ----------------------------------------------------
-        if (flag_cross == CROSS_IN) {
-            // 角点
-            if (far_Lpt0_found) {  // 绿色
-                map_perspective(far_rpts0s[far_Lpt0_rpts0s_id][0], far_rpts0s[far_Lpt0_rpts0s_id][1], trans, 1);
-                cv::circle(mat_result, cv::Point2f(trans[0], trans[1]), 3, cv::Scalar(0, 255, 0), 2, 8);
-            }
-            if (far_Lpt1_found) {  // 绿色
-                map_perspective(far_rpts1s[far_Lpt1_rpts1s_id][0], far_rpts1s[far_Lpt1_rpts1s_id][1], trans, 1);
-                cv::circle(mat_result, cv::Point2f(trans[0], trans[1]), 3, cv::Scalar(0, 255, 0), 2, 8);
-            }
-
-            // 远线
-            for (int a = 0; a < far_rpts0s_num; a++) {  // 边线等距采样 左 十字远线
-                map_perspective(far_rpts0s[a][0], far_rpts0s[a][1], trans, 1);
-                if ((int)trans[1] >= 0 && (int)trans[1] < mat_result.rows &&
-                    (int)trans[0] >= 0 && (int)trans[0] < mat_result.cols) {
-                    mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[0] = 0;
-                    mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[1] = 238;
-                    mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[2] = 238;
-                }
-            }
-            for (int a = 0; a < far_rpts1s_num; a++) {  // 边线等距采样 右 十字远线
-                map_perspective(far_rpts1s[a][0], far_rpts1s[a][1], trans, 1);
-                if ((int)trans[1] >= 0 && (int)trans[1] < mat_result.rows &&
-                    (int)trans[0] >= 0 && (int)trans[0] < mat_result.cols) {
-                    mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[0] = 238;
-                    mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[1] = 238;
-                    mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[2] = 0;
-                }
+        // 边线
+        for (int a = 0; a < rpts0s_num; a++) {  // 边线等距采样 左
+            map_perspective(rpts0s[a][0], rpts0s[a][1], trans, 1);
+            if ((int)trans[1] >= 0 && (int)trans[1] < mat_result.rows &&
+                (int)trans[0] >= 0 && (int)trans[0] < mat_result.cols) {
+                mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[0] = 0;
+                mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[1] = 238;
+                mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[2] = 238;
             }
         }
-        else {
-            // 施工区 & 加油站 & 救援区---------------------------------------
-            if (control_flag.contains(cross_element) ||
-                control_flag.contains(work_element)) {
-                // 锥桶
-                for (auto p : edge_det) {
-                    cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
-                }  // 白色 //列 |  行———
-
-                // 边线
-                for (auto p : edge_left)  // 青蓝色
-                    cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(0, 238, 238), -1);
-                for (auto p : edge_right)  // 黄色
-                    cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(238, 238, 0), -1);
-            }
-            // 正常巡线 --------------------------------------------
-            else {
-                // 角点
-                if (Lpt0_found) {  // 绿色
-                    map_perspective(rpts0s[Lpt0_rpts0s_id][0], rpts0s[Lpt0_rpts0s_id][1], trans, 1);
-                    cv::circle(mat_result, cv::Point2f(trans[0], trans[1]), 3, cv::Scalar(0, 255, 0), 2, 8);
-                }
-                if (Lpt1_found) {  // 绿色
-                    map_perspective(rpts1s[Lpt1_rpts1s_id][0], rpts1s[Lpt1_rpts1s_id][1], trans, 1);
-                    cv::circle(mat_result, cv::Point2f(trans[0], trans[1]), 3, cv::Scalar(0, 255, 0), 2, 8);
-                }
-
-                // 边线
-                for (int a = 0; a < rpts0s_num; a++) {  // 边线等距采样 左
-                    map_perspective(rpts0s[a][0], rpts0s[a][1], trans, 1);
-                    if ((int)trans[1] >= 0 && (int)trans[1] < mat_result.rows &&
-                        (int)trans[0] >= 0 && (int)trans[0] < mat_result.cols) {
-                        mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[0] = 0;
-                        mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[1] = 238;
-                        mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[2] = 238;
-                    }
-                }
-                for (int a = 0; a < rpts1s_num; a++) {  // 边线等距采样 右
-                    map_perspective(rpts1s[a][0], rpts1s[a][1], trans, 1);
-                    if ((int)trans[1] >= 0 && (int)trans[1] < mat_result.rows &&
-                        (int)trans[0] >= 0 && (int)trans[0] < mat_result.cols) {
-                        mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[0] = 238;
-                        mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[1] = 238;
-                        mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[2] = 0;
-                    }
-                }
-            }
-
-            // 中线
-            for (int a = 0; a < rptscs_num; a++) {  // 原图中线
-                if ((int)rptscs[a][1] >= 0 && (int)rptscs[a][1] < mat_result.rows &&
-                    (int)rptscs[a][0] >= 0 && (int)rptscs[a][0] < mat_result.cols) {
-                    mat_result.at<cv::Vec3b>((int)rptscs[a][1], (int)rptscs[a][0])[0] = 0;
-                    mat_result.at<cv::Vec3b>((int)rptscs[a][1], (int)rptscs[a][0])[1] = 0;
-                    mat_result.at<cv::Vec3b>((int)rptscs[a][1], (int)rptscs[a][0])[2] = 0;
-                }
-            }
-            for (int a = 0; a < rptsc0_num; a++) {  // 左中线
-                if ((int)rptsc0[a][1] >= 0 && (int)rptsc0[a][1] < mat_result.rows &&
-                    (int)rptsc0[a][0] >= 0 && (int)rptsc0[a][0] < mat_result.cols) {
-                    mat_result.at<cv::Vec3b>((int)rptsc0[a][1], (int)rptsc0[a][0])[0] = 0;
-                    mat_result.at<cv::Vec3b>((int)rptsc0[a][1], (int)rptsc0[a][0])[1] = 238;
-                    mat_result.at<cv::Vec3b>((int)rptsc0[a][1], (int)rptsc0[a][0])[2] = 238;
-                }
-            }
-            for (int a = 0; a < rptsc1_num; a++) {  // 右中线
-                if ((int)rptsc1[a][1] >= 0 && (int)rptsc1[a][1] < mat_result.rows &&
-                    (int)rptsc1[a][0] >= 0 && (int)rptsc1[a][0] < mat_result.cols) {
-                    mat_result.at<cv::Vec3b>((int)rptsc1[a][1], (int)rptsc1[a][0])[0] = 238;
-                    mat_result.at<cv::Vec3b>((int)rptsc1[a][1], (int)rptsc1[a][0])[1] = 238;
-                    mat_result.at<cv::Vec3b>((int)rptsc1[a][1], (int)rptsc1[a][0])[2] = 0;
-                }
+        for (int a = 0; a < rpts1s_num; a++) {  // 边线等距采样 右
+            map_perspective(rpts1s[a][0], rpts1s[a][1], trans, 1);
+            if ((int)trans[1] >= 0 && (int)trans[1] < mat_result.rows &&
+                (int)trans[0] >= 0 && (int)trans[0] < mat_result.cols) {
+                mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[0] = 238;
+                mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[1] = 238;
+                mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[2] = 0;
             }
         }
+
+
+        // 中线
+        for (int a = 0; a < rptscs_num; a++) {  // 原图中线
+            if ((int)rptscs[a][1] >= 0 && (int)rptscs[a][1] < mat_result.rows &&
+                (int)rptscs[a][0] >= 0 && (int)rptscs[a][0] < mat_result.cols) {
+                mat_result.at<cv::Vec3b>((int)rptscs[a][1], (int)rptscs[a][0])[0] = 0;
+                mat_result.at<cv::Vec3b>((int)rptscs[a][1], (int)rptscs[a][0])[1] = 0;
+                mat_result.at<cv::Vec3b>((int)rptscs[a][1], (int)rptscs[a][0])[2] = 0;
+            }
+        }
+        for (int a = 0; a < rptsc0_num; a++) {  // 左中线
+            if ((int)rptsc0[a][1] >= 0 && (int)rptsc0[a][1] < mat_result.rows &&
+                (int)rptsc0[a][0] >= 0 && (int)rptsc0[a][0] < mat_result.cols) {
+                mat_result.at<cv::Vec3b>((int)rptsc0[a][1], (int)rptsc0[a][0])[0] = 0;
+                mat_result.at<cv::Vec3b>((int)rptsc0[a][1], (int)rptsc0[a][0])[1] = 238;
+                mat_result.at<cv::Vec3b>((int)rptsc0[a][1], (int)rptsc0[a][0])[2] = 238;
+            }
+        }
+        for (int a = 0; a < rptsc1_num; a++) {  // 右中线
+            if ((int)rptsc1[a][1] >= 0 && (int)rptsc1[a][1] < mat_result.rows &&
+                (int)rptsc1[a][0] >= 0 && (int)rptsc1[a][0] < mat_result.cols) {
+                mat_result.at<cv::Vec3b>((int)rptsc1[a][1], (int)rptsc1[a][0])[0] = 238;
+                mat_result.at<cv::Vec3b>((int)rptsc1[a][1], (int)rptsc1[a][0])[1] = 238;
+                mat_result.at<cv::Vec3b>((int)rptsc1[a][1], (int)rptsc1[a][0])[2] = 0;
+            }
+        }
+
 
         if (flag_rpts) {
             // 贝塞尔曲线
@@ -894,33 +622,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 }
             }
 
-            // //绘制贝塞尔曲线所取点的y坐标线
-            // for (int a = 0; a < 300; a += 10)
-            // {
-            //     //circle(mat_result, cv::Point(0, p.y), 1, cv::Scalar(0, 0, 255), -1);
-            //     //circle(mat_result, cv::Point(0, p.y), 1, cv::Scalar(0, 0, 255), -1);
-            //     //circle(mat_result, cv::Point(0, p.y), 1, cv::Scalar(0, 0, 255), -1);
-            //     mat_result.at<cv::Vec3b>(bseqx_y1, a)[0] = 0;
-            //     mat_result.at<cv::Vec3b>(bseqx_y1, a)[1] = 0;
-            //     mat_result.at<cv::Vec3b>(bseqx_y1, a)[2] = 255;
-
-            //     mat_result.at<cv::Vec3b>(bseqx_y2, a)[0] = 0;
-            //     mat_result.at<cv::Vec3b>(bseqx_y2, a)[1] = 0;
-            //     mat_result.at<cv::Vec3b>(bseqx_y2, a)[2] = 255;
-
-            //     mat_result.at<cv::Vec3b>(bseqx_y3, a)[0] = 0;
-            //     mat_result.at<cv::Vec3b>(bseqx_y3, a)[1] = 0;
-            //     mat_result.at<cv::Vec3b>(bseqx_y3, a)[2] = 255;
-            // }
-
-
-            // 预瞄点
-            /*
-            cv::circle(mat_result, cv::Point2f(rptsn[aim_idx_far][0], rptsn[aim_idx_far][1]),
-                       3, cv::Scalar(0, 0, 255), 2, 8);
-            cv::circle(mat_result, cv::Point2f(rptsn[aim_idx_near][0], rptsn[aim_idx_near][1]),
-                       3, cv::Scalar(0, 0, 255), 2, 8);
-            */
         }
     }
 }
@@ -929,7 +630,123 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 /* ******************************************************************* */
 /* ******************************************************************* */
 
+void ImageProcess::get_edge()
+{
+    //得到原始边线点集
+    int begin_x = IMAGE_WIDTH / 2, begin_y = IMAGE_HEIGHT - 10;//近线向上找线的开始位置
+    int far_begin_x = 0, far_begin_y = 0;//远线向下找线的开始位置
+    int count = 0;
+    for (int i = 39; i > 20; i--) {
+        if (White_row_length[i] > 50 && White_row_length[i] < 160) count++;
+        else count = 0;
+        if (count == 3) {
+            begin_x = (White_row_mid_point[i] + White_row_mid_point[i + 1] + White_row_mid_point[i + 2]) / 3;
+            begin_y = White_row_start_point[i + 1][1];
+            float mid[2];
+            map_perspective((float)begin_x, (float)begin_y, mid, 1);
+            begin_x = (int)mid[0];
+        }
+    }
+    ipts0_num = 150;ipts1_num = 150;
+    if (begin_x > 1 && begin_x < IMAGE_WIDTH - 1 && begin_y>0 && begin_y < IMAGE_HEIGHT - 1) {
+        find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num); // 原图找左边线
+        find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);// 原图找右边线
+    }
+    else {//开始点不在屏幕范围内
+        begin_x = IMAGE_WIDTH / 2, begin_y = IMAGE_HEIGHT - 10;
+        find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
+        find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
+    }
+    // 变换后左右中线
+    float rpts0[IMAGE_HEIGHT][2] = { 0 };
+    float rpts1[IMAGE_HEIGHT][2] = { 0 };
+    float rptsc[IMAGE_HEIGHT][2] = { 0 };
+    // 原图边线转换数据定义
+    int iptsc0[IMAGE_HEIGHT] = { 0 };
+    int iptsc1[IMAGE_HEIGHT] = { 0 };
 
+    // 原图边线 -> 透视边线 左
+    rptsc_num = 0;
+    for (int i = 0; i < ipts0_num; i++, rptsc_num++) {
+        if (ipts0[i][1] < 10)
+            break;
+        map_perspective(ipts0[i][0], ipts0[i][1], rpts0[i], 0);
+        iptsc0[ipts0[i][1]] = ipts0[i][0];
+    }
+    ipts0_num = rptsc_num;
+    // 原图边线 -> 透视边线 右
+    rptsc_num = 0;
+    edge_right.clear();
+    for (int i = 0; i < ipts1_num; i++, rptsc_num++) {
+        if (ipts1[i][1] < 10)
+            break;
+        map_perspective(ipts1[i][0], ipts1[i][1], rpts1[i], 0);
+        iptsc1[ipts1[i][1]] = ipts1[i][0];
+    };
+    ipts1_num = rptsc_num;
+    // 中线获取 图像顶部10个像素丢弃
+    rptsc_num = 0;
+    for (int ccy = IMAGE_HEIGHT - 1; ccy >= 10; ccy--) {
+        iptsc[ccy] = iptsc0[ccy] + iptsc1[ccy];
+        if (iptsc[ccy] != 0) {
+            // 如果右边线丢失
+            if (iptsc1[ccy] == 0)
+                iptsc[ccy] = (int)((IMAGE_WIDTH - iptsc[ccy]) / 2 + iptsc[ccy]);
+            else  // 左边线丢失
+                iptsc[ccy] = (int)(iptsc[ccy] / 2);
+            // 原图中线 -> 透视中线
+            map_perspective(iptsc[ccy], ccy, rptsc[rptsc_num++], 0);
+        }
+    }
+
+    // 滤波
+    blur_points(rpts0, ipts0_num, rpts0b, (int)round(LINE_BLUR_KERNEL));
+    blur_points(rpts1, ipts1_num, rpts1b, (int)round(LINE_BLUR_KERNEL));
+    blur_points(rptsc, rptsc_num, rptscb, (int)round(LINE_BLUR_KERNEL));
+
+    // 边线等距采样
+    rpts0s_num = sizeof(rpts0s) / sizeof(rpts0s[0]);
+    resample_points(rpts0b, ipts0_num, rpts0s, &rpts0s_num, SAMPLE_DIST * PIXEL_PER_METER);
+    rpts1s_num = sizeof(rpts1s) / sizeof(rpts1s[0]);
+    resample_points(rpts1b, ipts1_num, rpts1s, &rpts1s_num, SAMPLE_DIST * PIXEL_PER_METER);
+    rptscs_num = sizeof(rptscs) / sizeof(rptscs[0]);
+    resample_points(rptscb, rptsc_num, rptscs, &rptscs_num, SAMPLE_DIST * PIXEL_PER_METER);
+
+    // 左右中线跟踪
+    track_leftline(rpts0s, rpts0s_num, rptsc0,
+        (int)round(ANGLE_DIST / SAMPLE_DIST),
+        PIXEL_PER_METER * ROAD_WIDTH / 2);
+    rptsc0_num = rpts0s_num;
+    track_rightline(rpts1s, rpts1s_num, rptsc1,
+        (int)round(ANGLE_DIST / SAMPLE_DIST),
+        PIXEL_PER_METER * ROAD_WIDTH / 2);
+    rptsc1_num = rpts1s_num;
+
+    // 透视中线 -> 原图中线
+    for (int i = 0; i < rptsc0_num; i++)
+        map_perspective(rptsc0[i][0], rptsc0[i][1], rptsc0[i], 1);
+    for (int i = 0; i < rptsc1_num; i++)
+        map_perspective(rptsc1[i][0], rptsc1[i][1], rptsc1[i], 1);
+    for (int i = 0; i < rptscs_num; i++)
+        map_perspective(rptscs[i][0], rptscs[i][1], rptscs[i], 1);
+
+    // 标志位重置
+    is_straight0 = is_straight1 = false;
+    mea_0 = mea_1 = 10.0f;
+    // 左线直线拟合
+    if (rpts0s_num > 10) {
+        mea_0 = fit_line(rpts0s, rpts0s_num, 60);
+        if (mea_0 < 2.5f && rpts0s_num > 60)
+            is_straight0 = true;
+    }
+    // 右线直线拟合
+    if (rpts1s_num > 10) {
+        mea_1 = fit_line(rpts1s, rpts1s_num, 60);
+        if (mea_1 < 2.5f && rpts1s_num > 60)
+            is_straight1 = true;
+    }
+
+}
 
 void ImageProcess::calculate_angle(void)
 {
