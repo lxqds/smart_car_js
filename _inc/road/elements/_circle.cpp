@@ -35,9 +35,10 @@ void check_circle() {
     {
         //左圆环
         if (IMG.Lpt0_found &&   // 左角点找到
+            IMG.Lpt0_point[1] > 120 && //左角点在屏幕下方
             !IMG.Lpt1_found &&  // 右角点未找到
-            IMG.is_straight1 &&  // 右边长直道
-            IMG.rpts0s_num < 0.8 / SAMPLE_DIST) {// 左线点比较少
+            IMG.is_straight1)  // 右边长直道
+        {
             none_left_line = 0;
             have_left_line = 0;
             IMG.element_identify = 1;
@@ -54,8 +55,9 @@ void check_circle() {
         //右圆环
         else if (!IMG.Lpt0_found &&  // 左角点未找到
             IMG.Lpt1_found &&   // 右角点找到
-            IMG.is_straight0 &&  // 左边长直道
-            IMG.rpts1s_num < 0.8 / SAMPLE_DIST) {// 右线点比较少
+            IMG.Lpt1_point[1] > 120 && //右角点在屏幕下方
+            IMG.is_straight0)   // 左边长直道
+        {// 右线点比较少
             none_right_line = 0;
             have_right_line = 0;
             IMG.element_identify = 1;
@@ -78,22 +80,15 @@ void run_circle() {
         IMG.aim_speed = IMG._config->speed_circle;
         // 左环开始, 寻外直道右线
         if (flag_circle == CIRCLE_LEFT_BEGIN) {
+            IMG.get_edge();//获取边线
             IMG.flag_track = TRACK_RIGHT;
-
-            // 先丢左线后有线
-            if (IMG.rpts0s_num < 0.2 / SAMPLE_DIST)
-                none_left_line++;
-            if (IMG.encoder.route - circle_route > 10 &&
-                IMG.rpts0s_num > 0.8 / SAMPLE_DIST && none_left_line > 1) {
-                have_left_line++;
-                if (have_left_line > 1) {
-                    none_left_line = 0;
-                    have_left_line = 0;
-                    circle_route = IMG.encoder.route;
-                    flag_circle = CIRCLE_LEFT_IN;
-                    MAT_LOG("CIRCLE_LEFT_IN");
-                }
+            // 找到远处左角点
+            if (IMG.far_Lpt0_found) {
+                circle_route = IMG.encoder.route;
+                flag_circle = CIRCLE_LEFT_IN;
+                MAT_LOG("CIRCLE_LEFT_IN");
             }
+
             // 入环失败
             if (IMG.encoder.route - circle_route > 100 &&
                 flag_circle != CIRCLE_LEFT_IN) {
@@ -107,26 +102,40 @@ void run_circle() {
             }
         }
         // 入左环, 寻内圆左线
-        if (flag_circle == CIRCLE_LEFT_IN) {
-            IMG.flag_track = TRACK_LEFT;
+        else if (flag_circle == CIRCLE_LEFT_IN) {
+            if (IMG.far_Lpt0_found) {
+                cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
+                    cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
+                    cv::Scalar(0, 0, 0), 7);
+                IMG.get_edge();//获取边线
+                IMG.flag_track = TRACK_RIGHT;
 
+            }
+            else if (IMG.far_Lpt1_found) {
+                cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
+                    cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
+                    cv::Scalar(0, 0, 0), 7);
+                IMG.get_edge();//获取边线
+                IMG.flag_track = TRACK_RIGHT;
+            }
+            else {
+                IMG.get_edge();//获取边线
+                IMG.flag_track = TRACK_LEFT;
+            }
             // 先丢右线后有线
-            if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
+            if (IMG.ipts1_num < 40)
                 none_right_line++;
-            if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST && none_right_line > 0) {
-                if (IMG.encoder.route - circle_route > 60)
-                    have_right_line++;
-                if (have_right_line > 0) {
-                    none_right_line = 0;
-                    have_right_line = 0;
-                    circle_route = IMG.encoder.route;
-                    flag_circle = CIRCLE_LEFT_RUNNING;
-                    MAT_LOG("CIRCLE_LEFT_RUNNING");
-                }
+            if (!IMG.far_Lpt0_found && !IMG.far_Lpt1_found && IMG.ipts1_num > 80) {
+                none_right_line = 0;
+                have_right_line = 0;
+                circle_route = IMG.encoder.route;
+                flag_circle = CIRCLE_LEFT_RUNNING;
+                MAT_LOG("CIRCLE_LEFT_RUNNING");
             }
         }
         // 正常巡线, 寻外圆右线
-        if (flag_circle == CIRCLE_LEFT_RUNNING) {
+        else if (flag_circle == CIRCLE_LEFT_RUNNING) {
+            IMG.get_edge();//获取边线
             IMG.flag_track = TRACK_RIGHT;
 
             // 外环存在拐点, 可再加拐点距离判据 (左L点)
@@ -136,25 +145,30 @@ void run_circle() {
             }
         }
         // 出环, 寻内圆
-        if (flag_circle == CIRCLE_LEFT_OUT) {
-            IMG.flag_track = TRACK_LEFT;
-
+        else if (flag_circle == CIRCLE_LEFT_OUT) {
+            if (IMG.Lpt1_found) {
+                cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH / 2, 1),
+                    cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
+                    cv::Scalar(0, 0, 0), 7);
+                IMG.get_edge();//获取边线
+                IMG.flag_track = TRACK_RIGHT;
+            }
+            else {
+                IMG.get_edge();//获取边线
+                IMG.flag_track = TRACK_LEFT;
+            }
 
             // 先丢右线后有线
-            if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
+            if (IMG.ipts1_num < 40)
                 none_right_line++;
-            if (IMG.rpts1s_num > 1.0 / SAMPLE_DIST && none_right_line > 0) {
-                if (have_right_line > 0 && IMG.encoder.route - circle_route > IMG._config->circle_out_rou) {
-                    none_right_line = 0;
-                    have_right_line = 0;
-                    circle_route = IMG.encoder.route;
-                    flag_circle = CIRCLE_OUT;
-                    MAT_LOG("CIRCLE_OUT");
-                }
-                else {
-                    have_right_line++;
-                }
+            if (IMG.ipts1_num > 80 && IMG.encoder.route - circle_route > IMG._config->circle_out_rou) {
+                none_right_line = 0;
+                have_right_line = 0;
+                circle_route = IMG.encoder.route;
+                flag_circle = CIRCLE_OUT;
+                MAT_LOG("CIRCLE_OUT");
             }
+
         }
 
         /* ***************************************************************** */

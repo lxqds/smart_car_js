@@ -244,7 +244,21 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     far_Lpt0_found = IMG.far_Lpt0_angle > 50 && IMG.far_Lpt0_angle < 120;
     far_Lpt1_found = IMG.far_Lpt1_angle > 50 && IMG.far_Lpt1_angle < 120;
 
-
+    // 标志位重置
+    is_straight0 = is_straight1 = false;
+    mea_0 = mea_1 = 10.0f;
+    // 左线直线拟合
+    if (ipts0_num > 10) {
+        mea_0 = fit_line(rpts0, ipts0_num, 60);
+        if (mea_0 < 2.5f && ipts0_num > 60)
+            is_straight0 = true;
+    }
+    // 右线直线拟合
+    if (ipts1_num > 10) {
+        mea_1 = fit_line(rpts1, ipts1_num, 60);
+        if (mea_1 < 2.5f && ipts1_num > 60)
+            is_straight1 = true;
+    }
 
     /* ***************************************************************** */
     /* *************************** 弯直道检测 *************************** */
