@@ -79,140 +79,211 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     /* **************************** 边线处理 **************************** */
     /* ***************************************************************** */
 
-    // 预瞄点纵坐标黑点检测 ------------------------------------------------
-    begin_y_t = BEGIN_Y;
-    if ((flag_work <= WORK_FOUND_2 &&
-        (flag_garage != GARAGE_IN_LEFT) && (flag_garage != GARAGE_IN_RIGHT) &&
-        (!(is_curve0 && flag_track == TRACK_LEFT) && !(is_curve1 && flag_track == TRACK_RIGHT))) ||
-        (flag_garage == GARAGE_PASS_LEFT || flag_garage == GARAGE_PASS_RIGHT)) {
-        int black_sum = 0;
-        for (int i = 100; i < IMAGE_WIDTH - 100; i++) {
-            if (AT_IMAGE(mat_bin, i, begin_y_t) < _config->threshold)
-                black_sum++;
-        }
-        if (black_sum > 10) {
-            begin_y_t = BEGIN_Y - 50;
-            begin_x_l = begin_x_l + 50 > IMAGE_WIDTH - 1 ? IMAGE_WIDTH - 1 : begin_x_l + 50;
-            begin_x_r = begin_x_r - 50 < 0 ? 0 : begin_x_r - 50;
+    //寻找最符合跑道的白行
+    int White_row_start_point[40][2]{};//白行起始点
+    int White_row_end_point[40][2]{};//白行结束点
+    int White_row_mid_point[40]{};  //透视变换后白行中点x坐标
+    int White_row_length[40]{};
+    {
+        int start_id = 39;  //起始白行的id
+        for (int i = 39; i > 0; i--) {
+            int start = 0, length = 0, sign = 0, count = 0;
+            float Mean_midpoint = IMAGE_WIDTH / 2, midpoint = 1000;
+            White_row_start_point[i][0] = 0;
+            White_row_start_point[i][1] = i * 5;
+            White_row_end_point[i][0] = 0;
+            White_row_end_point[i][1] = i * 5;
+            White_row_length[i] = 0;
+            for (int x = 0; x < IMAGE_WIDTH; x++) {
+                if (sign == 0) {//向右开始找白点
+                    if (AT_IMAGE(mat_bin, x, i * 5) >= 127)count++;
+                    else count = 0;
+                    if (count == 3) {
+                        if (i == start_id) {
+                            start = x - count + 1;
+                            sign = 1;
+                        }
+                        else {
+                            if (x - count + 1 <= White_row_end_point[i + 1][0]) {
+                                start = x - count + 1;
+                                sign = 1;
+                            }
+                            else break;
+                        }
+                    }
+                }
+                if (sign == 1) {//向右开始找黑点
+                    if (AT_IMAGE(mat_bin, x, i * 5) < 127)count++;
+                    else count = 0;
+                    if (count == 3 || x == IMAGE_WIDTH - 1) {
+                        if (i == start_id) {//开始行,不判断相邻直线是否有交集
+                            float a[2]{}, b[2]{};
+                            map_perspective((float)start, (float)i * 5, a, 0);
+                            map_perspective((float)x - count + 1, (float)i * 5, b, 0);
+                            float L = b[0] - a[0];
+                            float mid = (b[0] + a[0]) / 2;
+                            if (L > 50 && abs(mid - Mean_midpoint) < abs(midpoint - Mean_midpoint)) {
+                                midpoint = mid;
+                                length = (int)L;
+                                White_row_mid_point[i] = (int)midpoint;
+                                White_row_length[i] = length;
+                                White_row_start_point[i][0] = start;
+                                White_row_end_point[i][0] = x - count + 1;
+                            }
+                            sign = 0;
+                        }
+                        else {//判断相邻直线是否由交集
+                            if (x - count + 1 >= White_row_start_point[i + 1][0]) {
+                                float a[2]{}, b[2]{};
+                                map_perspective((float)start, (float)i * 5, a, 0);
+                                map_perspective((float)x - count + 1, (float)i * 5, b, 0);
+                                float L = b[0] - a[0];
+                                float mid = (b[0] + a[0]) / 2;
+                                for (int j = i; j < 40; j++) Mean_midpoint += White_row_mid_point[j];
+                                Mean_midpoint /= 40 - i;
+                                if (L > 50 && abs(mid - Mean_midpoint) < abs(midpoint - Mean_midpoint)) {
+                                    midpoint = mid;
+                                    length = (int)L;
+                                    White_row_mid_point[i] = (int)midpoint;
+                                    White_row_length[i] = length;
+                                    White_row_start_point[i][0] = start;
+                                    White_row_end_point[i][0] = x - count + 1;
+                                }
+                            }
+                            sign = 0;
+                        }
+                    }
+                }
+            }
+            if (i == start_id && White_row_end_point[i][0] == 0) start_id--;//开始位置找不到白行
+            else if (White_row_end_point[i][0] == 0)  break;//非开始位置,找不到白行,结束寻找
         }
     }
-
-    // 原图找左边线 -------------------------------------------------------
+    //从长度合适的白行开始摸线
     {
-        int x1 = begin_x_l, y1 = begin_y_t;
-        // 向左寻找白点
-        if (AT_IMAGE(mat_bin, x1, y1) < _config->threshold)
-            for (x1--; x1 > 0; x1--)
-                if (AT_IMAGE(mat_bin, x1, y1) >= _config->threshold)
-                    break;
-        // 向左寻找黑点
-        for (; x1 > 0; x1--)
-            if (AT_IMAGE(mat_bin, x1 - 1, y1) < _config->threshold)
-                break;
-        // 向上寻找黑点
-        if (x1 < BLOCK_SIZE / 2) {
-            x1 = BLOCK_SIZE / 2;
-            for (; y1 > IMAGE_HEIGHT * 2 / 3; y1--)
-                if (AT_IMAGE(mat_bin, x1, y1 - 1) < _config->threshold)
-                    break;
+        int begin_x = IMAGE_WIDTH / 2, begin_y = IMAGE_HEIGHT - 10;//近线向上找线的开始位置
+        int far_begin_x = 0, far_begin_y = 0;//远线向下找线的开始位置
+        int count = 0;
+        for (int i = 39; i > 20; i--) {
+            if (White_row_length[i] > 50 && White_row_length[i] < 160) count++;
+            else count = 0;
+            if (count == 3) {
+                begin_x = (White_row_mid_point[i] + White_row_mid_point[i + 1] + White_row_mid_point[i + 2]) / 3;
+                begin_y = White_row_start_point[i + 1][1];
+                float mid[2];
+                map_perspective((float)begin_x, (float)begin_y, mid, 1);
+                begin_x = (int)mid[0];
+            }
         }
-        if (AT_IMAGE(mat_bin, x1, y1) >= _config->threshold) {
-            ipts0_num = y1 + (IMAGE_HEIGHT - BEGIN_Y);
-            findline_lefthand_adaptive(mat_bin, BLOCK_SIZE, CLIP_VALUE,
-                x1, y1, ipts0, &ipts0_num);
-            begin_x_l = x1 + 50 > IMAGE_WIDTH - 1 ? IMAGE_WIDTH - 1 : x1 + 50;
+        ipts0_num = 150;ipts1_num = 150;
+        if (begin_x > 1 && begin_x < IMAGE_WIDTH - 1 && begin_y>0 && begin_y < IMAGE_HEIGHT - 1) {
+            find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num); // 原图找左边线
+            find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);// 原图找右边线
+        }
+        else {//开始点不在屏幕范围内
+            begin_x = IMAGE_WIDTH / 2, begin_y = IMAGE_HEIGHT - 10;
+            find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
+            find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
+        }
+        count = 0;
+        for (int i = 20; i > 4; i--) {
+            if (White_row_length[i] > 100 && White_row_length[i] < 180) count++;
+            else count = 0;
+            if (count == 3) {
+                far_begin_x = (White_row_mid_point[i] +
+                    White_row_mid_point[i + 1] +
+                    White_row_mid_point[i + 2]) / 3;
+                far_begin_y = White_row_start_point[i][1];
+                float mid[2];
+                map_perspective((float)far_begin_x, (float)far_begin_y, mid, 1);
+                far_begin_x = (int)mid[0];
+            }
+        }
+        if (far_begin_x > 10 && far_begin_x < IMAGE_WIDTH - 10 && far_begin_y>5 && far_begin_y < IMAGE_HEIGHT - 5) {
+            far_ipts0_num = 100;far_ipts1_num = 100;
+            find_far_left_line(mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num);// 原图找左边线
+            find_far_right_line(mat_bin, far_begin_x, far_begin_y, far_ipts1, &far_ipts1_num);// 原图找右边线
         }
         else {
-            ipts0_num = 0;
-            begin_x_l = BEGIN_X;
-        }
-    }
-    // 原图找右边线 -------------------------------------------------------
-    {
-        int x2 = begin_x_r, y2 = begin_y_t;
-        // 向右寻找白点
-        if (AT_IMAGE(mat_bin, x2, y2) < _config->threshold)
-            for (x2++; x2 < IMAGE_WIDTH - 1; x2++)
-                if (AT_IMAGE(mat_bin, x2, y2) >= _config->threshold)
-                    break;
-        // 向右寻找黑点
-        for (; x2 < IMAGE_WIDTH - 1; x2++)
-            if (AT_IMAGE(mat_bin, x2 + 1, y2) < _config->threshold)
-                break;
-        // 向上寻找黑点
-        if (x2 > IMAGE_WIDTH - BLOCK_SIZE / 2 - 1) {
-            x2 = IMAGE_WIDTH - BLOCK_SIZE / 2 - 1;
-            for (; y2 > IMAGE_HEIGHT * 2 / 3; y2--)
-                if (AT_IMAGE(mat_bin, x2, y2 - 1) < _config->threshold)
-                    break;
-        }
-        if (AT_IMAGE(mat_bin, x2, y2) >= _config->threshold) {
-            ipts1_num = y2 + (IMAGE_HEIGHT - BEGIN_Y);
-            findline_righthand_adaptive(mat_bin, BLOCK_SIZE, CLIP_VALUE,
-                x2, y2, ipts1, &ipts1_num);
-            begin_x_r = x2 - 50 < 0 ? 0 : x2 - 50;
-        }
-        else {
-            ipts1_num = 0;
-            begin_x_r = IMAGE_WIDTH - BEGIN_X;
+            far_ipts0_num = 0;
+            far_ipts1_num = 0;
         }
     }
 
     // 变换后左右中线
     float rpts0[IMAGE_HEIGHT][2] = { 0 };
     float rpts1[IMAGE_HEIGHT][2] = { 0 };
+    float far_rpts0[IMAGE_HEIGHT][2] = { 0 };
+    float far_rpts1[IMAGE_HEIGHT][2] = { 0 };
     float rptsc[IMAGE_HEIGHT][2] = { 0 };
     // 原图边线转换数据定义
     int iptsc0[IMAGE_HEIGHT] = { 0 };
     int iptsc1[IMAGE_HEIGHT] = { 0 };
 
-    // 原图边线 -> 透视边线 左
-    rptsc_num = 0;
-    edge_left.clear();
-    for (int i = 0; i < ipts0_num; i++, rptsc_num++) {
-        if (ipts0[i][1] < 10)
-            break;
+    //透视变换得到的线
+    for (int i = 0; i < ipts0_num; i++)
+        map_perspective((float)ipts0[i][0], (float)ipts0[i][1], rpts0[i], 0);
+    for (int i = 0; i < ipts1_num; i++)
+        map_perspective((float)ipts1[i][0], (float)ipts1[i][1], rpts1[i], 0);
+    for (int i = 0; i < far_ipts0_num; i++)
+        map_perspective((float)far_ipts0[i][0], (float)far_ipts0[i][1], far_rpts0[i], 0);
+    for (int i = 0; i < far_ipts1_num; i++)
+        map_perspective((float)far_ipts1[i][0], (float)far_ipts1[i][1], far_rpts1[i], 0);
 
-        map_perspective(ipts0[i][0], ipts0[i][1], rpts0[i], 0);
-        iptsc0[ipts0[i][1]] = ipts0[i][0];
+    Find_corner(rpts0, ipts0_num, Lpt0_point, &Lpt0_angle);
+    Find_corner(rpts1, ipts1_num, Lpt1_point, &Lpt1_angle);
+    Find_corner(far_rpts0, far_ipts0_num, far_Lpt0_point, &far_Lpt0_angle);
+    Find_corner(far_rpts1, far_ipts1_num, far_Lpt1_point, &far_Lpt1_angle);
 
-        // 注意: x 与 y 位置相反 !!!
-        POINT pointTmp(ipts0[i][1], ipts0[i][0]);
-        edge_left.push_back(pointTmp);
-    }
-    ipts0_num = rptsc_num;
-    // 原图边线 -> 透视边线 右
-    rptsc_num = 0;
-    edge_right.clear();
-    for (int i = 0; i < ipts1_num; i++, rptsc_num++) {
-        if (ipts1[i][1] < 10)
-            break;
 
-        map_perspective(ipts1[i][0], ipts1[i][1], rpts1[i], 0);
-        iptsc1[ipts1[i][1]] = ipts1[i][0];
 
-        // 注意: x 与 y 位置相反 !!!
-        POINT pointTmp(ipts1[i][1], ipts1[i][0]);
-        edge_right.push_back(pointTmp);
-    };
-    ipts1_num = rptsc_num;
+    // // 原图边线 -> 透视边线 左
+    // rptsc_num = 0;
+    // edge_left.clear();
+    // for (int i = 0; i < ipts0_num; i++, rptsc_num++) {
+    //     if (ipts0[i][1] < 10)
+    //         break;
 
-    // 中线获取 图像顶部10个像素丢弃
-    rptsc_num = 0;
-    for (int ccy = IMAGE_HEIGHT - 1; ccy >= 10; ccy--) {
-        iptsc[ccy] = iptsc0[ccy] + iptsc1[ccy];
+    //     map_perspective(ipts0[i][0], ipts0[i][1], rpts0[i], 0);
+    //     iptsc0[ipts0[i][1]] = ipts0[i][0];
 
-        if (iptsc[ccy] != 0) {
-            // 如果右边线丢失
-            if (iptsc1[ccy] == 0)
-                iptsc[ccy] = (int)((IMAGE_WIDTH - iptsc[ccy]) / 2 + iptsc[ccy]);
-            else  // 左边线丢失
-                iptsc[ccy] = (int)(iptsc[ccy] / 2);
+    //     // 注意: x 与 y 位置相反 !!!
+    //     POINT pointTmp(ipts0[i][1], ipts0[i][0]);
+    //     edge_left.push_back(pointTmp);
+    // }
+    // ipts0_num = rptsc_num;
+    // // 原图边线 -> 透视边线 右
+    // rptsc_num = 0;
+    // edge_right.clear();
+    // for (int i = 0; i < ipts1_num; i++, rptsc_num++) {
+    //     if (ipts1[i][1] < 10)
+    //         break;
 
-            // 原图中线 -> 透视中线
-            map_perspective(iptsc[ccy], ccy, rptsc[rptsc_num++], 0);
-        }
-    }
+    //     map_perspective(ipts1[i][0], ipts1[i][1], rpts1[i], 0);
+    //     iptsc1[ipts1[i][1]] = ipts1[i][0];
+
+    //     // 注意: x 与 y 位置相反 !!!
+    //     POINT pointTmp(ipts1[i][1], ipts1[i][0]);
+    //     edge_right.push_back(pointTmp);
+    // };
+    // ipts1_num = rptsc_num;
+
+    // // 中线获取 图像顶部10个像素丢弃
+    // rptsc_num = 0;
+    // for (int ccy = IMAGE_HEIGHT - 1; ccy >= 10; ccy--) {
+    //     iptsc[ccy] = iptsc0[ccy] + iptsc1[ccy];
+
+    //     if (iptsc[ccy] != 0) {
+    //         // 如果右边线丢失
+    //         if (iptsc1[ccy] == 0)
+    //             iptsc[ccy] = (int)((IMAGE_WIDTH - iptsc[ccy]) / 2 + iptsc[ccy]);
+    //         else  // 左边线丢失
+    //             iptsc[ccy] = (int)(iptsc[ccy] / 2);
+
+    //         // 原图中线 -> 透视中线
+    //         map_perspective(iptsc[ccy], ccy, rptsc[rptsc_num++], 0);
+    //     }
+    // }
 
     // 滤波
     blur_points(rpts0, ipts0_num, rpts0b, (int)round(LINE_BLUR_KERNEL));
@@ -584,7 +655,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     }
 
     // 识别元素
-
     check_garage();  // 斑马线 - 识别特殊特征
     check_work();  // 施工区 - 识别标志
     check_cross();  // 十字路 - 识别角点特征
@@ -625,13 +695,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     if (control_flag.top() == none_element)
     {
         aim_speed = _config->speed_base;
-        // // 根据偏差方差加减速
-// if (abs(aim_sigma) < 10.0) {
-//     aim_speed_shift += 10.0 / aim_sigma;
-// }
-// else {
-//     aim_speed_shift -= speed_diff;
-// }
         if (is_straight0 && is_straight1)
         {
             aim_speed_shift = _config->speed_base +
@@ -640,15 +703,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
             aim_speed_shift = clip(aim_speed_shift, _config->speed_base, _config->speed_up);
             aim_speed = aim_speed_shift;
         }
-
-
-        // if (encoder.speed * 1000 < _config->speed_base * 0.6)
-        // {
-        //     aim_angle_p *= 0.5;
-        // }
-
-
-
         // 正常巡线
         if (IMG.flag_track == TRACK_LEFT) {
             IMG.rpts = IMG.rptsc0;
@@ -663,10 +717,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
             IMG.rpts_num = IMG.rptscs_num;
         }
         IMG.calculate_angle();//计算角度
-
-
-
-
     }
 
 
@@ -682,15 +732,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
     // 偏差滤波
     float aim_angle_filter = filter(aim_angle);
     aim_angle_last = aim_angle_filter;
-
-    // // 动态 P 项, 出入库禁止
-    // if ((flag_garage != GARAGE_OUT_LEFT && flag_garage != GARAGE_OUT_RIGHT) &&
-    //     (flag_garage != GARAGE_IN_LEFT && flag_garage != GARAGE_IN_RIGHT) &&
-    //     ((is_curve0 && flag_track == TRACK_LEFT) || (is_curve1 && flag_track == TRACK_RIGHT))) {
-    //     aim_angle_p += fabs(aim_angle_filter) * aim_angle_p_k;
-    //     aim_angle_p = aim_angle_p > _config->steering_p * 3.0f ? _config->steering_p * 3.0f
-    //         : aim_angle_p;
-    // }
 
     // 计算舵机 PID
     int aim_angle_pwm = 0;
@@ -763,39 +804,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 }
             }
         }
-        // // 泛行区 --------------------------------------------------
-        // else if (flag_yroad >= YROAD_FOUND) {
-        //     // 锥桶
-        //     for (auto p : edge_det)  // 白色 //列 |  行———
-        //         cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(255, 255, 255), 2);
-        //     // 锥桶
-        //     for (auto p : cones_edge_left)  // 蓝色 //列 |  行———
-        //         cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(0, 191, 255), 2);
-
-        //     // 锥桶
-        //     for (auto p : cones_edge_right)  // 紫色 //列 |  行———
-        //         cv::circle(mat_result, cv::Point(p.y, p.x), 2, cv::Scalar(138, 43, 226), 2);
-        //     if (cones_edge_left.size() > 0)
-        //         cv::circle(mat_result, cv::Point(cones_edge_left[0].y, cones_edge_left[0].x), 2, cv::Scalar(0, 0, 0), 2);
-        //     if (cones_edge_right.size() > 0)
-        //         cv::circle(mat_result, cv::Point(cones_edge_right[0].y, cones_edge_right[0].x), 2, cv::Scalar(0, 255, 0), 2);
-        //     // 边线
-        //     for (auto p : edge_left)  // 青蓝色
-        //         cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(0, 238, 238), -1);
-        //     for (auto p : edge_right)  // 黄色
-        //         cv::circle(mat_result, cv::Point(p.y, p.x), 1, cv::Scalar(238, 238, 0), -1);
-        //     // 边线
-        //     /*for (int a = 0; a < yroad_rptss_num; a++) {  // 边线等距采样 泛行区边线
-        //         map_perspective(yroad_rptss[a][0], yroad_rptss[a][1], trans, 1);
-        //         if ((int)trans[1] >= 0 && (int)trans[1] < mat_result.rows &&
-        //             (int)trans[0] >= 0 && (int)trans[0] < mat_result.cols) {
-        //             mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[0] = 0;
-        //             mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[1] = 238;
-        //             mat_result.at<cv::Vec3b>((int)trans[1], (int)trans[0])[2] = 238;
-        //         }
-        //     }*/
-        // }
-        // 其他情况 ------------------------------------------------
         else {
             // 施工区 & 加油站 & 救援区---------------------------------------
             if (control_flag.contains(cross_element) ||
@@ -908,7 +916,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 
             // 预瞄点
             /*
-            cv::circle(mat_result, cv::Point2f(rptsn[aim_idx__far][0], rptsn[aim_idx__far][1]),
+            cv::circle(mat_result, cv::Point2f(rptsn[aim_idx_far][0], rptsn[aim_idx_far][1]),
                        3, cv::Scalar(0, 0, 255), 2, 8);
             cv::circle(mat_result, cv::Point2f(rptsn[aim_idx_near][0], rptsn[aim_idx_near][1]),
                        3, cv::Scalar(0, 0, 255), 2, 8);
@@ -925,9 +933,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 
 void ImageProcess::calculate_angle(void)
 {
-
-
-
 
     // 找最近点(起始点中线归一化)
     float min_dist = 1e10;
@@ -954,34 +959,24 @@ void ImageProcess::calculate_angle(void)
     if (begin_id >= 0 && rpts_num - begin_id >= 3) {
         // 找到中线
         flag_rpts = true;
-
         // 归一化中线
         rpts[begin_id][0] = cx;
         rpts[begin_id][1] = cy;
         rptsn_num = sizeof(rptsn) / sizeof(rptsn[0]);
         resample_points(rpts + begin_id, rpts_num - begin_id, rptsn, &rptsn_num,
             SAMPLE_DIST * PIXEL_PER_METER);
-
-        aim_idx__far = clip(round(aim_distance_f / SAMPLE_DIST), 0, rptsn_num - 1);
+        aim_idx_far = clip(round(aim_distance_f / SAMPLE_DIST), 0, rptsn_num - 1);
         aim_idx_near = clip(round(aim_distance_n / SAMPLE_DIST), 0, rptsn_num - 1);
-
         std::vector<POINT> v_center(4);  // 三阶贝塞尔曲线
         v_center[0] = { (int)cx, (int)cy };
-
         v_center[1] = { (int)rptsn[aim_idx_near][0], (int)rptsn[aim_idx_near][1] };
-
-        v_center[2] = { (int)rptsn[(int)((aim_idx__far + aim_idx_near) / 2)][0],
-                       (int)rptsn[(int)((aim_idx__far + aim_idx_near) / 2)][1] };
-        v_center[3] = { (int)rptsn[aim_idx__far][0], (int)rptsn[aim_idx__far][1] };
+        v_center[2] = { (int)rptsn[(int)((aim_idx_far + aim_idx_near) / 2)][0], (int)rptsn[(int)((aim_idx_far + aim_idx_near) / 2)][1] };
+        v_center[3] = { (int)rptsn[aim_idx_far][0], (int)rptsn[aim_idx_far][1] };
         bezier_line = bezier(0.03, v_center);
 
-        // bseqx_y1 = (IMAGE_HEIGHT * (1 - aim_distance_n));
-        // bseqx_y2 = (IMAGE_HEIGHT * (1 - (aim_distance_f + aim_distance_n) / 2));
-        // bseqx_y3 = (IMAGE_HEIGHT * (1 - aim_distance_f));
-
         // 计算远锚点偏差值
-        float dx = bezier_line[bezier_line.size() - 1].x - cx;  // rptsn[aim_idx__far][0] - cx;
-        float dy = cy - bezier_line[bezier_line.size() - 1].y;  // cy - rptsn[aim_idx__far][1];
+        float dx = bezier_line[bezier_line.size() - 1].x - cx;  // rptsn[aim_idx_far][0] - cx;
+        float dy = cy - bezier_line[bezier_line.size() - 1].y;  // cy - rptsn[aim_idx_far][1];
         float error_far = (-atan2f(dx, dy) * 180 / PI);
         assert(!isnan(error_far));
 
@@ -992,7 +987,7 @@ void ImageProcess::calculate_angle(void)
         assert(!isnan(error_near));
 
         aim_angle = error_far * 0.9 + error_near * 0.1;
-        aim_sigma = sigma(rptsn + aim_idx_near, aim_idx__far - aim_idx_near);
+        aim_sigma = sigma(rptsn + aim_idx_near, aim_idx_far - aim_idx_near);
         // aim_sigma = sigma(v_center);
     }
     else {
@@ -1001,20 +996,20 @@ void ImageProcess::calculate_angle(void)
         aim_angle = aim_angle_last;
         aim_sigma = 100.0f;
 
-        // 施工区丢线
-        if (flag_work != WORK_NONE)
-            aim_angle = aim_angle_last;
-        // 环岛内部丢线
-        if (control_flag.top() == circle_element)
-            aim_angle = aim_angle_last * 1.39f;
-        // 十字丢线
-        if (control_flag.top() == cross_element)
-            aim_angle = aim_angle_last;
-        // 斑马线丢线
-        if (flag_garage >= GARAGE_PASS_LEFT)
-            aim_angle = aim_angle_last;
-        else if (flag_garage >= GARAGE_IN_LEFT)
-            aim_angle = aim_angle_last * 1.35f;
+        // // 施工区丢线
+        // if (flag_work != WORK_NONE)
+        //     aim_angle = aim_angle_last;
+        // // 环岛内部丢线
+        // if (control_flag.top() == circle_element)
+        //     aim_angle = aim_angle_last * 1.39f;
+        // // 十字丢线
+        // if (control_flag.top() == cross_element)
+        //     aim_angle = aim_angle_last;
+        // // 斑马线丢线
+        // if (flag_garage >= GARAGE_PASS_LEFT)
+        //     aim_angle = aim_angle_last;
+        // else if (flag_garage >= GARAGE_IN_LEFT)
+        //     aim_angle = aim_angle_last * 1.35f;
     }
 }
 

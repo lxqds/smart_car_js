@@ -40,7 +40,7 @@ private:
     float cx = IMAGE_WIDTH / 2.0f;  // 车轮对应点 (纯跟踪起始点)
     float cy = IMAGE_HEIGHT * 0.99f;
 
-    int aim_idx__far = 0;  // 远预锚点位置
+    int aim_idx_far = 0;  // 远预锚点位置
     int aim_idx_near = 0;  // 近预锚点位置
 
     float mea_0 = 0.0f;  // 左直线拟合平均绝对误差
@@ -101,33 +101,6 @@ public:
 public:
     bool detection_new = false;
 
-    /*
-    string detection_labels[20] = {
-        "cone", "granary", "bridge", "tractor", "corn", "pig", "crosswalk", "bump",
-        "background",
-        "ramp", "three", "work",
-        "red", "gas", "wone", "wtwo"};
-
-    enum DetectionLabel {
-        label_cone = 0,
-        label_granary,
-        label_bridge,
-        label_tractor,
-        label_corn,
-        label_pig,
-        label_crosswalk,
-        label_bump,
-        label_ramp,   // 坡道
-        label_three,  // 泛行区
-        label_work,   // 施工区
-        label_red,    // 锥桶
-        label_gas,    // 加油站
-        label_wone,   // 赛道 1
-        label_wtwo,   // 赛道 2
-    };
-
-    */
-
     string detection_labels[20] = {
             "bomb"
             "cone"
@@ -186,10 +159,16 @@ public:
     // L 角点
     int Lpt0_rpts0s_id, Lpt1_rpts1s_id;
     bool Lpt0_found, Lpt1_found;
+    float Lpt0_angle, Lpt1_angle;
+    int Lpt0_point[2], Lpt1_point[2];//左右角点坐标
+    float far_Lpt0_angle, far_Lpt1_angle;
+    int far_Lpt0_point[2], far_Lpt1_point[2];//远处左右角点坐标
     // 长直道
     bool is_straight0, is_straight1;
     // 弯道 左 右 强制
     bool is_curve0, is_curve1;
+
+
 
     /* *********************************************************************** */
     /* ******************************* 边线数据 ******************************* */
@@ -201,6 +180,11 @@ public:
     int ipts1[IMAGE_HEIGHT][2];  // 右: 1
     int iptsc[IMAGE_HEIGHT];     // 中: c
     int ipts0_num, ipts1_num, rptsc_num;
+    //远线左右线定义
+    int far_ipts0[IMAGE_HEIGHT][2];
+    int far_ipts1[IMAGE_HEIGHT][2];
+    int far_ipts0_num, far_ipts1_num;
+
     // 透视变换后左右中线  滤波: b
     float rpts0b[IMAGE_HEIGHT][2];
     float rpts1b[IMAGE_HEIGHT][2];

@@ -1002,6 +1002,263 @@ void findline_righthand_adaptive(cv::Mat img, int block_size, int clip_value,
     *num = step;
 }
 
+
+/* 前进方向定义：
+ *   0
+ * 3   1
+ *   2
+ */
+const int far_dir_front[4][2] = { {0, 1}, {1, 0}, {0, -1}, {-1, 0} };
+const int far_dir_frontleft[4][2] = { {-1, 1}, {1, 1}, {1, -1}, {-1, -1} };
+const int far_dir_frontright[4][2] = { {1, 1}, {1, -1}, {-1, -1}, {-1, 1} };
+
+// 左手迷宫巡线（向下）
+void far_findline_lefthand_adaptive(cv::Mat img, int block_size, int clip_value,
+    int x, int y, int pts[][2], int* num) {
+    assert(num && *num >= 0);
+    assert(block_size > 1 && block_size % 2 == 1);
+
+    int half = block_size / 2;
+    int step = 0, dir = 0, turn = 0;
+
+    while ((step < *num) && (half <= x) && (x <= img.cols - half - 1) &&
+        (half <= y) && (y <= img.rows - half - 1) && (turn < 100)) {
+        //求自适应阈值
+        int local_thres = 0;
+        for (int dy = -half; dy <= half; dy++) {
+            for (int dx = -half; dx <= half; dx++) {
+                local_thres += AT_IMAGE(img, x + dx, y + dy);
+            }
+        }
+        local_thres /= block_size * block_size;
+        local_thres -= clip_value;
+
+        int front_value =
+            AT_IMAGE(img, x + far_dir_front[dir][0], y + far_dir_front[dir][1]);
+        int frontleft_value =
+            AT_IMAGE(img, x + far_dir_frontleft[dir][0], y + far_dir_frontleft[dir][1]);
+        if (front_value < local_thres) {
+            dir = (dir + 1) % 4;
+            turn++;
+        }
+        else if (frontleft_value < local_thres) {
+            x += far_dir_front[dir][0];
+            y += far_dir_front[dir][1];
+            pts[step][0] = x;
+            pts[step][1] = y;
+            step++;
+            turn = 0;
+        }
+        else {
+            x += far_dir_frontleft[dir][0];
+            y += far_dir_frontleft[dir][1];
+            dir = (dir + 3) % 4;
+            pts[step][0] = x;
+            pts[step][1] = y;
+            step++;
+            turn = 0;
+        }
+    }
+    *num = step;
+}
+
+// 右手迷宫巡线（向下）
+void far_findline_righthand_adaptive(cv::Mat img, int block_size, int clip_value,
+    int x, int y, int pts[][2], int* num) {
+    assert(num && *num >= 0);
+    assert(block_size > 1 && block_size % 2 == 1);
+
+    int half = block_size / 2;
+    int step = 0, dir = 0, turn = 0;
+
+    while ((step < *num) && (half <= x) && (x <= img.cols - half - 1) &&
+        (half <= y) && (y <= img.rows - half - 1) && (turn < 4)) {
+        int local_thres = 0;
+        for (int dy = -half; dy <= half; dy++) {
+            for (int dx = -half; dx <= half; dx++) {
+                local_thres += AT_IMAGE(img, x + dx, y + dy);
+            }
+        }
+        local_thres /= block_size * block_size;
+        local_thres -= clip_value;
+
+        int front_value =
+            AT_IMAGE(img, x + far_dir_front[dir][0], y + far_dir_front[dir][1]);
+        int frontright_value =
+            AT_IMAGE(img, x + far_dir_frontright[dir][0], y + far_dir_frontright[dir][1]);
+        if (front_value < local_thres) {
+            dir = (dir + 3) % 4;
+            turn++;
+        }
+        else if (frontright_value < local_thres) {
+            x += far_dir_front[dir][0];
+            y += far_dir_front[dir][1];
+            pts[step][0] = x;
+            pts[step][1] = y;
+            step++;
+            turn = 0;
+        }
+        else {
+            x += far_dir_frontright[dir][0];
+            y += far_dir_frontright[dir][1];
+            dir = (dir + 1) % 4;
+            pts[step][0] = x;
+            pts[step][1] = y;
+            step++;
+            turn = 0;
+        }
+    }
+    *num = step;
+}
+//找左线（向上）
+void find_left_line(cv::Mat mat_bin, int x, int y, int ipts[][2], int* ipts_num)
+{
+    int x1 = x, y1 = y;
+    // 向左寻找白点
+    if (AT_IMAGE(mat_bin, x1, y1) < 127)
+        for (x1--; x1 > 0; x1--)
+            if (AT_IMAGE(mat_bin, x1, y1) >= 127)
+                break;
+    // 向左寻找黑点
+    for (; x1 > 0; x1--)
+        if (AT_IMAGE(mat_bin, x1 - 1, y1) < 127)
+            break;
+    // 向上寻找黑点
+    if (x1 < BLOCK_SIZE / 2) {
+        x1 = BLOCK_SIZE / 2;
+        for (; y1 > IMAGE_HEIGHT * 2 / 3; y1--)
+            if (AT_IMAGE(mat_bin, x1, y1 - 1) < 127)
+                break;
+    }
+    if (AT_IMAGE(mat_bin, x1, y1) >= 127)
+        findline_lefthand_adaptive(mat_bin, BLOCK_SIZE, CLIP_VALUE,
+            x1, y1, ipts, ipts_num);
+    else *ipts_num = 0;
+}
+//找右线（向上）
+void find_right_line(cv::Mat mat_bin, int x, int y, int ipts[][2], int* ipts_num)
+{
+    int x2 = x, y2 = y;
+    // 向右寻找白点
+    if (AT_IMAGE(mat_bin, x2, y2) < 127)
+        for (x2++; x2 < IMAGE_WIDTH - 1; x2++)
+            if (AT_IMAGE(mat_bin, x2, y2) >= 127)
+                break;
+    // 向右寻找黑点
+    for (; x2 < IMAGE_WIDTH - 1; x2++)
+        if (AT_IMAGE(mat_bin, x2 + 1, y2) < 127)
+            break;
+    // 向上寻找黑点
+    if (x2 > IMAGE_WIDTH - BLOCK_SIZE / 2 - 1) {
+        x2 = IMAGE_WIDTH - BLOCK_SIZE / 2 - 1;
+        for (; y2 > IMAGE_HEIGHT * 2 / 3; y2--)
+            if (AT_IMAGE(mat_bin, x2, y2 - 1) < 127)
+                break;
+    }
+    if (AT_IMAGE(mat_bin, x2, y2) >= 127)
+        findline_righthand_adaptive(mat_bin, BLOCK_SIZE, CLIP_VALUE,
+            x2, y2, ipts, ipts_num);
+    else *ipts_num = 0;
+}
+//找左线（向下）
+void find_far_left_line(cv::Mat mat_bin, int x, int y, int ipts[][2], int* ipts_num)
+{
+    int x1 = x, y1 = y;
+    // 向左寻找白点
+    if (AT_IMAGE(mat_bin, x1, y1) < 127)
+        for (x1--; x1 > 0; x1--)
+            if (AT_IMAGE(mat_bin, x1, y1) >= 127)
+                break;
+    // 向左寻找黑点
+    for (; x1 > 0; x1--)
+        if (AT_IMAGE(mat_bin, x1 - 1, y1) < 127)
+            break;
+    // 向下寻找黑点
+    if (x1 < BLOCK_SIZE / 2) {
+        x1 = BLOCK_SIZE / 2;
+        for (; y1 < IMAGE_HEIGHT * 2 / 3; y1++)
+            if (AT_IMAGE(mat_bin, x1, y1 + 1) < 127)
+                break;
+    }
+    if (AT_IMAGE(mat_bin, x1, y1) >= 127)
+        far_findline_lefthand_adaptive(mat_bin, BLOCK_SIZE, CLIP_VALUE,
+            x1, y1, ipts, ipts_num);
+    else *ipts_num = 0;
+}
+//找右线（向下）
+void find_far_right_line(cv::Mat mat_bin, int x, int y, int ipts[][2], int* ipts_num)
+{
+    int x2 = x, y2 = y;
+    // 向右寻找白点
+    if (AT_IMAGE(mat_bin, x2, y2) < 127)
+        for (x2++; x2 < IMAGE_WIDTH - 1; x2++)
+            if (AT_IMAGE(mat_bin, x2, y2) >= 127)
+                break;
+    // 向右寻找黑点
+    for (; x2 < IMAGE_WIDTH - 1; x2++)
+        if (AT_IMAGE(mat_bin, x2 + 1, y2) < 127)
+            break;
+    // 向下寻找黑点
+    if (x2 > IMAGE_WIDTH - BLOCK_SIZE / 2 - 1) {
+        x2 = IMAGE_WIDTH - BLOCK_SIZE / 2 - 1;
+        for (; y2 < IMAGE_HEIGHT * 2 / 3; y2++)
+            if (AT_IMAGE(mat_bin, x2, y2 + 1) < 127)
+                break;
+    }
+    if (AT_IMAGE(mat_bin, x2, y2) >= 127)
+        far_findline_righthand_adaptive(mat_bin, BLOCK_SIZE, CLIP_VALUE,
+            x2, y2, ipts, ipts_num);
+    else *ipts_num = 0;
+}
+
+//根据顺序点集找角点
+void Find_corner(float rpts[][2], int rpts_num, int corner_point[2], float* angle)
+{
+    *angle = 180;
+    float angle_xy[2]{};
+    if (rpts_num > 20) {
+        float min_angle = 180;
+        float min_angle_x = 0;
+        float min_angle_y = 0;
+        int i = 0;
+        float k[3][2];
+        while (true) {
+            k[0][0] = rpts[i][0];
+            k[0][1] = rpts[i][1];
+            k[1][0] = rpts[i + 10][0];
+            k[1][1] = rpts[i + 10][1];
+            k[2][0] = rpts[i + 20][0];
+            k[2][1] = rpts[i + 20][1];
+            float BAx = (float)(k[0][0] - k[1][0]);
+            float BAy = (float)(k[0][1] - k[1][1]);
+            float BCx = (float)(k[2][0] - k[1][0]);
+            float BCy = (float)(k[2][1] - k[1][1]);
+            // 计算点积
+            float dotProduct = (BAx * BCx) + (BAy * BCy);
+            // 计算向量的模长
+            float magnitudeBA = sqrt(BAx * BAx + BAy * BAy);
+            float magnitudeBC = sqrt(BCx * BCx + BCy * BCy);
+            // 计算夹角的余弦值
+            float cosTheta = dotProduct / (magnitudeBA * magnitudeBC);
+            // 计算夹角（弧度）
+            float angleRad = acos(cosTheta);
+            // 转换为角度
+            float angleDeg = angleRad * (180.0f / PI);
+            if (angleDeg < min_angle) {
+                min_angle = angleDeg;
+                min_angle_x = (float)k[1][0];
+                min_angle_y = (float)k[1][1];
+            }
+            i += 5;
+            if (i + 20 >= rpts_num)break;
+        }
+        *angle = min_angle;
+        map_perspective(min_angle_x, min_angle_y, angle_xy, 1);
+        corner_point[0] = (int)angle_xy[0];
+        corner_point[1] = (int)angle_xy[1];
+    }
+}
+
 // 点集三角滤波
 void blur_points(float pts_in[][2], int num, float pts_out[][2], int kernel) {
     assert(kernel % 2 == 1);

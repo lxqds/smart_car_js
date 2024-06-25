@@ -22,9 +22,7 @@ bool far_Lpt0_found, far_Lpt1_found;
 int far_Lpt0_rpts0s_id, far_Lpt1_rpts1s_id;
 
 // 十字远线
-int far_ipts0[IMAGE_HEIGHT][2];
-int far_ipts1[IMAGE_HEIGHT][2];
-int far_ipts0_num, far_ipts1_num;
+
 
 float far_rpts0[IMAGE_HEIGHT][2];
 float far_rpts1[IMAGE_HEIGHT][2];

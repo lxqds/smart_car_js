@@ -35,7 +35,7 @@ class ImageProcess {
     float cx = IMAGE_WIDTH / 2.0f;  // 车轮对应点 (纯跟踪起始点)
     float cy = IMAGE_HEIGHT * 0.99f;
 
-    int aim_idx__far = 0;  // 远预锚点位置
+    int aim_idx_far = 0;  // 远预锚点位置
     int aim_idx_near = 0;  // 近预锚点位置
 
     float mea_0 = 0.0f;  // 左直线拟合平均绝对误差

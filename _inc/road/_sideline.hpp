@@ -73,7 +73,7 @@ bool sort_x_down(POINT a, POINT b);  // 降序
 //两点距离公式
 float distance_for_points(POINT a, POINT b);
 //搜索左右边缘的锥桶
-void search_cones_edge(std::vector<POINT> cones,std::vector<POINT> *left_cones,std::vector<POINT> *right_cones);
+void search_cones_edge(std::vector<POINT> cones, std::vector<POINT>* left_cones, std::vector<POINT>* right_cones);
 
 // 从AI检测结果中检索锥桶坐标集合
 std::vector<POINT> search_targets(std::vector<DetectionPredictResult> predict);
@@ -106,10 +106,10 @@ POINT search_left_near2(std::vector<POINT> pointsEdge, cv::Mat matt);
 POINT search_right_near(std::vector<POINT> pointsEdge, cv::Mat matt);
 
 //找左边线离锥桶最近的边线点的位次,x为行，第几行
-uint16_t search_break_left(std::vector<POINT> pointsEdge,cv::Mat matt);
+uint16_t search_break_left(std::vector<POINT> pointsEdge, cv::Mat matt);
 
 //找右边线离锥桶最近的边线点的位次,x为行，第几行
-uint16_t search_break_right(std::vector<POINT> pointsEdge,cv::Mat matt);
+uint16_t search_break_right(std::vector<POINT> pointsEdge, cv::Mat matt);
 
 // 搜索距离赛道左边缘上15最近的黄色色块 (黄色锥桶)
 POINT search_left_near15(std::vector<POINT> pointsEdge, cv::Mat matt);
@@ -142,35 +142,46 @@ POINT search_leftDown_cone(std::vector<POINT> pointsCone);
 // 限制范围
 int clip(int x, int low, int up);
 
-// 左手迷宫巡线
-void findline_lefthand_adaptive(cv::Mat img, int block_size, int clip_value,
-                                int x, int y, int pts[][2], int *num);
+// // 左手迷宫巡线
+// void findline_lefthand_adaptive(cv::Mat img, int block_size, int clip_value,
+//     int x, int y, int pts[][2], int* num);
 
-// 右手迷宫巡线
-void findline_righthand_adaptive(cv::Mat img, int block_size, int clip_value,
-                                 int x, int y, int pts[][2], int *num);
+// // 右手迷宫巡线
+// void findline_righthand_adaptive(cv::Mat img, int block_size, int clip_value,
+//     int x, int y, int pts[][2], int* num);
+
+//向上找左线
+void find_left_line(cv::Mat mat_bin, int x, int y, int ipts[][2], int* ipts_num);
+//向上找右线
+void find_right_line(cv::Mat mat_bin, int x, int y, int ipts[][2], int* ipts_num);
+//向下找左线
+void find_far_left_line(cv::Mat mat_bin, int x, int y, int ipts[][2], int* ipts_num);
+//向下找右线
+void find_far_right_line(cv::Mat mat_bin, int x, int y, int ipts[][2], int* ipts_num);
+//根据顺序点集找角点
+void Find_corner(float rpts[][2], int rpts_num, int corner_point[2], float* angle);
 
 // 点集三角滤波
 void blur_points(float pts_in[][2], int num, float pts_out[][2], int kernel);
 
 // 点集等距采样  使走过的采样前折线段的距离为`dist`
-void resample_points(float pts_in[][2], int num1, float pts_out[][2], int *num2,
-                     float dist);
+void resample_points(float pts_in[][2], int num1, float pts_out[][2], int* num2,
+    float dist);
 
 // 点集局部角度变化率
 void local_angle_points(float pts_in[][2], int num, float angle_out[],
-                        int dist);
+    int dist);
 
 // 角度变化率非极大抑制
 void nms_angle(float angle_in[], int num, float angle_out[], int kernel);
 
 // 左边线跟踪中线
 void track_leftline(float pts_in[][2], int num, float pts_out[][2],
-                    int approx_num, float dist);
+    int approx_num, float dist);
 
 // 右边线跟踪中线
 void track_rightline(float pts_in[][2], int num, float pts_out[][2],
-                     int approx_num, float dist);
+    int approx_num, float dist);
 
 /* ********************************************************************* */
 
