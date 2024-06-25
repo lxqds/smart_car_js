@@ -46,7 +46,7 @@ void check_cross() {
 
 /* ********************************************************************* */
 
-void run_cross() {
+void run_cross(cv::Mat& mat_result) {
 
     if (control_flag.top() == cross_element) {// 当前为十字路口元素时
         IMG.aim_speed = IMG._config->speed_cross;
@@ -57,12 +57,18 @@ void run_cross() {
                 if (IMG.Lpt0_found) {
                     cv::line(IMG.mat_bin, cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
                         cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
-                        cv::Scalar(0, 0, 0), 2);
+                        cv::Scalar(0, 0, 0), 3);
+                    cv::line(mat_result, cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
+                        cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
+                        cv::Scalar(0, 0, 0), 3);
                 }
                 else {
                     cv::line(IMG.mat_bin, cv::Point((int)(IMAGE_WIDTH * 0.2), IMAGE_HEIGHT - 1),
                         cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
-                        cv::Scalar(0, 0, 0), 2);
+                        cv::Scalar(0, 0, 0), 3);
+                    cv::line(mat_result, cv::Point((int)(IMAGE_WIDTH * 0.2), IMAGE_HEIGHT - 1),
+                        cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
+                        cv::Scalar(0, 0, 0), 3);
                 }
             }
             else {
@@ -72,19 +78,28 @@ void run_cross() {
                     float end_x = (end_y - IMG.ipts0[0][1]) / k + IMG.ipts0[0][0];
                     cv::line(IMG.mat_bin, cv::Point(IMG.ipts0[0][0], IMG.ipts0[0][1]),
                         cv::Point((int)end_x, (int)end_y),
-                        cv::Scalar(0, 0, 0), 2);
+                        cv::Scalar(0, 0, 0), 3);
+                    cv::line(mat_result, cv::Point(IMG.ipts0[0][0], IMG.ipts0[0][1]),
+                        cv::Point((int)end_x, (int)end_y),
+                        cv::Scalar(0, 0, 0), 3);
                 }
             }
             if (IMG.far_Lpt1_found) {
                 if (IMG.Lpt1_found) {
                     cv::line(IMG.mat_bin, cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
                         cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
-                        cv::Scalar(0, 0, 0), 2);
+                        cv::Scalar(0, 0, 0), 3);
+                    cv::line(mat_result, cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
+                        cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
+                        cv::Scalar(0, 0, 0), 3);
                 }
                 else {
                     cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH * 0.8, IMAGE_HEIGHT - 1),
                         cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
-                        cv::Scalar(0, 0, 0), 2);
+                        cv::Scalar(0, 0, 0), 3);
+                    cv::line(mat_result, cv::Point(IMAGE_WIDTH * 0.8, IMAGE_HEIGHT - 1),
+                        cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
+                        cv::Scalar(0, 0, 0), 3);
                 }
             }
             else {
@@ -94,7 +109,10 @@ void run_cross() {
                     float end_x = (end_y - IMG.ipts1[0][1]) / k + IMG.ipts1[0][0];
                     cv::line(IMG.mat_bin, cv::Point(IMG.ipts1[0][0], IMG.ipts1[0][1]),
                         cv::Point((int)end_x, (int)end_y),
-                        cv::Scalar(0, 0, 0), 2);
+                        cv::Scalar(0, 0, 0), 3);
+                    cv::line(mat_result, cv::Point(IMG.ipts1[0][0], IMG.ipts1[0][1]),
+                        cv::Point((int)end_x, (int)end_y),
+                        cv::Scalar(0, 0, 0), 3);
                 }
             }
 
@@ -125,19 +143,28 @@ void run_cross() {
                     if (L > 10) {
                         cv::line(IMG.mat_bin, cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
                             cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
-                            cv::Scalar(0, 0, 0), 2);
+                            cv::Scalar(0, 0, 0), 3);
+                        cv::line(mat_result, cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
+                            cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
+                            cv::Scalar(0, 0, 0), 3);
                     }
                     else {
                         cv::line(IMG.mat_bin, cv::Point((int)(IMAGE_WIDTH * 0.2), IMAGE_HEIGHT - 1),
                             cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
-                            cv::Scalar(0, 0, 0), 2);
+                            cv::Scalar(0, 0, 0), 3);
+                        cv::line(mat_result, cv::Point((int)(IMAGE_WIDTH * 0.2), IMAGE_HEIGHT - 1),
+                            cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
+                            cv::Scalar(0, 0, 0), 3);
                     }
 
                 }
                 else {
                     cv::line(IMG.mat_bin, cv::Point((int)(IMAGE_WIDTH * 0.2), IMAGE_HEIGHT - 1),
                         cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
-                        cv::Scalar(0, 0, 0), 2);
+                        cv::Scalar(0, 0, 0), 3);
+                    cv::line(mat_result, cv::Point((int)(IMAGE_WIDTH * 0.2), IMAGE_HEIGHT - 1),
+                        cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
+                        cv::Scalar(0, 0, 0), 3);
                 }
             }
             else {
@@ -147,7 +174,10 @@ void run_cross() {
                     float end_x = (end_y - IMG.ipts0[0][1]) / k + IMG.ipts0[0][0];
                     cv::line(IMG.mat_bin, cv::Point(IMG.ipts0[0][0], IMG.ipts0[0][1]),
                         cv::Point((int)end_x, (int)end_y),
-                        cv::Scalar(0, 0, 0), 2);
+                        cv::Scalar(0, 0, 0), 3);
+                    cv::line(mat_result, cv::Point(IMG.ipts0[0][0], IMG.ipts0[0][1]),
+                        cv::Point((int)end_x, (int)end_y),
+                        cv::Scalar(0, 0, 0), 3);
                 }
             }
             if (IMG.far_Lpt1_found) {
@@ -158,19 +188,28 @@ void run_cross() {
                     if (L > 10) {
                         cv::line(IMG.mat_bin, cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
                             cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
-                            cv::Scalar(0, 0, 0), 2);
+                            cv::Scalar(0, 0, 0), 3);
+                        cv::line(mat_result, cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
+                            cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
+                            cv::Scalar(0, 0, 0), 3);
                     }
                     else {
                         cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH * 0.8, IMAGE_HEIGHT - 1),
                             cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
-                            cv::Scalar(0, 0, 0), 2);
+                            cv::Scalar(0, 0, 0), 3);
+                        cv::line(mat_result, cv::Point(IMAGE_WIDTH * 0.8, IMAGE_HEIGHT - 1),
+                            cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
+                            cv::Scalar(0, 0, 0), 3);
                     }
 
                 }
                 else {
                     cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH * 0.8, IMAGE_HEIGHT - 1),
                         cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
-                        cv::Scalar(0, 0, 0), 2);
+                        cv::Scalar(0, 0, 0), 3);
+                    cv::line(mat_result, cv::Point(IMAGE_WIDTH * 0.8, IMAGE_HEIGHT - 1),
+                        cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
+                        cv::Scalar(0, 0, 0), 3);
                 }
             }
             else {
@@ -180,7 +219,10 @@ void run_cross() {
                     float end_x = (end_y - IMG.ipts1[0][1]) / k + IMG.ipts1[0][0];
                     cv::line(IMG.mat_bin, cv::Point(IMG.ipts1[0][0], IMG.ipts1[0][1]),
                         cv::Point((int)end_x, (int)end_y),
-                        cv::Scalar(0, 0, 0), 2);
+                        cv::Scalar(0, 0, 0), 3);
+                    cv::line(mat_result, cv::Point(IMG.ipts1[0][0], IMG.ipts1[0][1]),
+                        cv::Point((int)end_x, (int)end_y),
+                        cv::Scalar(0, 0, 0), 3);
                 }
             }
             IMG.get_edge();

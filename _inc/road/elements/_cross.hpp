@@ -9,7 +9,7 @@ enum flag_cross_e {
 extern flag_cross_e flag_cross;
 
 void check_cross();
-void run_cross();
+void run_cross(cv::Mat& mat_result);
 void cross_farline();
 
 #endif
