@@ -634,7 +634,6 @@ void ImageProcess::get_edge()
 {
     //得到原始边线点集
     int begin_x = IMAGE_WIDTH / 2, begin_y = IMAGE_HEIGHT - 10;//近线向上找线的开始位置
-    int far_begin_x = 0, far_begin_y = 0;//远线向下找线的开始位置
     int count = 0;
     for (int i = 39; i > 20; i--) {
         if (White_row_length[i] > 50 && White_row_length[i] < 160) count++;
