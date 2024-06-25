@@ -145,7 +145,7 @@ void run_circle() {
             IMG.flag_track = TRACK_RIGHT;
 
             // 外环存在拐点, 可再加拐点距离判据 (左L点)
-            if (IMG.ipts1_num < 80 && IMG.Lpt1_found && IMG.encoder.route - circle_route > 120) {
+            if (IMG.Lpt1_found && IMG.Lpt1_point[1] > 120 && IMG.encoder.route - circle_route > 120) {
                 flag_circle = CIRCLE_LEFT_OUT;
                 MAT_LOG("CIRCLE_LEFT_OUT");
             }
