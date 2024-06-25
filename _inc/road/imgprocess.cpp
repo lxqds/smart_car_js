@@ -90,11 +90,11 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
             White_row_end_point[i][0] = 0;
             White_row_end_point[i][1] = i * 5;
             White_row_length[i] = 0;
-            for (int x = 0; x < IMAGE_WIDTH; x++) {
+            for (int x = 0; x < IMAGE_WIDTH; x += 2) {
                 if (sign == 0) {//向右开始找白点
                     if (AT_IMAGE(mat_bin, x, i * 5) >= 127)count++;
                     else count = 0;
-                    if (count == 3) {
+                    if (count == 2) {
                         if (i == start_id) {
                             start = x - count + 1;
                             sign = 1;
@@ -111,7 +111,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
                 if (sign == 1) {//向右开始找黑点
                     if (AT_IMAGE(mat_bin, x, i * 5) < 127)count++;
                     else count = 0;
-                    if (count == 3 || x == IMAGE_WIDTH - 1) {
+                    if (count == 2 || x == IMAGE_WIDTH - 1) {
                         if (i == start_id) {//开始行,不判断相邻直线是否有交集
                             float a[2]{}, b[2]{};
                             map_perspective((float)start, (float)i * 5, a, 0);
