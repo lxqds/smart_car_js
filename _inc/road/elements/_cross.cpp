@@ -118,7 +118,7 @@ void run_cross() {
         /* ***************************************************************** */
 
         // 远线控制进十字
-        if (flag_cross == CROSS_IN) {
+        else if (flag_cross == CROSS_IN) {
             //补黑线
             if (IMG.far_Lpt0_found) {
 
