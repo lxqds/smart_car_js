@@ -699,6 +699,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& mat_result,
 
 void ImageProcess::get_edge()
 {
+    ipts0_num = 150;
+    ipts1_num = 150;
     find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
     find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
     // 变换后左右中线
