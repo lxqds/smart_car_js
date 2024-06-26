@@ -35,11 +35,11 @@ void check_circle() {
     {
         //左圆环
         if (IMG.Lpt0_found &&   // 左角点找到
-            IMG.Lpt0_point[1] > 120 && //左角点在屏幕下方
-            IMG.ipts0_num < 80 &&
+            IMG.Lpt0_point[1] > 100 && //左角点在屏幕下方
+            IMG.ipts0_num < 100 &&
             !IMG.Lpt1_found &&  // 右角点未找到
             !IMG.far_Lpt1_found &&  // 右角点未找到
-            IMG.ipts1_num > 160)  // 右边长直道
+            IMG.ipts1_num > 120)  // 右边长直道
         {
             none_left_line = 0;
             have_left_line = 0;
@@ -58,9 +58,9 @@ void check_circle() {
         else if (!IMG.Lpt0_found &&  // 左角点未找到
             !IMG.far_Lpt0_found &&  // 左远角点未找到
             IMG.Lpt1_found &&   // 右角点找到
-            IMG.Lpt1_point[1] > 120 && //右角点在屏幕下方
-            IMG.ipts1_num < 80 &&
-            IMG.ipts0_num > 160)   // 左边长直道
+            IMG.Lpt1_point[1] > 100 && //右角点在屏幕下方
+            IMG.ipts1_num < 100 &&
+            IMG.ipts0_num > 120)   // 左边长直道
         {// 右线点比较少
             none_right_line = 0;
             have_right_line = 0;
