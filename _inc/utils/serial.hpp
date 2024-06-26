@@ -97,16 +97,17 @@ private:
             {
                 Payload Payload_Data;
                 Payload_Data = _queue.Take();
-                DataBuffer pkt_buf(Payload_Data.size + 4);
+                DataBuffer pkt_buf(Payload_Data.size + 5);
                 uint8_t* packet = (uint8_t*)&pkt_buf[0];
-                packet[0] = 0x42;
-                packet[1] = Payload_Data.address;
-                packet[2] = Payload_Data.size + 4;
-                memcpy(&packet[3], Payload_Data.pData, Payload_Data.size);
-                packet[Payload_Data.size + 4 - 1] = packet[0] + packet[1] + packet[2];
+                packet[0] = 0x24;
+                packet[1] = 0x42;
+                packet[2] = Payload_Data.address;
+                packet[3] = Payload_Data.size + 5;
+                memcpy(&packet[4], Payload_Data.pData, Payload_Data.size);
+                packet[Payload_Data.size + 5 - 1] = packet[0] + packet[1] + packet[2] + packet[3];
                 for (uint8_t i = 0; i < Payload_Data.size; i++)
                 {
-                    packet[Payload_Data.size + 4 - 1] += packet[3 + i];
+                    packet[Payload_Data.size + 5 - 1] += packet[4 + i];
                 }
                 try
                 {
@@ -203,7 +204,7 @@ private:
     };
     void run_rece()
     {
-        #define FRAME_LENGTH_RECE 14
+#define FRAME_LENGTH_RECE 14
         uint8_t datas[FRAME_LENGTH_RECE] = { 0 };
         uint8_t counter = 0;
         uint8_t recv_data;
@@ -221,7 +222,7 @@ private:
                     counter = 0;
                     continue;
                 }
-                if ( 0xE2 != datas[1] && counter >= 2)
+                if (0xE2 != datas[1] && counter >= 2)
                 {
                     counter = 0;
                     continue;
@@ -245,7 +246,7 @@ private:
                             IMG.encoder.speed = (int16_t)(((int16_t)datas[2] << 8) | datas[3]) / 100.0f;
 
                             IMG.encoder.yaw = (int16_t)(((int16_t)datas[8] << 8) | datas[9]) / 100.0f;
-                            if(datas[10]!=0)serial_echo = datas[10];
+                            if (datas[10] != 0)serial_echo = datas[10];
                         }
                     }
                     counter = 0;
@@ -275,7 +276,7 @@ public:
             _serial_port->SetBaudRate(_bps);
             _serial_port->SetCharacterSize(CharacterSize::CHAR_SIZE_8);   // 8位数据位
             _serial_port->SetFlowControl(FlowControl::FLOW_CONTROL_NONE); // 设置流控
-            _serial_port->SetParity(Parity::PARITY_NONE);                 // 无校验
+            _serial_port->SetParity(Parity::PARITY_ODD);                 // 无校验
             _serial_port->SetStopBits(StopBits::STOP_BITS_1);             // 1个停止位
 
             _worker_thread_send = std::thread(&SerialDriver::run_send, this);
@@ -383,23 +384,29 @@ public:
     }
     void transmit_packet(uint8_t address, const uint8_t* pData, uint8_t size)
     {
-        if (_queue.Size() < 5)
-        {
-            Payload Payload_Data;
-            Payload_Data.address = address;
-            memcpy(Payload_Data.pData, pData, size);
-            Payload_Data.size = size;
-            _queue.Put(Payload_Data);
-        }
-        else
-        {
-            Payload Payload_Data = _queue.Take();;
-            Payload_Data.address = address;
-            memcpy(Payload_Data.pData, pData, size);
-            Payload_Data.size = size;
-            _queue.Put(Payload_Data);
-            LOG_I << "fulllll" << LOG_END;
-        }
+        Payload Payload_Data;
+        Payload_Data.address = address;
+        memcpy(Payload_Data.pData, pData, size);
+        Payload_Data.size = size;
+        _queue.Put(Payload_Data);
+        _queue.Put(Payload_Data);
+        _queue.Put(Payload_Data);
+        _queue.Put(Payload_Data);
+        _queue.Put(Payload_Data);
+
+        // if (_queue.Size() < 5)
+        // {
+
+        // }
+        // else
+        // {
+        //     Payload Payload_Data = _queue.Take();;
+        //     Payload_Data.address = address;
+        //     memcpy(Payload_Data.pData, pData, size);
+        //     Payload_Data.size = size;
+        //     _queue.Put(Payload_Data);
+        //     LOG_I << "fulllll" << LOG_END;
+        // }
 
 
     }
