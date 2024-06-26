@@ -256,7 +256,8 @@ void run_circle() {
 
         if (flag_circle == CIRCLE_OUT)
         {
-            if (IMG.is_straight0 || IMG.is_straight1 || IMG.encoder.route - circle_route > 100)
+            IMG.get_edge();//获取边线
+            if (IMG.ipts0_num > 120 || IMG.ipts1_num > 120 || IMG.encoder.route - circle_route > 100)
             {
                 IMG.element_over = true;
                 IMG.element_over_route = IMG.encoder.route;
