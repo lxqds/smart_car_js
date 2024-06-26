@@ -697,7 +697,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 /* ******************************************************************* */
 /* ******************************************************************* */
 
-void ImageProcess::get_edge(int mode = 0)
+void ImageProcess::get_edge(int mode)
 {
     if (mode == 1)
     {
