@@ -34,7 +34,7 @@ public:
     int init(std::string config_path, bool is_result);
     void process(cv::Mat& mat_origin, cv::Mat& mat_result, Payload_t& payload);
     void calculate_angle(void);
-    void get_edge(void);
+    void get_edge(int mode = 0);
 private:
     bool _is_result = false;  // 是否生成处理后的图像
 
@@ -180,7 +180,7 @@ public:
     int iptsc0[IMAGE_HEIGHT] = { 0 };
     int iptsc1[IMAGE_HEIGHT] = { 0 };
 
-    
+
     //远线左右线定义
     int far_ipts0[IMAGE_HEIGHT][2];
     int far_ipts1[IMAGE_HEIGHT][2];

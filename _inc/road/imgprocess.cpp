@@ -697,12 +697,15 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 /* ******************************************************************* */
 /* ******************************************************************* */
 
-void ImageProcess::get_edge()
+void ImageProcess::get_edge(int mode = 0)
 {
-    ipts0_num = 150;
-    ipts1_num = 150;
-    find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
-    find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
+    if (mode == 1)
+    {
+        ipts0_num = 150;
+        ipts1_num = 150;
+        find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
+        find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
+    }
     // 变换后左右中线
     float rpts0[IMAGE_HEIGHT][2] = { 0 };
     float rpts1[IMAGE_HEIGHT][2] = { 0 };

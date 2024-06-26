@@ -126,7 +126,7 @@ void run_cross() {
                 }
             }
 
-            IMG.get_edge();
+            IMG.get_edge(1);
 
         }
 
@@ -235,7 +235,7 @@ void run_cross() {
                         cv::Scalar(0, 0, 0), 7);
                 }
             }
-            IMG.get_edge();
+            IMG.get_edge(1);
         }
         // 正常巡线
         if (IMG.flag_track == TRACK_LEFT) {

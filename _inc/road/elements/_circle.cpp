@@ -153,7 +153,7 @@ void run_circle() {
                 cv::line(IMG.mat_result, cv::Point(1, 1),
                     cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
                     cv::Scalar(0, 0, 0), 7);
-                IMG.get_edge();//获取边线
+                IMG.get_edge(1);//获取边线
                 IMG.flag_track = TRACK_RIGHT;
             }
             else if (IMG.ipts1_num < 40) {
@@ -163,7 +163,7 @@ void run_circle() {
                 cv::line(IMG.mat_result, cv::Point(1, 1),
                     cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
                     cv::Scalar(0, 0, 0), 7);
-                IMG.get_edge();//获取边线
+                IMG.get_edge(1);//获取边线
                 IMG.flag_track = TRACK_RIGHT;
             }
             else {
@@ -246,7 +246,7 @@ void run_circle() {
                 cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH - 1, 1),
                     cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
                     cv::Scalar(0, 0, 0), 7);
-                IMG.get_edge();//获取边线
+                IMG.get_edge(1);//获取边线
                 IMG.flag_track = TRACK_LEFT;
             }
             else if (IMG.ipts0_num < 40) {
@@ -256,7 +256,7 @@ void run_circle() {
                 cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH - 1, 1),
                     cv::Point(1, IMAGE_HEIGHT - 1),
                     cv::Scalar(0, 0, 0), 7);
-                IMG.get_edge();//获取边线
+                IMG.get_edge(1);//获取边线
                 IMG.flag_track = TRACK_LEFT;
             }
             else {
