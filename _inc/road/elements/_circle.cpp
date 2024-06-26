@@ -82,15 +82,12 @@ void run_circle() {
         IMG.aim_speed = IMG._config->speed_circle;
         // 左环开始, 寻外直道右线
         if (flag_circle == CIRCLE_LEFT_BEGIN) {
-            IMG.get_edge();//获取边线
-            IMG.flag_track = TRACK_RIGHT;
             // 找到远处左角点
             if (IMG.far_Lpt0_found) {
                 circle_route = IMG.encoder.route;
                 flag_circle = CIRCLE_LEFT_IN;
                 MAT_LOG("CIRCLE_LEFT_IN");
             }
-
             // 入环失败
             if (IMG.encoder.route - circle_route > 100 &&
                 flag_circle != CIRCLE_LEFT_IN) {
@@ -102,11 +99,12 @@ void run_circle() {
                 flag_circle = CIRCLE_NONE;
                 MAT_LOG("CIRCLE_ERROR");
             }
+            IMG.get_edge();//获取边线
+            IMG.flag_track = TRACK_RIGHT;
+
         }
         // 入左环, 寻内圆左线
         else if (flag_circle == CIRCLE_LEFT_IN) {
-            IMG.get_edge();//获取边线
-            IMG.flag_track = TRACK_LEFT;
             // 先丢右线后有线
             if (IMG.ipts1_num < 40)
                 none_right_line++;
@@ -118,21 +116,36 @@ void run_circle() {
                 flag_circle = CIRCLE_LEFT_RUNNING;
                 MAT_LOG("CIRCLE_LEFT_RUNNING");
             }
+            IMG.get_edge();//获取边线
+            IMG.flag_track = TRACK_LEFT;
+
         }
         // 正常巡线, 寻外圆右线
         else if (flag_circle == CIRCLE_LEFT_RUNNING) {
-            IMG.get_edge();//获取边线
-            IMG.flag_track = TRACK_RIGHT;
-
             // 外环存在拐点, 可再加拐点距离判据 (左L点)
             if (IMG.Lpt1_found && IMG.encoder.route - circle_route > 120) {
                 flag_circle = CIRCLE_LEFT_OUT;
                 circle_route = IMG.encoder.route;
                 MAT_LOG("CIRCLE_LEFT_OUT");
             }
+            IMG.get_edge();//获取边线
+            IMG.flag_track = TRACK_RIGHT;
+
         }
         // 出环, 寻内圆
         else if (flag_circle == CIRCLE_LEFT_OUT) {
+            // 先丢右线后有线
+            if (IMG.ipts1_num < 40)
+                none_right_line++;
+            if (IMG.ipts1_num > 80 && IMG.encoder.route - circle_route > IMG._config->circle_out_rou &&
+                (none_right_line > 0 || IMG.encoder.route - circle_route > 50)) {
+                none_right_line = 0;
+                have_right_line = 0;
+                circle_route = IMG.encoder.route;
+                flag_circle = CIRCLE_OUT;
+                MAT_LOG("CIRCLE_OUT");
+            }
+
             if (IMG.Lpt1_found) {
                 cv::line(IMG.mat_bin, cv::Point(1, 1),
                     cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
@@ -156,40 +169,17 @@ void run_circle() {
             else {
                 IMG.get_edge();//获取边线
             }
-
-            // 先丢右线后有线
-            if (IMG.ipts1_num < 40)
-                none_right_line++;
-            if (IMG.ipts1_num > 80 && IMG.encoder.route - circle_route > IMG._config->circle_out_rou &&
-                (none_right_line > 0 || IMG.encoder.route - circle_route > 50)) {
-                none_right_line = 0;
-                have_right_line = 0;
-                circle_route = IMG.encoder.route;
-                flag_circle = CIRCLE_OUT;
-                MAT_LOG("CIRCLE_OUT");
-            }
-
         }
 
         /* ***************************************************************** */
 
         // 右环开始, 寻外直道左线
         if (flag_circle == CIRCLE_RIGHT_BEGIN) {
-            IMG.flag_track = TRACK_LEFT;
-
-            // 先丢右线后有线
-            if (IMG.rpts1s_num < 0.2 / SAMPLE_DIST)
-                none_right_line++;
-            if (IMG.encoder.route - circle_route > 10 &&
-                IMG.rpts1s_num > 0.8 / SAMPLE_DIST && none_right_line > 1) {
-                have_right_line++;
-                if (have_right_line > 1) {
-                    none_right_line = 0;
-                    have_right_line = 0;
-                    circle_route = IMG.encoder.route;
-                    flag_circle = CIRCLE_RIGHT_IN;
-                    MAT_LOG("CIRCLE_RIGHT_IN");
-                }
+            // 找到远处左角点
+            if (IMG.far_Lpt1_found) {
+                circle_route = IMG.encoder.route;
+                flag_circle = CIRCLE_RIGHT_IN;
+                MAT_LOG("CIRCLE_RIGHT_IN");
             }
             // 入环失败
             if (IMG.encoder.route - circle_route > 100 &&
@@ -202,58 +192,77 @@ void run_circle() {
                 flag_circle = CIRCLE_NONE;
                 MAT_LOG("CIRCLE_ERROR");
             }
-        }
-        // 入右环, 寻内圆右线
-        if (flag_circle == CIRCLE_RIGHT_IN) {
-            IMG.flag_track = TRACK_RIGHT;
-
-            // 先丢左线后有线
-            if (IMG.rpts0s_num < 0.2 / SAMPLE_DIST)
-                none_left_line++;
-            if (IMG.rpts0s_num > 0.8 / SAMPLE_DIST && none_left_line > 0) {
-                if (IMG.encoder.route - circle_route > 60)
-                    have_left_line++;
-                if (have_left_line > 0) {
-                    none_left_line = 0;
-                    have_left_line = 0;
-                    circle_route = IMG.encoder.route;
-                    flag_circle = CIRCLE_RIGHT_RUNNING;
-                    MAT_LOG("CIRCLE_RIGHT_RUNNING");
-                }
-            }
-        }
-        // 正常巡线, 寻外圆左线
-        if (flag_circle == CIRCLE_RIGHT_RUNNING) {
+            IMG.get_edge();//获取边线
             IMG.flag_track = TRACK_LEFT;
 
-            if (IMG.Lpt0_found && IMG.encoder.route - circle_route > 100) {
-                flag_circle = CIRCLE_RIGHT_OUT;
-                MAT_LOG("CIRCLE_RIGHT_OUT");
-            }
         }
-        // 出环, 寻内圆
-        if (flag_circle == CIRCLE_RIGHT_OUT) {
+        // 入右环, 寻内圆右线
+        else if (flag_circle == CIRCLE_RIGHT_IN) {
+            IMG.flag_track = TRACK_RIGHT;
+            // 先丢左线后有线
+            if (IMG.ipts0_num < 40)
+                none_left_line++;
+            if (!IMG.far_Lpt1_found && !IMG.far_Lpt0_found && IMG.ipts0_num > 80 &&
+                (none_left_line > 0 || IMG.encoder.route - circle_route > 120)) {
+                none_left_line = 0;
+                have_left_line = 0;
+                circle_route = IMG.encoder.route;
+                flag_circle = CIRCLE_RIGHT_RUNNING;
+                MAT_LOG("CIRCLE_RIGHT_RUNNING");
+            }
+            IMG.get_edge();//获取边线
             IMG.flag_track = TRACK_RIGHT;
 
+        }
+        // 正常巡线, 寻外圆左线
+        else if (flag_circle == CIRCLE_RIGHT_RUNNING) {
+            // 外环存在拐点, 可再加拐点距离判据 (左L点)
+            if (IMG.Lpt0_found && IMG.encoder.route - circle_route > 120) {
+                flag_circle = CIRCLE_RIGHT_OUT;
+                circle_route = IMG.encoder.route;
+                MAT_LOG("CIRCLE_RIGHT_OUT");
+            }
+            IMG.get_edge();//获取边线
+            IMG.flag_track = TRACK_LEFT;
 
+        }
+        // 出环, 寻内圆
+        else if (flag_circle == CIRCLE_RIGHT_OUT) {
             // 先丢左线后有线
-            if (IMG.rpts0s_num < 0.2 / SAMPLE_DIST)
+            if (IMG.ipts0_num < 40)
                 none_left_line++;
-            if (IMG.rpts0s_num > 1.0 / SAMPLE_DIST && none_left_line > 0) {
-                if (have_left_line > 0 && IMG.encoder.route - circle_route > IMG._config->circle_out_rou) {
-                    none_left_line = 0;
-                    have_left_line = 0;
-                    circle_route = IMG.encoder.route;
-                    flag_circle = CIRCLE_OUT;
-                    MAT_LOG("CIRCLE_OUT");
-                }
-                else {
-                    have_left_line++;
-                }
+            if (IMG.ipts0_num > 80 && IMG.encoder.route - circle_route > IMG._config->circle_out_rou &&
+                (none_left_line > 0 || IMG.encoder.route - circle_route > 50)) {
+                none_left_line = 0;
+                have_left_line = 0;
+                circle_route = IMG.encoder.route;
+                flag_circle = CIRCLE_OUT;
+                MAT_LOG("CIRCLE_OUT");
+            }
+            if (IMG.Lpt0_found) {
+                cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH - 1, 1),
+                    cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
+                    cv::Scalar(0, 0, 0), 7);
+                cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH - 1, 1),
+                    cv::Point(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
+                    cv::Scalar(0, 0, 0), 7);
+                IMG.get_edge();//获取边线
+                IMG.flag_track = TRACK_LEFT;
+            }
+            else if (IMG.ipts0_num < 40) {
+                cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH - 1, 1),
+                    cv::Point(1, IMAGE_HEIGHT - 1),
+                    cv::Scalar(0, 0, 0), 7);
+                cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH - 1, 1),
+                    cv::Point(1, IMAGE_HEIGHT - 1),
+                    cv::Scalar(0, 0, 0), 7);
+                IMG.get_edge();//获取边线
+                IMG.flag_track = TRACK_LEFT;
+            }
+            else {
+                IMG.get_edge();//获取边线
             }
         }
-
-
         if (flag_circle == CIRCLE_OUT)
         {
             IMG.get_edge();//获取边线
@@ -266,7 +275,6 @@ void run_circle() {
                 MAT_LOG("CIRCLE_NONE");
             }
         }
-
         /* *** *** *** *** *** */
         // 正常巡线
         if (IMG.flag_track == TRACK_LEFT) {

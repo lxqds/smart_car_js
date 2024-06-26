@@ -23,10 +23,10 @@ int not_have_line = 0;  // 十字丢线计次
 void check_cross() {
     //是否满足角点判断条件
     bool found_Lpt = (IMG.Lpt0_found && IMG.Lpt1_found &&
-        IMG.Lpt0_point[1] < 150 && IMG.Lpt1_point[1] < 150) ||//两边角点都找到
+        IMG.ipts0_num < 80 && IMG.ipts1_num < 80) ||//两边角点都找到
         (!control_flag.contains(circle_element) && (//不在圆环中
-            (IMG.Lpt0_found && IMG.ipts1_num < 40) ||//左边角点找到且右边丢线
-            (IMG.Lpt1_found && IMG.ipts0_num < 40)));//右边角点找到且左边丢线
+            (IMG.Lpt0_found && IMG.ipts0_num < 80 && IMG.ipts1_num < 40) ||//左边角点找到且右边丢线
+            (IMG.Lpt1_found && IMG.ipts1_num < 80 && IMG.ipts0_num < 40)));//右边角点找到且左边丢线
 
 
     if (!IMG.element_over &&
@@ -55,6 +55,13 @@ void run_cross() {
         IMG.aim_speed = IMG._config->speed_cross;
         // 检测到十字, 先按照近线走
         if (flag_cross == CROSS_BEGIN) {
+            // 近角点过少, 进入远线控制
+            if ((!IMG.Lpt0_found && !IMG.Lpt1_found) ||
+                (IMG.ipts0_num < 20 && IMG.ipts1_num < 20)) {
+                cross_route = IMG.encoder.route;
+                flag_cross = CROSS_IN;
+                MAT_LOG("CROSS_IN");
+            }
             //补黑线
             if (IMG.far_Lpt0_found) {
                 if (IMG.Lpt0_found) {
@@ -121,25 +128,25 @@ void run_cross() {
 
             IMG.get_edge();
 
-
-            // 近角点过少, 进入远线控制
-            if ((!IMG.Lpt0_found && !IMG.Lpt1_found) ||
-                (IMG.Preprocess_ipts0_num < 20 && IMG.Preprocess_ipts1_num < 20)) {
-                cross_route = IMG.encoder.route;
-                flag_cross = CROSS_IN;
-                MAT_LOG("CROSS_IN");
-            }
-
-
         }
 
         /* ***************************************************************** */
 
         // 远线控制进十字
         else if (flag_cross == CROSS_IN) {
+            // 出圈
+            if ((IMG.ipts0_num > 50 && IMG.ipts1_num > 50 &&
+                ((!IMG.Lpt0_found && !IMG.Lpt1_found) ||
+                    (IMG.Lpt0_found && IMG.Lpt1_found &&
+                        IMG.Lpt0_point[1] > 160 && IMG.Lpt1_point[1] > 160)))) {
+                IMG.element_over = true;
+                IMG.element_over_route = IMG.encoder.route;
+                control_flag.pop();
+                flag_cross = CROSS_NONE;
+                MAT_LOG("CROSS_NONE");
+            }
             //补黑线
             if (IMG.far_Lpt0_found) {
-
                 if (IMG.Lpt0_found) {
                     double L = dis_point_point(POINT(IMG.Lpt0_point[0], IMG.Lpt0_point[1]),
                         POINT(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]));
@@ -229,24 +236,22 @@ void run_cross() {
                 }
             }
             IMG.get_edge();
-            // 出圈
-            if ((IMG.Preprocess_ipts0_num > 50 && IMG.Preprocess_ipts1_num > 50 &&
-                ((!IMG.Lpt0_found && !IMG.Lpt1_found) ||
-                    (IMG.Lpt0_found && IMG.Lpt1_found &&
-                        IMG.Lpt0_point[1] > 160 && IMG.Lpt1_point[1] > 160)))) {
-                IMG.element_over = true;
-                IMG.element_over_route = IMG.encoder.route;
-                control_flag.pop();
-                flag_cross = CROSS_NONE;
-                MAT_LOG("CROSS_NONE");
-            }
         }
-
+        // 正常巡线
+        if (IMG.flag_track == TRACK_LEFT) {
+            IMG.rpts = IMG.rptsc0;
+            IMG.rpts_num = IMG.rptsc0_num;
+        }
+        else if (IMG.flag_track == TRACK_RIGHT) {
+            IMG.rpts = IMG.rptsc1;
+            IMG.rpts_num = IMG.rptsc1_num;
+        }
+        else {
+            IMG.rpts = IMG.rptscs;
+            IMG.rpts_num = IMG.rptscs_num;
+        }
         IMG.calculate_angle();//计算角度
-
     }
-
-
 }
 
 /* ********************************************************************* */
