@@ -139,7 +139,7 @@ void run_circle() {
             // 先丢右线后有线
             if (IMG.ipts1_num < 40)
                 none_right_line++;
-            if (IMG.ipts1_num > 80 && IMG.encoder.route - circle_route > IMG._config->circle_out_rou &&
+            if (IMG.ipts1_num > 120 && IMG.encoder.route - circle_route > IMG._config->circle_out_rou &&
                 (none_right_line > 0 || IMG.encoder.route - circle_route > 50)) {
                 none_right_line = 0;
                 have_right_line = 0;
@@ -233,7 +233,7 @@ void run_circle() {
             // 先丢左线后有线
             if (IMG.ipts0_num < 40)
                 none_left_line++;
-            if (IMG.ipts0_num > 80 && IMG.encoder.route - circle_route > IMG._config->circle_out_rou &&
+            if (IMG.ipts0_num > 120 && IMG.encoder.route - circle_route > IMG._config->circle_out_rou &&
                 (none_left_line > 0 || IMG.encoder.route - circle_route > 50)) {
                 none_left_line = 0;
                 have_left_line = 0;
