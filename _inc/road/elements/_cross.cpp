@@ -23,10 +23,10 @@ int not_have_line = 0;  // 十字丢线计次
 void check_cross() {
     //是否满足角点判断条件
     bool found_Lpt = (IMG.Lpt0_found && IMG.Lpt1_found &&
-        IMG.ipts0_num < 80 && IMG.ipts1_num < 80) ||//两边角点都找到
+        IMG.ipts0_num < 150 && IMG.ipts1_num < 150) ||//两边角点都找到
         (!control_flag.contains(circle_element) && (//不在圆环中
-            (IMG.Lpt0_found && IMG.ipts0_num < 80 && IMG.ipts1_num < 40) ||//左边角点找到且右边丢线
-            (IMG.Lpt1_found && IMG.ipts1_num < 80 && IMG.ipts0_num < 40)));//右边角点找到且左边丢线
+            (IMG.Lpt0_found && IMG.ipts0_num < 150 && IMG.ipts1_num < 40) ||//左边角点找到且右边丢线
+            (IMG.Lpt1_found && IMG.ipts1_num < 150 && IMG.ipts0_num < 40)));//右边角点找到且左边丢线
 
 
     if (!IMG.element_over &&
@@ -38,7 +38,7 @@ void check_cross() {
         found_Lpt) {
         if (control_flag.contains(circle_element)) {//如果在十字路口中则删除十字路口
             control_flag.remove(circle_element);
-            flag_cross = CROSS_NONE;
+            flag_circle = CIRCLE_NONE;
         }
         control_flag.push(cross_element);
         IMG.element_identify = 1;
