@@ -37,7 +37,7 @@ void check_circle() {
         if (IMG.Lpt0_found &&   // 左角点找到
             IMG.Lpt0_point[1] > 120 && //左角点在屏幕下方
             !IMG.Lpt1_found &&  // 右角点未找到
-            IMG.is_straight1)  // 右边长直道
+            IMG.ipts1_num > 120)  // 右边长直道
         {
             none_left_line = 0;
             have_left_line = 0;
@@ -56,7 +56,7 @@ void check_circle() {
         else if (!IMG.Lpt0_found &&  // 左角点未找到
             IMG.Lpt1_found &&   // 右角点找到
             IMG.Lpt1_point[1] > 120 && //右角点在屏幕下方
-            IMG.is_straight0)   // 左边长直道
+            IMG.ipts0_num > 120)   // 左边长直道
         {// 右线点比较少
             none_right_line = 0;
             have_right_line = 0;
@@ -103,30 +103,8 @@ void run_circle() {
         }
         // 入左环, 寻内圆左线
         else if (flag_circle == CIRCLE_LEFT_IN) {
-            if (IMG.far_Lpt0_found) {
-                cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
-                    cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
-                    cv::Scalar(0, 0, 0), 7);
-                cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
-                    cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
-                    cv::Scalar(0, 0, 0), 7);
-                IMG.get_edge();//获取边线
-                IMG.flag_track = TRACK_RIGHT;
-
-            }
-            else if (IMG.far_Lpt1_found) {
-                cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
-                    cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
-                    cv::Scalar(0, 0, 0), 7);
-                cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
-                    cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
-                    cv::Scalar(0, 0, 0), 7);
-                IMG.get_edge();//获取边线
-                IMG.flag_track = TRACK_RIGHT;
-            }
-            else {
-                IMG.get_edge();//获取边线
-            }
+            IMG.get_edge();//获取边线
+            IMG.flag_track = TRACK_LEFT;
             // 先丢右线后有线
             if (IMG.ipts1_num < 40)
                 none_right_line++;
@@ -154,20 +132,20 @@ void run_circle() {
         // 出环, 寻内圆
         else if (flag_circle == CIRCLE_LEFT_OUT) {
             if (IMG.Lpt1_found) {
-                cv::line(IMG.mat_bin, cv::Point((int)(IMAGE_WIDTH * 0.3), 1),
+                cv::line(IMG.mat_bin, cv::Point(1, 1),
                     cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
                     cv::Scalar(0, 0, 0), 7);
-                cv::line(IMG.mat_result, cv::Point((int)(IMAGE_WIDTH * 0.3), 1),
+                cv::line(IMG.mat_result, cv::Point(1, 1),
                     cv::Point(IMG.Lpt1_point[0], IMG.Lpt1_point[1]),
                     cv::Scalar(0, 0, 0), 7);
                 IMG.get_edge();//获取边线
                 IMG.flag_track = TRACK_RIGHT;
             }
             else if (IMG.ipts1_num < 40) {
-                cv::line(IMG.mat_bin, cv::Point((int)(IMAGE_WIDTH * 0.3), 1),
+                cv::line(IMG.mat_bin, cv::Point(1, 1),
                     cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
                     cv::Scalar(0, 0, 0), 7);
-                cv::line(IMG.mat_result, cv::Point((int)(IMAGE_WIDTH * 0.3), 1),
+                cv::line(IMG.mat_result, cv::Point(1, 1),
                     cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
                     cv::Scalar(0, 0, 0), 7);
                 IMG.get_edge();//获取边线

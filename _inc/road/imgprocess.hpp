@@ -177,7 +177,10 @@ public:
     int ipts0_num, ipts1_num, rptsc_num;
 
     int Preprocess_ipts0_num, Preprocess_ipts1_num;
+    int iptsc0[IMAGE_HEIGHT] = { 0 };
+    int iptsc1[IMAGE_HEIGHT] = { 0 };
 
+    
     //远线左右线定义
     int far_ipts0[IMAGE_HEIGHT][2];
     int far_ipts1[IMAGE_HEIGHT][2];
@@ -187,6 +190,7 @@ public:
     float rpts0b[IMAGE_HEIGHT][2];
     float rpts1b[IMAGE_HEIGHT][2];
     float rptscb[IMAGE_HEIGHT][2];
+
     // 透视变换后左右中线  等距采样: s
     float rpts0s[IMAGE_HEIGHT][2];
     float rpts1s[IMAGE_HEIGHT][2];

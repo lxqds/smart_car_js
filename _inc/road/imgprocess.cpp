@@ -179,7 +179,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 break;
             }
         }
-        ipts0_num = 150;ipts1_num = 150;
+        ipts0_num = 200;ipts1_num = 200;
         if (begin_x > 1 && begin_x < IMAGE_WIDTH - 1 && begin_y>0 && begin_y < IMAGE_HEIGHT - 1) {
             find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num); // 原图找左边线
             find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);// 原图找右边线
@@ -863,8 +863,8 @@ void ImageProcess::calculate_angle(void)
         // if (flag_work != WORK_NONE)
         //     aim_angle = aim_angle_last;
         // // 环岛内部丢线
-        // if (control_flag.top() == circle_element)
-        //     aim_angle = aim_angle_last * 1.39f;
+        if (control_flag.top() == circle_element)
+            aim_angle = aim_angle_last * 1.39f;
         // // 十字丢线
         // if (control_flag.top() == cross_element)
         //     aim_angle = aim_angle_last;
