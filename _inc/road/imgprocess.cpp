@@ -325,7 +325,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 {
                     far_begin_x = (white_row_start_point[i].back().x + white_row_end_point[i].back().x) / 2;
                     far_begin_y = white_row_start_point[i].back().y;
-                    far_ipts0_num = 100; far_ipts1_num = 100;
+                    far_ipts0_num = 120; far_ipts1_num = 120;
                     break;
                 }
             }
