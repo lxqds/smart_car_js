@@ -65,7 +65,7 @@ public:
     void waitThreadPoolFree() {
         while (true) {
             int num = getNumIdleThreads();
-            MAT_LOG("NumIdleThreads=%d", num);
+            // MAT_LOG("NumIdleThreads=%d", num);
             if (num == num_thread)break;
         }
     }
@@ -86,7 +86,7 @@ public:
             }
         }
     }
-}MyThreadPool(0);
+}MyThreadPool(3);
 
 
 /* 初始化 */
