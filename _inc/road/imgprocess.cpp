@@ -252,29 +252,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
 
 
-    /* ***************************************************************** */
-    /* **************************** 选定中线 **************************** */
-    /* *********************** 单侧线少, 切换巡线方向 ********************** */
-    if (is_straight0 && is_straight1)
-        flag_track = TRACK_MIDDLE;
-    else if (is_straight0)
-        flag_track = TRACK_LEFT;
-    else if (is_straight1)
-        flag_track = TRACK_RIGHT;
-    else if (rpts0s_num == 0 && rpts1s_num != 0)
-        flag_track = TRACK_RIGHT;
-    else if (rpts0s_num != 0 && rpts1s_num == 0)
-        flag_track = TRACK_LEFT;
-    else if (rpts0s_num < rpts1s_num / 2)
-        flag_track = TRACK_RIGHT;
-    else if (rpts0s_num / 2 > rpts1s_num)
-        flag_track = TRACK_LEFT;
-    else if (rpts0s_num < 10 && rpts0s_num < rpts1s_num)
-        flag_track = TRACK_RIGHT;
-    else if (rpts1s_num < 10 && rpts0s_num > rpts1s_num)
-        flag_track = TRACK_LEFT;
-    else
-        flag_track = TRACK_MIDDLE;
 
 
     /* ***************************************************************** */
@@ -455,23 +432,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         special_w = false;
         special_g = false;
     }
-
-    // cv::circle(mat_result, cv::Point(Lpt0_point[0], Lpt0_point[1]), 3, cv::Scalar(255, 0, 0), 2, 8);
-    // cv::circle(mat_result, cv::Point(Lpt1_point[0], Lpt1_point[1]), 3, cv::Scalar(255, 0, 0), 2, 8);
-    // cv::circle(mat_result, cv::Point(ipts0[0][0], ipts0[0][1]), 3, cv::Scalar(255, 0, 0), 2, 8);
-    // cv::circle(mat_result, cv::Point(ipts1[0][0], ipts1[0][1]), 3, cv::Scalar(255, 0, 0), 2, 8);
-    // float k = (Lpt0_point[1] - ipts0[0][1]) / (Lpt0_point[0] - ipts0[0][0]);
-    // float end_y = 1;
-    // float end_x = (end_y - ipts0[0][1]) / k + ipts0[0][0];
-    // cv::line(mat_result, cv::Point(ipts0[0][0], ipts0[0][1]),
-    //     cv::Point((int)end_x, (int)end_y),
-    //     cv::Scalar(0, 0, 0), 2);
-    // k = (Lpt1_point[1] - ipts1[0][1]) / (Lpt1_point[0] - ipts1[0][0]);
-    // end_y = 1;
-    // end_x = (end_y - ipts1[0][1]) / k + ipts1[0][0];
-    // cv::line(mat_result, cv::Point(ipts1[0][0], ipts1[0][1]),
-    //     cv::Point((int)end_x, (int)end_y),
-    //     cv::Scalar(0, 0, 0), 2);
 
     // 识别元素
     check_garage();  // 斑马线 - 识别特殊特征
@@ -794,6 +754,31 @@ void ImageProcess::get_edge(int mode)
         if (mea_1 < 2.5f && rpts1s_num > 60)
             is_straight1 = true;
     }
+
+    /* ***************************************************************** */
+    /* **************************** 选定中线 **************************** */
+    /* *********************** 单侧线少, 切换巡线方向 ********************** */
+    if (is_straight0 && is_straight1)
+        flag_track = TRACK_MIDDLE;
+    else if (is_straight0)
+        flag_track = TRACK_LEFT;
+    else if (is_straight1)
+        flag_track = TRACK_RIGHT;
+    else if (rpts0s_num == 0 && rpts1s_num != 0)
+        flag_track = TRACK_RIGHT;
+    else if (rpts0s_num != 0 && rpts1s_num == 0)
+        flag_track = TRACK_LEFT;
+    else if (rpts0s_num < rpts1s_num / 2)
+        flag_track = TRACK_RIGHT;
+    else if (rpts0s_num / 2 > rpts1s_num)
+        flag_track = TRACK_LEFT;
+    else if (rpts0s_num < 10 && rpts0s_num < rpts1s_num)
+        flag_track = TRACK_RIGHT;
+    else if (rpts1s_num < 10 && rpts0s_num > rpts1s_num)
+        flag_track = TRACK_LEFT;
+    else
+        flag_track = TRACK_MIDDLE;
+
 
 }
 
