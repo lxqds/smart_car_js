@@ -136,7 +136,7 @@ void run_circle() {
                 cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
                     cv::Point(IMAGE_WIDTH / 2, 1),
                     cv::Scalar(0, 0, 0), 7);
-                IMG.get_edge();//获取边线
+                IMG.get_edge(1);//获取边线
             }
 
         }
@@ -246,7 +246,7 @@ void run_circle() {
                 cv::line(IMG.mat_result, cv::Point(1, IMAGE_HEIGHT - 1),
                     cv::Point(IMAGE_WIDTH / 2, 1),
                     cv::Scalar(0, 0, 0), 7);
-                IMG.get_edge();//获取边线
+                IMG.get_edge(1);//获取边线
             }
 
         }
