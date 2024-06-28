@@ -173,11 +173,10 @@ int main(int argc, char const* argv[])
             {
                 serial->sendPack(payload);
             }
-            static double total_time = 0;
-            static double total_time_count = 0;
-            total_time += fps_time;total_time_count += 1;
+            static double _time = fps_time;
+            _time = _time * 0.95 + fps_time * 0.05;
             // 显示图像
-            sprintf(fps_buffer, "FPS: %.2f", 1000 / (total_time / total_time_count));
+            sprintf(fps_buffer, "FPS: %.2f", 1000 / _time);
             cv::putText(frame_imgpro, (std::string)fps_buffer, cv::Point(5, 10),
                 cv::FONT_HERSHEY_SIMPLEX, 0.4, cv::Scalar(0, 0, 255));
             if (imgprocess._config->rec_video_format)
