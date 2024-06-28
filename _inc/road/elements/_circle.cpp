@@ -36,10 +36,10 @@ void check_circle() {
         //左圆环
         if (IMG.Lpt0_found &&   // 左角点找到
             IMG.Lpt0_point[1] > 100 && //左角点在屏幕下方
-            IMG.ipts0_num < 100 &&
+            IMG.ipts0_num < 120 &&
             !IMG.Lpt1_found &&  // 右角点未找到
             !IMG.far_Lpt1_found &&  // 右角点未找到
-            IMG.ipts1_num > 120)  // 右边长直道
+            IMG.ipts1_num > 150)  // 右边长直道
         {
             none_left_line = 0;
             have_left_line = 0;
@@ -59,8 +59,8 @@ void check_circle() {
             !IMG.far_Lpt0_found &&  // 左远角点未找到
             IMG.Lpt1_found &&   // 右角点找到
             IMG.Lpt1_point[1] > 100 && //右角点在屏幕下方
-            IMG.ipts1_num < 100 &&
-            IMG.ipts0_num > 120)   // 左边长直道
+            IMG.ipts1_num < 120 &&
+            IMG.ipts0_num > 150)   // 左边长直道
         {// 右线点比较少
             none_right_line = 0;
             have_right_line = 0;
@@ -85,7 +85,7 @@ void run_circle() {
         // 左环开始, 寻外直道右线
         if (flag_circle == CIRCLE_LEFT_BEGIN) {
             // 找到远处左角点
-            if (IMG.far_Lpt0_found) {
+            if (IMG.far_Lpt0_found && !IMG.Lpt0_found) {
                 circle_route = IMG.encoder.route;
                 flag_circle = CIRCLE_LEFT_IN;
                 MAT_LOG("CIRCLE_LEFT_IN");
@@ -199,7 +199,7 @@ void run_circle() {
         // 右环开始, 寻外直道左线
         if (flag_circle == CIRCLE_RIGHT_BEGIN) {
             // 找到远处左角点
-            if (IMG.far_Lpt1_found) {
+            if (IMG.far_Lpt1_found && !IMG.Lpt1_found) {
                 circle_route = IMG.encoder.route;
                 flag_circle = CIRCLE_RIGHT_IN;
                 MAT_LOG("CIRCLE_RIGHT_IN");
