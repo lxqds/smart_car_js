@@ -86,7 +86,7 @@ public:
             }
         }
     }
-}MyThreadPool(0);
+}MyThreadPool(3);
 
 
 /* 初始化 */
@@ -195,7 +195,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 }
                 };
             for (int t = 0; t < 120; t++) {
-                // if (!MyThreadPool.addTask(f, t))
+                if (!MyThreadPool.addTask(f, t))
                 {
                     f(t);
                 }
@@ -253,7 +253,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 }
                 };
             for (int i = 39; i > 0; i--) {
-                // if (!MyThreadPool.addTask(f, i))
+                if (!MyThreadPool.addTask(f, i))
                 {
                     f(i);
                 }
