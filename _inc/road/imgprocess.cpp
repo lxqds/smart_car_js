@@ -310,9 +310,17 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 break;
             }
         }
-        ipts0_num = 180; ipts1_num = 180;
-        find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
-        find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
+        {
+            ipts0_num = 180; ipts1_num = 180;
+            //双线程巡线
+            if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
+                find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
+            find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
+            MyThreadPool.waitThreadPoolFree();
+        }
+
+
+
 
         //找远处巡线开始点
         int far_begin_x = 0, far_begin_y = 0;//远线向下找线的开始位置
@@ -325,13 +333,20 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 {
                     far_begin_x = (white_row_start_point[i].back().x + white_row_end_point[i].back().x) / 2;
                     far_begin_y = white_row_start_point[i].back().y;
-                    far_ipts0_num = 120; far_ipts1_num = 120;
+                    far_ipts0_num = 100; far_ipts1_num = 100;
                     break;
                 }
             }
         }
-        find_far_left_line(mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num);// 原图找左边线
-        find_far_right_line(mat_bin, far_begin_x, far_begin_y, far_ipts1, &far_ipts1_num);// 原图找右边线
+        {
+            //双线程巡线
+            if (!MyThreadPool.addTask(find_far_left_line, mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num))
+                find_far_left_line(mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num);// 原图找左边线
+            find_far_right_line(mat_bin, far_begin_x, far_begin_y, far_ipts1, &far_ipts1_num);// 原图找右边线
+            MyThreadPool.waitThreadPoolFree();
+        }
+
+
     }
     // 变换后左右线
     float rpts0[IMAGE_HEIGHT][2] = { 0 };
@@ -776,10 +791,12 @@ void ImageProcess::get_edge(int mode)
 {
     if (mode == 1)
     {
-        ipts0_num = 180;
-        ipts1_num = 180;
-        find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
+        ipts0_num = 180; ipts1_num = 180;
+        //双线程巡线
+        if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
+            find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
         find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
+        MyThreadPool.waitThreadPoolFree();
     }
     // 变换后左右中线
     float rpts0[IMAGE_HEIGHT][2] = { 0 };
