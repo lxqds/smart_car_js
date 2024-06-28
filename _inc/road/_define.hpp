@@ -7,7 +7,7 @@
 #define BEGIN_X (120)  // 巡线横坐标起始点
 #define BEGIN_Y (190)  // 巡线纵坐标起始点
 
-#define ROAD_WIDTH (0.40)      // 赛道宽度 (0.4)
+#define ROAD_WIDTH (0.50)      // 赛道宽度 (0.4)
 #define BLOCK_SIZE (7)         // 自适应阈值的block大小 (7)
 #define CLIP_VALUE (2)         // 自适应阈值的阈值裁减量 (2)
 #define LINE_BLUR_KERNEL (7)   // 边线三角滤波核的大小 (7)
