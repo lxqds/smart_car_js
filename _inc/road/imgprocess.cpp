@@ -158,38 +158,41 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
 
     {
+        //扇形扫描找最远的白线
         int max_white_line_end[2]{};
         float max_white_line_length = 0;
         int white_line_end[120][2]{};
         float white_line_length[120]{};
-        auto f = [&white_line_length, &white_line_end, this](int t) {
-            float L = 5;
-            int count = 0;
-            while (true) {
-                float _x = (float)(L * cos((t + 30) / 180.0f * PI));
-                float _y = (float)(L * sin((t + 30) / 180.0f * PI) + 5);
-                float x = _x + IMAGE_WIDTH / 2;
-                float y = IMAGE_HEIGHT - _y;
-                bool is_range = x > 5 && x < IMAGE_WIDTH - 5 && y >5;
-                if (is_range) {
-                    if (AT_IMAGE(this->mat_bin, (int)x, (int)y) < 127)count++;
-                    else count = 0;
+        {
+            auto f = [&white_line_length, &white_line_end, this](int t) {
+                float L = 5;
+                int count = 0;
+                while (true) {
+                    float _x = (float)(L * cos((t + 30) / 180.0f * PI));
+                    float _y = (float)(L * sin((t + 30) / 180.0f * PI) + 5);
+                    float x = _x + IMAGE_WIDTH / 2;
+                    float y = IMAGE_HEIGHT - _y;
+                    bool is_range = x > 5 && x < IMAGE_WIDTH - 5 && y >5;
+                    if (is_range) {
+                        if (AT_IMAGE(this->mat_bin, (int)x, (int)y) < 127)count++;
+                        else count = 0;
+                    }
+                    if (count == 2 || !is_range) {
+                        float a[2]{};
+                        map_perspective(x, y, a, 0);
+                        float l = (float)dis_point_point(POINT((int)a[0], (int)a[1]), POINT(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1));
+                        white_line_end[t][0] = (int)x;
+                        white_line_end[t][1] = (int)y;
+                        white_line_length[t] = l;
+                        break;
+                    }
+                    L += 1.0f;
                 }
-                if (count == 2 || !is_range) {
-                    float a[2]{};
-                    map_perspective(x, y, a, 0);
-                    float l = (float)dis_point_point(POINT((int)a[0], (int)a[1]), POINT(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1));
-                    white_line_end[t][0] = (int)x;
-                    white_line_end[t][1] = (int)y;
-                    white_line_length[t] = l;
-                    break;
+                };
+            for (int t = 0; t < 120; t++) {
+                if (!MyThreadPool.addTask(f, t)) {
+                    f(t);
                 }
-                L += 1.0f;
-            }
-            };
-        for (int t = 0; t < 120; t++) {
-            if (!MyThreadPool.addTask(f, t)) {
-                f(t);
             }
         }
         MyThreadPool.waitThreadPoolFree();
@@ -207,44 +210,50 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
 
 
-
+        //横向扫描,得到横线数据集
         std::vector<POINT> white_row_start_point[40];//白行起始点
         std::vector<POINT> white_row_end_point[40];//白行结束点
         std::vector<int> white_row_length[40];//透视变换白行长度
         //寻找最符合跑道的白行
-
-        for (int i = 39; i > 0; i--) {
-            int start = 0, sign = 0, count = 0;
-            for (int x = 0; x < IMAGE_WIDTH; x += 2) {
-                if (sign == 0) {//向右开始找白点
-                    if (AT_IMAGE(mat_bin, x, i * 5) >= 127)count++;
-                    else count = 0;
-                    if (count == 2) {
-                        start = x - count + 1;
-                        sign = 1;
+        {
+            auto f = [&white_row_start_point, &white_row_end_point, &white_row_length, this](int i) {
+                int start = 0, sign = 0, count = 0;
+                for (int x = 0; x < IMAGE_WIDTH; x += 2) {
+                    if (sign == 0) {//向右开始找白点
+                        if (AT_IMAGE(this->mat_bin, x, i * 5) >= 127)count++;
+                        else count = 0;
+                        if (count == 2) {
+                            start = x - count + 1;
+                            sign = 1;
+                        }
+                    }
+                    if (sign == 1) {//向右开始找黑点
+                        if (AT_IMAGE(this->mat_bin, x, i * 5) < 127)count++;
+                        else count = 0;
+                        if (count == 2 || x >= IMAGE_WIDTH - 2) {
+                            float a[2]{}, b[2]{};
+                            map_perspective((float)start, (float)i * 5, a, 0);
+                            map_perspective((float)x - count + 1, (float)i * 5, b, 0);
+                            float L = b[0] - a[0];
+                            if (L > 50) {
+                                white_row_start_point[i].push_back(POINT(start, i * 5));
+                                white_row_length[i].push_back((int)L);
+                                white_row_end_point[i].push_back(POINT(x - count + 1, i * 5));
+                            }
+                            count = 0;
+                            sign = 0;
+                        }
                     }
                 }
-                if (sign == 1) {//向右开始找黑点
-                    if (AT_IMAGE(mat_bin, x, i * 5) < 127)count++;
-                    else count = 0;
-                    if (count == 2 || x >= IMAGE_WIDTH - 2) {
-                        float a[2]{}, b[2]{};
-                        map_perspective((float)start, (float)i * 5, a, 0);
-                        map_perspective((float)x - count + 1, (float)i * 5, b, 0);
-                        float L = b[0] - a[0];
-                        if (L > 50) {
-                            white_row_start_point[i].push_back(POINT(start, i * 5));
-                            white_row_length[i].push_back((int)L);
-                            white_row_end_point[i].push_back(POINT(x - count + 1, i * 5));
-
-                        }
-                        count = 0;
-                        sign = 0;
-                    }
+                };
+            for (int i = 39; i > 0; i--) {
+                if (!MyThreadPool.addTask(f, i)) {
+                    f(i);
                 }
             }
         }
 
+        //处理横线数据集,得到最贴合主赛道的横线数据集
         for (int i = 39, start_sign = 0, end_sign = 0; i > 0; i--) {
             float mindistance = 0;
             if (end_sign == 0) {
@@ -292,6 +301,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 white_row_length[i].clear();
             }
         }
+        //找近处巡线开始点
         for (int i = 39; i > 1; i--) {
             if (!white_row_start_point[i].empty()) {
                 begin_x = (white_row_start_point[i].back().x + white_row_end_point[i].back().x) / 2;
@@ -303,6 +313,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
         find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
 
+        //找远处巡线开始点
         int far_begin_x = 0, far_begin_y = 0;//远线向下找线的开始位置
         int count = 0;
         far_ipts0_num = 0; far_ipts1_num = 0;
