@@ -194,8 +194,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                     f(t);
                 }
             }
+            MyThreadPool.waitThreadPoolFree();
         }
-        MyThreadPool.waitThreadPoolFree();
         for (int t = 0; t < 120; t += 1) {
             if (white_line_length[t] > max_white_line_length) {
                 max_white_line_end[0] = white_line_end[t][0];
@@ -251,6 +251,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                     f(i);
                 }
             }
+            MyThreadPool.waitThreadPoolFree();
         }
 
         //处理横线数据集,得到最贴合主赛道的横线数据集
