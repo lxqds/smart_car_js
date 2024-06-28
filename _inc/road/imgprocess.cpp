@@ -63,7 +63,11 @@ public:
     }
     // 判断线程池是否空闲
     void waitThreadPoolFree() {
-        while (getNumIdleThreads() != num_thread);
+        while (true) {
+            int num = getNumIdleThreads();
+            MAT_LOG("NumIdleThreads=%d", num);
+            if (num == num_thread)break;
+        }
     }
     // 获取空闲线程的数量
     int getNumIdleThreads() {
@@ -82,7 +86,7 @@ public:
             }
         }
     }
-}MyThreadPool(1);
+}MyThreadPool(10);
 
 
 /* 初始化 */
@@ -604,7 +608,30 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
     if (control_flag.top() == none_element)
     {
-        IMG.get_edge();
+        int mode = 0;
+        if (Lpt0_found && ipts0[0][1] - Lpt0_point[1] < 10)
+        {
+            cv::line(mat_bin, cv::Point((int)(IMAGE_WIDTH * 0.2f), (int)(IMAGE_HEIGHT - 1)),
+                cv::Point(Lpt0_point[0], Lpt0_point[1]),
+                cv::Scalar(0, 0, 0), 7);
+            cv::line(mat_result, cv::Point((int)(IMAGE_WIDTH * 0.2f), (int)(IMAGE_HEIGHT - 1)),
+                cv::Point(Lpt0_point[0], Lpt0_point[1]),
+                cv::Scalar(0, 0, 0), 7);
+            mode = 1;
+        }
+        if (Lpt1_found && ipts1[0][1] - Lpt1_point[1] < 10)
+        {
+            cv::line(IMG.mat_bin, cv::Point((int)(IMAGE_WIDTH * 0.8f), (int)(IMAGE_HEIGHT - 1)),
+                cv::Point(Lpt1_point[0], Lpt0_point[1]),
+                cv::Scalar(0, 0, 0), 7);
+            cv::line(IMG.mat_result, cv::Point((int)(IMAGE_WIDTH * 0.8f), (int)(IMAGE_HEIGHT - 1)),
+                cv::Point(Lpt1_point[0], Lpt0_point[1]),
+                cv::Scalar(0, 0, 0), 7);
+            mode = 1;
+        }
+
+
+        get_edge(mode);
         aim_speed = _config->speed_base;
         if (is_straight0 && is_straight1)
         {
