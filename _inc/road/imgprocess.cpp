@@ -86,8 +86,8 @@ public:
             }
         }
     }
-}MyThreadPool(0);
-
+};
+// _MyThreadPool MyThreadPool(0);
 
 /* 初始化 */
 int ImageProcess::init(std::string config_path, bool is_result) {
@@ -166,15 +166,15 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         //扇形扫描找最远的白线
         int max_white_line_end[2]{};
         float max_white_line_length = 0;
-        int white_line_end[120][2]{};
-        float white_line_length[120]{};
+        int white_line_end[90][2]{};
+        float white_line_length[90]{};
         {
             auto f = [&white_line_length, &white_line_end, this](int t) {
                 float L = 5;
                 int count = 0;
                 while (true) {
-                    float _x = (float)(L * cos((t + 30) / 180.0f * PI));
-                    float _y = (float)(L * sin((t + 30) / 180.0f * PI) + 5);
+                    float _x = (float)(L * cos((t + 45) / 180.0f * PI));
+                    float _y = (float)(L * sin((t + 45) / 180.0f * PI) + 5);
                     float x = _x + IMAGE_WIDTH / 2;
                     float y = IMAGE_HEIGHT - _y;
                     bool is_range = x > 5 && x < IMAGE_WIDTH - 5 && y >5;
@@ -191,10 +191,10 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                         white_line_length[t] = l;
                         break;
                     }
-                    L += 1.0f;
+                    L += 2.0f;
                 }
                 };
-            for (int t = 0; t < 120; t++) {
+            for (int t = 0; t < 90; t++) {
                 // if (!MyThreadPool.addTask(f, t))
                 {
                     f(t);
@@ -202,7 +202,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             }
             // MyThreadPool.waitThreadPoolFree();
         }
-        for (int t = 0; t < 120; t += 1) {
+        for (int t = 0; t < 90; t += 1) {
             if (white_line_length[t] > max_white_line_length) {
                 max_white_line_end[0] = white_line_end[t][0];
                 max_white_line_end[1] = white_line_end[t][1];
