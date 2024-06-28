@@ -7,6 +7,84 @@
 
 extern std::shared_ptr<SerialDriver> serial;
 Control_Flag control_flag;
+
+
+//线程池
+class _MyThreadPool {
+private:
+    std::vector<std::thread> workers;
+    std::queue<std::function<void()>> tasks;
+    std::mutex queue_mutex;
+    std::condition_variable condition;
+    bool stop;
+    int num_thread;
+    int num_thread_free;
+public:
+    _MyThreadPool(int num_threads) : stop(false) {
+        num_thread = num_threads;
+        num_thread_free = num_threads;
+        for (int i = 0; i < num_threads; ++i) {
+            workers.emplace_back(std::thread([this, i]() {
+                int _i = i;
+                while (true) {
+                    std::function<void()> task;
+                    {
+                        std::unique_lock<std::mutex> lock(queue_mutex);
+                        condition.wait(lock, [this] { return !tasks.empty() || stop; });
+                        if (stop && tasks.empty()) return;
+                        task = std::move(tasks.front());
+                        tasks.pop();
+                    }
+                    task(); // 执行任务
+                    {
+                        std::unique_lock<std::mutex> lock(queue_mutex);
+                        num_thread_free++;
+                    }
+
+                    //std::cout << _i << "线程  ";
+                }
+                }));
+        }
+    }
+    template<typename Func, typename... Args>
+    bool addTask(Func&& func, Args&&... args) {
+        {
+            if (getNumIdleThreads() == 0) {
+                return false;
+            }
+            std::lock_guard<std::mutex> lock(queue_mutex);
+            auto task = std::bind(std::forward<Func>(func), std::forward<Args>(args)...);
+            tasks.push(task);
+            num_thread_free--;
+        }
+        condition.notify_one();
+
+        return true;
+    }
+    // 判断线程池是否空闲
+    void waitThreadPoolFree() {
+        while (getNumIdleThreads() != num_thread);
+    }
+    // 获取空闲线程的数量
+    int getNumIdleThreads() {
+        std::lock_guard<std::mutex> lock(queue_mutex);
+        return num_thread_free;
+    }
+    ~_MyThreadPool() {
+        {
+            std::lock_guard<std::mutex> lock(queue_mutex);
+            stop = true;
+        }
+        condition.notify_all();
+        for (std::thread& worker : workers) {
+            if (worker.joinable()) {
+                worker.join();
+            }
+        }
+    }
+}MyThreadPool(2);
+
+
 /* 初始化 */
 int ImageProcess::init(std::string config_path, bool is_result) {
     _config = make_shared<ControlConfig>(config_path);
@@ -79,145 +157,179 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* **************************** 边线处理 **************************** */
     /* ***************************************************************** */
 
-    //寻找最符合跑道的白行
-        //预处理获取的白行数据
-    int White_row_start_point[40][2]{};//白行起始点
-    int White_row_end_point[40][2]{};//白行结束点
-    int White_row_mid_point[40]{};  //透视变换后白行中点x坐标
-    int White_row_length[40]{};
+
     {
-        int start_id = 39;  //起始白行的id
+        int max_white_line_end[2]{};
+        float max_white_line_length = 0;
+        int white_line_end[120][2]{};
+        float white_line_length[120]{};
+        static uint64_t 时间 = 0;
+        static uint64_t 时间计数 = 0;
+        auto start = std::chrono::steady_clock::now();
+        auto f = [&white_line_length, &white_line_end, mat_bin, mat_result](int t) {
+            float L = 5;
+            int count = 0;
+            while (true) {
+                float _x = (float)(L * cos((t + 30) / 180.0f * PI));
+                float _y = (float)(L * sin((t + 30) / 180.0f * PI) + 5);
+                float x = _x + IMAGE_WIDTH / 2;
+                float y = IMAGE_HEIGHT - _y;
+                bool is_range = x > 5 && x < IMAGE_WIDTH - 5 && y >5;
+                if (is_range) {
+                    if (AT_IMAGE(mat_bin, (int)x, (int)y) < 127)count++;
+                    else count = 0;
+                }
+                if (count == 2 || !is_range) {
+                    float a[2]{};
+                    map_perspective(x, y, a, 0);
+                    float l = (float)dis_point_point(POINT((int)a[0], (int)a[1]), POINT(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1));
+                    white_line_end[t][0] = (int)x;
+                    white_line_end[t][1] = (int)y;
+                    white_line_length[t] = l;
+                    break;
+                }
+                L += 1.0f;
+            }
+            };
+        for (int t = 0; t < 120; t++) {
+            if (!MyThreadPool.addTask(f, t)) {
+                f(t);
+            }
+        }
+        MyThreadPool.waitThreadPoolFree();
+        for (int t = 0; t < 120; t += 1) {
+            if (white_line_length[t] > max_white_line_length) {
+                max_white_line_end[0] = white_line_end[t][0];
+                max_white_line_end[1] = white_line_end[t][1];
+                max_white_line_length = white_line_length[t];
+            }
+            cv::line(mat_result, cv::Point((int)white_line_end[t][0], (int)white_line_end[t][1]),
+                cv::Point(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1), cv::Scalar(0, 255, 0), 1);
+        }
+        cv::line(mat_result, cv::Point((int)max_white_line_end[0], (int)max_white_line_end[1]),
+            cv::Point(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1), cv::Scalar(0, 0, 255), 1);
+        auto end = std::chrono::steady_clock::now();
+        auto last = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+        时间 += last.count();
+        时间计数++;
+        std::cout << 时间 / 时间计数 << "um\n";
+
+
+
+        std::vector<POINT> white_row_start_point[40];//白行起始点
+        std::vector<POINT> white_row_end_point[40];//白行结束点
+        std::vector<int> white_row_length[40];//透视变换白行长度
+        //寻找最符合跑道的白行
+
         for (int i = 39; i > 0; i--) {
-            int start = 0, length = 0, sign = 0, count = 0;
+            int start = 0, sign = 0, count = 0;
             float Mean_midpoint = IMAGE_WIDTH / 2, midpoint = 1000;
-            White_row_start_point[i][0] = 0;
-            White_row_start_point[i][1] = i * 5;
-            White_row_end_point[i][0] = 0;
-            White_row_end_point[i][1] = i * 5;
-            White_row_length[i] = 0;
             for (int x = 0; x < IMAGE_WIDTH; x += 2) {
                 if (sign == 0) {//向右开始找白点
                     if (AT_IMAGE(mat_bin, x, i * 5) >= 127)count++;
                     else count = 0;
                     if (count == 2) {
-                        if (i == start_id) {
-                            start = x - count + 1;
-                            sign = 1;
-                        }
-                        else {
-                            if (x - count + 1 <= White_row_end_point[i + 1][0]) {
-                                start = x - count + 1;
-                                sign = 1;
-                            }
-                            else break;
-                        }
+                        start = x - count + 1;
+                        sign = 1;
                     }
                 }
                 if (sign == 1) {//向右开始找黑点
                     if (AT_IMAGE(mat_bin, x, i * 5) < 127)count++;
                     else count = 0;
                     if (count == 2 || x >= IMAGE_WIDTH - 2) {
-                        if (i == start_id) {//开始行,不判断相邻直线是否有交集
-                            float a[2]{}, b[2]{};
-                            map_perspective((float)start, (float)i * 5, a, 0);
-                            map_perspective((float)x - count + 1, (float)i * 5, b, 0);
-                            float L = b[0] - a[0];
-                            float mid = (b[0] + a[0]) / 2;
-                            if (L > 50 && abs(mid - Mean_midpoint) < abs(midpoint - Mean_midpoint)) {
-                                midpoint = mid;
-                                length = (int)L;
-                                White_row_mid_point[i] = (int)midpoint;
-                                White_row_length[i] = length;
-                                White_row_start_point[i][0] = start;
-                                White_row_end_point[i][0] = x - count + 1;
-                            }
-                            count = 0;
-                            sign = 0;
+                        float a[2]{}, b[2]{};
+                        map_perspective((float)start, (float)i * 5, a, 0);
+                        map_perspective((float)x - count + 1, (float)i * 5, b, 0);
+                        float L = b[0] - a[0];
+                        if (L > 50) {
+                            white_row_start_point[i].push_back(POINT(start, i * 5));
+                            white_row_length[i].push_back((int)L);
+                            white_row_end_point[i].push_back(POINT(x - count + 1, i * 5));
+
                         }
-                        else {//判断相邻直线是否由交集
-                            if (x - count + 1 >= White_row_start_point[i + 1][0]) {
-                                float a[2]{}, b[2]{};
-                                map_perspective((float)start, (float)i * 5, a, 0);
-                                map_perspective((float)x - count + 1, (float)i * 5, b, 0);
-                                float L = b[0] - a[0];
-                                float mid = (b[0] + a[0]) / 2;
-                                for (int j = i; j < 40; j++) Mean_midpoint += White_row_mid_point[j];
-                                Mean_midpoint /= 40 - i;
-                                if (L > 50 && abs(mid - Mean_midpoint) < abs(midpoint - Mean_midpoint)) {
-                                    midpoint = mid;
-                                    length = (int)L;
-                                    White_row_mid_point[i] = (int)midpoint;
-                                    White_row_length[i] = length;
-                                    White_row_start_point[i][0] = start;
-                                    White_row_end_point[i][0] = x - count + 1;
-                                }
-                            }
-                            count = 0;
-                            sign = 0;
-                        }
+                        count = 0;
+                        sign = 0;
                     }
                 }
             }
-            if (i == start_id && White_row_end_point[i][0] == 0) start_id--;//开始位置找不到白行
-            else if (White_row_end_point[i][0] == 0)  break;//非开始位置,找不到白行,结束寻找
         }
-    }
-    //从长度合适的白行开始摸线
-    {
-        begin_x = IMAGE_WIDTH / 2, begin_y = IMAGE_HEIGHT - 10;//近线向上找线的开始位置
+
+        for (int i = 39, start_sign = 0, end_sign = 0; i > 0; i--) {
+            float mindistance = 0;
+            if (end_sign == 0) {
+                for (int j = 0; j < white_row_start_point[i].size();) {
+                    float x = (white_row_start_point[i][j].x + white_row_end_point[i][j].x) / 2.0f;
+                    float y = (float)white_row_start_point[i][j].y;
+                    float _x = (float)findThirdPointX(POINT(max_white_line_end[0], max_white_line_end[1]),
+                        POINT(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1), y);
+                    float L = abs(_x - x);
+                    if (j == 0) {
+                        mindistance = L;
+                        j++;
+                    }
+                    else {
+                        if (L < mindistance) {
+                            white_row_start_point[i].erase(white_row_start_point[i].begin());
+                            white_row_end_point[i].erase(white_row_end_point[i].begin());
+                            white_row_length[i].erase(white_row_length[i].begin());
+                            mindistance = L;
+                        }
+                        else {
+                            white_row_start_point[i].erase(white_row_start_point[i].begin() + 1);
+                            white_row_end_point[i].erase(white_row_end_point[i].begin() + 1);
+                            white_row_length[i].erase(white_row_length[i].begin() + 1);
+                        }
+                    }
+                }
+                if (white_row_start_point[i].empty() ||
+                    (start_sign == 1 && (
+                        white_row_start_point[i].back().x > white_row_end_point[i + 1].back().x ||
+                        white_row_end_point[i].back().x < white_row_start_point[i + 1].back().x ||
+                        white_row_start_point[i].back().y < max_white_line_end[1]))) {
+                    end_sign = 1;
+                }
+                else {
+                    start_sign = 1;
+                    cv::line(mat_result, cv::Point(white_row_start_point[i].back().x, white_row_start_point[i].back().y),
+                        cv::Point(white_row_end_point[i].back().x, white_row_end_point[i].back().y),
+                        cv::Scalar(0, 255, 0), 1);
+                }
+            }
+            else {
+                white_row_start_point[i].clear();
+                white_row_end_point[i].clear();
+                white_row_length[i].clear();
+            }
+        }
+        for (int i = 39; i > 1; i--) {
+            if (!white_row_start_point[i].empty()) {
+                begin_x = (white_row_start_point[i].back().x + white_row_end_point[i].back().x) / 2;
+                begin_y = white_row_start_point[i].back().y;
+                break;
+            }
+        }
+        ipts0_num = 150; ipts1_num = 150;
+        find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
+        find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
+
         int far_begin_x = 0, far_begin_y = 0;//远线向下找线的开始位置
         int count = 0;
-        for (int i = 37; i > 25; i--) {
-            if (White_row_length[i] > 50) count++;
-            else count = 0;
-            if (count == 3) {
-                begin_x = (White_row_mid_point[i] + White_row_mid_point[i + 1] + White_row_mid_point[i + 2]) / 3;
-                begin_y = White_row_start_point[i][1];
-                float mid[2];
-                map_perspective((float)begin_x, (float)begin_y, mid, 1);
-                begin_x = (int)mid[0];
-                break;
+        far_ipts0_num = 0; far_ipts1_num = 0;
+        for (int i = 1; i < 20; i++) {
+            if (!white_row_start_point[i].empty()) {
+                if (white_row_length[i].back() < 220) count++;
+                if (count == 3)
+                {
+                    far_begin_x = (white_row_start_point[i].back().x + white_row_end_point[i].back().x) / 2;
+                    far_begin_y = white_row_start_point[i].back().y;
+                    far_ipts0_num = 100; far_ipts1_num = 100;
+                    break;
+                }
             }
         }
-        ipts0_num = 200;ipts1_num = 200;
-        if (begin_x > 1 && begin_x < IMAGE_WIDTH - 1 && begin_y>0 && begin_y < IMAGE_HEIGHT - 1) {
-            find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num); // 原图找左边线
-            find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);// 原图找右边线
-        }
-        else {//开始点不在屏幕范围内
-            begin_x = IMAGE_WIDTH / 2, begin_y = IMAGE_HEIGHT - 10;
-            find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
-            find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
-        }
-        Preprocess_ipts0_num = ipts0_num;
-        Preprocess_ipts1_num = ipts1_num;
-        count = 0;
-        for (int i = 4; i < 20; i++) {
-
-            if (White_row_length[i] > 100 && White_row_length[i] < 200) count++;
-            else count = 0;
-            if (count == 3) {
-                far_begin_x = (White_row_mid_point[i] +
-                    White_row_mid_point[i + 1] +
-                    White_row_mid_point[i + 2]) / 3;
-                far_begin_y = White_row_start_point[i + 1][1];
-                float mid[2];
-                map_perspective((float)far_begin_x, (float)far_begin_y, mid, 1);
-                far_begin_x = (int)mid[0];
-                break;
-            }
-        }
-        if (far_begin_x > 10 && far_begin_x < IMAGE_WIDTH - 10 && far_begin_y>5 && far_begin_y < IMAGE_HEIGHT - 5) {
-            far_ipts0_num = 100;far_ipts1_num = 100;
-            find_far_left_line(mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num);// 原图找左边线
-            find_far_right_line(mat_bin, far_begin_x, far_begin_y, far_ipts1, &far_ipts1_num);// 原图找右边线
-        }
-        else {
-            far_ipts0_num = 0;
-            far_ipts1_num = 0;
-        }
+        find_far_left_line(mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num);// 原图找左边线
+        find_far_right_line(mat_bin, far_begin_x, far_begin_y, far_ipts1, &far_ipts1_num);// 原图找右边线
     }
-
     // 变换后左右线
     float rpts0[IMAGE_HEIGHT][2] = { 0 };
     float rpts1[IMAGE_HEIGHT][2] = { 0 };
