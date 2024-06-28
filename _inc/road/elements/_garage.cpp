@@ -183,6 +183,8 @@ void run_garage()
                     flag_garage = GARAGE_NONE;
                     MAT_LOG("GARAGE_NONE");
                 }
+
+                IMG.get_edge();//获取边线
                 // 正常巡线
                 if (IMG.flag_track == TRACK_LEFT) {
                     IMG.rpts = IMG.rptsc0;
