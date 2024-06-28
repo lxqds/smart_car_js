@@ -195,12 +195,12 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 }
                 };
             for (int t = 0; t < 120; t++) {
-                if (!MyThreadPool.addTask(f, t))
+                // if (!MyThreadPool.addTask(f, t))
                 {
                     f(t);
                 }
             }
-            MyThreadPool.waitThreadPoolFree();
+            // MyThreadPool.waitThreadPoolFree();
         }
         for (int t = 0; t < 120; t += 1) {
             if (white_line_length[t] > max_white_line_length) {
@@ -253,12 +253,12 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 }
                 };
             for (int i = 39; i > 0; i--) {
-                if (!MyThreadPool.addTask(f, i))
+                // if (!MyThreadPool.addTask(f, i))
                 {
                     f(i);
                 }
             }
-            MyThreadPool.waitThreadPoolFree();
+            // MyThreadPool.waitThreadPoolFree();
         }
 
         //处理横线数据集,得到最贴合主赛道的横线数据集
@@ -320,10 +320,10 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         {
             ipts0_num = 180; ipts1_num = 180;
             //双线程巡线
-            if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
-                find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
+            // if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
+            find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
             find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
-            MyThreadPool.waitThreadPoolFree();
+            // MyThreadPool.waitThreadPoolFree();
         }
 
 
@@ -347,10 +347,10 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         }
         {
             //双线程巡线
-            if (!MyThreadPool.addTask(find_far_left_line, mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num))
-                find_far_left_line(mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num);// 原图找左边线
+            // if (!MyThreadPool.addTask(find_far_left_line, mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num))
+            find_far_left_line(mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num);// 原图找左边线
             find_far_right_line(mat_bin, far_begin_x, far_begin_y, far_ipts1, &far_ipts1_num);// 原图找右边线
-            MyThreadPool.waitThreadPoolFree();
+            // MyThreadPool.waitThreadPoolFree();
         }
 
 
@@ -823,10 +823,10 @@ void ImageProcess::get_edge(int mode)
     {
         ipts0_num = 180; ipts1_num = 180;
         // //双线程巡线
-        if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
-            find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
+        // if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
+        find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
         find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
-        MyThreadPool.waitThreadPoolFree();
+        // MyThreadPool.waitThreadPoolFree();
     }
     // 变换后左右中线
     float rpts0[IMAGE_HEIGHT][2] = { 0 };
