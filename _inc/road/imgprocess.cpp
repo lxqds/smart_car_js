@@ -310,7 +310,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 break;
             }
         }
-        ipts0_num = 150; ipts1_num = 150;
+        ipts0_num = 180; ipts1_num = 180;
         find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
         find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
 
@@ -776,8 +776,8 @@ void ImageProcess::get_edge(int mode)
 {
     if (mode == 1)
     {
-        ipts0_num = 150;
-        ipts1_num = 150;
+        ipts0_num = 180;
+        ipts1_num = 180;
         find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
         find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
     }
