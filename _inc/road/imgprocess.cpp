@@ -289,14 +289,14 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                         }
                     }
                 }
-                if (white_row_start_point[i].empty() ||
-                    (start_sign == 1 && (
-                        white_row_start_point[i].back().x > white_row_end_point[i + 1].back().x ||
-                        white_row_end_point[i].back().x < white_row_start_point[i + 1].back().x ||
-                        white_row_start_point[i].back().y < max_white_line_end[1]))) {
+                if (start_sign == 1 && (
+                    white_row_start_point[i].empty() ||
+                    white_row_start_point[i].back().x > white_row_end_point[i + 1].back().x ||
+                    white_row_end_point[i].back().x < white_row_start_point[i + 1].back().x ||
+                    white_row_start_point[i].back().y < max_white_line_end[1])) {
                     end_sign = 1;
                 }
-                else {
+                if (!white_row_start_point[i].empty()) {
                     start_sign = 1;
                     // cv::line(mat_result, cv::Point(white_row_start_point[i].back().x, white_row_start_point[i].back().y),
                     //     cv::Point(white_row_end_point[i].back().x, white_row_end_point[i].back().y),
