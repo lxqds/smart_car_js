@@ -143,7 +143,7 @@ void run_cross() {
         // 远线控制进十字
         else if (flag_cross == CROSS_IN) {
             // 出圈
-            if ((IMG.ipts0_num > 50 && IMG.ipts1_num > 50 &&
+            if ((IMG.ipts0_num > 100 && IMG.ipts1_num > 100 &&
                 ((!IMG.Lpt0_found && !IMG.Lpt1_found) ||
                     (IMG.Lpt0_found && IMG.Lpt1_found &&
                         IMG.Lpt0_point[1] > 160 && IMG.Lpt1_point[1] > 160)))) {
