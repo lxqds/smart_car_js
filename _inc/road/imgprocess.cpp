@@ -310,7 +310,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             }
         }
         //找近处巡线开始点
-        for (int i = 39; i > 1; i--) {
+        for (int i = 39; i > 28; i--) {
             if (!white_row_start_point[i].empty()) {
                 begin_x = (white_row_start_point[i].back().x + white_row_end_point[i].back().x) / 2;
                 begin_y = white_row_start_point[i].back().y;
