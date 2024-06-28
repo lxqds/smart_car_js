@@ -92,7 +92,7 @@ void run_circle() {
                 MAT_LOG("CIRCLE_LEFT_IN");
             }
             // 入环失败
-            if (IMG.encoder.route - circle_route > 100 &&
+            if (IMG.encoder.route - circle_route > 120 &&
                 flag_circle != CIRCLE_LEFT_IN) {
                 none_left_line = 0;
                 have_left_line = 0;
@@ -207,7 +207,7 @@ void run_circle() {
                 MAT_LOG("CIRCLE_RIGHT_IN");
             }
             // 入环失败
-            if (IMG.encoder.route - circle_route > 100 &&
+            if (IMG.encoder.route - circle_route > 120 &&
                 flag_circle != CIRCLE_RIGHT_IN) {
                 none_right_line = 0;
                 have_right_line = 0;
