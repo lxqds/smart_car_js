@@ -685,15 +685,15 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             if ((int)rptsc0[a][1] >= 0 && (int)rptsc0[a][1] < mat_result.rows &&
                 (int)rptsc0[a][0] >= 0 && (int)rptsc0[a][0] < mat_result.cols) {
                 mat_result.at<cv::Vec3b>((int)rptsc0[a][1], (int)rptsc0[a][0])[0] = 0;
-                mat_result.at<cv::Vec3b>((int)rptsc0[a][1], (int)rptsc0[a][0])[1] = 238;
-                mat_result.at<cv::Vec3b>((int)rptsc0[a][1], (int)rptsc0[a][0])[2] = 238;
+                mat_result.at<cv::Vec3b>((int)rptsc0[a][1], (int)rptsc0[a][0])[1] = 0;
+                mat_result.at<cv::Vec3b>((int)rptsc0[a][1], (int)rptsc0[a][0])[2] = 200;
             }
         }
         for (int a = 0; a < rptsc1_num; a++) {  // 右中线
             if ((int)rptsc1[a][1] >= 0 && (int)rptsc1[a][1] < mat_result.rows &&
                 (int)rptsc1[a][0] >= 0 && (int)rptsc1[a][0] < mat_result.cols) {
-                mat_result.at<cv::Vec3b>((int)rptsc1[a][1], (int)rptsc1[a][0])[0] = 238;
-                mat_result.at<cv::Vec3b>((int)rptsc1[a][1], (int)rptsc1[a][0])[1] = 238;
+                mat_result.at<cv::Vec3b>((int)rptsc1[a][1], (int)rptsc1[a][0])[0] = 200;
+                mat_result.at<cv::Vec3b>((int)rptsc1[a][1], (int)rptsc1[a][0])[1] = 0;
                 mat_result.at<cv::Vec3b>((int)rptsc1[a][1], (int)rptsc1[a][0])[2] = 0;
             }
         }
@@ -704,25 +704,25 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             for (int a = 0; a < far_ipts0_num; a++) {  // 原图中线
                 if ((int)far_ipts0[a][1] >= 0 && (int)far_ipts0[a][1] < mat_result.rows &&
                     (int)far_ipts0[a][0] >= 0 && (int)far_ipts0[a][0] < mat_result.cols) {
-                    mat_result.at<cv::Vec3b>((int)far_ipts0[a][1], (int)far_ipts0[a][0])[0] = 255;
+                    mat_result.at<cv::Vec3b>((int)far_ipts0[a][1], (int)far_ipts0[a][0])[0] = 0;
                     mat_result.at<cv::Vec3b>((int)far_ipts0[a][1], (int)far_ipts0[a][0])[1] = 255;
-                    mat_result.at<cv::Vec3b>((int)far_ipts0[a][1], (int)far_ipts0[a][0])[2] = 0;
+                    mat_result.at<cv::Vec3b>((int)far_ipts0[a][1], (int)far_ipts0[a][0])[2] = 255;
                 }
             }
             // 右线
             for (int a = 0; a < far_ipts1_num; a++) {  // 原图中线
                 if ((int)far_ipts1[a][1] >= 0 && (int)far_ipts1[a][1] < mat_result.rows &&
                     (int)far_ipts1[a][0] >= 0 && (int)far_ipts1[a][0] < mat_result.cols) {
-                    mat_result.at<cv::Vec3b>((int)far_ipts1[a][1], (int)far_ipts1[a][0])[0] = 0;
+                    mat_result.at<cv::Vec3b>((int)far_ipts1[a][1], (int)far_ipts1[a][0])[0] = 255;
                     mat_result.at<cv::Vec3b>((int)far_ipts1[a][1], (int)far_ipts1[a][0])[1] = 255;
-                    mat_result.at<cv::Vec3b>((int)far_ipts1[a][1], (int)far_ipts1[a][0])[2] = 255;
+                    mat_result.at<cv::Vec3b>((int)far_ipts1[a][1], (int)far_ipts1[a][0])[2] = 0;
                 }
             }
         }
         if (Lpt0_found)
-            cv::circle(mat_result, cv::Point(Lpt0_point[0], Lpt0_point[1]), 3, cv::Scalar(255, 0, 0), 2, 8);
+            cv::circle(mat_result, cv::Point(Lpt0_point[0], Lpt0_point[1]), 3, cv::Scalar(0, 0, 255), 2, 8);
         if (Lpt1_found)
-            cv::circle(mat_result, cv::Point(Lpt1_point[0], Lpt1_point[1]), 3, cv::Scalar(0, 0, 255), 2, 8);
+            cv::circle(mat_result, cv::Point(Lpt1_point[0], Lpt1_point[1]), 3, cv::Scalar(255, 0, 0), 2, 8);
         if (far_Lpt0_found)
             cv::circle(mat_result, cv::Point(far_Lpt0_point[0], far_Lpt0_point[1]), 3, cv::Scalar(0, 255, 255), 2, 8);
         if (far_Lpt1_found)
