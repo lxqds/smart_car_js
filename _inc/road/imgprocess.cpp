@@ -81,7 +81,7 @@ public:
             }
         }
     }
-}MyThreadPool(2);
+}MyThreadPool(0);
 
 
 /* 初始化 */
@@ -202,8 +202,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 max_white_line_end[1] = white_line_end[t][1];
                 max_white_line_length = white_line_length[t];
             }
-            cv::line(mat_result, cv::Point((int)white_line_end[t][0], (int)white_line_end[t][1]),
-                cv::Point(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1), cv::Scalar(0, 255, 0), 1);
+            // cv::line(mat_result, cv::Point((int)white_line_end[t][0], (int)white_line_end[t][1]),
+            //     cv::Point(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1), cv::Scalar(0, 255, 0), 1);
         }
         cv::line(mat_result, cv::Point((int)max_white_line_end[0], (int)max_white_line_end[1]),
             cv::Point(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1), cv::Scalar(0, 0, 255), 1);
@@ -291,9 +291,9 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 }
                 else {
                     start_sign = 1;
-                    cv::line(mat_result, cv::Point(white_row_start_point[i].back().x, white_row_start_point[i].back().y),
-                        cv::Point(white_row_end_point[i].back().x, white_row_end_point[i].back().y),
-                        cv::Scalar(0, 255, 0), 1);
+                    // cv::line(mat_result, cv::Point(white_row_start_point[i].back().x, white_row_start_point[i].back().y),
+                    //     cv::Point(white_row_end_point[i].back().x, white_row_end_point[i].back().y),
+                    //     cv::Scalar(0, 255, 0), 1);
                 }
             }
             else {
