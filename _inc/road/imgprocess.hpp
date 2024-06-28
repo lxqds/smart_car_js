@@ -21,7 +21,15 @@
 #include "elements/_yroad.hpp"
 #include "elements/_slowzone.hpp"
 #include "elements/_save.hpp"
+#include <iostream>
+#include <string>
+#include <stdio.h>
 #include <vector>
+#include <chrono>
+#include <queue>
+#include <thread>
+#include <future>
+#include <functional>
 
 
 

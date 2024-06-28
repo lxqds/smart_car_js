@@ -81,7 +81,7 @@ public:
             }
         }
     }
-}MyThreadPool(0);
+}MyThreadPool(2);
 
 
 /* 初始化 */
