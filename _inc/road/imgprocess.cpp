@@ -163,7 +163,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         float max_white_line_length = 0;
         int white_line_end[120][2]{};
         float white_line_length[120]{};
-        auto f = [&white_line_length, &white_line_end, mat_bin, mat_result](int t) {
+        auto f = [&white_line_length, &white_line_end, this](int t) {
             float L = 5;
             int count = 0;
             while (true) {
@@ -173,7 +173,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 float y = IMAGE_HEIGHT - _y;
                 bool is_range = x > 5 && x < IMAGE_WIDTH - 5 && y >5;
                 if (is_range) {
-                    if (AT_IMAGE(mat_bin, (int)x, (int)y) < 127)count++;
+                    if (AT_IMAGE(this->mat_bin, (int)x, (int)y) < 127)count++;
                     else count = 0;
                 }
                 if (count == 2 || !is_range) {
