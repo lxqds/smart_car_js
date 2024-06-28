@@ -24,8 +24,7 @@ public:
         num_thread = num_threads;
         num_thread_free = num_threads;
         for (int i = 0; i < num_threads; ++i) {
-            workers.emplace_back(std::thread([this, i]() {
-                int _i = i;
+            workers.emplace_back(std::thread([this]() {
                 while (true) {
                     std::function<void()> task;
                     {
@@ -216,7 +215,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
         for (int i = 39; i > 0; i--) {
             int start = 0, sign = 0, count = 0;
-            float Mean_midpoint = IMAGE_WIDTH / 2, midpoint = 1000;
             for (int x = 0; x < IMAGE_WIDTH; x += 2) {
                 if (sign == 0) {//向右开始找白点
                     if (AT_IMAGE(mat_bin, x, i * 5) >= 127)count++;
@@ -250,7 +248,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         for (int i = 39, start_sign = 0, end_sign = 0; i > 0; i--) {
             float mindistance = 0;
             if (end_sign == 0) {
-                for (int j = 0; j < white_row_start_point[i].size();) {
+                for (uint32_t j = 0; j < white_row_start_point[i].size();) {
                     float x = (white_row_start_point[i][j].x + white_row_end_point[i][j].x) / 2.0f;
                     float y = (float)white_row_start_point[i][j].y;
                     float _x = (float)findThirdPointX(POINT(max_white_line_end[0], max_white_line_end[1]),
