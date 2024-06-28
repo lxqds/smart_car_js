@@ -210,12 +210,14 @@ void run_garage()
 
                 break;
             case GARAGE_IN_MIDDLE://过斑马线停车
+
                 IMG.aim_speed = IMG._config->speed_garage_in;
                 if (IMG.encoder.route - garage_route > IMG._config->garage_pass_route_)
                 {
                     flag_garage = GARAGE_STOP;
                     MAT_LOG("GARAGE_STOP");
                 }
+                IMG.get_edge();//获取边线
                 // 正常巡线
                 if (IMG.flag_track == TRACK_LEFT) {
                     IMG.rpts = IMG.rptsc0;
