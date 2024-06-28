@@ -195,7 +195,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 }
                 };
             for (int t = 0; t < 120; t++) {
-                if (!MyThreadPool.addTask(f, t)) {
+                // if (!MyThreadPool.addTask(f, t))
+                {
                     f(t);
                 }
             }
@@ -252,7 +253,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 }
                 };
             for (int i = 39; i > 0; i--) {
-                if (!MyThreadPool.addTask(f, i)) {
+                // if (!MyThreadPool.addTask(f, i))
+                {
                     f(i);
                 }
             }
@@ -331,7 +333,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         int far_begin_x = 0, far_begin_y = 0;//远线向下找线的开始位置
         int count = 0;
         far_ipts0_num = 0; far_ipts1_num = 0;
-        for (int i = 1; i < 20; i++) {
+        for (int i = 5; i < 20; i++) {
             if (!white_row_start_point[i].empty()) {
                 if (white_row_length[i].back() < 220) count++;
                 if (count == 3)
