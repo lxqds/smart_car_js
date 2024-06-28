@@ -185,6 +185,14 @@ double dis_point_point(POINT a, POINT b) {
     return s;
 }
 
+// 根据两点和第三点的y值求第三点的x值
+double findThirdPointX(POINT a, POINT b, double y) {
+    // 如果 y1 和 y2 相等，则两点在同一水平线上，无法确定唯一的 x3
+    if (y == b.y) return 0.0f;
+    double x = a.x + (y - a.y) * (b.x - a.x) / (b.y - a.y);// 计算第三点的x值
+    return x;
+}
+
 // 直线拟合 (返回平均绝对误差)
 float fit_line(float pts[][2], int num, int cut_h) {
     if (num != 0) {

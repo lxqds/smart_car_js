@@ -57,6 +57,9 @@ double dis_point_line(POINT a, POINT b, POINT p);
 // 两点间的距离计算
 double dis_point_point(POINT a, POINT b);
 
+// 根据两点和第三点的y值求第三点的x值
+double findThirdPointX(POINT a, POINT b, double y);
+
 // 直线拟合 (返回平均绝对误差)
 float fit_line(float pts[][2], int num, int cut_h);
 

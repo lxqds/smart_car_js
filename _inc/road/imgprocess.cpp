@@ -163,9 +163,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         float max_white_line_length = 0;
         int white_line_end[120][2]{};
         float white_line_length[120]{};
-        static uint64_t 时间 = 0;
-        static uint64_t 时间计数 = 0;
-        auto start = std::chrono::steady_clock::now();
         auto f = [&white_line_length, &white_line_end, mat_bin, mat_result](int t) {
             float L = 5;
             int count = 0;
@@ -208,11 +205,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         }
         cv::line(mat_result, cv::Point((int)max_white_line_end[0], (int)max_white_line_end[1]),
             cv::Point(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1), cv::Scalar(0, 0, 255), 1);
-        auto end = std::chrono::steady_clock::now();
-        auto last = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-        时间 += last.count();
-        时间计数++;
-        std::cout << 时间 / 时间计数 << "um\n";
+
 
 
 
