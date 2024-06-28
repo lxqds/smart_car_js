@@ -118,8 +118,26 @@ void run_circle() {
                 flag_circle = CIRCLE_LEFT_RUNNING;
                 MAT_LOG("CIRCLE_LEFT_RUNNING");
             }
-            IMG.get_edge();//获取边线
-            IMG.flag_track = TRACK_LEFT;
+
+            if (IMG.far_Lpt0_found) {
+                cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
+                    cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
+                    cv::Scalar(0, 0, 0), 7);
+                cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
+                    cv::Point(IMG.far_Lpt0_point[0], IMG.far_Lpt0_point[1]),
+                    cv::Scalar(0, 0, 0), 7);
+                IMG.get_edge(1);//获取边线
+                IMG.flag_track = TRACK_RIGHT;
+            }
+            else {
+                cv::line(IMG.mat_bin, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
+                    cv::Point(IMAGE_WIDTH / 2, 1),
+                    cv::Scalar(0, 0, 0), 7);
+                cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1),
+                    cv::Point(IMAGE_WIDTH / 2, 1),
+                    cv::Scalar(0, 0, 0), 7);
+                IMG.get_edge();//获取边线
+            }
 
         }
         // 正常巡线, 寻外圆右线
@@ -200,7 +218,6 @@ void run_circle() {
         }
         // 入右环, 寻内圆右线
         else if (flag_circle == CIRCLE_RIGHT_IN) {
-            IMG.flag_track = TRACK_RIGHT;
             // 先丢左线后有线
             if (IMG.ipts0_num < 40)
                 none_left_line++;
@@ -212,8 +229,25 @@ void run_circle() {
                 flag_circle = CIRCLE_RIGHT_RUNNING;
                 MAT_LOG("CIRCLE_RIGHT_RUNNING");
             }
-            IMG.get_edge();//获取边线
-            IMG.flag_track = TRACK_RIGHT;
+            if (IMG.far_Lpt1_found) {
+                cv::line(IMG.mat_bin, cv::Point(1, IMAGE_HEIGHT - 1),
+                    cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
+                    cv::Scalar(0, 0, 0), 7);
+                cv::line(IMG.mat_result, cv::Point(1, IMAGE_HEIGHT - 1),
+                    cv::Point(IMG.far_Lpt1_point[0], IMG.far_Lpt1_point[1]),
+                    cv::Scalar(0, 0, 0), 7);
+                IMG.get_edge(1);//获取边线
+                IMG.flag_track = TRACK_LEFT;
+            }
+            else {
+                cv::line(IMG.mat_bin, cv::Point(1, IMAGE_HEIGHT - 1),
+                    cv::Point(IMAGE_WIDTH / 2, 1),
+                    cv::Scalar(0, 0, 0), 7);
+                cv::line(IMG.mat_result, cv::Point(1, IMAGE_HEIGHT - 1),
+                    cv::Point(IMAGE_WIDTH / 2, 1),
+                    cv::Scalar(0, 0, 0), 7);
+                IMG.get_edge();//获取边线
+            }
 
         }
         // 正常巡线, 寻外圆左线
