@@ -196,8 +196,10 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             }
             // MyThreadPool.waitThreadPoolFree();
         }
-        for (int t = 1; t < 90 - 1; t += 1) {
-            float L = white_line_length[t - 1] + white_line_length[t] + white_line_length[t + 1];
+        for (int t = 2; t < 90 - 2; t += 1) {
+
+            float L = white_line_length[t - 2] + white_line_length[t - 1] + white_line_length[t] +
+                white_line_length[t + 1] + white_line_length[t + 2];
             if (L > max_white_line_length) {
                 max_white_line_end[0] = white_line_end[t][0];
                 max_white_line_end[1] = white_line_end[t][1];
