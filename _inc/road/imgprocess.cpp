@@ -8,7 +8,7 @@
 extern std::shared_ptr<SerialDriver> serial;
 Control_Flag control_flag;
 
-StopWatch time_cont;    // 帧率计时器
+
 //线程池
 class _MyThreadPool {
 private:
@@ -87,7 +87,7 @@ public:
         }
     }
 };
-_MyThreadPool MyThreadPool(3);
+// _MyThreadPool MyThreadPool(0);
 
 /* 初始化 */
 int ImageProcess::init(std::string config_path, bool is_result) {
@@ -162,7 +162,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* ***************************************************************** */
 
 
-
     {
         //扇形扫描找最远的白线
         int max_white_line_end[2]{};
@@ -170,41 +169,32 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         int white_line_end[90][2]{};
         float white_line_length[90]{};
         {
-            auto f = [&](int indx) {//分为10个任务
-                for (int t = indx * 90 / 10; t < (indx + 1) * 90 / 10; t++) {
-                    float L = 5;
-                    int count = 0;
-                    while (true) {
-                        float _x = (float)(L * cos((t + 45) / 180.0f * PI));
-                        float _y = (float)(L * sin((t + 45) / 180.0f * PI) + 5);
-                        float x = _x + IMAGE_WIDTH / 2;
-                        float y = IMAGE_HEIGHT - _y;
-                        bool is_range = x > 5 && x < IMAGE_WIDTH - 5 && y >5;
-                        if (is_range) {
-                            if (AT_IMAGE(mat_bin, (int)x, (int)y) < 127)count++;
-                            else count = 0;
-                        }
-                        if (count == 2 || !is_range) {
-                            float a[2]{};
-                            map_perspective(x, y, a, 0);
-                            float l = (float)dis_point_point(POINT((int)a[0], (int)a[1]), POINT(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1));
-                            white_line_end[t][0] = (int)x;
-                            white_line_end[t][1] = (int)y;
-                            white_line_length[t] = l;
-                            break;
-                        }
-                        L += 0.01f;
+            for (int t = 0; t < 90; t++) {
+                float L = 5;
+                int count = 0;
+                while (true) {
+                    float _x = (float)(L * cos((t + 45) / 180.0f * PI));
+                    float _y = (float)(L * sin((t + 45) / 180.0f * PI) + 5);
+                    float x = _x + IMAGE_WIDTH / 2;
+                    float y = IMAGE_HEIGHT - _y;
+                    bool is_range = x > 5 && x < IMAGE_WIDTH - 5 && y >5;
+                    if (is_range) {
+                        if (AT_IMAGE(mat_bin, (int)x, (int)y) < 127)count++;
+                        else count = 0;
                     }
+                    if (count == 2 || !is_range) {
+                        float a[2]{};
+                        map_perspective(x, y, a, 0);
+                        float l = (float)dis_point_point(POINT((int)a[0], (int)a[1]), POINT(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1));
+                        white_line_end[t][0] = (int)x;
+                        white_line_end[t][1] = (int)y;
+                        white_line_length[t] = l;
+                        break;
+                    }
+                    L += 2.0f;
                 }
-                };
-            time_cont.tic();
-            for (int i = 0; i < 10; i++) {
-                if (!MyThreadPool.addTask(f, i)) f(i);
             }
-            MyThreadPool.waitThreadPoolFree();
-            static double time_counts = time_cont.toc();
-            time_counts = time_counts * 0.95 + time_cont.toc() * 0.05;
-            MAT_LOG("time_counts=%.4lf", time_counts);
+            // MyThreadPool.waitThreadPoolFree();
         }
         for (int t = 0; t < 90; t += 1) {
             if (white_line_length[t] > max_white_line_length) {
@@ -318,10 +308,10 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         {
             ipts0_num = 180; ipts1_num = 180;
             //双线程巡线
-            if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
-                find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
+            // if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
+            find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
             find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
-            MyThreadPool.waitThreadPoolFree();
+            // MyThreadPool.waitThreadPoolFree();
         }
 
 
@@ -345,15 +335,14 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         }
         {
             //双线程巡线
-            if (!MyThreadPool.addTask(find_far_left_line, mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num))
-                find_far_left_line(mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num);// 原图找左边线
+            // if (!MyThreadPool.addTask(find_far_left_line, mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num))
+            find_far_left_line(mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num);// 原图找左边线
             find_far_right_line(mat_bin, far_begin_x, far_begin_y, far_ipts1, &far_ipts1_num);// 原图找右边线
-            MyThreadPool.waitThreadPoolFree();
+            // MyThreadPool.waitThreadPoolFree();
         }
 
 
     }
-
     // 变换后左右线
     float rpts0[IMAGE_HEIGHT][2] = { 0 };
     float rpts1[IMAGE_HEIGHT][2] = { 0 };
@@ -821,11 +810,11 @@ void ImageProcess::get_edge(int mode)
     if (mode == 1)
     {
         ipts0_num = 180; ipts1_num = 180;
-        //双线程巡线
-        if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
-            find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
+        // //双线程巡线
+        // if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
+        find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
         find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
-        MyThreadPool.waitThreadPoolFree();
+        // MyThreadPool.waitThreadPoolFree();
     }
     // 变换后左右中线
     float rpts0[IMAGE_HEIGHT][2] = { 0 };
