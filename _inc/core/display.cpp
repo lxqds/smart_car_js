@@ -15,7 +15,7 @@ int Display::init() {
 
     if (_video) {
         _out_video.open("yyds.avi", cv::VideoWriter::fourcc('M', 'J', 'P', 'G'),
-                        30.0, cv::Size(600, 400), true);
+            30.0, cv::Size(600, 400), true);
         if (!_out_video.isOpened())
             return -1;
 
@@ -55,7 +55,7 @@ void Display::put(cv::Mat frame) {
     if (!(_windows || _video))
         return;
 
-    if (_queue.Size() < 10)
+    if (_queue.Size() < 1)
         _queue.Put(frame);
 }
 
