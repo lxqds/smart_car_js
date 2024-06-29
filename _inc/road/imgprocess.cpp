@@ -162,7 +162,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* ***************************************************************** */
 
 
-    time_cont.tic();
+
     {
         //扇形扫描找最远的白线
         int max_white_line_end[2]{};
@@ -197,10 +197,14 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                     }
                 }
                 };
+            time_cont.tic();
             for (int i = 0; i < 10; i++) {
                 if (!MyThreadPool.addTask(f, i)) f(i);
             }
             MyThreadPool.waitThreadPoolFree();
+            static double time_counts = time_cont.toc();
+            time_counts = time_counts * 0.95 + time_cont.toc() * 0.05;
+            MAT_LOG("time_counts=%.4lf", time_counts);
         }
         for (int t = 0; t < 90; t += 1) {
             if (white_line_length[t] > max_white_line_length) {
@@ -349,9 +353,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
 
     }
-    static double time_counts = time_cont.toc();
-    time_counts = time_counts * 0.95 + time_cont.toc() * 0.05;
-    MAT_LOG("time_counts=%.4lf", time_counts);
+
     // 变换后左右线
     float rpts0[IMAGE_HEIGHT][2] = { 0 };
     float rpts1[IMAGE_HEIGHT][2] = { 0 };
