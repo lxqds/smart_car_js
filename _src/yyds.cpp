@@ -159,11 +159,14 @@ int main(int argc, char const* argv[])
         // 正常巡线
         else
         {
+
             // 图像处理 正常帧率
             imgprocess.process(frame_origin, frame_imgpro, payload);
+
             ret = 1;
         }
-
+        // 停止计时
+        fps_time = fps_sw.toc();
         if (ret != 0)
         {
             ret = 0;
@@ -190,8 +193,7 @@ int main(int argc, char const* argv[])
 
         }
 
-        // 停止计时
-        fps_time = fps_sw.toc();
+
     }
 
     /* 结束程序 */
