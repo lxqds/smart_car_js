@@ -99,6 +99,8 @@ int main(int argc, char const* argv[])
     while (capture->_loop)
     {
 
+        // 开始计时
+        fps_sw.tic();
         if (!init_slave_flag) {
 
 
@@ -158,13 +160,11 @@ int main(int argc, char const* argv[])
         // 正常巡线
         else
         {
-            // 开始计时
-            fps_sw.tic();
+
 
             // 图像处理 正常帧率
             imgprocess.process(frame_origin, frame_imgpro, payload);
-            // 停止计时
-            fps_time = fps_sw.toc();
+
             ret = 1;
         }
 
@@ -194,7 +194,8 @@ int main(int argc, char const* argv[])
 
         }
 
-
+        // 停止计时
+        fps_time = fps_sw.toc();
     }
 
     /* 结束程序 */
