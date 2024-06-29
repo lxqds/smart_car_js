@@ -197,7 +197,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 }
                 };
             for (int i = 0; i < 10; i++) {
-                if (!MyThreadPool.addTask(f)) f();
+                if (!MyThreadPool.addTask(f, i)) f(i);
             }
             MyThreadPool.waitThreadPoolFree();
         }
