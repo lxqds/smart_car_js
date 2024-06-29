@@ -87,7 +87,7 @@ public:
         }
     }
 };
-_MyThreadPool MyThreadPool(0);
+_MyThreadPool MyThreadPool(2);
 
 /* 初始化 */
 int ImageProcess::init(std::string config_path, bool is_result) {
