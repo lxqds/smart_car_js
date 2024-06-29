@@ -8,7 +8,7 @@
 extern std::shared_ptr<SerialDriver> serial;
 Control_Flag control_flag;
 
-
+StopWatch time_cont;    // 帧率计时器
 //线程池
 class _MyThreadPool {
 private:
@@ -87,7 +87,7 @@ public:
         }
     }
 };
-_MyThreadPool MyThreadPool(2);
+_MyThreadPool MyThreadPool(0);
 
 /* 初始化 */
 int ImageProcess::init(std::string config_path, bool is_result) {
@@ -162,6 +162,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* ***************************************************************** */
 
 
+    time_cont.tic();
     {
         //扇形扫描找最远的白线
         int max_white_line_end[2]{};
@@ -348,6 +349,9 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
 
     }
+    static double time_counts = time_cont.toc();
+    time_counts = time_counts * 0.95 + time_cont.toc() * 0.05;
+    MAT_LOG("time_counts=%.0lf", time_counts);
     // 变换后左右线
     float rpts0[IMAGE_HEIGHT][2] = { 0 };
     float rpts1[IMAGE_HEIGHT][2] = { 0 };
