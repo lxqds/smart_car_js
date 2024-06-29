@@ -87,7 +87,7 @@ public:
         }
     }
 };
-_MyThreadPool MyThreadPool(1);
+_MyThreadPool MyThreadPool(0);
 
 /* 初始化 */
 int ImageProcess::init(std::string config_path, bool is_result) {
@@ -171,7 +171,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         float white_line_length[90]{};
         {
             auto f = [&](int indx) {//分为10个任务
-                for (int t = indx * 90 / 2; t < (indx + 1) * 90 / 2; t++) {
+                for (int t = indx * 90 / 10; t < (indx + 1) * 90 / 10; t++) {
                     float L = 5;
                     int count = 0;
                     while (true) {
@@ -193,12 +193,12 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                             white_line_length[t] = l;
                             break;
                         }
-                        L += 0.1f;
+                        L += 0.01f;
                     }
                 }
                 };
             time_cont.tic();
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 10; i++) {
                 if (!MyThreadPool.addTask(f, i)) f(i);
             }
             MyThreadPool.waitThreadPoolFree();
