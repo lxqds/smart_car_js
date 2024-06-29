@@ -169,32 +169,36 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         int white_line_end[90][2]{};
         float white_line_length[90]{};
         {
-            for (int t = 0; t < 90; t++) {
-                float L = 5;
-                int count = 0;
-                while (true) {
-                    float _x = (float)(L * cos((t + 45) / 180.0f * PI));
-                    float _y = (float)(L * sin((t + 45) / 180.0f * PI) + 5);
-                    float x = _x + IMAGE_WIDTH / 2;
-                    float y = IMAGE_HEIGHT - _y;
-                    bool is_range = x > 5 && x < IMAGE_WIDTH - 5 && y >5;
-                    if (is_range) {
-                        if (AT_IMAGE(mat_bin, (int)x, (int)y) < 127)count++;
-                        else count = 0;
+            auto f = [&]() {
+                for (int t = 0; t < 90; t++) {
+                    float L = 5;
+                    int count = 0;
+                    while (true) {
+                        float _x = (float)(L * cos((t + 45) / 180.0f * PI));
+                        float _y = (float)(L * sin((t + 45) / 180.0f * PI) + 5);
+                        float x = _x + IMAGE_WIDTH / 2;
+                        float y = IMAGE_HEIGHT - _y;
+                        bool is_range = x > 5 && x < IMAGE_WIDTH - 5 && y >5;
+                        if (is_range) {
+                            if (AT_IMAGE(mat_bin, (int)x, (int)y) < 127)count++;
+                            else count = 0;
+                        }
+                        if (count == 2 || !is_range) {
+                            float a[2]{};
+                            map_perspective(x, y, a, 0);
+                            float l = (float)dis_point_point(POINT((int)a[0], (int)a[1]), POINT(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1));
+                            white_line_end[t][0] = (int)x;
+                            white_line_end[t][1] = (int)y;
+                            white_line_length[t] = l;
+                            break;
+                        }
+                        L += 2.0f;
                     }
-                    if (count == 2 || !is_range) {
-                        float a[2]{};
-                        map_perspective(x, y, a, 0);
-                        float l = (float)dis_point_point(POINT((int)a[0], (int)a[1]), POINT(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1));
-                        white_line_end[t][0] = (int)x;
-                        white_line_end[t][1] = (int)y;
-                        white_line_length[t] = l;
-                        break;
-                    }
-                    L += 2.0f;
                 }
-            }
-            // MyThreadPool.waitThreadPoolFree();
+                };
+            if (!MyThreadPool.addTask(f))
+                f();
+            MyThreadPool.waitThreadPoolFree();
         }
         for (int t = 0; t < 90; t += 1) {
             if (white_line_length[t] > max_white_line_length) {
