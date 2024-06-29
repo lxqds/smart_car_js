@@ -169,8 +169,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         int white_line_end[90][2]{};
         float white_line_length[90]{};
         {
-            auto f = [&]() {
-                for (int t = 0; t < 90; t++) {
+            auto f = [&](int indx) {//分为10个任务
+                for (int t = indx * 90 / 10; t < (indx + 1) * 90 / 10; t++) {
                     float L = 5;
                     int count = 0;
                     while (true) {
@@ -196,8 +196,9 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                     }
                 }
                 };
-            if (!MyThreadPool.addTask(f))
-                f();
+            for (int i = 0; i < 10; i++) {
+                if (!MyThreadPool.addTask(f)) f();
+            }
             MyThreadPool.waitThreadPoolFree();
         }
         for (int t = 0; t < 90; t += 1) {
