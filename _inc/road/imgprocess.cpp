@@ -169,7 +169,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         int white_line_end[90][2]{};
         float white_line_length[90]{};
         {
-            auto f = [&white_line_length, &white_line_end, this](int t) {
+            for (int t = 0; t < 90; t++) {
                 float L = 5;
                 int count = 0;
                 while (true) {
@@ -179,7 +179,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                     float y = IMAGE_HEIGHT - _y;
                     bool is_range = x > 5 && x < IMAGE_WIDTH - 5 && y >5;
                     if (is_range) {
-                        if (AT_IMAGE(this->mat_bin, (int)x, (int)y) < 127)count++;
+                        if (AT_IMAGE(mat_bin, (int)x, (int)y) < 127)count++;
                         else count = 0;
                     }
                     if (count == 2 || !is_range) {
@@ -192,12 +192,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                         break;
                     }
                     L += 2.0f;
-                }
-                };
-            for (int t = 0; t < 90; t++) {
-                // if (!MyThreadPool.addTask(f, t))
-                {
-                    f(t);
                 }
             }
             // MyThreadPool.waitThreadPoolFree();
@@ -222,11 +216,11 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         std::vector<int> white_row_length[40];//透视变换白行长度
         //寻找最符合跑道的白行
         {
-            auto f = [&white_row_start_point, &white_row_end_point, &white_row_length, this](int i) {
+            for (int i = 39; i > 0; i--) {
                 int start = 0, sign = 0, count = 0;
                 for (int x = 0; x < IMAGE_WIDTH; x += 2) {
                     if (sign == 0) {//向右开始找白点
-                        if (AT_IMAGE(this->mat_bin, x, i * 5) >= 127)count++;
+                        if (AT_IMAGE(mat_bin, x, i * 5) >= 127)count++;
                         else count = 0;
                         if (count == 2) {
                             start = x - count + 1;
@@ -234,7 +228,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                         }
                     }
                     if (sign == 1) {//向右开始找黑点
-                        if (AT_IMAGE(this->mat_bin, x, i * 5) < 127)count++;
+                        if (AT_IMAGE(mat_bin, x, i * 5) < 127)count++;
                         else count = 0;
                         if (count == 2 || x >= IMAGE_WIDTH - 2) {
                             float a[2]{}, b[2]{};
@@ -250,12 +244,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                             sign = 0;
                         }
                     }
-                }
-                };
-            for (int i = 39; i > 0; i--) {
-                // if (!MyThreadPool.addTask(f, i))
-                {
-                    f(i);
                 }
             }
             // MyThreadPool.waitThreadPoolFree();
