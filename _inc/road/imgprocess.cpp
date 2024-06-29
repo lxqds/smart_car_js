@@ -351,7 +351,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     }
     static double time_counts = time_cont.toc();
     time_counts = time_counts * 0.95 + time_cont.toc() * 0.05;
-    MAT_LOG("time_counts=%.0lf", time_counts);
+    MAT_LOG("time_counts=%.4lf", time_counts);
     // 变换后左右线
     float rpts0[IMAGE_HEIGHT][2] = { 0 };
     float rpts1[IMAGE_HEIGHT][2] = { 0 };
