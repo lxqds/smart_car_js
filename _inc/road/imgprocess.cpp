@@ -87,7 +87,7 @@ public:
         }
     }
 };
-_MyThreadPool MyThreadPool(1);
+_MyThreadPool MyThreadPool(0);
 
 /* 初始化 */
 int ImageProcess::init(std::string config_path, bool is_result) {
@@ -193,7 +193,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                             white_line_length[t] = l;
                             break;
                         }
-                        L += 2.0f;
+                        L += 0.1f;
                     }
                 }
                 };
