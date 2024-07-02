@@ -183,17 +183,17 @@ int main(int argc, char const* argv[])
             sprintf(fps_buffer, "FPS: %.2f", 1000 / _time);
             cv::putText(frame_imgpro, (std::string)fps_buffer, cv::Point(5, 10),
                 cv::FONT_HERSHEY_SIMPLEX, 0.4, cv::Scalar(0, 0, 255));
-            display->put(IMG.mat_lab.clone());
+            
 
-            // if (imgprocess._config->rec_video_format)
-            // {
-            //     display->put(frame_imgpro.clone());
-            // }
-            // else
-            // {
-            //     display->put(frame_origin.clone());
-            // }
-
+            if (imgprocess._config->rec_video_format)
+            {
+                display->put(frame_imgpro.clone());
+            }
+            else
+            {
+                display->put(frame_origin.clone());
+            }
+            // display->put(IMG.mat_lab.clone());
         }
 
         // 停止计时

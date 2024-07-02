@@ -269,7 +269,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
     }
 
-    
+
     // 变换后左右线
     float rpts0[IMAGE_HEIGHT][2] = { 0 };
     float rpts1[IMAGE_HEIGHT][2] = { 0 };
@@ -280,12 +280,12 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     for (int i = 0; i < ipts0_num; i++)
     {
         map_perspective((float)ipts0[i][0], (float)ipts0[i][1], rpts0[i], 0);
-        edge_left.push_back(POINT(ipts0[i][0], ipts0[i][1]));
+        edge_left.push_back(POINT(ipts0[i][1], ipts0[i][0]));
     }
     for (int i = 0; i < ipts1_num; i++)
     {
         map_perspective((float)ipts1[i][0], (float)ipts1[i][1], rpts1[i], 0);
-        edge_right.push_back(POINT(ipts1[i][0], ipts1[i][1]));
+        edge_right.push_back(POINT(ipts1[i][1], ipts1[i][0]));
     }
     for (int i = 0; i < far_ipts0_num; i++)
         map_perspective((float)far_ipts0[i][0], (float)far_ipts0[i][1], far_rpts0[i], 0);
