@@ -231,7 +231,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             }
         }
         {
-            ipts0_num = 180; ipts1_num = 180;
+            ipts0_num = 170; ipts1_num = 170;
             //双线程巡线
             // if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
             find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
@@ -281,7 +281,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         map_perspective((float)ipts0[i][0], (float)ipts0[i][1], rpts0[i], 0);
         edge_left.push_back(POINT(ipts0[i][1], ipts0[i][0]));
     }
-    for (int i = 0; i < ipts1_num; i++){
+    for (int i = 0; i < ipts1_num; i++) {
         map_perspective((float)ipts1[i][0], (float)ipts1[i][1], rpts1[i], 0);
         edge_right.push_back(POINT(ipts1[i][1], ipts1[i][0]));
     }
@@ -885,12 +885,12 @@ void ImageProcess::get_edge(int mode)
 
 }
 
-void ImageProcess::Attitude_Ring(float nowYaw,float expYaw,float P,float D) {
-    static float last_err=0;
+void ImageProcess::Attitude_Ring(float nowYaw, float expYaw, float P, float D) {
+    static float last_err = 0;
     float err = expYaw - nowYaw;
     float Pout = err * P;
     float Dout = (err - last_err) * D;
-    
+
     aim_angle = (Pout + Dout);
     last_err = err;
 }
