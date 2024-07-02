@@ -308,22 +308,27 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* *************************** 目标检测结果 ************************** */
     /* ***************************************************************** */
     detection_result.clear();
-    _det_result = detection->getResult()->result;
-    // 遍历检测结果
-    for (size_t i = 0; i < _det_result.size(); i++) {
-        DetectionPredictResult r = _det_result[i];
-        // 检测结果筛选
-        if (r.score < _config->threshold_detection)
-            continue;
-        int deX = r.x / 2, deY = r.y / 2;
-        int deH = r.height / 2, deW = r.width / 2;
-        DETECTION detection;
-        detection.label = r.type;
-        detection.x = deX + deW / 2;
-        detection.y = deY + deH / 2;
-        detection.score = r.score;
-        detection_result.push_back(detection);
+    if (detection->_is_predicted)
+    {
+        _det_result = detection->getResult()->result;
+        // 遍历检测结果
+        for (size_t i = 0; i < _det_result.size(); i++) {
+            DetectionPredictResult r = _det_result[i];
+            // 检测结果筛选
+            if (r.score < _config->threshold_detection)
+                continue;
+            int deX = r.x / 2, deY = r.y / 2;
+            int deH = r.height / 2, deW = r.width / 2;
+            DETECTION detection;
+            detection.label = r.type;
+            detection.x = deX + deW / 2;
+            detection.y = deY + deH / 2;
+            detection.score = r.score;
+            detection_result.push_back(detection);
+        }
     }
+
+
 
 
     // // 检测完成判断 (加油站 & 施工区 跳过 防止重复获取检测结果)
