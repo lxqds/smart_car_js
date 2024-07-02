@@ -45,17 +45,17 @@ void check_bomb()
         !control_flag.contains(ramp_element)
         )
     {
-        for (auto r : IMG.detection_result)
-        {
-            if (r.label == IMG.label_bomb && r.score > 0.6 && r.y > IMAGE_HEIGHT * 0.1) {
-                IMG.element_identify = 1;
-                control_flag.push(bomb_element);
-                bomb_route = IMG.encoder.route;
-                flag_bomb = BOMB_FOUND;
-                MAT_LOG("BOMB_FOUND");
-                break;
-            }
-        }
+        // for (auto r : IMG.detection_result)
+        // {
+        //     if (r.label == IMG.label_bomb && r.score > 0.6 && r.y > IMAGE_HEIGHT * 0.1) {
+        //         IMG.element_identify = 1;
+        //         control_flag.push(bomb_element);
+        //         bomb_route = IMG.encoder.route;
+        //         flag_bomb = BOMB_FOUND;
+        //         MAT_LOG("BOMB_FOUND");
+        //         break;
+        //     }
+        // }
 
 
 
