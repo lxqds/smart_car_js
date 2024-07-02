@@ -28,7 +28,7 @@ int bomb_x = 0;           //横坐标
 int bomb_y = 0;           //纵坐标
 int = 0;           //横坐标
 int bomb_block_y = 0;           //纵坐标
-bomb_block_x
+int bomb_block_x = 0;
 int first_cone = 0;        //第一个锥桶的位置
 int first_cone_count = 0;    //第一个锥桶计数 
 
