@@ -33,25 +33,32 @@ void check_work()
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&   //当前没在入库中
         !control_flag.contains(ramp_element) &&      //当前没在桥中
-        !control_flag.contains(bomb_element) &&    //当前没在炸弹中
-        (flag_work == WORK_DETECTION || flag_work == WORK_EVEI_DETECTION))
-    {
-        if (flag_work == WORK_EVEI_DETECTION) {
-            MAT_LOG("WORK_FOUND_R");
-            direction_work = false;
-            IMG.flag_track = TRACK_RIGHT;
-        }
-        else {
-            MAT_LOG("WORK_FOUND_L");
-            direction_work = true;
-            IMG.flag_track = TRACK_LEFT;
+        !control_flag.contains(bomb_element)
+        {
+            for (auto r : IMG.detection_result)
+            {
+                if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.6 && r.y > IMAGE_HEIGHT * 0.1) {
+                    IMG.element_identify = 1;
+                    control_flag.push(work_element);
+                    work_route = IMG.encoder.route;
+                    direction_work = false;
+                    IMG.flag_track = TRACK_RIGHT;
+                    flag_work = WORK_FOUND_1;
+                    MAT_LOG("WORK_FOUND_R");
+                }
+                else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.6 && r.y > IMAGE_HEIGHT * 0.1) {
+
+                    IMG.element_identify = 1;
+                    control_flag.push(work_element);
+                    work_route = IMG.encoder.route;
+                    direction_work = true;
+                    IMG.flag_track = TRACK_LIGHT;
+                    flag_work = WORK_FOUND_1;
+                    MAT_LOG("WORK_FOUND_L");
+                }
+            }
         }
 
-        IMG.element_identify = 1;
-        work_route = IMG.encoder.route;
-        control_flag.push(work_element);
-        flag_work = WORK_FOUND_1;
-    }
 }
 
 /* ********************************************************************* */
@@ -61,7 +68,7 @@ void run_work()
 
 
     if (control_flag.top() == work_element) {
-
+        IMG.get_edge(0);
         //工作区基准速度
         IMG.aim_speed = IMG._config->speed_work;
 
