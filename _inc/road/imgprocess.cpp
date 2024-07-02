@@ -318,7 +318,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         int deX = r.x / 2, deY = r.y / 2;
         int deH = r.height / 2, deW = r.width / 2;
         DETECTION detection;
-        detection.label = DetectionLabel(r.type);
+        detection.label = r.type;
         detection.x = deX + deW / 2;
         detection.y = deY + deH / 2;
         detection.score = r.score;

@@ -156,7 +156,7 @@ public:
     };
     // 重构坐标类
     struct DETECTION {
-        DetectionLabel label;
+        int label;
         int x;           //横坐标
         int y;           //纵坐标
         float score;    //相似度
