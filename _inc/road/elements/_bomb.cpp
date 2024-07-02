@@ -26,9 +26,9 @@ POINT bomb_near_cone;  // 较近的锥桶
 float bomb_route = 0;  // 炸弹区编码器积分
 int bomb_x = 0;           //横坐标
 int bomb_y = 0;           //纵坐标
-int bomb_block_x = 0;           //横坐标
+int = 0;           //横坐标
 int bomb_block_y = 0;           //纵坐标
-
+bomb_block_x
 int first_cone = 0;        //第一个锥桶的位置
 int first_cone_count = 0;    //第一个锥桶计数 
 
@@ -110,7 +110,7 @@ void run_bomb()
                     IMG._config->speed_bomb2;
                 }
             }
-        // 当车辆开始靠近第一个锥桶:
+            // 当车辆开始靠近第一个锥桶:
             if (bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_first_cone_ready && (first_cone_count > 3 || first_cone_count < -3))
             {
                 first_cone_count = 0;
@@ -217,6 +217,15 @@ void run_bomb()
                     PIXEL_PER_METER * IMG._config->bomb_second_run_wide / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
+            }
+            for (auto r : IMG.detection_result)
+            {
+                if (r.label == IMG.label_block) {
+                    bomb_block_y = r.y;
+                    bomb_block_x = r.x;
+
+                    break;
+                }
             }
 
             if (bomb_block_y > IMAGE_HEIGHT * 0.1)
