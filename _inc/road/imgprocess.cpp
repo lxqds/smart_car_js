@@ -892,6 +892,7 @@ void ImageProcess::Attitude_Ring(float nowYaw,float expYaw,float P,float D) {
     float Dout = (err - last_err) * D;
     
     aim_angle = (Pout + Dout);
+    last_err = err;
 }
 
 void ImageProcess::calculate_angle(void)
