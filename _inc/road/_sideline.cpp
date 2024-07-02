@@ -525,7 +525,12 @@ POINT search_right_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
         for (int y = pointsEdge[i].y; y > pointsEdge[i].y - 50; y--) {
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) {
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
+                {
                     sum--;
+                    cv::line(IMG.mat_result, cv::Point(pointsEdge[i].y, pointsEdge[i].x),
+                        cv::Point(y, pointsEdge[i].x),
+                        cv::Scalar(255, 0, 255), 7);
+                }
                 if (sum <= 0)
                 {
                     if (resw > pointsEdge[i].y - y)
