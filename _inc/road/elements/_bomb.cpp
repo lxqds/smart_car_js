@@ -26,9 +26,8 @@ POINT bomb_near_cone;  // 较近的锥桶
 float bomb_route = 0;  // 炸弹区编码器积分
 int bomb_x = 0;           //横坐标
 int bomb_y = 0;           //纵坐标
-int = 0;           //横坐标
+int bomb_block_x = 0;           //横坐标
 int bomb_block_y = 0;           //纵坐标
-int bomb_block_x = 0;
 int first_cone = 0;        //第一个锥桶的位置
 int first_cone_count = 0;    //第一个锥桶计数 
 
