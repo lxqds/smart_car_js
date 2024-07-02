@@ -153,6 +153,8 @@ void run_bomb()
                     bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_second_cone_ready)
                 {
                     bomb_route = IMG.encoder.route;
+                    bomb_block_x = 0;
+                    bomb_block_y = 0;
                     flag_bomb = BOMB_SECOND_CONE;
                     MAT_LOG("BOMB_SECOND_CONE");
                 }
@@ -178,6 +180,8 @@ void run_bomb()
                     bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_second_cone_ready)//最近的是左边锥桶
                 {
                     bomb_route = IMG.encoder.route;
+                    bomb_block_x = 0;
+                    bomb_block_y = 0;
                     flag_bomb = BOMB_SECOND_CONE;
                     MAT_LOG("BOMB_SECOND_CONE");
                 }
