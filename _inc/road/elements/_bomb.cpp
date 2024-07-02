@@ -56,9 +56,6 @@ void check_bomb()
                 break;
             }
         }
-
-
-
     }
 
 
