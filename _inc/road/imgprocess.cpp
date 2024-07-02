@@ -322,7 +322,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         detection.x = deX + deW / 2;
         detection.y = deY + deH / 2;
         detection.score = r.score;
-        detection_result.push_back(r);
+        detection_result.push_back(detection);
     }
 
 
