@@ -33,7 +33,7 @@ void check_work()
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&   //当前没在入库中
         !control_flag.contains(ramp_element) &&      //当前没在桥中
-        !control_flag.contains(bomb_element)
+        !control_flag.contains(bomb_element))
         {
             for (auto r : IMG.detection_result)
             {
@@ -175,7 +175,7 @@ void run_work()
             // 调整 进入角度
          /*   IMG.aim_angle = IMG._config->work_angle_in_1;
             if (!direction_work) IMG.aim_angle = -IMG.aim_angle;*/
-            Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);
+            IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);
             if ((IMG.encoder.route - work_route > IMG._config->work_rou_ready ) && (work_near_cone.x==0 && work_near_cone.y == 0 ))
             {
 
