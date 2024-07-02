@@ -80,7 +80,7 @@ void run_bomb()
                 else
                     bomb_near_cone = bomb_near_cone_R;
 
-                if (bomb_near_cone > IMAGE_HEIGHT * 0.4) {
+                if (bomb_near_cone.x > IMAGE_HEIGHT * 0.4) {
 
                     if (bomb_near_cone_L.x > bomb_near_cone_R.x) {
                         if (first_cone_count < 0)first_cone_count = 0;
