@@ -43,6 +43,7 @@ public:
     void process(cv::Mat& mat_origin, cv::Mat& mat_result, Payload_t& payload);
     void calculate_angle(void);
     void get_edge(int mode = 0);
+    void Attitude_Ring(float nowYaw, float expYaw, float P, float D); //姿态环
 private:
     bool _is_result = false;  // 是否生成处理后的图像
 

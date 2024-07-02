@@ -166,8 +166,9 @@ void run_work()
                 work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
              
             // 调整 进入角度
-            IMG.aim_angle = IMG._config->work_angle_in_1;
-            if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
+         /*   IMG.aim_angle = IMG._config->work_angle_in_1;
+            if (!direction_work) IMG.aim_angle = -IMG.aim_angle;*/
+            Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);
             if ((IMG.encoder.route - work_route > IMG._config->work_rou_ready ) && (work_near_cone.x==0 && work_near_cone.y == 0 ))
             {
 
