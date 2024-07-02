@@ -110,64 +110,6 @@ void run_bomb()
                     IMG._config->speed_bomb2;
                 }
             }
-            // IMG.edge_det.clear();
-        // // IMG.edge_det = search_targets(IMG._det_result);
-        // bomb_near_cone = AI_search_height_near(IMG._det_result);
-        // bomb_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);
-        // if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
-        // {
-        //     float rnear_cone_x;//透视后锥桶x
-        //     float cone_line_min0 = 999.0;//左边线和锥桶最小距离
-        //     float cone_line_min1 = 999.0;//右边线和锥桶最小距离
-        //     map_perspective(bomb_near_cone.x, bomb_near_cone.x, &rnear_cone_x, 0);//锥桶透视变化
-        //     for (int i = 0;i < IMG.rpts0s_num;i++)
-        //     {
-        //         float dx = IMG.rpts0s[i][0] - rnear_cone_x;
-        //         float dy = IMG.rpts0s[i][1] - bomb_near_cone.x;
-        //         float length = sqrt(dx * dx + dy * dy);
-        //         if (length < cone_line_min0)
-        //         {
-        //             cone_line_min0 = length;
-        //         }
-        //     }
-        //     for (int i = 0;i < IMG.rpts1s_num;i++)
-        //     {
-        //         float dx = IMG.rpts1s[i][0] - rnear_cone_x;
-        //         float dy = IMG.rpts1s[i][1] - bomb_near_cone.x;
-        //         float length = sqrt(dx * dx + dy * dy);
-        //         if (length < cone_line_min1)
-        //         {
-        //             cone_line_min1 = length;
-        //         }
-        //     }
-        //     MAT_LOG("L=%.1lf R=%.1lf", cone_line_min0, cone_line_min1);
-        //     if (cone_line_min0 < cone_line_min1)
-        //         first_cone_count++;
-        //     else
-        //         first_cone_count--;
-        //     if (first_cone_count >= 3)
-        //     {
-        //         first_cone = 0;
-        //     }
-
-        //     else if (first_cone_count <= -3)
-        //     {
-        //         first_cone = 1;
-        //     }
-        //     bomb_route = IMG.encoder.route;
-        //     if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
-        //     {
-        //         IMG._config->speed_bomb2;
-        //     }
-
-        // }
-
-                //first_cone_ready    0.3
-                //first_cone_run_wide  0.2
-                //bomb_second_cone_ready 0.7
-                //bomb_second_run_wide  0.15
-                //boom_block_ready 0.45
-                //boom_block_run_wide 0.2
         // 当车辆开始靠近第一个锥桶:
             if (bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_first_cone_ready && (first_cone_count > 3 || first_cone_count < -3))
             {
@@ -196,37 +138,6 @@ void run_bomb()
             bomb_near_cone_R = POINT(0, 0);
             bomb_near_cone_L = search_left_near_in(IMG.edge_left, IMG.mat_lab);
             bomb_near_cone_R = search_right_near_in(IMG.edge_right, IMG.mat_lab);
-
-            // bomb_near_cone = POINT(0, 0);
-            // IMG.edge_det.clear();
-            // bomb_near_cone = AI_search_height_near(IMG._det_result);
-
-            // float rnear_cone_x;//透视后锥桶x
-            // float cone_line_min0 = 999.0;//左边线和锥桶最小距离
-            // float cone_line_min1 = 999.0;//右边线和锥桶最小距离
-            // map_perspective(bomb_near_cone.x, bomb_near_cone.x, &rnear_cone_x, 0);//锥桶透视变化
-            // for (int i = 0;i < IMG.rpts0s_num;i++)
-            // {
-            //     float dx = IMG.rpts0s[i][0] - rnear_cone_x;
-            //     float dy = IMG.rpts0s[i][1] - bomb_near_cone.x;
-            //     float length = sqrt(dx * dx + dy * dy);
-            //     if (length < cone_line_min0)
-            //     {
-            //         cone_line_min0 = length;
-            //     }
-            // }
-            // for (int i = 0;i < IMG.rpts1s_num;i++)
-            // {
-            //     float dx = IMG.rpts1s[i][0] - rnear_cone_x;
-            //     float dy = IMG.rpts1s[i][1] - bomb_near_cone.x;
-            //     float length = sqrt(dx * dx + dy * dy);
-            //     if (length < cone_line_min1)
-            //     {
-            //         cone_line_min1 = length;
-            //     }
-            // }
-
-
 
             if (first_cone == 0)    //第一个锥桶在左边，循右线
             {
