@@ -277,13 +277,11 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     float far_rpts1[IMAGE_HEIGHT][2] = { 0 };
     edge_left.clear();edge_right.clear();
     //透视变换得到的线
-    for (int i = 0; i < ipts0_num; i++)
-    {
+    for (int i = 0; i < ipts0_num; i++) {
         map_perspective((float)ipts0[i][0], (float)ipts0[i][1], rpts0[i], 0);
         edge_left.push_back(POINT(ipts0[i][1], ipts0[i][0]));
     }
-    for (int i = 0; i < ipts1_num; i++)
-    {
+    for (int i = 0; i < ipts1_num; i++){
         map_perspective((float)ipts1[i][0], (float)ipts1[i][1], rpts1[i], 0);
         edge_right.push_back(POINT(ipts1[i][1], ipts1[i][0]));
     }
