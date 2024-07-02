@@ -789,7 +789,6 @@ void ImageProcess::get_edge(int mode)
     ipts0_num = rptsc_num;
     // 原图边线 -> 透视边线 右
     rptsc_num = 0;
-    edge_right.clear();
     for (int i = 0; i < ipts1_num; i++, rptsc_num++) {
         if (ipts1[i][1] < 10)
             break;
