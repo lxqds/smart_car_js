@@ -42,15 +42,23 @@ void check_bomb()
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&      //当前没在入库中
-        !control_flag.contains(ramp_element) &&      //当前没在桥中
-        flag_bomb == BOMB_DETECTION && bomb_y > IMAGE_HEIGHT * 0.1 //找到炸弹
+        !control_flag.contains(ramp_element)
         )
     {
-        IMG.element_identify = 1;
-        control_flag.push(bomb_element);
-        bomb_route = IMG.encoder.route;
-        flag_bomb = BOMB_FOUND;
-        MAT_LOG("BOMB_FOUND");
+        for (auto r : IMG.detection_result)
+        {
+            if (DetectionLabel(r.type) == IMG.label_bomb && r.score > 0.6 && r.y > IMAGE_HEIGHT * 0.1) {
+                IMG.element_identify = 1;
+                control_flag.push(bomb_element);
+                bomb_route = IMG.encoder.route;
+                flag_bomb = BOMB_FOUND;
+                MAT_LOG("BOMB_FOUND");
+                break;
+            }
+        }
+
+
+
     }
 
 
@@ -60,6 +68,7 @@ void check_bomb()
 
 void run_bomb()
 {
+    IMG.get_edge(0);
     if (control_flag.top() == bomb_element) {//当前为炸弹元素
 
         if (flag_bomb == BOMB_FOUND)

@@ -9,86 +9,6 @@ extern std::shared_ptr<SerialDriver> serial;
 Control_Flag control_flag;
 
 
-//线程池
-class _MyThreadPool {
-private:
-
-public:
-    std::vector<std::thread> workers;
-    std::queue<std::function<void()>> tasks;
-    std::mutex queue_mutex;
-    std::condition_variable condition;
-    bool stop;
-    int num_thread;
-    int num_thread_free;
-    _MyThreadPool(int num_threads) : stop(false) {
-        num_thread = num_threads;
-        num_thread_free = num_threads;
-        for (int i = 0; i < num_threads; ++i) {
-            workers.emplace_back(std::thread([this]() {
-                while (true) {
-                    std::function<void()> task;
-                    {
-                        std::unique_lock<std::mutex> lock(queue_mutex);
-                        condition.wait(lock, [this] { return !tasks.empty() || stop; });
-                        if (stop && tasks.empty()) return;
-                        task = std::move(tasks.front());
-                        tasks.pop();
-                    }
-                    task(); // 执行任务
-                    {
-                        std::unique_lock<std::mutex> lock(queue_mutex);
-                        num_thread_free++;
-                    }
-
-                    //std::cout << _i << "线程  ";
-                }
-                }));
-        }
-    }
-    template<typename Func, typename... Args>
-    bool addTask(Func&& func, Args&&... args) {
-        {
-            if (getNumIdleThreads() == 0) {
-                return false;
-            }
-            std::lock_guard<std::mutex> lock(queue_mutex);
-            auto task = std::bind(std::forward<Func>(func), std::forward<Args>(args)...);
-            tasks.push(task);
-            num_thread_free--;
-        }
-        condition.notify_one();
-
-        return true;
-    }
-    // 判断线程池是否空闲
-    void waitThreadPoolFree() {
-        while (true) {
-            int num = getNumIdleThreads();
-            // MAT_LOG("NumIdleThreads=%d", num);
-            if (num == num_thread)break;
-        }
-    }
-    // 获取空闲线程的数量
-    int getNumIdleThreads() {
-        std::lock_guard<std::mutex> lock(queue_mutex);
-        return num_thread_free;
-    }
-    ~_MyThreadPool() {
-        {
-            std::lock_guard<std::mutex> lock(queue_mutex);
-            stop = true;
-        }
-        condition.notify_all();
-        for (std::thread& worker : workers) {
-            if (worker.joinable()) {
-                worker.join();
-            }
-        }
-    }
-};
-// _MyThreadPool MyThreadPool(0);
-
 /* 初始化 */
 int ImageProcess::init(std::string config_path, bool is_result) {
     _config = make_shared<ControlConfig>(config_path);
@@ -387,165 +307,183 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* ***************************************************************** */
     /* *************************** 目标检测结果 ************************** */
     /* ***************************************************************** */
-
-    // 检测完成判断 (加油站 & 施工区 跳过 防止重复获取检测结果)
-    if ((flag_work <= WORK_DETECTION) &&
-        detection->_is_predicted) {
-        _det_result = detection->getResult()->result;
-
-        // 遍历检测结果
-        for (size_t i = 0; i < _det_result.size(); i++) {
-            DetectionPredictResult r = _det_result[i];
-
-            // 检测结果筛选
-            if (r.score < _config->threshold_detection)
-                continue;
-            if (DetectionLabel(r.type) == label_cone) {
-                // continue;
-            }
-
-            // 转换到处理图像坐标
-            int deX = r.x / 2, deY = r.y / 2;
-            int deH = r.height / 2, deW = r.width / 2;
-
-            log_i("Detection GET %d ,%f", r.type, r.score);
-            // 尺寸位置筛选
-            // if ((deX < 10 || deX + deW > 300) || deY < 20 || (deH < 25 || deW < 25))
-                //continue;
-
-            // 禁止在元素内判断其他元素
-
-
-            switch (DetectionLabel(r.type)) {
-                case label_bomb:      // 炸弹
-                {
-                    if (!control_flag.contains(circle_element) &&   //当前没在环岛中
-                        !control_flag.contains(work_element) &&     //当前没在工作区中
-                        !control_flag.contains(garage_element) &&      //当前没在入库中
-                        !control_flag.contains(ramp_element) &&      //当前没在桥中
-                        !control_flag.contains(bomb_element)      //当前没在炸弹中
-                        ) {
-                        flag_bomb = BOMB_DETECTION;
-
-                        sprintf(string_log, "label_bomb_DETECTION");
-                        log_i("label_bomb_DETECTION");
-                    }
-                    bomb_y = deY + deH / 2;
-                    bomb_x = deX + deW / 2;
-                }break;
-                case label_thief:      // 贼 和 恶人处理方式一样 不 break
-                case label_evil:      //恶人
-                {
-                    if (!control_flag.contains(circle_element) &&   //当前没在环岛中
-                        !control_flag.contains(work_element) &&     //当前没在工作区中
-                        !control_flag.contains(garage_element) &&      //当前没在入库中
-                        !control_flag.contains(ramp_element) &&      //当前没在桥中
-                        !control_flag.contains(bomb_element) &&     //当前没在炸弹中
-                        r.score > 0.6) {
-                        if (flag_work == WORK_NONE && _config->check_work_ == 1) {
-                            flag_work = WORK_EVEI_DETECTION;
-                            sprintf(string_log, "WORK_EVEI_DETECTION");
-                        }
-
-                        if (flag_work != WORK_NONE) sprintf(string_log, "flag_work != WORK_NONE");
-
-                        sprintf(string_log, "label_evil_thief");
-                        log_i("label_evil_DETECTION or label_thief");
-                    }
-                }break;
-                case label_tumble:      // 跌倒
-                case label_patient:     // 病人
-                    if (!control_flag.contains(circle_element) &&   //当前没在环岛中
-                        !control_flag.contains(work_element) &&     //当前没在工作区中
-                        !control_flag.contains(garage_element) &&      //当前没在入库中
-                        !control_flag.contains(ramp_element) &&      //当前没在桥中
-                        !control_flag.contains(bomb_element) &&     //当前没在炸弹中
-                        r.score > 0.6
-                        ) {
-                        if (flag_work == WORK_NONE && _config->check_work_ == 1) {
-
-                            flag_work = WORK_DETECTION;
-                            sprintf(string_log, "PATIENT_DETECTION");
-                            log_i("PATIENT_DETECTION");
-                        }
-                    }
-
-                    break;
-                case label_prop:      // 道具小车
-                {
-                    sprintf(string_log, "label_prop_DETECTION");
-                    log_i("label_prop_DETECTION");
-                }break;
-                case label_safety:      // 普通小车
-                {
-                    sprintf(string_log, "label_safety_DETECTION");
-                    log_i("label_safety_DETECTION");
-                }break;
-                case label_spy:      // 嫌犯小车
-                {
-                    sprintf(string_log, "label_spy_DETECTION");
-                    log_i("label_spy_DETECTION");
-                }break;
-                case label_danger:      // 危险小车
-                {
-                    sprintf(string_log, "label_danger_DETECTION");
-                    log_i("label_danger_DETECTION");
-                }break;
-
-                case label_bridge:  // 桥
-                    if (!control_flag.contains(circle_element) &&   //当前没在环岛中
-                        !control_flag.contains(work_element) &&     //当前没在工作区中
-                        !control_flag.contains(garage_element) &&      //当前没在入库中
-                        !control_flag.contains(ramp_element) &&      //当前没在桥中
-                        !control_flag.contains(bomb_element) &&     //当前没在炸弹中
-                        r.score > 0.75
-                        ) {
-                        flag_ramp = RAMP_DETECTION;
-                        sprintf(string_log, "label_bomb_DETECTION");
-                        log_i("BRIDGE_DETECTION");
-                    }
-                    ramp_y = deY + deH / 2;
-                    ramp_x = deX + deW / 2;
-                    ramp_score = r.score;
-                    break;
-                case label_block:      // 黑块
-                {
-                    bomb_block_y = deY + deH / 2;
-                    bomb_block_x = deX + deW / 2;
-                    // sprintf(string_log, "label_block_DETECTION");
-                    // log_i("label_block_DETECTION");
-                }break;
-                case label_crosswalk:  // 斑马线
-                    if (flag_garage == GARAGE_NONE && _config->check_garage_AI == 1) {
-                        flag_garage = GARAGE_AI_DETECTION;
-                        sprintf(string_log, "GARAGE_AI_DETECTION");
-                        log_i("GARAGE_AI_DETECTION");
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-            if (r.type > 0 && r.type < 16) {
-                // 计算偏移
-                if (deY < BEGIN_Y + 30 && deY + deH > BEGIN_Y - 30 &&
-                    deX < IMAGE_WIDTH - BEGIN_X + 20 && deX + deW > BEGIN_X - 20) {
-                    if (deX < begin_x_l)
-                        begin_x_l = deX;
-                    if (deX + deW > begin_x_r)
-                        begin_x_r = deX + deW;
-                }
-
-                // 绘制检测结果
-                if (_is_result) {
-                    MAT_INFO(mat_result, cv::Point(deX, deY), 0.4, "%s - %.2f",
-                        detection_labels[r.type].c_str(), r.score);
-                    cv::Rect rect(deX, deY, deW, deH);
-                    cv::rectangle(mat_result, rect, cv::Scalar(0, 0, 224), 2);
-                }
-            }
-        }
+    detection_result.clear();
+    _det_result = detection->getResult()->result;
+    // 遍历检测结果
+    for (size_t i = 0; i < _det_result.size(); i++) {
+        DetectionPredictResult r = _det_result[i];
+        // 检测结果筛选
+        if (r.score < _config->threshold_detection)
+            continue;
+        int deX = r.x / 2, deY = r.y / 2;
+        int deH = r.height / 2, deW = r.width / 2;
+        DETECTION detection;
+        detection.label = DetectionLabel(r.type);
+        detection.x = deX + deW / 2;
+        detection.y = deY + deH / 2;
+        detection.score = r.score;
+        detection_result.push_back(r);
     }
+
+
+    // // 检测完成判断 (加油站 & 施工区 跳过 防止重复获取检测结果)
+    // if ((flag_work <= WORK_DETECTION) &&
+    //     detection->_is_predicted) {
+    //     _det_result = detection->getResult()->result;
+
+    //     // 遍历检测结果
+    //     for (size_t i = 0; i < _det_result.size(); i++) {
+    //         DetectionPredictResult r = _det_result[i];
+
+    //         // 检测结果筛选
+    //         if (r.score < _config->threshold_detection)
+    //             continue;
+    //         if (DetectionLabel(r.type) == label_cone) {
+    //             // continue;
+    //         }
+
+    //         // 转换到处理图像坐标
+    //         int deX = r.x / 2, deY = r.y / 2;
+    //         int deH = r.height / 2, deW = r.width / 2;
+
+    //         log_i("Detection GET %d ,%f", r.type, r.score);
+    //         // 尺寸位置筛选
+    //         // if ((deX < 10 || deX + deW > 300) || deY < 20 || (deH < 25 || deW < 25))
+    //             //continue;
+
+    //         // 禁止在元素内判断其他元素
+
+
+    //         switch (DetectionLabel(r.type)) {
+    //             case label_bomb:      // 炸弹
+    //             {
+    //                 if (!control_flag.contains(circle_element) &&   //当前没在环岛中
+    //                     !control_flag.contains(work_element) &&     //当前没在工作区中
+    //                     !control_flag.contains(garage_element) &&      //当前没在入库中
+    //                     !control_flag.contains(ramp_element) &&      //当前没在桥中
+    //                     !control_flag.contains(bomb_element)      //当前没在炸弹中
+    //                     ) {
+    //                     flag_bomb = BOMB_DETECTION;
+
+    //                     sprintf(string_log, "label_bomb_DETECTION");
+    //                     log_i("label_bomb_DETECTION");
+    //                 }
+    //                 bomb_y = deY + deH / 2;
+    //                 bomb_x = deX + deW / 2;
+    //             }break;
+    //             case label_thief:      // 贼 和 恶人处理方式一样 不 break
+    //             case label_evil:      //恶人
+    //             {
+    //                 if (!control_flag.contains(circle_element) &&   //当前没在环岛中
+    //                     !control_flag.contains(work_element) &&     //当前没在工作区中
+    //                     !control_flag.contains(garage_element) &&      //当前没在入库中
+    //                     !control_flag.contains(ramp_element) &&      //当前没在桥中
+    //                     !control_flag.contains(bomb_element) &&     //当前没在炸弹中
+    //                     r.score > 0.6) {
+    //                     if (flag_work == WORK_NONE && _config->check_work_ == 1) {
+    //                         flag_work = WORK_EVEI_DETECTION;
+    //                         sprintf(string_log, "WORK_EVEI_DETECTION");
+    //                     }
+
+    //                     if (flag_work != WORK_NONE) sprintf(string_log, "flag_work != WORK_NONE");
+
+    //                     sprintf(string_log, "label_evil_thief");
+    //                     log_i("label_evil_DETECTION or label_thief");
+    //                 }
+    //             }break;
+    //             case label_tumble:      // 跌倒
+    //             case label_patient:     // 病人
+    //                 if (!control_flag.contains(circle_element) &&   //当前没在环岛中
+    //                     !control_flag.contains(work_element) &&     //当前没在工作区中
+    //                     !control_flag.contains(garage_element) &&      //当前没在入库中
+    //                     !control_flag.contains(ramp_element) &&      //当前没在桥中
+    //                     !control_flag.contains(bomb_element) &&     //当前没在炸弹中
+    //                     r.score > 0.6
+    //                     ) {
+    //                     if (flag_work == WORK_NONE && _config->check_work_ == 1) {
+
+    //                         flag_work = WORK_DETECTION;
+    //                         sprintf(string_log, "PATIENT_DETECTION");
+    //                         log_i("PATIENT_DETECTION");
+    //                     }
+    //                 }
+
+    //                 break;
+    //             case label_prop:      // 道具小车
+    //             {
+    //                 sprintf(string_log, "label_prop_DETECTION");
+    //                 log_i("label_prop_DETECTION");
+    //             }break;
+    //             case label_safety:      // 普通小车
+    //             {
+    //                 sprintf(string_log, "label_safety_DETECTION");
+    //                 log_i("label_safety_DETECTION");
+    //             }break;
+    //             case label_spy:      // 嫌犯小车
+    //             {
+    //                 sprintf(string_log, "label_spy_DETECTION");
+    //                 log_i("label_spy_DETECTION");
+    //             }break;
+    //             case label_danger:      // 危险小车
+    //             {
+    //                 sprintf(string_log, "label_danger_DETECTION");
+    //                 log_i("label_danger_DETECTION");
+    //             }break;
+
+    //             case label_bridge:  // 桥
+    //                 if (!control_flag.contains(circle_element) &&   //当前没在环岛中
+    //                     !control_flag.contains(work_element) &&     //当前没在工作区中
+    //                     !control_flag.contains(garage_element) &&      //当前没在入库中
+    //                     !control_flag.contains(ramp_element) &&      //当前没在桥中
+    //                     !control_flag.contains(bomb_element) &&     //当前没在炸弹中
+    //                     r.score > 0.75
+    //                     ) {
+    //                     flag_ramp = RAMP_DETECTION;
+    //                     sprintf(string_log, "label_bomb_DETECTION");
+    //                     log_i("BRIDGE_DETECTION");
+    //                 }
+    //                 ramp_y = deY + deH / 2;
+    //                 ramp_x = deX + deW / 2;
+    //                 ramp_score = r.score;
+    //                 break;
+    //             case label_block:      // 黑块
+    //             {
+    //                 bomb_block_y = deY + deH / 2;
+    //                 bomb_block_x = deX + deW / 2;
+    //                 // sprintf(string_log, "label_block_DETECTION");
+    //                 // log_i("label_block_DETECTION");
+    //             }break;
+    //             case label_crosswalk:  // 斑马线
+    //                 if (flag_garage == GARAGE_NONE && _config->check_garage_AI == 1) {
+    //                     flag_garage = GARAGE_AI_DETECTION;
+    //                     sprintf(string_log, "GARAGE_AI_DETECTION");
+    //                     log_i("GARAGE_AI_DETECTION");
+    //                 }
+    //                 break;
+    //             default:
+    //                 break;
+    //         }
+
+    //         if (r.type > 0 && r.type < 16) {
+    //             // 计算偏移
+    //             if (deY < BEGIN_Y + 30 && deY + deH > BEGIN_Y - 30 &&
+    //                 deX < IMAGE_WIDTH - BEGIN_X + 20 && deX + deW > BEGIN_X - 20) {
+    //                 if (deX < begin_x_l)
+    //                     begin_x_l = deX;
+    //                 if (deX + deW > begin_x_r)
+    //                     begin_x_r = deX + deW;
+    //             }
+
+    //             // 绘制检测结果
+    //             if (_is_result) {
+    //                 MAT_INFO(mat_result, cv::Point(deX, deY), 0.4, "%s - %.2f",
+    //                     detection_labels[r.type].c_str(), r.score);
+    //                 cv::Rect rect(deX, deY, deW, deH);
+    //                 cv::rectangle(mat_result, rect, cv::Scalar(0, 0, 224), 2);
+    //             }
+    //         }
+    //     }
+    // }
 
     /* ***************************************************************** */
     /* **************************** 元素检测 **************************** */
