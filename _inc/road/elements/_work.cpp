@@ -52,7 +52,7 @@ void check_work()
                     control_flag.push(work_element);
                     work_route = IMG.encoder.route;
                     direction_work = true;
-                    IMG.flag_track = TRACK_LIGHT;
+                    IMG.flag_track = TRACK_LEFT;
                     flag_work = WORK_FOUND_1;
                     MAT_LOG("WORK_FOUND_L");
                 }
