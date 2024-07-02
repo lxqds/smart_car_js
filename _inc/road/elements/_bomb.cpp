@@ -65,9 +65,8 @@ void check_bomb()
 
 void run_bomb()
 {
-    IMG.get_edge(0);
     if (control_flag.top() == bomb_element) {//当前为炸弹元素
-
+        IMG.get_edge(0);
         if (flag_bomb == BOMB_FOUND)
         {
             IMG.aim_speed = IMG._config->speed_bomb1;
