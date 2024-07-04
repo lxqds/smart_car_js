@@ -46,7 +46,7 @@ void check_bomb()
     {
         for (auto r : IMG.detection_result)
         {
-            if (r.label == IMG.label_bomb && r.score > 0.6 && r.y > IMAGE_HEIGHT * 0.1) {
+            if (r.label == IMG.label_bomb && r.score > 0.7 && r.y > IMAGE_HEIGHT * 0.1) {
                 IMG.element_identify = 1;
                 control_flag.push(bomb_element);
                 bomb_route = IMG.encoder.route;
@@ -74,59 +74,50 @@ void run_bomb()
             bomb_near_cone_R = POINT(0, 0);
             bomb_near_cone_L = search_left_near_in(IMG.edge_left, IMG.mat_lab);
             bomb_near_cone_R = search_right_near_in(IMG.edge_right, IMG.mat_lab);
-            if (bomb_near_cone_L.x != 0 && bomb_near_cone_R.x != 0)
-            {
+            if (bomb_near_cone_L.x != 0 && bomb_near_cone_R.x != 0) {
                 if (bomb_near_cone_L.x > bomb_near_cone_R.x)
-                {
-                    if (first_cone_count < 0)first_cone_count = 0;
-
-                    first_cone_count++;
                     bomb_near_cone = bomb_near_cone_L;
-                }
                 else
-                {
-                    if (first_cone_count > 0)first_cone_count = 0;
-                    first_cone_count--;
                     bomb_near_cone = bomb_near_cone_R;
+
+                if (bomb_near_cone.x > IMAGE_HEIGHT * 0.4) {
+
+                    if (bomb_near_cone_L.x > bomb_near_cone_R.x) {
+                        if (first_cone_count < 0)first_cone_count = 0;
+                        first_cone_count++;
+                    }
+                    else {
+                        if (first_cone_count > 0)first_cone_count = 0;
+                        first_cone_count--;
+                    }
                 }
                 MAT_LOG("near_y L=%d R=%d ", bomb_near_cone_L.x, bomb_near_cone_R.x);
             }
 
 
-            if (first_cone_count >= 3)
-            {
-                first_cone = 0;
-            }
-            else if (first_cone_count <= -3)
-            {
-                first_cone = 1;
-            }
-            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1)
-            {
+            if (first_cone_count >= 2) first_cone = 0;
+            else if (first_cone_count <= -2) first_cone = 1;
+            if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1) {
                 bomb_route = IMG.encoder.route;
                 if (bomb_near_cone.x > IMAGE_HEIGHT * 0.4)
-                {
                     IMG._config->speed_bomb2;
-                }
             }
             // 当车辆开始靠近第一个锥桶:
-            if (bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_first_cone_ready && (first_cone_count > 3 || first_cone_count < -3))
-            {
+            if (bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_first_cone_ready &&
+                (first_cone_count > 3 || first_cone_count < -3)) {
                 first_cone_count = 0;
                 bomb_route = IMG.encoder.route;
                 flag_bomb = BOMB_FIRST_CONE;
                 MAT_LOG("BOMB_FIRST_CONE");
             }
-            else if (IMG.encoder.route - bomb_route > 60)
-            {
+            else if (IMG.encoder.route - bomb_route > 60) {
                 first_cone_count = 0;
                 flag_bomb = BOMB_NONE;
                 control_flag.pop();
                 MAT_LOG("BOMB_ERROR1");
             }
         }
-        if (flag_bomb == BOMB_FIRST_CONE)
-        {
+        if (flag_bomb == BOMB_FIRST_CONE) {
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.aim_distance_f = 0.3;
             IMG.aim_distance_n = 0.1;
@@ -138,8 +129,7 @@ void run_bomb()
             bomb_near_cone_L = search_left_near_in(IMG.edge_left, IMG.mat_lab);
             bomb_near_cone_R = search_right_near_in(IMG.edge_right, IMG.mat_lab);
 
-            if (first_cone == 0)    //第一个锥桶在左边，循右线
-            {
+            if (first_cone == 0) {    //第一个锥桶在左边，循右线
                 IMG.flag_track = TRACK_RIGHT;
                 bomb_near_cone = bomb_near_cone_R;
                 //右边线预测中线
@@ -150,24 +140,21 @@ void run_bomb()
                 IMG.rptsc1_num = IMG.rpts1s_num;
                 MAT_LOG(" R_near_y=%d", bomb_near_cone.x);
                 if (IMG.encoder.route - bomb_route > 30 &&
-                    bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_second_cone_ready)
-                {
+                    bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_second_cone_ready) {
                     bomb_route = IMG.encoder.route;
                     bomb_block_x = 0;
                     bomb_block_y = 0;
                     flag_bomb = BOMB_SECOND_CONE;
                     MAT_LOG("BOMB_SECOND_CONE");
                 }
-                else if (IMG.encoder.route - bomb_route > 120)
-                {
+                else if (IMG.encoder.route - bomb_route > 120) {
                     flag_bomb = BOMB_NONE;
                     control_flag.pop();
                     MAT_LOG("BOMB_ERROR3");
                 }
 
             }
-            else
-            {
+            else {
                 IMG.flag_track = TRACK_LEFT;
                 bomb_near_cone = bomb_near_cone_L;
                 //左边线预测中线
@@ -201,92 +188,73 @@ void run_bomb()
             IMG.aim_angle_p *= 1.5;
 
 
-            if (first_cone == 1)    //第一个锥桶在右边，第二个锥桶在左边，寻右线
-            {
+            if (first_cone == 1) {    //第一个锥桶在右边，第二个锥桶在左边，寻右线
+
                 IMG.flag_track = TRACK_RIGHT;
                 //右边线预测中线
                 track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * IMG._config->bomb_second_run_wide / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
-
             }
-            else
-            {
+            else {
                 IMG.flag_track = TRACK_LEFT;
                 //左边线预测中线
                 track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * IMG._config->bomb_second_run_wide / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
-
             }
             for (auto r : IMG.detection_result)
             {
                 if (r.label == IMG.label_block) {
                     bomb_block_y = r.y;
                     bomb_block_x = r.x;
-
                     break;
                 }
             }
 
             if (bomb_block_y > IMAGE_HEIGHT * 0.1)
-            {
                 bomb_route = IMG.encoder.route;
-            }
 
-            if (bomb_block_y > IMAGE_HEIGHT * IMG._config->bomb_block_ready)//靠近黑块
-            {
+            if (bomb_block_y > IMAGE_HEIGHT * IMG._config->bomb_block_ready) {//靠近黑块
                 bomb_route = IMG.encoder.route;
                 flag_bomb = BOMB_BLOCK;
                 MAT_LOG("BOMB_BLOCK");
             }
-            else if (IMG.encoder.route - bomb_route > 40)
-            {
+            else if (IMG.encoder.route - bomb_route > 40) {
                 flag_bomb = BOMB_NONE;
                 control_flag.pop();
                 MAT_LOG("BOMB_ERROR3");
             }
         }
-        if (flag_bomb == BOMB_BLOCK)
-        {
+        if (flag_bomb == BOMB_BLOCK) {
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.aim_distance_f = 0.3;
             IMG.aim_distance_n = 0.1;
             IMG.aim_angle_p *= 1.5;
-
-            if (first_cone == 0)    //第一个锥桶在右边，第二个锥桶在左边，寻右线
-            {
+            if (first_cone == 0) {    //第一个锥桶在右边，第二个锥桶在左边，寻右线
                 IMG.flag_track = TRACK_RIGHT;
                 //右边线预测中线
                 track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * IMG._config->bomb_block_run_wide / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
-
-                if (IMG.encoder.route - bomb_route > 60)//靠近黑块
-                {
+                if (IMG.encoder.route - bomb_route > 60) {//靠近黑块
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_NONE;
                     control_flag.pop();
                     MAT_LOG("BOMB_NONE");
                 }
-                else if (IMG.encoder.route - bomb_route > 120)
-                {
+                else if (IMG.encoder.route - bomb_route > 120) {
                     flag_bomb = BOMB_NONE;
                     control_flag.pop();
                     MAT_LOG("BOMB_ERROR2");
                 }
                 if (IMG.encoder.route - bomb_route > 30)
-                {
                     IMG.aim_speed = IMG._config->speed_bomb1;
-                }
-
-
             }
-            else
-            {
+            else {
                 IMG.flag_track = TRACK_LEFT;
                 //左边线预测中线
                 track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
@@ -294,8 +262,7 @@ void run_bomb()
                     PIXEL_PER_METER * IMG._config->bomb_block_run_wide / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
-                if (IMG.encoder.route - bomb_route > 60)//靠近黑块
-                {
+                if (IMG.encoder.route - bomb_route > 60) {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_NONE;
                     control_flag.pop();
@@ -308,9 +275,7 @@ void run_bomb()
                     MAT_LOG("BOMB_ERROR2");
                 }
                 if (IMG.encoder.route - bomb_route > 30)
-                {
                     IMG.aim_speed = IMG._config->speed_bomb1;
-                }
             }
         }
         // 正常巡线
