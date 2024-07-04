@@ -64,18 +64,18 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
     // // 绘制处理结果图, 灰度格式转BGR格式
 
-    // if (_config->check_binary_ || _config->check_lab_) {
-    //     std::vector<cv::Mat> channels;
-    //     if (_config->check_binary_) {
-    //         for (int i = 0; i < 3; i++)
-    //             channels.push_back(mat_bin);
-    //     }
-    //     else {
-    //         for (int i = 0; i < 3; i++)
-    //             channels.push_back(mat_lab);
-    //     }
-    //     cv::merge(channels, mat_result);
-    // }
+     if (_config->check_binary_ || _config->check_lab_) {
+         std::vector<cv::Mat> channels;
+         if (_config->check_binary_) {
+             for (int i = 0; i < 3; i++)
+                 channels.push_back(mat_bin);
+         }
+         else {
+             for (int i = 0; i < 3; i++)
+                 channels.push_back(mat_lab);
+         }
+         cv::merge(channels, mat_result);
+     }
 
     /* ***************************************************************** */
     /* **************************** 边线处理 **************************** */
