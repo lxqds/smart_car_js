@@ -71,7 +71,7 @@ private:
     std::shared_ptr<Ort::Session> predictor_onnx_;
 
     void _boundaryCorrection(DetectionPredictResult& r, int width_range, int height_range);
-
+    _MyThreadPool MyThreadPool(1);
 public:
     int init();
 
@@ -103,6 +103,8 @@ private:
     std::thread _worker_thread;
 
     BlockingQueue<cv::Mat> _queue;
+    BlockingQueue<DetectionPredictResult> Result_queue;
+    std::mutex queue_mutex;
 
     bool _loop;
     bool _can_predict;
@@ -116,18 +118,27 @@ private:
         {
             if (_queue.Size() >= 1)
             {
-                _can_predict = false;
+
+                // _can_predict = false;
 
                 // stopwatch.tic();
+                auto f = [&]() {
+                    _result->org_frame = _queue.Take().clone();
 
-                _result->org_frame = _queue.Take().clone();
-                _result->result = _predictor->predict(_result->org_frame);
+                    _result->result = _predictor->predict(_result->org_frame);
+                    {
+                        std::unique_lock<std::mutex> lock(queue_mutex);
+                        Result_queue.Put(_result->result);
+                    }
+                    // log_i("detection time: %f", stopwatch.toc());
 
-                // log_i("detection time: %f", stopwatch.toc());
-
-                _is_predicted = true;
+                    _is_predicted = true;
+                    };
+                if (!MyThreadPool.addTask(f)) {
+                    f();
+                }
             }
-            _can_predict = true;
+            // _can_predict = true;
 
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
@@ -177,10 +188,18 @@ public:
         log_i("Stop.");
         return 0;
     };
-
+    void get_result(std::vector<DetectionPredictResult>& ret)
+    {
+        {
+            std::unique_lock<std::mutex> lock(queue_mutex);
+            ret.clear();
+            if (Result_queue.Size() >= 1)
+                ret = Result_queue.Take();
+        }
+    }
     void run(cv::Mat frame_wraper)
     {
-        if (_can_predict && _queue.Size() < 1)
+        if (_queue.Size() < 1)
         {
             _queue.Put(frame_wraper);
         }

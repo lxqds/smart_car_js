@@ -9,6 +9,8 @@ extern std::shared_ptr<SerialDriver> serial;
 Control_Flag control_flag;
 
 
+
+
 /* 初始化 */
 int ImageProcess::init(std::string config_path, bool is_result) {
     _config = make_shared<ControlConfig>(config_path);
