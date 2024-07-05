@@ -116,20 +116,6 @@ private:
     void work();
 
 public:
-    static void f()
-    {
-        _result->org_frame = _queue.Take().clone();
-
-        _result->result = _predictor->predict(_result->org_frame);
-        {
-            std::unique_lock<std::mutex> lock(queue_mutex);
-            Result_queue.Put(_result->result);
-        }
-        // log_i("detection time: %f", stopwatch.toc());
-
-        _is_predicted = true;
-    }
-
 
     bool _is_predicted = false;
 
