@@ -28,6 +28,8 @@ bool direction_work = true;//true : 左工作区 false : 右工作区
 
 void check_work()
 {
+    if(r.score > 0.5)LOG_I << "  get_AI :" << r.label << LOG_END;
+
     if (!IMG.element_over &&
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
