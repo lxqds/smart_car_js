@@ -231,7 +231,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             }
         }
         {
-            ipts0_num = 170; ipts1_num = 170;
+            ipts0_num = 200; ipts1_num = 200;
             //双线程巡线
             // if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
             find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
@@ -763,7 +763,7 @@ void ImageProcess::get_edge(int mode)
 {
     if (mode == 1)
     {
-        ipts0_num = 180; ipts1_num = 180;
+        ipts0_num = 200; ipts1_num = 200;
         // //双线程巡线
         // if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
         find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
