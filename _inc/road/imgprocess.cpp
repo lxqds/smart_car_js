@@ -314,8 +314,9 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* *************************** 目标检测结果 ************************** */
     /* ***************************************************************** */
     detection_result.clear();
-    if (detection->_is_predicted)
+    // if (detection->_is_predicted)
     {
+        _result->result = _predictor->predict(mat_origin);
         _det_result = detection->getResult()->result;
         // 遍历检测结果
         for (size_t i = 0; i < _det_result.size(); i++) {
