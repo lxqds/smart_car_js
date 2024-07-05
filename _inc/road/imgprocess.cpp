@@ -64,18 +64,18 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
     // // 绘制处理结果图, 灰度格式转BGR格式
 
-     if (_config->check_binary_ || _config->check_lab_) {
-         std::vector<cv::Mat> channels;
-         if (_config->check_binary_) {
-             for (int i = 0; i < 3; i++)
-                 channels.push_back(mat_bin);
-         }
-         else {
-             for (int i = 0; i < 3; i++)
-                 channels.push_back(mat_lab);
-         }
-         cv::merge(channels, mat_result);
-     }
+    if (_config->check_binary_ || _config->check_lab_) {
+        std::vector<cv::Mat> channels;
+        if (_config->check_binary_) {
+            for (int i = 0; i < 3; i++)
+                channels.push_back(mat_bin);
+        }
+        else {
+            for (int i = 0; i < 3; i++)
+                channels.push_back(mat_lab);
+        }
+        cv::merge(channels, mat_result);
+    }
 
     /* ***************************************************************** */
     /* **************************** 边线处理 **************************** */
@@ -331,6 +331,12 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             detection.y = deY + deH / 2;
             detection.score = r.score;
             detection_result.push_back(detection);
+            MAT_INFO(mat_result, cv::Point(deX, deY - 5), 0.2, "%.2f", r.score);
+            cv::line(mat_result, cv::Point(deX, deY), cv::Point(deX + deW, deY), cv::Scalar(0, 0, 0), 1);
+            cv::line(mat_result, cv::Point(deX, deY), cv::Point(deX, deY + deH), cv::Scalar(0, 0, 0), 1);
+            cv::line(mat_result, cv::Point(deX + deW, deY + deH), cv::Point(deX + deW, deY), cv::Scalar(0, 0, 0), 1);
+            cv::line(mat_result, cv::Point(deX + deW, deY + deH), cv::Point(deX, deY + deH), cv::Scalar(0, 0, 0), 1);
+
         }
     }
 
