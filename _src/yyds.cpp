@@ -77,7 +77,7 @@ int main(int argc, char const* argv[])
 
     /* 启动多线程 */
     capture->start();
-    // detection->start();
+    detection->start();
     display->start();
 
     /* 初始化PID */
@@ -119,7 +119,7 @@ int main(int argc, char const* argv[])
         capture->get(frame_origin);
 
         // 目标检测
-        detection->run(frame_origin);
+        // detection->run(frame_origin);
 
         // 加油站 & 施工区 等待检测结果
         if (flag_gas > GAS_DETECTION || flag_work > WORK_DETECTION)
