@@ -316,9 +316,9 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     detection_result.clear();
     // if (detection->_is_predicted)
     {
-        detection->_queue.Put(frame_wraper);
+        detection->_queue.Put(mat_origin);
         detection->_result->org_frame = detection->_queue.Take().clone();
-        detection->_result->result = detection->_predictor->predict(_result->org_frame);
+        detection->_result->result = detection->_predictor->predict(detection->_result->org_frame);
         _det_result = detection->getResult()->result;
         // 遍历检测结果
         for (size_t i = 0; i < _det_result.size(); i++) {
