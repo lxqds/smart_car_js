@@ -71,7 +71,7 @@ private:
     std::shared_ptr<Ort::Session> predictor_onnx_;
 
     void _boundaryCorrection(DetectionPredictResult& r, int width_range, int height_range);
-    _MyThreadPool MyThreadPool(1);
+
 public:
     int init();
 
@@ -94,14 +94,15 @@ class Detection
 public:
     Detection() {};
     ~Detection() {};
-
+    
 private:
     std::shared_ptr<SystemConfig> _system_config;
     std::shared_ptr<DetectionPredictor> _predictor;
     std::shared_ptr<DetectionResult> _result;
 
     std::thread _worker_thread;
-
+    
+    _MyThreadPool MyThreadPool(1);
     BlockingQueue<cv::Mat> _queue;
     BlockingQueue<DetectionPredictResult> Result_queue;
     std::mutex queue_mutex;
