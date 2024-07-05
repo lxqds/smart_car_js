@@ -7,7 +7,7 @@
 
 extern std::shared_ptr<SerialDriver> serial;
 Control_Flag control_flag;
-
+extern std::shared_ptr<Detection> detection;
 
 /* 初始化 */
 int ImageProcess::init(std::string config_path, bool is_result) {
@@ -316,7 +316,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     detection_result.clear();
     // if (detection->_is_predicted)
     {
-        _result->result = _predictor->predict(mat_origin);
+        detection->_result->result = detection->_predictor->predict(mat_origin);
         _det_result = detection->getResult()->result;
         // 遍历检测结果
         for (size_t i = 0; i < _det_result.size(); i++) {
