@@ -37,7 +37,7 @@ void check_work()
         {
             for (auto r : IMG.detection_result)
             {
-                if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.6 && r.y > IMAGE_HEIGHT * 0.1) {
+                if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.1) {
                     IMG.element_identify = 1;
                     control_flag.push(work_element);
                     work_route = IMG.encoder.route;
@@ -46,7 +46,7 @@ void check_work()
                     flag_work = WORK_FOUND_1;
                     MAT_LOG("WORK_FOUND_R");
                 }
-                else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.6 && r.y > IMAGE_HEIGHT * 0.1) {
+                else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.1) {
 
                     IMG.element_identify = 1;
                     control_flag.push(work_element);

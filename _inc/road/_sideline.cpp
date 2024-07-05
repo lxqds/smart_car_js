@@ -252,13 +252,10 @@ std::vector<POINT> bezier(double dt, std::vector<POINT> input) {
 float Calculate_K(std::vector<POINT> edge) {
 
     int n = edge.size();
-
-    float px, py = 0;
-    float b, k = 0;
+    float k = 0;
     int bx, ex;
     if (edge[0].y <= edge[n - 1].y) { bx = 0; ex = n - 1; }
     else { bx = n - 1; ex = 0; }
-
     k = ((float)(edge[ex].x - edge[bx].x) / (float)(edge[ex].y - edge[bx].y));
 
     return k;
