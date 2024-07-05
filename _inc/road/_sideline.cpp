@@ -248,6 +248,23 @@ std::vector<POINT> bezier(double dt, std::vector<POINT> input) {
     return output;
 }
 
+//计算返回斜率
+float Calculate_K(std::vector<mPOINT> edge) {
+
+    int n = edge.size();
+
+    float px, py = 0;
+    float b, k = 0;
+    int bx, ex;
+    if (edge[0].y <= edge[n - 1].y) { bx = 0; ex = n - 1; }
+    else { bx = n - 1; ex = 0; }
+
+    k = ((float)(edge[ex].x - edge[bx].x) / (float)(edge[ex].y - edge[bx].y));
+
+    return k;
+
+}
+
 /* *********************************************************************** */
 /* **************************** 特殊 AI 元素处理 *************************** */
 /* ***************************** 加油站 & 施工区 *************************** */
