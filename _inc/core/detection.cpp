@@ -389,6 +389,18 @@ void DetectionPredictor::drawResults(
 
 void Detection::work()
 {
+    auto f = [&]() {
+        _result->org_frame = _queue.Take().clone();
+
+        _result->result = _predictor->predict(_result->org_frame);
+        {
+            std::unique_lock<std::mutex> lock(queue_mutex);
+            Result_queue.Put(_result->result);
+        }
+        // log_i("detection time: %f", stopwatch.toc());
+
+        _is_predicted = true;
+        };
     while (_loop)
     {
         if (_queue.Size() >= 1)
@@ -397,18 +409,7 @@ void Detection::work()
             // _can_predict = false;
 
             // stopwatch.tic();
-            auto f = [&]() {
-                _result->org_frame = _queue.Take().clone();
 
-                _result->result = _predictor->predict(_result->org_frame);
-                {
-                    std::unique_lock<std::mutex> lock(queue_mutex);
-                    Result_queue.Put(_result->result);
-                }
-                // log_i("detection time: %f", stopwatch.toc());
-
-                _is_predicted = true;
-                };
             if (!MyThreadPool->addTask(f)) {
                 f();
             }
