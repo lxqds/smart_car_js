@@ -38,7 +38,7 @@ void check_work()
         {
             for (auto r : IMG.detection_result)
             {
-                if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.1) {
+                if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.52 && r.y > IMAGE_HEIGHT * 0.05) {
                     IMG.element_identify = 1;
                     control_flag.push(work_element);
                     work_route = IMG.encoder.route;
@@ -47,7 +47,7 @@ void check_work()
                     flag_work = WORK_FOUND_1;
                     MAT_LOG("WORK_FOUND_R");
                 }
-                else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.1) {
+                else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.52 && r.y > IMAGE_HEIGHT * 0.05) {
 
                     IMG.element_identify = 1;
                     control_flag.push(work_element);
@@ -167,7 +167,7 @@ void run_work()
 
             //开始调整进入姿态，若是没找到线旁的锥桶 且 小于设定调整路程则开始深入工作区
             float edgek = 0;
-            float threshold_k = -1.48 ;
+            float threshold_k = -1.40 ;
             // 进入方向
             if (direction_work) {
                 work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
