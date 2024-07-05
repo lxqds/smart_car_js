@@ -102,7 +102,7 @@ private:
 
     std::thread _worker_thread;
 
-    _MyThreadPool MyThreadPool();
+    std::shared_ptr<_MyThreadPool> MyThreadPool;
     BlockingQueue<cv::Mat> _queue;
     BlockingQueue<std::vector<DetectionPredictResult>> Result_queue;
     std::mutex queue_mutex;
@@ -123,19 +123,8 @@ private:
                 // _can_predict = false;
 
                 // stopwatch.tic();
-                auto f = [&]() {
-                    _result->org_frame = _queue.Take().clone();
 
-                    _result->result = _predictor->predict(_result->org_frame);
-                    {
-                        std::unique_lock<std::mutex> lock(queue_mutex);
-                        Result_queue.Put(_result->result);
-                    }
-                    // log_i("detection time: %f", stopwatch.toc());
-
-                    _is_predicted = true;
-                    };
-                if (!MyThreadPool.addTask(f)) {
+                if (!MyThreadPool->addTask(f)) {
                     f();
                 }
             }
@@ -146,6 +135,21 @@ private:
     };
 
 public:
+    void f()
+    {
+        _result->org_frame = _queue.Take().clone();
+
+        _result->result = _predictor->predict(_result->org_frame);
+        {
+            std::unique_lock<std::mutex> lock(queue_mutex);
+            Result_queue.Put(_result->result);
+        }
+        // log_i("detection time: %f", stopwatch.toc());
+
+        _is_predicted = true;
+    }
+
+
     bool _is_predicted = false;
 
     int init(std::string system_config_path)
@@ -158,7 +162,7 @@ public:
 
         _predictor = std::make_shared<DetectionPredictor>(_system_config->model_config_path);
         CHECK(_predictor != nullptr) << "Predictor Create failed." << LOG_END;
-        MyThreadPool.init(1);
+        MyThreadPool->init(1);
         int ret = _predictor->init();
         CHECK(ret == 0) << "Predictor Create failed." << LOG_END;
 
