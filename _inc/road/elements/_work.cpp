@@ -202,6 +202,10 @@ void run_work()
 
             IMG.aim_angle = 0;
             LOG_I << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
+            cv::line(mat_result, cv::Point(0, (int)IMAGE_HEIGHT* IMG._config->work_read_cone_thresholdy_avg),
+                cv::Point(IMAGE_WIDTH -1, (int)IMAGE_HEIGHT* IMG._config->work_read_cone_thresholdy_avg), cv::Scalar(0, 0, 255), 1);
+            cv::line(mat_result, cv::Point(IMAGE_WIDTH / 2 + 30, 0),
+                cv::Point(IMAGE_WIDTH / 2 + 30, IMAGE_HEIGHT), cv::Scalar(0, 0, 255), 1);
             //开始靠近锥桶
             if (avg_y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg && IMG.encoder.route - work_route < IMG._config->work_rou_in)
             {
