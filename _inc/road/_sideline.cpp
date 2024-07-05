@@ -249,7 +249,7 @@ std::vector<POINT> bezier(double dt, std::vector<POINT> input) {
 }
 
 //计算返回斜率
-float Calculate_K(std::vector<mPOINT> edge) {
+float Calculate_K(std::vector<POINT> edge) {
 
     int n = edge.size();
 
