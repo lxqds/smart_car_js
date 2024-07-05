@@ -26,15 +26,19 @@ void check_ramp() {
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&     //当前没在入库中
-        !control_flag.contains(ramp_element) &&      //当前没在桥中
-        flag_ramp == RAMP_DETECTION && ramp_y > IMAGE_HEIGHT * 0.4 //找到炸弹
+        !control_flag.contains(ramp_element)      //当前没在桥中
         )
     {
-        IMG.element_identify = 1;
-        control_flag.push(ramp_element);
-        ramp_route = IMG.encoder.route;
-        flag_ramp = RAMP_UP;
-        MAT_LOG("BRIDGE_UP");
+        for (auto r : IMG.detection_result) {
+            if (r.label == IMG.label_bridge && r.score > 0.6 && r.y > IMAGE_HEIGHT * 0.4) {
+                IMG.element_identify = 1;
+                control_flag.push(ramp_element);
+                ramp_route = IMG.encoder.route;
+                flag_ramp = RAMP_UP;
+                MAT_LOG("BRIDGE_UP");
+            }
+        }
+
     }
 }
 
