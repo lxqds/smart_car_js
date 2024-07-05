@@ -184,7 +184,7 @@ void run_work()
             if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
 
            // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready ) 
-            if (edgek < threshold_k  && (work_near_cone.x==0 && work_near_cone.y == 0 ))
+            if (edgek < threshold_k  || (work_near_cone.x==0 && work_near_cone.y == 0 ))
             {
 
                 work_route = IMG.encoder.route;
