@@ -390,9 +390,11 @@ void DetectionPredictor::drawResults(
 void Detection::work()
 {
     auto f = [&]() {
+        DetectionPredictor predictor;
+        predictor.init();
         _result->org_frame = _queue.Take().clone();
 
-        _result->result = _predictor->predict(_result->org_frame);
+        _result->result = predictor.predict(_result->org_frame);
         {
             std::unique_lock<std::mutex> lock(queue_mutex);
             Result_queue.Put(_result->result);
