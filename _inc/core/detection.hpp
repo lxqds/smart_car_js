@@ -116,7 +116,7 @@ private:
     void work();
 
 public:
-    void f()
+    static void f()
     {
         _result->org_frame = _queue.Take().clone();
 
