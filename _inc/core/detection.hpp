@@ -95,7 +95,7 @@ public:
     Detection() {};
     ~Detection() {};
 
-private:
+public:
     std::shared_ptr<SystemConfig> _system_config;
     std::shared_ptr<DetectionPredictor> _predictor;
     std::shared_ptr<DetectionResult> _result;
