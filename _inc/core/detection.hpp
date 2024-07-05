@@ -113,26 +113,7 @@ private:
     StopWatch stopwatch;
 
 private:
-    void work()
-    {
-        while (_loop)
-        {
-            if (_queue.Size() >= 1)
-            {
-
-                // _can_predict = false;
-
-                // stopwatch.tic();
-
-                // if (!MyThreadPool->addTask(f)) {
-                //     f();
-                // }
-            }
-            // _can_predict = true;
-
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
-        }
-    };
+    void work();
 
 public:
     void f()

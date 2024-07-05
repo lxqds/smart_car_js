@@ -3,16 +3,16 @@
 #undef LOG_TAG
 #define LOG_TAG "DetPredictor"
 
-void DetectionPredictor::_boundaryCorrection(DetectionPredictResult &r,
-                                             int width_range,
-                                             int height_range) {
+void DetectionPredictor::_boundaryCorrection(DetectionPredictResult& r,
+    int width_range,
+    int height_range) {
 #define MARGIN_PIXELS (2)
     r.width = (r.width > (width_range - r.x - MARGIN_PIXELS))
-                  ? (width_range - r.x - MARGIN_PIXELS)
-                  : r.width;
+        ? (width_range - r.x - MARGIN_PIXELS)
+        : r.width;
     r.height = (r.height > (height_range - r.y - MARGIN_PIXELS))
-                   ? (height_range - r.y - MARGIN_PIXELS)
-                   : r.height;
+        ? (height_range - r.y - MARGIN_PIXELS)
+        : r.height;
 
     r.x = (r.x < MARGIN_PIXELS) ? MARGIN_PIXELS : r.x;
     r.y = (r.y < MARGIN_PIXELS) ? MARGIN_PIXELS : r.y;
@@ -20,41 +20,41 @@ void DetectionPredictor::_boundaryCorrection(DetectionPredictResult &r,
 
 // 初始化
 int DetectionPredictor::init() {
-   /* 
-    _model_config = std::make_shared<ModelConfig>(_config_path);
+    /*
+     _model_config = std::make_shared<ModelConfig>(_config_path);
 
-    CHECK(_model_config != nullptr) << "Create Model config failed, config path: "
-                                    << _config_path << LOG_END;
+     CHECK(_model_config != nullptr) << "Create Model config failed, config path: "
+                                     << _config_path << LOG_END;
 
-    std::vector<Place> valid_places({
-        Place{TARGET(kFPGA), PRECISION(kFP16), DATALAYOUT(kNHWC)},
-        Place{TARGET(kHost), PRECISION(kFloat)},
-        Place{TARGET(kARM), PRECISION(kFloat)},
-    });
+     std::vector<Place> valid_places({
+         Place{TARGET(kFPGA), PRECISION(kFP16), DATALAYOUT(kNHWC)},
+         Place{TARGET(kHost), PRECISION(kFloat)},
+         Place{TARGET(kARM), PRECISION(kFloat)},
+     });
 
-    paddle::lite_api::CxxConfig config;
+     paddle::lite_api::CxxConfig config;
 
-    if (_model_config->is_combined_model) {
-        config.set_model_file(_model_config->model_file);
-        config.set_param_file(_model_config->params_file);
-    } else {
-        config.set_model_dir(_model_config->model_params_dir);
-    }
+     if (_model_config->is_combined_model) {
+         config.set_model_file(_model_config->model_file);
+         config.set_param_file(_model_config->params_file);
+     } else {
+         config.set_model_dir(_model_config->model_params_dir);
+     }
 
-    config.set_valid_places(valid_places);
+     config.set_valid_places(valid_places);
 
-    _predictor = paddle::lite_api::CreatePaddlePredictor(config);
+     _predictor = paddle::lite_api::CreatePaddlePredictor(config);
 
-    if (!_predictor) {
-        log_e("Create Paddle Predictor Failed.");
-        return -1;
-    }
-    log_i("Init Success.");
-    */
+     if (!_predictor) {
+         log_e("Create Paddle Predictor Failed.");
+         return -1;
+     }
+     log_i("Init Success.");
+     */
 
-    /* NEW PPNC PREDICTION CODES BELOW*/
+     /* NEW PPNC PREDICTION CODES BELOW*/
 
-    // Initialize model
+     // Initialize model
     LOG_I << "[PPNC] Initialize model." << LOG_END;
     this->predictor_nna_ = std::make_shared<PPNCPredictor>("../configs/config_ppncnna.json");//如何构建 NNA? 
     this->predictor_nms_ = std::make_shared<PPNCPredictor>("../configs/config_ppncnms.json");//判断重合框，与部署无关
@@ -97,11 +97,11 @@ int DetectionPredictor::init() {
         }
     }
 
-    for (auto &s : this->onnx_input_names_.first) {
+    for (auto& s : this->onnx_input_names_.first) {
         this->onnx_input_names_.second.push_back(s.c_str());
     }
 
-    for (auto &s : this->onnx_out_names_.first) {
+    for (auto& s : this->onnx_out_names_.first) {
         this->onnx_out_names_.second.push_back(s.c_str());
     }
     build_nms(_config_path);
@@ -126,19 +126,20 @@ int DetectionPredictor::init() {
         file.close();
 
         for (uint8_t i = 0; i < labels.size(); i++) {
-            LOG_I << "[Label " << (i+0) << "] " << labels.at(i) << LOG_END;
+            LOG_I << "[Label " << (i + 0) << "] " << labels.at(i) << LOG_END;
         }
 
         LOG_I << "Done." << LOG_END;
 
         return 0;
-    } else {
+    }
+    else {
         LOG_I << "Failed." << LOG_END;
     }
     return -1;
 }
 
-void DetectionPredictor::build_nms(const std::string &model_dir) {
+void DetectionPredictor::build_nms(const std::string& model_dir) {
     std::string model_file = model_dir + "/nms.tar";
     std::string untar_cmd = "tar -xf " + model_file + " -C . --no-same-owner";
     std::string final_file = model_file + ".so";
@@ -213,10 +214,10 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
 
     std::vector<DetectionPredictResult> predict_ret;
 
-    auto feeds = preprocess(input_frame, {320, 320});
-    auto &image = feeds->at("image");
+    auto feeds = preprocess(input_frame, { 320, 320 });
+    auto& image = feeds->at("image");
 
-    this->predictor_nna_->set_inputs({{"image", image}});
+    this->predictor_nna_->set_inputs({ {"image", image} });
 
     // ppnc_nna run
     this->predictor_nna_->run();
@@ -242,7 +243,7 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
         scale_factor.shape.size()));
 
     for (size_t i = 2; i < this->onnx_input_names_.second.size(); ++i) {
-        const NDTensor &t = this->predictor_nna_->get_output(i - 2);
+        const NDTensor& t = this->predictor_nna_->get_output(i - 2);
         numel = std::accumulate(t.shape.begin(), t.shape.end(), 1, std::multiplies<>());
         input_tensors.push_back(Ort::Value::CreateTensor<float>(
             memory_info, t.value(), numel, t.shape.data(), t.shape.size()));
@@ -257,8 +258,8 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
         this->onnx_out_names_.second.data(),
         this->onnx_out_names_.second.size());
 
-    auto *data0 = onnx_out[0].GetTensorData<float>();
-    auto *data1 = onnx_out[1].GetTensorData<float>();
+    auto* data0 = onnx_out[0].GetTensorData<float>();
+    auto* data1 = onnx_out[1].GetTensorData<float>();
     auto output_shape0 = onnx_out[0].GetTensorTypeAndShapeInfo().GetShape();
     auto output_shape1 = onnx_out[1].GetTensorTypeAndShapeInfo().GetShape();
 
@@ -269,14 +270,14 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
     box_point = output_shape0[2];
     cls_num = output_shape1[1];
 
-    NDTensor bboxes({1, num, box_point});
-    NDTensor scores({1, cls_num, num});
+    NDTensor bboxes({ 1, num, box_point });
+    NDTensor scores({ 1, cls_num, num });
 
     std::memcpy(bboxes.value(), data0, num * box_point * sizeof(float));
     std::memcpy(scores.value(), data1, cls_num * num * sizeof(float));
 
     // ppnc_nms run
-    this->predictor_nms_->set_inputs({{"bboxes", bboxes}, {"scores", scores}});
+    this->predictor_nms_->set_inputs({ {"bboxes", bboxes}, {"scores", scores} });
     this->predictor_nms_->run();
 
     // Get result and return
@@ -298,27 +299,27 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
         result.width = data[i + 4] - data[i + 2];
         result.height = data[i + 5] - data[i + 3];
 
-         //LOG_I << "result.type = " << result.type << "\r\n"
-         //      << "result.score = " << result.score << LOG_END;
-         //LOG_I << "result.x = " << result.x << "\r\n"
-         //      << "result.y = " << result.y << "\r\n"
-         //      << "result.width = " << result.width << "\r\n"
-         //      << "result.height = " << result.score << LOG_END;
-        
-        //printResults(result);
-        //drawResults(input_frame,result);
+        //LOG_I << "result.type = " << result.type << "\r\n"
+        //      << "result.score = " << result.score << LOG_END;
+        //LOG_I << "result.x = " << result.x << "\r\n"
+        //      << "result.y = " << result.y << "\r\n"
+        //      << "result.width = " << result.width << "\r\n"
+        //      << "result.height = " << result.score << LOG_END;
+
+       //printResults(result);
+       //drawResults(input_frame,result);
         predict_ret.push_back(result);
     }
 
     return predict_ret;
 }
 
-std::shared_ptr<std::unordered_map<std::string, NDTensor>> DetectionPredictor::preprocess(cv::Mat frame, const std::vector<int64_t> &input_size) {
+std::shared_ptr<std::unordered_map<std::string, NDTensor>> DetectionPredictor::preprocess(cv::Mat frame, const std::vector<int64_t>& input_size) {
     cv::Mat x;
-    NDTensor scale_factor({1, 2}), img({1, 3, input_size[0], input_size[1]});
+    NDTensor scale_factor({ 1, 2 }), img({ 1, 3, input_size[0], input_size[1] });
     scale_factor.value()[0] = static_cast<float>(input_size[0]) / frame.size[0];
     scale_factor.value()[1] = static_cast<float>(input_size[1]) / frame.size[1];
-    NDTensor im_shape({1, 2});
+    NDTensor im_shape({ 1, 2 });
     im_shape.value()[0] = input_size[0];
     im_shape.value()[1] = input_size[1];
     cv::cvtColor(frame, x, cv::COLOR_BGR2RGB);
@@ -330,19 +331,19 @@ std::shared_ptr<std::unordered_map<std::string, NDTensor>> DetectionPredictor::p
     TransposeAndCopyToTensor(x, img);
 
     std::unordered_map<std::string, NDTensor> ret = {
-        {"image", img}, {"im_shape", im_shape}, {"scale_factor", scale_factor}};
+        {"image", img}, {"im_shape", im_shape}, {"scale_factor", scale_factor} };
 
     return std::make_shared<std::unordered_map<std::string, NDTensor>>(ret);
 }
 
-void DetectionPredictor::TransposeAndCopyToTensor(const cv::Mat &src, NDTensor &dst) {
+void DetectionPredictor::TransposeAndCopyToTensor(const cv::Mat& src, NDTensor& dst) {
     cv::Mat channels[3];
     split(src, channels);
     int offset = src.rows * src.cols;
     auto start = dst.value();
     for (int i = 0; i < 3; ++i) {
         std::memcpy(start + i * offset, channels[i].data,
-                    offset * sizeof(float));
+            offset * sizeof(float));
     }
 }
 
@@ -357,32 +358,52 @@ std::string DetectionPredictor::getLabel(uint16_t type) {
 
 
 void DetectionPredictor::printResults(
-    DetectionPredictResult &results) {
+    DetectionPredictResult& results) {
 
-        DetectionPredictResult r = results;
-        if (r.type >= 0 && (uint16_t)r.type < this->labels.size()) {
-            LOG_I << "label:" << this->labels[r.type] << LOG_END;
-            LOG_I << "\t\tindex:" << r.type << ", score:" << r.score
-                  << ", loc:" << r.x << ", " << r.y << ", " << r.width << ", "
-                  << r.height << LOG_END;
-        }
-    
+    DetectionPredictResult r = results;
+    if (r.type >= 0 && (uint16_t)r.type < this->labels.size()) {
+        LOG_I << "label:" << this->labels[r.type] << LOG_END;
+        LOG_I << "\t\tindex:" << r.type << ", score:" << r.score
+            << ", loc:" << r.x << ", " << r.y << ", " << r.width << ", "
+            << r.height << LOG_END;
+    }
+
 }
 
 
 // 针对检测结果, 进行画框操作
 void DetectionPredictor::drawResults(
-    cv::Mat &input_frame, DetectionPredictResult &results) {
+    cv::Mat& input_frame, DetectionPredictResult& results) {
 
-        DetectionPredictResult r = results;
-        _boundaryCorrection(r, input_frame.cols, input_frame.rows);
-        if (r.type >= 0 && (uint16_t)r.type < this->labels.size()) {
-            cv::Point origin(r.x, r.y);
-            std::string label_name = this->labels[r.type];
-            cv::putText(input_frame, label_name, origin, cv::FONT_HERSHEY_PLAIN, 1,
-                        cv::Scalar(255, 0, 0, 255), 2);
-        }
-        cv::Rect rect(r.x, r.y, r.width, r.height);
-        cv::rectangle(input_frame, rect, cv::Scalar(0, 0, 224), 2);
+    DetectionPredictResult r = results;
+    _boundaryCorrection(r, input_frame.cols, input_frame.rows);
+    if (r.type >= 0 && (uint16_t)r.type < this->labels.size()) {
+        cv::Point origin(r.x, r.y);
+        std::string label_name = this->labels[r.type];
+        cv::putText(input_frame, label_name, origin, cv::FONT_HERSHEY_PLAIN, 1,
+            cv::Scalar(255, 0, 0, 255), 2);
+    }
+    cv::Rect rect(r.x, r.y, r.width, r.height);
+    cv::rectangle(input_frame, rect, cv::Scalar(0, 0, 224), 2);
 }
 
+void Detection::work()
+{
+    while (_loop)
+    {
+        if (_queue.Size() >= 1)
+        {
+
+            // _can_predict = false;
+
+            // stopwatch.tic();
+
+            if (!MyThreadPool->addTask(f)) {
+                f();
+            }
+        }
+        // _can_predict = true;
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+}
