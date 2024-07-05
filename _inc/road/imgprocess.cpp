@@ -315,33 +315,33 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* ***************************************************************** */
     detection_result.clear();
     // if (detection->_is_predicted)
-    {
-        detection->_queue.Put(mat_origin);
-        detection->_result->org_frame = detection->_queue.Take().clone();
-        detection->_result->result = detection->_predictor->predict(detection->_result->org_frame);
-        _det_result = detection->getResult()->result;
-        // 遍历检测结果
-        for (size_t i = 0; i < _det_result.size(); i++) {
-            DetectionPredictResult r = _det_result[i];
-            // 检测结果筛选
-            if (r.score < _config->threshold_detection)
-                continue;
-            int deX = r.x / 2, deY = r.y / 2;
-            int deH = r.height / 2, deW = r.width / 2;
-            DETECTION detection;
-            detection.label = r.type;
-            detection.x = deX + deW / 2;
-            detection.y = deY + deH / 2;
-            detection.score = r.score;
-            detection_result.push_back(detection);
-            MAT_INFO(mat_result, cv::Point(deX, deY - 5), 0.2, "%.2f", r.score);
-            cv::line(mat_result, cv::Point(deX, deY), cv::Point(deX + deW, deY), cv::Scalar(0, 0, 0), 1);
-            cv::line(mat_result, cv::Point(deX, deY), cv::Point(deX, deY + deH), cv::Scalar(0, 0, 0), 1);
-            cv::line(mat_result, cv::Point(deX + deW, deY + deH), cv::Point(deX + deW, deY), cv::Scalar(0, 0, 0), 1);
-            cv::line(mat_result, cv::Point(deX + deW, deY + deH), cv::Point(deX, deY + deH), cv::Scalar(0, 0, 0), 1);
+    // {
+    //     detection->_queue.Put(mat_origin);
+    //     detection->_result->org_frame = detection->_queue.Take().clone();
+    //     detection->_result->result = detection->_predictor->predict(detection->_result->org_frame);
+    //     _det_result = detection->getResult()->result;
+    //     // 遍历检测结果
+    //     for (size_t i = 0; i < _det_result.size(); i++) {
+    //         DetectionPredictResult r = _det_result[i];
+    //         // 检测结果筛选
+    //         if (r.score < _config->threshold_detection)
+    //             continue;
+    //         int deX = r.x / 2, deY = r.y / 2;
+    //         int deH = r.height / 2, deW = r.width / 2;
+    //         DETECTION detection;
+    //         detection.label = r.type;
+    //         detection.x = deX + deW / 2;
+    //         detection.y = deY + deH / 2;
+    //         detection.score = r.score;
+    //         detection_result.push_back(detection);
+    //         MAT_INFO(mat_result, cv::Point(deX, deY - 5), 0.2, "%.2f", r.score);
+    //         cv::line(mat_result, cv::Point(deX, deY), cv::Point(deX + deW, deY), cv::Scalar(0, 0, 0), 1);
+    //         cv::line(mat_result, cv::Point(deX, deY), cv::Point(deX, deY + deH), cv::Scalar(0, 0, 0), 1);
+    //         cv::line(mat_result, cv::Point(deX + deW, deY + deH), cv::Point(deX + deW, deY), cv::Scalar(0, 0, 0), 1);
+    //         cv::line(mat_result, cv::Point(deX + deW, deY + deH), cv::Point(deX, deY + deH), cv::Scalar(0, 0, 0), 1);
 
-        }
-    }
+    //     }
+    // }
 
 
 
