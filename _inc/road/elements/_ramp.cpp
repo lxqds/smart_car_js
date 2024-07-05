@@ -30,7 +30,7 @@ void check_ramp() {
         )
     {
         for (auto r : IMG.detection_result) {
-            if (r.label == IMG.label_bridge && r.score > 0.6 && r.y > IMAGE_HEIGHT * 0.4) {
+            if (r.label == IMG.label_bridge && r.score > 0.5 && r.y > IMAGE_HEIGHT * 0.3) {
                 IMG.element_identify = 1;
                 control_flag.push(ramp_element);
                 ramp_route = IMG.encoder.route;
