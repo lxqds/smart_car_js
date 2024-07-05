@@ -7,10 +7,8 @@
 
 extern std::shared_ptr<SerialDriver> serial;
 Control_Flag control_flag;
-extern std::shared_ptr<Detection> detection;
-SystemConfig _system_config("../configs/usbcamera.json");
 
-DetectionPredictor _predictor(_system_config.model_config_path);
+
 /* 初始化 */
 int ImageProcess::init(std::string config_path, bool is_result) {
     _config = make_shared<ControlConfig>(config_path);
@@ -42,7 +40,7 @@ int ImageProcess::init(std::string config_path, bool is_result) {
     aim_distance_n = _config->aim_distance_near;
     element_over = false;
     speed_diff = (_config->speed_up - _config->speed_base) / 10;
-    _predictor.init();
+
     return 0;
 }
 
@@ -316,10 +314,9 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* *************************** 目标检测结果 ************************** */
     /* ***************************************************************** */
     detection_result.clear();
-    // if (detection->_is_predicted)
+    if (detection->_is_predicted)
     {
-
-        _det_result = _predictor.predict(mat_origin.clone());
+        _det_result = detection->getResult()->result;
         // 遍历检测结果
         for (size_t i = 0; i < _det_result.size(); i++) {
             DetectionPredictResult r = _det_result[i];
