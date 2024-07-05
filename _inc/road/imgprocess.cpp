@@ -8,6 +8,8 @@
 extern std::shared_ptr<SerialDriver> serial;
 Control_Flag control_flag;
 extern std::shared_ptr<Detection> detection;
+SystemConfig _system_config("../configs/usbcamera.json");
+
 DetectionPredictor _predictor(_system_config->model_config_path);
 /* 初始化 */
 int ImageProcess::init(std::string config_path, bool is_result) {
