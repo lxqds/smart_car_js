@@ -104,7 +104,7 @@ private:
 
     _MyThreadPool MyThreadPool();
     BlockingQueue<cv::Mat> _queue;
-    BlockingQueue<DetectionPredictResult> Result_queue;
+    BlockingQueue<std::vector<DetectionPredictResult>> Result_queue;
     std::mutex queue_mutex;
 
     bool _loop;
