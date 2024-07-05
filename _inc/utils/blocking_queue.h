@@ -64,8 +64,7 @@ private:
     int num_thread;
     int num_thread_free;
 public:
-    void init(int num_threads) {
-        stop = false;
+    _MyThreadPool(int num_threads) : stop(false) {
         num_thread = num_threads;
         num_thread_free = num_threads;
         for (int i = 0; i < num_threads; ++i) {
