@@ -307,7 +307,7 @@ public:
 
     void buzzerSound(const uint8_t sound)
     {
-        // transmit_packet(0x04, &sound, 1);
+        transmit_packet(0x04, &sound, 1);
 
         // DataBuffer pkt_buf(sizeof(uint8_t) * 7);
         // uint8_t *sendBuff = (uint8_t *)&pkt_buf[0];
