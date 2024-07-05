@@ -178,6 +178,7 @@ void run_work()
                 edgek = Calculate_K(IMG.edge_right);
                 threshold_k = -threshold_k;
             }
+            LOG_I << " \n edgek \n" << edgek << LOG_END;
             // 调整 进入角度
             IMG.aim_angle = IMG._config->work_angle_in_1;
             if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
