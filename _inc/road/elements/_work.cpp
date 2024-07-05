@@ -171,7 +171,8 @@ void run_work()
             // 进入方向
             if (direction_work) {
                 work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
-                if(IMG.edge_left.size()!=0)edgek = Calculate_K(IMG.edge_left);
+                if(IMG.edge_left.size()!=0)edgek = -Calculate_K(IMG.edge_left);
+                threshold_k = -threshold_k;
             }
             else {
                 work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
@@ -183,7 +184,8 @@ void run_work()
             IMG.aim_angle = IMG._config->work_angle_in_1;
             if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
 
-           // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready ) 
+           // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready )
+           // if(direction_work && (edgek > threshold_k && (work_near_cone.x == 0 && work_near_cone.y == 0)) || edgek == 0)
             if ((edgek < threshold_k  && (work_near_cone.x==0 && work_near_cone.y == 0 )) || edgek ==0)
             {
 
@@ -205,6 +207,8 @@ void run_work()
             cv::line(IMG.mat_result, cv::Point(0, (int)IMAGE_HEIGHT* IMG._config->work_read_cone_thresholdy_avg),
                 cv::Point(IMAGE_WIDTH -1, (int)IMAGE_HEIGHT* IMG._config->work_read_cone_thresholdy_avg), cv::Scalar(0, 0, 255), 1);
             cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH / 2 + 30, 0),
+                cv::Point(IMAGE_WIDTH / 2 + 30, IMAGE_HEIGHT), cv::Scalar(0, 0, 255), 1);
+            cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH / 2 -30, 0),
                 cv::Point(IMAGE_WIDTH / 2 + 30, IMAGE_HEIGHT), cv::Scalar(0, 0, 255), 1);
             //开始靠近锥桶
             if (avg_y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg && IMG.encoder.route - work_route < IMG._config->work_rou_in)
