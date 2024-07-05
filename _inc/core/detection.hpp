@@ -129,7 +129,7 @@ public:
 
         _predictor = std::make_shared<DetectionPredictor>(_system_config->model_config_path);
         CHECK(_predictor != nullptr) << "Predictor Create failed." << LOG_END;
-        MyThreadPool = std::make_shared<_MyThreadPool>(0);
+        MyThreadPool = std::make_shared<_MyThreadPool>(1);
 
         int ret = _predictor->init();
         CHECK(ret == 0) << "Predictor Create failed." << LOG_END;
