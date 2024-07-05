@@ -50,8 +50,8 @@ class DetectionPredictor
 {
 public:
     // 传入的是模型目录
-    DetectionPredictor(std::string config_path) : _config_path(config_path){};
-    ~DetectionPredictor(){};
+    DetectionPredictor(std::string config_path) : _config_path(config_path) {};
+    ~DetectionPredictor() {};
 
 private:
     std::string _config_path;
@@ -61,8 +61,8 @@ private:
     // new PPNC
     std::vector<std::string> labels;
     // onnx info
-    std::pair<std::vector<std::string>, std::vector<const char *>> onnx_input_names_;
-    std::pair<std::vector<std::string>, std::vector<const char *>> onnx_out_names_;
+    std::pair<std::vector<std::string>, std::vector<const char*>> onnx_input_names_;
+    std::pair<std::vector<std::string>, std::vector<const char*>> onnx_out_names_;
     Ort::Env onnx_env_;
     // predictor
 
@@ -70,30 +70,30 @@ private:
     std::shared_ptr<PPNCPredictor> predictor_nms_;
     std::shared_ptr<Ort::Session> predictor_onnx_;
 
-    void _boundaryCorrection(DetectionPredictResult &r, int width_range, int height_range);
+    void _boundaryCorrection(DetectionPredictResult& r, int width_range, int height_range);
 
 public:
     int init();
 
-    void build_nms(const std::string &model_dir);
+    void build_nms(const std::string& model_dir);
     std::shared_ptr<std::unordered_map<std::string, NDTensor>> preprocess(
         cv::Mat frame,
-        const std::vector<int64_t> &input_size);
+        const std::vector<int64_t>& input_size);
     // void render();
 
     std::vector<DetectionPredictResult> predict(cv::Mat input_frame);
-    void TransposeAndCopyToTensor(const cv::Mat &src, NDTensor &dst);
+    void TransposeAndCopyToTensor(const cv::Mat& src, NDTensor& dst);
     std::string getLabel(uint16_t type);
-    void drawResults(cv::Mat& input_frame, DetectionPredictResult &results);
+    void drawResults(cv::Mat& input_frame, DetectionPredictResult& results);
 
-    void printResults(DetectionPredictResult &results);
+    void printResults(DetectionPredictResult& results);
 };
 
 class Detection
 {
 public:
-    Detection(){};
-    ~Detection(){};
+    Detection() {};
+    ~Detection() {};
 
 private:
     std::shared_ptr<SystemConfig> _system_config;
@@ -142,7 +142,7 @@ public:
 
         LOG_I << "SystemConfig Path:" << system_config_path << LOG_END;
         LOG_I << "Model Config Path:" << _system_config->model_config_path
-              << LOG_END;
+            << LOG_END;
 
         _predictor = std::make_shared<DetectionPredictor>(_system_config->model_config_path);
         CHECK(_predictor != nullptr) << "Predictor Create failed." << LOG_END;
@@ -180,7 +180,7 @@ public:
 
     void run(cv::Mat frame_wraper)
     {
-        if (_can_predict && _queue.Size() < 2)
+        if (_can_predict && _queue.Size() < 1)
         {
             _queue.Put(frame_wraper);
         }

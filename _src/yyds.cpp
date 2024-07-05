@@ -77,7 +77,7 @@ int main(int argc, char const* argv[])
 
     /* 启动多线程 */
     capture->start();
-    detection->start();
+    // detection->start();
     display->start();
 
     /* 初始化PID */
