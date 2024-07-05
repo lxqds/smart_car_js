@@ -390,7 +390,7 @@ void DetectionPredictor::drawResults(
 void Detection::work()
 {
     auto f = [&]() {
-        DetectionPredictor predictor;
+        DetectionPredictor predictor(_system_config->model_config_path);
         predictor.init();
         _result->org_frame = _queue.Take().clone();
 
