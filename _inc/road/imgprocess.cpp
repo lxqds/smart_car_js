@@ -9,8 +9,6 @@ extern std::shared_ptr<SerialDriver> serial;
 Control_Flag control_flag;
 
 
-
-
 /* 初始化 */
 int ImageProcess::init(std::string config_path, bool is_result) {
     _config = make_shared<ControlConfig>(config_path);
@@ -318,8 +316,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     detection_result.clear();
     if (detection->_is_predicted)
     {
-        // _det_result = detection->getResult()->result;
-        detection->get_result(_det_result);
+        _det_result = detection->getResult()->result;
         // 遍历检测结果
         for (size_t i = 0; i < _det_result.size(); i++) {
             DetectionPredictResult r = _det_result[i];
