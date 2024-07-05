@@ -94,15 +94,15 @@ class Detection
 public:
     Detection() {};
     ~Detection() {};
-    
+
 private:
     std::shared_ptr<SystemConfig> _system_config;
     std::shared_ptr<DetectionPredictor> _predictor;
     std::shared_ptr<DetectionResult> _result;
 
     std::thread _worker_thread;
-    
-    _MyThreadPool MyThreadPool(1);
+
+    _MyThreadPool MyThreadPool();
     BlockingQueue<cv::Mat> _queue;
     BlockingQueue<DetectionPredictResult> Result_queue;
     std::mutex queue_mutex;
@@ -158,7 +158,7 @@ public:
 
         _predictor = std::make_shared<DetectionPredictor>(_system_config->model_config_path);
         CHECK(_predictor != nullptr) << "Predictor Create failed." << LOG_END;
-
+        MyThreadPool.init(1);
         int ret = _predictor->init();
         CHECK(ret == 0) << "Predictor Create failed." << LOG_END;
 
