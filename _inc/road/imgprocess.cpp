@@ -842,13 +842,13 @@ void ImageProcess::get_edge(int mode)
     mea_0 = mea_1 = 10.0f;
     // 左线直线拟合
     if (rpts0s_num > 10) {
-        mea_0 = fit_line(rpts0s, rpts0s_num, 40);
+        mea_0 = fit_line(rpts0s, rpts0s_num, 60);
         if (mea_0 < 2.5f && rpts0s_num > 60)
             is_straight0 = true;
     }
     // 右线直线拟合
     if (rpts1s_num > 10) {
-        mea_1 = fit_line(rpts1s, rpts1s_num, 40);
+        mea_1 = fit_line(rpts1s, rpts1s_num, 60);
         if (mea_1 < 2.5f && rpts1s_num > 60)
             is_straight1 = true;
     }
