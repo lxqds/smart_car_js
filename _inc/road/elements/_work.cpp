@@ -323,31 +323,44 @@ void run_work()
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
 
             drawH(mcentPoint.y, 0, 0, 255, IMG.mat_result);
-            drawH((int)(0.3 * IMAGE_HEIGHT), 0, 255, 0, IMG.mat_result);
 
             IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed); //逐渐减速
             IMG.aim_speed = -IMG.aim_speed;//倒车         
             // POINT AI_cone_left = POINT AI_search_right_near(IMG._det_result, IMG.edge_left);
             //退出角度赋值
-            if (out_flage)//大于退出 某阶段时开始打角
+            if (out_flage == 1)//大于退出 某阶段时开始打角
             {
-                IMG.aim_angle = IMG._config->work_recback_angle;
+                IMG.aim_angle = 5;
+                //IMG._config->work_recback_angle
+                if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
+            }
 
+            if (out_flage == 2) {
+
+                IMG.aim_angle = IMG._config->work_recback_angle;
                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
             }
             //退出速度赋值
+            if (mcentPoint.y < 0.4 * IMAGE_HEIGHT && mcentPoint.y > 0.3 * IMAGE_HEIGHT)
+            {
+                drawH((int)(0.4 * IMAGE_HEIGHT), 0, 255, 0, IMG.mat_result);
+                IMG.aim_angle = 0;
+                MAT_LOG("out1");
+                out_flage = 1;
+            }
+
             if (mcentPoint.y < 0.3 * IMAGE_HEIGHT)
             {
+                drawH((int)(0.3 * IMAGE_HEIGHT), 0, 255, 0, IMG.mat_result);
                 IMG.aim_angle = 0;
-                MAT_LOG("out");
-                out_flage = 1;
+                MAT_LOG("out2");
+                out_flage = 2;
             }
             LOG_I << "R0 " << R0 << "R1 " << R1 << LOG_END;
 
-            if (R0 <10 &&
-                R1 <10 &&
+            if ((R0 <10 || R1 <10 )&&
                (work_near_cone.x != 0 && work_near_cone1.x != 0) &&
-                out_flage)
+                out_flage==2)
             {
                 control_flag.pop();//移除
                 flag_work = WORK_NONE;
