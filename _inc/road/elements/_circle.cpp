@@ -43,42 +43,16 @@ void check_circle() {
         //左圆环
         if (!IMG.Lpt1_found &&  // 右角点未找到
             !IMG.far_Lpt1_found &&  // 右角点未找到
-            IMG.ipts1_num > 150 )  // 右边长直道
+            IMG.ipts1_num > 150)  // 右边长直道
         {
-            int a = 0, b = 0, c = 0;
-            for (int i = 39; i > 30; i--) {
-                if (!IMG.white_row_start_point[i].empty()) {
-                    if (IMG.white_row_start_point[i].back().x < 5)a++;
-                    if (a > 5) {
-                        for (int j = i; j > 25; j--) {
-                            if (IMG.white_row_start_point[i].empty())break;
-                            if (IMG.white_row_start_point[i].back().x > 20)b++;
-                            if (b > 5) {
-                                for (int k = j; k > 10; k--) {
-                                    if (IMG.white_row_start_point[i].empty())break;
-                                    if (IMG.white_row_start_point[i].back().x < 5)c++;
-                                    if (c > 0) break;
-                                }
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                }
-
-            }
 
             if ((IMG.Lpt0_found &&   // 左角点找到
                 IMG.Lpt0_point[1] > 100 && //左角点在屏幕下方
                 IMG.ipts0_num < 120) ||
-                (
-                    IMG.ipts0_num < 30 &&//左线丢线
-                    IMG.far_ipts0_num>30 &&
-                    c > 0 &&//横线满足贴墙->不贴墙->贴墙
-                    IMG.far_ipts0[IMG.far_ipts0_num - 1][0] < 10 &&//远线末端贴墙
-                    IMG.far_ipts0[IMG.far_ipts0_num - 1][1] < 100 &&//远线末端在屏幕上方
-                    abs(IMG.far_ipts0[IMG.far_ipts0_num - 1][0] - IMG.far_ipts0[0][0]) > 30
-                    )) {
+                (IMG.ipts0_num > 50 &&
+                    IMG.ipts0[0][0] < 5 &&
+                    IMG.ipts0[IMG.ipts0_num - 1][0] < 5 &&
+                    IMG.ipts0[0][1] < IMAGE_HEIGHT * 0.8)) {
                 none_left_line = 0;
                 have_left_line = 0;
                 IMG.element_identify = 1;
@@ -94,43 +68,18 @@ void check_circle() {
             }
         }
         //右圆环
-        else if (!IMG.Lpt0_found &&  // 左角点未找到
+        if (!IMG.Lpt0_found &&  // 左角点未找到
             !IMG.far_Lpt0_found &&  // 左远角点未找到
-            IMG.ipts0_num > 150 )   // 左边长直道
+            IMG.ipts0_num > 150)   // 左边长直道
         {// 右线点比较少
-
-            int a = 0, b = 0, c = 0;
-            for (int i = 39; i > 30; i--) {
-                if (!IMG.white_row_start_point[i].empty()) {
-                    if (IMG.white_row_end_point[i].back().x > IMAGE_WIDTH - 6)a++;
-                    if (a > 5) {
-                        for (int j = i; j > 25; j--) {
-                            if (IMG.white_row_start_point[i].empty())break;
-                            if (IMG.white_row_end_point[i].back().x < IMAGE_WIDTH - 21)b++;
-                            if (b > 5) {
-                                for (int k = j; k > 10; k--) {
-                                    if (IMG.white_row_start_point[i].empty())break;
-                                    if (IMG.white_row_end_point[i].back().x > IMAGE_WIDTH - 6)c++;
-                                    if (c > 0) break;
-                                }
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
 
             if ((IMG.Lpt1_found &&   // 右角点找到
                 IMG.Lpt1_point[1] > 100 && //右角点在屏幕下方
                 IMG.ipts1_num < 120) ||
-                (
-                    c > 0 &&//横线满足贴墙->不贴墙->贴墙
-                    IMG.ipts1_num < 30 &&//右线丢线
-                    IMG.far_ipts1_num>30 &&
-                    IMG.far_ipts1[IMG.far_ipts1_num - 1][0] > IMAGE_WIDTH - 11 &&//远线末端贴墙
-                    IMG.far_ipts1[IMG.far_ipts1_num - 1][1] < 100 &&//远线末端在屏幕上方
-                    abs(IMG.far_ipts1[IMG.far_ipts1_num - 1][0] - IMG.far_ipts1[0][0]) >30)) {
+                (IMG.ipts1_num > 50 &&
+                    IMG.ipts1[0][0] > IMAGE_WIDTH - 6 &&
+                    IMG.ipts1[IMG.ipts1_num - 1][0] > IMAGE_WIDTH - 6 &&
+                    IMG.ipts1[0][1] < IMAGE_HEIGHT * 0.8)) {
 
                 none_right_line = 0;
                 have_right_line = 0;
