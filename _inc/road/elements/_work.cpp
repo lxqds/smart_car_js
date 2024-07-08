@@ -118,18 +118,18 @@ void run_work()
             int thresholdh = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in;
 
             int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + 15;
-
-            if (work_near_cone.x > coneLowy ) {
+            if (work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy) {
+                if (work_near_cone.x > coneLowy) {
                     wzp = -1;
+                }
+                else if (work_near_cone.x < thresholdh)
+                {
+                    wzp = 1;
+                }
+                else {
+                    wzp = 0;
+                }
             }
-            else if(work_near_cone.x < thresholdh)
-            {
-                   wzp = 1;
-            }
-            else {
-                wzp = 0;
-            }
-
             IMG.aim_speed = IMG._config->speed_work * wzp;
             
             int speed_err = abs(IMG.aim_speed - IMG.encoder.speed*1000);
