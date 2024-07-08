@@ -308,13 +308,22 @@ void run_work()
         {
             work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
             work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);  //右工作区进入准备
+
+            float R0 = 10.0f, R1 = 10.0f;
+            // 左线直线拟合
+            if (IMG.ipts0_num > 10)
+                R0 = fit_line1(IMG.ipts0, IMG.ipts0_num, 60);
+            // 右线直线拟合
+            if (IMG.ipts1_num > 10)
+                R1 = fit_line1(IMG.ipts1, IMG.ipts1_num, 60);
+
             cv::Rect miny;
             miny = workC.search_all_cone_rect(IMG.mat_lab)[0];
             POINT mcentPoint = getCenterPoint(miny);
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
 
             drawH(mcentPoint.y, 0, 0, 255, IMG.mat_result);
-            drawH((int)(0.35 * IMG._config->work_recback_line_k), 0, 255, 0, IMG.mat_result);
+            drawH((int)(0.3 * IMAGE_HEIGHT), 0, 255, 0, IMG.mat_result);
 
             IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed); //逐渐减速
             IMG.aim_speed = -IMG.aim_speed;//倒车         
@@ -335,8 +344,8 @@ void run_work()
                 out_flage = 1;
             }
 
-            if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST &&
-                IMG.rpts0s_num > 0.8 / SAMPLE_DIST &&
+            if (R0 <10 &&
+                R1 <10 &&
                (work_near_cone.x != 0 && work_near_cone1.x != 0) &&
                 out_flage)
             {
@@ -345,7 +354,7 @@ void run_work()
                 MAT_LOG("WORK_HAVE_L");
             }
 
-            if (work_route - IMG.encoder.route > IMG._config->work_recback_max_route && (work_near_cone.x !=0 && work_near_cone1.x != 0))
+            if (work_route - IMG.encoder.route > IMG._config->work_recback_max_route && (work_near_cone.x !=0 && work_near_cone1.x != 0) && R0 < 10 && R1 < 10)
             {
                 control_flag.pop();//移除
                 flag_work = WORK_NONE;
