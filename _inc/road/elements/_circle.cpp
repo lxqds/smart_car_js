@@ -53,11 +53,11 @@ void check_circle() {
                         for (int j = i; j > 25; j--) {
                             if (IMG.white_row_start_point[i].empty())break;
                             if (IMG.white_row_start_point[i].back().x > 20)b++;
-                            if (b > 8) {
+                            if (b > 5) {
                                 for (int k = j; k > 10; k--) {
                                     if (IMG.white_row_start_point[i].empty())break;
                                     if (IMG.white_row_start_point[i].back().x < 5)c++;
-                                    if (c > 1) break;
+                                    if (c > 0) break;
                                 }
                                 break;
                             }
@@ -74,7 +74,7 @@ void check_circle() {
                 (
                     IMG.ipts0_num < 30 &&//左线丢线
                     IMG.far_ipts0_num>30 &&
-                    c > 1 &&//横线满足贴墙->不贴墙->贴墙
+                    c > 0 &&//横线满足贴墙->不贴墙->贴墙
                     IMG.far_ipts0[IMG.far_ipts0_num - 1][0] < 10 &&//远线末端贴墙
                     IMG.far_ipts0[IMG.far_ipts0_num - 1][1] < 100 &&//远线末端在屏幕上方
                     abs(IMG.far_ipts0[IMG.far_ipts0_num - 1][0] - IMG.far_ipts0[0][0]) > 30
@@ -107,11 +107,11 @@ void check_circle() {
                         for (int j = i; j > 25; j--) {
                             if (IMG.white_row_start_point[i].empty())break;
                             if (IMG.white_row_end_point[i].back().x < IMAGE_WIDTH - 21)b++;
-                            if (b > 8) {
+                            if (b > 5) {
                                 for (int k = j; k > 10; k--) {
                                     if (IMG.white_row_start_point[i].empty())break;
                                     if (IMG.white_row_end_point[i].back().x > IMAGE_WIDTH - 6)c++;
-                                    if (c > 1) break;
+                                    if (c > 0) break;
                                 }
                                 break;
                             }
@@ -125,7 +125,7 @@ void check_circle() {
                 IMG.Lpt1_point[1] > 100 && //右角点在屏幕下方
                 IMG.ipts1_num < 120) ||
                 (
-                    c > 1 &&//横线满足贴墙->不贴墙->贴墙
+                    c > 0 &&//横线满足贴墙->不贴墙->贴墙
                     IMG.ipts1_num < 30 &&//右线丢线
                     IMG.far_ipts1_num>30 &&
                     IMG.far_ipts1[IMG.far_ipts1_num - 1][0] > IMAGE_WIDTH - 11 &&//远线末端贴墙
