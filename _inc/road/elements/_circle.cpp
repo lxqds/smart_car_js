@@ -52,7 +52,9 @@ void check_circle() {
                 (IMG.ipts0_num > 50 &&
                     IMG.ipts0[0][0] < 10 &&
                     IMG.ipts0[IMG.ipts0_num - 1][0] < 10 &&
-                    IMG.ipts0[0][1] < IMAGE_HEIGHT * 0.85)) {
+                    IMG.ipts0[0][1] < IMAGE_HEIGHT * 0.85 &&
+                    abs(IMG.ipts0[IMG.ipts0_num - 1][1] - IMG.ipts0[0][1])>40 &&
+                    abs(IMG.ipts0[IMG.ipts0_num - 1][1] - IMG.ipts0[0][1]) < 120)) {
                 none_left_line = 0;
                 have_left_line = 0;
                 IMG.element_identify = 1;
@@ -79,7 +81,9 @@ void check_circle() {
                 (IMG.ipts1_num > 50 &&
                     IMG.ipts1[0][0] > IMAGE_WIDTH - 11 &&
                     IMG.ipts1[IMG.ipts1_num - 1][0] > IMAGE_WIDTH - 11 &&
-                    IMG.ipts1[0][1] < IMAGE_HEIGHT * 0.85)) {
+                    IMG.ipts1[0][1] < IMAGE_HEIGHT * 0.85 &&
+                    abs(IMG.ipts1[IMG.ipts1_num - 1][1] - IMG.ipts1[0][1])>40 &&
+                    abs(IMG.ipts1[IMG.ipts1_num - 1][1] - IMG.ipts1[0][1]) < 120)) {
 
                 none_right_line = 0;
                 have_right_line = 0;
