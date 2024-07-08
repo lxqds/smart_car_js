@@ -31,48 +31,103 @@ void check_circle() {
         !control_flag.contains(bomb_element) &&   //当前没在炸弹中
         !control_flag.contains(garage_element) &&      //当前没在入库中
         !control_flag.contains(ramp_element)      //当前没在桥中
-        )
-    {
+        ) {
         //左圆环
-        if (IMG.Lpt0_found &&   // 左角点找到
-            IMG.Lpt0_point[1] > 100 && //左角点在屏幕下方
-            IMG.ipts0_num < 120 &&
-            !IMG.Lpt1_found &&  // 右角点未找到
+        if (!IMG.Lpt1_found &&  // 右角点未找到
             !IMG.far_Lpt1_found &&  // 右角点未找到
             IMG.ipts1_num > 150)  // 右边长直道
         {
-            none_left_line = 0;
-            have_left_line = 0;
-            IMG.element_identify = 1;
-            circle_route = IMG.encoder.route;
-            if (control_flag.contains(cross_element)) {//如果在十字路口中则删除十字路口
-                control_flag.remove(cross_element);
-                flag_cross = CROSS_NONE;
+            int a = 0, b = 0, c = 0;
+            for (int i = 39; i > 30; i--) {
+                if (IMG.white_row_start_point[i].x < 5)a++;
+                if (a > 4) {
+                    for (int j = i; j > 25; j--) {
+                        if (IMG.white_row_start_point[i].x > 20)b++;
+                        if (b > 5) {
+                            for (int k = j; k > 10; k--) {
+                                if (IMG.white_row_start_point[i].x < 5)c++;
+                                if (c > 1) break;
+                            }
+                            break;
+                        }
+                    }
+                    break;
+                }
             }
 
-            control_flag.push(circle_element);
-            flag_circle = CIRCLE_LEFT_BEGIN;
-            MAT_LOG("CIRCLE_LEFT_BEGIN");
+            if ((IMG.Lpt0_found &&   // 左角点找到
+                IMG.Lpt0_point[1] > 100 && //左角点在屏幕下方
+                IMG.ipts0_num < 120) ||
+                (
+                    IMG.ipts0_num < 30 &&//左线丢线
+                    c > 1 &&//横线满足贴墙->不贴墙->贴墙
+                    IMG.far_ipts0[IMG.far_ipts0_num - 1][0] < 10 &&//远线末端贴墙
+                    IMG.far_ipts0[IMG.far_ipts0_num - 1][1] < 100//远线末端在屏幕上方
+                    )) {
+                none_left_line = 0;
+                have_left_line = 0;
+                IMG.element_identify = 1;
+                circle_route = IMG.encoder.route;
+                if (control_flag.contains(cross_element)) {//如果在十字路口中则删除十字路口
+                    control_flag.remove(cross_element);
+                    flag_cross = CROSS_NONE;
+                }
+
+                control_flag.push(circle_element);
+                flag_circle = CIRCLE_LEFT_BEGIN;
+                MAT_LOG("CIRCLE_LEFT_BEGIN");
+            }
         }
         //右圆环
         else if (!IMG.Lpt0_found &&  // 左角点未找到
             !IMG.far_Lpt0_found &&  // 左远角点未找到
-            IMG.Lpt1_found &&   // 右角点找到
-            IMG.Lpt1_point[1] > 100 && //右角点在屏幕下方
-            IMG.ipts1_num < 120 &&
             IMG.ipts0_num > 150)   // 左边长直道
         {// 右线点比较少
-            none_right_line = 0;
-            have_right_line = 0;
-            IMG.element_identify = 1;
-            circle_route = IMG.encoder.route;
-            if (control_flag.contains(cross_element)) {//如果在十字路口中则删除十字路口
-                control_flag.remove(cross_element);
-                flag_cross = CROSS_NONE;
+
+            int a = 0, b = 0, c = 0;
+            for (int i = 39; i > 30; i--) {
+                if (IMG.white_row_end_point[i].x > IMAGE_WIDTH - 6)a++;
+                if (a > 4) {
+                    for (int j = i; j > 25; j--) {
+                        if (IMG.white_row_end_point[i].x < > IMAGE_WIDTH - 21)b++;
+                        if (b > 5) {
+                            for (int k = j; k > 10; k--) {
+                                if (IMG.white_row_end_point[i].x > IMAGE_WIDTH - 6)c++;
+                                if (c > 1) break;
+                            }
+                            break;
+                        }
+                    }
+                    break;
+                }
             }
-            control_flag.push(circle_element);
-            flag_circle = CIRCLE_RIGHT_BEGIN;
-            MAT_LOG("CIRCLE_RIGHT_BEGIN");
+
+            if ((IMG.Lpt1_found &&   // 右角点找到
+                IMG.Lpt1_point[1] > 100 && //右角点在屏幕下方
+                IMG.ipts1_num < 120) ||
+                (
+                    c > 1 &&//横线满足贴墙->不贴墙->贴墙
+                    IMG.ipts1_num < 30 &&//右线丢线
+                    IMG.far_ipts1[IMG.far_ipts1_num - 1][0] > IMAGE_WIDTH - 11 &&//远线末端贴墙
+                    IMG.far_ipts1[IMG.far_ipts1_num - 1][1] < 100//远线末端在屏幕上方
+                    )) {
+
+                none_right_line = 0;
+                have_right_line = 0;
+                IMG.element_identify = 1;
+                circle_route = IMG.encoder.route;
+                if (control_flag.contains(cross_element)) {//如果在十字路口中则删除十字路口
+                    control_flag.remove(cross_element);
+                    flag_cross = CROSS_NONE;
+                }
+                control_flag.push(circle_element);
+                flag_circle = CIRCLE_RIGHT_BEGIN;
+                MAT_LOG("CIRCLE_RIGHT_BEGIN");
+            }
+
+
+
+
         }
     }
 }
@@ -307,11 +362,9 @@ void run_circle() {
                 IMG.get_edge();//获取边线
             }
         }
-        if (flag_circle == CIRCLE_OUT)
-        {
+        if (flag_circle == CIRCLE_OUT) {
             IMG.get_edge();//获取边线
-            if (IMG.ipts0_num > 120 || IMG.ipts1_num > 120 || IMG.encoder.route - circle_route > 100)
-            {
+            if (IMG.ipts0_num > 120 || IMG.ipts1_num > 120 || IMG.encoder.route - circle_route > 100) {
                 IMG.element_over = true;
                 IMG.element_over_route = IMG.encoder.route;
                 control_flag.pop();//移除环岛

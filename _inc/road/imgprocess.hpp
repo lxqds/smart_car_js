@@ -179,6 +179,10 @@ public:
     bool is_straight0, is_straight1;
 
 
+    //横向扫描得到的横线数据集
+    std::vector<POINT> white_row_start_point[40];//白行起始点
+    std::vector<POINT> white_row_end_point[40];//白行结束点
+
     /* *********************************************************************** */
     /* ******************************* 边线数据 ******************************* */
     /* *********************************************************************** */
@@ -193,7 +197,6 @@ public:
     int iptsc[IMAGE_HEIGHT];     // 中: c
     int ipts0_num, ipts1_num, rptsc_num;
 
-    int Preprocess_ipts0_num, Preprocess_ipts1_num;
     int iptsc0[IMAGE_HEIGHT] = { 0 };
     int iptsc1[IMAGE_HEIGHT] = { 0 };
 

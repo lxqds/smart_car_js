@@ -136,13 +136,14 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
 
         //横向扫描,得到横线数据集
-        std::vector<POINT> white_row_start_point[40];//白行起始点
-        std::vector<POINT> white_row_end_point[40];//白行结束点
-        std::vector<int> white_row_length[40];//透视变换白行长度
+        white_row_start_point
+            std::vector<int> white_row_length[40];//透视变换白行长度
         //寻找最符合跑道的白行
         {
             for (int i = 39; i > 0; i--) {
                 int start = 0, sign = 0, count = 0;
+                white_row_start_point[i].clear();
+                white_row_end_point[i].clear();
                 for (int x = 0; x < IMAGE_WIDTH; x += 2) {
                     if (sign == 0) {//向右开始找白点
                         if (AT_IMAGE(mat_bin, x, i * 5) >= 127)count++;
