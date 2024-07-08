@@ -119,12 +119,12 @@ void run_work()
 
             int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + 15;
 
-            if (work_near_cone.x > coneLowy) {
-                    wzp = 1;
+            if (work_near_cone.x > coneLowy ) {
+                    wzp = -1;
             }
             else if(work_near_cone.x < thresholdh)
             {
-                   wzp = -1;
+                   wzp = 1;
             }
             else {
                 wzp = 0;
