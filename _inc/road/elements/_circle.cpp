@@ -46,15 +46,48 @@ void check_circle() {
             IMG.ipts1_num > 150)  // 右边长直道
         {
 
+            float angleDeg = 180.0f;
+            if (IMG.ipts0_num > 50) {
+                float k[3][2];
+                float rpts[2];
+                map_perspective((float)IMG.ipts0[0][0], (float)IMG.ipts0[0][1], rpts, 0);
+                k[0][0] = rpts[0];
+                k[0][1] = rpts[1];
+                map_perspective((float)IMG.ipts0[IMG.ipts0_num / 2][0], (float)IMG.ipts0[IMG.ipts0_num / 2][1], rpts, 0);
+                k[1][0] = rpts[0];
+                k[1][1] = rpts[1];
+                map_perspective((float)IMG.ipts0[IMG.ipts0_num - 1][0], (float)IMG.ipts0[IMG.ipts0_num - 1][1], rpts, 0);
+                k[2][0] = rpts[0];
+                k[2][1] = rpts[1];
+                float BAx = (float)(k[0][0] - k[1][0]);
+                float BAy = (float)(k[0][1] - k[1][1]);
+                float BCx = (float)(k[2][0] - k[1][0]);
+                float BCy = (float)(k[2][1] - k[1][1]);
+                // 计算点积
+                float dotProduct = (BAx * BCx) + (BAy * BCy);
+                // 计算向量的模长
+                float magnitudeBA = sqrt(BAx * BAx + BAy * BAy);
+                float magnitudeBC = sqrt(BCx * BCx + BCy * BCy);
+                // 计算夹角的余弦值
+                float cosTheta = dotProduct / (magnitudeBA * magnitudeBC);
+                // 计算夹角（弧度）
+                float angleRad = acos(cosTheta);
+                // 转换为角度
+                angleDeg = angleRad * (180.0f / PI);
+            }
+
+
+
             if ((IMG.Lpt0_found &&   // 左角点找到
                 IMG.Lpt0_point[1] > 140 && //左角点在屏幕下方
                 IMG.ipts0_num < 150) ||
                 (IMG.ipts0_num > 50 &&
                     IMG.ipts0[0][0] < 10 &&
-                    IMG.ipts0[IMG.ipts0_num - 1][0] < 10 &&
+                    IMG.ipts0[IMG.ipts0_num - 1][0] < 30 &&
                     IMG.ipts0[0][1] < IMAGE_HEIGHT * 0.85 &&
                     abs(IMG.ipts0[IMG.ipts0_num - 1][1] - IMG.ipts0[0][1])>40 &&
-                    abs(IMG.ipts0[IMG.ipts0_num - 1][1] - IMG.ipts0[0][1]) < 120)) {
+                    abs(IMG.ipts0[IMG.ipts0_num - 1][1] - IMG.ipts0[0][1]) < 120 &&
+                    angleDeg < 120)) {
                 none_left_line = 0;
                 have_left_line = 0;
                 IMG.element_identify = 1;
@@ -74,16 +107,45 @@ void check_circle() {
             !IMG.far_Lpt0_found &&  // 左远角点未找到
             IMG.ipts0_num > 150)   // 左边长直道
         {// 右线点比较少
-
+            float angleDeg = 180.0f;
+            if (IMG.ipts1_num > 50) {
+                float k[3][2];
+                float rpts[2];
+                map_perspective((float)IMG.ipts1[0][0], (float)IMG.ipts1[0][1], rpts, 0);
+                k[0][0] = rpts[0];
+                k[0][1] = rpts[1];
+                map_perspective((float)IMG.ipts1[IMG.ipts1_num / 2][0], (float)IMG.ipts1[IMG.ipts1_num / 2][1], rpts, 0);
+                k[1][0] = rpts[0];
+                k[1][1] = rpts[1];
+                map_perspective((float)IMG.ipts1[IMG.ipts1_num - 1][0], (float)IMG.ipts1[IMG.ipts1_num - 1][1], rpts, 0);
+                k[2][0] = rpts[0];
+                k[2][1] = rpts[1];
+                float BAx = (float)(k[0][0] - k[1][0]);
+                float BAy = (float)(k[0][1] - k[1][1]);
+                float BCx = (float)(k[2][0] - k[1][0]);
+                float BCy = (float)(k[2][1] - k[1][1]);
+                // 计算点积
+                float dotProduct = (BAx * BCx) + (BAy * BCy);
+                // 计算向量的模长
+                float magnitudeBA = sqrt(BAx * BAx + BAy * BAy);
+                float magnitudeBC = sqrt(BCx * BCx + BCy * BCy);
+                // 计算夹角的余弦值
+                float cosTheta = dotProduct / (magnitudeBA * magnitudeBC);
+                // 计算夹角（弧度）
+                float angleRad = acos(cosTheta);
+                // 转换为角度
+                angleDeg = angleRad * (180.0f / PI);
+            }
             if ((IMG.Lpt1_found &&   // 右角点找到
                 IMG.Lpt1_point[1] > 140 && //右角点在屏幕下方
                 IMG.ipts1_num < 150) ||
                 (IMG.ipts1_num > 50 &&
                     IMG.ipts1[0][0] > IMAGE_WIDTH - 11 &&
-                    IMG.ipts1[IMG.ipts1_num - 1][0] > IMAGE_WIDTH - 11 &&
+                    IMG.ipts1[IMG.ipts1_num - 1][0] > IMAGE_WIDTH - 31 &&
                     IMG.ipts1[0][1] < IMAGE_HEIGHT * 0.85 &&
                     abs(IMG.ipts1[IMG.ipts1_num - 1][1] - IMG.ipts1[0][1])>40 &&
-                    abs(IMG.ipts1[IMG.ipts1_num - 1][1] - IMG.ipts1[0][1]) < 120)) {
+                    abs(IMG.ipts1[IMG.ipts1_num - 1][1] - IMG.ipts1[0][1]) < 120 &&
+                    angleDeg < 120)) {
 
                 none_right_line = 0;
                 have_right_line = 0;
