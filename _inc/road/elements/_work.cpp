@@ -129,7 +129,7 @@ void run_work()
 
             IMG.aim_speed = err_H;
 
-            float speedP = err_H / 50;
+            float speedP = err_H / 50.0;
             if (speedP > 1)speedP = 1;
             if (speedP < -1)speedP = -1;
             
@@ -241,7 +241,7 @@ void run_work()
             err_H = (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg - minyCent.y;
             
             IMG.aim_angle = err_W * 0.6;
-            speedP = err_H / 50;
+            speedP = err_H / 50.0;
             if (speedP > 1)speedP = 1;
             if (speedP < -1)speedP = -1;
 
