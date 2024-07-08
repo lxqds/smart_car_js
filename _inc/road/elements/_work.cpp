@@ -133,8 +133,7 @@ void run_work()
             if (work_near_cone.x < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy && 
                 (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)&&
                 IMG.encoder.route - work_route > 10 && 
-                speed_err <300 && 
-                (work_near_cone.x < thresholdh && work_near_cone.x > coneLowy)) {
+                speed_err <300 ) {
 
                 work_route = IMG.encoder.route;
                 flag_work = WORK_READY;
