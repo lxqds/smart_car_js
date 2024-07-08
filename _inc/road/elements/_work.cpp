@@ -74,7 +74,6 @@ void run_work()
         IMG.aim_speed = IMG._config->speed_work;
 
         work_near_cone = POINT(0, 0);
-        work_near_AIcone = POINT(0, 0);
         IMG.edge_det.clear();
         if (flag_work == WORK_FOUND_1)
         {
