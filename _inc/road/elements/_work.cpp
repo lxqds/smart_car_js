@@ -336,13 +336,13 @@ void run_work()
                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
             }
             //退出速度赋值
-            if ((work_route - IMG.encoder.route < work_route2 * IMG._config->work_recback_line_k)|| mcentPoint.y < 0.3 * IMAGE_HEIGHT)
+            if (mcentPoint.y < 0.3 * IMAGE_HEIGHT)
             {
-
                 IMG.aim_angle = 0;
                 MAT_LOG("out");
                 out_flage = 1;
             }
+            LOG_I << "R0 " << R0 << "R1 " << R1 << LOG_END;
 
             if (R0 <10 &&
                 R1 <10 &&
