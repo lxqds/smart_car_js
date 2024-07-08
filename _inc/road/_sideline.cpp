@@ -193,7 +193,7 @@ double findThirdPointX(POINT a, POINT b, double y) {
     return x;
 }
 
-// 直线拟合 (返回平均绝对误差)
+// 透视图直线拟合 (返回平均绝对误差)
 float fit_line(float pts[][2], int num, int cut_h) {
     if (num != 0) {
         std::vector<cv::Point> points;
@@ -222,7 +222,31 @@ float fit_line(float pts[][2], int num, int cut_h) {
 
     return 100.0f;
 }
+// 原图直线拟合 (返回平均绝对误差)
+float fit_line1(float pts[][2], int num, int cut_h) {
+    if (num != 0) {
+        std::vector<cv::Point> points;
+        cv::Vec4f line_para;
+        float k, b, mea = 0.0f;
+        int y_counter = 0;
 
+        for (int i = 0; i < num; i++, y_counter++) {
+            if (ipts[i][1] < cut_h)break;
+            points.push_back(cv::Point(ipts[i][0], ipts[i][1]));
+        }
+
+        cv::fitLine(points, line_para, cv::DIST_L2, 0, 1e-2, 1e-2);
+
+        k = line_para[1] / line_para[0];
+        b = line_para[3] - k * line_para[2];
+
+        for (int i = 0; i < y_counter; i++)
+            mea += fabs(k * points[i].x + b - points[i].y);
+        return (float)(mea / y_counter);
+    }
+
+    return 100.0f;
+}
 // 贝塞尔曲线拟合
 std::vector<POINT> bezier(double dt, std::vector<POINT> input) {
     std::vector<POINT> output;
@@ -358,8 +382,7 @@ float get_AIorcolor_AVG_Y(std::vector<DetectionPredictResult> predict) {
     //计算 Z-score 
     int outnum = 0;
     sum = 0;
-    for (int i = 0; i < num; i++)
-    {
+    for (int i = 0; i < num; i++) {
         z_scores = ((AI_cones[i].x - aver) * (AI_cones[i].x - aver)) / sigma;// 与均值差的平方除以方差
 
         if (z_scores < 2.5) {
@@ -378,8 +401,7 @@ POINT AI_search_left_near(std::vector<DetectionPredictResult> predict, std::vect
     vector<POINT> AI_cones = search_targets(predict);
 
     for (size_t i = 0; i < pointsEdge.size(); i++) {
-        for (size_t a = 0; a < AI_cones.size(); a++)
-        {   //锥桶中心在 任意边线点 左方宽35 高40区域内时:
+        for (size_t a = 0; a < AI_cones.size(); a++) {   //锥桶中心在 任意边线点 左方宽35 高40区域内时:
             if ((pointsEdge[i].y - 35 < AI_cones[a].y && AI_cones[a].y < pointsEdge[i].y)
                 && ((pointsEdge[i].x - 20 < AI_cones[a].x && AI_cones[a].x < pointsEdge[i].x)
                     || (pointsEdge[i].x + 20 > AI_cones[a].x && AI_cones[a].x > pointsEdge[i].x)))
@@ -394,8 +416,7 @@ POINT AI_search_right_near(std::vector<DetectionPredictResult> predict, std::vec
     vector<POINT> AI_cones = search_targets(predict);
 
     for (size_t i = 0; i < pointsEdge.size(); i++) {
-        for (size_t a = 0; a < AI_cones.size(); a++)
-        {   //锥桶中心在 任意边线点 右方宽35 高40区域内时:
+        for (size_t a = 0; a < AI_cones.size(); a++) {   //锥桶中心在 任意边线点 右方宽35 高40区域内时:
             if ((pointsEdge[i].y < AI_cones[a].y && AI_cones[a].y < pointsEdge[i].y + 35)
                 && ((pointsEdge[i].x - 20 < AI_cones[a].x && AI_cones[a].x < pointsEdge[i].x)
                     || (pointsEdge[i].x + 20 > AI_cones[a].x && AI_cones[a].x > pointsEdge[i].x)))
@@ -432,16 +453,14 @@ uint16_t search_mid_cone_getH(cv::Mat matt) {
     int sum = 5;
     for (size_t y = IMAGE_HEIGHT - 20; y > IMAGE_HEIGHT / 2; y--) {
         sum = 5;
-        for (size_t x = IMAGE_WIDTH / 2; x < IMAGE_WIDTH / 2 + 30; x++)
-        {
+        for (size_t x = IMAGE_WIDTH / 2; x < IMAGE_WIDTH / 2 + 30; x++) {
             if (AT_IMAGE(matt, x, y) > 0)
                 sum--;
             if (sum <= 0)
                 return y;
         }
 
-        for (size_t x = IMAGE_WIDTH / 2; x > IMAGE_WIDTH / 2 - 30; x--)
-        {
+        for (size_t x = IMAGE_WIDTH / 2; x > IMAGE_WIDTH / 2 - 30; x--) {
             if (AT_IMAGE(matt, x, y) > 0)
                 sum--;
             if (sum <= 0)
@@ -458,8 +477,7 @@ std::vector<cv::Rect>  CVFind_Clone::search_all_cone_rect(cv::Mat matt) {
     Clone_MAP = matt.clone();
     memset(bl_map, 0, sizeof(bl_map));
     std::vector<cv::Rect> Res;
-    for (int y = 10; y < IMAGE_HEIGHT; y++)
-    {
+    for (int y = 10; y < IMAGE_HEIGHT; y++) {
         for (int x = 5; x < IMAGE_WIDTH - 10; x++) {
             if (AT_IMAGE(Clone_MAP, x, y) > 0) {
                 cv::Rect resRect(x, y, x, y);
@@ -498,8 +516,7 @@ void CVFind_Clone::coverTheMat(cv::Rect Rect, cv::Mat map) {
     if (w >= IMAGE_WIDTH)w = IMAGE_WIDTH - 1;
     if (h >= IMAGE_HEIGHT)h = IMAGE_HEIGHT - 1;
 
-    for (; by < h; by++)
-    {
+    for (; by < h; by++) {
         for (int x = bx; x < w; x++) {
             AT_IMAGE(map, x, by) = 0;
         }
@@ -529,8 +546,7 @@ cv::Rect CVFind_Clone::find_Width_Begin_x(int x, int y, int turncs, int nowfx, c
      //cv::waitKey(0);
     // printf("/n/n ***************   next  ********************* \n\n x %d y %d \n\n\n",x,y);
 
-    for (size_t i = 0; i < 8; i++)
-    {
+    for (size_t i = 0; i < 8; i++) {
         int frontx, fronty;
         fronty = y + cone_front[i][1];
         frontx = x + cone_front[i][0];
@@ -570,17 +586,17 @@ cv::Rect CVFind_Clone::find_Width_Begin_x(int x, int y, int turncs, int nowfx, c
 
 }
 
-void drawH(int h, uint8_t r, uint8_t g, uint8_t b , cv::Mat map) {
+void drawH(int h, uint8_t r, uint8_t g, uint8_t b, cv::Mat map) {
     cv::line(map, cv::Point(0, (int)h),
         cv::Point(IMAGE_WIDTH - 1, (int)h), cv::Scalar(r, g, b), 1);
 }
 
 
 void drawW(int w, uint8_t r, uint8_t g, uint8_t b, cv::Mat map) {
-    cv::line(map, cv::Point(w, IMAGE_HEIGHT-1),
+    cv::line(map, cv::Point(w, IMAGE_HEIGHT - 1),
         cv::Point(w, 0), cv::Scalar(r, g, b), 1);
 }
-POINT getCenterPoint(cv::Rect rect){
+POINT getCenterPoint(cv::Rect rect) {
     POINT cpt;
 
     cpt.x = rect.x + (int)rect.width / 2;
@@ -653,10 +669,8 @@ POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
                         cv::Scalar(255, 0, 255), 7);
                 }
 
-                if (sum <= 0)
-                {
-                    if (resw > y - pointsEdge[i].y)
-                    {
+                if (sum <= 0) {
+                    if (resw > y - pointsEdge[i].y) {
                         find = POINT(pointsEdge[i].x, y);
                         resw = y - pointsEdge[i].y;
                     }
@@ -678,17 +692,14 @@ POINT search_right_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
         for (int y = pointsEdge[i].y; y > pointsEdge[i].y - 50; y--) {
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) {
 
-                if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
-                {
+                if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0) {
                     sum--;
                     cv::line(IMG.mat_result, cv::Point(pointsEdge[i].y, pointsEdge[i].x),
                         cv::Point(y, pointsEdge[i].x),
                         cv::Scalar(255, 0, 255), 7);
                 }
-                if (sum <= 0)
-                {
-                    if (resw > pointsEdge[i].y - y)
-                    {
+                if (sum <= 0) {
+                    if (resw > pointsEdge[i].y - y) {
                         find = POINT(pointsEdge[i].x, y);
                         resw = pointsEdge[i].y - y;
                     }
