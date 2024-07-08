@@ -25,7 +25,8 @@ StopWatch stop_clock_2;
 CVFind_Clone workC;
 bool direction_work = true;//true : 左工作区 false : 右工作区
 /* ********************************************************************* */
-
+int FOUND_last_y;
+uint8_t out_flage;
 void check_work()
 {
 
@@ -46,6 +47,7 @@ void check_work()
                     IMG.flag_track = TRACK_RIGHT;
                     flag_work = WORK_FOUND_1;
                     MAT_LOG("WORK_FOUND_R");
+                    FOUND_last_y = 0;
                 }
                 else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.52 && r.y > IMAGE_HEIGHT * 0.1) {
 
@@ -63,7 +65,6 @@ void check_work()
 }
 
 /* ********************************************************************* */
-
 void run_work()
 {
 
@@ -77,7 +78,6 @@ void run_work()
         IMG.edge_det.clear();
         if (flag_work == WORK_FOUND_1)
         {
-
             // 找锥桶
             IMG.edge_det = search_targets(IMG._det_result);
             // 进入方向
@@ -89,17 +89,25 @@ void run_work()
           //  LOG_I << " work_near_cone :" << work_near_cone.x << " IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy :" << IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy << LOG_END;
 
             // 当车辆开始靠近锥桶: 准备进入 识别或色块 识别到的锥桶大于一段阈值
-            if (work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy)
-            {
-                flag_work = WORK_FOUND_2;
-                work_route = IMG.encoder.route;
-                MAT_LOG("WORK_FOUND_2");
+            //if (work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy)
+            //{
+            //    flag_work = WORK_FOUND_2;
+            //    work_route = IMG.encoder.route;
+            //    MAT_LOG("WORK_FOUND_2");
+            //}
+           
+            //当 第一个锥桶消失
+            if (FOUND_last_y > work_near_cone.x) {
+                    flag_work = WORK_FOUND_2;
+                    work_route = IMG.encoder.route;
+                    MAT_LOG("WORK_FOUND_2");
             }
+
             cv::line(IMG.mat_result, cv::Point(0, (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy),
                 cv::Point(IMAGE_WIDTH - 1, (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy), cv::Scalar(0, 0, 255), 1);
             cv::line(IMG.mat_result, cv::Point(0, (int)work_near_cone.x),
                 cv::Point(IMAGE_WIDTH - 1, (int)work_near_cone.x), cv::Scalar(255, 0, 0), 1);
-
+            FOUND_last_y = work_near_cone.x;
         }
 
         if (flag_work == WORK_FOUND_2)
@@ -119,14 +127,14 @@ void run_work()
 
             int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in+7-work_near_cone.x ;
 
-            IMG.aim_speed = IMG._config->speed_work ;
+            IMG.aim_speed = err_H;
 
-            if(work_near_cone.x< IMAGE_HEIGHT* 0.6){
-
-                IMG.aim_speed = err_H * 5;
-
-            }
+            float speedP = err_H / 50;
+            if (speedP > 1)speedP = 1;
+            if (speedP < -1)speedP = -1;
             
+            IMG.aim_speed = IMG._config->speed_work * speedP;
+
             int speed_err = abs(IMG.aim_speed - IMG.encoder.speed*1000);
             LOG_I << "  speed_err:" << speed_err << LOG_END;
             if (work_near_cone.x < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy && 
@@ -288,6 +296,7 @@ void run_work()
                 MAT_LOG("WORK_PARKINISH"); //泊车中
                 flag_work = WORK_OUT;
                 workC.init();
+                out_flage = 0;
             }
             else
             {
@@ -311,21 +320,25 @@ void run_work()
             IMG.aim_speed = -IMG.aim_speed;//倒车         
             // POINT AI_cone_left = POINT AI_search_right_near(IMG._det_result, IMG.edge_left);
             //退出角度赋值
-            if (work_route - IMG.encoder.route > work_route2 * IMG._config->work_recback_angle_route_k)//大于退出 某阶段时开始打角
+            if (out_flage)//大于退出 某阶段时开始打角
             {
                 IMG.aim_angle = IMG._config->work_recback_angle;
 
                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
             }
             //退出速度赋值
-            if ((work_route - IMG.encoder.route < work_route2 * IMG._config->work_recback_line_k)|| mcentPoint.y < 0.35 * IMG._config->work_recback_line_k)
+            if ((work_route - IMG.encoder.route < work_route2 * IMG._config->work_recback_line_k)|| mcentPoint.y < 0.3 * IMAGE_HEIGHT)
             {
 
                 IMG.aim_angle = 0;
                 MAT_LOG("out");
+                out_flage = 1;
             }
 
-            if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST && IMG.rpts0s_num > 0.8 / SAMPLE_DIST && work_route - IMG.encoder.route > work_route2)
+            if (IMG.rpts1s_num > 0.8 / SAMPLE_DIST &&
+                IMG.rpts0s_num > 0.8 / SAMPLE_DIST &&
+               (work_near_cone.x != 0 && work_near_cone1.x != 0) &&
+                out_flage)
             {
                 control_flag.pop();//移除
                 flag_work = WORK_NONE;
