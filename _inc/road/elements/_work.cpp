@@ -82,7 +82,7 @@ void run_work()
             IMG.edge_det = search_targets(IMG._det_result);
 
             // 进入方向
-            if (true)
+            if (direction_work)
                 work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
             else
                 work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
