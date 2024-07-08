@@ -744,6 +744,7 @@ POINT search_left_near35(std::vector<POINT> pointsEdge, cv::Mat matt) {
     return POINT(0, 0);
 }
 
+//x , y相反
 // 搜索距离赛道右边缘最近的黄色色块 (黄色锥桶)
 POINT search_right_near(std::vector<POINT> pointsEdge, cv::Mat matt) {
     for (size_t i = 0; i < pointsEdge.size(); i++)

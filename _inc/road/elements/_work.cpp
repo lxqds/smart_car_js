@@ -105,29 +105,49 @@ void run_work()
 
         if (flag_work == WORK_FOUND_2)
         {
-            // 找锥桶
+            float wzp = 1;
+
             IMG.edge_det = search_targets(IMG._det_result);
 
-            // 进入方向
+            // 找锥桶
             if (direction_work)
                 work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
             else
                 work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
 
-            if (work_near_cone.x < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy && work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in && IMG.encoder.route - work_route > 10) {
+            int thresholdh = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in;
+
+            int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + 15;
+
+            if (work_near_cone.x > coneLowy) {
+                    wzp = 1;
+            }
+            else if(work_near_cone.x < thresholdh)
+            {
+                   wzp = -1;
+            }
+            else {
+                wzp = 0;
+            }
+
+            IMG.aim_speed = IMG._config->speed_work * wzp;
+            
+            int speed_err = abs(IMG.aim_speed - IMG.encoder.speed*1000);
+
+            if (work_near_cone.x < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy && 
+                (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)&&
+                IMG.encoder.route - work_route > 10 && 
+                speed_err <200 && 
+                (work_near_cone.x < thresholdh && work_near_cone.x > coneLowy)) {
 
                 work_route = IMG.encoder.route;
                 flag_work = WORK_READY;
                 MAT_LOG("WORK_READY");
             }
-            cv::line(IMG.mat_result, cv::Point(0, (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in),
-                cv::Point(IMAGE_WIDTH - 1, (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in), cv::Scalar(255, 0, 0), 1);
 
-            cv::line(IMG.mat_result, cv::Point(0, (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy),
-                cv::Point(IMAGE_WIDTH - 1, (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy), cv::Scalar(0, 0, 255), 1);
-            cv::line(IMG.mat_result, cv::Point(0, (int)work_near_cone.x),
-                cv::Point(IMAGE_WIDTH - 1, (int)work_near_cone.x), cv::Scalar(255, 0, 0), 1);
-
+                drawH(thresholdh, 0, 0,255, IMG.mat_result);
+                drawH(work_near_cone.x, 255, 0, 0, IMG.mat_result);
+                drawH(coneLowy, 0, 0, 255, IMG.mat_result);
         }
 
         if (flag_work == WORK_FOUND_2 || flag_work == WORK_FOUND_1) {
@@ -174,7 +194,9 @@ void run_work()
             //    flag_work = WORK_STOPPING;
             //    MAT_LOG("WORK_READY_ERROR");
             //}
-
+            // 调整 进入角度
+            IMG.aim_angle = IMG._config->work_angle_in_1;
+            if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
             //开始调整进入姿态，若是没找到线旁的锥桶 且 小于设定调整路程则开始深入工作区
             float edgek = 0;
             float threshold_k = -1.40 ;
@@ -189,10 +211,6 @@ void run_work()
                 if (IMG.edge_right.size() != 0)edgek = Calculate_K(IMG.edge_right);
                 threshold_k = -threshold_k;
             }
-            LOG_I << " \n edgek \n" << edgek << LOG_END;
-            // 调整 进入角度
-            IMG.aim_angle = IMG._config->work_angle_in_1;
-            if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
 
            // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready )
 
@@ -276,7 +294,7 @@ void run_work()
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
 
             drawH(mcentPoint.y, 0, 0, 255, IMG.mat_result);
-            drawH((int)0.35 * IMG._config->work_recback_line_k, 0, 255, 0, IMG.mat_result);
+            drawH((int)(0.35 * IMG._config->work_recback_line_k), 0, 255, 0, IMG.mat_result);
 
             IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed); //逐渐减速
             IMG.aim_speed = -IMG.aim_speed;//倒车         
