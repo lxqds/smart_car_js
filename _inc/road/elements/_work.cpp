@@ -96,6 +96,10 @@ void run_work()
                 work_route = IMG.encoder.route;
                 MAT_LOG("WORK_FOUND_2");
             }
+            cv::line(IMG.mat_result, cv::Point(0, (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy),
+                cv::Point(IMAGE_WIDTH - 1, (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy), cv::Scalar(0, 0, 255), 1);
+            cv::line(IMG.mat_result, cv::Point(0, (int)work_near_cone.x),
+                cv::Point(IMAGE_WIDTH - 1, (int)work_near_cone.x), cv::Scalar(255, 0, 0), 1);
 
         }
 
@@ -116,6 +120,13 @@ void run_work()
                 flag_work = WORK_READY;
                 MAT_LOG("WORK_READY");
             }
+            cv::line(IMG.mat_result, cv::Point(0, (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in),
+                cv::Point(IMAGE_WIDTH - 1, (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in), cv::Scalar(255, 0, 0), 1);
+
+            cv::line(IMG.mat_result, cv::Point(0, (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy),
+                cv::Point(IMAGE_WIDTH - 1, (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy), cv::Scalar(0, 0, 255), 1);
+            cv::line(IMG.mat_result, cv::Point(0, (int)work_near_cone.x),
+                cv::Point(IMAGE_WIDTH - 1, (int)work_near_cone.x), cv::Scalar(255, 0, 0), 1);
 
         }
 
