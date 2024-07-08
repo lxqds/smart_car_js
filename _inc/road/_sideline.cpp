@@ -578,7 +578,7 @@ void drawH(int h, uint8_t r, uint8_t g, uint8_t b , cv::Mat map) {
 
 void drawW(int w, uint8_t r, uint8_t g, uint8_t b, cv::Mat map) {
     cv::line(map, cv::Point(w, IMAGE_HEIGHT-1),
-        cv::Point(w, 0, cv::Scalar(r, g, b), 1));
+        cv::Point(w, 0), cv::Scalar(r, g, b), 1);
 }
 POINT getCenterPoint(cv::Rect rect){
     POINT cpt;
