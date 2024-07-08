@@ -251,7 +251,8 @@ void run_work()
 
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
             //开始靠近锥桶
-            if (avg_y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg 
+            if (err_H < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg
+                && err_H > IMAGE_HEIGHT * 0.8;
                 && IMG.encoder.route - work_route < IMG._config->work_rou_in)
             {
 
