@@ -185,16 +185,15 @@ void run_work()
             if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
 
            // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready )
-           // if(direction_work && (edgek > threshold_k && (work_near_cone.x == 0 && work_near_cone.y == 0)) || edgek == 0)
-            if ((edgek < threshold_k  && (work_near_cone.x==0 && work_near_cone.y == 0 )) || edgek ==0)
-            {
 
+            if ((work_near_cone.x == 0 && work_near_cone.y == 0)||(direction_work && edgek > threshold_k) || (!direction_work && edgek < threshold_k) || edgek == 0) {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_RUN;
                 work_route2 = IMG.encoder.route;
                 MAT_LOG("WORK_RUN");
-            }
 
+            }
+            
         }
 
 
