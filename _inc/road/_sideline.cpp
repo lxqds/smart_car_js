@@ -451,6 +451,125 @@ uint16_t search_mid_cone_getH(cv::Mat matt) {
     return 0;
 }
 
+void CVFind_Clone::init() {
+    memset(bl_map, 0, sizeof(bl_map));
+}
+std::vector<cv::Rect>  CVFind_Clone::search_all_cone_rect(cv::Mat matt) {
+    Clone_MAP = matt.clone();
+    memset(bl_map, 0, sizeof(bl_map));
+    std::vector<cv::Rect> Res;
+    for (int y = 10; y < IMAGE_HEIGHT; y++)
+    {
+        for (int x = 5; x < IMAGE_WIDTH - 10; x++) {
+            if (AT_IMAGE(Clone_MAP, x, y) > 0) {
+                cv::Rect resRect(x, y, x, y);
+                //printf("\n\nfind %d %d\n", x, y);
+                resRect = find_Width_Begin_x(x, y, 0, 1, resRect);
+                resRect.width -= resRect.x;
+                resRect.height -= resRect.y;
+                coverTheMat(resRect, Clone_MAP);
+                if (resRect.area() < 80 || resRect.width < 0 || resRect.height < 0)continue;
+                resRect.x -= 3;
+                resRect.y -= 3;
+                resRect.width += 3;
+                resRect.height += 3;
+                if (resRect.x < 0)resRect.x = 0;
+                if (resRect.y < 0)resRect.y = 0;
+                if (resRect.width >= IMAGE_WIDTH)resRect.width = IMAGE_WIDTH - 1;
+                if (resRect.height >= IMAGE_HEIGHT)resRect.height = IMAGE_HEIGHT - 1;
+                //float predit = 9.26 * resRect.y - 55;
+                //if (abs(predit - resRect.area()) > 300)continue;//区域面积和y坐标线性预测值偏差大则跳过
+                //cv::imshow("Clone_MAP", Clone_MAP);
+                Res.push_back(resRect);
+            }
+        }
+    }
+    return Res;
+}
+
+void CVFind_Clone::coverTheMat(cv::Rect Rect, cv::Mat map) {
+    int by, bx, w, h;
+    by = Rect.y - 3;
+    bx = Rect.x - 3;
+    w = bx + Rect.width + 6;
+    h = by + Rect.height + 6;
+    if (by < 0)by = 0;
+    if (bx < 0) bx = 0;
+    if (w >= IMAGE_WIDTH)w = IMAGE_WIDTH - 1;
+    if (h >= IMAGE_HEIGHT)h = IMAGE_HEIGHT - 1;
+
+    for (; by < h; by++)
+    {
+        for (int x = bx; x < w; x++) {
+            AT_IMAGE(map, x, by) = 0;
+        }
+    }
+}
+bool CVFind_Clone::pt_IsEdge(int x, int y) {
+    //左  处于图片边界时也认定它 是边界
+    for (uint8_t i = 0; i < 8; i++) {
+        int frontx, fronty;
+        fronty = y + cone_front[i][1];
+        frontx = x + cone_front[i][0];
+        if (frontx < 0 || frontx >= IMAGE_WIDTH) return true;
+        if (fronty < 0 || fronty >= IMAGE_HEIGHT) return true;
+        if (AT_IMAGE(Clone_MAP, frontx, fronty) <= 0)return true;
+    }
+    //  printf("lext not hei \n");
+    return false;
+}
+cv::Rect CVFind_Clone::find_Width_Begin_x(int x, int y, int turncs, int nowfx, cv::Rect lastRect) {
+
+    if (x < 0 || y < 0 || x >= IMAGE_WIDTH || y >= IMAGE_HEIGHT) return lastRect;
+    if (abs(turncs) >= 8) { return lastRect; }//转动360度 结束递归 返回现在搜索到最长宽度
+    cv::Rect resRect = lastRect;
+    short tempfx = nowfx;
+    short tempturncs = turncs;
+    // cv::imshow("Clone_MAP", Clone_MAP);
+     //cv::waitKey(0);
+    // printf("/n/n ***************   next  ********************* \n\n x %d y %d \n\n\n",x,y);
+
+    for (size_t i = 0; i < 8; i++)
+    {
+        int frontx, fronty;
+        fronty = y + cone_front[i][1];
+        frontx = x + cone_front[i][0];
+        if (frontx < 0 || frontx >= IMAGE_WIDTH) continue;
+        if (fronty < 0 || fronty >= IMAGE_HEIGHT) continue;
+        //      下一格为白色                         且为 未寻找过的格子             且    下一格的八邻域为黑格（边缘格）
+        if (AT_IMAGE(Clone_MAP, frontx, fronty) > 0 && bl_map[frontx][fronty] == 0 && pt_IsEdge(frontx, fronty)) {//对八邻域试探搜索
+            tempfx = nowfx;
+            tempturncs = turncs;
+            // 要转的 减去 现在方向  大于0 右转 小于 0 左转 
+            int turnfx = cone_arger[i] - nowfx;
+            if (turnfx >= 4) turnfx -= 8; //将范围限制在180度以内
+            if (turnfx <= -4) turnfx += 8;
+
+            tempfx = cone_arger[i]; //更新搜索方向
+
+            tempturncs += turnfx; //更新转弯次数
+            //AT_IMAGE(Clone_MAP, x, y) = 0;
+            bl_map[x][y] = 1; //禁止搜索相同路径
+
+            if (frontx > resRect.width) {
+                resRect.width = frontx;  // 更新MAX x
+            }
+            if (fronty > resRect.height) {
+                resRect.height = fronty; // 更新MAX h
+            }
+            if (fronty < resRect.y) {
+                resRect.y = fronty;   //更新min y
+            }
+            if (frontx < resRect.x) {
+                resRect.x = frontx;//更新min x
+            }
+            resRect = find_Width_Begin_x(frontx, fronty, tempturncs, tempfx, resRect);
+        }
+    }
+    return resRect;
+
+}
+
 //// 搜索距离赛道左边缘最近的黄色色块 (黄色锥桶) 赛道内
 //POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
 //    int sum = 5;

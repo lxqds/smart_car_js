@@ -143,6 +143,23 @@ POINT search_leftDown_cone(std::vector<POINT> pointsCone);
 
 /* ********************************************************************* */
 
+class CVFind_Clone
+{
+public:
+    void init();
+    std::vector<cv::Rect> search_all_cone_rect(cv::Mat matt);
+private:
+    const int cone_front[8][2] = { {1, 0},{0, -1}, {0, 1}, {-1, 0},{-1, -1},{1, 1},{-1, 1},{1, -1} };
+    const int cone_arger[8] = { 2,0,4,6,7,3,5,1 };
+    cv::Mat Clone_MAP;
+    bool bl_map[IMAGE_WIDTH][IMAGE_HEIGHT]; //搜索地图
+    void coverTheMat(cv::Rect Rect, cv::Mat map);
+    bool pt_IsEdge(int x, int y);
+    cv::Rect find_Width_Begin_x(int x, int y, int turncs, int nowfx, cv::Rect lastRect);
+
+};
+
+/* ********************************************************************* */
 // 限制范围
 int clip(int x, int low, int up);
 
