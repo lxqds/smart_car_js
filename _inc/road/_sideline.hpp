@@ -158,7 +158,8 @@ private:
     cv::Rect find_Width_Begin_x(int x, int y, int turncs, int nowfx, cv::Rect lastRect);
 
 };
-
+void drawH(int h, uint8_t r, uint8_t g, uint8_t b);
+void drawW(int h, uint8_t r, uint8_t g, uint8_t b)
 /* ********************************************************************* */
 // 限制范围
 int clip(int x, int low, int up);

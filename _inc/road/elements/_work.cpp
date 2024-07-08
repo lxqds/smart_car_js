@@ -217,7 +217,8 @@ void run_work()
             cv::line(IMG.mat_result, cv::Point(0, (int)IMAGE_HEIGHT* IMG._config->work_read_cone_thresholdy_avg),
                 cv::Point(IMAGE_WIDTH -1, (int)IMAGE_HEIGHT* IMG._config->work_read_cone_thresholdy_avg), cv::Scalar(0, 0, 255), 1);
             cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH / 2 + 30, 0),
-                cv::Point(IMAGE_WIDTH / 2 + 30, IMAGE_HEIGHT), cv::Scalar(0, 0, 255), 1);
+                cv::Point(IMAGE_WIDTH / 2 + 30, IMAGE_HEIGHT), cv::Scalar(255, 0, 0), 1);
+
             cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH / 2 -30, 0),
                 cv::Point(IMAGE_WIDTH / 2 - 30, IMAGE_HEIGHT), cv::Scalar(0, 0, 255), 1);
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
@@ -268,6 +269,9 @@ void run_work()
         {
             work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
             work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);  //右工作区进入准备
+            cv::Rect miny;
+            miny = workC.search_all_cone_rect(IMG.mat_lab)[0];
+            cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
 
             IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed); //逐渐减速
             IMG.aim_speed = -IMG.aim_speed;//倒车         
@@ -280,7 +284,7 @@ void run_work()
                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
             }
             //退出速度赋值
-            if (work_route - IMG.encoder.route < work_route2 * IMG._config->work_recback_line_k )
+            if ((work_route - IMG.encoder.route < work_route2 * IMG._config->work_recback_line_k)|| miny.y < 0.35 * IMG._config->work_recback_line_k)
             {
 
                 IMG.aim_angle = 0;
@@ -294,7 +298,7 @@ void run_work()
                 MAT_LOG("WORK_HAVE_L");
             }
 
-            if (work_route - IMG.encoder.route > IMG._config->work_recback_max_route && (work_near_cone.x !=0 || work_near_cone1.x != 0))
+            if (work_route - IMG.encoder.route > IMG._config->work_recback_max_route && (work_near_cone.x !=0 && work_near_cone1.x != 0))
             {
                 control_flag.pop();//移除
                 flag_work = WORK_NONE;
