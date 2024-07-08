@@ -223,7 +223,7 @@ float fit_line(float pts[][2], int num, int cut_h) {
     return 100.0f;
 }
 // 原图直线拟合 (返回平均绝对误差)
-float fit_line1(float pts[][2], int num, int cut_h) {
+float fit_line1(float ipts[][2], int num, int cut_h) {
     if (num != 0) {
         std::vector<cv::Point> points;
         cv::Vec4f line_para;
