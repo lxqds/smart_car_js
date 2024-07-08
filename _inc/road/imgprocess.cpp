@@ -15,19 +15,16 @@ int ImageProcess::init(std::string config_path, bool is_result) {
     _is_result = is_result;
 
     // 初始化出库方向
-    if (_config->direction_garage == 0)
-    {
+    if (_config->direction_garage == 0) {
         control_flag.push(garage_element);
         flag_garage = GARAGE_OUT_LEFT;
     }
 
-    else if (_config->direction_garage == 1)
-    {
+    else if (_config->direction_garage == 1) {
         control_flag.push(garage_element);
         flag_garage = GARAGE_OUT_RIGHT;
     }
-    else if (_config->direction_garage == 4)
-    {
+    else if (_config->direction_garage == 4) {
         control_flag.push(garage_element);
         flag_garage = GARAGE_OUT_MIDDLE;
         MAT_LOG("GARAGE_OUT_MIDDLE");
@@ -136,9 +133,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
 
         //横向扫描,得到横线数据集
-        white_row_start_point
-            std::vector<int> white_row_length[40];//透视变换白行长度
-        //寻找最符合跑道的白行
+        std::vector<int> white_row_length[40];//透视变换白行长度
+    //寻找最符合跑道的白行
         {
             for (int i = 39; i > 0; i--) {
                 int start = 0, sign = 0, count = 0;
@@ -250,8 +246,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         for (int i = 5; i < 20; i++) {
             if (!white_row_start_point[i].empty()) {
                 if (white_row_length[i].back() < 220) count++;
-                if (count == 3)
-                {
+                if (count == 3) {
                     far_begin_x = (white_row_start_point[i].back().x + white_row_end_point[i].back().x) / 2;
                     far_begin_y = white_row_start_point[i].back().y;
                     far_ipts0_num = 120; far_ipts1_num = 120;
@@ -315,8 +310,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* *************************** 目标检测结果 ************************** */
     /* ***************************************************************** */
     detection_result.clear();
-    if (detection->_is_predicted)
-    {
+    if (detection->_is_predicted) {
         _det_result = detection->getResult()->result;
         // 遍历检测结果
         for (size_t i = 0; i < _det_result.size(); i++) {
@@ -557,11 +551,9 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* **************************** 速度判定 **************************** */
     /* ***************************************************************** */
 
-    if (control_flag.top() == none_element)
-    {
+    if (control_flag.top() == none_element) {
         int mode = 0;
-        if (Lpt0_found && ipts0[0][1] - Lpt0_point[1] < 10)
-        {
+        if (Lpt0_found && ipts0[0][1] - Lpt0_point[1] < 10) {
             cv::line(mat_bin, cv::Point((int)(IMAGE_WIDTH * 0.2f), (int)(IMAGE_HEIGHT - 1)),
                 cv::Point(Lpt0_point[0], Lpt0_point[1]),
                 cv::Scalar(0, 0, 0), 7);
@@ -570,8 +562,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
                 cv::Scalar(0, 0, 0), 7);
             mode = 1;
         }
-        if (Lpt1_found && ipts1[0][1] - Lpt1_point[1] < 10)
-        {
+        if (Lpt1_found && ipts1[0][1] - Lpt1_point[1] < 10) {
             cv::line(IMG.mat_bin, cv::Point((int)(IMAGE_WIDTH * 0.8f), (int)(IMAGE_HEIGHT - 1)),
                 cv::Point(Lpt1_point[0], Lpt0_point[1]),
                 cv::Scalar(0, 0, 0), 7);
@@ -584,8 +575,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
         get_edge(mode);
         aim_speed = _config->speed_base;
-        if (is_straight0 && is_straight1)
-        {
+        if (is_straight0 && is_straight1) {
             aim_speed_shift = _config->speed_base +
                 (1 - clip(abs(aim_sigma), 0, 30) / 30.0) * (_config->speed_up - _config->speed_base);
             // 速度限幅
@@ -704,8 +694,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             }
         }
         //远线绘制
-        if (far_ipts0_num != 0)
-        {
+        if (far_ipts0_num != 0) {
             // 左线
             for (int a = 0; a < far_ipts0_num; a++) {  // 原图中线
                 if ((int)far_ipts0[a][1] >= 0 && (int)far_ipts0[a][1] < mat_result.rows &&
@@ -768,8 +757,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
 void ImageProcess::get_edge(int mode)
 {
-    if (mode == 1)
-    {
+    if (mode == 1) {
         ipts0_num = 200; ipts1_num = 200;
         // //双线程巡线
         // if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
