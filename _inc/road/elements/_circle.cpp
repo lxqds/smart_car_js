@@ -48,11 +48,11 @@ void check_circle() {
 
             if ((IMG.Lpt0_found &&   // 左角点找到
                 IMG.Lpt0_point[1] > 100 && //左角点在屏幕下方
-                IMG.ipts0_num < 120) ||
+                IMG.ipts0_num < 150) ||
                 (IMG.ipts0_num > 50 &&
-                    IMG.ipts0[0][0] < 5 &&
-                    IMG.ipts0[IMG.ipts0_num - 1][0] < 5 &&
-                    IMG.ipts0[0][1] < IMAGE_HEIGHT * 0.8)) {
+                    IMG.ipts0[0][0] < 10 &&
+                    IMG.ipts0[IMG.ipts0_num - 1][0] < 10 &&
+                    IMG.ipts0[0][1] < IMAGE_HEIGHT * 0.85)) {
                 none_left_line = 0;
                 have_left_line = 0;
                 IMG.element_identify = 1;
@@ -75,11 +75,11 @@ void check_circle() {
 
             if ((IMG.Lpt1_found &&   // 右角点找到
                 IMG.Lpt1_point[1] > 100 && //右角点在屏幕下方
-                IMG.ipts1_num < 120) ||
+                IMG.ipts1_num < 150) ||
                 (IMG.ipts1_num > 50 &&
-                    IMG.ipts1[0][0] > IMAGE_WIDTH - 6 &&
-                    IMG.ipts1[IMG.ipts1_num - 1][0] > IMAGE_WIDTH - 6 &&
-                    IMG.ipts1[0][1] < IMAGE_HEIGHT * 0.8)) {
+                    IMG.ipts1[0][0] > IMAGE_WIDTH - 11 &&
+                    IMG.ipts1[IMG.ipts1_num - 1][0] > IMAGE_WIDTH - 11 &&
+                    IMG.ipts1[0][1] < IMAGE_HEIGHT * 0.85)) {
 
                 none_right_line = 0;
                 have_right_line = 0;
