@@ -80,7 +80,6 @@ void run_work()
 
             // 找锥桶
             IMG.edge_det = search_targets(IMG._det_result);
-
             // 进入方向
             if (direction_work)
                 work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
@@ -118,26 +117,23 @@ void run_work()
             int thresholdh = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in;
 
             int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + 15;
-            if (work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy) {
-                if (work_near_cone.x > coneLowy) {
-                    wzp = -1;
-                }
-                else if (work_near_cone.x < thresholdh)
-                {
-                    wzp = 1;
-                }
-                else {
-                    wzp = 0;
-                }
+
+            int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in+7-work_near_cone.x ;
+
+            IMG.aim_speed = IMG._config->speed_work ;
+
+            if(work_near_cone.x< IMAGE_HEIGHT* 0.6){
+
+                IMG.aim_speed = err_H * 3;
+
             }
-            IMG.aim_speed = IMG._config->speed_work * wzp;
             
             int speed_err = abs(IMG.aim_speed - IMG.encoder.speed*1000);
 
             if (work_near_cone.x < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy && 
                 (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)&&
                 IMG.encoder.route - work_route > 10 && 
-                speed_err <200 && 
+                speed_err <300 && 
                 (work_near_cone.x < thresholdh && work_near_cone.x > coneLowy)) {
 
                 work_route = IMG.encoder.route;

@@ -451,6 +451,7 @@ uint16_t search_mid_cone_getH(cv::Mat matt) {
     return 0;
 }
 
+
 void CVFind_Clone::init() {
     memset(bl_map, 0, sizeof(bl_map));
 }
