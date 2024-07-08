@@ -39,8 +39,8 @@ void check_circle() {
         // 右线直线拟合
         if (IMG.ipts1_num > 10)
             R1 = fit_line1(IMG.ipts1, IMG.ipts1_num, 40);
-
-
+        MAT_INFO(IMG.mat_result, cv::Point(25, 100), 0.4, "%.2f", R0);
+        MAT_INFO(IMG.mat_result, cv::Point(250, 100), 0.4, "%.2f", R1);
         //左圆环
         if (!IMG.Lpt1_found &&  // 右角点未找到
             !IMG.far_Lpt1_found &&  // 右角点未找到
