@@ -124,7 +124,7 @@ void run_work()
 
             if(work_near_cone.x< IMAGE_HEIGHT* 0.6){
 
-                IMG.aim_speed = err_H * 3;
+                IMG.aim_speed = err_H * 5;
 
             }
             
@@ -132,7 +132,6 @@ void run_work()
             LOG_I << "  speed_err:" << speed_err << LOG_END;
             if (work_near_cone.x < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy && 
                 (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)&&
-                IMG.encoder.route - work_route > 10 && 
                 speed_err <500 ) {
 
                 work_route = IMG.encoder.route;
@@ -194,7 +193,7 @@ void run_work()
             if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
             //开始调整进入姿态，若是没找到线旁的锥桶 且 小于设定调整路程则开始深入工作区
             float edgek = 0;
-            float threshold_k = -1.40 ;
+            float threshold_k = -1.20 ;
             // 进入方向
             if (direction_work) {
                 work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
@@ -222,24 +221,41 @@ void run_work()
 
         if (flag_work == WORK_RUN) {
             cv::Rect miny;
-            int16_t avg_y = search_mid_cone_getH(IMG.mat_lab);
+            //int16_t avg_y = search_mid_cone_getH(IMG.mat_lab);
+            // LOG_I << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
+
             miny=workC.search_all_cone_rect(IMG.mat_lab)[0];
+            POINT minyCent = getCenterPoint(miny);
             IMG.aim_angle = 0;
-            LOG_I << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
+            int err_W, err_H;
+            float speedP = 0;
+
+            err_W = IMAGE_WIDTH / 2 - minyCent.x;
+            err_H = (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg - minyCent.y;
+            
+            IMG.aim_angle = err_W * 0.6;
+            speedP = err_H / 50;
+            if (speedP > 1)speedP = 1;
+            if (speedP < -1)speedP = -1;
+
+
 
             cv::line(IMG.mat_result, cv::Point(0, (int)IMAGE_HEIGHT* IMG._config->work_read_cone_thresholdy_avg),
                 cv::Point(IMAGE_WIDTH -1, (int)IMAGE_HEIGHT* IMG._config->work_read_cone_thresholdy_avg), cv::Scalar(0, 0, 255), 1);
+
             cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH / 2 + 30, 0),
                 cv::Point(IMAGE_WIDTH / 2 + 30, IMAGE_HEIGHT), cv::Scalar(255, 0, 0), 1);
 
             cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH / 2 -30, 0),
-                cv::Point(IMAGE_WIDTH / 2 - 30, IMAGE_HEIGHT), cv::Scalar(0, 0, 255), 1);
+                cv::Point(IMAGE_WIDTH / 2 - 30, IMAGE_HEIGHT), cv::Scalar(255, 0, 0), 1);
+
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
             //开始靠近锥桶
-            if (avg_y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg && IMG.encoder.route - work_route < IMG._config->work_rou_in)
+            if (avg_y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg 
+                && IMG.encoder.route - work_route < IMG._config->work_rou_in)
             {
 
-                IMG.aim_speed = (int16_t)(IMG._config->work_run_speed);
+                IMG.aim_speed = (int16_t)(IMG._config->work_run_speed * speedP);
 
             }
             else {
