@@ -134,7 +134,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
         //横向扫描,得到横线数据集
         std::vector<int> white_row_length[40];//透视变换白行长度
-    //寻找最符合跑道的白行
+        //寻找最符合跑道的白行
         {
             for (int i = 39; i > 0; i--) {
                 int start = 0, sign = 0, count = 0;

@@ -39,15 +39,15 @@ void check_circle() {
         {
             int a = 0, b = 0, c = 0;
             for (int i = 39; i > 30; i--) {
-                if (!white_row_start_point[i].empty()) {
+                if (!IMG.white_row_start_point[i].empty()) {
                     if (IMG.white_row_start_point[i].back().x < 5)a++;
                     if (a > 4) {
                         for (int j = i; j > 25; j--) {
-                            if (white_row_start_point[i].empty())break;
+                            if (IMG.white_row_start_point[i].empty())break;
                             if (IMG.white_row_start_point[i].back().x > 20)b++;
                             if (b > 5) {
                                 for (int k = j; k > 10; k--) {
-                                    if (white_row_start_point[i].empty())break;
+                                    if (IMG.white_row_start_point[i].empty())break;
                                     if (IMG.white_row_start_point[i].back().x < 5)c++;
                                     if (c > 1) break;
                                 }
@@ -91,15 +91,15 @@ void check_circle() {
 
             int a = 0, b = 0, c = 0;
             for (int i = 39; i > 30; i--) {
-                if (!white_row_start_point[i].empty()) {
+                if (!IMG.white_row_start_point[i].empty()) {
                     if (IMG.white_row_end_point[i].back().x > IMAGE_WIDTH - 6)a++;
                     if (a > 4) {
                         for (int j = i; j > 25; j--) {
-                            if (white_row_start_point[i].empty())break;
+                            if (IMG.white_row_start_point[i].empty())break;
                             if (IMG.white_row_end_point[i].back().x > IMAGE_WIDTH - 21)b++;
                             if (b > 5) {
                                 for (int k = j; k > 10; k--) {
-                                    if (white_row_start_point[i].empty())break;
+                                    if (IMG.white_row_start_point[i].empty())break;
                                     if (IMG.white_row_end_point[i].back().x > IMAGE_WIDTH - 6)c++;
                                     if (c > 1) break;
                                 }
