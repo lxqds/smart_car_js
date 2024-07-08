@@ -47,7 +47,7 @@ void check_circle() {
         {
 
             if ((IMG.Lpt0_found &&   // 左角点找到
-                IMG.Lpt0_point[1] > 100 && //左角点在屏幕下方
+                IMG.Lpt0_point[1] > 140 && //左角点在屏幕下方
                 IMG.ipts0_num < 150) ||
                 (IMG.ipts0_num > 50 &&
                     IMG.ipts0[0][0] < 10 &&
@@ -76,7 +76,7 @@ void check_circle() {
         {// 右线点比较少
 
             if ((IMG.Lpt1_found &&   // 右角点找到
-                IMG.Lpt1_point[1] > 100 && //右角点在屏幕下方
+                IMG.Lpt1_point[1] > 140 && //右角点在屏幕下方
                 IMG.ipts1_num < 150) ||
                 (IMG.ipts1_num > 50 &&
                     IMG.ipts1[0][0] > IMAGE_WIDTH - 11 &&
