@@ -43,8 +43,7 @@ void check_circle() {
         //左圆环
         if (!IMG.Lpt1_found &&  // 右角点未找到
             !IMG.far_Lpt1_found &&  // 右角点未找到
-            IMG.ipts1_num > 150 &&
-            R1 < 5.0f)  // 右边长直道
+            IMG.ipts1_num > 150 )  // 右边长直道
         {
             int a = 0, b = 0, c = 0;
             for (int i = 39; i > 30; i--) {
@@ -97,8 +96,7 @@ void check_circle() {
         //右圆环
         else if (!IMG.Lpt0_found &&  // 左角点未找到
             !IMG.far_Lpt0_found &&  // 左远角点未找到
-            IMG.ipts0_num > 150 &&
-            R0 < 5.0f)   // 左边长直道
+            IMG.ipts0_num > 150 )   // 左边长直道
         {// 右线点比较少
 
             int a = 0, b = 0, c = 0;
