@@ -65,9 +65,11 @@ void check_circle() {
                 IMG.ipts0_num < 120) ||
                 (
                     IMG.ipts0_num < 30 &&//左线丢线
+                    IMG.far_ipts0_num>30 &&
                     c > 1 &&//横线满足贴墙->不贴墙->贴墙
                     IMG.far_ipts0[IMG.far_ipts0_num - 1][0] < 10 &&//远线末端贴墙
-                    IMG.far_ipts0[IMG.far_ipts0_num - 1][1] < 100//远线末端在屏幕上方
+                    IMG.far_ipts0[IMG.far_ipts0_num - 1][1] < 100 &&//远线末端在屏幕上方
+                    abs(IMG.far_ipts0[IMG.far_ipts0_num - 1][0] - IMG.far_ipts0[0][0]) > 30
                     )) {
                 none_left_line = 0;
                 have_left_line = 0;
@@ -117,9 +119,10 @@ void check_circle() {
                 (
                     c > 1 &&//横线满足贴墙->不贴墙->贴墙
                     IMG.ipts1_num < 30 &&//右线丢线
+                    IMG.far_ipts1_num>30 &&
                     IMG.far_ipts1[IMG.far_ipts1_num - 1][0] > IMAGE_WIDTH - 11 &&//远线末端贴墙
-                    IMG.far_ipts1[IMG.far_ipts1_num - 1][1] < 100//远线末端在屏幕上方
-                    )) {
+                    IMG.far_ipts1[IMG.far_ipts1_num - 1][1] < 100 &&//远线末端在屏幕上方
+                    abs(IMG.far_ipts1[IMG.far_ipts1_num - 1][0] - IMG.far_ipts1[0][0]) >30)) {
 
                 none_right_line = 0;
                 have_right_line = 0;
