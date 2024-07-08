@@ -570,15 +570,25 @@ cv::Rect CVFind_Clone::find_Width_Begin_x(int x, int y, int turncs, int nowfx, c
 
 }
 
-void drawH(int h, uint8_t r, uint8_t g, uint8_t b) {
-    cv::line(IMG.mat_result, cv::Point(0, (int)h),
-        cv::Point(IMAGE_WIDTH - 1, (int)h), cv::Scalar(255, 0, 0), 1);
+void drawH(int h, uint8_t r, uint8_t g, uint8_t b , cv::Mat map) {
+    cv::line(map, cv::Point(0, (int)h),
+        cv::Point(IMAGE_WIDTH - 1, (int)h), cv::Scalar(r, g, b), 1);
 }
 
 
-void drawW(int w, uint8_t r, uint8_t g, uint8_t b) {
-    cv::line(IMG.mat_result, cv::Point(w, IMAGE_HEIGHT),
-        cv::Point(w, (0), cv::Scalar(255, 0, 0), 1);
+void drawW(int w, uint8_t r, uint8_t g, uint8_t b, cv::Mat map) {
+    cv::line(map, cv::Point(w, IMAGE_HEIGHT-1),
+        cv::Point(w, 0, cv::Scalar(r, g, b), 1);
+}
+POINT getCenterPoint(cv::Rect rect){
+    POINT cpt;
+
+    cpt.x = rect.x + (int)rect.width / 2;
+
+    cpt.y = rect.y + (int)rect.height / 2;
+
+    return cpt;
+
 }
 //// 搜索距离赛道左边缘最近的黄色色块 (黄色锥桶) 赛道内
 //POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {

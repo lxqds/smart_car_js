@@ -258,6 +258,7 @@ void run_work()
                 work_route = IMG.encoder.route;
                 MAT_LOG("WORK_PARKINISH"); //泊车中
                 flag_work = WORK_OUT;
+                workC.init();
             }
             else
             {
@@ -271,7 +272,11 @@ void run_work()
             work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);  //右工作区进入准备
             cv::Rect miny;
             miny = workC.search_all_cone_rect(IMG.mat_lab)[0];
+            POINT mcentPoint = getCenterPoint(miny);
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
+
+            drawH(mcentPoint.y, 0, 0, 255, IMG.mat_result);
+            drawH((int)0.35 * IMG._config->work_recback_line_k, 0, 255, 0, IMG.mat_result);
 
             IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed); //逐渐减速
             IMG.aim_speed = -IMG.aim_speed;//倒车         
@@ -284,7 +289,7 @@ void run_work()
                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
             }
             //退出速度赋值
-            if ((work_route - IMG.encoder.route < work_route2 * IMG._config->work_recback_line_k)|| miny.y < 0.35 * IMG._config->work_recback_line_k)
+            if ((work_route - IMG.encoder.route < work_route2 * IMG._config->work_recback_line_k)|| mcentPoint.y < 0.35 * IMG._config->work_recback_line_k)
             {
 
                 IMG.aim_angle = 0;
