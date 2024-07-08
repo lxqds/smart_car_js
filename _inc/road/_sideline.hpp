@@ -63,7 +63,7 @@ double findThirdPointX(POINT a, POINT b, double y);
 // 透视图直线拟合 (返回平均绝对误差)
 float fit_line(float pts[][2], int num, int cut_h);
 // 原图直线拟合 (返回平均绝对误差)
-float fit_line1(float ipts[][2], int num, int cut_h);
+float fit_line1(int ipts[][2], int num, int cut_h);
 //计算返回斜率
 float Calculate_K(std::vector<POINT> edge);
 // 贝塞尔曲线拟合
