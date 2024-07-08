@@ -35,10 +35,10 @@ void check_circle() {
         float R0 = 10.0f, R1 = 10.0f;
         // 左线直线拟合
         if (IMG.ipts0_num > 10)
-            R0 = fit_line1(IMG.ipts0, IMG.ipts0_num, 60);
+            R0 = fit_line1(IMG.ipts0, IMG.ipts0_num, 40);
         // 右线直线拟合
         if (IMG.ipts1_num > 10)
-            R1 = fit_line1(IMG.ipts1, IMG.ipts1_num, 60);
+            R1 = fit_line1(IMG.ipts1, IMG.ipts1_num, 40);
 
 
         //左圆环
@@ -109,7 +109,7 @@ void check_circle() {
                     if (a > 5) {
                         for (int j = i; j > 25; j--) {
                             if (IMG.white_row_start_point[i].empty())break;
-                            if (IMG.white_row_end_point[i].back().x > IMAGE_WIDTH - 21)b++;
+                            if (IMG.white_row_end_point[i].back().x < IMAGE_WIDTH - 21)b++;
                             if (b > 8) {
                                 for (int k = j; k > 10; k--) {
                                     if (IMG.white_row_start_point[i].empty())break;
