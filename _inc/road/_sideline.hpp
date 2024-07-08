@@ -110,7 +110,8 @@ POINT search_left_near2(std::vector<POINT> pointsEdge, cv::Mat matt);
 
 // 搜索距离赛道右边缘最近的红色色块 (红色锥桶)
 POINT search_right_near(std::vector<POINT> pointsEdge, cv::Mat matt);
-
+POINT search_right_near_up(std::vector<POINT> pointsEdge, cv::Mat matt);
+POINT search_left_near_up(std::vector<POINT> pointsEdge, cv::Mat matt);
 //找左边线离锥桶最近的边线点的位次,x为行，第几行
 uint16_t search_break_left(std::vector<POINT> pointsEdge, cv::Mat matt);
 

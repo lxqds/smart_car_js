@@ -117,9 +117,9 @@ void run_work()
 
             // 找锥桶
             if (direction_work)
-                work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
+                work_near_cone = search_left_near_up(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
             else
-                work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
+                work_near_cone = search_right_near_up(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
 
             int thresholdh = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in;
 
