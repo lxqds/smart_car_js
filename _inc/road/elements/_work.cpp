@@ -134,7 +134,7 @@ void run_work()
 
             IMG.aim_speed = err_H;
 
-            float speedP = err_H / 30.0;
+            float speedP = err_H / 30.0+0.5;
             if (speedP > 2)speedP = 2;
             if (speedP < -2)speedP = -2;
 
@@ -390,16 +390,16 @@ void run_work()
 
                 int thresholdh = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out;
 
-                int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out + 6;
+                int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out + 10;
 
-                int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out + 3 - minyCent.y;
+                int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out + 5 - minyCent.y;
 
                 IMG.aim_speed = err_H;
 
                 drawH(minyCent.y, 255, 0, 0, IMG.mat_result);
                 drawH(thresholdh, 0, 0, 255, IMG.mat_result);
                 drawH(coneLowy  , 0, 0, 255, IMG.mat_result);
-                float speedP = err_H / 50.0;
+                float speedP = err_H / 50.0 +0.5;
                 if (speedP > 2)speedP = 2;
                 if (speedP < -2)speedP = -2;
 
