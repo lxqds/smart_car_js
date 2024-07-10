@@ -250,7 +250,7 @@ struct ControlConfig
 
         AUTOCFG(speed_garage_out);
         AUTOCFG(speed_work);
-        
+
 
 
         AUTOCFG(speed_bomb1);
@@ -265,6 +265,7 @@ struct ControlConfig
         AUTOCFG(work_stop_time);
         AUTOCFG(work_error);
         AUTOCFG(work_read_cone_thresholdy);
+        AUTOCFG(work_run_angle_p);
         AUTOCFG(work_rou_in);
         AUTOCFG(work_angle_in_1);
         AUTOCFG(work_recback_angle);
@@ -470,56 +471,44 @@ struct SystemConfig
         nlohmann::json input_config = value["input"];
         input_type = input_config["type"];
 
-        if (input_config["path"] != nullptr)
-        {
+        if (input_config["path"] != nullptr) {
             input_path = input_config["path"];
-            if (input_type == "image")
-            {
+            if (input_type == "image") {
                 input_path = confiig_path + input_path;
             }
         }
 
-        if (value["fpga_preprocess"] == nullptr)
-        {
+        if (value["fpga_preprocess"] == nullptr) {
             use_fpga_preprocess = true;
         }
-        else
-        {
+        else {
             use_fpga_preprocess = value["fpga_preprocess"];
         }
 
-        if (value["debug"] != nullptr)
-        {
+        if (value["debug"] != nullptr) {
             nlohmann::json debug_config = value["debug"];
-            if (debug_config["predict_time_log_enable"] == nullptr)
-            {
+            if (debug_config["predict_time_log_enable"] == nullptr) {
                 predict_time_log_enable = true;
             }
-            else
-            {
+            else {
                 predict_time_log_enable = debug_config["predict_time_log_enable"];
             }
 
-            if (debug_config["predict_log_enable"] == nullptr)
-            {
+            if (debug_config["predict_log_enable"] == nullptr) {
                 predict_log_enable = true;
             }
-            else
-            {
+            else {
                 predict_log_enable = debug_config["predict_log_enable"];
             }
 
-            if (debug_config["display_enable"] == nullptr)
-            {
+            if (debug_config["display_enable"] == nullptr) {
                 display_enable = true;
             }
-            else
-            {
+            else {
                 display_enable = debug_config["display_enable"];
             }
         }
-        else
-        {
+        else {
             display_enable = false;
             predict_log_enable = false;
             predict_time_log_enable = false;

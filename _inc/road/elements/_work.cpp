@@ -37,36 +37,34 @@ void check_work()
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&   //当前没在入库中
         !control_flag.contains(ramp_element) &&      //当前没在桥中
-        !control_flag.contains(bomb_element))
-        {
-            for (auto r : IMG.detection_result)
-            {
-                if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.52 && r.y > IMAGE_HEIGHT * 0.1) {
-                    IMG.element_identify = 1;
-                    control_flag.push(work_element);
-                    work_route = IMG.encoder.route;
-                    direction_work = false;
-                    IMG.flag_track = TRACK_RIGHT;
-                    flag_work = WORK_FOUND_2;
-                    MAT_LOG("WORK_FOUND_R");
-                    FOUND_last_y = 0;
-                    in_flag = 0;
-                }
-                else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.52 && r.y > IMAGE_HEIGHT * 0.1) {
-
-                    IMG.element_identify = 1;
-                    control_flag.push(work_element);
-                    work_route = IMG.encoder.route;
-                    direction_work = true;
-                    IMG.flag_track = TRACK_LEFT;
-                    flag_work = WORK_FOUND_2;
-                    MAT_LOG("WORK_FOUND_L");
-                    FOUND_last_y = 0;
-                    in_flag = 0;
-                }
-                
+        !control_flag.contains(bomb_element)) {
+        for (auto r : IMG.detection_result) {
+            if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.52 && r.y > IMAGE_HEIGHT * 0.1) {
+                IMG.element_identify = 1;
+                control_flag.push(work_element);
+                work_route = IMG.encoder.route;
+                direction_work = false;
+                IMG.flag_track = TRACK_RIGHT;
+                flag_work = WORK_FOUND_2;
+                MAT_LOG("WORK_FOUND_R");
+                FOUND_last_y = 0;
+                in_flag = 0;
             }
+            else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.52 && r.y > IMAGE_HEIGHT * 0.1) {
+
+                IMG.element_identify = 1;
+                control_flag.push(work_element);
+                work_route = IMG.encoder.route;
+                direction_work = true;
+                IMG.flag_track = TRACK_LEFT;
+                flag_work = WORK_FOUND_2;
+                MAT_LOG("WORK_FOUND_L");
+                FOUND_last_y = 0;
+                in_flag = 0;
+            }
+
         }
+    }
 
 }
 
@@ -83,8 +81,7 @@ void run_work()
 
         work_near_cone = POINT(0, 0);
         IMG.edge_det.clear();
-        if (flag_work == WORK_FOUND_1)
-        {
+        if (flag_work == WORK_FOUND_1) {
             // 找锥桶
             IMG.edge_det = search_targets(IMG._det_result);
             // 进入方向
@@ -102,15 +99,15 @@ void run_work()
             //    work_route = IMG.encoder.route;
             //    MAT_LOG("WORK_FOUND_2");
             //}
-           
+
             //当 第一个锥桶消失
             if (in_flag == 0 && work_near_cone.x > 0.7 * IMAGE_HEIGHT) {
                 in_flag = 1;
             }
             if (FOUND_last_y > work_near_cone.x && in_flag == 1) {
-                    flag_work = WORK_FOUND_2;
-                    work_route = IMG.encoder.route;
-                    MAT_LOG("WORK_FOUND_2");
+                flag_work = WORK_FOUND_2;
+                work_route = IMG.encoder.route;
+                MAT_LOG("WORK_FOUND_2");
             }
 
             cv::line(IMG.mat_result, cv::Point(0, (int)work_near_cone.x),
@@ -119,8 +116,7 @@ void run_work()
             FOUND_last_y = work_near_cone.x;
         }
 
-        if (flag_work == WORK_FOUND_2)
-        {
+        if (flag_work == WORK_FOUND_2) {
 
             IMG.edge_det = search_targets(IMG._det_result);
 
@@ -132,32 +128,32 @@ void run_work()
 
             int thresholdh = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in;
 
-            int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + 15;
+            int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + 6;
 
-            int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + 7 - work_near_cone.x;
+            int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + 3 - work_near_cone.x;
 
             IMG.aim_speed = err_H;
 
             float speedP = err_H / 30.0;
-            if (speedP > 1)speedP = 1;
-            if (speedP < -1)speedP = -1;
-            
-            IMG.aim_speed = IMG._config->speed_work * speedP +100;
+            if (speedP > 2)speedP = 2;
+            if (speedP < -2)speedP = -2;
 
-            int speed_err = abs(IMG.aim_speed - IMG.encoder.speed*1000);
+            IMG.aim_speed = IMG._config->speed_work * speedP;
+
+            int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
             LOG_I << "  speed_err:" << speed_err << LOG_END;
-            if (work_near_cone.x < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy && 
-                (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)&&
-                speed_err <100 ) {
+            if (work_near_cone.x < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy &&
+                (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) &&
+                speed_err < 100) {
 
                 work_route = IMG.encoder.route;
                 flag_work = WORK_READY;
                 MAT_LOG("WORK_READY");
             }
 
-                drawH(thresholdh, 0, 0,255, IMG.mat_result);
-                drawH(work_near_cone.x, 255, 0, 0, IMG.mat_result);
-                drawH(coneLowy, 0, 0, 255, IMG.mat_result);
+            drawH(thresholdh, 0, 0, 255, IMG.mat_result);
+            drawH(work_near_cone.x, 255, 0, 0, IMG.mat_result);
+            drawH(coneLowy, 0, 0, 255, IMG.mat_result);
         }
 
         if (flag_work == WORK_FOUND_2 || flag_work == WORK_FOUND_1) {
@@ -179,8 +175,7 @@ void run_work()
             IMG.calculate_angle();//计算角度
 
                             // 超过指定距离未进入绕行区, 元素行驶失败
-            if ((IMG.encoder.route - work_route > IMG._config->work_error))
-            {
+            if ((IMG.encoder.route - work_route > IMG._config->work_error)) {
                 IMG.element_over = true;
                 IMG.element_over_route = IMG.encoder.route;
                 control_flag.pop();//移除
@@ -225,7 +220,7 @@ void run_work()
                 MAT_LOG("WORK_RUN");
                 workC.init();
             }
-            
+
         }
 
 
@@ -240,8 +235,7 @@ void run_work()
             // 最高点锥桶
             if (all_zt.size() >= 1) miny = all_zt[0];
 
-            for (size_t i = 0; i < all_zt.size(); i++)
-            {
+            for (size_t i = 0; i < all_zt.size(); i++) {
                 cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
             }
             POINT minyCent = getCenterPoint(miny);
@@ -252,15 +246,15 @@ void run_work()
 
             err_W = IMAGE_WIDTH / 2.0 - minyCent.x;
             err_H = (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg - minyCent.y;
-            
+
             IMG.aim_angle = err_W * IMG._config->work_run_angle_p;
             speedP = err_H / 50.0;
             if (speedP > 1)speedP = 1;
             if (speedP < -1)speedP = -1;
-            drawH(err_H, 0,255, 0, IMG.mat_result);
+            drawH(err_H, 0, 255, 0, IMG.mat_result);
             drawH(IMAGE_HEIGHT * 0.1, 255, 0, 0, IMG.mat_result);
             drawW(minyCent.x, 0, 255, 0, IMG.mat_result);
-            drawW(IMAGE_WIDTH /2, 255, 0, 0, IMG.mat_result);
+            drawW(IMAGE_WIDTH / 2, 255, 0, 0, IMG.mat_result);
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
 
 
@@ -270,8 +264,7 @@ void run_work()
             //if (minyCent.y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg) IMG.aim_speed = -IMG.aim_speed;
 
             int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
-            if(abs(err_H )< IMAGE_HEIGHT * 0.1 && speed_err <100 )
-            {
+            if (abs(err_H) < IMAGE_HEIGHT * 0.1 && speed_err < 100) {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_STOPPING;
                 MAT_LOG("WORK_STOPPING");
@@ -281,8 +274,7 @@ void run_work()
         if (flag_work == WORK_STOPPING)//刹车中
         {
             IMG.aim_speed = 0;
-            if (IMG.encoder.speed < 0.1 && IMG.encoder.speed > -0.1)
-            {
+            if (IMG.encoder.speed < 0.1 && IMG.encoder.speed > -0.1) {
                 flag_work = WORK_PARKING;
                 MAT_LOG("WORK_STOPFINISH");//刹车完成
                 stop_clock.tic();
@@ -295,8 +287,7 @@ void run_work()
         if (flag_work == WORK_PARKING)//泊车
         {
             IMG.aim_speed = 0;
-            if (stop_clock.toc() > IMG._config->work_stop_time)
-            {
+            if (stop_clock.toc() > IMG._config->work_stop_time) {
                 work_route = IMG.encoder.route;
                 MAT_LOG("WORK_PARKINISH"); //泊车中
                 flag_work = WORK_OUT;
@@ -304,14 +295,12 @@ void run_work()
                 out_flage = 0;
                 last_data = 0;
             }
-            else
-            {
+            else {
                 MAT_LOG("WORK_PARKING");
             }
         }
 
-        if (flag_work == WORK_OUT)
-        {
+        if (flag_work == WORK_OUT) {
             work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
             work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);  //右工作区进入准备
 
@@ -329,7 +318,7 @@ void run_work()
             all_zt = workC.search_all_cone_rect(IMG.mat_lab);
 
             // 最高点锥桶
-            if(all_zt.size() >=2) miny = all_zt[0];
+            if (all_zt.size() >= 2) miny = all_zt[0];
             POINT mcentPoint = getCenterPoint(miny);
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
             drawH(mcentPoint.y, 0, 0, 255, IMG.mat_result);
@@ -341,7 +330,7 @@ void run_work()
             {
                 float clone_k = Calculate_Left_ConeK(all_zt);
                 IMG.aim_speed = -IMG.aim_speed;//倒车
-                IMG.aim_angle = - clone_k * 10;
+                IMG.aim_angle = -clone_k * 10;
                 //IMG._config->work_recback_angle
                 if (last_data != 0 && abs(clone_k * 100 - last_data * 100) > 2)out_flage = 1;
                 last_data = clone_k;
@@ -349,14 +338,13 @@ void run_work()
             }
 
             //开始 直线退出
-            if (out_flage == 1)
-            {   
-         
-                IMG.aim_speed = -IMG.aim_speed;//倒车
-                IMG.aim_angle =0;
+            if (out_flage == 1) {
 
-                if (IMG.max_white_line_length > 250 && work_route - IMG.encoder.route > 20 )out_flage = 2;
-                
+                IMG.aim_speed = -IMG.aim_speed;//倒车
+                IMG.aim_angle = 0;
+
+                if (IMG.max_white_line_length > 250 && work_route - IMG.encoder.route > 20)out_flage = 2;
+
             }
 
             if (out_flage == 2) {
@@ -365,8 +353,7 @@ void run_work()
                 if (abs(IMG.encoder.speed * 1000) < 200) { work_route = IMG.encoder.route;  out_flage = 3; }
             }
             //退出速度赋值
-            if (out_flage == 3)
-            {
+            if (out_flage == 3) {
                 IMG.aim_speed = (IMG._config->speed_base);
                 // 正常巡线
                 if (IMG.flag_track == TRACK_LEFT) {
@@ -384,7 +371,7 @@ void run_work()
 
                 IMG.calculate_angle();//计算角度
 
-                if ( IMG.encoder.route - work_route > 30) {
+                if (IMG.encoder.route - work_route > 30) {
                     control_flag.pop();//移除
                     flag_work = WORK_NONE;
                     MAT_LOG("WORK_HAVE_L");
