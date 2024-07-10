@@ -245,6 +245,10 @@ void run_work()
 
             // 最高点锥桶
             if (all_zt.size() >= 1) miny = all_zt[0];
+            for (size_t i = 0; i < all_zt.size(); i++)
+            {
+                cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
+            }
             POINT minyCent = getCenterPoint(miny);
 
             IMG.aim_angle = 0;
@@ -354,7 +358,7 @@ void run_work()
             //开始 直线退出
             if (out_flage == 1)
             {   
-                float clone_k = Calculate_Left_ConeK(all_zt);
+         
                 IMG.aim_speed = -IMG.aim_speed;//倒车
                 IMG.aim_angle =0;
 

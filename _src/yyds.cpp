@@ -194,7 +194,7 @@ int main(int argc, char const* argv[])
                 display->put(frame_origin.clone());
             }
             else if (imgprocess._config->rec_video_format == 2) {
-                display->put(imgprocess.mat_lab.clone());
+                display->put(IMG.mat_lab.clone());
             }
             // display->put(IMG.mat_lab.clone());
         }

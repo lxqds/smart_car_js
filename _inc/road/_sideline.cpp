@@ -510,7 +510,7 @@ std::vector<cv::Rect>  CVFind_Clone::search_all_cone_rect(cv::Mat matt) {
                 //float predit = 9.26 * resRect.y - 55;
                 //if (abs(predit - resRect.area()) > 300)continue;//区域面积和y坐标线性预测值偏差大则跳过
                 //cv::imshow("Clone_MAP", Clone_MAP);
-                if (resRect.y < 0.3 * IMAGE_HEIGHT)continue;
+                if (resRect.y < 0.2 * IMAGE_HEIGHT)continue;
                 Res.push_back(resRect);
             }
         }
