@@ -348,15 +348,17 @@ void run_work()
                 //IMG._config->work_recback_angle
                 if (last_data != 0 && abs(clone_k * 100 - last_data * 100) > 2)out_flage = 1;
                 last_data = clone_k;
+                work_route = IMG.encoder.route
             }
 
             //开始 直线退出
             if (out_flage == 1)
-            {
+            {   
+                float clone_k = Calculate_Left_ConeK(all_zt);
                 IMG.aim_speed = -IMG.aim_speed;//倒车
-                IMG.aim_angle = 10;
+                IMG.aim_angle = clone_k*50;
 
-                if (IMG.max_white_line_length > 150)out_flage = 2;
+                if (IMG.max_white_line_length > 250 && work_route - IMG.encoder.route > 35 )out_flage = 2;
                 
             }
 
