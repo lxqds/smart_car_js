@@ -237,7 +237,7 @@ void run_work()
                // 找最高点且在屏幕一定范围下
                 for (size_t i = 0; i < all_zt.size(); i++)
                 {
-                    if (all_zt[i] < 0.3 * IMAGE_HEIGHT)continue;
+                    if (all_zt[i].y < 0.3 * IMAGE_HEIGHT)continue;
                     if (all_zt[i].y < miny.y)miny = all_zt[i];
                 }
             } 
@@ -257,7 +257,7 @@ void run_work()
             }
             //若未找到合适的锥桶，则采用全屏扫描色块
             if (minyCent.y == IMAGE_HEIGHT) {
-                LOG_I << "  can not;t find cone" << "  get_AIorcolor_AVG_Y :" << avg_y LOG_END;
+                LOG_I << "  can not;t find cone" << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
                 minyCent.x = 150;
                 minyCent.y = avg_y;
             }
@@ -371,7 +371,7 @@ void run_work()
                     // 找最高点且在屏幕一定范围下
                     for (size_t i = 0; i < all_zt.size(); i++)
                     {
-                        if (all_zt[i] < 0.3 * IMAGE_HEIGHT)continue;
+                        if (all_zt[i].y < 0.3 * IMAGE_HEIGHT)continue;
                         if (all_zt[i].y < miny.y)miny = all_zt[i];
                     }
                 }
@@ -383,7 +383,7 @@ void run_work()
 
                 //若未找到合适的锥桶，则采用全屏扫描色块
                 if (minyCent.y == IMAGE_HEIGHT) {
-                    LOG_I << "  can not;t find cone" << "  get_AIorcolor_AVG_Y :" << avg_y LOG_END;
+                    LOG_I << "  can not;t find cone" << "  get_AIorcolor_AVG_Y :" << avg_y <<LOG_END;
                     minyCent.x = 150;
                     minyCent.y = avg_y;
                 }
