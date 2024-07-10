@@ -212,19 +212,19 @@ void run_work()
             float threshold_k = -1.20 ;
             // 进入方向
             if (direction_work) {
-                work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
+                work_near_cone = search_left_near(IMG.edge_right, IMG.mat_lab); //左工作区进入准备
                 if(IMG.edge_left.size()!=0)edgek = Calculate_K(IMG.edge_left);
                 threshold_k = -1;
             }
             else {
-                work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
+                work_near_cone = search_right_near(IMG.edge_left, IMG.mat_lab);//右工作区进入准备
                 if (IMG.edge_right.size() != 0)edgek = Calculate_K(IMG.edge_right);
                 threshold_k = -threshold_k;
             }
 
            // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready )
 
-            if ((work_near_cone.x == 0 && work_near_cone.y == 0)||(direction_work && edgek > threshold_k) || (!direction_work && edgek < threshold_k) || edgek == 0) {
+            if ((work_near_cone.x == 0 && work_near_cone.y == 0)&&((direction_work && edgek > threshold_k) || (!direction_work && edgek < threshold_k) || edgek == 0)) {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_RUN;
                 work_route2 = IMG.encoder.route;
