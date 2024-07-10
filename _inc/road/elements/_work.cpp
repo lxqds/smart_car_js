@@ -311,13 +311,13 @@ void run_work()
             work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
             work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);  //右工作区进入准备
 
-            float R0 = 10.0f, R1 = 10.0f;
-            // 左线直线拟合
-            if (IMG.ipts0_num > 10)
-                R0 = fit_line1(IMG.ipts0, IMG.ipts0_num, 60);
-            // 右线直线拟合
-            if (IMG.ipts1_num > 10)
-                R1 = fit_line1(IMG.ipts1, IMG.ipts1_num, 60);
+            //float R0 = 10.0f, R1 = 10.0f;
+            //// 左线直线拟合
+            //if (IMG.ipts0_num > 10)
+            //    R0 = fit_line1(IMG.ipts0, IMG.ipts0_num, 60);
+            //// 右线直线拟合
+            //if (IMG.ipts1_num > 10)
+            //    R1 = fit_line1(IMG.ipts1, IMG.ipts1_num, 60);
 
             //找锥桶
             cv::Rect miny;
@@ -325,7 +325,7 @@ void run_work()
             all_zt = workC.search_all_cone_rect(IMG.mat_lab);
 
             // 最高点锥桶
-            miny = all_Zt[0];
+            miny = all_zt[0];
             POINT mcentPoint = getCenterPoint(miny);
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
             drawH(mcentPoint.y, 0, 0, 255, IMG.mat_result);
