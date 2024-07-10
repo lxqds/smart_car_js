@@ -98,7 +98,7 @@ void run_work()
             //}
            
             //当 第一个锥桶消失
-            if (FOUND_last_y > work_near_cone.x) {
+            if (FOUND_last_y > work_near_cone.x && work_near_cone.x >0.7 * IMAGE_HEIGHT) {
                     flag_work = WORK_FOUND_2;
                     work_route = IMG.encoder.route;
                     MAT_LOG("WORK_FOUND_2");
