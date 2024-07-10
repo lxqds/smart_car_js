@@ -341,11 +341,11 @@ void run_work()
             //找左侧锥桶斜率
             float clone_k = Calculate_Left_ConeK(all_zt);
 
-            IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed); //逐渐减速
-            IMG.aim_speed = -IMG.aim_speed;//倒车         
+            IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed); //逐渐减速         
 
             if (out_flage == 0)//稍稍反方向打角
             {
+                IMG.aim_speed = -IMG.aim_speed;//倒车
                 IMG.aim_angle = - clone_k * 10;
                 //IMG._config->work_recback_angle
                 if (last_data != 0 && abs(clone_k * 100 - last_data * 100) > 2)out_flage = 1;
@@ -355,6 +355,7 @@ void run_work()
             //开始 直线退出
             if (out_flage == 1)
             {
+                IMG.aim_speed = -IMG.aim_speed;//倒车
                 IMG.aim_angle = 0;
 
                 if (IMG.max_white_line_length > 100)out_flage = 2;
@@ -369,7 +370,7 @@ void run_work()
             //退出速度赋值
             if (out_flage == 3)
             {
-                IMG.aim_speed = IMG.aim_speed;
+                IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed);
                 // 正常巡线
                 if (IMG.flag_track == TRACK_LEFT) {
                     IMG.rpts = IMG.rptsc0;
