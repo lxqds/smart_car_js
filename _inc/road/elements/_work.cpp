@@ -426,7 +426,7 @@ void run_work()
                 if (!direction_work)IMG.aim_angle = -IMG.aim_angle;
                 if (((work_near_cone.x != 0 && work_near_cone.y != 0) && 
                     (work_near_cone1.x != 0 && work_near_cone1.y != 0)) || 
-                    (IMG.encoder.route - work_route > 15)) {
+                    (IMG.encoder.route - work_route > 30)) {
                     out_flage = 4;
                     work_route = IMG.encoder.route;
                 }
