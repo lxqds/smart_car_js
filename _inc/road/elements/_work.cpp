@@ -213,7 +213,7 @@ void run_work()
 
            // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready )
 
-            if ((work_near_cone.x == 0 && work_near_cone.y == 0)&& IMG.max_white_line_length < 300) {
+            if ((work_near_cone.x == 0 && work_near_cone.y == 0) && IMG.max_white_line_length < 300) {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_RUN;
                 work_route2 = IMG.encoder.route;
@@ -239,6 +239,15 @@ void run_work()
                 cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
             }
             POINT minyCent = getCenterPoint(miny);
+            if (minyCent.x != 0 && minyCent.y != 0) {
+                if (direction_work) {
+                    minyCent.x -= 20;
+                }
+                else {
+                    minyCent.x += 20;
+                }
+
+            }
 
             IMG.aim_angle = 0;
             int err_W, err_H;
