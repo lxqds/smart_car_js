@@ -361,6 +361,7 @@ void run_work()
             //退出速度赋值
             if (out_flage == 3)
             {
+                IMG.aim_speed = IMG.aim_speed;
                 // 正常巡线
                 if (IMG.flag_track == TRACK_LEFT) {
                     IMG.rpts = IMG.rptsc0;
