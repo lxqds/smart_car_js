@@ -132,9 +132,9 @@ void run_work()
 
             int thresholdh = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in;
 
-            int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + 7;
+            int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + 6;
 
-            int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in+7/2-work_near_cone.x ;
+            int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in+3-work_near_cone.x ;
 
             IMG.aim_speed = err_H;
 
