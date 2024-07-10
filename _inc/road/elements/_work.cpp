@@ -244,7 +244,7 @@ void run_work()
             all_zt = workC.search_all_cone_rect(IMG.mat_lab);
 
             // 最高点锥桶
-            if (all_zt.size() >= 2) miny = all_zt[0];
+            if (all_zt.size() >= 1) miny = all_zt[0];
             POINT minyCent = getCenterPoint(miny);
 
             IMG.aim_angle = 0;
