@@ -214,7 +214,6 @@ void run_work()
             if (direction_work) {
                 work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
                 if(IMG.edge_left.size()!=0)edgek = -Calculate_K(IMG.edge_left);
-                threshold_k = -threshold_k;
             }
             else {
                 work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
