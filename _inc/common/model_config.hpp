@@ -92,7 +92,7 @@ struct ControlConfig
 
     float work_recback_angle;          //施工区倒车角度
 
-
+    float work_read_cone_thresholdy_out;
     float bomb_first_cone_ready;     //第一个锥桶 准备拐弯阈值
     float bomb_first_cone_run_wide;//第一个锥桶道路宽度系数： 靠近边线距离
     float bomb_second_cone_ready; //第二个锥桶准备拐弯阈值
@@ -276,7 +276,7 @@ struct ControlConfig
         AUTOCFG(work_recback_angle_route_k);
         AUTOCFG(work_recback_max_route);
         AUTOCFG(work_run_speed);
-
+        AUTOCFG(work_read_cone_thresholdy_out);
 
 
         AUTOCFG(speed_ramp);

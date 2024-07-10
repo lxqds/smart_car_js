@@ -409,7 +409,7 @@ void run_work()
                     speed_err < 100) {
 
                     out_flage = 3;
-                    MAT_LOG("out_flage=3");
+                    MAT_LOG("out_flage=2");
                 }
 
             }
