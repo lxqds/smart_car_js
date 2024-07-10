@@ -241,6 +241,7 @@ void run_work()
             // LOG_I << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
 
             miny=workC.search_all_cone_rect(IMG.mat_lab)[0];
+
             POINT minyCent = getCenterPoint(miny);
 
             IMG.aim_angle = 0;
@@ -250,7 +251,7 @@ void run_work()
             err_W = IMAGE_WIDTH / 2 - minyCent.x;
             err_H = (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg - minyCent.y;
             
-            IMG.aim_angle = err_W * 1.5;
+            IMG.aim_angle = err_W * 1.1;
             speedP = err_H / 40.0;
             if (speedP > 1)speedP = 1;
             if (speedP < -1)speedP = -1;
