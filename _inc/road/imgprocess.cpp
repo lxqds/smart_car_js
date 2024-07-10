@@ -827,15 +827,53 @@ void ImageProcess::get_edge(int mode)
     track_rightline(rpts1s, rpts1s_num, rptsc1,
         (int)round(ANGLE_DIST / SAMPLE_DIST),
         PIXEL_PER_METER * ROAD_WIDTH / 2);
-    rptsc1_num = rpts1s_num;
 
-    // 透视中线 -> 原图中线
-    for (int i = 0; i < rptsc0_num; i++)
-        map_perspective(rptsc0[i][0], rptsc0[i][1], rptsc0[i], 1);
-    for (int i = 0; i < rptsc1_num; i++)
-        map_perspective(rptsc1[i][0], rptsc1[i][1], rptsc1[i], 1);
-    for (int i = 0; i < rptscs_num; i++)
-        map_perspective(rptscs[i][0], rptscs[i][1], rptscs[i], 1);
+    {//透视中线 -> 原图中线 ,剔除不在屏幕区域的点
+        rptsc1_num = rpts1s_num;
+        std::vector<POINT> rptsc_buf;
+        rptsc_buf.clear();
+        // 
+        for (int i = 0; i < rptsc0_num; i++) {
+            map_perspective(rptsc0[i][0], rptsc0[i][1], rptsc0[i], 1);
+            if (rptsc0[i][0] >= 0 && rptsc0[i][0] < IMAGE_WIDTH && rptsc0[i][1] >= 0 && rptsc0[i][1] < IMAGE_HEIGHT) {
+                rptsc_buf.push_back(POINT(rptsc0[i][1], rptsc0[i][0]));
+            }
+        }
+        rptsc1_num = 0;
+        for (int i = 0; i < rptsc_buf.size();i++) {
+            rptsc0[i][0] = rptsc_buf[i].x;
+            rptsc0[i][1] = rptsc_buf[i].y;
+            rptsc1_num++;
+        }
+        rptsc_buf.clear();
+        for (int i = 0; i < rptsc1_num; i++) {
+            map_perspective(rptsc1[i][0], rptsc1[i][1], rptsc1[i], 1);
+            if (rptsc1[i][0] >= 0 && rptsc1[i][0] < IMAGE_WIDTH && rptsc1[i][1] >= 0 && rptsc1[i][1] < IMAGE_HEIGHT) {
+                rptsc_buf.push_back(POINT(rptsc1[i][1], rptsc1[i][0]));
+            }
+        }
+        rptsc0_num = 0;
+        for (int i = 0; i < rptsc_buf.size(); i++) {
+            rptsc1[i][0] = rptsc_buf[i].x;
+            rptsc1[i][1] = rptsc_buf[i].y;
+            rptsc0_num++;
+        }
+        rptsc_buf.clear();
+        for (int i = 0; i < rptscs_num; i++) {
+            map_perspective(rptscs[i][0], rptscs[i][1], rptscs[i], 1);
+            if (rptscs[i][0] >= 0 && rptscs[i][0] < IMAGE_WIDTH && rptscs[i][1] >= 0 && rptscs[i][1] < IMAGE_HEIGHT) {
+                rptsc_buf.push_back(POINT(rptscs[i][1], rptscs[i][0]));
+            }
+        }
+        rptscs_num = 0;
+        for (int i = 0; i < rptsc_buf.size(); i++) {
+            rptscs[i][0] = rptsc_buf[i].x;
+            rptscs[i][1] = rptsc_buf[i].y;
+            rptscs_num++;
+        }
+    }
+
+
 
     // 标志位重置
     is_straight0 = is_straight1 = false;
