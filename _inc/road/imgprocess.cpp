@@ -836,11 +836,11 @@ void ImageProcess::get_edge(int mode)
         for (int i = 0; i < rptsc0_num; i++) {
             map_perspective(rptsc0[i][0], rptsc0[i][1], rptsc0[i], 1);
             if (rptsc0[i][0] >= 0 && rptsc0[i][0] < IMAGE_WIDTH && rptsc0[i][1] >= 0 && rptsc0[i][1] < IMAGE_HEIGHT) {
-                rptsc_buf.push_back(POINT(rptsc0[i][1], rptsc0[i][0]));
+                rptsc_buf.push_back(POINT(rptsc0[i][0], rptsc0[i][1]));
             }
         }
         rptsc1_num = 0;
-        for (int i = 0; i < rptsc_buf.size();i++) {
+        for (uint32_t i = 0; i < rptsc_buf.size();i++) {
             rptsc0[i][0] = rptsc_buf[i].x;
             rptsc0[i][1] = rptsc_buf[i].y;
             rptsc1_num++;
@@ -849,11 +849,11 @@ void ImageProcess::get_edge(int mode)
         for (int i = 0; i < rptsc1_num; i++) {
             map_perspective(rptsc1[i][0], rptsc1[i][1], rptsc1[i], 1);
             if (rptsc1[i][0] >= 0 && rptsc1[i][0] < IMAGE_WIDTH && rptsc1[i][1] >= 0 && rptsc1[i][1] < IMAGE_HEIGHT) {
-                rptsc_buf.push_back(POINT(rptsc1[i][1], rptsc1[i][0]));
+                rptsc_buf.push_back(POINT(rptsc1[i][0], rptsc1[i][1]));
             }
         }
         rptsc0_num = 0;
-        for (int i = 0; i < rptsc_buf.size(); i++) {
+        for (uint32_t i = 0; i < rptsc_buf.size(); i++) {
             rptsc1[i][0] = rptsc_buf[i].x;
             rptsc1[i][1] = rptsc_buf[i].y;
             rptsc0_num++;
@@ -862,11 +862,11 @@ void ImageProcess::get_edge(int mode)
         for (int i = 0; i < rptscs_num; i++) {
             map_perspective(rptscs[i][0], rptscs[i][1], rptscs[i], 1);
             if (rptscs[i][0] >= 0 && rptscs[i][0] < IMAGE_WIDTH && rptscs[i][1] >= 0 && rptscs[i][1] < IMAGE_HEIGHT) {
-                rptsc_buf.push_back(POINT(rptscs[i][1], rptscs[i][0]));
+                rptsc_buf.push_back(POINT(rptscs[i][0], rptscs[i][1]));
             }
         }
         rptscs_num = 0;
-        for (int i = 0; i < rptsc_buf.size(); i++) {
+        for (uint32_t i = 0; i < rptsc_buf.size(); i++) {
             rptscs[i][0] = rptsc_buf[i].x;
             rptscs[i][1] = rptsc_buf[i].y;
             rptscs_num++;
