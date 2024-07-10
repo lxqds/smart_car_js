@@ -135,8 +135,8 @@ void run_work()
             IMG.aim_speed = err_H;
 
             float speedP = err_H / 30.0;
-            if (speedP < 0)speedP -= 0.5;
-            else speedP += 0.5;
+            if (speedP < 0)speedP -= 0.1;
+            else speedP += 0.1;
             if (speedP > 2)speedP = 2;
             if (speedP < -2)speedP = -2;
 
