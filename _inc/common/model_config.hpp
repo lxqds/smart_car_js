@@ -21,7 +21,7 @@ struct ControlConfig
 
     uint16_t threshold;           // 二值化阈值
     uint16_t threshold_detection; // 目标检测阈值
-
+    uint16_t lab_threshold;     //锥桶阈值
     uint8_t direction_garage; // 出库方向   0: 左   1: 右
     uint8_t direction_yroad;  // 泛行区方向  0: 左   1: 右
     uint8_t direction_work;   // 施工区方向  0: 左   1: 右
@@ -187,7 +187,7 @@ struct ControlConfig
         AUTOCFG(check_slow_);
         AUTOCFG(check_circle_);
         AUTOCFG(check_cross_);
-
+        AUTOCFG(lab_threshold);
         AUTOCFG(ai_p_k);
         AUTOCFG(ai_p);
         AUTOCFG(ai_d);

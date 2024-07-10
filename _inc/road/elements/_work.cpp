@@ -242,7 +242,7 @@ void run_work()
 
             miny=workC.search_all_cone_rect(IMG.mat_lab)[0];
             POINT minyCent = getCenterPoint(miny);
-            minyCent.x 
+
             IMG.aim_angle = 0;
             int err_W, err_H;
             float speedP = 0;
