@@ -59,7 +59,7 @@ void check_work()
                     work_route = IMG.encoder.route;
                     direction_work = true;
                     IMG.flag_track = TRACK_LEFT;
-                    flag_work = WORK_FOUND_1;
+                    flag_work = WORK_FOUND_2;
                     MAT_LOG("WORK_FOUND_L");
                     FOUND_last_y = 0;
                     in_flag = 0;
@@ -214,7 +214,7 @@ void run_work()
             if (direction_work) {
                 work_near_cone = search_left_near(IMG.edge_right, IMG.mat_lab); //左工作区进入准备
                 if(IMG.edge_left.size()!=0)edgek = Calculate_K(IMG.edge_left);
-                threshold_k = -1;
+                threshold_k = -0.8;
             }
             else {
                 work_near_cone = search_right_near(IMG.edge_left, IMG.mat_lab);//右工作区进入准备
