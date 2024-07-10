@@ -226,7 +226,7 @@ void run_work()
 
         if (flag_work == WORK_RUN) {
             cv::Rect miny;
-            int16_t avg_y = search_mid_cone_getH(IMG.mat_lab)
+            int16_t avg_y = search_mid_cone_getH(IMG.mat_lab);
 
             std::vector<cv::Rect> all_zt;
             all_zt = workC.search_all_cone_rect(IMG.mat_lab);
@@ -337,7 +337,7 @@ void run_work()
             cv::Rect miny;
             std::vector<cv::Rect> all_zt;
             all_zt = workC.search_all_cone_rect(IMG.mat_lab);
-
+            int16_t avg_y = search_mid_cone_getH(IMG.mat_lab);
             // 最高点锥桶
             if (all_zt.size() >= 2) miny = all_zt[0];
             POINT mcentPoint = getCenterPoint(miny);
