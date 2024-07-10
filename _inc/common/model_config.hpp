@@ -71,7 +71,6 @@ struct ControlConfig
     uint8_t gas_rou_over;      // 加油站完成积分
 
     uint8_t work_error;        // 施工区错误
-    uint8_t work_rou_ready;    // 施工区准备进入积分
     uint8_t work_rou_in;       // 施工区进入积分
     float work_read_cone_thresholdy;// 施工区进入时，锥桶阈值
 
@@ -87,6 +86,7 @@ struct ControlConfig
 
     uint16_t work_run_speed; //施工区 进入速度
 
+    float work_run_angle_p;
     float work_angle_in_1;           //施工区一段进入角度
 
 
@@ -265,7 +265,6 @@ struct ControlConfig
         AUTOCFG(work_stop_time);
         AUTOCFG(work_error);
         AUTOCFG(work_read_cone_thresholdy);
-        AUTOCFG(work_rou_ready);
         AUTOCFG(work_rou_in);
         AUTOCFG(work_angle_in_1);
         AUTOCFG(work_recback_angle);

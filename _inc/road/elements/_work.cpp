@@ -254,7 +254,7 @@ void run_work()
             err_W = IMAGE_WIDTH / 2 - minyCent.x;
             err_H = (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg - minyCent.y;
             
-            IMG.aim_angle = err_W * 1.1;
+            IMG.aim_angle = err_W * IMG._config->work_run_angle_p;
             speedP = err_H / 40.0;
             if (speedP > 1)speedP = 1;
             if (speedP < -1)speedP = -1;
@@ -358,7 +358,7 @@ void run_work()
                 IMG.aim_speed = -IMG.aim_speed;//倒车
                 IMG.aim_angle =0;
 
-                if (IMG.max_white_line_length > 250 && work_route - IMG.encoder.route > 35 )out_flage = 2;
+                if (IMG.max_white_line_length > 250 && work_route - IMG.encoder.route > 20 )out_flage = 2;
                 
             }
 

@@ -253,7 +253,7 @@
     "work_read_cone_thresholdy_in": 0.25,
     "work_error": 200,
     "work_angle_in_1": 50,
-    "work_rou_ready": 35,
+    "work_run_angle_p": 0.8,
     "work_read_cone_thresholdy_avg": 0.6,
     "work_rou_in": 30,
     "work_run_speed": 500,
