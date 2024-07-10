@@ -47,7 +47,7 @@ void check_work()
                     work_route = IMG.encoder.route;
                     direction_work = false;
                     IMG.flag_track = TRACK_RIGHT;
-                    flag_work = WORK_FOUND_1;
+                    flag_work = WORK_FOUND_2;
                     MAT_LOG("WORK_FOUND_R");
                     FOUND_last_y = 0;
                     in_flag = 0;
@@ -142,7 +142,7 @@ void run_work()
             if (speedP > 1)speedP = 1;
             if (speedP < -1)speedP = -1;
             
-            IMG.aim_speed = IMG._config->speed_work * speedP;
+            IMG.aim_speed = IMG._config->speed_work * speedP +100;
 
             int speed_err = abs(IMG.aim_speed - IMG.encoder.speed*1000);
             LOG_I << "  speed_err:" << speed_err << LOG_END;
@@ -266,7 +266,7 @@ void run_work()
             drawH(err_H, 0,255, 0, IMG.mat_result);
             drawH(IMAGE_HEIGHT * 0.1, 255, 0, 0, IMG.mat_result);
             drawW(minyCent.x, 0, 255, 0, IMG.mat_result);
-            drawW(IMAGE_HEIGHT/2, 255, 0, 0, IMG.mat_result);
+            drawW(IMAGE_WIDTH /2, 255, 0, 0, IMG.mat_result);
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
 
 
