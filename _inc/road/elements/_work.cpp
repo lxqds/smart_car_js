@@ -226,14 +226,21 @@ void run_work()
 
         if (flag_work == WORK_RUN) {
             cv::Rect miny;
-            //int16_t avg_y = search_mid_cone_getH(IMG.mat_lab);
-            // LOG_I << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
+            int16_t avg_y = search_mid_cone_getH(IMG.mat_lab)
 
             std::vector<cv::Rect> all_zt;
             all_zt = workC.search_all_cone_rect(IMG.mat_lab);
 
             // 最高点锥桶
-            if (all_zt.size() >= 1) miny = all_zt[0];
+            if (all_zt.size() >= 1) {
+                miny.y= IMAGE_HEIGHT;
+               // 找最高点且在屏幕一定范围下
+                for (size_t i = 0; i < all_zt.size(); i++)
+                {
+                    if (all_zt[i] < 0.3 * IMAGE_HEIGHT)continue;
+                    if (all_zt[i].y < miny.y)miny = all_zt[i];
+                }
+            } 
 
             for (size_t i = 0; i < all_zt.size(); i++) {
                 cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
@@ -248,7 +255,12 @@ void run_work()
                 }
 
             }
-
+            //若未找到合适的锥桶，则采用全屏扫描色块
+            if (minyCent.y == IMAGE_HEIGHT) {
+                LOG_I << "  can not;t find cone" << "  get_AIorcolor_AVG_Y :" << avg_y LOG_END;
+                minyCent.x = 150;
+                minyCent.y = avg_y;
+            }
             IMG.aim_angle = 0;
             int err_W, err_H;
             float speedP = 0;
@@ -348,17 +360,64 @@ void run_work()
             //开始 直线退出
             if (out_flage == 1) {
 
-                IMG.aim_speed = -IMG.aim_speed;//倒车
                 IMG.aim_angle = 0;
+                cv::Rect miny;
+                std::vector<cv::Rect> all_zt;
+                all_zt = workC.search_all_cone_rect(IMG.mat_lab);
 
-                if (IMG.max_white_line_length > 250 && work_route - IMG.encoder.route > 20)out_flage = 2;
+                // 最高点锥桶
+                if (all_zt.size() >= 1) {
+                    miny.y = IMAGE_HEIGHT;
+                    // 找最高点且在屏幕一定范围下
+                    for (size_t i = 0; i < all_zt.size(); i++)
+                    {
+                        if (all_zt[i] < 0.3 * IMAGE_HEIGHT)continue;
+                        if (all_zt[i].y < miny.y)miny = all_zt[i];
+                    }
+                }
+
+                for (size_t i = 0; i < all_zt.size(); i++) {
+                    cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
+                }
+                POINT minyCent = getCenterPoint(miny);
+
+                //若未找到合适的锥桶，则采用全屏扫描色块
+                if (minyCent.y == IMAGE_HEIGHT) {
+                    LOG_I << "  can not;t find cone" << "  get_AIorcolor_AVG_Y :" << avg_y LOG_END;
+                    minyCent.x = 150;
+                    minyCent.y = avg_y;
+                }
+
+                int thresholdh = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out;
+
+                int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out + 6;
+
+                int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out + 3 - minyCent.y;
+
+                IMG.aim_speed = err_H;
+
+                float speedP = err_H / 30.0;
+                if (speedP > 2)speedP = 2;
+                if (speedP < -2)speedP = -2;
+
+                IMG.aim_speed = IMG._config->speed_work * speedP;
+
+                int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
+                LOG_I << "  speed_err:" << speed_err << LOG_END;
+
+                if ((minyCent.y >= thresholdh && minyCent.y <= coneLowy) &&
+                    speed_err < 100) {
+
+                    out_flage = 3;
+                    MAT_LOG("out_flage=3");
+                }
 
             }
-
+            //
             if (out_flage == 2) {
 
                 IMG.aim_speed = 0;
-                if (abs(IMG.encoder.speed * 1000) < 200) { work_route = IMG.encoder.route;  out_flage = 3; }
+                if (abs(IMG.encoder.speed * 1000) < 100) { work_route = IMG.encoder.route;  out_flage = 3; }
             }
 
             if (out_flage == 3) {
