@@ -315,7 +315,7 @@ void run_work()
                 MAT_LOG("WORK_PARKINISH"); //泊车中
                 flag_work = WORK_OUT;
                 workC.init();
-                out_flage = 0;
+                out_flage = 1;
                 last_data = 0;
             }
             else {
@@ -361,77 +361,87 @@ void run_work()
 
             //开始 直线退出
             if (out_flage == 1) {
+                /*
+                {
+                    IMG.aim_angle = 0;
+                    cv::Rect miny;
+                    std::vector<cv::Rect> all_zt;
+                    all_zt = workC.search_all_cone_rect(IMG.mat_lab);
 
+                    // 最高点锥桶
+                    if (all_zt.size() >= 1) {
+                        miny.y = IMAGE_HEIGHT;
+                        // 找最高点且在屏幕一定范围下
+                        //for (size_t i = 0; i < all_zt.size(); i++)
+                        //{
+                        //    if (all_zt[i].y < 0.1 * IMAGE_HEIGHT)continue;
+                        //    if (all_zt[i].y < miny.y)miny = all_zt[i];
+                        //}
+                    }
+
+                    for (size_t i = 0; i < all_zt.size(); i++) {
+                        cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
+                    }
+                    POINT minyCent = getCenterPoint(miny);
+
+                    //若未找到合适的锥桶，则采用全屏扫描色块
+                    if (minyCent.y == IMAGE_HEIGHT) {
+                        LOG_I << "  can not;t find cone" << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
+                        minyCent.x = 150;
+                        minyCent.y = avg_y;
+                    }
+
+                    int thresholdh = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out;
+
+                    int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out + 10;
+
+                    int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out + 5 - minyCent.y;
+
+                    IMG.aim_speed = err_H;
+
+                    drawH(minyCent.y, 255, 0, 0, IMG.mat_result);
+                    drawH(thresholdh, 0, 0, 255, IMG.mat_result);
+                    drawH(coneLowy, 0, 0, 255, IMG.mat_result);
+                    float speedP = err_H / 50.0 + 0.5;
+                    if (speedP > 2)speedP = 2;
+                    if (speedP < -2)speedP = -2;
+
+                    IMG.aim_speed = IMG._config->speed_work * speedP;
+
+                    int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
+                    LOG_I << "  speed_err:" << speed_err << LOG_END;
+
+                    if ((minyCent.y >= thresholdh && minyCent.y <= coneLowy) &&
+                        speed_err < 100) {
+
+                        out_flage = 3;
+                        MAT_LOG("out_flage=2");
+                    }
+
+                }
+                */
                 IMG.aim_angle = 0;
-                cv::Rect miny;
-                std::vector<cv::Rect> all_zt;
-                all_zt = workC.search_all_cone_rect(IMG.mat_lab);
-
-                // 最高点锥桶
-                if (all_zt.size() >= 1) {
-                    miny.y = IMAGE_HEIGHT;
-                    // 找最高点且在屏幕一定范围下
-                    //for (size_t i = 0; i < all_zt.size(); i++)
-                    //{
-                    //    if (all_zt[i].y < 0.1 * IMAGE_HEIGHT)continue;
-                    //    if (all_zt[i].y < miny.y)miny = all_zt[i];
-                    //}
-                }
-
-                for (size_t i = 0; i < all_zt.size(); i++) {
-                    cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
-                }
-                POINT minyCent = getCenterPoint(miny);
-
-                //若未找到合适的锥桶，则采用全屏扫描色块
-                if (minyCent.y == IMAGE_HEIGHT) {
-                    LOG_I << "  can not;t find cone" << "  get_AIorcolor_AVG_Y :" << avg_y <<LOG_END;
-                    minyCent.x = 150;
-                    minyCent.y = avg_y;
-                }
-
-                int thresholdh = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out;
-
-                int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out + 10;
-
-                int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out + 5 - minyCent.y;
-
-                IMG.aim_speed = err_H;
-
-                drawH(minyCent.y, 255, 0, 0, IMG.mat_result);
-                drawH(thresholdh, 0, 0, 255, IMG.mat_result);
-                drawH(coneLowy  , 0, 0, 255, IMG.mat_result);
-                float speedP = err_H / 50.0 +0.5;
-                if (speedP > 2)speedP = 2;
-                if (speedP < -2)speedP = -2;
-
-                IMG.aim_speed = IMG._config->speed_work * speedP;
-
-                int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
-                LOG_I << "  speed_err:" << speed_err << LOG_END;
-
-                if ((minyCent.y >= thresholdh && minyCent.y <= coneLowy) &&
-                    speed_err < 100) {
-
-                    out_flage = 3;
-                    MAT_LOG("out_flage=2");
-                }
-
+                IMG.aim_speed = -IMG._config->speed_work;
+                if (IMG.max_white_line_length > 200)out_flage = 2;
             }
             //
             if (out_flage == 2) {
 
                 IMG.aim_speed = 0;
-                if (abs(IMG.encoder.speed * 1000) < 100) { work_route = IMG.encoder.route;  out_flage = 3; }
+                if (abs(IMG.encoder.speed * 1000) < 300) { work_route = IMG.encoder.route;  out_flage = 3; }
             }
 
             if (out_flage == 3) {
-                IMG.aim_speed = -IMG._config->speed_work;
+                IMG.aim_speed =IMG._config->speed_work;
                 IMG.aim_angle =IMG._config-> work_recback_angle;
+
                 if (!direction_work)IMG.aim_angle = -IMG.aim_angle;
-                if (((work_near_cone.x != 0 && work_near_cone.y != 0) && 
+
+                if (
+                    (IMG.ipts0_num > 100 && IMG.ipts1_num > 100)||
+                    ((work_near_cone.x != 0 && work_near_cone.y != 0) && 
                     (work_near_cone1.x != 0 && work_near_cone1.y != 0)) || 
-                    (IMG.encoder.route - work_route > 30)) {
+                    (IMG.encoder.route - work_route > 40)) {
                     out_flage = 4;
                     work_route = IMG.encoder.route;
                 }
