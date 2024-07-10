@@ -245,6 +245,7 @@ void run_work()
 
             // 最高点锥桶
             if (all_zt.size() >= 1) miny = all_zt[0];
+
             for (size_t i = 0; i < all_zt.size(); i++)
             {
                 cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
@@ -272,7 +273,7 @@ void run_work()
             //开始靠近锥桶
             IMG.aim_speed = (int16_t)(IMG._config->work_run_speed * speedP);
 
-            if (minyCent.y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg) IMG.aim_speed = -IMG.aim_speed;
+            //if (minyCent.y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg) IMG.aim_speed = -IMG.aim_speed;
 
             int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
             if(abs(err_H )< IMAGE_HEIGHT * 0.1 && speed_err <100 )
