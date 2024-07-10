@@ -148,7 +148,7 @@ void run_work()
             LOG_I << "  speed_err:" << speed_err << LOG_END;
             if (work_near_cone.x < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy && 
                 (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)&&
-                speed_err <200 ) {
+                speed_err <100 ) {
 
                 work_route = IMG.encoder.route;
                 flag_work = WORK_READY;
@@ -251,7 +251,7 @@ void run_work()
             int err_W, err_H;
             float speedP = 0;
 
-            err_W = IMAGE_WIDTH / 2 - minyCent.x;
+            err_W = IMAGE_WIDTH / 2.0 - minyCent.x;
             err_H = (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg - minyCent.y;
             
             IMG.aim_angle = err_W * IMG._config->work_run_angle_p;
