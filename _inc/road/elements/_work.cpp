@@ -213,7 +213,7 @@ void run_work()
 
            // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready )
 
-            if ((work_near_cone.x == 0 && work_near_cone.y == 0)|| IMG.max_white_line_length < 300) {
+            if ((work_near_cone.x == 0 && work_near_cone.y == 0)&& IMG.max_white_line_length < 300) {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_RUN;
                 work_route2 = IMG.encoder.route;
