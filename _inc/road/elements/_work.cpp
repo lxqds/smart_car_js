@@ -453,7 +453,7 @@ void run_work()
                     (IMG.ipts0_num > 100 && IMG.ipts1_num > 100)||
                     ((work_near_cone.x != 0 && work_near_cone.y != 0) && 
                     (work_near_cone1.x != 0 && work_near_cone1.y != 0)) || 
-                    (IMG.encoder.route - work_route > 40)) {
+                    (IMG.encoder.route - work_route > 80)) {
                     out_flage = 4;
                     work_route = IMG.encoder.route;
                     MAT_LOG("out_flage4");
