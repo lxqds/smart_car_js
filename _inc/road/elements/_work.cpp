@@ -354,9 +354,9 @@ void run_work()
             if (out_flage == 1)
             {
                 IMG.aim_speed = -IMG.aim_speed;//倒车
-                IMG.aim_angle = 0;
+                IMG.aim_angle = 10;
 
-                if (IMG.max_white_line_length > 100)out_flage = 2;
+                if (IMG.max_white_line_length > 150)out_flage = 2;
                 
             }
 
