@@ -268,7 +268,7 @@ void run_work()
 
 
             //开始靠近锥桶
-            IMG.aim_speed = (int16_t)(IMG._config->work_run_0speed * speedP);
+            IMG.aim_speed = (int16_t)(IMG._config->work_run_speed * speedP);
 
             //if (minyCent.y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg) IMG.aim_speed = -IMG.aim_speed;
 
@@ -331,7 +331,6 @@ void run_work()
             POINT mcentPoint = getCenterPoint(miny);
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
             drawH(mcentPoint.y, 0, 0, 255, IMG.mat_result);
-            Calculate_Left_ConeK(std::vector<cv::Rect> arr)
 
             IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed); //逐渐减速         
 
@@ -366,7 +365,9 @@ void run_work()
                 IMG.aim_speed = -IMG._config->speed_work;
                 IMG.aim_angle =IMG._config-> work_recback_angle;
                 if (!direction_work)IMG.aim_angle = -IMG.aim_angle;
-                if ((work_near_cone.x != 0 && work_near_cone.y != 0) && (work_near_cone1.x != 0 && work_near_cone1.y != 0) || IMG.encoder.route - work_route > 15) {
+                if (((work_near_cone.x != 0 && work_near_cone.y != 0) && 
+                    (work_near_cone1.x != 0 && work_near_cone1.y != 0)) || 
+                    (IMG.encoder.route - work_route > 15)) {
                     out_flage = 4;
                     work_route = IMG.encoder.route;
                 }
