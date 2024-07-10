@@ -177,8 +177,8 @@ public:
     int far_Lpt0_point[2], far_Lpt1_point[2];//远处左右角点坐标
     // 长直道
     bool is_straight0, is_straight1;
-
-
+    //主赛道预测线长度
+    float max_white_line_length;
     //横向扫描得到的横线数据集
     std::vector<POINT> white_row_start_point[40];//白行起始点
     std::vector<POINT> white_row_end_point[40];//白行结束点

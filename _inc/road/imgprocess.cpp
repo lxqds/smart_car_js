@@ -82,7 +82,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     {
         //扇形扫描找最远的白线
         int max_white_line_end[2]{};
-        float max_white_line_length = 0;
+        max_white_line_length = 0;
         int white_line_end[90][2]{};
         float white_line_length[90]{};
         {
