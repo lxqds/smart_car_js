@@ -333,18 +333,17 @@ void run_work()
             all_zt = workC.search_all_cone_rect(IMG.mat_lab);
 
             // 最高点锥桶
-            miny = all_zt[0];
+            if(all_zt.size() >=2) miny = all_zt[0];
             POINT mcentPoint = getCenterPoint(miny);
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
             drawH(mcentPoint.y, 0, 0, 255, IMG.mat_result);
 
-            //找左侧锥桶斜率
-            float clone_k = Calculate_Left_ConeK(all_zt);
 
             IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed); //逐渐减速         
 
             if (out_flage == 0)//稍稍反方向打角
             {
+                float clone_k = Calculate_Left_ConeK(all_zt);
                 IMG.aim_speed = -IMG.aim_speed;//倒车
                 IMG.aim_angle = - clone_k * 10;
                 //IMG._config->work_recback_angle
