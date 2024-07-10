@@ -28,6 +28,7 @@ bool direction_work = true;//true : 左工作区 false : 右工作区
 int FOUND_last_y;
 float last_data;
 uint8_t out_flage;
+uint8_t in_flag;
 void check_work()
 {
 
@@ -49,6 +50,7 @@ void check_work()
                     flag_work = WORK_FOUND_1;
                     MAT_LOG("WORK_FOUND_R");
                     FOUND_last_y = 0;
+                    in_flag = 0;
                 }
                 else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.52 && r.y > IMAGE_HEIGHT * 0.1) {
 
@@ -59,13 +61,17 @@ void check_work()
                     IMG.flag_track = TRACK_LEFT;
                     flag_work = WORK_FOUND_1;
                     MAT_LOG("WORK_FOUND_L");
+                    FOUND_last_y = 0;
+                    in_flag = 0;
                 }
+                
             }
         }
 
 }
 
 /* ********************************************************************* */
+
 void run_work()
 {
 
@@ -98,16 +104,18 @@ void run_work()
             //}
            
             //当 第一个锥桶消失
-            if (FOUND_last_y > work_near_cone.x && work_near_cone.x >0.7 * IMAGE_HEIGHT) {
+            if (in_flag == 0 && work_near_cone.x > 0.7 * IMAGE_HEIGHT) {
+                in_flag = 1;
+            }
+            if (FOUND_last_y > work_near_cone.x && in_flag == 1;) {
                     flag_work = WORK_FOUND_2;
                     work_route = IMG.encoder.route;
                     MAT_LOG("WORK_FOUND_2");
             }
 
-            cv::line(IMG.mat_result, cv::Point(0, (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy),
-                cv::Point(IMAGE_WIDTH - 1, (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy), cv::Scalar(0, 0, 255), 1);
             cv::line(IMG.mat_result, cv::Point(0, (int)work_near_cone.x),
                 cv::Point(IMAGE_WIDTH - 1, (int)work_near_cone.x), cv::Scalar(255, 0, 0), 1);
+            drawH(0.7 * IMAGE_HEIGHT, 255, 0, 0, IMG.mat_result);
             FOUND_last_y = work_near_cone.x;
         }
 
