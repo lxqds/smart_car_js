@@ -213,7 +213,7 @@ void run_work()
             // 进入方向
             if (direction_work) {
                 work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
-                if(IMG.edge_left.size()!=0)edgek = -Calculate_K(IMG.edge_left);
+                if(IMG.edge_left.size()!=0)edgek = Calculate_K(IMG.edge_left);
                 threshold_k = -1;
             }
             else {
