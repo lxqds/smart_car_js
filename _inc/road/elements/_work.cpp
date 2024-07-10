@@ -26,6 +26,7 @@ CVFind_Clone workC;
 bool direction_work = true;//true : 左工作区 false : 右工作区
 /* ********************************************************************* */
 int FOUND_last_y;
+float last_data;
 uint8_t out_flage;
 void check_work()
 {
@@ -297,6 +298,7 @@ void run_work()
                 flag_work = WORK_OUT;
                 workC.init();
                 out_flage = 0;
+                last_data = 0;
             }
             else
             {
@@ -317,63 +319,70 @@ void run_work()
             if (IMG.ipts1_num > 10)
                 R1 = fit_line1(IMG.ipts1, IMG.ipts1_num, 60);
 
+            //找锥桶
             cv::Rect miny;
-            miny = workC.search_all_cone_rect(IMG.mat_lab)[0];
+            std::vector<cv::Rect> all_zt;
+            all_zt = workC.search_all_cone_rect(IMG.mat_lab);
+
+            // 最高点锥桶
+            miny = all_Zt[0];
             POINT mcentPoint = getCenterPoint(miny);
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
-
             drawH(mcentPoint.y, 0, 0, 255, IMG.mat_result);
+
+            //找左侧锥桶斜率
+            float clone_k = Calculate_Left_ConeK(all_zt);
 
             IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed); //逐渐减速
             IMG.aim_speed = -IMG.aim_speed;//倒车         
-            // POINT AI_cone_left = POINT AI_search_right_near(IMG._det_result, IMG.edge_left);
-            //退出角度赋值
-            if (out_flage == 1)//大于退出 某阶段时开始打角
+
+            if (out_flage == 0)//稍稍反方向打角
             {
-                IMG.aim_angle = 5;
+                IMG.aim_angle = - clone_k * 10;
                 //IMG._config->work_recback_angle
-                if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
+                if (last_data != 0 && abs(clone_k * 100 - last_data * 100) > 2)out_flage = 1;
+                last_data = clone_k;
+            }
+
+            //开始 直线退出
+            if (out_flage == 1)
+            {
+                IMG.aim_angle = 0;
+
+                if (IMG.max_white_line_length > 100)out_flage = 2;
+                
             }
 
             if (out_flage == 2) {
 
-                IMG.aim_angle = IMG._config->work_recback_angle;
-                if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
+                IMG.aim_speed = 0;
+                if (abs(IMG.encoder.speed * 1000) < 200) { work_route = IMG.encoder.route;  out_flage = 3; }
             }
             //退出速度赋值
-            if (mcentPoint.y < 0.4 * IMAGE_HEIGHT && mcentPoint.y > 0.3 * IMAGE_HEIGHT)
+            if (out_flage == 3)
             {
-                drawH((int)(0.4 * IMAGE_HEIGHT), 0, 255, 0, IMG.mat_result);
-                IMG.aim_angle = 0;
-                MAT_LOG("out1");
-                out_flage = 1;
-            }
+                // 正常巡线
+                if (IMG.flag_track == TRACK_LEFT) {
+                    IMG.rpts = IMG.rptsc0;
+                    IMG.rpts_num = IMG.rptsc0_num;
+                }
+                else if (IMG.flag_track == TRACK_RIGHT) {
+                    IMG.rpts = IMG.rptsc1;
+                    IMG.rpts_num = IMG.rptsc1_num;
+                }
+                else {
+                    IMG.rpts = IMG.rptscs;
+                    IMG.rpts_num = IMG.rptscs_num;
+                }
 
-            if (mcentPoint.y < 0.3 * IMAGE_HEIGHT)
-            {
-                drawH((int)(0.3 * IMAGE_HEIGHT), 0, 255, 0, IMG.mat_result);
-                IMG.aim_angle = 0;
-                MAT_LOG("out2");
-                out_flage = 2;
-            }
-            LOG_I << "R0 " << R0 << "R1 " << R1 << LOG_END;
+                IMG.calculate_angle();//计算角度
 
-            if ((R0 <10 || R1 <10 )&&
-               (work_near_cone.x != 0 && work_near_cone1.x != 0) &&
-                out_flage==2)
-            {
-                control_flag.pop();//移除
-                flag_work = WORK_NONE;
-                MAT_LOG("WORK_HAVE_L");
+                if (work_route - IMG.encoder.route > 50) {
+                    control_flag.pop();//移除
+                    flag_work = WORK_NONE;
+                    MAT_LOG("WORK_HAVE_L");
+                }
             }
-
-            if (work_route - IMG.encoder.route > IMG._config->work_recback_max_route && (work_near_cone.x !=0 && work_near_cone1.x != 0) && R0 < 10 && R1 < 10)
-            {
-                control_flag.pop();//移除
-                flag_work = WORK_NONE;
-                MAT_LOG("WORK_MAX");
-            }
-
 
         }
 

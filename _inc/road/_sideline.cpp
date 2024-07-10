@@ -608,6 +608,7 @@ void drawW(int w, uint8_t r, uint8_t g, uint8_t b, cv::Mat map) {
     cv::line(map, cv::Point(w, IMAGE_HEIGHT - 1),
         cv::Point(w, 0), cv::Scalar(r, g, b), 1);
 }
+
 POINT getCenterPoint(cv::Rect rect) {
     POINT cpt;
 
@@ -617,6 +618,20 @@ POINT getCenterPoint(cv::Rect rect) {
 
     return cpt;
 
+}
+
+//计算最高锥桶为中心 到 最左侧锥桶 的直线斜率
+float Calculate_Left_ConeK(std::vector<cv::Rect> arr) {
+    if (arr.size() < 2)return 0;
+    POINT TopR = getCenterPoint(arr[0]);
+    POINT BomL;
+
+    for (size_t i = 1; i < arr.size(); i++)
+    {
+        if (arr[i].area() < 300)continue;
+        if (arr[i].x < TopR.x)BomL = getCenterPoint(arr[i]);
+    }
+    return (float)(TopR.y - BomL.y) / (float)(TopR.x - BomL.x);
 }
 //// 搜索距离赛道左边缘最近的黄色色块 (黄色锥桶) 赛道内
 //POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
