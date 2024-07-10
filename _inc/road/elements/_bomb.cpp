@@ -42,10 +42,8 @@ void check_bomb()
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&      //当前没在入库中
         !control_flag.contains(ramp_element)
-        )
-    {
-        for (auto r : IMG.detection_result)
-        {
+        ) {
+        for (auto r : IMG.detection_result) {
             if (r.label == IMG.label_bomb && r.score > 0.5 && r.y > IMAGE_HEIGHT * 0.1) {
                 IMG.element_identify = 1;
                 control_flag.push(bomb_element);
@@ -66,8 +64,7 @@ void run_bomb()
 {
     if (control_flag.top() == bomb_element) {//当前为炸弹元素
         IMG.get_edge(0);
-        if (flag_bomb == BOMB_FOUND)
-        {
+        if (flag_bomb == BOMB_FOUND) {
             IMG.aim_speed = IMG._config->speed_bomb1;
             bomb_near_cone = POINT(0, 0);
             bomb_near_cone_L = POINT(0, 0);
@@ -172,16 +169,14 @@ void run_bomb()
                     flag_bomb = BOMB_SECOND_CONE;
                     MAT_LOG("BOMB_SECOND_CONE");
                 }
-                else if (IMG.encoder.route - bomb_route > 120)
-                {
+                else if (IMG.encoder.route - bomb_route > 120) {
                     flag_bomb = BOMB_NONE;
                     control_flag.pop();
                     MAT_LOG("BOMB_ERROR3");
                 }
             }
         }
-        if (flag_bomb == BOMB_SECOND_CONE)
-        {
+        if (flag_bomb == BOMB_SECOND_CONE) {
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.aim_distance_f = 0.2;
             IMG.aim_distance_n = 0.1;
@@ -205,8 +200,7 @@ void run_bomb()
                     PIXEL_PER_METER * IMG._config->bomb_second_run_wide / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
             }
-            for (auto r : IMG.detection_result)
-            {
+            for (auto r : IMG.detection_result) {
                 if (r.label == IMG.label_block) {
                     bomb_block_y = r.y;
                     bomb_block_x = r.x;
@@ -217,16 +211,16 @@ void run_bomb()
             if (bomb_block_y > IMAGE_HEIGHT * 0.1)
                 bomb_route = IMG.encoder.route;
 
-            if (bomb_block_y > IMAGE_HEIGHT * IMG._config->bomb_block_ready) {//靠近黑块
+            if (bomb_block_y > IMAGE_HEIGHT * IMG._config->bomb_block_ready || IMG.encoder.route - bomb_route > 40) {//靠近黑块
                 bomb_route = IMG.encoder.route;
                 flag_bomb = BOMB_BLOCK;
                 MAT_LOG("BOMB_BLOCK");
             }
-            else if (IMG.encoder.route - bomb_route > 40) {
-                flag_bomb = BOMB_NONE;
-                control_flag.pop();
-                MAT_LOG("BOMB_ERROR3");
-            }
+            // else if (IMG.encoder.route - bomb_route > 40) {
+            //     flag_bomb = BOMB_NONE;
+            //     control_flag.pop();
+            //     MAT_LOG("BOMB_ERROR3");
+            // }
         }
         if (flag_bomb == BOMB_BLOCK) {
             IMG.aim_speed = IMG._config->speed_bomb2;
@@ -268,8 +262,7 @@ void run_bomb()
                     control_flag.pop();
                     MAT_LOG("BOMB_NONE");
                 }
-                else if (IMG.encoder.route - bomb_route > 120)
-                {
+                else if (IMG.encoder.route - bomb_route > 120) {
                     flag_bomb = BOMB_NONE;
                     control_flag.pop();
                     MAT_LOG("BOMB_ERROR2");
@@ -295,12 +288,10 @@ void run_bomb()
         if (IMG.rpts_num > 0.3 / SAMPLE_DIST) {
             IMG.calculate_angle();//计算角度
         }
-        else if (IMG.flag_track == TRACK_RIGHT)
-        {
+        else if (IMG.flag_track == TRACK_RIGHT) {
             IMG.aim_angle = -45;
         }
-        else if (IMG.flag_track == TRACK_LEFT)
-        {
+        else if (IMG.flag_track == TRACK_LEFT) {
             IMG.aim_angle = 45;
         }
 
