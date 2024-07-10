@@ -249,8 +249,8 @@ void run_work()
             err_W = IMAGE_WIDTH / 2 - minyCent.x;
             err_H = (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg - minyCent.y;
             
-            IMG.aim_angle = err_W * 0.6;
-            speedP = err_H / 50.0;
+            IMG.aim_angle = err_W * 2;
+            speedP = err_H / 40.0;
             if (speedP > 1)speedP = 1;
             if (speedP < -1)speedP = -1;
 
@@ -267,15 +267,9 @@ void run_work()
 
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
             //开始靠近锥桶
-            if (err_H < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg
-                && err_H > IMAGE_HEIGHT * 0.8
-                && IMG.encoder.route - work_route < IMG._config->work_rou_in)
+            IMG.aim_speed = (int16_t)(IMG._config->work_run_speed * speedP);
+            if(err_H < IMAGE_HEIGHT * 0.1 )
             {
-
-                IMG.aim_speed = (int16_t)(IMG._config->work_run_speed * speedP);
-
-            }
-            else {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_STOPPING;
                 MAT_LOG("WORK_STOPPING");
