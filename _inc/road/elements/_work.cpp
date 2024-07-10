@@ -138,7 +138,7 @@ void run_work()
 
             IMG.aim_speed = err_H;
 
-            float speedP = err_H / 50.0;
+            float speedP = err_H / 30.0;
             if (speedP > 1)speedP = 1;
             if (speedP < -1)speedP = -1;
             
@@ -148,7 +148,7 @@ void run_work()
             LOG_I << "  speed_err:" << speed_err << LOG_END;
             if (work_near_cone.x < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy && 
                 (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)&&
-                speed_err <500 ) {
+                speed_err <200 ) {
 
                 work_route = IMG.encoder.route;
                 flag_work = WORK_READY;
