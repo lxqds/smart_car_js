@@ -369,7 +369,7 @@ void run_work()
             //退出速度赋值
             if (out_flage == 3)
             {
-                IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed);
+                IMG.aim_speed = (IMG._config->speed_base);
                 // 正常巡线
                 if (IMG.flag_track == TRACK_LEFT) {
                     IMG.rpts = IMG.rptsc0;
