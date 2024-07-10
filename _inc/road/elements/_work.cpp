@@ -262,19 +262,12 @@ void run_work()
             speedP = err_H / 40.0;
             if (speedP > 1)speedP = 1;
             if (speedP < -1)speedP = -1;
-
-
-
-            cv::line(IMG.mat_result, cv::Point(0, (int)IMAGE_HEIGHT* IMG._config->work_read_cone_thresholdy_avg),
-                cv::Point(IMAGE_WIDTH -1, (int)IMAGE_HEIGHT* IMG._config->work_read_cone_thresholdy_avg), cv::Scalar(0, 0, 255), 1);
-
-            cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH / 2 + 30, 0),
-                cv::Point(IMAGE_WIDTH / 2 + 30, IMAGE_HEIGHT), cv::Scalar(255, 0, 0), 1);
-
-            cv::line(IMG.mat_result, cv::Point(IMAGE_WIDTH / 2 -30, 0),
-                cv::Point(IMAGE_WIDTH / 2 - 30, IMAGE_HEIGHT), cv::Scalar(255, 0, 0), 1);
-
+            drawH(err_H, 0,255, 0, IMG.mat_result);
+            drawH(IMAGE_HEIGHT * 0.1, 255, 0, 0, IMG.mat_result);
+            drawH(minyCent.x, 255, 255, 0, IMG.mat_result);
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
+
+
             //开始靠近锥桶
             IMG.aim_speed = (int16_t)(IMG._config->work_run_speed * speedP);
             if(err_H < IMAGE_HEIGHT * 0.1 )
