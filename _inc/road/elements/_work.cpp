@@ -386,7 +386,7 @@ void run_work()
 
                 IMG.calculate_angle();//计算角度
 
-                if (work_route - IMG.encoder.route > 50) {
+                if ( IMG.encoder.route - work_route > 30) {
                     control_flag.pop();//移除
                     flag_work = WORK_NONE;
                     MAT_LOG("WORK_HAVE_L");
