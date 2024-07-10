@@ -214,6 +214,7 @@ void run_work()
             if (direction_work) {
                 work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
                 if(IMG.edge_left.size()!=0)edgek = -Calculate_K(IMG.edge_left);
+                threshold_k = -1;
             }
             else {
                 work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
@@ -239,8 +240,11 @@ void run_work()
             //int16_t avg_y = search_mid_cone_getH(IMG.mat_lab);
             // LOG_I << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
 
-            miny=workC.search_all_cone_rect(IMG.mat_lab)[0];
+            std::vector<cv::Rect> all_zt;
+            all_zt = workC.search_all_cone_rect(IMG.mat_lab);
 
+            // 最高点锥桶
+            if (all_zt.size() >= 2) miny = all_zt[0];
             POINT minyCent = getCenterPoint(miny);
 
             IMG.aim_angle = 0;
