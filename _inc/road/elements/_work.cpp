@@ -399,7 +399,7 @@ void run_work()
                 drawH(minyCent.y, 255, 0, 0, IMG.mat_result);
                 drawH(thresholdh, 0, 0, 255, IMG.mat_result);
                 drawH(coneLowy  , 0, 0, 255, IMG.mat_result);
-                float speedP = err_H / 30.0;
+                float speedP = err_H / 50.0;
                 if (speedP > 2)speedP = 2;
                 if (speedP < -2)speedP = -2;
 
