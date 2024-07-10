@@ -242,6 +242,7 @@ void run_work()
 
             miny=workC.search_all_cone_rect(IMG.mat_lab)[0];
             POINT minyCent = getCenterPoint(miny);
+            minyCent.x 
             IMG.aim_angle = 0;
             int err_W, err_H;
             float speedP = 0;
@@ -249,7 +250,7 @@ void run_work()
             err_W = IMAGE_WIDTH / 2 - minyCent.x;
             err_H = (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg - minyCent.y;
             
-            IMG.aim_angle = err_W * 2;
+            IMG.aim_angle = err_W * 1.5;
             speedP = err_H / 40.0;
             if (speedP > 1)speedP = 1;
             if (speedP < -1)speedP = -1;
