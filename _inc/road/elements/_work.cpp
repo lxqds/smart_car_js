@@ -356,7 +356,7 @@ void run_work()
             {   
                 float clone_k = Calculate_Left_ConeK(all_zt);
                 IMG.aim_speed = -IMG.aim_speed;//倒车
-                IMG.aim_angle = -clone_k*50;
+                IMG.aim_angle =0;
 
                 if (IMG.max_white_line_length > 250 && work_route - IMG.encoder.route > 35 )out_flage = 2;
                 
