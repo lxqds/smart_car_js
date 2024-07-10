@@ -348,7 +348,7 @@ void run_work()
                 //IMG._config->work_recback_angle
                 if (last_data != 0 && abs(clone_k * 100 - last_data * 100) > 2)out_flage = 1;
                 last_data = clone_k;
-                work_route = IMG.encoder.route
+                work_route = IMG.encoder.route;
             }
 
             //开始 直线退出
