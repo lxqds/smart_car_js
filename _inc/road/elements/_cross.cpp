@@ -26,8 +26,8 @@ void check_cross() {
         IMG.Lpt1_found && IMG.ipts1[IMG.ipts1_num - 1][1] > 80 &&//右线末端在屏幕中间以下
         IMG.Lpt0_point[1] < 170 && IMG.Lpt1_point[1] < 170 &&
         IMG.Lpt0_point[1] > 80 && IMG.Lpt1_point[1] > 80) ||//两边角点都找到
-        (IMG.far_Lpt0_found && IMG.far_Lpt1_found) ||
         (!control_flag.contains(circle_element) && (//不在圆环中
+            (IMG.far_Lpt0_found && IMG.far_Lpt1_found) ||
             (IMG.Lpt0_found && IMG.ipts0_num < 150 && IMG.ipts1_num < 40) ||//左边角点找到且右边丢线
             (IMG.Lpt1_found && IMG.ipts1_num < 150 && IMG.ipts0_num < 40)));//右边角点找到且左边丢线
 
