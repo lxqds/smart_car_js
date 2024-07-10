@@ -462,7 +462,7 @@ POINT search_left_near2(std::vector<POINT> pointsEdge, cv::Mat matt) {
 // 搜索 屏幕中间以下 黄色锥桶 距离屏幕最下方距离
 uint16_t search_mid_cone_getH(cv::Mat matt) {
     int sum = 5;
-    for (size_t y = IMAGE_HEIGHT - 20; y > IMAGE_HEIGHT / 2; y--) {
+    for (size_t y = IMAGE_HEIGHT - 20; y > 0; y--) {
         sum = 5;
         for (size_t x = IMAGE_WIDTH / 2; x < IMAGE_WIDTH / 2 + 30; x++) {
             if (AT_IMAGE(matt, x, y) > 0)
