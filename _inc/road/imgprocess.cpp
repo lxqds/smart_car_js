@@ -57,7 +57,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     cv::cvtColor(mat_result, mat_lab, cv::COLOR_BGR2Lab);
     std::vector<cv::Mat> channels_lab;
     cv::split(mat_lab, channels_lab);
-    cv::threshold(channels_lab[2], mat_lab, _config.lab_threshold, 255, cv::THRESH_BINARY);
+    cv::threshold(channels_lab[2], mat_lab, _config->lab_threshold, 255, cv::THRESH_BINARY);
 
     // // 绘制处理结果图, 灰度格式转BGR格式
 
