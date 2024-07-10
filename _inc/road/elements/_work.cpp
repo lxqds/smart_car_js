@@ -354,9 +354,13 @@ void run_work()
                 IMG.aim_speed = -IMG.aim_speed;//倒车
                 IMG.aim_angle = -clone_k * 10;
                 //IMG._config->work_recback_angle
-                if (last_data != 0 && abs(clone_k * 100 - last_data * 100) > 2)out_flage = 1;
+                if (last_data != 0 && abs(clone_k * 100 - last_data * 100) > 2) { 
+                    out_flage = 1; 
+                    MAT_LOG("out_flage1");
+                }
                 last_data = clone_k;
                 work_route = IMG.encoder.route;
+                
             }
 
             //开始 直线退出
@@ -422,13 +426,21 @@ void run_work()
                 */
                 IMG.aim_angle = 0;
                 IMG.aim_speed = -IMG._config->speed_work;
-                if (IMG.max_white_line_length > 200)out_flage = 2;
+                if (IMG.max_white_line_length > 200) {
+                    out_flage = 2;
+                    MAT_LOG("out_flage2");
+                }
             }
             //
             if (out_flage == 2) {
 
                 IMG.aim_speed = 0;
-                if (abs(IMG.encoder.speed * 1000) < 300) { work_route = IMG.encoder.route;  out_flage = 3; }
+                if (abs(IMG.encoder.speed * 1000) < 300) { 
+                    work_route = IMG.encoder.route;
+                    out_flage = 3;
+                    MAT_LOG("out_flage3");
+                }
+                
             }
 
             if (out_flage == 3) {
@@ -444,7 +456,9 @@ void run_work()
                     (IMG.encoder.route - work_route > 40)) {
                     out_flage = 4;
                     work_route = IMG.encoder.route;
+                    MAT_LOG("out_flage4");
                 }
+                
             }
             //退出速度赋值
             if (out_flage == 4) {
