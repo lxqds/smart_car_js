@@ -22,8 +22,8 @@ int not_have_line = 0;  // 十字丢线计次
 
 void check_cross() {
     //是否满足角点判断条件
-    bool found_Lpt = (IMG.Lpt0_found && IMG.ipts0[IMG.ipts0_num - 1] > 80 &&//左线末端在屏幕中间以下
-        IMG.Lpt1_found && IMG.ipts1[IMG.ipts1_num - 1] > 80 &&//右线末端在屏幕中间以下
+    bool found_Lpt = (IMG.Lpt0_found && IMG.ipts0[IMG.ipts0_num - 1][1] > 80 &&//左线末端在屏幕中间以下
+        IMG.Lpt1_found && IMG.ipts1[IMG.ipts1_num - 1][1] > 80 &&//右线末端在屏幕中间以下
         IMG.Lpt0_point[1] < 170 && IMG.Lpt1_point[1] < 170 &&
         IMG.Lpt0_point[1] > 80 && IMG.Lpt1_point[1] > 80) ||//两边角点都找到
         (IMG.far_Lpt0_found && IMG.far_Lpt1_found) ||
