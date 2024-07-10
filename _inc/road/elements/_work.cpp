@@ -107,7 +107,7 @@ void run_work()
             if (in_flag == 0 && work_near_cone.x > 0.7 * IMAGE_HEIGHT) {
                 in_flag = 1;
             }
-            if (FOUND_last_y > work_near_cone.x && in_flag == 1;) {
+            if (FOUND_last_y > work_near_cone.x && in_flag == 1) {
                     flag_work = WORK_FOUND_2;
                     work_route = IMG.encoder.route;
                     MAT_LOG("WORK_FOUND_2");
