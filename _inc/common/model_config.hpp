@@ -81,6 +81,8 @@ struct ControlConfig
     float work_run_angle_p;
     float work_angle_in_1;           //施工区一段进入角度
 
+    float work_out_angular_P;      ///施工区，退出斜率角度p值
+    float work_out_angular_base_deviation;///施工区，退出斜率角度基础偏差
     /*delete
     * work_rou_in
     * work_read_cone_thresholdy
@@ -249,7 +251,8 @@ struct ControlConfig
         AUTOCFG(speed_garage_out);
         AUTOCFG(speed_work);
 
-
+        AUTOCFG(work_out_angular_base_deviation);
+        AUTOCFG(work_out_angular_P);
 
         AUTOCFG(speed_bomb1);
         AUTOCFG(speed_bomb2);

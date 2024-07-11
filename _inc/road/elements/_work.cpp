@@ -433,9 +433,9 @@ void run_work()
                 if (direction_work) k = Calculate_Right_ConeK(all_zt);
                 else k = Calculate_Left_ConeK(all_zt);
 
-                IMG.aim_angle = (member_K - k ) * 100;
-                if (direction_work && IMG.aim_angle < 10) IMG.aim_angle = 10;
-                else if(!direction_work && IMG.aim_angle > -10)IMG.aim_angle = -10;
+                IMG.aim_angle = (member_K - k ) * IMG._config->work_out_angular_P;
+                if (direction_work && IMG.aim_angle < IMG._config->work_out_angular_base_deviation) IMG.aim_angle = IMG._config->work_out_angular_base_deviation;
+                else if(!direction_work && IMG.aim_angle > -IMG._config->work_out_angular_base_deviation)IMG.aim_angle = -IMG._config->work_out_angular_base_deviation;
 
                 IMG.aim_speed = -IMG._config->speed_work;
 
@@ -450,7 +450,7 @@ void run_work()
                 IMG.aim_speed = 0;
                 if (abs(IMG.encoder.speed * 1000) < 300) {
                     work_route = IMG.encoder.route;
-                    out_flage = 3;
+                    out_flage = 4;
                     MAT_LOG("out_flage3");
                 }
 
