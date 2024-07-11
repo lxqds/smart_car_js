@@ -71,28 +71,26 @@ struct ControlConfig
     uint8_t gas_rou_over;      // 加油站完成积分
 
     uint8_t work_error;        // 施工区错误
-    uint8_t work_rou_in;       // 施工区进入积分
-    float work_read_cone_thresholdy;// 施工区进入时，锥桶阈值
 
     float work_read_cone_thresholdy_in; //施工区二段进入阈值
 
     float work_read_cone_thresholdy_avg;  //施工区 进入锥桶平均阈值
-
-    float work_recback_line_k;//施工区 直线后退阈值
-
-    float work_recback_angle_route_k;//施工区 打角后退阈值
-
-    float work_recback_max_route;//施工区最大退出距离
 
     uint16_t work_run_speed; //施工区 进入速度
 
     float work_run_angle_p;
     float work_angle_in_1;           //施工区一段进入角度
 
-
+    /*delete
+    * work_rou_in
+    * work_read_cone_thresholdy
+    * work_recback_line_k
+    * work_recback_max_route
+    */
     float work_recback_angle;          //施工区倒车角度
 
-    float work_read_cone_thresholdy_out;
+    float work_read_cone_thresholdy_out;   //工作区，倒退阈值
+
     float bomb_first_cone_ready;     //第一个锥桶 准备拐弯阈值
     float bomb_first_cone_run_wide;//第一个锥桶道路宽度系数： 靠近边线距离
     float bomb_second_cone_ready; //第二个锥桶准备拐弯阈值
@@ -264,17 +262,12 @@ struct ControlConfig
 
         AUTOCFG(work_stop_time);
         AUTOCFG(work_error);
-        AUTOCFG(work_read_cone_thresholdy);
         AUTOCFG(work_run_angle_p);
-        AUTOCFG(work_rou_in);
         AUTOCFG(work_angle_in_1);
         AUTOCFG(work_recback_angle);
         AUTOCFG(work_recback_speed);
         AUTOCFG(work_read_cone_thresholdy_in);
         AUTOCFG(work_read_cone_thresholdy_avg);
-        AUTOCFG(work_recback_line_k);
-        AUTOCFG(work_recback_angle_route_k);
-        AUTOCFG(work_recback_max_route);
         AUTOCFG(work_run_speed);
         AUTOCFG(work_read_cone_thresholdy_out);
 
