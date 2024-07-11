@@ -27,10 +27,9 @@ void check_ramp() {
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&     //当前没在入库中
         !control_flag.contains(ramp_element)      //当前没在桥中
-        )
-    {
+        ) {
         for (auto r : IMG.detection_result) {
-            if (r.label == IMG.label_bridge && r.score > 0.6 && r.y > IMAGE_HEIGHT * 0.3) {
+            if (r.label == IMG.label_bridge && r.score > 0.8 && r.y > IMAGE_HEIGHT * 0.3) {
                 IMG.element_identify = 1;
                 control_flag.push(ramp_element);
                 ramp_route = IMG.encoder.route;
@@ -47,15 +46,13 @@ void check_ramp() {
 void run_ramp() {
     if (control_flag.top() == ramp_element) {//当前为炸弹元素
 
-        if (flag_ramp == RAMP_UP)
-        {
+        if (flag_ramp == RAMP_UP) {
             IMG.get_edge();
             IMG.flag_track = TRACK_MIDDLE;
             IMG.aim_speed = IMG._config->speed_ramp;
             IMG.aim_distance_f = 0.5;
             IMG.aim_distance_n = 0.2;
-            if (IMG.encoder.route - ramp_route > IMG._config->ramp_rou)
-            {
+            if (IMG.encoder.route - ramp_route > IMG._config->ramp_rou) {
                 control_flag.pop();
                 flag_ramp = RAMP_NONE;
                 MAT_LOG("RAMP_NONE");
