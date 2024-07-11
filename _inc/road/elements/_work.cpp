@@ -131,12 +131,12 @@ void run_work()
             int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + 6;
 
             int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + 3 - work_near_cone.x;
-            
+
             IMG.aim_speed = err_H;
 
-            float speedP = err_H / 30.0;
-            if (speedP < 0)speedP -= 0.1;
-            else speedP += 0.1;
+            float speedP = err_H / 50.0;
+            if (speedP < 0)speedP -= 0.05;
+            else speedP += 0.05;
             if (speedP > 2)speedP = 2;
             if (speedP < -2)speedP = -2;
 
@@ -174,6 +174,7 @@ void run_work()
             }
 
             IMG.calculate_angle();//计算角度
+            if (IMG.encoder.speed * 1000 < 0)IMG.aim_angle = -IMG.aim_angle;
 
                             // 超过指定距离未进入绕行区, 元素行驶失败
             if ((IMG.encoder.route - work_route > IMG._config->work_error)) {
@@ -234,14 +235,13 @@ void run_work()
 
             // 最高点锥桶
             if (all_zt.size() >= 1) {
-                miny.y= IMAGE_HEIGHT;
+                miny.y = IMAGE_HEIGHT;
                // 找最高点且在屏幕一定范围下
-                for (size_t i = 0; i < all_zt.size(); i++)
-                {
+                for (size_t i = 0; i < all_zt.size(); i++) {
                     if (all_zt[i].y < 0.3 * IMAGE_HEIGHT)continue;
                     if (all_zt[i].y < miny.y)miny = all_zt[i];
                 }
-            } 
+            }
 
             for (size_t i = 0; i < all_zt.size(); i++) {
                 cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
@@ -353,13 +353,13 @@ void run_work()
                 IMG.aim_speed = -IMG.aim_speed;//倒车
                 IMG.aim_angle = -clone_k * 10;
                 //IMG._config->work_recback_angle
-                if (last_data != 0 && abs(clone_k * 100 - last_data * 100) > 2) { 
-                    out_flage = 1; 
+                if (last_data != 0 && abs(clone_k * 100 - last_data * 100) > 2) {
+                    out_flage = 1;
                     MAT_LOG("out_flage1");
                 }
                 last_data = clone_k;
                 work_route = IMG.encoder.route;
-                
+
             }
 
             //开始 直线退出
@@ -434,30 +434,30 @@ void run_work()
             if (out_flage == 2) {
 
                 IMG.aim_speed = 0;
-                if (abs(IMG.encoder.speed * 1000) < 300) { 
+                if (abs(IMG.encoder.speed * 1000) < 300) {
                     work_route = IMG.encoder.route;
                     out_flage = 3;
                     MAT_LOG("out_flage3");
                 }
-                
+
             }
 
             if (out_flage == 3) {
-                IMG.aim_speed =IMG._config->speed_work;
-                IMG.aim_angle =IMG._config-> work_recback_angle;
+                IMG.aim_speed = IMG._config->speed_work;
+                IMG.aim_angle = IMG._config->work_recback_angle;
 
                 if (!direction_work)IMG.aim_angle = -IMG.aim_angle;
 
                 if (
-                    (IMG.ipts0_num > 100 && IMG.ipts1_num > 100)||
-                    ((work_near_cone.x != 0 && work_near_cone.y != 0) && 
-                    (work_near_cone1.x != 0 && work_near_cone1.y != 0)) || 
+                    (IMG.ipts0_num > 100 && IMG.ipts1_num > 100) ||
+                    ((work_near_cone.x != 0 && work_near_cone.y != 0) &&
+                        (work_near_cone1.x != 0 && work_near_cone1.y != 0)) ||
                     (IMG.encoder.route - work_route > 80)) {
                     out_flage = 4;
                     work_route = IMG.encoder.route;
                     MAT_LOG("out_flage4");
                 }
-                
+
             }
             //退出速度赋值
             if (out_flage == 4) {
