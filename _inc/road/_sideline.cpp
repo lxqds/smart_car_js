@@ -630,6 +630,22 @@ float Calculate_Left_ConeK(std::vector<cv::Rect> arr) {
     for (size_t i = 1; i < arr.size(); i++)
     {
         if (arr[i].area() < 300)continue;
+        if (getCenterPoint(arr[i]).y < 0.25 * IMAGE_HEIGHT)continue;
+        if (arr[i].x < TopR.x)BomL = getCenterPoint(arr[i]);
+    }
+    return (float)(TopR.y - BomL.y) / (float)(TopR.x - BomL.x);
+}
+
+//计算最高锥桶为中心 到 最右侧锥桶 的直线斜率
+float Calculate_Right_ConeK(std::vector<cv::Rect> arr) {
+    if (arr.size() < 2)return 0;
+    POINT TopR = getCenterPoint(arr[0]);
+    POINT BomL;
+
+    for (size_t i = 1; i < arr.size(); i++)
+    {
+        if (arr[i].area() < 300)continue;
+        if (getCenterPoint(arr[i]).y < 0.25 * IMAGE_HEIGHT)continue;
         if (arr[i].x < TopR.x)BomL = getCenterPoint(arr[i]);
     }
     return (float)(TopR.y - BomL.y) / (float)(TopR.x - BomL.x);

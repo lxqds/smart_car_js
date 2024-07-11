@@ -29,6 +29,7 @@ int FOUND_last_y;
 float last_data;
 uint8_t out_flage;
 uint8_t in_flag;
+float member_K = 0;
 void check_work()
 {
 
@@ -305,7 +306,6 @@ void run_work()
             }
             MAT_LOG("WORK_STOPPING");
         }
-
         if (flag_work == WORK_PARKING)//泊车
         {
             IMG.aim_speed = 0;
@@ -316,6 +316,7 @@ void run_work()
                 workC.init();
                 out_flage = 1;
                 last_data = 0;
+                member_K = 0;
             }
             else {
                 MAT_LOG("WORK_PARKING");
@@ -345,8 +346,12 @@ void run_work()
             cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 255), 1);
             drawH(mcentPoint.y, 0, 0, 255, IMG.mat_result);
 
-            IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed); //逐渐减速         
+            IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed); //逐渐减速     
 
+            if (member_K == 0) {
+                if(direction_work)member_K = Calculate_Right_ConeK(all_zt);  //记录后退第一帧的k值
+                else member_K = Calculate_Left_ConeK(all_zt);
+            }
             if (out_flage == 0)//稍稍反方向打角
             {
                 float clone_k = Calculate_Left_ConeK(all_zt);
@@ -423,8 +428,14 @@ void run_work()
 
                 }
                 */
-                IMG.aim_angle = 0;
+
+                float k = 0;
+                if (direction_work) k = Calculate_Right_ConeK(all_zt);
+                else k = Calculate_Left_ConeK(all_zt);
+
+                IMG.aim_angle = (member_K - k ) * 100;
                 IMG.aim_speed = -IMG._config->speed_work;
+
                 if (IMG.max_white_line_length > 200) {
                     out_flage = 2;
                     MAT_LOG("out_flage2");
@@ -432,7 +443,7 @@ void run_work()
             }
             //
             if (out_flage == 2) {
-
+                float err_k = Calculate_Left_ConeK(all_zt);
                 IMG.aim_speed = 0;
                 if (abs(IMG.encoder.speed * 1000) < 300) { 
                     work_route = IMG.encoder.route;
