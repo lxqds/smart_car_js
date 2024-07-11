@@ -646,9 +646,9 @@ float Calculate_Right_ConeK(std::vector<cv::Rect> arr) {
     {
         if (arr[i].area() < 300)continue;
         if (getCenterPoint(arr[i]).y < 0.25 * IMAGE_HEIGHT)continue;
-        if (arr[i].x < TopR.x)BomL = getCenterPoint(arr[i]);
+        if (arr[i].x > TopR.x)BomL = getCenterPoint(arr[i]);
     }
-    return (float)(TopR.y - BomL.y) / (float)(TopR.x - BomL.x);
+    return (float)(BomL.y - TopR.y) / (float)(BomL.x - TopR.x);
 }
 //// 搜索距离赛道左边缘最近的黄色色块 (黄色锥桶) 赛道内
 //POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {

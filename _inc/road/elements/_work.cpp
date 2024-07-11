@@ -436,6 +436,7 @@ void run_work()
                 IMG.aim_angle = (member_K - k ) * 100;
                 if (direction_work && IMG.aim_angle < 10) IMG.aim_angle = 10;
                 else if(!direction_work && IMG.aim_angle > -10)IMG.aim_angle = -10;
+
                 IMG.aim_speed = -IMG._config->speed_work;
 
                 if (IMG.max_white_line_length > 200) {
