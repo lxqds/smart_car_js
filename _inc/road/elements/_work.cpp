@@ -434,6 +434,8 @@ void run_work()
                 else k = Calculate_Left_ConeK(all_zt);
 
                 IMG.aim_angle = (member_K - k ) * 100;
+                if (direction_work && aim_angle < 10) aim_angle = 10;
+                else if(!direction_work && aim_angle > -10)aim_angle = -10;
                 IMG.aim_speed = -IMG._config->speed_work;
 
                 if (IMG.max_white_line_length > 200) {
