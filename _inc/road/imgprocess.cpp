@@ -749,6 +749,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         // }
     }
     _mat_result = mat_result;
+    if (IMG._config->rec_video_format == 2)_mat_result = mat_lab;
+    
 }
 
 /* ******************************************************************* */

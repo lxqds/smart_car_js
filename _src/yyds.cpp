@@ -185,16 +185,13 @@ int main(int argc, char const* argv[])
                 cv::FONT_HERSHEY_SIMPLEX, 0.4, cv::Scalar(0, 0, 255));
             
 
-            if (imgprocess._config->rec_video_format ==1)
-            {
-                display->put(frame_imgpro.clone());
-            }
-            else if(imgprocess._config->rec_video_format ==0)
+            if (imgprocess._config->rec_video_format ==0)
             {
                 display->put(frame_origin.clone());
             }
-            else if (imgprocess._config->rec_video_format == 2) {
-                display->put(IMG.mat_lab.clone());
+            else
+            {
+                display->put(frame_imgpro.clone());
             }
             // display->put(IMG.mat_lab.clone());
         }
