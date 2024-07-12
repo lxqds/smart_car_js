@@ -56,9 +56,9 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
     //求原始图像的RGB分量的均值
     double R, G, B;
-    B = mean(imageRGB[0])[0];
-    G = mean(imageRGB[1])[0];
-    R = mean(imageRGB[2])[0];
+    B = cv::mean(imageRGB[0])[0];
+    G = cv::mean(imageRGB[1])[0];
+    R = cv::mean(imageRGB[2])[0];
 
     //需要调整的RGB分量的增益
     double KR, KG, KB;
