@@ -128,7 +128,7 @@ struct ControlConfig
     uint16_t garage_out_route_;  // 出库距离判断
     uint16_t garage_pass_route_; // 通过过斑马线停车距离判断
     uint16_t speed_work;         // 出入施工区速度
-
+    uint8_t  assist_judgment;//协助判断参数
     uint16_t speed_bomb1;        //危险区速度1
     uint16_t speed_bomb2;        //危险区速度2
 
@@ -170,7 +170,7 @@ struct ControlConfig
 
         AUTOCFG(threshold);
         AUTOCFG(threshold_detection);
-
+        AUTOCFG(assist_judgment);
         AUTOCFG(direction_garage);
         AUTOCFG(direction_yroad);
         AUTOCFG(direction_work);

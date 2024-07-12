@@ -35,39 +35,74 @@ float member_K = 0;
 void check_work()
 {
 
-    if (!IMG.element_over &&
-        !control_flag.contains(circle_element) &&   //当前没在环岛中
-        !control_flag.contains(work_element) &&     //当前没在工作区中
-        !control_flag.contains(garage_element) &&   //当前没在入库中
-        !control_flag.contains(ramp_element) &&      //当前没在桥中
-        !control_flag.contains(bomb_element)) {
-        for (auto r : IMG.detection_result) {
-            if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
-                IMG.element_identify = 1;
-                control_flag.push(work_element);
-                work_route = IMG.encoder.route;
-                direction_work = false;
-                IMG.flag_track = TRACK_RIGHT;
-                flag_work = WORK_FOUND_1;
-                MAT_LOG("WORK_FOUND_R");
-                FOUND_last_y = 0;
-                in_flag = 0;
-            }
-            else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
+        if (!IMG.element_over &&
+            !control_flag.contains(circle_element) &&   //当前没在环岛中
+            !control_flag.contains(work_element) &&     //当前没在工作区中
+            !control_flag.contains(garage_element) &&   //当前没在入库中
+            !control_flag.contains(ramp_element) &&      //当前没在桥中
+            !control_flag.contains(bomb_element)) {
+            if (IMG._config->assist_judgment == 0) {
 
-                IMG.element_identify = 1;
-                control_flag.push(work_element);
-                work_route = IMG.encoder.route;
-                direction_work = true;
-                IMG.flag_track = TRACK_LEFT;
-                flag_work = WORK_FOUND_1;
-                MAT_LOG("WORK_FOUND_L");
-                FOUND_last_y = 0;
-                in_flag = 0;
-            }
+                for (auto r : IMG.detection_result) {
+                    if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
+                        IMG.element_identify = 1;
+                        control_flag.push(work_element);
+                        work_route = IMG.encoder.route;
+                        direction_work = false;
+                        IMG.flag_track = TRACK_RIGHT;
+                        flag_work = WORK_FOUND_1;
+                        MAT_LOG("WORK_FOUND_R");
+                        FOUND_last_y = 0;
+                        in_flag = 0;
+                    }
+                    else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
 
+                        IMG.element_identify = 1;
+                        control_flag.push(work_element);
+                        work_route = IMG.encoder.route;
+                        direction_work = true;
+                        IMG.flag_track = TRACK_LEFT;
+                        flag_work = WORK_FOUND_1;
+                        MAT_LOG("WORK_FOUND_L");
+                        FOUND_last_y = 0;
+                        in_flag = 0;
+                    }
+
+                }
+            }
+            else if (IMG._config->assist_judgment == 1) //左工作区
+            {
+                work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
+                if (work_near_cone.y > 0.4 * IMAGE_HEIGHT) {
+                    IMG.element_identify = 1;
+                    control_flag.push(work_element);
+                    work_route = IMG.encoder.route;
+                    direction_work = true;
+                    IMG.flag_track = TRACK_LEFT;
+                    flag_work = WORK_FOUND_1;
+                    MAT_LOG("WORK_FOUND_L");
+                    FOUND_last_y = 0;
+                    in_flag = 0;
+                }
+            }
+            else if (IMG._config->assist_judgment == 2) //右工作区
+            {
+                work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab); //右工作区进入准备
+                if (work_near_cone.y > 0.4 * IMAGE_HEIGHT) {
+                    IMG.element_identify = 1;
+                    control_flag.push(work_element);
+                    work_route = IMG.encoder.route;
+                    direction_work = false;
+                    IMG.flag_track = TRACK_RIGHT;
+                    flag_work = WORK_FOUND_1;
+                    MAT_LOG("WORK_FOUND_R");
+                    FOUND_last_y = 0;
+                    in_flag = 0;
+                }
+            }
         }
-    }
+    
+
 
 }
 
