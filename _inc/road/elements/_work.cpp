@@ -120,11 +120,11 @@ void run_work()
             if (fond_flag == 0)
             {
                 work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
-                int thresholdh = IMAGE_HEIGHT * 0.4;
+                int thresholdh = IMAGE_HEIGHT * 0.3;
 
-                int coneLowy = IMAGE_HEIGHT * 0.4 + 12;
+                int coneLowy = IMAGE_HEIGHT * 0.3 + 12;
 
-                int err_H = IMAGE_HEIGHT * 0.4 + 6 - work_Red.x;
+                int err_H = IMAGE_HEIGHT * 0.3 + 6 - work_Red.x;
 
                 IMG.aim_speed = err_H;
 
@@ -140,7 +140,7 @@ void run_work()
                 drawH(work_Red.x, 255, 0, 0, IMG.mat_result);
                 drawH(coneLowy, 0, 0, 255, IMG.mat_result);
 
-                if (stop_clock.toc() > 1000) {
+                if (stop_clock.toc() > 5000 && (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)) {
                     fond_flag = 1;
                     IMG.aim_speed = IMG._config->speed_base;
                     MAT_LOG("WORK_RED_ERR");
