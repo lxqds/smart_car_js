@@ -158,7 +158,7 @@ void run_work()
 
             for (auto r : IMG.detection_result) {
                 MAT_LOG("WORK_FUZ");
-                if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.70 && r.y > IMAGE_HEIGHT * 0.05) {
+                if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.78 && r.y > IMAGE_HEIGHT * 0.05) {
                     IMG.element_identify = 1;
                     work_route = IMG.encoder.route;
                     direction_work = false;
