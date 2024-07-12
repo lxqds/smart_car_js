@@ -7,8 +7,8 @@ int CaptureInterface::init(float exposure) {
     _capture = std::make_shared<cv::VideoCapture>();
     _capture->open(0, cv::CAP_V4L);  // ("/dev/video0", cv::CAP_V4L);
     CHECK(_capture->isOpened()) << "Create Capture Failed." << LOG_END;
-    _capture->set(cv::CAP_PROP_AUTO_EXPOSURE, 1.0); // where 0.25 means "manual exposure, manual iris"
-    _capture->set(cv::CAP_PROP_EXPOSURE, exposure);
+    _capture->set(cv::CAP_PROP_AUTO_EXPOSURE, 3.0); // where 0.25 means "manual exposure, manual iris"
+    _capture->set(cv::CAP_PROP_EXPOSURE, 2000);
     _capture->set(cv::CAP_PROP_FOURCC, CV_FOURCC('M', 'J', 'P', 'G'));
     _capture->set(cv::CAP_PROP_FPS, 60);
     _capture->set(cv::CAP_PROP_FRAME_WIDTH, 640);
