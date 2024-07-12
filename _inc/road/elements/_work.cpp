@@ -321,9 +321,10 @@ void run_work()
                 MAT_LOG("WORK_PARKINISH"); //泊车中
                 flag_work = WORK_OUT;
                 workC.init();
-                out_flage = 1;
+                out_flage = 0;
                 last_data = 0;
                 member_K = 0;
+                work_yaw = IMG.encoder.yaw;
             }
             else {
                 MAT_LOG("WORK_PARKING");
@@ -361,15 +362,19 @@ void run_work()
             }
             if (out_flage == 0)//稍稍反方向打角
             {
-                float clone_k = Calculate_Left_ConeK(all_zt);
+                float out_yaw = -10;
                 IMG.aim_speed = -IMG.aim_speed;//倒车
-                IMG.aim_angle = -clone_k * 10;
-                //IMG._config->work_recback_angle
-                if (last_data != 0 && abs(clone_k * 100 - last_data * 100) > 2) {
+                IMG.aim_angle = 45;
+                if (!direction_work) {
+                    out_yaw = -out_yaw;
+                    IMG.aim_angle = -IMG.aim_angle;
+                }
+
+                if (abs( IMG.encoder.yaw - work_yaw )> out_yaw)
+                {
                     out_flage = 1;
                     MAT_LOG("out_flage1");
                 }
-                last_data = clone_k;
                 work_route = IMG.encoder.route;
 
             }
