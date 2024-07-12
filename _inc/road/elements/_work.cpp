@@ -50,7 +50,7 @@ void check_work()
                  if (IMG._config->assist_judgment) {
                      work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
                      work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);//右工作区进入准备
-                     if (work_near_cone1.x != 0 && work_near_cone1 != 0 && work_near_cone != 0 && work_near_cone != 0 &&)
+                     if (work_near_cone1.x != 0 && work_near_cone.x != 0)
                      {
                          work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
                          if (work_Red.x != 0 && work_Red.y != 0 && work_Red.x > 0.4 * IMAGE_HEIGHT) {
@@ -139,7 +139,7 @@ void run_work()
                 drawH(work_Red.x, 255, 0, 0, IMG.mat_result);
                 drawH(coneLowy, 0, 0, 255, IMG.mat_result);
 
-                if (stop_clock.toc > 1000) {
+                if (stop_clock.toc() > 1000) {
                     fond_flag = 1;
                     IMG.aim_speed = IMG._config->speed_base;
                     MAT_LOG("WORK_RED_ERR");
