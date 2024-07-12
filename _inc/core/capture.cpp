@@ -10,7 +10,7 @@ int CaptureInterface::init(float exposure) {
     // _capture->set(cv::CAP_PROP_AUTO_EXPOSURE, 1.0);
     _capture->set(cv::CAP_PROP_EXPOSURE, exposure);
     _capture->set(cv::CAP_PROP_FOURCC, CV_FOURCC('M', 'J', 'P', 'G'));
-    _capture->set(cv::CAP_PROP_FPS, 120);
+    _capture->set(cv::CAP_PROP_FPS, 60);
     _capture->set(cv::CAP_PROP_FRAME_WIDTH, 640);
     _capture->set(cv::CAP_PROP_FRAME_HEIGHT, 480);
 
