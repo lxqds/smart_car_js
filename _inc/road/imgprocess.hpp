@@ -71,6 +71,7 @@ public:
     cv::Mat mat_result;
     cv::Mat mat_bin;  // 原图转二值化图
     cv::Mat mat_lab;  // 原图转 LAB 图
+    cv::Mat mat_lab2;  // 原图转 LAB 图
     uint8_t assist_judgment;
     flag_track_e flag_track = TRACK_MIDDLE;  // 巡线选择
 

@@ -56,10 +56,14 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     // 获取 LAB 图片 B 通道 (黄) -> 提取锥桶
     cv::cvtColor(mat_result, mat_lab, cv::COLOR_BGR2Lab);
     std::vector<cv::Mat> channels_lab;
+    std::vector<cv::Mat> _channels_lab;
     cv::split(mat_lab, channels_lab);
-    cv::threshold(channels_lab[1], channels_lab[1], _config->lab_thresholdRG, 255, cv::THRESH_BINARY_INV);
-    cv::threshold(channels_lab[2], channels_lab[2], _config->lab_threshold, 255, cv::THRESH_BINARY);
-    cv::bitwise_and(channels_lab[1], channels_lab[2], mat_lab);
+    cv::threshold(channels_lab[1], _channels_lab[1], _config->lab_thresholdRG, 255, cv::THRESH_BINARY_INV);
+    cv::threshold(channels_lab[2], _channels_lab[2], _config->lab_threshold, 255, cv::THRESH_BINARY);
+    cv::bitwise_and(_channels_lab[1], _channels_lab[2], mat_lab);
+
+    cv::threshold(channels_lab[1], mat_lab2, _config->lab_thresholdRED, 255, cv::THRESH_BINARY);
+
     // // 绘制处理结果图, 灰度格式转BGR格式
 
     if (_config->check_binary_ || _config->check_lab_) {
