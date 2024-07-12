@@ -118,39 +118,7 @@ int main(int argc, char const* argv[])
         // 目标检测
        detection->run(frame_origin);
 
-        // 加油站 & 施工区 等待检测结果
-        if (flag_gas > GAS_DETECTION || flag_work > WORK_DETECTION) {
-            if (detection->_is_predicted) {
-                // 获取检测结果
-                std::shared_ptr<DetectionResult> det_res = detection->getResult();
-                imgprocess._det_result = det_res->result;
-                // 图像处理
-                int num = 0;
-                for (unsigned i = 0; i < imgprocess._det_result.size(); i++) {
-                    if (imgprocess._det_result[i].type == 1) {
-                        num++;
-                    }
-                }
-
-                if (num > gas_which) {
-                    gas_which = num;
-                    if (gas_which == 1) {
-                        LOG_I << "Granary exit has been set to #1." << LOG_END;
-                    }
-                    else {
-
-                        LOG_I << "Granary exit has been set to #2." << LOG_END;
-                    }
-                }
-
-                imgprocess.process(det_res->org_frame, frame_imgpro, payload);
-                ret = 1;
-            }
-        }
-        // 正常巡线
-        else {
-
-
+        {
             // 图像处理 正常帧率
             imgprocess.process(frame_origin, frame_imgpro, payload);
 
