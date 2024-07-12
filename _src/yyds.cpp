@@ -40,8 +40,6 @@ int main(int argc, char const* argv[])
         .add_option("-l", "--launch", "launch!!!")
         .add_option("-w", "--windows", "show windows")
         .add_option("-v", "--video", "save video")
-        .add_option("-1", "--workR", "work R")
-        .add_option("-2", "--workL", "work L")
         .parse(argc, argv);
     _windows = args.has_option("--windows");
     _video = args.has_option("--video");
