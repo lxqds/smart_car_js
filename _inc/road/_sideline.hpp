@@ -112,6 +112,7 @@ POINT search_left_near2(std::vector<POINT> pointsEdge, cv::Mat matt);
 POINT search_right_near(std::vector<POINT> pointsEdge, cv::Mat matt);
 POINT search_right_near_up(std::vector<POINT> pointsEdge, cv::Mat matt);
 POINT search_left_near_up(std::vector<POINT> pointsEdge, cv::Mat matt);
+POINT search_right_near_Red(std::vector<POINT> pointsEdge, cv::Mat matt);
 //找左边线离锥桶最近的边线点的位次,x为行，第几行
 uint16_t search_break_left(std::vector<POINT> pointsEdge, cv::Mat matt);
 

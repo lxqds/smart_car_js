@@ -821,6 +821,16 @@ POINT search_right_near(std::vector<POINT> pointsEdge, cv::Mat matt) {
     return POINT(0, 0);
 }
 
+POINT search_right_near_Red(std::vector<POINT> pointsEdge, cv::Mat matt) {
+    for (size_t i = 0; i < pointsEdge.size(); i++)
+        for (int y = pointsEdge[i].y + 25; y > pointsEdge[i].y; y--)
+            if ((y >= 0) && (y <= IMAGE_WIDTH - 1))
+                if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
+                    if (pt_point(matt, y, pointsEdge[i].x, 4))
+                        return POINT(pointsEdge[i].x, y);
+    return POINT(0, 0);
+}
+
 //x , y相反  上至下
 // 搜索距离赛道右边缘最近的黄色色块 (黄色锥桶)
 POINT search_right_near_up(std::vector<POINT> pointsEdge, cv::Mat matt) {
