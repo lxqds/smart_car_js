@@ -144,6 +144,11 @@ void run_work()
                     fond_flag = 1;
                     IMG.aim_speed = IMG._config->speed_base;
                     MAT_LOG("WORK_RED_ERR");
+                    IMG.element_over = true;
+                    IMG.element_over_route = IMG.encoder.route;
+                    control_flag.pop();//移除
+                    flag_work = WORK_NONE;
+                    MAT_LOG("WORK_ERROR");
                 }
             }
 
@@ -155,7 +160,6 @@ void run_work()
                 MAT_LOG("WORK_FUZ");
                 if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
                     IMG.element_identify = 1;
-                    control_flag.push(work_element);
                     work_route = IMG.encoder.route;
                     direction_work = false;
                     IMG.flag_track = TRACK_RIGHT;
@@ -172,7 +176,6 @@ void run_work()
                 else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
 
                     IMG.element_identify = 1;
-                    control_flag.push(work_element);
                     work_route = IMG.encoder.route;
                     direction_work = true;
                     IMG.flag_track = TRACK_LEFT;
