@@ -48,31 +48,34 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* ***************************** 初始化 ***************************** */
     /* ***************************************************************** */
     mat_result = _mat_result;
+    {
+        std::vector<cv::Mat> imageRGB;
 
-    // std::vector<cv::Mat> imageRGB;
+        //RGB三通道分离
+        cv::split(mat_result, imageRGB);
+        LOG_I << "1" << LOG_END;
+        //求原始图像的RGB分量的均值
+        double R, G, B;
+        B = cv::mean(imageRGB[0])[0];
+        G = cv::mean(imageRGB[1])[0];
+        R = cv::mean(imageRGB[2])[0];
+        LOG_I << "2" << LOG_END;
+        //需要调整的RGB分量的增益
+        double KR, KG, KB;
+        KB = (R + G + B) / (3 * B);
+        KG = (R + G + B) / (3 * G);
+        KR = (R + G + B) / (3 * R);
 
-    // //RGB三通道分离
-    // cv::split(mat_result, imageRGB);
+        //调整RGB三个通道各自的值
+        imageRGB[0] = imageRGB[0] * KB;
+        imageRGB[1] = imageRGB[1] * KG;
+        imageRGB[2] = imageRGB[2] * KR;
 
-    // //求原始图像的RGB分量的均值
-    // double R, G, B;
-    // B = cv::mean(imageRGB[0])[0];
-    // G = cv::mean(imageRGB[1])[0];
-    // R = cv::mean(imageRGB[2])[0];
+        //RGB三通道图像合并
+        cv::merge(imageRGB, mat_result);
+        LOG_I << "3" << LOG_END;
+    }
 
-    // //需要调整的RGB分量的增益
-    // double KR, KG, KB;
-    // KB = (R + G + B) / (3 * B);
-    // KG = (R + G + B) / (3 * G);
-    // KR = (R + G + B) / (3 * R);
-
-    // //调整RGB三个通道各自的值
-    // imageRGB[0] = imageRGB[0] * KB;
-    // imageRGB[1] = imageRGB[1] * KG;
-    // imageRGB[2] = imageRGB[2] * KR;
-
-    // //RGB三通道图像合并
-    // cv::merge(imageRGB, mat_result);
 
 
 
