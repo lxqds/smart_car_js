@@ -69,9 +69,13 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
     if (_config->check_binary_ || _config->check_lab_) {
         std::vector<cv::Mat> channels;
-        if (_config->check_binary_) {
+        if (_config->check_binary_ == 1) {
             for (int i = 0; i < 3; i++)
                 channels.push_back(mat_bin);
+        }
+        else if (_config->check_binary_ == 2) {
+            for (int i = 0; i < 3; i++)
+                channels.push_back(mat_lab2);
         }
         else {
             for (int i = 0; i < 3; i++)
