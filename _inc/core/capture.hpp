@@ -25,7 +25,7 @@ public:
     bool _launch = false;
 
 public:
-    int init(int exposure);
+    int init(float exposure);
     int start();
     int stop();
 

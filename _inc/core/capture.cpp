@@ -3,7 +3,7 @@
 #undef LOG_TAG
 #define LOG_TAG "Capture"
 
-int CaptureInterface::init(int exposure) {
+int CaptureInterface::init(float exposure) {
     _capture = std::make_shared<cv::VideoCapture>();
     _capture->open(0, cv::CAP_V4L);  // ("/dev/video0", cv::CAP_V4L);
     CHECK(_capture->isOpened()) << "Create Capture Failed." << LOG_END;
