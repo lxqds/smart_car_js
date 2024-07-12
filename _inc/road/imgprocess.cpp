@@ -49,10 +49,10 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* ***************************************************************** */
     mat_result = _mat_result;
 
-    std::vector<Mat> imageRGB;
+    std::vector<cv::Mat> imageRGB;
 
     //RGB三通道分离
-    split(mat_result, imageRGB);
+    cv::split(mat_result, imageRGB);
 
     //求原始图像的RGB分量的均值
     double R, G, B;
@@ -72,7 +72,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     imageRGB[2] = imageRGB[2] * KR;
 
     //RGB三通道图像合并
-    merge(imageRGB, mat_result);
+    cv::merge(imageRGB, mat_result);
 
 
 
