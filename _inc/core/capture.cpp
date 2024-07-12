@@ -3,7 +3,7 @@
 #undef LOG_TAG
 #define LOG_TAG "Capture"
 
-int CaptureInterface::init() {
+int CaptureInterface::init(int exposure) {
     _capture = std::make_shared<cv::VideoCapture>();
     _capture->open(0, cv::CAP_V4L);  // ("/dev/video0", cv::CAP_V4L);
     CHECK(_capture->isOpened()) << "Create Capture Failed." << LOG_END;
@@ -12,7 +12,8 @@ int CaptureInterface::init() {
     _capture->set(cv::CAP_PROP_FPS, 60);
     _capture->set(cv::CAP_PROP_FRAME_WIDTH, 640);
     _capture->set(cv::CAP_PROP_FRAME_HEIGHT, 480);
-
+    _capture->set(cv::CAP_PROP_AUTO_EXPOSURE, 0.25); // where 0.25 means "manual exposure, manual iris"
+    _capture->set(cv::CAP_PROP_EXPOSURE, exposure);
     LOG_I << ">>> width  = " << _capture->get(cv::CAP_PROP_FRAME_WIDTH) << LOG_END;
     LOG_I << ">>> height = " << _capture->get(cv::CAP_PROP_FRAME_HEIGHT) << LOG_END;
     LOG_I << ">>> fps    = " << _capture->get(cv::CAP_PROP_FPS) << LOG_END;
@@ -42,7 +43,7 @@ int CaptureInterface::stop() {
     return 0;
 }
 
-void CaptureInterface::get(cv::Mat &frame) { frame = _queue.Take().clone(); }
+void CaptureInterface::get(cv::Mat& frame) { frame = _queue.Take().clone(); }
 
 void CaptureInterface::run() {
     cv::Mat _frame;
@@ -71,7 +72,8 @@ void CaptureInterface::run() {
             if (_queue.Size() > 20)
                 _queue.Take();
             _queue.Put(_frame);
-        } else {
+        }
+        else {
             CHECK(false) << "UsbCamera read failed." << LOG_END;
         }
 
@@ -101,7 +103,7 @@ void CaptureInterface::run() {
 }
 
 bool CaptureInterface::_kbhit_() {
-    struct timeval tv = {0L, 0L};
+    struct timeval tv = { 0L, 0L };
     fd_set fds;
     FD_ZERO(&fds);
     FD_SET(0, &fds);

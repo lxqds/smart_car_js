@@ -19,6 +19,7 @@ struct ControlConfig
     std::string config_dir;
     std::string speed_level;
 
+    int exposure;           //曝光级别
     uint16_t threshold;           // 二值化阈值
     uint16_t threshold_detection; // 目标检测阈值
     uint16_t lab_threshold;     //锥桶阈值
@@ -170,6 +171,7 @@ struct ControlConfig
 #define P_CUR root
 #define AUTOCFG(index) index = P_CUR[#index]
 
+        AUTOCFG(exposure);
         AUTOCFG(threshold);
         AUTOCFG(threshold_detection);
         AUTOCFG(assist_judgment);

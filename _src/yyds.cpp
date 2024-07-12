@@ -55,7 +55,7 @@ int main(int argc, char const* argv[])
 
     /* 摄像头 */
     capture = std::make_shared<CaptureInterface>();
-    ret = capture->init();
+    ret = capture->init(imgprocess._config->exposure);
     CHECK(0 == ret) << "device video can not open !!" << LOG_END;
 
     /* 目标检测 */

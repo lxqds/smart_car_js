@@ -11,27 +11,27 @@
 #include "../utils/logger_helper.hpp"
 
 class CaptureInterface {
-   public:
-    CaptureInterface(){};
-    ~CaptureInterface(){};
+public:
+    CaptureInterface() {};
+    ~CaptureInterface() {};
 
-   private:
+private:
     std::shared_ptr<cv::VideoCapture> _capture;
     std::thread _worker_thread;
     BlockingQueue<cv::Mat> _queue;
 
-   public:
+public:
     bool _loop = false;
     bool _launch = false;
 
-   public:
-    int init();
+public:
+    int init(int exposure);
     int start();
     int stop();
 
-    void get(cv::Mat &frame);
+    void get(cv::Mat& frame);
 
-   private:
+private:
     void run();
     bool _kbhit_();
 };
