@@ -41,27 +41,22 @@ void check_garage()
         !control_flag.contains(garage_element) &&       //当前没在出入库中
         !control_flag.contains(ramp_element) &&         //当前没在桥中
         IMG.encoder.route > IMG._config->garage_out_route_  //出了车库之后
-        )
-    {
+        ) {
         if (IMG._config->check_garage_AI == 0)      //不使用AI识别斑马线
         {
             int16_t black_blocks = 0;
             int16_t cursor = 0;
             int16_t times = 0;
 
-            for (int16_t y = 40; y < 100; y++)
-            {
+            for (int16_t y = 40; y < 100; y++) {
                 black_blocks = 0;
                 cursor = 0; // 指向栈顶的游标
-                for (int16_t x = IMAGE_WIDTH / 2 - 60; x < IMAGE_WIDTH / 2 + 60; x++)
-                {
-                    if (AT_IMAGE(IMG.mat_bin, x, y) < IMG._config->threshold)
-                    {
+                for (int16_t x = IMAGE_WIDTH / 2 - 60; x < IMAGE_WIDTH / 2 + 60; x++) {
+                    if (AT_IMAGE(IMG.mat_bin, x, y) < IMG._config->threshold) {
                         if (cursor < 20)
                             cursor++;
                     }
-                    else
-                    {
+                    else {
                         if (cursor >= 4 && cursor <= 8)
                             black_blocks++;
                         cursor = 0;
@@ -70,8 +65,7 @@ void check_garage()
                 if (black_blocks >= 5 && black_blocks <= 9)
                     times++;
             }
-            if (times >= 3)
-            {
+            if (times >= 3) {
                 if (control_flag.contains(cross_element)) {//如果在十字路口中则删除十字路口
                     control_flag.remove(cross_element);
                     flag_cross = CROSS_NONE;
@@ -112,52 +106,42 @@ void check_garage()
 
     // 非出库, 找到斑马线
     if (flag_garage != GARAGE_OUT_LEFT && flag_garage != GARAGE_OUT_RIGHT &&
-        flag_garage == GARAGE_DETECTION)
-    {
+        flag_garage == GARAGE_DETECTION) {
         IMG.element_identify = 1;
         garage_route = IMG.encoder.route;
 
         // clear granary mark
         gas_which = 0;
 
-        if (IMG._config->direction_garage == 0)
-        { // 左库
-            if (++garage_num >= IMG._config->check_garage_times_)
-            {
+        if (IMG._config->direction_garage == 0) { // 左库
+            if (++garage_num >= IMG._config->check_garage_times_) {
                 flag_garage = GARAGE_IN_LEFT; // 第二次入库
                 MAT_LOG("GARAGE_IN_LEFT");
             }
-            else
-            {
+            else {
                 flag_garage = GARAGE_PASS_LEFT; // 第一次不入库
                 MAT_LOG("GARAGE_PASS_LEFT");
             }
         }
-        else if (IMG._config->direction_garage == 1)
-        { // 右库
-            if (++garage_num >= IMG._config->check_garage_times_)
-            {
+        else if (IMG._config->direction_garage == 1) { // 右库
+            if (++garage_num >= IMG._config->check_garage_times_) {
                 flag_garage = GARAGE_IN_RIGHT; // 第二次入库
                 MAT_LOG("GARAGE_IN_RIGHT");
             }
-            else
-            {
+            else {
                 flag_garage = GARAGE_PASS_RIGHT; // 第一次不入库
                 MAT_LOG("GARAGE_PASS_RIGHT");
             }
         }
-        else if (IMG._config->direction_garage == 2)
-        { // 左库 循环
+        else if (IMG._config->direction_garage == 2) { // 左库 循环
             flag_garage = GARAGE_PASS_LEFT;
             MAT_LOG("GARAGE_PASS_LEFT");
         }
-        else if (IMG._config->direction_garage == 3)
-        { // 右库 循环
+        else if (IMG._config->direction_garage == 3) { // 右库 循环
             flag_garage = GARAGE_PASS_RIGHT;
             MAT_LOG("GARAGE_PASS_RIGHT");
         }
-        else if (IMG._config->direction_garage == 4)
-        { // 停车
+        else if (IMG._config->direction_garage == 4) { // 停车
             flag_garage = GARAGE_IN_MIDDLE; // 过斑马线停车
             MAT_LOG("GARAGE_IN_MIDDLE");
         }
@@ -171,18 +155,17 @@ void run_garage()
     if (control_flag.top() == garage_element) {
 
         /* *** *** *** *** *** */
-        switch (flag_garage)
-        {
+        switch (flag_garage) {
             case GARAGE_OUT_MIDDLE:
                 IMG.aim_speed = IMG._config->speed_garage_out;
-                if (IMG.encoder.route > IMG._config->garage_out_route_)
-                {
+                if (IMG.encoder.route > IMG._config->garage_out_route_) {
                     IMG.element_over = true;
                     IMG.element_over_route = IMG.encoder.route;
                     control_flag.pop();
                     flag_garage = GARAGE_NONE;
                     MAT_LOG("GARAGE_NONE");
                 }
+                cv::line(IMG.mat_result, cv::Point(0, 0.5 * IMAGE_HEIGHT), cv::Point(IMAGE_WIDTH - 1, 0.5 * IMAGE_HEIGHT), cv::Scalar(255, 0, 0), 1);
 
                 IMG.get_edge();//获取边线
                 // 正常巡线
@@ -198,12 +181,10 @@ void run_garage()
                     IMG.rpts = IMG.rptscs;
                     IMG.rpts_num = IMG.rptscs_num;
                 }
-                if (IMG.rpts_num > 0.8 / SAMPLE_DIST)
-                {
+                if (IMG.rpts_num > 0.8 / SAMPLE_DIST) {
                     IMG.calculate_angle();//计算角度
                 }
-                else
-                {
+                else {
                     IMG.aim_angle = IMG.aim_angle_last;
                 }
 
@@ -212,8 +193,7 @@ void run_garage()
             case GARAGE_IN_MIDDLE://过斑马线停车
 
                 IMG.aim_speed = IMG._config->speed_garage_in;
-                if (IMG.encoder.route - garage_route > IMG._config->garage_pass_route_)
-                {
+                if (IMG.encoder.route - garage_route > IMG._config->garage_pass_route_) {
                     flag_garage = GARAGE_STOP;
                     MAT_LOG("GARAGE_STOP");
                 }
@@ -254,12 +234,10 @@ void run_garage()
                     IMG.rpts = IMG.rptscs;
                     IMG.rpts_num = IMG.rptscs_num;
                 }
-                if (IMG.rpts_num > 0.8 / SAMPLE_DIST)
-                {
+                if (IMG.rpts_num > 0.8 / SAMPLE_DIST) {
                     IMG.calculate_angle();//计算角度
                 }
-                else
-                {
+                else {
                     IMG.aim_angle = IMG.aim_angle_last;
                 }
                 if (IMG.encoder.speed < 0.1 && IMG.encoder.speed>-0.1)//停车了
