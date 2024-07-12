@@ -5,7 +5,7 @@
 
 int CaptureInterface::init(float exposure) {
     _capture = std::make_shared<cv::VideoCapture>();
-    _capture->open(0, cv::CAP_V4L);  // ("/dev/video0", cv::CAP_V4L);
+    _capture->open(0);  // ("/dev/video0", cv::CAP_V4L);
     CHECK(_capture->isOpened()) << "Create Capture Failed." << LOG_END;
 
     _capture->set(cv::CAP_PROP_FOURCC, CV_FOURCC('M', 'J', 'P', 'G'));
