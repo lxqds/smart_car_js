@@ -7,8 +7,8 @@ int CaptureInterface::init(float exposure) {
     _capture = std::make_shared<cv::VideoCapture>();
     _capture->open(0, cv::CAP_V4L);  // ("/dev/video0", cv::CAP_V4L);
     CHECK(_capture->isOpened()) << "Create Capture Failed." << LOG_END;
-    // _capture->set(cv::CAP_PROP_AUTO_EXPOSURE, 3.0); // where 0.25 means "manual exposure, manual iris"
-    // _capture->set(cv::CAP_PROP_EXPOSURE, 2000);
+    // _capture->set(cv::CAP_PROP_AUTO_EXPOSURE, 1.0);
+    // _capture->set(cv::CAP_PROP_EXPOSURE, exposure);
     _capture->set(cv::CAP_PROP_FOURCC, CV_FOURCC('M', 'J', 'P', 'G'));
     _capture->set(cv::CAP_PROP_FPS, 60);
     _capture->set(cv::CAP_PROP_FRAME_WIDTH, 640);
@@ -51,6 +51,7 @@ void CaptureInterface::run() {
 
     while (_loop) {
         if (_capture->read(_frame)) {
+            // LOG_I << ">>> exposure    = " << _capture->get(cv::CAP_PROP_EXPOSURE) * 100 << LOG_END;
             // 图片裁剪 (600x400)  (横坐标偏移修正 - 5)
             _frame = _frame(cv::Rect(20 - 5, 35, 600, 400));
 
