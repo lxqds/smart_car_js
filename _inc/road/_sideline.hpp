@@ -167,6 +167,7 @@ POINT getCenterPoint(cv::Rect rect);
 //计算最高锥桶为中心 到 最左侧锥桶 的直线斜率
 float Calculate_Left_ConeK(std::vector<cv::Rect> arr);
 float Calculate_Right_ConeK(std::vector<cv::Rect> arr);
+bool pt_point(cv::Mat mat, int x, int y, int num);
 /* ********************************************************************* */
 // 限制范围
 int clip(int x, int low, int up);

@@ -444,7 +444,8 @@ POINT search_left_near_up(std::vector<POINT> pointsEdge, cv::Mat matt) {
         for (int y = pointsEdge[i].y - 25; y < pointsEdge[i].y; y++)
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1))
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
-                    return POINT(pointsEdge[i].x, y);
+                    if (pt_point(matt, y, pointsEdge[i].x, 4))
+                        return POINT(pointsEdge[i].x, y);
 
     return POINT(0, 0);
 }
@@ -696,29 +697,39 @@ float Calculate_Right_ConeK(std::vector<cv::Rect> arr) {
 //    }
 //    return find;
 //}
-
+const int pt_front[8][2] = { {1, 0},{0, -1}, {0, 1}, {-1, 0},{-1, -1},{1, 1},{-1, 1},{1, -1} };
+//判断该点周围像素大于0 的个数是否满足要求
+bool pt_point(cv::Mat mat,int x,int y,int num) {
+    int sum = 0;
+    for (uint8_t i = 0; i < 8; i++) {
+        int frontx, fronty;
+        fronty = y + pt_front[i][1];
+        frontx = x + pt_front[i][0];
+        if (frontx < 0 || frontx >= IMAGE_WIDTH) continue;
+        if (fronty < 0 || fronty >= IMAGE_HEIGHT) continue;
+        if (AT_IMAGE(mat, frontx, fronty) > 0)sum++;
+    }
+    if (sum >= num)return true;
+    else return false;
+}
 // 搜索距离赛道左边缘最近的黄色色块 (黄色锥桶) 赛道内
 POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
-    int sum = 5;
     POINT find = POINT(0, 0);
     int resw = IMAGE_WIDTH;
     for (size_t i = 0; i < pointsEdge.size(); i++) {
-        sum = 5;
         for (int y = pointsEdge[i].y; y < pointsEdge[i].y + 50; y++) {
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) {
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0) {
-                    sum--;
                     cv::line(IMG.mat_result, cv::Point(pointsEdge[i].y, pointsEdge[i].x),
                         cv::Point(y, pointsEdge[i].x),
                         cv::Scalar(255, 0, 255), 7);
-                }
-
-                if (sum <= 0) {
-                    if (resw > y - pointsEdge[i].y) {
-                        find = POINT(pointsEdge[i].x, y);
-                        resw = y - pointsEdge[i].y;
+                    if (pt_point(matt,y, pointsEdge[i].x, 4)) {
+                        if (resw > y - pointsEdge[i].y) {
+                            find = POINT(pointsEdge[i].x, y);
+                            resw = y - pointsEdge[i].y;
+                        }
+                        break;
                     }
-                    break;
                 }
             }
         }
@@ -737,17 +748,16 @@ POINT search_right_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) {
 
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0) {
-                    sum--;
                     cv::line(IMG.mat_result, cv::Point(pointsEdge[i].y, pointsEdge[i].x),
                         cv::Point(y, pointsEdge[i].x),
                         cv::Scalar(255, 0, 255), 7);
-                }
-                if (sum <= 0) {
-                    if (resw > pointsEdge[i].y - y) {
-                        find = POINT(pointsEdge[i].x, y);
-                        resw = pointsEdge[i].y - y;
+                    if (pt_point(matt, y, pointsEdge[i].x, 4)) {
+                        if (resw > pointsEdge[i].y - y) {
+                            find = POINT(pointsEdge[i].x, y);
+                            resw = pointsEdge[i].y - y;
+                        }
+                        break;
                     }
-                    break;
                 }
 
             }
@@ -818,7 +828,8 @@ POINT search_right_near_up(std::vector<POINT> pointsEdge, cv::Mat matt) {
         for (int y = pointsEdge[i].y + 25; y > pointsEdge[i].y; y--)
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1))
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
-                    return POINT(pointsEdge[i].x, y);
+                    if (pt_point(matt, y, pointsEdge[i].x, 4))
+                         return POINT(pointsEdge[i].x, y);
 
     return POINT(0, 0);
 }
