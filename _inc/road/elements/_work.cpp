@@ -19,7 +19,8 @@ extern Control_Flag control_flag;
 float work_route = 0;  // 施工区编码器积分
 float work_route2 = 0; // 施工区编码器积分
 
-float work_yaw = 0; // 施工区偏航角积分
+float work_yaw = 0; // 
+float work_in_yaw = 0; // 施工区偏航角积分
 POINT work_near_cone;  //色块 较近的锥桶
 POINT work_near_cone1;  //AI 较近的锥桶
 StopWatch stop_clock;
@@ -186,6 +187,7 @@ void run_work()
                 work_route = IMG.encoder.route;
                 flag_work = WORK_READY;
                 work_yaw = IMG.encoder.yaw;
+                work_in_yaw = IMG.encoder.yaw;
                 MAT_LOG("WORK_READY");
             }
 
@@ -355,6 +357,8 @@ void run_work()
                 flag_work = WORK_OUT;
                 workC.init();
                 out_flage = 0;
+                if (abs(work_in_yaw - IMG.encoder.yaw) > 40)out_flage = 1;
+
                 last_data = 0;
                 member_K = 0;
                 work_yaw = IMG.encoder.yaw;
