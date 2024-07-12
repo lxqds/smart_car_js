@@ -48,6 +48,34 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* ***************************** 初始化 ***************************** */
     /* ***************************************************************** */
     mat_result = _mat_result;
+
+    std::vector<Mat> imageRGB;
+
+    //RGB三通道分离
+    split(mat_result, imageRGB);
+
+    //求原始图像的RGB分量的均值
+    double R, G, B;
+    B = cv::mean(imageRGB[0])[0];
+    G = cv::mean(imageRGB[1])[0];
+    R = cv::mean(imageRGB[2])[0];
+
+    //需要调整的RGB分量的增益
+    double KR, KG, KB;
+    KB = (R + G + B) / (3 * B);
+    KG = (R + G + B) / (3 * G);
+    KR = (R + G + B) / (3 * R);
+
+    //调整RGB三个通道各自的值
+    imageRGB[0] = imageRGB[0] * KB;
+    imageRGB[1] = imageRGB[1] * KG;
+    imageRGB[2] = imageRGB[2] * KR;
+
+    //RGB三通道图像合并
+    merge(imageRGB, mat_result);
+
+
+
     // 图像预处理: 缩放 -> 灰度 -> 二值化
     cv::resize(mat_origin, mat_result, cv::Size(IMAGE_WIDTH, IMAGE_HEIGHT), 0, 0, cv::INTER_AREA);
     cv::cvtColor(mat_result, mat_bin, cv::COLOR_BGR2GRAY);
