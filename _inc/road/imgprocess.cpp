@@ -351,6 +351,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* ***************************************************************** */
     detection_result.clear();
     if (detection->_is_predicted) {
+        LOG_I << "IN is_predicted " << LOG_END;
         _det_result = detection->getResult()->result;
         // 遍历检测结果
         for (size_t i = 0; i < _det_result.size(); i++) {
