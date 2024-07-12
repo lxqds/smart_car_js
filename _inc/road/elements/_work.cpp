@@ -137,11 +137,16 @@ void run_work()
                 drawH(thresholdh, 0, 0, 255, IMG.mat_result);
                 drawH(work_Red.x, 255, 0, 0, IMG.mat_result);
                 drawH(coneLowy, 0, 0, 255, IMG.mat_result);
-                if (work_Red.x = 0)IMG.aim_speed = -IMG._config->speed_work;
+                if (work_Red.x == 0)IMG.aim_speed = -IMG._config->speed_work;
                 if (stop_clock.toc() > 5000 && (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)) {
                     fond_flag = 1;
                     IMG.aim_speed = IMG._config->speed_base;
                     MAT_LOG("WORK_RED_ERR");
+                    IMG.element_over = true;
+                    IMG.element_over_route = IMG.encoder.route;
+                    control_flag.pop();//移除
+                    flag_work = WORK_NONE;
+                    MAT_LOG("WORK_ERROR");
                 }
             }
 
@@ -150,9 +155,9 @@ void run_work()
             }
 
             for (auto r : IMG.detection_result) {
-                if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
+                MAT_LOG("WORK_FUZ");
+                if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.70 && r.y > IMAGE_HEIGHT * 0.05) {
                     IMG.element_identify = 1;
-                    control_flag.push(work_element);
                     work_route = IMG.encoder.route;
                     direction_work = false;
                     IMG.flag_track = TRACK_RIGHT;
@@ -166,10 +171,9 @@ void run_work()
                         AI_find_sign.y = r.score * 100;
                     }
                 }
-                else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
+                else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.70 && r.y > IMAGE_HEIGHT * 0.05) {
 
                     IMG.element_identify = 1;
-                    control_flag.push(work_element);
                     work_route = IMG.encoder.route;
                     direction_work = true;
                     IMG.flag_track = TRACK_LEFT;
@@ -245,6 +249,7 @@ void run_work()
             IMG.aim_speed = IMG._config->speed_work * speedP;
 
             int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
+            if (work_near_cone.x == 0)IMG.aim_speed = -IMG.aim_speed;
            // LOG_I << "  speed_err:" << speed_err << LOG_END;
             if ((work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) &&
                 speed_err < IMG._config->work_read_cone_allow_speed_error) {
