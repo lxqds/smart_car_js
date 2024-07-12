@@ -43,7 +43,6 @@ int main(int argc, char const* argv[])
         .parse(argc, argv);
     _windows = args.has_option("--windows");
     _video = args.has_option("--video");
-    imgprocess.assist_judgment = 0;
     /* 日志初始化 */
     logger.init_logger();
 

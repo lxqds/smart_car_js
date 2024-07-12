@@ -72,7 +72,6 @@ public:
     cv::Mat mat_bin;  // 原图转二值化图
     cv::Mat mat_lab;  // 原图转 LAB 图
     cv::Mat mat_lab2;  // 原图转 LAB 图
-    uint8_t assist_judgment;
     flag_track_e flag_track = TRACK_MIDDLE;  // 巡线选择
 
     int begin_x_l = BEGIN_X;                // 巡线横坐标起始点 左
