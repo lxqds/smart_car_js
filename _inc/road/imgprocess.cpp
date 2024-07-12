@@ -605,7 +605,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* ***************************************************************** */
 
     // 偏差限幅
-    aim_angle = aim_angle > 500.0f ? 500.0f : aim_angle < -500.0f ? -500.0f
+    aim_angle = aim_angle > 300.0f ? 300.0f : aim_angle < -300.0f ? -300.0f
         : aim_angle;
 
     // 偏差滤波
