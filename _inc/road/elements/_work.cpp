@@ -40,64 +40,63 @@ POINT AI_find_sign = POINT(0, 0);  //标记，分数*100
 void check_work()
 {
 
-        if (!IMG.element_over &&
-            !control_flag.contains(circle_element) &&   //当前没在环岛中
-            !control_flag.contains(work_element) &&     //当前没在工作区中
-            !control_flag.contains(garage_element) &&   //当前没在入库中
-            !control_flag.contains(ramp_element) &&      //当前没在桥中
-            !control_flag.contains(bomb_element)) {
+    if (!IMG.element_over &&
+        !control_flag.contains(circle_element) &&   //当前没在环岛中
+        !control_flag.contains(work_element) &&     //当前没在工作区中
+        !control_flag.contains(garage_element) &&   //当前没在入库中
+        !control_flag.contains(ramp_element) &&      //当前没在桥中
+        !control_flag.contains(bomb_element)) {
 
-                 if (IMG._config->assist_judgment) {
-                     work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
-                     work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);//右工作区进入准备
-                     if (work_near_cone1.x != 0 && work_near_cone.x != 0)
-                     {
-                         work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
-                         if (work_Red.x != 0 && work_Red.y != 0 && work_Red.x > 0.25 * IMAGE_HEIGHT) {
-                             IMG.element_identify = 1;
-                             control_flag.push(work_element);
-                             work_route = IMG.encoder.route;
-                             IMG.flag_track = TRACK_RIGHT;
-                             flag_work = WORK_FOUND_0;
-                             MAT_LOG("WORK_FOUND_0");
-                             fond_flag = 0;
-                             AI_find_sign = POINT(0, 0);
-                             stop_clock.tic();
-                         }
-                         MAT_LOG("WORK_FOUND_0_read");
-                     }
+        if (IMG._config->assist_judgment) {
+            work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
+            work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);//右工作区进入准备
+            if (work_near_cone1.x != 0 && work_near_cone.x != 0) {
+                work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
+                if (work_Red.x != 0 && work_Red.y != 0 && work_Red.x > 0.25 * IMAGE_HEIGHT) {
+                    IMG.element_identify = 1;
+                    control_flag.push(work_element);
+                    work_route = IMG.encoder.route;
+                    IMG.flag_track = TRACK_RIGHT;
+                    flag_work = WORK_FOUND_0;
+                    MAT_LOG("WORK_FOUND_0");
+                    fond_flag = 0;
+                    AI_find_sign = POINT(0, 0);
+                    stop_clock.tic();
                 }
+                MAT_LOG("WORK_FOUND_0_read");
+            }
+        }
 
-                for (auto r : IMG.detection_result) {
-                    if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
-                        IMG.element_identify = 1;
-                        control_flag.push(work_element);
-                        work_route = IMG.encoder.route;
-                        direction_work = false;
-                        IMG.flag_track = TRACK_RIGHT;
-                        flag_work = WORK_FOUND_1;
-                        MAT_LOG("WORK_FOUND_R");
-                        FOUND_last_y = 0;
-                        in_flag = 0;
-                    }
-                    else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
+        for (auto r : IMG.detection_result) {
+            if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
+                IMG.element_identify = 1;
+                control_flag.push(work_element);
+                work_route = IMG.encoder.route;
+                direction_work = false;
+                IMG.flag_track = TRACK_RIGHT;
+                flag_work = WORK_FOUND_1;
+                MAT_LOG("WORK_FOUND_R");
+                FOUND_last_y = 0;
+                in_flag = 0;
+            }
+            else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
 
-                        IMG.element_identify = 1;
-                        control_flag.push(work_element);
-                        work_route = IMG.encoder.route;
-                        direction_work = true;
-                        IMG.flag_track = TRACK_LEFT;
-                        flag_work = WORK_FOUND_1;
-                        MAT_LOG("WORK_FOUND_L");
-                        FOUND_last_y = 0;
-                        in_flag = 0;
-                    }
-
-                }
-
+                IMG.element_identify = 1;
+                control_flag.push(work_element);
+                work_route = IMG.encoder.route;
+                direction_work = true;
+                IMG.flag_track = TRACK_LEFT;
+                flag_work = WORK_FOUND_1;
+                MAT_LOG("WORK_FOUND_L");
+                FOUND_last_y = 0;
+                in_flag = 0;
             }
 
-    
+        }
+
+    }
+
+
 
 
 }
@@ -117,15 +116,14 @@ void run_work()
         IMG.edge_det.clear();
         if (flag_work == WORK_FOUND_0) {
 
-            if (fond_flag == 0)
-            {
+            if (fond_flag == 0) {
                 work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
                 int thresholdh = IMAGE_HEIGHT * 0.3;
 
                 int coneLowy = IMAGE_HEIGHT * 0.3 + 12;
 
                 int err_H = IMAGE_HEIGHT * 0.3 + 6 - work_Red.x;
-                
+
                 IMG.aim_speed = err_H;
 
                 float speedP = err_H / 30.0;
@@ -163,10 +161,10 @@ void run_work()
                     FOUND_last_y = 0;
                     in_flag = 0;
 
-                    if (AI_find_sign.y < r.score *100) { 
+                    if (AI_find_sign.y < r.score * 100) {
                         AI_find_sign.x = 1;
                         AI_find_sign.y = r.score * 100;
-                   }
+                    }
                 }
                 else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
 
@@ -208,7 +206,7 @@ void run_work()
             //}
 
             //当 第一个锥桶消失
-            if (in_flag == 0 && work_near_cone.x > 0.5* IMAGE_HEIGHT) {
+            if (in_flag == 0 && work_near_cone.x > 0.5 * IMAGE_HEIGHT) {
                 in_flag = 1;
                 flag_work = WORK_FOUND_2;
                 work_route = IMG.encoder.route;
@@ -234,7 +232,7 @@ void run_work()
 
             int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + IMG._config->work_read_cone_allow_error;
 
-            int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + IMG._config->work_read_cone_allow_error/2.0 - work_near_cone.x;
+            int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + IMG._config->work_read_cone_allow_error / 2.0 - work_near_cone.x;
 
             IMG.aim_speed = err_H;
 
@@ -323,8 +321,8 @@ void run_work()
             float in_yaw = -20;
             if (!direction_work)in_yaw = -in_yaw;
             if (IMG.max_white_line_length < 300 ||
-                ((!direction_work && IMG.encoder.yaw - work_yaw > in_yaw)&&
-                ( direction_work && IMG.encoder.yaw - work_yaw < in_yaw))
+                ((!direction_work && IMG.encoder.yaw - work_yaw > in_yaw) &&
+                    (direction_work && IMG.encoder.yaw - work_yaw < in_yaw))
                 ) {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_RUN;
@@ -461,7 +459,7 @@ void run_work()
             IMG.aim_speed = (int16_t)(IMG._config->work_recback_speed); //逐渐减速     
 
             if (member_K == 0) {
-                if(direction_work)member_K = Calculate_Right_ConeK(all_zt);  //记录后退第一帧的k值
+                if (direction_work)member_K = Calculate_Right_ConeK(all_zt);  //记录后退第一帧的k值
                 else member_K = Calculate_Left_ConeK(all_zt);
             }
             if (out_flage == 0)//稍稍反方向打角
@@ -474,8 +472,7 @@ void run_work()
                     IMG.aim_angle = -IMG.aim_angle;
                 }
 
-                if (abs( IMG.encoder.yaw - work_yaw )> out_yaw)
-                {
+                if (abs(IMG.encoder.yaw - work_yaw) > out_yaw) {
                     out_flage = 1;
                     MAT_LOG("out_flage1");
                 }
@@ -549,13 +546,13 @@ void run_work()
                 if (direction_work) k = Calculate_Right_ConeK(all_zt);
                 else k = Calculate_Left_ConeK(all_zt);
 
-                IMG.aim_angle = (member_K - k ) * IMG._config->work_out_angular_P;
+                IMG.aim_angle = (member_K - k) * IMG._config->work_out_angular_P;
                 if (direction_work && IMG.aim_angle < IMG._config->work_out_angular_base_deviation) IMG.aim_angle = IMG._config->work_out_angular_base_deviation;
-                else if(!direction_work && IMG.aim_angle > -IMG._config->work_out_angular_base_deviation)IMG.aim_angle = -IMG._config->work_out_angular_base_deviation;
+                else if (!direction_work && IMG.aim_angle > -IMG._config->work_out_angular_base_deviation)IMG.aim_angle = -IMG._config->work_out_angular_base_deviation;
 
                 IMG.aim_speed = -IMG._config->speed_work;
 
-                if (IMG.max_white_line_length > 200) {
+                if (IMG.max_white_line_length > 1000) {
                     out_flage = 2;
                     MAT_LOG("out_flage2");
                 }
