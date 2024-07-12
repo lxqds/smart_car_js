@@ -53,7 +53,7 @@ void check_work()
                      if (work_near_cone1.x != 0 && work_near_cone.x != 0)
                      {
                          work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
-                         if (work_Red.x != 0 && work_Red.y != 0 && work_Red.x > 0.4 * IMAGE_HEIGHT) {
+                         if (work_Red.x != 0 && work_Red.y != 0 && work_Red.x > 0.25 * IMAGE_HEIGHT) {
                              IMG.element_identify = 1;
                              control_flag.push(work_element);
                              work_route = IMG.encoder.route;

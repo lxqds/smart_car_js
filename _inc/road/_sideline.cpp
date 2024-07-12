@@ -823,10 +823,10 @@ POINT search_right_near(std::vector<POINT> pointsEdge, cv::Mat matt) {
 
 POINT search_right_near_Red(std::vector<POINT> pointsEdge, cv::Mat matt) {
     for (size_t i = 0; i < pointsEdge.size(); i++)
-        for (int y = pointsEdge[i].y + 50; y > pointsEdge[i].y; y--)
+        for (int y = pointsEdge[i].y + 100; y > pointsEdge[i].y; y--)
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1))
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
-                    if (pt_point(matt, y, pointsEdge[i].x, 8))
+                    if (pt_point(matt, y, pointsEdge[i].x, 7))
                         return POINT(pointsEdge[i].x, y);
     return POINT(0, 0);
 }
