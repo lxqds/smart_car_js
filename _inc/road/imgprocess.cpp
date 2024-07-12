@@ -615,7 +615,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     // 计算舵机 PID
     int aim_angle_pwm = 0;
     aim_angle_pwm = (int)(pid_realize_a(aim_angle_filter, 0.0f, aim_angle_p, aim_angle_d) + 0.5f);
-    aim_angle_pwm = 0 - clip(aim_angle_pwm, -450, 450);
+    aim_angle_pwm = 0 - clip(aim_angle_pwm, -130, 130);
 
     // 赋值数据包
     payload.tSpeed = aim_speed;
