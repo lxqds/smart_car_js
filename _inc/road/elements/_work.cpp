@@ -361,7 +361,7 @@ void run_work()
             {
                 float out_yaw = -10;
                 IMG.aim_speed = -IMG.aim_speed;//倒车
-                IMG.aim_angle = 45;
+                IMG.aim_angle = -45;
                 if (!direction_work) {
                     out_yaw = -out_yaw;
                     IMG.aim_angle = -IMG.aim_angle;
