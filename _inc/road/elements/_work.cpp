@@ -18,6 +18,8 @@ extern Control_Flag control_flag;
 // 变量定义
 float work_route = 0;  // 施工区编码器积分
 float work_route2 = 0; // 施工区编码器积分
+
+float work_yaw = 0; // 施工区偏航角积分
 POINT work_near_cone;  //色块 较近的锥桶
 POINT work_near_cone1;  //AI 较近的锥桶
 StopWatch stop_clock;
@@ -40,7 +42,7 @@ void check_work()
         !control_flag.contains(ramp_element) &&      //当前没在桥中
         !control_flag.contains(bomb_element)) {
         for (auto r : IMG.detection_result) {
-            if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.52 && r.y > IMAGE_HEIGHT * 0.1) {
+            if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
                 IMG.element_identify = 1;
                 control_flag.push(work_element);
                 work_route = IMG.encoder.route;
@@ -51,7 +53,7 @@ void check_work()
                 FOUND_last_y = 0;
                 in_flag = 0;
             }
-            else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.52 && r.y > IMAGE_HEIGHT * 0.1) {
+            else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
 
                 IMG.element_identify = 1;
                 control_flag.push(work_element);
@@ -129,15 +131,15 @@ void run_work()
 
             int thresholdh = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in;
 
-            int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + 6;
+            int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + IMG._config->work_read_cone_allow_error;
 
-            int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + 3 - work_near_cone.x;
+            int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + IMG._config->work_read_cone_allow_error/2.0 - work_near_cone.x;
 
             IMG.aim_speed = err_H;
 
             float speedP = err_H / 50.0;
-            if (speedP < 0)speedP -= 0.05;
-            else speedP += 0.05;
+            if (speedP < 0)speedP -= IMG._config->work_read_cone_base_speed_k;
+            else speedP += IMG._config->work_read_cone_base_speed_k;
             if (speedP > 2)speedP = 2;
             if (speedP < -2)speedP = -2;
 
@@ -146,10 +148,11 @@ void run_work()
             int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
             LOG_I << "  speed_err:" << speed_err << LOG_END;
             if ((work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) &&
-                speed_err < 100) {
+                speed_err < IMG._config->work_read_cone_allow_speed_error) {
 
                 work_route = IMG.encoder.route;
                 flag_work = WORK_READY;
+                work_yaw = IMG.encoder.yaw;
                 MAT_LOG("WORK_READY");
             }
 
@@ -215,8 +218,12 @@ void run_work()
             }
 
            // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready )
-
-            if ((work_near_cone.x == 0 && work_near_cone.y == 0) && IMG.max_white_line_length < 300) {
+            float in_yaw = -20;
+            if (!direction_work)in_yaw = -in_yaw;
+            if (IMG.max_white_line_length < 300 ||
+                ((!direction_work && IMG.encoder.yaw - work_yaw > in_yaw)&&
+                ( direction_work && IMG.encoder.yaw - work_yaw < in_yaw))
+                ) {
                 work_route = IMG.encoder.route;
                 flag_work = WORK_RUN;
                 work_route2 = IMG.encoder.route;
