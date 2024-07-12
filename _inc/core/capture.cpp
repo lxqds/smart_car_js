@@ -17,6 +17,7 @@ int CaptureInterface::init(int exposure) {
     LOG_I << ">>> width  = " << _capture->get(cv::CAP_PROP_FRAME_WIDTH) << LOG_END;
     LOG_I << ">>> height = " << _capture->get(cv::CAP_PROP_FRAME_HEIGHT) << LOG_END;
     LOG_I << ">>> fps    = " << _capture->get(cv::CAP_PROP_FPS) << LOG_END;
+    LOG_I << ">>> exposure    = " << _capture->get(cv::CAP_PROP_EXPOSURE) << LOG_END;
     LOG_I << "Create Capture Success." << LOG_END;
 
     return 0;
