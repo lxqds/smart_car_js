@@ -73,7 +73,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             for (int i = 0; i < 3; i++)
                 channels.push_back(mat_bin);
         }
-        else if (_config->check_binary_ == 2) {
+        else if (_config->check_lab_ == 2) {
             for (int i = 0; i < 3; i++)
                 channels.push_back(mat_lab2);
         }
