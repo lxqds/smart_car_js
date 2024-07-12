@@ -64,6 +64,7 @@ void check_work()
                              AI_find_sign = POINT(0, 0);
                              stop_clock.tic();
                          }
+                         MAT_LOG("WORK_FOUND_0_read");
                      }
                 }
 
