@@ -51,6 +51,7 @@ void CaptureInterface::run() {
 
     while (_loop) {
         if (_capture->read(_frame)) {
+            LOG_I << ">>> exposure    = " << _capture->get(cv::CAP_PROP_EXPOSURE) << LOG_END;
             // 图片裁剪 (600x400)  (横坐标偏移修正 - 5)
             _frame = _frame(cv::Rect(20 - 5, 35, 600, 400));
 
