@@ -22,6 +22,7 @@ struct ControlConfig
     uint16_t threshold;           // 二值化阈值
     uint16_t threshold_detection; // 目标检测阈值
     uint16_t lab_threshold;     //锥桶阈值
+    uint16_t lab_thresholdRG;   //锥桶红绿通道
     uint8_t direction_garage; // 出库方向   0: 左   1: 右
     uint8_t direction_yroad;  // 泛行区方向  0: 左   1: 右
     uint8_t direction_work;   // 施工区方向  0: 左   1: 右
@@ -174,7 +175,7 @@ struct ControlConfig
         AUTOCFG(direction_yroad);
         AUTOCFG(direction_work);
         AUTOCFG(direction_gas);
-
+        AUTOCFG(lab_thresholdRG);
         AUTOCFG(rec_video_format);
         AUTOCFG(check_binary_);
         AUTOCFG(check_lab_);
