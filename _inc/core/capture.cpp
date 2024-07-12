@@ -16,6 +16,7 @@ int CaptureInterface::init(float exposure) {
     LOG_I << ">>> width  = " << _capture->get(cv::CAP_PROP_FRAME_WIDTH) << LOG_END;
     LOG_I << ">>> height = " << _capture->get(cv::CAP_PROP_FRAME_HEIGHT) << LOG_END;
     LOG_I << ">>> fps    = " << _capture->get(cv::CAP_PROP_FPS) << LOG_END;
+    LOG_I << ">>> exposure    = " << _capture->get(cv::CAP_PROP_EXPOSURE) << LOG_END;
     LOG_I << "Create Capture Success." << LOG_END;
 
     return 0;
@@ -42,7 +43,7 @@ int CaptureInterface::stop() {
     return 0;
 }
 
-void CaptureInterface::get(cv::Mat &frame) { frame = _queue.Take().clone(); }
+void CaptureInterface::get(cv::Mat& frame) { frame = _queue.Take().clone(); }
 
 void CaptureInterface::run() {
     cv::Mat _frame;
@@ -71,7 +72,8 @@ void CaptureInterface::run() {
             if (_queue.Size() > 20)
                 _queue.Take();
             _queue.Put(_frame);
-        } else {
+        }
+        else {
             CHECK(false) << "UsbCamera read failed." << LOG_END;
         }
 
@@ -101,7 +103,7 @@ void CaptureInterface::run() {
 }
 
 bool CaptureInterface::_kbhit_() {
-    struct timeval tv = {0L, 0L};
+    struct timeval tv = { 0L, 0L };
     fd_set fds;
     FD_ZERO(&fds);
     FD_SET(0, &fds);
