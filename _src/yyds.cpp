@@ -46,8 +46,6 @@ int main(int argc, char const* argv[])
     _windows = args.has_option("--windows");
     _video = args.has_option("--video");
     imgprocess.assist_judgment = 0;
-    if (args.has_option("--workR"))imgprocess.assist_judgment = 2;
-    if (args.has_option("--workL"))imgprocess.assist_judgment = 1;
     /* 日志初始化 */
     logger.init_logger();
 
