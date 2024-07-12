@@ -12,7 +12,7 @@ int CaptureInterface::init(int exposure) {
     _capture->set(cv::CAP_PROP_FPS, 60);
     _capture->set(cv::CAP_PROP_FRAME_WIDTH, 640);
     _capture->set(cv::CAP_PROP_FRAME_HEIGHT, 480);
-    _capture->set(cv::CAP_PROP_AUTO_EXPOSURE, 0.25); // where 0.25 means "manual exposure, manual iris"
+    _capture->set(cv::CAP_PROP_AUTO_EXPOSURE, 1.0); // where 0.25 means "manual exposure, manual iris"
     _capture->set(cv::CAP_PROP_EXPOSURE, exposure);
     LOG_I << ">>> width  = " << _capture->get(cv::CAP_PROP_FRAME_WIDTH) << LOG_END;
     LOG_I << ">>> height = " << _capture->get(cv::CAP_PROP_FRAME_HEIGHT) << LOG_END;
