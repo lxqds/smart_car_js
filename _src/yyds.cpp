@@ -52,7 +52,7 @@ int main(int argc, char const* argv[])
     /* 图像处理 */
     ret = imgprocess.init("../configs/control.json", (_windows || _video));
     CHECK(0 == ret) << "../configs/control.json can not found !!" << LOG_END;
-
+    LOG_I << "exposure=" << imgprocess._config->exposure << LOG_END;
     /* 摄像头 */
     capture = std::make_shared<CaptureInterface>();
     ret = capture->init(imgprocess._config->exposure);
@@ -94,8 +94,7 @@ int main(int argc, char const* argv[])
     // serial->buzzerSound(3);
     echo_sw.tic();
     LOG_I << "PID Initing\n" << speedPID[0] << LOG_END;
-    while (capture->_loop)
-    {
+    while (capture->_loop) {
 
         // 开始计时
         fps_sw.tic();
@@ -120,32 +119,25 @@ int main(int argc, char const* argv[])
        // detection->run(frame_origin);
 
         // 加油站 & 施工区 等待检测结果
-        if (flag_gas > GAS_DETECTION || flag_work > WORK_DETECTION)
-        {
-            if (detection->_is_predicted)
-            {
+        if (flag_gas > GAS_DETECTION || flag_work > WORK_DETECTION) {
+            if (detection->_is_predicted) {
                 // 获取检测结果
                 std::shared_ptr<DetectionResult> det_res = detection->getResult();
                 imgprocess._det_result = det_res->result;
                 // 图像处理
                 int num = 0;
-                for (unsigned i = 0; i < imgprocess._det_result.size(); i++)
-                {
-                    if (imgprocess._det_result[i].type == 1)
-                    {
+                for (unsigned i = 0; i < imgprocess._det_result.size(); i++) {
+                    if (imgprocess._det_result[i].type == 1) {
                         num++;
                     }
                 }
 
-                if (num > gas_which)
-                {
+                if (num > gas_which) {
                     gas_which = num;
-                    if (gas_which == 1)
-                    {
+                    if (gas_which == 1) {
                         LOG_I << "Granary exit has been set to #1." << LOG_END;
                     }
-                    else
-                    {
+                    else {
 
                         LOG_I << "Granary exit has been set to #2." << LOG_END;
                     }
@@ -156,8 +148,7 @@ int main(int argc, char const* argv[])
             }
         }
         // 正常巡线
-        else
-        {
+        else {
 
 
             // 图像处理 正常帧率
@@ -166,13 +157,11 @@ int main(int argc, char const* argv[])
             ret = 1;
         }
 
-        if (ret != 0)
-        {
+        if (ret != 0) {
             ret = 0;
 
             // 发送指令
-            if (capture->_launch)
-            {
+            if (capture->_launch) {
                 serial->sendPack(payload);
             }
             static double _time = fps_time;
@@ -181,14 +170,12 @@ int main(int argc, char const* argv[])
             sprintf(fps_buffer, "FPS: %.2f", 1000 / _time);
             cv::putText(frame_imgpro, (std::string)fps_buffer, cv::Point(5, 10),
                 cv::FONT_HERSHEY_SIMPLEX, 0.4, cv::Scalar(0, 0, 255));
-            
 
-            if (imgprocess._config->rec_video_format ==0)
-            {
+
+            if (imgprocess._config->rec_video_format == 0) {
                 display->put(frame_origin.clone());
             }
-            else
-            {
+            else {
                 display->put(frame_imgpro.clone());
             }
             // display->put(IMG.mat_lab.clone());
@@ -218,8 +205,7 @@ void callbackSignal(int signum)
     static uint8_t is_exit = 0;
     is_exit += 1;
 
-    if (is_exit == 1)
-    {
+    if (is_exit == 1) {
         /* 结束线程 */
         capture->stop();
         log_i("capture stopped.");
