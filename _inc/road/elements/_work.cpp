@@ -48,7 +48,7 @@ void check_work()
                 work_route = IMG.encoder.route;
                 direction_work = false;
                 IMG.flag_track = TRACK_RIGHT;
-                flag_work = WORK_FOUND_2;
+                flag_work = WORK_FOUND_1;
                 MAT_LOG("WORK_FOUND_R");
                 FOUND_last_y = 0;
                 in_flag = 0;
@@ -60,7 +60,7 @@ void check_work()
                 work_route = IMG.encoder.route;
                 direction_work = true;
                 IMG.flag_track = TRACK_LEFT;
-                flag_work = WORK_FOUND_2;
+                flag_work = WORK_FOUND_1;
                 MAT_LOG("WORK_FOUND_L");
                 FOUND_last_y = 0;
                 in_flag = 0;
@@ -104,10 +104,8 @@ void run_work()
             //}
 
             //当 第一个锥桶消失
-            if (in_flag == 0 && work_near_cone.x > 0.7 * IMAGE_HEIGHT) {
+            if (in_flag == 0 && work_near_cone.x > 0.5* IMAGE_HEIGHT) {
                 in_flag = 1;
-            }
-            if (FOUND_last_y > work_near_cone.x && in_flag == 1) {
                 flag_work = WORK_FOUND_2;
                 work_route = IMG.encoder.route;
                 MAT_LOG("WORK_FOUND_2");
@@ -115,8 +113,7 @@ void run_work()
 
             cv::line(IMG.mat_result, cv::Point(0, (int)work_near_cone.x),
                 cv::Point(IMAGE_WIDTH - 1, (int)work_near_cone.x), cv::Scalar(255, 0, 0), 1);
-            drawH(0.7 * IMAGE_HEIGHT, 255, 0, 0, IMG.mat_result);
-            FOUND_last_y = work_near_cone.x;
+            drawH(0.5 * IMAGE_HEIGHT, 255, 0, 0, IMG.mat_result);
         }
 
         if (flag_work == WORK_FOUND_2) {
