@@ -62,6 +62,7 @@ void check_work()
                     fond_flag = 0;
                     AI_find_sign = POINT(0, 0);
                     stop_clock.tic();
+                    return;
                 }
                 MAT_LOG("WORK_FOUND_0_read");
             }
@@ -78,6 +79,7 @@ void check_work()
                 MAT_LOG("WORK_FOUND_R");
                 FOUND_last_y = 0;
                 in_flag = 0;
+                return;
             }
             else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
 
@@ -90,6 +92,7 @@ void check_work()
                 MAT_LOG("WORK_FOUND_L");
                 FOUND_last_y = 0;
                 in_flag = 0;
+                return;
             }
 
         }
