@@ -49,7 +49,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* ***************************************************************** */
     mat_result = _mat_result;
 
-    std::vector<Mat> imageRGB;
+    std::vector<cv::Mat> imageRGB;
 
     //RGB三通道分离
     split(mat_result, imageRGB);
