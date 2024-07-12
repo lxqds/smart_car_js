@@ -32,6 +32,7 @@ float last_data;
 uint8_t out_flage;
 uint8_t in_flag;
 float member_K = 0;
+
 void check_work()
 {
 
@@ -41,7 +42,7 @@ void check_work()
             !control_flag.contains(garage_element) &&   //当前没在入库中
             !control_flag.contains(ramp_element) &&      //当前没在桥中
             !control_flag.contains(bomb_element)) {
-            if (IMG._config->assist_judgment == 0) {
+            if (IMG.assist_judgment == 0) {
 
                 for (auto r : IMG.detection_result) {
                     if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
@@ -70,7 +71,7 @@ void check_work()
 
                 }
             }
-            else if (IMG._config->assist_judgment == 1) //左工作区
+            else if (IMG.assist_judgment == 1) //左工作区
             {
                 work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
                 if (work_near_cone.y > 0.4 * IMAGE_HEIGHT) {
@@ -85,7 +86,7 @@ void check_work()
                     in_flag = 0;
                 }
             }
-            else if (IMG._config->assist_judgment == 2) //右工作区
+            else if (IMG.assist_judgment == 2) //右工作区
             {
                 work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab); //右工作区进入准备
                 if (work_near_cone.y > 0.4 * IMAGE_HEIGHT) {

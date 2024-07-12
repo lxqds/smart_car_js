@@ -170,7 +170,6 @@ struct ControlConfig
 
         AUTOCFG(threshold);
         AUTOCFG(threshold_detection);
-        AUTOCFG(assist_judgment);
         AUTOCFG(direction_garage);
         AUTOCFG(direction_yroad);
         AUTOCFG(direction_work);

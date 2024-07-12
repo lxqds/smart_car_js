@@ -33,7 +33,6 @@ int main(int argc, char const* argv[])
     cv::Mat frame_imgpro; // 图像处理输出
 
     StopWatch echo_sw;   // 应答计时器
-
     /* 命令行参数 */
     auto args = util::argparser("yyds car command line parameters explained.");
     args.set_program_name("yyds")
@@ -41,10 +40,14 @@ int main(int argc, char const* argv[])
         .add_option("-l", "--launch", "launch!!!")
         .add_option("-w", "--windows", "show windows")
         .add_option("-v", "--video", "save video")
+        .add_option("-WR", "--workR", "work R")
+        .add_option("-WL", "--workL", "work L")
         .parse(argc, argv);
     _windows = args.has_option("--windows");
     _video = args.has_option("--video");
-
+    imgprocess.assist_judgment = 0;
+    if (args.has_option("--workR"))imgprocess.assist_judgment = 2;
+    if (args.has_option("--workL"))imgprocess.assist_judgment = 1;
     /* 日志初始化 */
     logger.init_logger();
 
