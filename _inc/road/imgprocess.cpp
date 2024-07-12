@@ -605,7 +605,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* ***************************************************************** */
 
     // 偏差限幅
-    aim_angle = aim_angle > 300.0f ? 300.0f : aim_angle < -300.0f ? -300.0f
+    aim_angle = aim_angle > 500.0f ? 500.0f : aim_angle < -500.0f ? -500.0f
         : aim_angle;
 
     // 偏差滤波
@@ -615,7 +615,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     // 计算舵机 PID
     int aim_angle_pwm = 0;
     aim_angle_pwm = (int)(pid_realize_a(aim_angle_filter, 0.0f, aim_angle_p, aim_angle_d) + 0.5f);
-    aim_angle_pwm = 0 - clip(aim_angle_pwm, -500, 500);
+    aim_angle_pwm = 0 - clip(aim_angle_pwm, -400, 400);
 
     // 赋值数据包
     payload.tSpeed = aim_speed;
