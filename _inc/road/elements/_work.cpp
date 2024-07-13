@@ -558,7 +558,7 @@ void run_work()
                 if (direction_work && IMG.aim_angle < IMG._config->work_out_angular_base_deviation) IMG.aim_angle = IMG._config->work_out_angular_base_deviation;
                 else if (!direction_work && IMG.aim_angle > -IMG._config->work_out_angular_base_deviation)IMG.aim_angle = -IMG._config->work_out_angular_base_deviation;
 
-                IMG.aim_speed = -IMG._config->speed_work;
+                IMG.aim_speed = -IMG._config->work_recback_speed;
 
                 if (IMG.max_white_line_length > 1000) {
                     out_flage = 2;
@@ -567,7 +567,6 @@ void run_work()
             }
             //
             if (out_flage == 2) {
-                float err_k = Calculate_Left_ConeK(all_zt);
                 IMG.aim_speed = 0;
                 if (abs(IMG.encoder.speed * 1000) < 300) {
                     work_route = IMG.encoder.route;
@@ -576,7 +575,7 @@ void run_work()
                 }
 
             }
-
+            //大幅度打角，将车拉回赛道
             if (out_flage == 3) {
                 IMG.aim_speed = IMG._config->speed_work;
                 IMG.aim_angle = IMG._config->work_recback_angle;
@@ -594,7 +593,7 @@ void run_work()
                 }
 
             }
-            //退出速度赋值
+            //退出速度赋值  正常巡线一段时间后退出工作区
             if (out_flage == 4) {
                 IMG.aim_speed = (IMG._config->speed_base);
                 // 正常巡线
