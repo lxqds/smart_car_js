@@ -20,6 +20,7 @@ extern Control_Flag control_flag;
 #define IMG imgprocess
 
 // 变量定义
+POINT bomb_Red;
 POINT bomb_near_cone_L;  // 较近的左锥桶
 POINT bomb_near_cone_R;  // 较近的右锥桶
 POINT bomb_near_cone;  // 较近的锥桶
@@ -43,6 +44,25 @@ void check_bomb()
         !control_flag.contains(garage_element) &&      //当前没在入库中
         !control_flag.contains(ramp_element)
         ) {
+
+        if (IMG._config->assist_judgment) {
+            bomb_near_cone_L = POINT(0, 0);
+            bomb_near_cone_R = POINT(0, 0);
+            bomb_near_cone_L = search_left_near_in(IMG.edge_left, IMG.mat_lab);
+            bomb_near_cone_R = search_right_near_in(IMG.edge_right, IMG.mat_lab);
+            if (bomb_near_cone_L.x != 0 && bomb_near_cone_R.x != 0) {
+                bomb_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
+                if (bomb_Red.x != 0 && bomb_Red.y != 0 && bomb_Red.x > 0.25 * IMAGE_HEIGHT) {
+                    IMG.element_identify = 1;
+                    control_flag.push(bomb_element);
+                    bomb_route = IMG.encoder.route;
+                    flag_bomb = BOMB_FOUND;
+                    MAT_LOG("BOMB_FOUND_0");
+                    return;
+                }
+            }
+        }
+
         for (auto r : IMG.detection_result) {
             if (r.label == IMG.label_bomb && r.score > 0.5 && r.y > IMAGE_HEIGHT * 0.1) {
                 IMG.element_identify = 1;
@@ -53,6 +73,7 @@ void check_bomb()
                 break;
             }
         }
+
     }
 
 
@@ -64,6 +85,8 @@ void run_bomb()
 {
     if (control_flag.top() == bomb_element) {//当前为炸弹元素
         IMG.get_edge(0);
+
+
         if (flag_bomb == BOMB_FOUND) {
             IMG.aim_speed = IMG._config->speed_bomb1;
             bomb_near_cone = POINT(0, 0);
@@ -202,7 +225,7 @@ void run_bomb()
             }
             for (auto r : IMG.detection_result) {
                 if (r.label == IMG.label_block) {
-                    bomb_block_y = r.y;
+                    bomb_block_y = r.y + r.h / 2;
                     bomb_block_x = r.x;
                     break;
                 }

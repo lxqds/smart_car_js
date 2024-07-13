@@ -7,6 +7,7 @@
 enum flag_bomb_e {
     BOMB_NONE = 0,
     BOMB_DETECTION,
+    BOMB_FOUND_0,
     BOMB_FOUND,         //找到炸弹
     BOMB_FIRST_CONE,    //第一个锥桶
     BOMB_SECOND_CONE,    //第二个锥桶

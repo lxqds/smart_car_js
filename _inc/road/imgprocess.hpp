@@ -160,6 +160,8 @@ public:
         int label;
         int x;           //横坐标
         int y;           //纵坐标
+        int w;           //宽
+        int h;           //高
         float score;    //相似度
     };
     std::vector<DETECTION> detection_result;  // 目标检测结果
