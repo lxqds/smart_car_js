@@ -74,7 +74,7 @@ struct ControlConfig
     uint8_t gas_rou_over;      // 加油站完成积分
 
     uint8_t work_error;        // 施工区错误
-
+    float work_read_cone_threshold;
     float work_read_cone_thresholdy_in; //施工区二段进入阈值
     float work_read_cone_base_speed_k;  //work 准备进入时，姿态调整速度系数  0.05
     float work_read_cone_allow_error;    //work 准备进入时，姿态调整允许的位置误差  10
@@ -285,7 +285,7 @@ struct ControlConfig
         AUTOCFG(work_run_speed);
         AUTOCFG(work_read_cone_thresholdy_out);
         AUTOCFG(work_read_cone_speed_H_err);
-
+        AUTOCFG(work_read_cone_threshold);
         AUTOCFG(speed_ramp);
         AUTOCFG(ramp_rou);
 
