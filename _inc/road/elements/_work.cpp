@@ -243,7 +243,7 @@ void run_work()
 
             IMG.aim_speed = err_H;
 
-            float speedP = err_H / 50.0;
+            float speedP = err_H / IMG._config->work_read_cone_speed_H_err;
             if (speedP < 0)speedP -= IMG._config->work_read_cone_base_speed_k;
             else speedP += IMG._config->work_read_cone_base_speed_k;
             if (speedP > 2)speedP = 2;

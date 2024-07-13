@@ -78,6 +78,7 @@ struct ControlConfig
     float work_read_cone_thresholdy_in; //施工区二段进入阈值
     float work_read_cone_base_speed_k;  //work 准备进入时，姿态调整速度系数  0.05
     float work_read_cone_allow_error;    //work 准备进入时，姿态调整允许的位置误差  10
+    float work_read_cone_speed_H_err;   //work 准备进入时，姿态调整允许的速度p的偏差系数   50
     int16_t work_read_cone_allow_speed_error; //work 准备进入时，姿态调整允许的速度误差  10
     float work_read_cone_thresholdy_avg;  //施工区 进入锥桶平均阈值
 
@@ -283,7 +284,7 @@ struct ControlConfig
         AUTOCFG(work_read_cone_thresholdy_avg);
         AUTOCFG(work_run_speed);
         AUTOCFG(work_read_cone_thresholdy_out);
-
+        AUTOCFG(work_read_cone_speed_H_err);
 
         AUTOCFG(speed_ramp);
         AUTOCFG(ramp_rou);
