@@ -567,6 +567,7 @@ void run_work()
             }
             //
             if (out_flage == 2) {
+                IMG.aim_angle = 0;
                 IMG.aim_speed = 0;
                 if (abs(IMG.encoder.speed * 1000) < 300) {
                     work_route = IMG.encoder.route;

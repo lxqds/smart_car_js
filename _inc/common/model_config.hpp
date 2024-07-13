@@ -261,7 +261,7 @@ struct ControlConfig
 
         AUTOCFG(work_out_angular_base_deviation);
         AUTOCFG(work_out_angular_P);
-
+        AUTOCFG(work_out_route);
         AUTOCFG(speed_bomb1);
         AUTOCFG(speed_bomb2);
         AUTOCFG(bomb_first_cone_ready);
