@@ -213,7 +213,7 @@ void run_work()
             //}
 
             //当 第一个锥桶消失
-            if (in_flag == 0 && work_near_cone.x > 0.5 * IMAGE_HEIGHT) {
+            if (in_flag == 0 && work_near_cone.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT) {
                 in_flag = 1;
                 flag_work = WORK_FOUND_2;
                 work_route = IMG.encoder.route;
