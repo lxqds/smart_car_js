@@ -94,6 +94,7 @@
     "speed_circle": 2700,
     "angle_circle_p_k": 1.5,
     "speed_cross": 2700,
+    "********-work-*********": 0,
     "work_read_cone_thresholdy": 0.50,
     "work_read_cone_thresholdy_in": 0.22,
     "work_read_cone_base_speed_k": 0.1,
