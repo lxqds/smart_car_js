@@ -69,7 +69,7 @@ void check_work()
         }
 
         for (auto r : IMG.detection_result) {
-            if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
+            if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.15) {
                 IMG.element_identify = 1;
                 control_flag.push(work_element);
                 work_route = IMG.encoder.route;
@@ -81,7 +81,7 @@ void check_work()
                 in_flag = 0;
                 return;
             }
-            else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
+            else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.15) {
 
                 IMG.element_identify = 1;
                 control_flag.push(work_element);
