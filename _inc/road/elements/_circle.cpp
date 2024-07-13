@@ -32,13 +32,13 @@ void check_circle() {
         !control_flag.contains(garage_element) &&      //当前没在入库中
         !control_flag.contains(ramp_element)      //当前没在桥中
         ) {
-        float R0 = 10.0f, R1 = 10.0f;
-        // 左线直线拟合
-        if (IMG.ipts0_num > 10)
-            R0 = fit_line1(IMG.ipts0, IMG.ipts0_num, 60);
-        // 右线直线拟合
-        if (IMG.ipts1_num > 10)
-            R1 = fit_line1(IMG.ipts1, IMG.ipts1_num, 60);
+        // float R0 = 10.0f, R1 = 10.0f;
+        // // 左线直线拟合
+        // if (IMG.ipts0_num > 10)
+        //     R0 = fit_line1(IMG.ipts0, IMG.ipts0_num, 60);
+        // // 右线直线拟合
+        // if (IMG.ipts1_num > 10)
+        //     R1 = fit_line1(IMG.ipts1, IMG.ipts1_num, 60);
 
         //左圆环
         if (!IMG.Lpt1_found &&  // 右角点未找到

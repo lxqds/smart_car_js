@@ -562,7 +562,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     check_cross();  // 十字路 - 识别角点特征
     check_circle();  // 环岛路 - 识别角点特征
     check_bomb();   //炸弹
-    if(IMG._config->check_ramp_)check_ramp();   //桥
+    if (IMG._config->check_ramp_)check_ramp();   //桥
 
     aim_distance_f = _config->aim_distance_far;
     aim_distance_n = _config->aim_distance_near;
@@ -617,14 +617,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
 
         get_edge(mode);
-        aim_speed = _config->speed_base;
-        if (is_straight0 && is_straight1) {
-            aim_speed_shift = _config->speed_base +
-                (1 - clip(abs(aim_sigma), 0, 30) / 30.0) * (_config->speed_up - _config->speed_base);
-            // 速度限幅
-            aim_speed_shift = clip(aim_speed_shift, _config->speed_base, _config->speed_up);
-            aim_speed = aim_speed_shift;
-        }
+
         // 正常巡线
         if (IMG.flag_track == TRACK_LEFT) {
             IMG.rpts = IMG.rptsc0;
@@ -639,6 +632,14 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             IMG.rpts_num = IMG.rptscs_num;
         }
         IMG.calculate_angle();//计算角度
+        aim_speed = _config->speed_base;
+        if (is_straight0 && is_straight1) {
+            aim_speed_shift = _config->speed_base +
+                (1 - clip(abs(aim_sigma), 0, 30) / 30.0) * (_config->speed_up - _config->speed_base);
+            // 速度限幅
+            aim_speed_shift = clip(aim_speed_shift, _config->speed_base, _config->speed_up);
+            aim_speed = aim_speed_shift;
+        }
     }
 
 

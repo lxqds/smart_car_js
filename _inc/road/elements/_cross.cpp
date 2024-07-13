@@ -55,7 +55,7 @@ void check_cross() {
 void run_cross() {
 
     if (control_flag.top() == cross_element) {// 当前为十字路口元素时
-        IMG.aim_speed = IMG._config->speed_cross;
+
         // 检测到十字, 先按照近线走
         if (flag_cross == CROSS_BEGIN) {
             // 近角点过少, 进入远线控制
@@ -262,6 +262,7 @@ void run_cross() {
                 }
             }
             IMG.get_edge(1);
+
             // 正常巡线
             if (IMG.flag_track == TRACK_LEFT) {
                 IMG.rpts = IMG.rptsc0;
@@ -290,6 +291,14 @@ void run_cross() {
             IMG.rpts_num = IMG.rptscs_num;
         }
         IMG.calculate_angle();//计算角度
+        IMG.aim_speed = IMG._config->speed_cross;
+        if (IMG.is_straight0 && IMG.is_straight1) {
+            IMG.aim_speed_shift = IMG._config->speed_cross +
+                (1 - clip(abs(IMG.aim_sigma), 0, 30) / 30.0) * (IMG._config->speed_up - IMG._config->speed_cross);
+            // 速度限幅
+            IMG.aim_speed_shift = clip(IMG.aim_speed_shift, IMG._config->speed_cross, IMG._config->speed_up);
+            IMG.aim_speed = IMG.aim_speed_shift;
+        }
     }
 }
 
