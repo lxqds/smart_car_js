@@ -430,7 +430,7 @@ void run_work()
                 flag_work = WORK_OUT;
                 workC.init();
                 out_flage = 0;
-                if (abs(work_in_yaw - IMG.encoder.yaw) > 40)out_flage = 1;
+                if (abs(work_in_yaw - IMG.encoder.yaw) > 30)out_flage = 1;
 
                 last_data = 0;
                 member_K = 0;
