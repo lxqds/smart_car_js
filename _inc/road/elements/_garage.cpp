@@ -40,6 +40,8 @@ void check_garage()
         !control_flag.contains(work_element) &&         //当前没在工作区中
         !control_flag.contains(garage_element) &&       //当前没在出入库中
         !control_flag.contains(ramp_element) &&         //当前没在桥中
+        !control_flag.contains(bomb_element) &&         //当前没在炸弹中
+        !control_flag.contains(work_element) &&     //当前没在工作区中
         IMG.encoder.route > IMG._config->garage_out_route_  //出了车库之后
         ) {
         if (IMG._config->check_garage_AI == 0)      //不使用AI识别斑马线

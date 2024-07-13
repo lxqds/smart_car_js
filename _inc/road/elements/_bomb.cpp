@@ -159,7 +159,7 @@ void run_bomb()
 
                 IMG.rptsc1_num = IMG.rpts1s_num;
                 MAT_LOG(" R_near_y=%d", bomb_near_cone.x);
-                if (IMG.encoder.route - bomb_route > 30 &&
+                if (IMG.encoder.route - bomb_route > 20 &&
                     bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_second_cone_ready) {
                     bomb_route = IMG.encoder.route;
                     bomb_block_x = 0;
@@ -183,7 +183,7 @@ void run_bomb()
                     PIXEL_PER_METER * IMG._config->bomb_first_cone_run_wide / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
                 MAT_LOG(" L_near_y=%d", bomb_near_cone.x);
-                if (IMG.encoder.route - bomb_route > 40 &&
+                if (IMG.encoder.route - bomb_route > 20 &&
                     bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_second_cone_ready)//最近的是左边锥桶
                 {
                     bomb_route = IMG.encoder.route;

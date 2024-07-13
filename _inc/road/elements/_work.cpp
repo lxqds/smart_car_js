@@ -174,7 +174,7 @@ void run_work()
                         AI_find_sign.y = r.score * 100;
                     }
                 }
-                else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.70 && r.y > IMAGE_HEIGHT * 0.05) {
+                else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.05) {
 
                     IMG.element_identify = 1;
                     work_route = IMG.encoder.route;
