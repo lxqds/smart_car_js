@@ -123,15 +123,15 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         //扇形扫描找最远的白线
         int max_white_line_end[2]{};
         max_white_line_length = 0;
-        int white_line_end[90][2]{};
-        float white_line_length[90]{};
+        int white_line_end[120][2]{};
+        float white_line_length[120]{};
         {
-            for (int t = 0; t < 90; t++) {
+            for (int t = 0; t < 120; t++) {
                 float L = 5;
                 int count = 0;
                 while (true) {
-                    float _x = (float)(L * cos((t + 45) / 180.0f * PI));
-                    float _y = (float)(L * sin((t + 45) / 180.0f * PI) + 5);
+                    float _x = (float)(L * cos((t + 30) / 180.0f * PI));
+                    float _y = (float)(L * sin((t + 30) / 180.0f * PI) + 5);
                     float x = _x + IMAGE_WIDTH / 2;
                     float y = IMAGE_HEIGHT - _y;
                     bool is_range = x > 5 && x < IMAGE_WIDTH - 5 && y >5;
@@ -153,7 +153,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             }
             // MyThreadPool.waitThreadPoolFree();
         }
-        for (int t = 5; t < 90 - 5; t += 1) {
+        for (int t = 5; t < 120 - 5; t += 1) {
             float L = 0;
             for (int i = -5; i <= 5; i++) {
                 L += white_line_length[t + i];
@@ -365,6 +365,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             detection.label = r.type;
             detection.x = deX + deW / 2;
             detection.y = deY + deH / 2;
+            detection.w = deW;
+            detection.h = deH;
             detection.score = r.score;
             detection_result.push_back(detection);
             MAT_INFO(mat_result, cv::Point(deX, deY - 5), 0.2, "%.2f", r.score);

@@ -202,7 +202,7 @@ void run_bomb()
             }
             for (auto r : IMG.detection_result) {
                 if (r.label == IMG.label_block) {
-                    bomb_block_y = r.y;
+                    bomb_block_y = r.y + r.h / 2;
                     bomb_block_x = r.x;
                     break;
                 }
