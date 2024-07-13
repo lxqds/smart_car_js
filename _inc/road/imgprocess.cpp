@@ -562,7 +562,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     check_cross();  // 十字路 - 识别角点特征
     check_circle();  // 环岛路 - 识别角点特征
     check_bomb();   //炸弹
-    // check_ramp();   //桥
+    if(IMG._config->check_ramp_)check_ramp();   //桥
 
     aim_distance_f = _config->aim_distance_far;
     aim_distance_n = _config->aim_distance_near;
@@ -574,7 +574,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     run_cross();
     run_circle();
     run_bomb();
-    // run_ramp();
+    run_ramp();
     if (element_identify == 1) {
         serial->buzzerSound(1);
     }
