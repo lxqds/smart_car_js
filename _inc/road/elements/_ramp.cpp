@@ -13,10 +13,15 @@ extern ImageProcess imgprocess;
 #define IMG imgprocess
 extern Control_Flag control_flag;
 // 变量定义
+POINT ramp_Red;
 float ramp_route = 0;  // 坡道编码器积分
 int ramp_x = 0;           //横坐标
 int ramp_y = 0;           //纵坐标
 float ramp_score;   //置信度
+
+
+extern POINT bomb_near_cone_L;  // 较近的左锥桶
+extern POINT bomb_near_cone_R;  // 较近的右锥桶
 /* ********************************************************************* */
 
 void check_ramp() {
@@ -29,15 +34,24 @@ void check_ramp() {
         !control_flag.contains(ramp_element)      //当前没在桥中
         ) {
         for (auto r : IMG.detection_result) {
-            if (r.label == IMG.label_bridge && r.score > 0.8 && r.y > IMAGE_HEIGHT * 0.3) {
-                IMG.element_identify = 1;
-                control_flag.push(ramp_element);
-                ramp_route = IMG.encoder.route;
-                flag_ramp = RAMP_UP;
-                MAT_LOG("BRIDGE_UP");
+            if (r.label == IMG.label_bridge && r.score > 0.7 && r.y > IMAGE_HEIGHT * 0.3) {
+                ramp_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
+                if (ramp_Red.x != 0 && ramp_Red.y != 0 && ramp_Red.x > 0.25 * IMAGE_HEIGHT) {
+                    bomb_near_cone_L = POINT(0, 0);
+                    bomb_near_cone_R = POINT(0, 0);
+                    bomb_near_cone_L = search_left_near_in(IMG.edge_left, IMG.mat_lab);
+                    bomb_near_cone_R = search_right_near_in(IMG.edge_right, IMG.mat_lab);
+                    if (bomb_near_cone_L.x == 0 && bomb_near_cone_R.x == 0) {
+                        IMG.element_identify = 1;
+                        control_flag.push(ramp_element);
+                        ramp_route = IMG.encoder.route;
+                        flag_ramp = RAMP_UP;
+                        MAT_LOG("BRIDGE_UP");
+                    }
+                    return;
+                }
             }
         }
-
     }
 }
 
