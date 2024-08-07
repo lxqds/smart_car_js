@@ -58,27 +58,6 @@ void check_work()
         !control_flag.contains(ramp_element) &&      //当前没在桥中
         !control_flag.contains(bomb_element)) {
 
-        if (IMG._config->assist_judgment) {
-            work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
-            work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);//右工作区进入准备
-            if (work_near_cone1.x != 0 && work_near_cone.x != 0) {
-                work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
-                if (work_Red.x != 0 && work_Red.y != 0 && work_Red.x > 0.25 * IMAGE_HEIGHT) {
-                    IMG.element_identify = 1;
-                    control_flag.push(work_element);
-                    work_route = IMG.encoder.route;
-                    IMG.flag_track = TRACK_RIGHT;
-                    flag_work = WORK_FOUND_0;
-                    MAT_LOG("WORK_FOUND_0");
-                    fond_flag = 0;
-                    AI_find_sign = POINT(0, 0);
-                    stop_clock.tic();
-                    return;
-                }
-                MAT_LOG("WORK_FOUND_0_read");
-            }
-        }
-
         for (auto r : IMG.detection_result) {
             if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.15) {
                 IMG.element_identify = 1;
@@ -106,6 +85,28 @@ void check_work()
                 return;
             }
 
+        }
+
+        if (IMG._config->assist_judgment) {
+            work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
+            work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);//右工作区进入准备
+            if (work_near_cone1.x != 0 && work_near_cone.x != 0) {
+                work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
+                if (work_Red.x != 0 && work_Red.y != 0 && work_Red.x > 0.25 * IMAGE_HEIGHT) {
+                    IMG.element_identify = 1;
+                    control_flag.push(work_element);
+                    work_route = IMG.encoder.route;
+                    IMG.flag_track = TRACK_RIGHT;
+                    flag_work = WORK_FOUND_0;
+                    speed_fun(0, 1, 500);
+                    MAT_LOG("WORK_FOUND_0");
+                    fond_flag = 0;
+                    AI_find_sign = POINT(0, 0);
+                    stop_clock.tic();
+                    return;
+                }
+                MAT_LOG("WORK_FOUND_0_read");
+            }
         }
 
     }
@@ -183,6 +184,8 @@ void run_work()
                         FOUND_last_y = 0;
                         in_flag = 0;
 
+                        speed_fun(IMG._config->speed_work+1, 1, 500);
+
                         if (AI_find_sign.y < r.score * 100) {
                             AI_find_sign.x = 1;
                             AI_find_sign.y = r.score * 100;
@@ -198,6 +201,9 @@ void run_work()
                         MAT_LOG("WORK_FOUND_L");
                         FOUND_last_y = 0;
                         in_flag = 0;
+
+                        speed_fun(IMG._config->speed_work + 1, 1, 500);
+
                         if (AI_find_sign.y < r.score * 100) {
                             AI_find_sign.x = 0;
                             AI_find_sign.y = r.score * 100;
