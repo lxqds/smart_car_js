@@ -148,11 +148,10 @@ void check_yroad() {
 /* ********************************************************************* */
 
 void run_yroad() {
-	if (control_flag.top() == circle_element) {//当前为圆环元素
+	if (control_flag.top() == yroad_element) {//当前为圆环元素
 
 		if (flag_yroad == YROAD_FOUND_0) {
 			IMG.aim_speed = 100;
-
 			for (auto r : IMG.detection_result) {
 				switch (r.label) {
 					case IMG.label_safety://普通车辆
