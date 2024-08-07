@@ -87,7 +87,6 @@ void check_work()
                 direction_work = false;
                 IMG.flag_track = TRACK_RIGHT;
                 flag_work = WORK_FOUND_1;
-                speed_fun(0, 1, 500);
                 MAT_LOG("WORK_FOUND_R");
                 FOUND_last_y = 0;
                 in_flag = 0;
@@ -100,8 +99,7 @@ void check_work()
                 work_route = IMG.encoder.route;
                 direction_work = true;
                 IMG.flag_track = TRACK_LEFT;
-                flag_work = WORK_FOUND_1;
-                speed_fun(0, 1, 500);
+                flag_work = WORK_FOUND_1;           
                 MAT_LOG("WORK_FOUND_L");
                 FOUND_last_y = 0;
                 in_flag = 0;
@@ -155,6 +153,8 @@ void run_work()
                     drawH(work_Red.x, 255, 0, 0, IMG.mat_result);
                     drawH(coneLowy, 0, 0, 255, IMG.mat_result);
                     if (work_Red.x == 0)IMG.aim_speed = -IMG._config->speed_work;
+                    if (work_near_cone.x > thresholdh && work_near_cone.x < coneLowy)speed_fun(0, 2, 500);
+
                     if (stop_clock.toc() > 5000 && (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)) {
                         fond_flag = 1;
                         IMG.aim_speed = IMG._config->speed_base;
@@ -268,7 +268,7 @@ void run_work()
                 int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
                 if (work_near_cone.x == 0)IMG.aim_speed = -IMG.aim_speed;
                 // LOG_I << "  speed_err:" << speed_err << LOG_END;
-                if (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) speed_fun(0,1, 300);
+                if (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) speed_fun(0,2, 500);
 
                 if ((work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) &&
                     speed_err < IMG._config->work_read_cone_allow_speed_error) {
@@ -331,6 +331,7 @@ void run_work()
                 //}
                 // 
                 // 调整 进入角度
+                speed_fun(IMG._config->speed_work+1, 1.5, 500);
                 IMG.aim_angle = IMG._config->work_angle_in_1;
                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
 
@@ -421,7 +422,7 @@ void run_work()
                 int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
                 if (abs(err_H) < IMAGE_HEIGHT * 0.1 && speed_err < 100) {
                     work_route = IMG.encoder.route;
-                    flag_work = WORK_STOPPING;
+                    flag_work = WORK_OUT;
                     MAT_LOG("WORK_STOPPING");
                 }
             }
