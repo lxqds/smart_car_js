@@ -45,7 +45,7 @@ void speed_fun(int speed, float brake_P, float yx_speed_err) {
     else if(IMG.encoder.speed < speed) IMG.aim_speed = speed + IMG.encoder.speed * brake_P;
 
     speed_err = speed - IMG.encoder.speed;
-    if (abs(speed_err) < yx_speed_err) aim_speed = speed;
+    if (abs(speed_err) < yx_speed_err) IMG.aim_speed = speed;
 }
 
 void check_work()
