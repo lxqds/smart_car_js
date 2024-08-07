@@ -293,7 +293,7 @@ void run_yroad() {
 			IMG.calculate_angle();//计算角度
 		}
 		else if (flag_yroad == YROAD_FOUND_3) {
-			IMG.aim_speed = _config->speed_base;;
+			IMG.aim_speed = IMG._config->speed_base;;
 			IMG.aim_distance_f = 0.3;
 			IMG.aim_distance_n = 0.1;
 			IMG.aim_angle_p *= 1.5;
