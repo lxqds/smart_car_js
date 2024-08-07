@@ -304,7 +304,7 @@ void run_yroad() {
 			}
 
 			IMG.get_edge();//获取边线
-			if (yroad_position = 0) {
+			if (yroad_position == 0) {
 				IMG.flag_track = TRACK_RIGHT;
 				//右边线预测中线
 				track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
