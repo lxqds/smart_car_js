@@ -143,7 +143,7 @@ void check_yroad() {
 void run_yroad() {
 	if (control_flag.top() == circle_element) {//当前为圆环元素
 
-		if (YROAD_FOUND_0) {
+		if (flag_yroad == YROAD_FOUND_0) {
 			IMG.aim_speed = 100;
 
 			for (auto r : IMG.detection_result) {
@@ -237,7 +237,7 @@ void run_yroad() {
 			IMG.calculate_angle();//计算角度
 
 		}
-		else if (YROAD_FOUND_1) {
+		else if (flag_yroad == YROAD_FOUND_1) {
 			IMG.aim_speed = 100;
 
 			if (IMG.encoder.route - yroad_route > 200) {
@@ -262,7 +262,7 @@ void run_yroad() {
 			}
 			IMG.calculate_angle();//计算角度
 		}
-		else if (YROAD_FOUND_2) {
+		else if (flag_yroad == YROAD_FOUND_2) {
 			IMG.aim_speed = 100;
 
 			if (IMG.encoder.route - yroad_route > 200) {
@@ -286,7 +286,7 @@ void run_yroad() {
 			}
 			IMG.calculate_angle();//计算角度
 		}
-		else if (YROAD_FOUND_3) {
+		else if (flag_yroad == YROAD_FOUND_3) {
 			IMG.aim_speed = 100;
 
 			if (IMG.encoder.route - yroad_route > 200) {
