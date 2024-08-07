@@ -421,12 +421,13 @@ void run_work()
 
 
                 //开始靠近锥桶
-                IMG.aim_speed = (int16_t)(IMG._config->work_run_speed * speedP);
+                IMG.aim_speed = (int16_t)(IMG._config->work_run_speed );
 
                 //if (minyCent.y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg) IMG.aim_speed = -IMG.aim_speed;
 
                 int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
-                if (abs(err_H) < IMAGE_HEIGHT * 0.1 && speed_err < 100) {
+                if (abs(err_H) < IMAGE_HEIGHT * 0.1 ) {
+                    speed_fun(0, 2, 300);
                     work_route = IMG.encoder.route;
                     flag_work = WORK_OUT;
                     MAT_LOG("WORK_STOPPING");
