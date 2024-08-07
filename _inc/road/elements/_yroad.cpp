@@ -117,12 +117,19 @@ void check_yroad() {
 		if (IMG.ipts1_num > 180 &&// 右边长道
 			IMG.ipts0_num > 180 // 左边长道
 			) {
-			if ((!IMG.Lpt1_found &&  // 右角点未找到
+			float R0 = 10.0f, R1 = 10.0f;
+			// 左线直线拟合
+			if (IMG.ipts0_num > 10)
+				R0 = fit_line1(IMG.ipts0, IMG.ipts0_num, 60);
+			// 右线直线拟合
+			if (IMG.ipts1_num > 10)
+				R1 = fit_line1(IMG.ipts1, IMG.ipts1_num, 60);
+			if ((R1 < 1.0f && !IMG.Lpt1_found &&  // 右角点未找到
 				!IMG.far_Lpt1_found &&  // 右远角点未找到
 				IMG.Lpt0_found &&//左角点找到
 				IMG.far_Lpt0_found) //左远角点找到
 				||
-				(IMG.Lpt1_found &&  // 右角点找到
+				(R0 < 1.0f && IMG.Lpt1_found &&  // 右角点找到
 					IMG.far_Lpt1_found &&  // 右远角点找到
 					!IMG.Lpt0_found &&//左角点未找到
 					!IMG.far_Lpt0_found) //左远角点未找到
