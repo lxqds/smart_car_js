@@ -557,11 +557,12 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     }
 
     // 识别元素
-    check_garage();  // 斑马线 - 识别特殊特征
-    check_work();  // 施工区 - 识别标志
+    check_garage(); // 斑马线 - 识别特殊特征
+    check_work();   // 施工区 - 识别标志
     check_cross();  // 十字路 - 识别角点特征
-    check_circle();  // 环岛路 - 识别角点特征
-    check_bomb();   //炸弹
+    check_circle(); // 环岛路 - 识别角点特征
+    check_bomb();   // 炸弹
+    check_yroad();  // 追逐区
     if (IMG._config->check_ramp_)check_ramp();   //桥
 
     aim_distance_f = _config->aim_distance_far;
@@ -575,6 +576,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     run_circle();
     run_bomb();
     run_ramp();
+    run_yroad();
     if (element_identify == 1) {
         serial->buzzerSound(1);
     }
