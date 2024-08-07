@@ -173,7 +173,7 @@ void run_yroad() {
 							IMG.element_identify = 1;
 							yroad_route = IMG.encoder.route;
 							flag_yroad = YROAD_FOUND_1;
-							MAT_LOG("YROAD_FOUND_1");
+							MAT_LOG("YROAD_FOUND_1_%d", yroad_position);
 							return;
 						}
 					}
@@ -196,7 +196,7 @@ void run_yroad() {
 							IMG.element_identify = 1;
 							yroad_route = IMG.encoder.route;
 							flag_yroad = YROAD_FOUND_2;
-							MAT_LOG("YROAD_FOUND_2");
+							MAT_LOG("YROAD_FOUND_2_%d", yroad_position);
 							return;
 						}
 					}
@@ -219,7 +219,7 @@ void run_yroad() {
 							IMG.element_identify = 1;
 							yroad_route = IMG.encoder.route;
 							flag_yroad = YROAD_FOUND_3;
-							MAT_LOG("YROAD_FOUND_3");
+							MAT_LOG("YROAD_FOUND_3_%d", yroad_position);
 							return;
 						}
 					}
@@ -294,9 +294,8 @@ void run_yroad() {
 		}
 		else if (flag_yroad == YROAD_FOUND_3) {
 			IMG.aim_speed = IMG._config->speed_base;;
-			IMG.aim_distance_f = 0.3;
-			IMG.aim_distance_n = 0.1;
-			IMG.aim_angle_p *= 1.5;
+			IMG.aim_distance_f = 0.5;
+			IMG.aim_distance_n = 0.2;
 
 			if (IMG.encoder.route - yroad_route > 200) {
 				IMG.element_over = true;
