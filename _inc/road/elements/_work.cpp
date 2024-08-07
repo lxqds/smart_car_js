@@ -313,6 +313,7 @@ void run_work()
             //    flag_work = WORK_STOPPING;
             //    MAT_LOG("WORK_READY_ERROR");
             //}
+            // 
             // 调整 进入角度
             IMG.aim_angle = IMG._config->work_angle_in_1;
             if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
@@ -488,7 +489,7 @@ void run_work()
 
             }
 
-            //开始 直线退出
+            //开始 退出
             if (out_flage == 1) {
                 /*
                 {
