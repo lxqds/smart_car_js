@@ -272,7 +272,8 @@ enum Control_element {
     work_element,   //工作区
     garage_element, //车库
     bomb_element,   //炸弹
-    ramp_element    //桥
+    ramp_element,   //桥
+    yroad_element   //追逐区
 };
 
 class Control_Flag {
