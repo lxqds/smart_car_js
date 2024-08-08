@@ -50,9 +50,6 @@ void speed_fun(int speed, float brake_P, float yx_speed_err) {
 
 void check_work()
 {
-    work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
-    drawH(0.05 * IMAGE_HEIGHT, 0, 0, 255, IMG.mat_result);
-    drawH(work_Red.x, 0, 255, 0, IMG.mat_result);
     if (!IMG.element_over &&
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
@@ -100,7 +97,7 @@ void check_work()
                     work_route = IMG.encoder.route;
                     IMG.flag_track = TRACK_RIGHT;
                     flag_work = WORK_FOUND_0;
-                    speed_fun(0, 1, 500);
+                    speed_fun(0, 2, 500);
                     MAT_LOG("WORK_FOUND_0");
                     fond_flag = 0;
                     AI_find_sign = POINT(0, 0);
@@ -136,11 +133,12 @@ void run_work()
 
                 if (fond_flag == 0) {
                     work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
-                    int thresholdh = IMAGE_HEIGHT * 0.3;
+                    float threshold_re = 0.5;
+                    int thresholdh = IMAGE_HEIGHT * threshold_re;
 
-                    int coneLowy = IMAGE_HEIGHT * 0.3 + 12;
+                    int coneLowy = IMAGE_HEIGHT * threshold_re + 12;
 
-                    int err_H = IMAGE_HEIGHT * 0.3 + 6 - work_Red.x;
+                    int err_H = IMAGE_HEIGHT * threshold_re + 6 - work_Red.x;
 
                     IMG.aim_speed = err_H;
 
