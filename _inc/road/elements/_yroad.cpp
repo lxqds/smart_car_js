@@ -124,9 +124,6 @@ void check_yroad() {
 			if (IMG.ipts1_num > 10)
 				R1 = fit_line1(IMG.ipts1, IMG.ipts1_num, 60);
 
-
-
-
 			if (R1 < 1.0f && !IMG.Lpt1_found &&  // 右角点未找到
 				!IMG.far_Lpt1_found &&  // 右远角点未找到
 				IMG.Lpt0_found &&//左角点找到
@@ -354,15 +351,38 @@ void run_yroad() {
 
 		}
 		else if (flag_yroad == YROAD_FOUND_1) {
-			IMG.aim_speed = 100;
+			IMG.aim_speed = IMG._config->speed_base;;
+			IMG.aim_distance_f = 0.4;
+			IMG.aim_distance_n = 0.2;
 
 			if (IMG.encoder.route - yroad_route > 200) {
 				IMG.element_over = true;
 				IMG.element_over_route = IMG.encoder.route;
+				flag_yroad = YROAD_NONE;
 				control_flag.pop();//移除环岛
 			}
 
 			IMG.get_edge();//获取边线
+			if (yroad_position == 0) {
+				IMG.flag_track = TRACK_RIGHT;
+				//右边线预测中线
+				track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
+					(int)round(ANGLE_DIST / SAMPLE_DIST),
+					PIXEL_PER_METER * 0.2 / 2);
+				IMG.rptsc1_num = IMG.rpts1s_num;
+			}
+			else {
+				IMG.flag_track = TRACK_LEFT;
+				//左边线预测中线
+				track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
+					(int)round(ANGLE_DIST / SAMPLE_DIST),
+					PIXEL_PER_METER * 0.2 / 2);
+				IMG.rptsc0_num = IMG.rpts0s_num;
+			}
+
+
+
+
 			// 正常巡线
 			if (IMG.flag_track == TRACK_LEFT) {
 				IMG.rpts = IMG.rptsc0;
@@ -376,7 +396,16 @@ void run_yroad() {
 				IMG.rpts = IMG.rptscs;
 				IMG.rpts_num = IMG.rptscs_num;
 			}
-			IMG.calculate_angle();//计算角度
+
+			if (IMG.rpts_num > 0.3 / SAMPLE_DIST) {
+				IMG.calculate_angle();//计算角度
+			}
+			else if (IMG.flag_track == TRACK_RIGHT) {
+				IMG.aim_angle = -45;
+			}
+			else if (IMG.flag_track == TRACK_LEFT) {
+				IMG.aim_angle = 45;
+			}
 		}
 		else if (flag_yroad == YROAD_FOUND_2) {
 			IMG.aim_speed = 100;
@@ -384,6 +413,7 @@ void run_yroad() {
 			if (IMG.encoder.route - yroad_route > 200) {
 				IMG.element_over = true;
 				IMG.element_over_route = IMG.encoder.route;
+				flag_yroad = YROAD_NONE;
 				control_flag.pop();//移除环岛
 			}
 			IMG.get_edge();//获取边线
@@ -404,12 +434,13 @@ void run_yroad() {
 		}
 		else if (flag_yroad == YROAD_FOUND_3) {
 			IMG.aim_speed = IMG._config->speed_base;;
-			IMG.aim_distance_f = 0.5;
+			IMG.aim_distance_f = 0.4;
 			IMG.aim_distance_n = 0.2;
 
 			if (IMG.encoder.route - yroad_route > 200) {
 				IMG.element_over = true;
 				IMG.element_over_route = IMG.encoder.route;
+				flag_yroad = YROAD_NONE;
 				control_flag.pop();//移除环岛
 			}
 
