@@ -167,7 +167,7 @@ void run_work()
 
                 if (fond_flag == 0) {
                     work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
-                    float threshold_re = 0.4;
+                    float threshold_re = 0.3;
                     int thresholdh = IMAGE_HEIGHT * threshold_re ;
 
                     int coneLowy = IMAGE_HEIGHT * threshold_re + 40;
@@ -214,7 +214,7 @@ void run_work()
                             AI_find_sign.y = r.score * 100;
                         }
                     }
-                    else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.05) {
+                    else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.50 && r.y > IMAGE_HEIGHT * 0.05) {
 
                         IMG.element_identify = 1;
                         work_route = IMG.encoder.route;
