@@ -134,31 +134,20 @@ void run_work()
                 if (fond_flag == 0) {
                     work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
                     float threshold_re = 0.5;
-                    int thresholdh = IMAGE_HEIGHT * threshold_re;
+                    int thresholdh = IMAGE_HEIGHT * threshold_re ;
 
-                    int coneLowy = IMAGE_HEIGHT * threshold_re + 12;
+                    int coneLowy = IMAGE_HEIGHT * threshold_re + 30;
 
-                    int err_H = IMAGE_HEIGHT * threshold_re + 6 - work_Red.x;
+                    int err_H = IMAGE_HEIGHT * threshold_re + 15 - work_Red.x;
 
-                    IMG.aim_speed = err_H;
-
-                    float speedP = err_H / 40.0;
-                    if (speedP < 0)speedP -= IMG._config->work_read_cone_base_speed_k;
-                    else speedP += IMG._config->work_read_cone_base_speed_k;
-                    if (speedP > 2)speedP = 2.0;
-                    if (speedP < -2)speedP = -2.0;
-                 
-
+                    IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
+                    if (work_Red.x == 0)IMG.aim_speed = -IMG._config->speed_work;
                     drawH(thresholdh, 0, 0, 255, IMG.mat_result);
                     drawH(work_Red.x, 255, 0, 0, IMG.mat_result);
                     drawH(coneLowy, 0, 0, 255, IMG.mat_result);
-                    if (work_Red.x == 0)IMG.aim_speed = -IMG._config->speed_work;
 
                     if (work_near_cone.x > thresholdh && work_near_cone.x < coneLowy) {
                         speed_fun(0, 3, 200);
-                    }
-                    else {
-                        IMG.aim_speed = IMG._config->speed_work * speedP;
                     }
 
                     if (stop_clock.toc() > 5000 && (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)) {
@@ -187,7 +176,7 @@ void run_work()
                         FOUND_last_y = 0;
                         in_flag = 0;
 
-                        speed_fun(IMG._config->speed_work+1, 1, 500);
+                        speed_fun(IMG._config->speed_work+1, 2, 500);
 
                         if (AI_find_sign.y < r.score * 100) {
                             AI_find_sign.x = 1;
@@ -205,7 +194,7 @@ void run_work()
                         FOUND_last_y = 0;
                         in_flag = 0;
 
-                        speed_fun(IMG._config->speed_work + 1, 1, 500);
+                        speed_fun(IMG._config->speed_work + 1, 2, 500);
 
                         if (AI_find_sign.y < r.score * 100) {
                             AI_find_sign.x = 0;
