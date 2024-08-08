@@ -48,6 +48,19 @@ void speed_fun(int speed, float brake_P, float yx_speed_err) {
     if (abs(speed_err) < yx_speed_err) IMG.aim_speed = speed;
 }
 
+bool pt_min_rect(std::vector<cv::Rect> all_zt, cv::Rect miny) {
+    miny.x -= 30;
+    miny.width += 60;
+    if (miny.x < 0)miny.x = 0;
+    if (miny.width + miny.x > IMAGE_WIDTH)miny.width = IMAGE_WIDTH - miny.x;
+    cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 0), 1);
+    for (int i = 0; i < all_zt.size(); i++)
+    {
+        if (miny & all_zt[i] != 0)return true;
+    }
+    return false;
+}
+
 void check_work()
 {
 
@@ -387,7 +400,7 @@ void run_work()
                     miny.y = IMAGE_HEIGHT;
                     // 找最高点且在屏幕一定范围下
                     for (size_t i = 0; i < all_zt.size(); i++) {
-                        if (all_zt[i].y < 0.45 * IMAGE_HEIGHT)continue;
+                        if (!pt_min_rect(all_zt, miny))continue;
                         if (all_zt[i].y < miny.y)miny = all_zt[i];
                     }
                 }
