@@ -125,7 +125,6 @@ void check_work()
                     stop_clock.tic();
                     return;
                 }
-                MAT_LOG("WORK_FOUND_0_read");
             }
         }
 
@@ -651,7 +650,7 @@ void run_work()
                     if (IMG.encoder.route - work_route > IMG._config->work_out_route) {
                         control_flag.pop();//移除
                         flag_work = WORK_NONE;
-                        MAT_LOG("WORK_HAVE_L");
+                        MAT_LOG("WORK_HAVE_DO");
                     }
                 }
 
