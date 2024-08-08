@@ -148,6 +148,7 @@ void run_work()
 
                     if (abs((int)(IMG.encoder.speed*1000))<500 && work_near_cone.x > thresholdh) {
                         IMG.aim_speed = 0;
+                        LOG_I << " speed" << (int)(IMG.encoder.speed * 1000) <<LOG_END;
                     }
 
                     if (stop_clock.toc() > 3000 && abs((int)IMG.encoder.speed*1000) < 500) {
