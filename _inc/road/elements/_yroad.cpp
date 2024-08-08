@@ -113,7 +113,6 @@ void check_yroad() {
 				return;
 			}
 		}
-		//道具小车在左边
 		if (IMG.ipts1_num > 180 &&// 右边长道
 			IMG.ipts0_num > 180 // 左边长道
 			) {
@@ -202,211 +201,212 @@ void check_yroad() {
 				}
 			}
 		}
-
+	}
+}
 		/* ********************************************************************* */
 
-		void run_yroad() {
-			if (control_flag.top() == yroad_element) {//当前为圆环元素
+void run_yroad() {
+	if (control_flag.top() == yroad_element) {//当前为圆环元素
 
-				if (flag_yroad == YROAD_FOUND_0) {
-					IMG.aim_speed = 100;
-					for (auto r : IMG.detection_result) {
-						switch (r.label) {
-							case IMG.label_safety://普通车辆
-							{
-								if (r.score > 0.7 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
-									double L0 =
-										dis_point_line(
-											POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
-											POINT(IMG.ipts0[IMG.ipts0_num - 1][0], IMG.ipts0[IMG.ipts0_num - 1][1]),
-											POINT(r.x, r.y));
-									double L1 =
-										dis_point_line(
-											POINT(IMG.ipts1[0][0], IMG.ipts1[0][1]),
-											POINT(IMG.ipts1[IMG.ipts1_num - 1][0], IMG.ipts1[IMG.ipts1_num - 1][1]),
-											POINT(r.x, r.y));
-									if (L0 < L1) yroad_position = 0;
-									else yroad_position = 1;
+		if (flag_yroad == YROAD_FOUND_0) {
+			IMG.aim_speed = 100;
+			for (auto r : IMG.detection_result) {
+				switch (r.label) {
+					case IMG.label_safety://普通车辆
+					{
+						if (r.score > 0.7 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
+							double L0 =
+								dis_point_line(
+									POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
+									POINT(IMG.ipts0[IMG.ipts0_num - 1][0], IMG.ipts0[IMG.ipts0_num - 1][1]),
+									POINT(r.x, r.y));
+							double L1 =
+								dis_point_line(
+									POINT(IMG.ipts1[0][0], IMG.ipts1[0][1]),
+									POINT(IMG.ipts1[IMG.ipts1_num - 1][0], IMG.ipts1[IMG.ipts1_num - 1][1]),
+									POINT(r.x, r.y));
+							if (L0 < L1) yroad_position = 0;
+							else yroad_position = 1;
 
-									IMG.element_identify = 1;
-									yroad_route = IMG.encoder.route;
-									flag_yroad = YROAD_FOUND_1;
-									MAT_LOG("YROAD_FOUND_1_%d", yroad_position);
-									return;
-								}
-							}
-							return;
-							case IMG.label_spy://嫌疑车辆
-							{
-								if (r.score > 0.7 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
-									double L0 =
-										dis_point_line(
-											POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
-											POINT(IMG.ipts0[IMG.ipts0_num - 1][0], IMG.ipts0[IMG.ipts0_num - 1][1]),
-											POINT(r.x, r.y));
-									double L1 =
-										dis_point_line(
-											POINT(IMG.ipts1[0][0], IMG.ipts1[0][1]),
-											POINT(IMG.ipts1[IMG.ipts1_num - 1][0], IMG.ipts1[IMG.ipts1_num - 1][1]),
-											POINT(r.x, r.y));
-									if (L0 < L1) yroad_position = 0;
-									else yroad_position = 1;
-									IMG.element_identify = 1;
-									yroad_route = IMG.encoder.route;
-									flag_yroad = YROAD_FOUND_2;
-									MAT_LOG("YROAD_FOUND_2_%d", yroad_position);
-									return;
-								}
-							}
-							return;
-							case IMG.label_danger://危险车辆
-							{
-								if (r.score > 0.7 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
-									double L0 =
-										dis_point_line(
-											POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
-											POINT(IMG.ipts0[IMG.ipts0_num - 1][0], IMG.ipts0[IMG.ipts0_num - 1][1]),
-											POINT(r.x, r.y));
-									double L1 =
-										dis_point_line(
-											POINT(IMG.ipts1[0][0], IMG.ipts1[0][1]),
-											POINT(IMG.ipts1[IMG.ipts1_num - 1][0], IMG.ipts1[IMG.ipts1_num - 1][1]),
-											POINT(r.x, r.y));
-									if (L0 < L1) yroad_position = 0;
-									else yroad_position = 1;
-									IMG.element_identify = 1;
-									yroad_route = IMG.encoder.route;
-									flag_yroad = YROAD_FOUND_3;
-									MAT_LOG("YROAD_FOUND_3_%d", yroad_position);
-									return;
-								}
-							}
+							IMG.element_identify = 1;
+							yroad_route = IMG.encoder.route;
+							flag_yroad = YROAD_FOUND_1;
+							MAT_LOG("YROAD_FOUND_1_%d", yroad_position);
 							return;
 						}
 					}
-					IMG.get_edge();//获取边线
-					// 正常巡线
-					if (IMG.flag_track == TRACK_LEFT) {
-						IMG.rpts = IMG.rptsc0;
-						IMG.rpts_num = IMG.rptsc0_num;
+					return;
+					case IMG.label_spy://嫌疑车辆
+					{
+						if (r.score > 0.7 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
+							double L0 =
+								dis_point_line(
+									POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
+									POINT(IMG.ipts0[IMG.ipts0_num - 1][0], IMG.ipts0[IMG.ipts0_num - 1][1]),
+									POINT(r.x, r.y));
+							double L1 =
+								dis_point_line(
+									POINT(IMG.ipts1[0][0], IMG.ipts1[0][1]),
+									POINT(IMG.ipts1[IMG.ipts1_num - 1][0], IMG.ipts1[IMG.ipts1_num - 1][1]),
+									POINT(r.x, r.y));
+							if (L0 < L1) yroad_position = 0;
+							else yroad_position = 1;
+							IMG.element_identify = 1;
+							yroad_route = IMG.encoder.route;
+							flag_yroad = YROAD_FOUND_2;
+							MAT_LOG("YROAD_FOUND_2_%d", yroad_position);
+							return;
+						}
 					}
-					else if (IMG.flag_track == TRACK_RIGHT) {
-						IMG.rpts = IMG.rptsc1;
-						IMG.rpts_num = IMG.rptsc1_num;
+					return;
+					case IMG.label_danger://危险车辆
+					{
+						if (r.score > 0.7 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
+							double L0 =
+								dis_point_line(
+									POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
+									POINT(IMG.ipts0[IMG.ipts0_num - 1][0], IMG.ipts0[IMG.ipts0_num - 1][1]),
+									POINT(r.x, r.y));
+							double L1 =
+								dis_point_line(
+									POINT(IMG.ipts1[0][0], IMG.ipts1[0][1]),
+									POINT(IMG.ipts1[IMG.ipts1_num - 1][0], IMG.ipts1[IMG.ipts1_num - 1][1]),
+									POINT(r.x, r.y));
+							if (L0 < L1) yroad_position = 0;
+							else yroad_position = 1;
+							IMG.element_identify = 1;
+							yroad_route = IMG.encoder.route;
+							flag_yroad = YROAD_FOUND_3;
+							MAT_LOG("YROAD_FOUND_3_%d", yroad_position);
+							return;
+						}
 					}
-					else {
-						IMG.rpts = IMG.rptscs;
-						IMG.rpts_num = IMG.rptscs_num;
-					}
-					IMG.calculate_angle();//计算角度
-
-				}
-				else if (flag_yroad == YROAD_FOUND_1) {
-					IMG.aim_speed = 100;
-
-					if (IMG.encoder.route - yroad_route > 200) {
-						IMG.element_over = true;
-						IMG.element_over_route = IMG.encoder.route;
-						control_flag.pop();//移除环岛
-					}
-
-					IMG.get_edge();//获取边线
-					// 正常巡线
-					if (IMG.flag_track == TRACK_LEFT) {
-						IMG.rpts = IMG.rptsc0;
-						IMG.rpts_num = IMG.rptsc0_num;
-					}
-					else if (IMG.flag_track == TRACK_RIGHT) {
-						IMG.rpts = IMG.rptsc1;
-						IMG.rpts_num = IMG.rptsc1_num;
-					}
-					else {
-						IMG.rpts = IMG.rptscs;
-						IMG.rpts_num = IMG.rptscs_num;
-					}
-					IMG.calculate_angle();//计算角度
-				}
-				else if (flag_yroad == YROAD_FOUND_2) {
-					IMG.aim_speed = 100;
-
-					if (IMG.encoder.route - yroad_route > 200) {
-						IMG.element_over = true;
-						IMG.element_over_route = IMG.encoder.route;
-						control_flag.pop();//移除环岛
-					}
-					IMG.get_edge();//获取边线
-					// 正常巡线
-					if (IMG.flag_track == TRACK_LEFT) {
-						IMG.rpts = IMG.rptsc0;
-						IMG.rpts_num = IMG.rptsc0_num;
-					}
-					else if (IMG.flag_track == TRACK_RIGHT) {
-						IMG.rpts = IMG.rptsc1;
-						IMG.rpts_num = IMG.rptsc1_num;
-					}
-					else {
-						IMG.rpts = IMG.rptscs;
-						IMG.rpts_num = IMG.rptscs_num;
-					}
-					IMG.calculate_angle();//计算角度
-				}
-				else if (flag_yroad == YROAD_FOUND_3) {
-					IMG.aim_speed = IMG._config->speed_base;;
-					IMG.aim_distance_f = 0.5;
-					IMG.aim_distance_n = 0.2;
-
-					if (IMG.encoder.route - yroad_route > 200) {
-						IMG.element_over = true;
-						IMG.element_over_route = IMG.encoder.route;
-						control_flag.pop();//移除环岛
-					}
-
-					IMG.get_edge();//获取边线
-					if (yroad_position == 0) {
-						IMG.flag_track = TRACK_RIGHT;
-						//右边线预测中线
-						track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
-							(int)round(ANGLE_DIST / SAMPLE_DIST),
-							PIXEL_PER_METER * 0.6 / 2);
-						IMG.rptsc1_num = IMG.rpts1s_num;
-					}
-					else {
-						IMG.flag_track = TRACK_LEFT;
-						//左边线预测中线
-						track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
-							(int)round(ANGLE_DIST / SAMPLE_DIST),
-							PIXEL_PER_METER * 0.6 / 2);
-						IMG.rptsc0_num = IMG.rpts0s_num;
-					}
-
-
-
-
-					// 正常巡线
-					if (IMG.flag_track == TRACK_LEFT) {
-						IMG.rpts = IMG.rptsc0;
-						IMG.rpts_num = IMG.rptsc0_num;
-					}
-					else if (IMG.flag_track == TRACK_RIGHT) {
-						IMG.rpts = IMG.rptsc1;
-						IMG.rpts_num = IMG.rptsc1_num;
-					}
-					else {
-						IMG.rpts = IMG.rptscs;
-						IMG.rpts_num = IMG.rptscs_num;
-					}
-
-					if (IMG.rpts_num > 0.3 / SAMPLE_DIST) {
-						IMG.calculate_angle();//计算角度
-					}
-					else if (IMG.flag_track == TRACK_RIGHT) {
-						IMG.aim_angle = -45;
-					}
-					else if (IMG.flag_track == TRACK_LEFT) {
-						IMG.aim_angle = 45;
-					}
+					return;
 				}
 			}
-		}
+			IMG.get_edge();//获取边线
+			// 正常巡线
+			if (IMG.flag_track == TRACK_LEFT) {
+				IMG.rpts = IMG.rptsc0;
+				IMG.rpts_num = IMG.rptsc0_num;
+			}
+			else if (IMG.flag_track == TRACK_RIGHT) {
+				IMG.rpts = IMG.rptsc1;
+				IMG.rpts_num = IMG.rptsc1_num;
+			}
+			else {
+				IMG.rpts = IMG.rptscs;
+				IMG.rpts_num = IMG.rptscs_num;
+			}
+			IMG.calculate_angle();//计算角度
 
-		/* ********************************************************************* */
+		}
+		else if (flag_yroad == YROAD_FOUND_1) {
+			IMG.aim_speed = 100;
+
+			if (IMG.encoder.route - yroad_route > 200) {
+				IMG.element_over = true;
+				IMG.element_over_route = IMG.encoder.route;
+				control_flag.pop();//移除环岛
+			}
+
+			IMG.get_edge();//获取边线
+			// 正常巡线
+			if (IMG.flag_track == TRACK_LEFT) {
+				IMG.rpts = IMG.rptsc0;
+				IMG.rpts_num = IMG.rptsc0_num;
+			}
+			else if (IMG.flag_track == TRACK_RIGHT) {
+				IMG.rpts = IMG.rptsc1;
+				IMG.rpts_num = IMG.rptsc1_num;
+			}
+			else {
+				IMG.rpts = IMG.rptscs;
+				IMG.rpts_num = IMG.rptscs_num;
+			}
+			IMG.calculate_angle();//计算角度
+		}
+		else if (flag_yroad == YROAD_FOUND_2) {
+			IMG.aim_speed = 100;
+
+			if (IMG.encoder.route - yroad_route > 200) {
+				IMG.element_over = true;
+				IMG.element_over_route = IMG.encoder.route;
+				control_flag.pop();//移除环岛
+			}
+			IMG.get_edge();//获取边线
+			// 正常巡线
+			if (IMG.flag_track == TRACK_LEFT) {
+				IMG.rpts = IMG.rptsc0;
+				IMG.rpts_num = IMG.rptsc0_num;
+			}
+			else if (IMG.flag_track == TRACK_RIGHT) {
+				IMG.rpts = IMG.rptsc1;
+				IMG.rpts_num = IMG.rptsc1_num;
+			}
+			else {
+				IMG.rpts = IMG.rptscs;
+				IMG.rpts_num = IMG.rptscs_num;
+			}
+			IMG.calculate_angle();//计算角度
+		}
+		else if (flag_yroad == YROAD_FOUND_3) {
+			IMG.aim_speed = IMG._config->speed_base;;
+			IMG.aim_distance_f = 0.5;
+			IMG.aim_distance_n = 0.2;
+
+			if (IMG.encoder.route - yroad_route > 200) {
+				IMG.element_over = true;
+				IMG.element_over_route = IMG.encoder.route;
+				control_flag.pop();//移除环岛
+			}
+
+			IMG.get_edge();//获取边线
+			if (yroad_position == 0) {
+				IMG.flag_track = TRACK_RIGHT;
+				//右边线预测中线
+				track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
+					(int)round(ANGLE_DIST / SAMPLE_DIST),
+					PIXEL_PER_METER * 0.6 / 2);
+				IMG.rptsc1_num = IMG.rpts1s_num;
+			}
+			else {
+				IMG.flag_track = TRACK_LEFT;
+				//左边线预测中线
+				track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
+					(int)round(ANGLE_DIST / SAMPLE_DIST),
+					PIXEL_PER_METER * 0.6 / 2);
+				IMG.rptsc0_num = IMG.rpts0s_num;
+			}
+
+
+
+
+			// 正常巡线
+			if (IMG.flag_track == TRACK_LEFT) {
+				IMG.rpts = IMG.rptsc0;
+				IMG.rpts_num = IMG.rptsc0_num;
+			}
+			else if (IMG.flag_track == TRACK_RIGHT) {
+				IMG.rpts = IMG.rptsc1;
+				IMG.rpts_num = IMG.rptsc1_num;
+			}
+			else {
+				IMG.rpts = IMG.rptscs;
+				IMG.rpts_num = IMG.rptscs_num;
+			}
+
+			if (IMG.rpts_num > 0.3 / SAMPLE_DIST) {
+				IMG.calculate_angle();//计算角度
+			}
+			else if (IMG.flag_track == TRACK_RIGHT) {
+				IMG.aim_angle = -45;
+			}
+			else if (IMG.flag_track == TRACK_LEFT) {
+				IMG.aim_angle = 45;
+			}
+		}
+	}
+}
+
+/* ********************************************************************* */
