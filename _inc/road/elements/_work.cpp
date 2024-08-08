@@ -387,7 +387,7 @@ void run_work()
                     miny.y = IMAGE_HEIGHT;
                     // 找最高点且在屏幕一定范围下
                     for (size_t i = 0; i < all_zt.size(); i++) {
-                        if (all_zt[i].y < 0.3 * IMAGE_HEIGHT)continue;
+                        if (all_zt[i].y < 0.45 * IMAGE_HEIGHT)continue;
                         if (all_zt[i].y < miny.y)miny = all_zt[i];
                     }
                 }
