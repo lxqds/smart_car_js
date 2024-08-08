@@ -439,6 +439,9 @@ void run_work()
                     speed_fun(0, 2, 300);
                     work_route = IMG.encoder.route;
                     flag_work = WORK_OUT;
+                    workC.init();
+                    out_flage = 0;
+                    if (abs(work_in_yaw - IMG.encoder.yaw) > 30)out_flage = 1;
                     MAT_LOG("WORK_STOPPING");
                 }
             }
