@@ -165,7 +165,7 @@ void run_work()
                     drawH(thresholdh, 0, 0, 255, IMG.mat_result);
                     drawH(work_Red.x, 255, 0, 0, IMG.mat_result);
                     drawH(coneLowy, 0, 0, 255, IMG.mat_result);
-                    LOG_I << " speed" << abs((int)(IMG.encoder.speed * 1000)) << LOG_END;
+                    //LOG_I << " speed" << abs((int)(IMG.encoder.speed * 1000)) << LOG_END;
                     if (abs(IMG.encoder.speed*1000)<500 && work_Red.x > thresholdh) {
                         IMG.aim_speed = 0;
                     }
@@ -594,6 +594,7 @@ void run_work()
 
                     IMG.aim_speed = -IMG._config->work_recback_speed;
 
+                    LOG_I << " work_route" << work_route - IMG.encoder.route << LOG_END;
                     if (IMG.max_white_line_length > 1000 && work_route - IMG.encoder.route >30) {
                         out_flage = 2;
                         MAT_LOG("out_flage2");
