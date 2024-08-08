@@ -56,30 +56,30 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     // 图像预处理: 缩放 -> 灰度 -> 二值化
     cv::resize(mat_origin, mat_result, cv::Size(IMAGE_WIDTH, IMAGE_HEIGHT), 0, 0, cv::INTER_AREA);
 
-    {
-        std::vector<cv::Mat> imageRGB;
-        //RGB三通道分离
-        cv::split(mat_result, imageRGB);
-        // LOG_I << "1" << LOG_END;
-        //求原始图像的RGB分量的均值
-        double R, G, B;
-        B = cv::mean(imageRGB[0])[0];
-        G = cv::mean(imageRGB[1])[0];
-        R = cv::mean(imageRGB[2])[0];
-        // LOG_I << "2" << LOG_END;
-        //需要调整的RGB分量的增益
-        double KR, KG, KB;
-        KB = (R + G + B) / (3 * B);
-        KG = (R + G + B) / (3 * G);
-        KR = (R + G + B) / (3 * R);
-        //调整RGB三个通道各自的值
-        imageRGB[0] = imageRGB[0] * KB;
-        imageRGB[1] = imageRGB[1] * KG;
-        imageRGB[2] = imageRGB[2] * KR;
-        //RGB三通道图像合并-
-        cv::merge(imageRGB, mat_result);
-        // LOG_I << "3" << LOG_END;
-    }
+    // {
+    //     std::vector<cv::Mat> imageRGB;
+    //     //RGB三通道分离
+    //     cv::split(mat_result, imageRGB);
+    //     // LOG_I << "1" << LOG_END;
+    //     //求原始图像的RGB分量的均值
+    //     double R, G, B;
+    //     B = cv::mean(imageRGB[0])[0];
+    //     G = cv::mean(imageRGB[1])[0];
+    //     R = cv::mean(imageRGB[2])[0];
+    //     // LOG_I << "2" << LOG_END;
+    //     //需要调整的RGB分量的增益
+    //     double KR, KG, KB;
+    //     KB = (R + G + B) * 1.5 / (3.2 * B);
+    //     KG = (R + G + B) / (3 * G);
+    //     KR = (R + G + B) / (3 * R);
+    //     //调整RGB三个通道各自的值
+    //     imageRGB[0] = imageRGB[0] * KB;
+    //     imageRGB[1] = imageRGB[1] * KG;
+    //     imageRGB[2] = imageRGB[2] * KR;
+    //     //RGB三通道图像合并-
+    //     cv::merge(imageRGB, mat_result);
+    //     // LOG_I << "3" << LOG_END;
+    // }
     cv::cvtColor(mat_result, mat_bin, cv::COLOR_BGR2GRAY);
     cv::threshold(mat_bin, mat_bin, 0, 255, cv::THRESH_OTSU);
 
@@ -316,7 +316,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     for (int i = 0; i < ipts0_num; i++) {
         map_perspective((float)ipts0[i][0], (float)ipts0[i][1], rpts0[i], 0);
         edge_left.push_back(POINT(ipts0[i][1], ipts0[i][0]));
-       
+
     }
     for (int i = 0; i < ipts1_num; i++) {
         map_perspective((float)ipts1[i][0], (float)ipts1[i][1], rpts1[i], 0);
@@ -326,12 +326,12 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         map_perspective((float)far_ipts0[i][0], (float)far_ipts0[i][1], far_rpts0[i], 0);
         edge_left_far.push_back(POINT(far_ipts0[i][1], far_ipts0[i][0]));
     }
-        
+
     for (int i = 0; i < far_ipts1_num; i++) {
         map_perspective((float)far_ipts1[i][0], (float)far_ipts1[i][1], far_rpts1[i], 0);
         edge_right_far.push_back(POINT(far_ipts1[i][1], far_ipts1[i][0]));
     }
-       
+
 
     Find_corner(rpts0, ipts0_num, Lpt0_point, &Lpt0_angle);
     Find_corner(rpts1, ipts1_num, Lpt1_point, &Lpt1_angle);
