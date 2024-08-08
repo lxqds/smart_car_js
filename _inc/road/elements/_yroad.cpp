@@ -36,83 +36,83 @@ void check_yroad() {
 		!control_flag.contains(garage_element) &&      //当前没在入库中
 		!control_flag.contains(ramp_element)
 		) {
-		// for (auto r : IMG.detection_result) {
-		// 	switch (r.label) {
-		// 		case IMG.label_safety://普通车辆
-		// 		{
-		// 			if (r.score > 0.7 && r.y > IMAGE_HEIGHT * 0.1 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
-		// 				double L0 =
-		// 					dis_point_line(
-		// 						POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
-		// 						POINT(IMG.ipts0[IMG.ipts0_num - 1][0], IMG.ipts0[IMG.ipts0_num - 1][1]),
-		// 						POINT(r.x, r.y));
-		// 				double L1 =
-		// 					dis_point_line(
-		// 						POINT(IMG.ipts1[0][0], IMG.ipts1[0][1]),
-		// 						POINT(IMG.ipts1[IMG.ipts1_num - 1][0], IMG.ipts1[IMG.ipts1_num - 1][1]),
-		// 						POINT(r.x, r.y));
-		// 				if (L0 < L1) yroad_position = 0;
-		// 				else yroad_position = 1;
+		for (auto r : IMG.detection_result) {
+			switch (r.label) {
+				case IMG.label_safety://普通车辆
+				{
+					if (r.score > 0.7 && r.y > IMAGE_HEIGHT * 0.1 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
+						double L0 =
+							dis_point_line(
+								POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
+								POINT(IMG.ipts0[IMG.ipts0_num - 1][0], IMG.ipts0[IMG.ipts0_num - 1][1]),
+								POINT(r.x, r.y));
+						double L1 =
+							dis_point_line(
+								POINT(IMG.ipts1[0][0], IMG.ipts1[0][1]),
+								POINT(IMG.ipts1[IMG.ipts1_num - 1][0], IMG.ipts1[IMG.ipts1_num - 1][1]),
+								POINT(r.x, r.y));
+						if (L0 < L1) yroad_position = 0;
+						else yroad_position = 1;
 
-		// 				IMG.element_identify = 1;
-		// 				control_flag.push(yroad_element);
-		// 				yroad_route = IMG.encoder.route;
-		// 				flag_yroad = YROAD_FOUND_1;
-		// 				MAT_LOG("YROAD_FOUND_1");
-		// 				return;
-		// 			}
-		// 		}
-		// 		return;
-		// 		case IMG.label_spy://嫌疑车辆
-		// 		{
-		// 			if (r.score > 0.7 && r.y > IMAGE_HEIGHT * 0.1 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
-		// 				double L0 =
-		// 					dis_point_line(
-		// 						POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
-		// 						POINT(IMG.ipts0[IMG.ipts0_num - 1][0], IMG.ipts0[IMG.ipts0_num - 1][1]),
-		// 						POINT(r.x, r.y));
-		// 				double L1 =
-		// 					dis_point_line(
-		// 						POINT(IMG.ipts1[0][0], IMG.ipts1[0][1]),
-		// 						POINT(IMG.ipts1[IMG.ipts1_num - 1][0], IMG.ipts1[IMG.ipts1_num - 1][1]),
-		// 						POINT(r.x, r.y));
-		// 				if (L0 < L1) yroad_position = 0;
-		// 				else yroad_position = 1;
-		// 				IMG.element_identify = 1;
-		// 				control_flag.push(yroad_element);
-		// 				yroad_route = IMG.encoder.route;
-		// 				flag_yroad = YROAD_FOUND_2;
-		// 				MAT_LOG("YROAD_FOUND_2");
-		// 				return;
-		// 			}
-		// 		}
-		// 		return;
-		// 		case IMG.label_danger://危险车辆
-		// 		{
-		// 			if (r.score > 0.7 && r.y > IMAGE_HEIGHT * 0.1 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
-		// 				double L0 =
-		// 					dis_point_line(
-		// 						POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
-		// 						POINT(IMG.ipts0[IMG.ipts0_num - 1][0], IMG.ipts0[IMG.ipts0_num - 1][1]),
-		// 						POINT(r.x, r.y));
-		// 				double L1 =
-		// 					dis_point_line(
-		// 						POINT(IMG.ipts1[0][0], IMG.ipts1[0][1]),
-		// 						POINT(IMG.ipts1[IMG.ipts1_num - 1][0], IMG.ipts1[IMG.ipts1_num - 1][1]),
-		// 						POINT(r.x, r.y));
-		// 				if (L0 < L1) yroad_position = 0;
-		// 				else yroad_position = 1;
-		// 				IMG.element_identify = 1;
-		// 				control_flag.push(yroad_element);
-		// 				yroad_route = IMG.encoder.route;
-		// 				flag_yroad = YROAD_FOUND_3;
-		// 				MAT_LOG("YROAD_FOUND_3");
-		// 				return;
-		// 			}
-		// 		}
-		// 		return;
-		// 	}
-		// }
+						IMG.element_identify = 1;
+						control_flag.push(yroad_element);
+						yroad_route = IMG.encoder.route;
+						flag_yroad = YROAD_FOUND_1;
+						MAT_LOG("YROAD_FOUND_1");
+						return;
+					}
+				}
+				return;
+				case IMG.label_spy://嫌疑车辆
+				{
+					if (r.score > 0.7 && r.y > IMAGE_HEIGHT * 0.1 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
+						double L0 =
+							dis_point_line(
+								POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
+								POINT(IMG.ipts0[IMG.ipts0_num - 1][0], IMG.ipts0[IMG.ipts0_num - 1][1]),
+								POINT(r.x, r.y));
+						double L1 =
+							dis_point_line(
+								POINT(IMG.ipts1[0][0], IMG.ipts1[0][1]),
+								POINT(IMG.ipts1[IMG.ipts1_num - 1][0], IMG.ipts1[IMG.ipts1_num - 1][1]),
+								POINT(r.x, r.y));
+						if (L0 < L1) yroad_position = 0;
+						else yroad_position = 1;
+						IMG.element_identify = 1;
+						control_flag.push(yroad_element);
+						yroad_route = IMG.encoder.route;
+						flag_yroad = YROAD_FOUND_2;
+						MAT_LOG("YROAD_FOUND_2");
+						return;
+					}
+				}
+				return;
+				case IMG.label_danger://危险车辆
+				{
+					if (r.score > 0.7 && r.y > IMAGE_HEIGHT * 0.1 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
+						double L0 =
+							dis_point_line(
+								POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
+								POINT(IMG.ipts0[IMG.ipts0_num - 1][0], IMG.ipts0[IMG.ipts0_num - 1][1]),
+								POINT(r.x, r.y));
+						double L1 =
+							dis_point_line(
+								POINT(IMG.ipts1[0][0], IMG.ipts1[0][1]),
+								POINT(IMG.ipts1[IMG.ipts1_num - 1][0], IMG.ipts1[IMG.ipts1_num - 1][1]),
+								POINT(r.x, r.y));
+						if (L0 < L1) yroad_position = 0;
+						else yroad_position = 1;
+						IMG.element_identify = 1;
+						control_flag.push(yroad_element);
+						yroad_route = IMG.encoder.route;
+						flag_yroad = YROAD_FOUND_3;
+						MAT_LOG("YROAD_FOUND_3");
+						return;
+					}
+				}
+				return;
+			}
+		}
 		if (IMG.ipts1_num > 180 &&// 右边长道
 			IMG.ipts0_num > 180 // 左边长道
 			) {
@@ -132,6 +132,58 @@ void check_yroad() {
 				IMG.Lpt0_found &&//左角点找到
 				IMG.far_Lpt0_found //左远角点找到
 				) {
+
+				float x0 = IMG.ipts0[0][0];
+				float y0 = IMG.ipts0[0][1];
+				float x1 = IMG.ipts0[IMG.ipts0_num - 1][0];
+				float y1 = IMG.ipts0[IMG.ipts0_num - 1][1];
+				float r = sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
+				float a = (x1 - x0) / r;
+				float b = (y1 - y0) / r;
+				int flag = 0;
+				for (int i = x0 + 2;i < x0 + 12; i++) {
+					int sign = 0;
+					int count = 0;
+					for (float L = 1; ; L++) {
+						int x = (int)(i + L * a);
+						int y = (int)(y0 + L * b);
+						if (x < 0 || x >= IMAGE_WIDTH || y < 0 || y >= IMAGE_HEIGHT || y < y1)break;
+						if (sign == 0) {
+							if (AT_IMAGE(IMG.mat_bin, (int)x, (int)y) < 127)count++;
+							else count = 0;
+							if (count > 10) {
+								L -= 10;
+								sign = 1;
+								count = 0;
+								cv::line(IMG.mat_result, cv::Point(x, y),
+									cv::Point(x, y),
+									cv::Scalar(255, 0, 255), 1);
+							}
+						}
+						else if (sign == 1) {
+							if (AT_IMAGE(IMG.mat_bin, (int)x, (int)y) > 127)count++;
+							else count = 0;
+							if (count > 5) {
+								flag++;
+								count = 0;
+								break;
+							}
+						}
+					}
+					if (flag >= 5) {
+						IMG.element_identify = 1;
+						control_flag.push(yroad_element);
+						yroad_route = IMG.encoder.route;
+						flag_yroad = YROAD_FOUND_0;
+						MAT_LOG("YROAD_FOUND_0");
+						return;
+					}
+
+				}
+
+
+
+
 
 				IMG.element_identify = 1;
 				control_flag.push(yroad_element);
