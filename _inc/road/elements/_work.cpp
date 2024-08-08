@@ -147,10 +147,10 @@ void run_work()
                     drawH(coneLowy, 0, 0, 255, IMG.mat_result);
 
                     if (abs(IMG.encoder.speed)<500 && work_near_cone.x > thresholdh) {
-                        speed_fun(0, 2, 200);
+                        IMG.aim_speed = 0;
                     }
 
-                    if (stop_clock.toc() > 2000 && (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)) {
+                    if (stop_clock.toc() > 2000 && abs(IMG.encoder.speed) < 500) {
                         fond_flag = 1;
                         IMG.aim_speed = IMG._config->speed_base;
                         MAT_LOG("WORK_RED_ERR");
