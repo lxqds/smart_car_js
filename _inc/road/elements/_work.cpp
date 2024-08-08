@@ -133,12 +133,12 @@ void run_work()
 
                 if (fond_flag == 0) {
                     work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
-                    float threshold_re = 0.5;
+                    float threshold_re = 0.4;
                     int thresholdh = IMAGE_HEIGHT * threshold_re ;
 
-                    int coneLowy = IMAGE_HEIGHT * threshold_re + 30;
+                    int coneLowy = IMAGE_HEIGHT * threshold_re + 40;
 
-                    int err_H = IMAGE_HEIGHT * threshold_re + 15 - work_Red.x;
+                    int err_H = IMAGE_HEIGHT * threshold_re + 30 - work_Red.x;
 
                     IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
                     if (work_Red.x == 0)IMG.aim_speed = -IMG._config->speed_work;
@@ -146,7 +146,7 @@ void run_work()
                     drawH(work_Red.x, 255, 0, 0, IMG.mat_result);
                     drawH(coneLowy, 0, 0, 255, IMG.mat_result);
 
-                    if (abs(IMG.encoder.speed)<600) {
+                    if (abs(IMG.encoder.speed)<500 && work_near_cone.x > thresholdh) {
                         speed_fun(0, 2, 200);
                     }
 
