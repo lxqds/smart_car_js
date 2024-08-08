@@ -50,8 +50,9 @@ void speed_fun(int speed, float brake_P, float yx_speed_err) {
 
 void check_work()
 {
+    work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
     drawH(0.05 * IMAGE_HEIGHT, 0, 0, 255, IMG.mat_result);
-    drawH(0.05 * IMAGE_HEIGHT, 0, 0, 255, IMG.mat_result);
+    drawH(work_Red.x, 0, 255, 0, IMG.mat_result);
     if (!IMG.element_over &&
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
