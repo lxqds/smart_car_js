@@ -54,9 +54,10 @@ bool pt_min_rect(std::vector<cv::Rect> all_zt, cv::Rect miny) {
     if (miny.x < 0)miny.x = 0;
     if (miny.width + miny.x > IMAGE_WIDTH)miny.width = IMAGE_WIDTH - miny.x;
     cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 0), 1);
-    for (int i = 0; i < all_zt.size(); i++)
+    for (size_t i = 0; i < all_zt.size(); i++)
     {
-        if (miny & all_zt[i] != 0)return true;
+        cv::Rect bin = miny & all_zt[i];
+        if (bin.area() != 0)return true;
     }
     return false;
 }
