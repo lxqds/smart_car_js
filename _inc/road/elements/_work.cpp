@@ -133,6 +133,7 @@ void check_work()
                     IMG.flag_track = TRACK_RIGHT;
                     flag_work = WORK_FOUND_0;
                     speed_fun(0, 2, 500);
+                    IMG.aim_speed = IMG._config->speed_work;
                     MAT_LOG("WORK_FOUND_0");
                     fond_flag = 0;
                     AI_find_sign = POINT(0, 0);
