@@ -145,21 +145,15 @@ void run_work()
                     drawH(thresholdh, 0, 0, 255, IMG.mat_result);
                     drawH(work_Red.x, 255, 0, 0, IMG.mat_result);
                     drawH(coneLowy, 0, 0, 255, IMG.mat_result);
-
-                    if (abs((int)(IMG.encoder.speed*1000))<500 && work_near_cone.x > thresholdh) {
+                    LOG_I << " speed" << abs((int)(IMG.encoder.speed * 1000)) << LOG_END;
+                    if (abs(IMG.encoder.speed*1000)<500 && work_Red.x > thresholdh) {
                         IMG.aim_speed = 0;
-                        LOG_I << " speed" << abs((int)(IMG.encoder.speed * 1000)) <<LOG_END;
                     }
 
                     if (stop_clock.toc() > 3000 && abs((int)IMG.encoder.speed*1000) < 500) {
-                        fond_flag = 1;
-                        IMG.aim_speed = IMG._config->speed_base;
                         MAT_LOG("WORK_RED_ERR");
-                        IMG.element_over = true;
-                        IMG.element_over_route = IMG.encoder.route;
-                        control_flag.pop();//移除
-                        flag_work = WORK_NONE;
-                        return;
+                        flag_work = WORK_OUT;
+                        out_flage = 4;
                     }
                 }
 
