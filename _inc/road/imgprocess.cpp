@@ -311,7 +311,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     float rpts1[IMAGE_HEIGHT][2] = { 0 };
     float far_rpts0[IMAGE_HEIGHT][2] = { 0 };
     float far_rpts1[IMAGE_HEIGHT][2] = { 0 };
-    edge_left.clear();edge_right.clear();
+    edge_left.clear(); edge_right.clear(); edge_left_far.clear();  edge_right_far.clear();
     //透视变换得到的线
     for (int i = 0; i < ipts0_num; i++) {
         map_perspective((float)ipts0[i][0], (float)ipts0[i][1], rpts0[i], 0);
