@@ -161,7 +161,7 @@ void run_work()
                         IMG.aim_speed = IMG._config->speed_work * speedP;
                     }
 
-                    if (stop_clock.toc() > 2000 && (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)) {
+                    if (stop_clock.toc() > 5000 && (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)) {
                         fond_flag = 1;
                         IMG.aim_speed = IMG._config->speed_base;
                         MAT_LOG("WORK_RED_ERR");
@@ -169,7 +169,6 @@ void run_work()
                         IMG.element_over_route = IMG.encoder.route;
                         control_flag.pop();//移除
                         flag_work = WORK_NONE;
-                        MAT_LOG("WORK_ERROR");
                     }
                 }
 
@@ -178,7 +177,6 @@ void run_work()
                 }
 
                 for (auto r : IMG.detection_result) {
-                    MAT_LOG("WORK_FUZ");
                     if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.78 && r.y > IMAGE_HEIGHT * 0.05) {
                         IMG.element_identify = 1;
                         work_route = IMG.encoder.route;
