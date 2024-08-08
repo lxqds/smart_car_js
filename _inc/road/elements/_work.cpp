@@ -50,8 +50,9 @@ void speed_fun(int speed, float brake_P, float yx_speed_err) {
 
 void check_work()
 {
+
     if (!IMG.element_over &&
-        !control_flag.contains(circle_element) &&   //当前没在环岛中
+        (!control_flag.contains(circle_element) || flag_circle == CIRCLE_OUT) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&   //当前没在入库中
         !control_flag.contains(ramp_element) &&      //当前没在桥中
@@ -60,6 +61,11 @@ void check_work()
         for (auto r : IMG.detection_result) {
             if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.15) {
                 IMG.element_identify = 1;
+
+                if (control_flag.contains(circle_element)) {
+                    control_flag.remove(circle_element);
+                    flag_circle = CIRCLE_NONE;
+                }
                 control_flag.push(work_element);
                 work_route = IMG.encoder.route;
                 direction_work = false;
@@ -73,6 +79,12 @@ void check_work()
             else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.15) {
 
                 IMG.element_identify = 1;
+
+
+                if (control_flag.contains(circle_element)) {
+                    control_flag.remove(circle_element);
+                    flag_circle = CIRCLE_NONE;
+                }
                 control_flag.push(work_element);
                 work_route = IMG.encoder.route;
                 direction_work = true;
@@ -93,6 +105,12 @@ void check_work()
                 work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
                 if (work_Red.x != 0 && work_Red.y != 0 && work_Red.x > 0.05 * IMAGE_HEIGHT) {
                     IMG.element_identify = 1;
+
+
+                    if (control_flag.contains(circle_element)) {
+                        control_flag.remove(circle_element);
+                        flag_circle = CIRCLE_NONE;
+                    }
                     control_flag.push(work_element);
                     work_route = IMG.encoder.route;
                     IMG.flag_track = TRACK_RIGHT;
@@ -154,6 +172,7 @@ void run_work()
                         MAT_LOG("WORK_RED_ERR");
                         flag_work = WORK_OUT;
                         out_flage = 4;
+                        return;
                     }
                 }
 
