@@ -232,7 +232,9 @@ public:
 public:
     std::vector<POINT> edge_det;        // AI元素检测边缘点集
     std::vector<POINT> edge_left;       // 赛道左边缘点集   注意: 此点集 x 与 y 位置相反 !!!
+    std::vector<POINT> edge_left_far;
     std::vector<POINT> edge_right;      // 赛道右边缘点集
+    std::vector<POINT> edge_right_far;
     std::vector<POINT> last_edge_left;  // 记录上一场边缘点集 (丢失边)
     std::vector<POINT> last_edge_right;
     std::vector<vector<POINT>> path_last_edge_left; //记录左路径
