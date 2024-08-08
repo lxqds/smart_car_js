@@ -50,7 +50,8 @@ void speed_fun(int speed, float brake_P, float yx_speed_err) {
 
 void check_work()
 {
-
+    drawH(0.05 * IMAGE_HEIGHT, 0, 0, 255, IMG.mat_result);
+    drawH(0.05 * IMAGE_HEIGHT, 0, 0, 255, IMG.mat_result);
     if (!IMG.element_over &&
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
@@ -88,8 +89,6 @@ void check_work()
         }
 
         if (IMG._config->assist_judgment) {
-            drawH(0.05 * IMAGE_HEIGHT, 0, 0, 255, IMG.mat_result);
-            drawH(0.05 * IMAGE_HEIGHT, 0, 0, 255, IMG.mat_result);
             work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
             work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);//右工作区进入准备
             if (work_near_cone1.x != 0 && work_near_cone.x != 0) {
