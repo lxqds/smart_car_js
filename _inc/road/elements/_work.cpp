@@ -53,9 +53,9 @@ bool pt_min_rect(std::vector<cv::Rect> all_zt, cv::Rect miny) {
     miny.width += 60;
     if (miny.x < 0)miny.x = 0;
     if (miny.width + miny.x > IMAGE_WIDTH)miny.width = IMAGE_WIDTH - miny.x;
-    cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 255, 0), 1);
     for (size_t i = 0; i < all_zt.size(); i++)
-    {
+    {   
+        if (miny.y == all_zt[i].y)continue;
         cv::Rect bin = miny & all_zt[i];
         if (bin.area() != 0)return true;
     }
@@ -373,7 +373,7 @@ void run_work()
                 }
 
                 // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready )
-                float in_yaw = -30;
+                float in_yaw = -40;
                 if (!direction_work)in_yaw = -in_yaw;
                 if (IMG.max_white_line_length < 300 ||
                     ((!direction_work && IMG.encoder.yaw - work_yaw > in_yaw) &&
