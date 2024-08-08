@@ -142,21 +142,26 @@ void run_work()
 
                     IMG.aim_speed = err_H;
 
-                    float speedP = err_H / 30.0;
+                    float speedP = err_H / 40.0;
                     if (speedP < 0)speedP -= IMG._config->work_read_cone_base_speed_k;
                     else speedP += IMG._config->work_read_cone_base_speed_k;
                     if (speedP > 2)speedP = 2.0;
                     if (speedP < -2)speedP = -2.0;
-
-                    IMG.aim_speed = IMG._config->speed_work * speedP;
+                 
 
                     drawH(thresholdh, 0, 0, 255, IMG.mat_result);
                     drawH(work_Red.x, 255, 0, 0, IMG.mat_result);
                     drawH(coneLowy, 0, 0, 255, IMG.mat_result);
                     if (work_Red.x == 0)IMG.aim_speed = -IMG._config->speed_work;
-                    if (work_near_cone.x > thresholdh && work_near_cone.x < coneLowy)speed_fun(0, 2, 500);
 
-                    if (stop_clock.toc() > 5000 && (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)) {
+                    if (work_near_cone.x > thresholdh && work_near_cone.x < coneLowy) {
+                        speed_fun(0, 3, 200);
+                    }
+                    else {
+                        IMG.aim_speed = IMG._config->speed_work * speedP;
+                    }
+
+                    if (stop_clock.toc() > 2000 && (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy)) {
                         fond_flag = 1;
                         IMG.aim_speed = IMG._config->speed_base;
                         MAT_LOG("WORK_RED_ERR");
