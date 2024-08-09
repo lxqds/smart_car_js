@@ -458,7 +458,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             cv::line(mat_result, cv::Point(deX + deW, deY + deH), cv::Point(deX + deW, deY), cv::Scalar(0, 0, 0), 1);
             cv::line(mat_result, cv::Point(deX + deW, deY + deH), cv::Point(deX, deY + deH), cv::Scalar(0, 0, 0), 1);
 
-            LOG_I << "detection_type:" << r.type << LOG_END;
+            LOG_I << "detection_type:" << r.type << " score=" << LOG_END;
 
 
 
