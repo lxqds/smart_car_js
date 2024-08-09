@@ -437,7 +437,7 @@ void run_yroad() {
 			}
 		}
 		else if (flag_yroad == YROAD_FOUND_2) {
-			IMG.aim_speed = IMG._config->speed_base;
+			IMG.aim_speed = 200;
 
 			int Lpt0_point[2] = { 0 };
 			int Lpt1_point[2] = { 0 };
@@ -495,7 +495,7 @@ void run_yroad() {
 			IMG.calculate_angle();//计算角度
 		}
 		else if (flag_yroad == YROAD_FOUND_2_1) {//超车
-			IMG.aim_speed = IMG._config->speed_base;
+			IMG.aim_speed = 200;
 
 
 			if (yroad_position == 0) {
@@ -540,7 +540,7 @@ void run_yroad() {
 		else if (flag_yroad == YROAD_FOUND_2_2) {//开始别车
 			IMG.aim_distance_f = 0.3;
 			IMG.aim_distance_n = 0.1;
-			IMG.aim_speed = IMG._config->speed_base;
+			IMG.aim_speed = 200;
 			if (yroad_position == 0) {
 				IMG.flag_track = TRACK_LEFT;
 				//左边线预测中线
