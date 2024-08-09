@@ -120,9 +120,10 @@ void check_work()
 
             if (work_near_cone1.x != 0 && work_near_cone.x != 0) {
                 work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
-                if (work_Red.x != 0 && work_Red.y != 0 && work_Red.x > 0.05 * IMAGE_HEIGHT) {
-                    IMG.element_identify = 1;
+                if(work_Red.x ==0)work_Red = search_right_near_Red(IMG.edge_right_far, IMG.mat_lab2);
 
+                if (work_Red.x != 0 && work_Red.x > 0.05 * IMAGE_HEIGHT) {
+                    IMG.element_identify = 1;
 
                     if (control_flag.contains(circle_element)) {
                         control_flag.remove(circle_element);
@@ -166,37 +167,6 @@ void run_work()
             //预识别到元素，但是未识别到左右进入方向，后退回去识别
             if (flag_work == WORK_FOUND_0) {
 
-                if (fond_flag == 0) {
-                    work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
-                    float threshold_re = 0.3;
-                    int thresholdh = IMAGE_HEIGHT * threshold_re ;
-
-                    int coneLowy = IMAGE_HEIGHT * threshold_re + 40;
-
-                    int err_H = IMAGE_HEIGHT * threshold_re + 30 - work_Red.x;
-
-                    IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
-                    if (work_Red.x == 0)IMG.aim_speed = -IMG._config->speed_work;
-                    drawH(thresholdh, 0, 0, 255, IMG.mat_result);
-                    drawH(work_Red.x, 255, 0, 0, IMG.mat_result);
-                    drawH(coneLowy, 0, 0, 255, IMG.mat_result);
-                    //LOG_I << " speed" << abs((int)(IMG.encoder.speed * 1000)) << LOG_END;
-                    if (abs(IMG.encoder.speed*1000)<500 && work_Red.x > thresholdh) {
-                        IMG.aim_speed = 0;
-                    }
-
-                    if (stop_clock.toc() > 3000 && abs((int)IMG.encoder.speed*1000) < 500) {
-                        MAT_LOG("WORK_RED_ERR");
-                        flag_work = WORK_OUT;
-                        out_flage = 4;
-                        return;
-                    }
-                }
-
-                if (fond_flag == 1) {
-                    IMG.aim_speed = IMG._config->speed_work;
-                }
-
                 for (auto r : IMG.detection_result) {
                     if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.78 && r.y > IMAGE_HEIGHT * 0.05) {
                         IMG.element_identify = 1;
@@ -234,6 +204,37 @@ void run_work()
                         }
                     }
 
+                }
+
+                if (fond_flag == 0) {
+                    work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
+                    float threshold_re = 0.3;
+                    int thresholdh = IMAGE_HEIGHT * threshold_re;
+
+                    int coneLowy = IMAGE_HEIGHT * threshold_re + 40;
+
+                    int err_H = IMAGE_HEIGHT * threshold_re + 30 - work_Red.x;
+
+                    IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
+                    if (work_Red.x == 0)IMG.aim_speed = -IMG._config->speed_work;
+                    drawH(thresholdh, 0, 0, 255, IMG.mat_result);
+                    drawH(work_Red.x, 255, 0, 0, IMG.mat_result);
+                    drawH(coneLowy, 0, 0, 255, IMG.mat_result);
+                    //LOG_I << " speed" << abs((int)(IMG.encoder.speed * 1000)) << LOG_END;
+                    if (abs(IMG.encoder.speed * 1000) < 500 && work_Red.x > thresholdh) {
+                        IMG.aim_speed = 0;
+                    }
+
+                    if (stop_clock.toc() > 3000 && abs((int)IMG.encoder.speed * 1000) < 500) {
+                        MAT_LOG("WORK_RED_ERR");
+                        flag_work = WORK_OUT;
+                        out_flage = 4;
+                        return;
+                    }
+                }
+
+                if (fond_flag == 1) {
+                    IMG.aim_speed = IMG._config->speed_work;
                 }
             }
 
@@ -374,12 +375,11 @@ void run_work()
                 }
 
                 // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready )
-                float in_yaw = -40;
+                float in_yaw = 40;
                 if (!direction_work)in_yaw = -in_yaw;
                 if (IMG.max_white_line_length < 300 ||
-                    ((!direction_work && IMG.encoder.yaw - work_yaw > in_yaw) &&
-                        (direction_work && IMG.encoder.yaw - work_yaw < in_yaw))
-                    ) {
+                    (abs(IMG.encoder.yaw - work_yaw)> in_yaw))
+                    {
                     work_route = IMG.encoder.route;
                     flag_work = WORK_RUN;
                     work_route2 = IMG.encoder.route;
@@ -457,6 +457,8 @@ void run_work()
                     workC.init();
                     out_flage = 0;
                     if (abs(work_in_yaw - IMG.encoder.yaw) > 30)out_flage = 1;
+                    last_data = 0;
+                    member_K = 0;
                     MAT_LOG("WORK_STOPPING");
                 }
             }
@@ -607,8 +609,10 @@ void run_work()
                     else k = Calculate_Left_ConeK(all_zt);
 
                     IMG.aim_angle = (member_K - k) * IMG._config->work_out_angular_P;
-                    if (direction_work && IMG.aim_angle < IMG._config->work_out_angular_base_deviation) IMG.aim_angle = IMG._config->work_out_angular_base_deviation;
-                    else if (!direction_work && IMG.aim_angle > -IMG._config->work_out_angular_base_deviation)IMG.aim_angle = -IMG._config->work_out_angular_base_deviation;
+                    if(direction_work)IMG.aim_angle += IMG._config->work_out_angular_base_deviation;
+                    else IMG.aim_angle -= IMG._config->work_out_angular_base_deviation;
+                    //if (direction_work && IMG.aim_angle < IMG._config->work_out_angular_base_deviation) IMG.aim_angle = IMG._config->work_out_angular_base_deviation;
+                    //else if (!direction_work && IMG.aim_angle > -IMG._config->work_out_angular_base_deviation)IMG.aim_angle = -IMG._config->work_out_angular_base_deviation;
 
                     IMG.aim_speed = -IMG._config->work_recback_speed;
 
