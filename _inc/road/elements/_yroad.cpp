@@ -310,28 +310,28 @@ void run_yroad() {
 						}
 					}
 					return;
-					case IMG.label_danger://危险车辆
-					{
-						if (r.score > 0.8 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
-							double L0 =
-								dis_point_line(
-									POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
-									POINT(IMG.ipts0[IMG.ipts0_num - 1][0], IMG.ipts0[IMG.ipts0_num - 1][1]),
-									POINT(r.x, r.y));
-							double L1 =
-								dis_point_line(
-									POINT(IMG.ipts1[0][0], IMG.ipts1[0][1]),
-									POINT(IMG.ipts1[IMG.ipts1_num - 1][0], IMG.ipts1[IMG.ipts1_num - 1][1]),
-									POINT(r.x, r.y));
-							if (L0 < L1) yroad_position = 0;
-							else yroad_position = 1;
-							IMG.element_identify = 1;
-							yroad_route = IMG.encoder.route;
-							flag_yroad = YROAD_FOUND_3;
-							MAT_LOG("YROAD_FOUND_3_%d", yroad_position);
-							return;
-						}
-					}
+					// case IMG.label_danger://危险车辆
+					// {
+					// 	if (r.score > 0.8 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
+					// 		double L0 =
+					// 			dis_point_line(
+					// 				POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
+					// 				POINT(IMG.ipts0[IMG.ipts0_num - 1][0], IMG.ipts0[IMG.ipts0_num - 1][1]),
+					// 				POINT(r.x, r.y));
+					// 		double L1 =
+					// 			dis_point_line(
+					// 				POINT(IMG.ipts1[0][0], IMG.ipts1[0][1]),
+					// 				POINT(IMG.ipts1[IMG.ipts1_num - 1][0], IMG.ipts1[IMG.ipts1_num - 1][1]),
+					// 				POINT(r.x, r.y));
+					// 		if (L0 < L1) yroad_position = 0;
+					// 		else yroad_position = 1;
+					// 		IMG.element_identify = 1;
+					// 		yroad_route = IMG.encoder.route;
+					// 		flag_yroad = YROAD_FOUND_3;
+					// 		MAT_LOG("YROAD_FOUND_3_%d", yroad_position);
+					// 		return;
+					// 	}
+					// }
 					return;
 				}
 			}
