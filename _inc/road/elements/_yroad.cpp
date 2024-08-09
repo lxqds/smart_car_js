@@ -437,7 +437,7 @@ void run_yroad() {
 			}
 		}
 		else if (flag_yroad == YROAD_FOUND_2) {
-			IMG.aim_speed = 400;
+			IMG.aim_speed = 700;
 
 			int Lpt0_point[2] = { 0 };
 			int Lpt1_point[2] = { 0 };
@@ -465,7 +465,7 @@ void run_yroad() {
 			}
 			else {
 				IMG.flag_track = TRACK_LEFT;
-				drawH(Lpt0_point_first.y, 0, 0, 255, IMG.mat_result);
+				drawH(Lpt1_point_first.y, 0, 0, 255, IMG.mat_result);
 				if (Lpt1_point_first.y > 0.7 * IMAGE_HEIGHT) {
 					yroad_route = IMG.encoder.route;
 					flag_yroad = YROAD_FOUND_2_1;
@@ -495,7 +495,7 @@ void run_yroad() {
 			IMG.calculate_angle();//计算角度
 		}
 		else if (flag_yroad == YROAD_FOUND_2_1) {//超车
-			IMG.aim_speed = 400;
+			IMG.aim_speed = 700;
 			IMG.get_edge();//获取边线
 
 			if (yroad_position == 0) {
@@ -540,7 +540,8 @@ void run_yroad() {
 		else if (flag_yroad == YROAD_FOUND_2_2) {//开始别车
 			IMG.aim_distance_f = 0.3;
 			IMG.aim_distance_n = 0.1;
-			IMG.aim_speed = 400;
+			IMG.aim_angle_p *= 1.5;
+			IMG.aim_speed = 700;
 			IMG.get_edge();//获取边线
 			if (yroad_position == 0) {
 				IMG.flag_track = TRACK_LEFT;
