@@ -86,9 +86,9 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             //创建红色像素掩码
         cv::Mat redMask1;
         cv::Mat redMask2;
-        cv::Scalar lowerRed1(0, 40, 40);
+        cv::Scalar lowerRed1(0, 35, 35);
         cv::Scalar upperRed1(10, 255, 255);
-        cv::Scalar lowerRed2(160, 40, 40);
+        cv::Scalar lowerRed2(160, 35, 35);
         cv::Scalar upperRed2(179, 255, 255);
         cv::inRange(hsvImage, lowerRed1, upperRed1, redMask1);
         cv::inRange(hsvImage, lowerRed2, upperRed2, redMask2);
@@ -97,7 +97,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         cv::bitwise_or(redMask1, redMask2, mask);  //合并
 
         //去噪
-        cv::Mat kernel = cv::getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(7, 7));
+        cv::Mat kernel = cv::getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(5, 5));
         cv::morphologyEx(mask, mask, cv::MORPH_OPEN, kernel);
         cv::morphologyEx(mask, mask, cv::MORPH_CLOSE, kernel);
 
@@ -127,7 +127,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
  if (pixelCount > 1000 && maxAreaIndex != -1)
  {
-        cv::Rect boundingRect = cv::boundingRect(contours[maxAreaIndex]);
+        cv::Rect boundingRect = cv::boundingRect(contours[maxAreaIndex]);//红色增强区域
      
          int expandPixels = 30;  // 根据需要调整这个值来控制扩展的大小
          boundingRect.x -= expandPixels - 15;
