@@ -187,7 +187,7 @@ void run_work()
                             AI_find_sign.y = r.score * 100;
                         }
                     }
-                    else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.4 && r.y > IMAGE_HEIGHT * 0.05) {
+                    else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.35 && r.y > IMAGE_HEIGHT * 0.05) {
 
                         IMG.element_identify = 1;
                         work_route = IMG.encoder.route;
@@ -213,9 +213,9 @@ void run_work()
                     float threshold_re = 0.15;
                     int thresholdh = IMAGE_HEIGHT * threshold_re;
 
-                    int coneLowy = IMAGE_HEIGHT * threshold_re + 40;
+                    int coneLowy = IMAGE_HEIGHT * threshold_re + 20;
 
-                    int err_H = IMAGE_HEIGHT * threshold_re + 30 - work_Red.x;
+                    int err_H = IMAGE_HEIGHT * threshold_re + 10- work_Red.x;
 
                     IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
                     if (work_Red.x == 0)IMG.aim_speed = -IMG._config->speed_work;
