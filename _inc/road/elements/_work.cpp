@@ -380,7 +380,7 @@ void run_work()
                 float yaw_err = IMG.encoder.yaw - work_yaw;
                 if (yaw_err > 180 ) yaw_err -= 360;
                 if (yaw_err < -180)yaw_err += 360;
-                if (!direction_work)in_yaw = -in_yaw;
+
                 if (IMG.max_white_line_length < 300 ||
                     (abs(yaw_err)> in_yaw))
                     {
