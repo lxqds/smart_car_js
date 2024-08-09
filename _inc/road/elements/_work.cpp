@@ -86,14 +86,14 @@ void check_work()
                 IMG.flag_track = TRACK_RIGHT;
                 flag_work = WORK_FOUND_1;
                 MAT_LOG("WORK_FOUND_R");
+                LOG_I << "rescore" << r.score << LOG_END;
                 FOUND_last_y = 0;
                 in_flag = 0;
                 return;
             }
             else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.15) {
 
-                IMG.element_identify = 1;
-
+                IMG.element_identify = 1
 
                 if (control_flag.contains(circle_element)) {
                     control_flag.remove(circle_element);
@@ -105,6 +105,7 @@ void check_work()
                 IMG.flag_track = TRACK_LEFT;
                 flag_work = WORK_FOUND_1;           
                 MAT_LOG("WORK_FOUND_L");
+                LOG_I << "rescore" << r.score << LOG_END;
                 FOUND_last_y = 0;
                 in_flag = 0;
                 return;
@@ -177,6 +178,7 @@ void run_work()
                         IMG.flag_track = TRACK_RIGHT;
                         flag_work = WORK_FOUND_1;
                         MAT_LOG("WORK_FOUND_R");
+                        LOG_I << "rescore" << r.score << LOG_END;
                         FOUND_last_y = 0;
                         in_flag = 0;
 
@@ -195,6 +197,7 @@ void run_work()
                         IMG.flag_track = TRACK_LEFT;
                         flag_work = WORK_FOUND_1;
                         MAT_LOG("WORK_FOUND_L");
+                        LOG_I << "rescore" << r.score << LOG_END;
                         FOUND_last_y = 0;
                         in_flag = 0;
 
