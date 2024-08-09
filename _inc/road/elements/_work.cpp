@@ -93,7 +93,7 @@ void check_work()
             }
             else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.15) {
 
-                IMG.element_identify = 1
+                IMG.element_identify = 1;
 
                 if (control_flag.contains(circle_element)) {
                     control_flag.remove(circle_element);
