@@ -737,7 +737,6 @@ POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
 
 // 搜索距离内外赛道右边缘上面最近的黄色色块 (黄色锥桶) 赛道内
 POINT search_right_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
-    int sum = 5;
     POINT find = POINT(0, 0);
     int resw = IMAGE_WIDTH;
     for (size_t i = 0; i < pointsEdge.size(); i++) {
@@ -1524,7 +1523,6 @@ bool Find_corner_first(float rpts[][2], int rpts_num, int corner_point[2], float
 {
     float angle_xy[2]{};
     if (rpts_num > 30) {
-        float min_angle = 180;
         float min_angle_x = 0;
         float min_angle_y = 0;
         int i = 0;

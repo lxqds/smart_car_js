@@ -444,12 +444,12 @@ void run_yroad() {
 			IMG.aim_speed = IMG._config->speed_base;
 
 			int Lpt0_point[2] = { 0 };
-			int Lpt0_point[2] = { 0 };
+			int Lpt1_point[2] = { 0 };
 			if (Find_corner_first(IMG.rpts0, IMG.ipts0_num, Lpt0_point, 110)) {
 				Lpt0_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
 			};
-			if (Find_corner_first(IMG.rpts1, IMG.ipts1_num, Lpt0_point, 110)) {
-				Lpt1_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
+			if (Find_corner_first(IMG.rpts1, IMG.ipts1_num, Lpt1_point, 110)) {
+				Lpt1_point_first = POINT(Lpt1_point[0], Lpt1_point[1]);
 			};
 
 			if (yroad_position == 0) {

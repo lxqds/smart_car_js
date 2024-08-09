@@ -117,7 +117,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             }
         }
 
-        size_t redPixelsCount = cv::countNonZero(mask); //计算红色像素点
+        // size_t redPixelsCount = cv::countNonZero(mask); //计算红色像素点
 
         cv::Mat maskContour = cv::Mat::zeros(mask.size(), CV_8U);  //计算最大区域像素点
         cv::drawContours(maskContour, contours, maxAreaIndex, 255, -1);
@@ -384,7 +384,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
 
 
-    
+
     float far_rpts0[IMAGE_HEIGHT][2] = { 0 };
     float far_rpts1[IMAGE_HEIGHT][2] = { 0 };
     edge_left.clear(); edge_right.clear(); edge_left_far.clear();  edge_right_far.clear();
