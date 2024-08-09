@@ -426,7 +426,7 @@ void run_work()
                 }
                 //若未找到合适的锥桶，则采用全屏扫描色块
                 if (minyCent.y == IMAGE_HEIGHT) {
-                    LOG_I << "  can not;t find cone" << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
+                  //  LOG_I << "  can not;t find cone" << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
                     minyCent.x = 150;
                     minyCent.y = avg_y;
                 }
@@ -620,7 +620,7 @@ void run_work()
 
                     IMG.aim_speed = -IMG._config->work_recback_speed;
 
-                    LOG_I << " work_route  " << work_route  << "  enco" << IMG.encoder.route <<"  cz  " << work_route - IMG.encoder.route <<LOG_END;
+                   // LOG_I << " work_route  " << work_route  << "  enco" << IMG.encoder.route <<"  cz  " << work_route - IMG.encoder.route <<LOG_END;
                     if (IMG.max_white_line_length > 1000 && work_route - IMG.encoder.route >30) {
                         out_flage = 2;
                         MAT_LOG("out_flage2");
