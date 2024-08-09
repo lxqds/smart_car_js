@@ -371,14 +371,18 @@ void run_work()
                     work_near_cone = search_left_near(IMG.edge_right, IMG.mat_lab); //左工作区进入准备
                 }
                 else {
-                    work_near_cone = search_right_near(IMG.edge_left, IMG.mat_lab);//右工作区进入准备
+                    work_near_cone = search_right_near(IMG.edge_left, IMG.mat_lab);//右工作区进入准备+= 360
                 }
 
                 // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready )
                 float in_yaw = 40;
+
+                float yaw_err = IMG.encoder.yaw - work_yaw;
+                if (yaw_err > 180 ) yaw_err -= 360;
+                if (yaw_err < -180)yaw_err += 360;
                 if (!direction_work)in_yaw = -in_yaw;
                 if (IMG.max_white_line_length < 300 ||
-                    (abs(IMG.encoder.yaw - work_yaw)> in_yaw))
+                    (abs(yaw_err)> in_yaw))
                     {
                     work_route = IMG.encoder.route;
                     flag_work = WORK_RUN;
