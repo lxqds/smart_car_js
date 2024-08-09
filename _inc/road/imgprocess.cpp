@@ -88,7 +88,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         cv::Mat redMask2;
         cv::Scalar lowerRed1(0, 45, 45);
         cv::Scalar upperRed1(10, 255, 255);
-        cv::Scalar lowerRed2(160, 45, 45);
+        cv::Scalar lowerRed2(160, 45, 45); 
         cv::Scalar upperRed2(179, 255, 255);
         cv::inRange(hsvImage, lowerRed1, upperRed1, redMask1);
         cv::inRange(hsvImage, lowerRed2, upperRed2, redMask2);
