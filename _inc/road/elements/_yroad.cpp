@@ -461,10 +461,10 @@ void run_yroad() {
 		}
 		else if (flag_yroad == YROAD_FOUND_3) {
 			IMG.aim_speed = IMG._config->speed_base;;
-			IMG.aim_distance_f = 0.4;
-			IMG.aim_distance_n = 0.2;
+			IMG.aim_distance_f = 0.3;
+			IMG.aim_distance_n = 0.1;
 
-			if (IMG.encoder.route - yroad_route > 200) {
+			if (IMG.encoder.route - yroad_route > 100) {
 				IMG.element_over = true;
 				IMG.element_over_route = IMG.encoder.route;
 				flag_yroad = YROAD_NONE;
