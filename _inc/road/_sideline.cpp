@@ -1550,7 +1550,6 @@ bool Find_corner_first(float rpts[][2], int rpts_num, int corner_point[2], float
             // 转换为角度
             float angleDeg = angleRad * (180.0f / PI);
             if (angleDeg < angle) {
-                min_angle = angleDeg;
                 min_angle_x = (float)k[1][0];
                 min_angle_y = (float)k[1][1];
                 map_perspective(min_angle_x, min_angle_y, angle_xy, 1);
