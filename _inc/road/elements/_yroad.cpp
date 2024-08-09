@@ -447,7 +447,7 @@ void run_yroad() {
 			if (Find_corner_first(IMG.rpts1, IMG.ipts1_num, Lpt1_point, 110)) {
 				Lpt1_point_first = POINT(Lpt1_point[0], Lpt1_point[1]);
 			};
-
+			IMG.get_edge();//获取边线
 			if (yroad_position == 0) {
 				IMG.flag_track = TRACK_RIGHT;
 				drawH(Lpt0_point_first.y, 0, 0, 255, IMG.mat_result);
@@ -478,7 +478,7 @@ void run_yroad() {
 				IMG.rptsc0_num = IMG.rpts0s_num;
 			}
 
-			IMG.get_edge();//获取边线
+
 			// 正常巡线
 			if (IMG.flag_track == TRACK_LEFT) {
 				IMG.rpts = IMG.rptsc0;
@@ -496,7 +496,7 @@ void run_yroad() {
 		}
 		else if (flag_yroad == YROAD_FOUND_2_1) {//超车
 			IMG.aim_speed = 200;
-
+			IMG.get_edge();//获取边线
 
 			if (yroad_position == 0) {
 				IMG.flag_track = TRACK_RIGHT;
@@ -521,7 +521,7 @@ void run_yroad() {
 				flag_yroad = YROAD_FOUND_2_2;
 				MAT_LOG("YROAD_FOUND_2_2_%d", yroad_position);
 			}
-			IMG.get_edge();//获取边线
+
 			// 正常巡线
 			if (IMG.flag_track == TRACK_LEFT) {
 				IMG.rpts = IMG.rptsc0;
@@ -541,6 +541,7 @@ void run_yroad() {
 			IMG.aim_distance_f = 0.3;
 			IMG.aim_distance_n = 0.1;
 			IMG.aim_speed = 200;
+			IMG.get_edge();//获取边线
 			if (yroad_position == 0) {
 				IMG.flag_track = TRACK_LEFT;
 				//左边线预测中线
@@ -565,7 +566,7 @@ void run_yroad() {
 				flag_yroad = YROAD_FOUND_2_3;
 				MAT_LOG("YROAD_FOUND_2_3_%d", yroad_position);
 			}
-			IMG.get_edge();//获取边线
+
 			// 正常巡线
 			if (IMG.flag_track == TRACK_LEFT) {
 				IMG.rpts = IMG.rptsc0;
@@ -585,6 +586,7 @@ void run_yroad() {
 			IMG.aim_distance_f = 0.3;
 			IMG.aim_distance_n = 0.1;
 			IMG.aim_speed = 0;
+			IMG.get_edge();//获取边线
 			if (yroad_position == 0) {
 				IMG.flag_track = TRACK_LEFT;
 				//左边线预测中线
@@ -609,7 +611,7 @@ void run_yroad() {
 				flag_yroad = YROAD_NONE;
 				control_flag.pop();//移除环岛
 			}
-			IMG.get_edge();//获取边线
+
 			// 正常巡线
 			if (IMG.flag_track == TRACK_LEFT) {
 				IMG.rpts = IMG.rptsc0;
