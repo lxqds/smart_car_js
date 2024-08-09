@@ -740,7 +740,6 @@ POINT search_right_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
     POINT find = POINT(0, 0);
     int resw = IMAGE_WIDTH;
     for (size_t i = 0; i < pointsEdge.size(); i++) {
-        sum = 5;
         for (int y = pointsEdge[i].y; y > pointsEdge[i].y - 50; y--) {
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) {
 
