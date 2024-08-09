@@ -42,7 +42,7 @@ int ImageProcess::init(std::string config_path, bool is_result) {
 
 /* 图像处理 */
 void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
-    Payload_t& payload) 
+    Payload_t& payload)
 {
     /* ***************************************************************** */
     /* ***************************** 初始化 ***************************** */
@@ -69,9 +69,9 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         // LOG_I << "2" << LOG_END;
         //需要调整的RGB分量的增益
         double KR, KG, KB;
-        KB = (R + G + B) * 1.15/ (3* B);
-        KG = (R + G + B) / (3 * G*1.15);
-        KR = (R + G + B) / (3 * R*1.15);
+        KB = (R + G + B) * 1.15 / (3 * B);
+        KG = (R + G + B) / (3 * G * 1.15);
+        KR = (R + G + B) / (3 * R * 1.15);
         //调整RGB三个通道各自的值
         imageRGB[0] = imageRGB[0] * KB;
         imageRGB[1] = imageRGB[1] * KG;
@@ -109,51 +109,47 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         int maxAreaIndex = -1;
         double maxArea = 0;
 
-        for (size_t i = 0; i < contours.size(); i++)
-        {
+        for (size_t i = 0; i < contours.size(); i++) {
             double area = cv::contourArea(contours[i]);
-            if (area > maxArea)
-            {
+            if (area > maxArea) {
                 maxArea = area;
                 maxAreaIndex = i;
             }
         }
 
-     size_t redPixelsCount = cv::countNonZero(mask); //计算红色像素点
+        size_t redPixelsCount = cv::countNonZero(mask); //计算红色像素点
 
-    cv::Mat maskContour = cv::Mat::zeros(mask.size(), CV_8U);  //计算最大区域像素点
-    cv::drawContours(maskContour, contours, maxAreaIndex, 255, -1);
-    size_t pixelCount = cv::countNonZero(maskContour);
+        cv::Mat maskContour = cv::Mat::zeros(mask.size(), CV_8U);  //计算最大区域像素点
+        cv::drawContours(maskContour, contours, maxAreaIndex, 255, -1);
+        size_t pixelCount = cv::countNonZero(maskContour);
 
- if (pixelCount > 1000 && maxAreaIndex != -1)
- {
-        cv::Rect boundingRect = cv::boundingRect(contours[maxAreaIndex]);//红色增强区域
-     
-         int expandPixels = 30;  // 根据需要调整这个值来控制扩展的大小
-         boundingRect.x -= expandPixels - 15;
-         boundingRect.y -= expandPixels;
-         boundingRect.width += 1.5 * expandPixels;
-         boundingRect.height += expandPixels + 15;
-         
-     
+        if (pixelCount > 1000 && maxAreaIndex != -1) {
+            cv::Rect boundingRect = cv::boundingRect(contours[maxAreaIndex]);//红色增强区域
 
-     // 提取最大轮廓扩展后的区域
-     boundingRect &= cv::Rect(0, 0, mat_result.cols, mat_result.rows);
-     cv::Mat roi = mat_result(boundingRect);
-   
-     // 根据红色区域的情况决定是否增强红色通道,0.05%
-     double threshold = 0.0005 * mat_result.rows * mat_result.cols;
-     if (pixelCount > threshold)
-     {
-         std::vector<cv::Mat> roiChannels;
-         cv::split(roi, roiChannels);
-         roiChannels[2] = roiChannels[2] * 1.3;  // 增强红色通道，系数
-         cv::merge(roiChannels, roi);
+            int expandPixels = 30;  // 根据需要调整这个值来控制扩展的大小
+            boundingRect.x -= expandPixels - 15;
+            boundingRect.y -= expandPixels;
+            boundingRect.width += 1.5 * expandPixels;
+            boundingRect.height += expandPixels + 15;
 
-        
-     }
-   
- }
+
+
+        // 提取最大轮廓扩展后的区域
+            boundingRect &= cv::Rect(0, 0, mat_result.cols, mat_result.rows);
+            cv::Mat roi = mat_result(boundingRect);
+
+            // 根据红色区域的情况决定是否增强红色通道,0.05%
+            double threshold = 0.0005 * mat_result.rows * mat_result.cols;
+            if (pixelCount > threshold) {
+                std::vector<cv::Mat> roiChannels;
+                cv::split(roi, roiChannels);
+                roiChannels[2] = roiChannels[2] * 1.3;  // 增强红色通道，系数
+                cv::merge(roiChannels, roi);
+
+
+            }
+
+        }
 
 
     }
@@ -170,7 +166,11 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     cv::threshold(channels_lab[2], _channels_lab[2], _config->lab_threshold, 255, cv::THRESH_BINARY);
     cv::bitwise_and(_channels_lab[1], _channels_lab[2], mat_lab);
 
-    cv::threshold(channels_lab[1], mat_lab2, _config->lab_thresholdRED, 255, cv::THRESH_BINARY);
+    cv::threshold(channels_lab[1], _channels_lab[1], _config->lab_thresholdRED, 255, cv::THRESH_BINARY);
+    cv::threshold(channels_lab[2], _channels_lab[2], 120, 255, cv::THRESH_BINARY);
+    cv::bitwise_and(_channels_lab[1], _channels_lab[2], mat_lab2);
+
+    // cv::threshold(channels_lab[1], mat_lab2, _config->lab_thresholdRED, 255, cv::THRESH_BINARY);
 
     // // 绘制处理结果图, 灰度格式转BGR格式
 
