@@ -516,7 +516,7 @@ void run_yroad() {
 					PIXEL_PER_METER * 0.2 / 2);
 				IMG.rptsc0_num = IMG.rpts0s_num;
 			}
-			if (IMG.encoder.route - yroad_route > 40) {
+			if (IMG.encoder.route - yroad_route > 30) {
 				yroad_route = IMG.encoder.route;
 				flag_yroad = YROAD_FOUND_2_2;
 				MAT_LOG("YROAD_FOUND_2_2_%d", yroad_position);
@@ -540,7 +540,7 @@ void run_yroad() {
 		else if (flag_yroad == YROAD_FOUND_2_2) {//开始别车
 			IMG.aim_distance_f = 0.3;
 			IMG.aim_distance_n = 0.1;
-			IMG.aim_angle_p *= 1.5;
+			IMG.aim_angle_p *= 2;
 			IMG.aim_speed = 700;
 			IMG.get_edge();//获取边线
 			if (yroad_position == 0) {
@@ -548,7 +548,7 @@ void run_yroad() {
 				//左边线预测中线
 				track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
 					(int)round(ANGLE_DIST / SAMPLE_DIST),
-					PIXEL_PER_METER * 0.2 / 2);
+					PIXEL_PER_METER * 0.1 / 2);
 				IMG.rptsc0_num = IMG.rpts0s_num;
 			}
 			else {
@@ -557,7 +557,7 @@ void run_yroad() {
 				//右边线预测中线
 				track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
 					(int)round(ANGLE_DIST / SAMPLE_DIST),
-					PIXEL_PER_METER * 0.2 / 2);
+					PIXEL_PER_METER * 0.1 / 2);
 				IMG.rptsc1_num = IMG.rpts1s_num;
 
 			}
@@ -586,6 +586,7 @@ void run_yroad() {
 		else if (flag_yroad == YROAD_FOUND_2_3) {//停车
 			IMG.aim_distance_f = 0.3;
 			IMG.aim_distance_n = 0.1;
+			IMG.aim_angle_p *= 2;
 			IMG.aim_speed = 0;
 			IMG.get_edge();//获取边线
 			if (yroad_position == 0) {
