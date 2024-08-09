@@ -17,14 +17,10 @@ extern Control_Flag control_flag;
 // 变量定义
 float yroad_route = 0;  // 追逐区编码器积分
 uint8_t yroad_position = 0;  // 道具小车位置
-StopWatch stop_clock;//停车计时
+StopWatch yroad_stop_clock;//停车计时
 POINT Lpt0_point_first;
 POINT Lpt1_point_first;
 
-
-// 追逐区角点
-int yroad_Lpt_id;      // 追逐区角点位置
-bool yroad_Lpt_found;  // 追逐区角点检测标志
 
 
 /* ********************************************************************* */
@@ -565,7 +561,7 @@ void run_yroad() {
 			}
 			if (IMG.encoder.route - yroad_route > 20) {
 				yroad_route = IMG.encoder.route;
-				stop_clock.tic();
+				yroad_stop_clock.tic();
 				flag_yroad = YROAD_FOUND_2_3;
 				MAT_LOG("YROAD_FOUND_2_3_%d", yroad_position);
 			}
@@ -607,7 +603,7 @@ void run_yroad() {
 				IMG.rptsc1_num = IMG.rpts1s_num;
 
 			}
-			if (stop_clock.toc() > 3000) {
+			if (yroad_stop_clock.toc() > 3000) {
 				IMG.element_over = true;
 				IMG.element_over_route = IMG.encoder.route;
 				flag_yroad = YROAD_NONE;
