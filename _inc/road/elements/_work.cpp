@@ -86,6 +86,7 @@ void check_work()
                 IMG.flag_track = TRACK_RIGHT;
                 flag_work = WORK_FOUND_1;
                 MAT_LOG("WORK_FOUND_R");
+                LOG_I << "rescore" << r.score << LOG_END;
                 FOUND_last_y = 0;
                 in_flag = 0;
                 return;
@@ -93,7 +94,6 @@ void check_work()
             else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.15) {
 
                 IMG.element_identify = 1;
-
 
                 if (control_flag.contains(circle_element)) {
                     control_flag.remove(circle_element);
@@ -105,6 +105,7 @@ void check_work()
                 IMG.flag_track = TRACK_LEFT;
                 flag_work = WORK_FOUND_1;           
                 MAT_LOG("WORK_FOUND_L");
+                LOG_I << "rescore" << r.score << LOG_END;
                 FOUND_last_y = 0;
                 in_flag = 0;
                 return;
@@ -118,12 +119,12 @@ void check_work()
             if(work_near_cone1.x==0)work_near_cone1 = search_right_near(IMG.edge_right_far, IMG.mat_lab);//右工作区进入准备
             if (work_near_cone.x == 0)work_near_cone = search_left_near(IMG.edge_left_far, IMG.mat_lab);//右工作区进入准备
 
-            if (work_near_cone1.x != 0 && work_near_cone.x != 0) {
+            if (work_near_cone1.x != 0 || work_near_cone.x != 0) {
                 MAT_LOG("TWO_YEOW");
                 work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
                 if(work_Red.x ==0)work_Red = search_right_near_Red(IMG.edge_right_far, IMG.mat_lab2);
 
-                if (work_Red.x != 0 && work_Red.x > 0.05 * IMAGE_HEIGHT) {
+                if (work_Red.x != 0 && work_Red.x > 0.1* IMAGE_HEIGHT) {
                     MAT_LOG("SEE_RED");
                     IMG.element_identify = 1;
 
@@ -177,6 +178,7 @@ void run_work()
                         IMG.flag_track = TRACK_RIGHT;
                         flag_work = WORK_FOUND_1;
                         MAT_LOG("WORK_FOUND_R");
+                        LOG_I << "rescore" << r.score << LOG_END;
                         FOUND_last_y = 0;
                         in_flag = 0;
 
@@ -187,7 +189,7 @@ void run_work()
                             AI_find_sign.y = r.score * 100;
                         }
                     }
-                    else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.4 && r.y > IMAGE_HEIGHT * 0.05) {
+                    else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.35 && r.y > IMAGE_HEIGHT * 0.05) {
 
                         IMG.element_identify = 1;
                         work_route = IMG.encoder.route;
@@ -195,6 +197,7 @@ void run_work()
                         IMG.flag_track = TRACK_LEFT;
                         flag_work = WORK_FOUND_1;
                         MAT_LOG("WORK_FOUND_L");
+                        LOG_I << "rescore" << r.score << LOG_END;
                         FOUND_last_y = 0;
                         in_flag = 0;
 
@@ -213,9 +216,9 @@ void run_work()
                     float threshold_re = 0.15;
                     int thresholdh = IMAGE_HEIGHT * threshold_re;
 
-                    int coneLowy = IMAGE_HEIGHT * threshold_re + 40;
+                    int coneLowy = IMAGE_HEIGHT * threshold_re + 20;
 
-                    int err_H = IMAGE_HEIGHT * threshold_re + 30 - work_Red.x;
+                    int err_H = IMAGE_HEIGHT * threshold_re + 10- work_Red.x;
 
                     IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
                     if (work_Red.x == 0)IMG.aim_speed = -IMG._config->speed_work;
