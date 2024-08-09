@@ -655,12 +655,12 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     aim_angle_p = _config->steering_p;
     aim_angle_d = _config->steering_d;
     run_garage();
-    run_work();
     run_cross();
     run_circle();
     run_bomb();
     run_ramp();
     run_yroad();
+    run_work();
     if (element_identify == 1) {
         serial->buzzerSound(1);
     }

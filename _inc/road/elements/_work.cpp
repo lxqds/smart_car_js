@@ -124,7 +124,7 @@ void check_work()
                 work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
                 if(work_Red.x ==0)work_Red = search_right_near_Red(IMG.edge_right_far, IMG.mat_lab2);
 
-                if (work_Red.x != 0 && work_Red.x > 0.05 * IMAGE_HEIGHT) {
+                if (work_Red.x != 0 && work_Red.x > 0.1* IMAGE_HEIGHT) {
                     MAT_LOG("SEE_RED");
                     IMG.element_identify = 1;
 
