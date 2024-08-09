@@ -119,7 +119,7 @@ void check_work()
             if(work_near_cone1.x==0)work_near_cone1 = search_right_near(IMG.edge_right_far, IMG.mat_lab);//右工作区进入准备
             if (work_near_cone.x == 0)work_near_cone = search_left_near(IMG.edge_left_far, IMG.mat_lab);//右工作区进入准备
 
-            if (work_near_cone1.x != 0 && work_near_cone.x != 0) {
+            if (work_near_cone1.x != 0 || work_near_cone.x != 0) {
                 MAT_LOG("TWO_YEOW");
                 work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
                 if(work_Red.x ==0)work_Red = search_right_near_Red(IMG.edge_right_far, IMG.mat_lab2);
