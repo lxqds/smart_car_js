@@ -17,8 +17,11 @@ extern Control_Flag control_flag;
 // 变量定义
 float yroad_route = 0;  // 追逐区编码器积分
 uint8_t yroad_position = 0;  // 道具小车位置
-POINT yroad_near_cone;  // 左右较近的锥桶
-uint8_t last_flag_track;
+StopWatch stop_clock;//停车计时
+POINT Lpt0_point_first;
+POINT Lpt1_point_first;
+
+
 // 追逐区角点
 int yroad_Lpt_id;      // 追逐区角点位置
 bool yroad_Lpt_found;  // 追逐区角点检测标志
@@ -300,6 +303,9 @@ void run_yroad() {
 									POINT(r.x, r.y));
 							if (L0 < L1) yroad_position = 0;
 							else yroad_position = 1;
+							Lpt0_point_first = POINT(0, 0);
+							Lpt1_point_first = POINT(0, 0);
+
 							IMG.element_identify = 1;
 							yroad_route = IMG.encoder.route;
 							flag_yroad = YROAD_FOUND_2;
@@ -435,9 +441,173 @@ void run_yroad() {
 			}
 		}
 		else if (flag_yroad == YROAD_FOUND_2) {
-			IMG.aim_speed = 100;
+			IMG.aim_speed = IMG._config->speed_base;
 
-			if (IMG.encoder.route - yroad_route > 200) {
+			int Lpt0_point[2] = { 0 };
+			int Lpt0_point[2] = { 0 };
+			if (Find_corner_first(IMG.rpts0, IMG.ipts0_num, Lpt0_point, 110)) {
+				Lpt0_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
+			};
+			if (Find_corner_first(IMG.rpts1, IMG.ipts1_num, Lpt0_point, 110)) {
+				Lpt1_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
+			};
+
+			if (yroad_position == 0) {
+				IMG.flag_track = TRACK_RIGHT;
+				drawH(Lpt0_point_first.y, 0, 0, 255, IMG.mat_result);
+				if (Lpt0_point_first.y > 0.7 * IMAGE_HEIGHT) {
+					yroad_route = IMG.encoder.route;
+					flag_yroad = YROAD_FOUND_2_1;
+					MAT_LOG("YROAD_FOUND_2_1_%d", yroad_position);
+				}
+
+				//右边线预测中线
+				track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
+					(int)round(ANGLE_DIST / SAMPLE_DIST),
+					PIXEL_PER_METER * 0.2 / 2);
+				IMG.rptsc1_num = IMG.rpts1s_num;
+			}
+			else {
+				IMG.flag_track = TRACK_LEFT;
+				drawH(Lpt0_point_first.y, 0, 0, 255, IMG.mat_result);
+				if (Lpt1_point_first.y > 0.7 * IMAGE_HEIGHT) {
+					yroad_route = IMG.encoder.route;
+					flag_yroad = YROAD_FOUND_2_1;
+					MAT_LOG("YROAD_FOUND_2_1_%d", yroad_position);
+				}
+				//左边线预测中线
+				track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
+					(int)round(ANGLE_DIST / SAMPLE_DIST),
+					PIXEL_PER_METER * 0.2 / 2);
+				IMG.rptsc0_num = IMG.rpts0s_num;
+			}
+
+			IMG.get_edge();//获取边线
+			// 正常巡线
+			if (IMG.flag_track == TRACK_LEFT) {
+				IMG.rpts = IMG.rptsc0;
+				IMG.rpts_num = IMG.rptsc0_num;
+			}
+			else if (IMG.flag_track == TRACK_RIGHT) {
+				IMG.rpts = IMG.rptsc1;
+				IMG.rpts_num = IMG.rptsc1_num;
+			}
+			else {
+				IMG.rpts = IMG.rptscs;
+				IMG.rpts_num = IMG.rptscs_num;
+			}
+			IMG.calculate_angle();//计算角度
+		}
+		else if (flag_yroad == YROAD_FOUND_2_1) {//超车
+			IMG.aim_speed = IMG._config->speed_base;
+
+
+			if (yroad_position == 0) {
+				IMG.flag_track = TRACK_RIGHT;
+
+				//右边线预测中线
+				track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
+					(int)round(ANGLE_DIST / SAMPLE_DIST),
+					PIXEL_PER_METER * 0.2 / 2);
+				IMG.rptsc1_num = IMG.rpts1s_num;
+			}
+			else {
+				IMG.flag_track = TRACK_LEFT;
+
+				//左边线预测中线
+				track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
+					(int)round(ANGLE_DIST / SAMPLE_DIST),
+					PIXEL_PER_METER * 0.2 / 2);
+				IMG.rptsc0_num = IMG.rpts0s_num;
+			}
+			if (IMG.encoder.route - yroad_route > 50) {
+				yroad_route = IMG.encoder.route;
+				flag_yroad = YROAD_FOUND_2_2;
+				MAT_LOG("YROAD_FOUND_2_2_%d", yroad_position);
+			}
+			IMG.get_edge();//获取边线
+			// 正常巡线
+			if (IMG.flag_track == TRACK_LEFT) {
+				IMG.rpts = IMG.rptsc0;
+				IMG.rpts_num = IMG.rptsc0_num;
+			}
+			else if (IMG.flag_track == TRACK_RIGHT) {
+				IMG.rpts = IMG.rptsc1;
+				IMG.rpts_num = IMG.rptsc1_num;
+			}
+			else {
+				IMG.rpts = IMG.rptscs;
+				IMG.rpts_num = IMG.rptscs_num;
+			}
+			IMG.calculate_angle();//计算角度
+		}
+		else if (flag_yroad == YROAD_FOUND_2_2) {//开始别车
+			IMG.aim_distance_f = 0.3;
+			IMG.aim_distance_n = 0.1;
+			IMG.aim_speed = IMG._config->speed_base;
+			if (yroad_position == 0) {
+				IMG.flag_track = TRACK_LEFT;
+				//左边线预测中线
+				track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
+					(int)round(ANGLE_DIST / SAMPLE_DIST),
+					PIXEL_PER_METER * 0.2 / 2);
+				IMG.rptsc0_num = IMG.rpts0s_num;
+			}
+			else {
+				IMG.flag_track = TRACK_RIGHT;
+
+				//右边线预测中线
+				track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
+					(int)round(ANGLE_DIST / SAMPLE_DIST),
+					PIXEL_PER_METER * 0.2 / 2);
+				IMG.rptsc1_num = IMG.rpts1s_num;
+
+			}
+			if (IMG.encoder.route - yroad_route > 20) {
+				yroad_route = IMG.encoder.route;
+				stop_clock.tic();
+				flag_yroad = YROAD_FOUND_2_3;
+				MAT_LOG("YROAD_FOUND_2_3_%d", yroad_position);
+			}
+			IMG.get_edge();//获取边线
+			// 正常巡线
+			if (IMG.flag_track == TRACK_LEFT) {
+				IMG.rpts = IMG.rptsc0;
+				IMG.rpts_num = IMG.rptsc0_num;
+			}
+			else if (IMG.flag_track == TRACK_RIGHT) {
+				IMG.rpts = IMG.rptsc1;
+				IMG.rpts_num = IMG.rptsc1_num;
+			}
+			else {
+				IMG.rpts = IMG.rptscs;
+				IMG.rpts_num = IMG.rptscs_num;
+			}
+			IMG.calculate_angle();//计算角度
+		}
+		else if (flag_yroad == YROAD_FOUND_2_3) {//停车
+			IMG.aim_distance_f = 0.3;
+			IMG.aim_distance_n = 0.1;
+			IMG.aim_speed = 0;
+			if (yroad_position == 0) {
+				IMG.flag_track = TRACK_LEFT;
+				//左边线预测中线
+				track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
+					(int)round(ANGLE_DIST / SAMPLE_DIST),
+					PIXEL_PER_METER * 0.2 / 2);
+				IMG.rptsc0_num = IMG.rpts0s_num;
+			}
+			else {
+				IMG.flag_track = TRACK_RIGHT;
+
+				//右边线预测中线
+				track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
+					(int)round(ANGLE_DIST / SAMPLE_DIST),
+					PIXEL_PER_METER * 0.2 / 2);
+				IMG.rptsc1_num = IMG.rpts1s_num;
+
+			}
+			if (stop_clock.toc() > 3000) {
 				IMG.element_over = true;
 				IMG.element_over_route = IMG.encoder.route;
 				flag_yroad = YROAD_NONE;
@@ -458,9 +628,10 @@ void run_yroad() {
 				IMG.rpts_num = IMG.rptscs_num;
 			}
 			IMG.calculate_angle();//计算角度
+
 		}
 		else if (flag_yroad == YROAD_FOUND_3) {
-			IMG.aim_speed = IMG._config->speed_base;;
+			IMG.aim_speed = IMG._config->speed_base;
 			IMG.aim_distance_f = 0.3;
 			IMG.aim_distance_n = 0.1;
 

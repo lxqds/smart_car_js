@@ -208,6 +208,12 @@ public:
     int far_ipts1[IMAGE_HEIGHT][2];
     int far_ipts0_num, far_ipts1_num;
 
+    //透视变换左右线定义
+    float rpts0[IMAGE_HEIGHT][2] = { 0 };
+    float rpts1[IMAGE_HEIGHT][2] = { 0 };
+
+
+
     // 透视变换后左右中线  滤波: b
     float rpts0b[IMAGE_HEIGHT][2];
     float rpts1b[IMAGE_HEIGHT][2];
