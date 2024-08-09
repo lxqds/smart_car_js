@@ -168,7 +168,7 @@ void run_work()
             IMG.edge_det.clear();
             //预识别到元素，但是未识别到左右进入方向，后退回去识别
             if (flag_work == WORK_FOUND_0) {
-
+                speed_fun(IMG._config->speed_work+1, 2, 500);
                 for (auto r : IMG.detection_result) {
                     if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.78 && r.y > IMAGE_HEIGHT * 0.05) {
                         IMG.element_identify = 1;
@@ -235,9 +235,6 @@ void run_work()
                     }
                 }
 
-                if (fond_flag == 1) {
-                    IMG.aim_speed = IMG._config->speed_work;
-                }
             }
 
             if (flag_work == WORK_FOUND_1) {
