@@ -210,7 +210,7 @@ void run_work()
 
                 if (fond_flag == 0) {
                     work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
-                    float threshold_re = 0.3;
+                    float threshold_re = 0.15;
                     int thresholdh = IMAGE_HEIGHT * threshold_re;
 
                     int coneLowy = IMAGE_HEIGHT * threshold_re + 40;
@@ -231,6 +231,7 @@ void run_work()
                         MAT_LOG("WORK_RED_ERR");
                         flag_work = WORK_OUT;
                         out_flage = 4;
+                        work_route = IMG.encoder.route;
                         return;
                     }
                 }
