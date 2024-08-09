@@ -286,7 +286,7 @@ void run_yroad() {
 					return;
 					case IMG.label_spy://嫌疑车辆
 					{
-						if (r.score > 0.7 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
+						if (r.score > 0.5 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
 							double L0 =
 								dis_point_line(
 									POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
@@ -312,7 +312,7 @@ void run_yroad() {
 					return;
 					case IMG.label_danger://危险车辆
 					{
-						if (r.score > 0.7 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
+						if (r.score > 0.8 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
 							double L0 =
 								dis_point_line(
 									POINT(IMG.ipts0[0][0], IMG.ipts0[0][1]),
