@@ -49,8 +49,8 @@ void speed_fun(int speed, float brake_P, float yx_speed_err) {
 }
 //判断角点锥桶
 bool pt_min_rect(std::vector<cv::Rect> all_zt, cv::Rect miny) {
-    miny.x -= 30;
-    miny.width += 60;
+    miny.x -= 40;
+    miny.width += 80;
     if (miny.x < 0)miny.x = 0;
     if (miny.width + miny.x > IMAGE_WIDTH)miny.width = IMAGE_WIDTH - miny.x;
     for (size_t i = 0; i < all_zt.size(); i++)
@@ -408,10 +408,10 @@ void run_work()
                         if (all_zt[i].y < miny.y)miny = all_zt[i];
                     }
                 }
-
-                for (size_t i = 0; i < all_zt.size(); i++) {
-                    cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
-                }
+                cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 0, 255), 1);
+                //for (size_t i = 0; i < all_zt.size(); i++) {
+                //    cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
+                //}
                 POINT minyCent = getCenterPoint(miny);
                 if (minyCent.x != 0 && minyCent.y != 0) {
                     if (direction_work) {
@@ -424,7 +424,7 @@ void run_work()
                 }
                 //若未找到合适的锥桶，则采用全屏扫描色块
                 if (minyCent.y == IMAGE_HEIGHT) {
-                  //  LOG_I << "  can not;t find cone" << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
+                    LOG_I <<"AVG_Y :" << avg_y << LOG_END;
                     minyCent.x = 150;
                     minyCent.y = search_mid_cone_getH(IMG.mat_lab);
                 }
