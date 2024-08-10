@@ -1141,3 +1141,7 @@ void Control_Flag::remove(int value) {
         }
     }
 }
+
+void brake() {
+    brake_flag = 1;
+}
