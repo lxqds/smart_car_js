@@ -110,9 +110,9 @@ int main(int argc, char const* argv[])
             if (serial_echo == 0xA1) init_slave_flag = 1;//如果有响应
 
         }
-        uint8_t aaa = 1;]
+        uint8_t aaa = 1;
         imgprocess.brake_flag = 1;
-        if (imgprocess.brake_flag)serial->transmit_packet(0x10, *aaa, 1)
+        if (imgprocess.brake_flag)serial->transmit_packet(0x10, *aaa, 1);
         if (serial_echo == 0xA2) imgprocess.brake_flag = 0;
         // 获取图像
         capture->get(frame_origin);
