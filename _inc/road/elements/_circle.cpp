@@ -26,6 +26,7 @@ void check_circle() {
     if (IMG._config->check_circle_ == 1 &&
         !IMG.element_over &&
         // !control_flag.contains(cross_element) &&    //当前没在十字路口中
+        !control_flag.contains(yroad_element) &&    //当前没在追逐区中
         !control_flag.contains(circle_element) &&   //当前没在环岛中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(bomb_element) &&   //当前没在炸弹中

@@ -26,6 +26,7 @@ extern POINT bomb_near_cone_R;  // 较近的右锥桶
 
 void check_ramp() {
     if (!IMG.element_over &&
+        !control_flag.contains(yroad_element) &&    //当前没在追逐区中
         !control_flag.contains(bomb_element) &&    //当前没在炸弹中
         !control_flag.contains(cross_element) &&    //当前没在十字路口中
         !control_flag.contains(circle_element) &&   //当前没在环岛中
