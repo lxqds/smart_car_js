@@ -423,10 +423,10 @@ void run_work()
 
                 }
                 //若未找到合适的锥桶，则采用全屏扫描色块
-                if (minyCent.y == IMAGE_HEIGHT) {
-                    LOG_I <<"AVG_Y :" << avg_y << LOG_END;
+                if (minyCent.y == IMAGE_HEIGHT) 
                     minyCent.x = 150;
                     minyCent.y = search_mid_cone_getH(IMG.mat_lab);
+                    LOG_I << "AVG_Y :" << minyCent.y << LOG_END;
                 }
 
                 IMG.aim_angle = 0;
