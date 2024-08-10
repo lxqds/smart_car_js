@@ -292,7 +292,7 @@ std::vector<DetectionPredictResult> DetectionPredictor::predict(cv::Mat input_fr
         result.score = data[i + 1];
 
         if (result.score < 0.3) {
-            continue;
+           // continue;
         }
         result.x = data[i + 2];
         result.y = data[i + 3];
