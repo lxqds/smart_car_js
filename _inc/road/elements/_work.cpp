@@ -47,6 +47,29 @@ void speed_fun(int speed, float brake_P, float yx_speed_err) {
     speed_err = speed - IMG.encoder.speed;
     if (abs(speed_err) < yx_speed_err) IMG.aim_speed = speed;
 }
+
+//判断俩矩阵是否香蕉
+bool rectA_intersect_rectB(cv::Rect rectA, cv::Rect rectB)
+{
+    if (rectA.x > rectB.x + rectB.width) { return false; }
+    if (rectA.y > rectB.y + rectB.height) { return false; }
+    if ((rectA.x + rectA.width) < rectB.x) { return false; }
+    if ((rectA.y + rectA.height) < rectB.y) { return false; }
+
+    float colInt = min(rectA.x + rectA.width, rectB.x + rectB.width) - max(rectA.x, rectB.x);
+    float rowInt = min(rectA.y + rectA.height, rectB.y + rectB.height) - max(rectA.y, rectB.y);
+    float intersection = colInt * rowInt;
+    float areaA = rectA.width * rectA.height;
+    float areaB = rectB.width * rectB.height;
+    float intersectionPercent = intersection / (areaA + areaB - intersection);
+
+    if ((0 < intersectionPercent) && (intersectionPercent < 1) && (intersection != areaA) && (intersection != areaB))
+    {
+        return true;
+    }
+
+    return false;
+}
 //判断角点锥桶
 bool pt_min_rect(std::vector<cv::Rect> all_zt, cv::Rect miny) {
     miny.x -= 40;
@@ -56,9 +79,9 @@ bool pt_min_rect(std::vector<cv::Rect> all_zt, cv::Rect miny) {
     for (size_t i = 0; i < all_zt.size(); i++)
     {   
         if (miny.y == all_zt[i].y)continue;
-        cv::Rect bin = miny & all_zt[i];
-        cv::rectangle(IMG.mat_result, miny, cv::Scalar(255, 0, 0), 1);
-        if (bin.area() != 0)return true;
+        LOG_I << " in_pt" << LOG_END;
+       // cv::rectangle(IMG.mat_result, miny, cv::Scalar(255, 0, 0), 1);
+        if (rectA_intersect_rectB(all_zt[i], miny))return true;
     }
     return false;
 }
