@@ -105,14 +105,21 @@ int main(int argc, char const* argv[])
                 echo_sw.tic();
                 serial->transmit_packet(0x09, speedPID_BUFF, 12);
                 LOG_I << "send!" << "..." << serial_echo << LOG_END;
+
             }
 
-            if (serial_echo == 0xA1) init_slave_flag = 1;//如果有响应
+            if (serial_echo == 0xA1) {
+                serial_echo = 0;
+                init_slave_flag = 1;//如果有响应
+            }
 
         }
         imgprocess.brake_flag = 1;
         if (imgprocess.brake_flag)serial->transmit_packet(0x10, (uint8_t*)"1", 1);
-        if (serial_echo == 0xA2) { imgprocess.brake_flag = 0;   LOG_I << "shou!" << "..." << serial_echo << LOG_END;
+        if (serial_echo == 0xA2) { 
+            imgprocess.brake_flag = 0;   
+            serial_echo = 0;//如果有响应
+            LOG_I << "shou!" << "..." << serial_echo << LOG_END;
          }
         // 获取图像
         capture->get(frame_origin);
