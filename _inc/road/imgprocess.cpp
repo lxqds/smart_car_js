@@ -88,7 +88,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
         cv::Mat redMask2;
         cv::Scalar lowerRed1(0, 45, 45);
         cv::Scalar upperRed1(10, 255, 255);
-        cv::Scalar lowerRed2(160, 45, 45); 
+        cv::Scalar lowerRed2(160, 45, 45);
         cv::Scalar upperRed2(179, 255, 255);
         cv::inRange(hsvImage, lowerRed1, upperRed1, redMask1);
         cv::inRange(hsvImage, lowerRed2, upperRed2, redMask2);
@@ -117,7 +117,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             }
         }
 
-        size_t redPixelsCount = cv::countNonZero(mask); //计算红色像素点
+        // size_t redPixelsCount = cv::countNonZero(mask); //计算红色像素点
 
         cv::Mat maskContour = cv::Mat::zeros(mask.size(), CV_8U);  //计算最大区域像素点
         cv::drawContours(maskContour, contours, maxAreaIndex, 255, -1);
@@ -383,9 +383,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     }
 
 
-    // 变换后左右线
-    float rpts0[IMAGE_HEIGHT][2] = { 0 };
-    float rpts1[IMAGE_HEIGHT][2] = { 0 };
+
+
     float far_rpts0[IMAGE_HEIGHT][2] = { 0 };
     float far_rpts1[IMAGE_HEIGHT][2] = { 0 };
     edge_left.clear(); edge_right.clear(); edge_left_far.clear();  edge_right_far.clear();
@@ -458,6 +457,10 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             cv::line(mat_result, cv::Point(deX, deY), cv::Point(deX, deY + deH), cv::Scalar(0, 0, 0), 1);
             cv::line(mat_result, cv::Point(deX + deW, deY + deH), cv::Point(deX + deW, deY), cv::Scalar(0, 0, 0), 1);
             cv::line(mat_result, cv::Point(deX + deW, deY + deH), cv::Point(deX, deY + deH), cv::Scalar(0, 0, 0), 1);
+
+            // LOG_I << "detection_type:" << r.type << " score=" << r.score << LOG_END;
+
+
 
         }
     }

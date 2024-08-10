@@ -47,7 +47,7 @@ void speed_fun(int speed, float brake_P, float yx_speed_err) {
     speed_err = speed - IMG.encoder.speed;
     if (abs(speed_err) < yx_speed_err) IMG.aim_speed = speed;
 }
-
+//判断角点锥桶
 bool pt_min_rect(std::vector<cv::Rect> all_zt, cv::Rect miny) {
     miny.x -= 30;
     miny.width += 60;
@@ -120,7 +120,7 @@ void check_work()
             if (work_near_cone.x == 0)work_near_cone = search_left_near(IMG.edge_left_far, IMG.mat_lab);//右工作区进入准备
 
             if (work_near_cone1.x != 0 || work_near_cone.x != 0) {
-                MAT_LOG("TWO_YEOW");
+                MAT_LOG("YEOW");
                 work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
                 if(work_Red.x ==0)work_Red = search_right_near_Red(IMG.edge_right_far, IMG.mat_lab2);
 
@@ -169,8 +169,8 @@ void run_work()
             IMG.edge_det.clear();
             //预识别到元素，但是未识别到左右进入方向，后退回去识别
             if (flag_work == WORK_FOUND_0) {
-                speed_fun(IMG._config->speed_work+1, 2, 500);
-                for (auto r : IMG.detection_result) {
+                speed_fun(IMG._config->speed_work+1, 2, 500); //快速减速
+                for (auto r : IMG.detection_result) {  //如果有识别到元素就进入工作区
                     if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.78 && r.y > IMAGE_HEIGHT * 0.05) {
                         IMG.element_identify = 1;
                         work_route = IMG.encoder.route;
@@ -212,7 +212,7 @@ void run_work()
                 }
 
                 if (fond_flag == 0) {
-                    work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
+                    work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2); //右线红色色块
                     float threshold_re = 0.15;
                     int thresholdh = IMAGE_HEIGHT * threshold_re;
 
@@ -399,7 +399,6 @@ void run_work()
 
             if (flag_work == WORK_RUN) {
                 cv::Rect miny;
-                int16_t avg_y = search_mid_cone_getH(IMG.mat_lab);
 
                 std::vector<cv::Rect> all_zt;
                 all_zt = workC.search_all_cone_rect(IMG.mat_lab);
@@ -431,19 +430,17 @@ void run_work()
                 if (minyCent.y == IMAGE_HEIGHT) {
                   //  LOG_I << "  can not;t find cone" << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
                     minyCent.x = 150;
-                    minyCent.y = avg_y;
+                    minyCent.y = search_mid_cone_getH(IMG.mat_lab);
                 }
+
                 IMG.aim_angle = 0;
+
                 int err_W, err_H;
-                float speedP = 0;
 
                 err_W = IMAGE_WIDTH / 2.0 - minyCent.x;
                 err_H = (int)IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg - minyCent.y;
 
                 IMG.aim_angle = err_W * IMG._config->work_run_angle_p;
-                speedP = err_H / 50.0;
-                if (speedP > 1)speedP = 1;
-                if (speedP < -1)speedP = -1;
                 drawH(err_H, 0, 255, 0, IMG.mat_result);
                 drawH(IMAGE_HEIGHT * 0.1, 255, 0, 0, IMG.mat_result);
                 drawW(minyCent.x, 0, 255, 0, IMG.mat_result);
@@ -551,69 +548,19 @@ void run_work()
 
                 //开始 退出
                 if (out_flage == 1) {
-                    /*
-                    {
-                        IMG.aim_angle = 0;
-                        cv::Rect miny;
-                        std::vector<cv::Rect> all_zt;
-                        all_zt = workC.search_all_cone_rect(IMG.mat_lab);
-
-                        // 最高点锥桶
-                        if (all_zt.size() >= 1) {
-                            miny.y = IMAGE_HEIGHT;
-                            // 找最高点且在屏幕一定范围下
-                            //for (size_t i = 0; i < all_zt.size(); i++)
-                            //{
-                            //    if (all_zt[i].y < 0.1 * IMAGE_HEIGHT)continue;
-                            //    if (all_zt[i].y < miny.y)miny = all_zt[i];
-                            //}
-                        }
-
-                        for (size_t i = 0; i < all_zt.size(); i++) {
-                            cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
-                        }
-                        POINT minyCent = getCenterPoint(miny);
-
-                        //若未找到合适的锥桶，则采用全屏扫描色块
-                        if (minyCent.y == IMAGE_HEIGHT) {
-                            LOG_I << "  can not;t find cone" << "  get_AIorcolor_AVG_Y :" << avg_y << LOG_END;
-                            minyCent.x = 150;
-                            minyCent.y = avg_y;
-                        }
-
-                        int thresholdh = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out;
-
-                        int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out + 10;
-
-                        int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_out + 5 - minyCent.y;
-
-                        IMG.aim_speed = err_H;
-
-                        drawH(minyCent.y, 255, 0, 0, IMG.mat_result);
-                        drawH(thresholdh, 0, 0, 255, IMG.mat_result);
-                        drawH(coneLowy, 0, 0, 255, IMG.mat_result);
-                        float speedP = err_H / 50.0 + 0.5;
-                        if (speedP > 2)speedP = 2;
-                        if (speedP < -2)speedP = -2;
-
-                        IMG.aim_speed = IMG._config->speed_work * speedP;
-
-                        int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
-                        LOG_I << "  speed_err:" << speed_err << LOG_END;
-
-                        if ((minyCent.y >= thresholdh && minyCent.y <= coneLowy) &&
-                            speed_err < 100) {
-
-                            out_flage = 3;
-                            MAT_LOG("out_flage=2");
-                        }
-
-                    }
-                    */
 
                     float k = 0;
-                    if (direction_work) k = Calculate_Right_ConeK(all_zt);
-                    else k = Calculate_Left_ConeK(all_zt);
+                    if (direction_work) {
+                        k = Calculate_Right_ConeK(all_zt);
+                        cv::line(IMG.mat_result, cv::Point(all_zt[0].x, all_zt[0].y),
+                            cv::Point(IMAGE_WIDTH - 1,(int)(k * (IMAGE_WIDTH -1 - all_zt[0].x) + all_zt[0].y ) ), cv::Scalar(0, 255, 0), 1);
+                    }
+                    else {
+                        k = Calculate_Left_ConeK(all_zt);
+                        cv::line(IMG.mat_result, cv::Point(0, (int)(all_zt[0].y - k * (all_zt[0].x))),
+                            cv::Point(all_zt[0].x, all_zt[0].y), cv::Scalar(0, 255, 0), 1);
+
+                    }
 
                     IMG.aim_angle = (member_K - k) * IMG._config->work_out_angular_P;
                     if(direction_work)IMG.aim_angle += IMG._config->work_out_angular_base_deviation;
