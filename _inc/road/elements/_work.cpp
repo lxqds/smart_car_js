@@ -245,10 +245,8 @@ void run_work()
                 // 找锥桶
                 IMG.edge_det = search_targets(IMG._det_result);
                 // 进入方向
-                if (direction_work)
                     work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
-                else
-                    work_near_cone = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
+                    work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
 
               //  LOG_I << " work_near_cone :" << work_near_cone.x << " IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy :" << IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy << LOG_END;
 
@@ -261,16 +259,15 @@ void run_work()
                 //}
 
                 //当 第一个锥桶消失
-                if (in_flag == 0 && work_near_cone.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT) {
+                if (in_flag == 0 && (work_near_cone.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT || work_near_cone1.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT)) {
                     in_flag = 1;
                     flag_work = WORK_FOUND_2;
                     work_route = IMG.encoder.route;
                     MAT_LOG("WORK_FOUND_2");
                 }
-
-                cv::line(IMG.mat_result, cv::Point(0, (int)work_near_cone.x),
-                    cv::Point(IMAGE_WIDTH - 1, (int)work_near_cone.x), cv::Scalar(255, 0, 0), 1);
-                drawH(0.5 * IMAGE_HEIGHT, 255, 0, 0, IMG.mat_result);
+                drawH(work_near_cone1.x, 0, 255, 0, IMG.mat_result);
+                drawH(work_near_cone.x, 0, 255, 0, IMG.mat_result);
+                drawH(IMG._config->work_read_cone_threshold * IMAGE_HEIGHT, 255, 0, 0, IMG.mat_result);
             }
 
             if (flag_work == WORK_FOUND_2) {
