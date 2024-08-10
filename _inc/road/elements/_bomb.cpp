@@ -245,9 +245,6 @@ void run_bomb()
             // }
 
 
-
-
-
             if (bomb_block_y > IMAGE_HEIGHT * 0.1)
                 bomb_route = IMG.encoder.route;
 
