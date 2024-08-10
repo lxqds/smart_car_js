@@ -94,6 +94,7 @@ int main(int argc, char const* argv[])
     // serial->buzzerSound(3);
     echo_sw.tic();
     LOG_I << "PID Initing\n" << speedPID[0] << LOG_END;
+    imgprocess.brake_flag = 1;
     while (capture->_loop) {
 
         // 开始计时
@@ -114,7 +115,6 @@ int main(int argc, char const* argv[])
             }
 
         }
-        imgprocess.brake_flag = 1;
         if (imgprocess.brake_flag)serial->transmit_packet(0x10, (uint8_t*)"1", 1);
         if (serial_echo == 0xA2) { 
             imgprocess.brake_flag = 0;   
