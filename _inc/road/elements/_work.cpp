@@ -424,7 +424,7 @@ void run_work()
                 std::vector<cv::Rect> all_zt;
                 all_zt = workC.search_all_cone_rect(IMG.mat_lab);
 
-                // 最高点锥桶
+                // 最高点锥桶 角点追踪
                 if (all_zt.size() >= 1) {
                     miny = cv::Rect(0, IMAGE_HEIGHT, IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1);
                     // 找最高点且在屏幕一定范围下
@@ -447,11 +447,12 @@ void run_work()
                     }
 
                 }
+                minyCent.y = IMAGE_HEIGHT;//取消角点追踪
                 //若未找到合适的锥桶，则采用全屏扫描色块
                 if (minyCent.y == IMAGE_HEIGHT) {
                     minyCent.x = 150;
                     minyCent.y = search_mid_cone_getH(IMG.mat_lab);
-                    LOG_I << "AVG_Y :" << minyCent.y << LOG_END;
+                 //   LOG_I << "AVG_Y :" << minyCent.y << LOG_END;
                 }
 
                 IMG.aim_angle = 0;
