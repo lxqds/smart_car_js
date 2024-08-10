@@ -152,7 +152,7 @@ void check_work()
                 if (work_Red.x != 0 && work_Red.x > 0.1* IMAGE_HEIGHT) {
                     MAT_LOG("SEE_RED");
                     IMG.element_identify = 1;
-
+                    IMG.brake();
                     if (control_flag.contains(circle_element)) {
                         control_flag.remove(circle_element);
                         flag_circle = CIRCLE_NONE;
