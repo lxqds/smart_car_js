@@ -552,7 +552,7 @@ void run_work()
                     float k = 0;
                     if (direction_work) {
                         k = Calculate_Right_ConeK(all_zt);
-                        cv::line(IMG.mat_result, cv::Point(0, cv::Point(all_zt[0].x, all_zt[0].y),
+                        cv::line(IMG.mat_result, cv::Point(all_zt[0].x, all_zt[0].y),
                             cv::Point(IMAGE_WIDTH - 1,(int)(k * (IMAGE_WIDTH -1 - all_zt[0].x) + all_zt[0].y ) ), cv::Scalar(0, 255, 0), 1);
                     }
                     else {
