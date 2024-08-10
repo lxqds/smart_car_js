@@ -12,7 +12,6 @@ enum flag_bomb_e {
     BOMB_FIRST_CONE,    //第一个锥桶
     BOMB_SECOND_CONE,    //第二个锥桶
     BOMB_BLOCK,         //黑块
-
 };
 extern flag_bomb_e flag_bomb;
 extern int bomb_x;           //横坐标
