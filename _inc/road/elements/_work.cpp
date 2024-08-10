@@ -323,7 +323,7 @@ void run_work()
                 int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
                 if (work_near_cone.x == 0)IMG.aim_speed = -IMG.aim_speed;
                 // LOG_I << "  speed_err:" << speed_err << LOG_END;
-                if (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) speed_fun(0,2, 500);
+                if (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) { IMG.brake(); speed_fun(0, 2, 500); }
 
                 if ((work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) &&
                     speed_err < IMG._config->work_read_cone_allow_speed_error) {
@@ -425,15 +425,15 @@ void run_work()
                 all_zt = workC.search_all_cone_rect(IMG.mat_lab);
 
                 // 最高点锥桶 角点追踪
-                if (all_zt.size() >= 1) {
-                    miny = cv::Rect(0, IMAGE_HEIGHT, IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1);
-                    // 找最高点且在屏幕一定范围下
-                    for (size_t i = 0; i < all_zt.size(); i++) {
-                        if (!pt_min_rect(all_zt, miny) && miny.y != IMAGE_HEIGHT)continue;
-                        if (all_zt[i].y < miny.y)miny = all_zt[i];
-                    }
-                }
-                cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 0, 255), 1);
+                //if (all_zt.size() >= 1) {
+                //    miny = cv::Rect(0, IMAGE_HEIGHT, IMAGE_WIDTH - 1, IMAGE_HEIGHT - 1);
+                //    // 找最高点且在屏幕一定范围下
+                //    for (size_t i = 0; i < all_zt.size(); i++) {
+                //        if (!pt_min_rect(all_zt, miny) && miny.y != IMAGE_HEIGHT)continue;
+                //        if (all_zt[i].y < miny.y)miny = all_zt[i];
+                //    }
+                //}
+                //cv::rectangle(IMG.mat_result, miny, cv::Scalar(0, 0, 255), 1);
                 //for (size_t i = 0; i < all_zt.size(); i++) {
                 //    cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
                 //}
@@ -477,6 +477,7 @@ void run_work()
 
                 int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
                 if (abs(err_H) < IMAGE_HEIGHT * 0.1 ) {
+                    IMG.brake();
                     speed_fun(0, 2, 300);
                     work_route = IMG.encoder.route;
                     flag_work = WORK_OUT;
