@@ -32,6 +32,10 @@ int bomb_block_y = 0;           //纵坐标
 int first_cone = 0;        //第一个锥桶的位置
 int first_cone_count = 0;    //第一个锥桶计数 
 
+
+POINT Lpt0_point_first;
+POINT Lpt1_point_first;
+
 /* ********************************************************************* */
 
 void check_bomb()
@@ -137,7 +141,7 @@ void run_bomb()
                 MAT_LOG("BOMB_ERROR1");
             }
         }
-        if (flag_bomb == BOMB_FIRST_CONE) {
+        else if (flag_bomb == BOMB_FIRST_CONE) {
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.aim_distance_f = 0.3;
             IMG.aim_distance_n = 0.1;
@@ -199,12 +203,19 @@ void run_bomb()
                 }
             }
         }
-        if (flag_bomb == BOMB_SECOND_CONE) {
+        else if (flag_bomb == BOMB_SECOND_CONE) {
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.aim_distance_f = 0.2;
             IMG.aim_distance_n = 0.1;
             IMG.aim_angle_p *= 1.5;
-
+            int Lpt0_point[2] = { 0 };
+            int Lpt1_point[2] = { 0 };
+            if (Find_corner_first(IMG.rpts0, IMG.ipts0_num, Lpt0_point, 110)) {
+                Lpt0_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
+            };
+            if (Find_corner_first(IMG.rpts1, IMG.ipts1_num, Lpt1_point, 110)) {
+                Lpt1_point_first = POINT(Lpt1_point[0], Lpt1_point[1]);
+            };
 
             if (first_cone == 1) {    //第一个锥桶在右边，第二个锥桶在左边，寻右线
 
@@ -214,6 +225,7 @@ void run_bomb()
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * IMG._config->bomb_second_run_wide / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
+                bomb_block_y = Lpt1_point_first.y;
             }
             else {
                 IMG.flag_track = TRACK_LEFT;
@@ -222,14 +234,19 @@ void run_bomb()
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * IMG._config->bomb_second_run_wide / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
+                bomb_block_y = Lpt0_point_first.y;
             }
-            for (auto r : IMG.detection_result) {
-                if (r.label == IMG.label_block) {
-                    bomb_block_y = r.y + r.h / 2;
-                    bomb_block_x = r.x;
-                    break;
-                }
-            }
+            // for (auto r : IMG.detection_result) {
+            //     if (r.label == IMG.label_block) {
+            //         bomb_block_y = r.y + r.h / 2;
+            //         bomb_block_x = r.x;
+            //         break;
+            //     }
+            // }
+
+
+
+
 
             if (bomb_block_y > IMAGE_HEIGHT * 0.1)
                 bomb_route = IMG.encoder.route;
@@ -245,7 +262,7 @@ void run_bomb()
             //     MAT_LOG("BOMB_ERROR3");
             // }
         }
-        if (flag_bomb == BOMB_BLOCK) {
+        else if (flag_bomb == BOMB_BLOCK) {
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.aim_distance_f = 0.3;
             IMG.aim_distance_n = 0.1;
