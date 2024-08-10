@@ -1143,6 +1143,5 @@ void Control_Flag::remove(int value) {
 }
 
 void ImageProcess::brake() {
-    void brake() {
     brake_flag = 1;
 }
