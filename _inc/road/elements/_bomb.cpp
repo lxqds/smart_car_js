@@ -33,8 +33,8 @@ int first_cone = 0;        //第一个锥桶的位置
 int first_cone_count = 0;    //第一个锥桶计数 
 
 
-POINT Lpt0_point_first;
-POINT Lpt1_point_first;
+POINT bomb_Lpt0_point_first;
+POINT bomb_Lpt1_point_first;
 
 /* ********************************************************************* */
 
@@ -211,10 +211,10 @@ void run_bomb()
             int Lpt0_point[2] = { 0 };
             int Lpt1_point[2] = { 0 };
             if (Find_corner_first(IMG.rpts0, IMG.ipts0_num, Lpt0_point, 110)) {
-                Lpt0_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
+                bomb_Lpt0_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
             };
             if (Find_corner_first(IMG.rpts1, IMG.ipts1_num, Lpt1_point, 110)) {
-                Lpt1_point_first = POINT(Lpt1_point[0], Lpt1_point[1]);
+                bomb_Lpt0_point_first = POINT(Lpt1_point[0], Lpt1_point[1]);
             };
 
             if (first_cone == 1) {    //第一个锥桶在右边，第二个锥桶在左边，寻右线
@@ -225,7 +225,7 @@ void run_bomb()
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * IMG._config->bomb_second_run_wide / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
-                bomb_block_y = Lpt1_point_first.y;
+                bomb_block_y = bomb_Lpt1_point_first.y;
             }
             else {
                 IMG.flag_track = TRACK_LEFT;
@@ -234,7 +234,7 @@ void run_bomb()
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * IMG._config->bomb_second_run_wide / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
-                bomb_block_y = Lpt0_point_first.y;
+                bomb_block_y = bomb_Lpt0_point_first.y;
             }
             // for (auto r : IMG.detection_result) {
             //     if (r.label == IMG.label_block) {
