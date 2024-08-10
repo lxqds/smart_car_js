@@ -260,7 +260,7 @@ void run_work()
                     float k = 1;
                     if(work_near_cone1.y !=0 && work_near_cone.y !=0)k = (work_near_cone1.x - work_near_cone.x) / (work_near_cone1.y - work_near_cone.y);
                    
-                    LOG_I << " work_near_cone k:" << k << LOG_END;
+                    LOG_I << " work_near_cone k:" << k*100 << LOG_END;
                     cv::line(IMG.mat_result, cv::Point(work_near_cone.y, work_near_cone.x),
                         cv::Point(work_near_cone1.y, work_near_cone1.x), cv::Scalar(0, 255, 0), 1);
                 //当 第一个锥桶消失
