@@ -257,9 +257,12 @@ void run_work()
                 //    work_route = IMG.encoder.route;
                 //    MAT_LOG("WORK_FOUND_2");
                 //}
-
+                    float k = (work_near_cone1.x - work_near_cone.x) / (work_near_cone1.y - work_near_cone.y);
+                    LOG_I << " work_near_cone k:" << k << LOG_END;
+                    cv::line(IMG.mat_result, cv::Point(work_near_cone.y, work_near_cone.x),
+                        cv::Point(work_near_cone.y, work_near_cone.x), cv::Scalar(0, 255, 0), 1);
                 //当 第一个锥桶消失
-                if (in_flag == 0 && (work_near_cone.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT || work_near_cone1.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT)) {
+                if (in_flag == 0 && (work_near_cone.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT || work_near_cone1.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT) && abs(k) < 0.3 ) {
                     in_flag = 1;
                     flag_work = WORK_FOUND_2;
                     work_route = IMG.encoder.route;
