@@ -289,15 +289,9 @@ void run_work()
 
                 int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + IMG._config->work_read_cone_allow_error / 2.0 - work_near_cone.x;
 
-                IMG.aim_speed = err_H;
+                IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
 
-                float speedP = err_H / IMG._config->work_read_cone_speed_H_err;
-                if (speedP < 0)speedP -= IMG._config->work_read_cone_base_speed_k;
-                else speedP += IMG._config->work_read_cone_base_speed_k;
-                if (speedP > 2)speedP = 2;
-                if (speedP < -2)speedP = -2;
-
-                IMG.aim_speed = IMG._config->speed_work * speedP;
+              //  if (speedP < 0)speedP -= IMG._config->work_read_cone_base_speed_k;
 
                 int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
                 if (work_near_cone.x == 0)IMG.aim_speed = -IMG.aim_speed;
