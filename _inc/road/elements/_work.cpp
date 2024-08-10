@@ -415,10 +415,10 @@ void run_work()
                 POINT minyCent = getCenterPoint(miny);
                 if (minyCent.x != 0 && minyCent.y != 0) {
                     if (direction_work) {
-                        minyCent.x -= 20;
+                        minyCent.x -= 10;
                     }
                     else {
-                        minyCent.x += 20;
+                        minyCent.x += 10;
                     }
 
                 }
