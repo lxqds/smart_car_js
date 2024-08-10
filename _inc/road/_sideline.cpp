@@ -440,7 +440,7 @@ POINT search_left_near(std::vector<POINT> pointsEdge, cv::Mat matt) {
 
 // 搜索距离赛道左边缘最近的黄色色块 (黄色锥桶)  从上往下搜
 POINT search_left_near_up(std::vector<POINT> pointsEdge, cv::Mat matt) {
-    for (size_t i = pointsEdge.size()-1; i >0; i--)
+    for (size_t i = pointsEdge.size() - 1; i > 0; i--)
         for (int y = pointsEdge[i].y - 25; y < pointsEdge[i].y; y++)
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1))
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
@@ -628,8 +628,7 @@ float Calculate_Left_ConeK(std::vector<cv::Rect> arr) {
     POINT TopR = getCenterPoint(arr[0]);
     POINT BomL;
 
-    for (size_t i = 1; i < arr.size(); i++)
-    {
+    for (size_t i = 1; i < arr.size(); i++) {
         if (arr[i].area() < 300)continue;
         if (getCenterPoint(arr[i]).y < 0.25 * IMAGE_HEIGHT)continue;
         if (arr[i].x < TopR.x)BomL = getCenterPoint(arr[i]);
@@ -643,8 +642,7 @@ float Calculate_Right_ConeK(std::vector<cv::Rect> arr) {
     POINT TopR = getCenterPoint(arr[0]);
     POINT BomL;
 
-    for (size_t i = 1; i < arr.size(); i++)
-    {
+    for (size_t i = 1; i < arr.size(); i++) {
         if (arr[i].area() < 300)continue;
         if (getCenterPoint(arr[i]).y < 0.25 * IMAGE_HEIGHT)continue;
         if (arr[i].x > TopR.x)BomL = getCenterPoint(arr[i]);
@@ -699,7 +697,7 @@ float Calculate_Right_ConeK(std::vector<cv::Rect> arr) {
 //}
 const int pt_front[8][2] = { {1, 0},{0, -1}, {0, 1}, {-1, 0},{-1, -1},{1, 1},{-1, 1},{1, -1} };
 //判断该点周围像素大于0 的个数是否满足要求
-bool pt_point(cv::Mat mat,int x,int y,int num) {
+bool pt_point(cv::Mat mat, int x, int y, int num) {
     int sum = 0;
     for (uint8_t i = 0; i < 8; i++) {
         int frontx, fronty;
@@ -723,7 +721,7 @@ POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
                     cv::line(IMG.mat_result, cv::Point(pointsEdge[i].y, pointsEdge[i].x),
                         cv::Point(y, pointsEdge[i].x),
                         cv::Scalar(255, 0, 255), 7);
-                    if (pt_point(matt,y, pointsEdge[i].x, 4)) {
+                    if (pt_point(matt, y, pointsEdge[i].x, 4)) {
                         if (resw > y - pointsEdge[i].y) {
                             find = POINT(pointsEdge[i].x, y);
                             resw = y - pointsEdge[i].y;
@@ -739,11 +737,9 @@ POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
 
 // 搜索距离内外赛道右边缘上面最近的黄色色块 (黄色锥桶) 赛道内
 POINT search_right_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
-    int sum = 5;
     POINT find = POINT(0, 0);
     int resw = IMAGE_WIDTH;
     for (size_t i = 0; i < pointsEdge.size(); i++) {
-        sum = 5;
         for (int y = pointsEdge[i].y; y > pointsEdge[i].y - 50; y--) {
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) {
 
@@ -834,12 +830,12 @@ POINT search_right_near_Red(std::vector<POINT> pointsEdge, cv::Mat matt) {
 //x , y相反  上至下
 // 搜索距离赛道右边缘最近的黄色色块 (黄色锥桶)
 POINT search_right_near_up(std::vector<POINT> pointsEdge, cv::Mat matt) {
-    for (size_t i = pointsEdge.size()-1; i > 0 ; i--)
+    for (size_t i = pointsEdge.size() - 1; i > 0; i--)
         for (int y = pointsEdge[i].y + 25; y > pointsEdge[i].y; y--)
             if ((y >= 0) && (y <= IMAGE_WIDTH - 1))
                 if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0)
                     if (pt_point(matt, y, pointsEdge[i].x, 4))
-                         return POINT(pointsEdge[i].x, y);
+                        return POINT(pointsEdge[i].x, y);
 
     return POINT(0, 0);
 }
@@ -1519,6 +1515,61 @@ void Find_corner(float rpts[][2], int rpts_num, int corner_point[2], float* angl
         corner_point[1] = (int)angle_xy[1];
     }
 }
+
+
+//根据顺序点集找第一个小于angle角点
+bool Find_corner_first(float rpts[][2], int rpts_num, int corner_point[2], float angle)
+{
+    float angle_xy[2]{};
+    if (rpts_num > 30) {
+        float min_angle_x = 0;
+        float min_angle_y = 0;
+        int i = 0;
+        float k[3][2];
+        while (true) {
+            k[0][0] = rpts[i][0];
+            k[0][1] = rpts[i][1];
+            k[1][0] = rpts[i + 15][0];
+            k[1][1] = rpts[i + 15][1];
+            k[2][0] = rpts[i + 30][0];
+            k[2][1] = rpts[i + 30][1];
+            float BAx = (float)(k[0][0] - k[1][0]);
+            float BAy = (float)(k[0][1] - k[1][1]);
+            float BCx = (float)(k[2][0] - k[1][0]);
+            float BCy = (float)(k[2][1] - k[1][1]);
+            // 计算点积
+            float dotProduct = (BAx * BCx) + (BAy * BCy);
+            // 计算向量的模长
+            float magnitudeBA = sqrt(BAx * BAx + BAy * BAy);
+            float magnitudeBC = sqrt(BCx * BCx + BCy * BCy);
+            // 计算夹角的余弦值
+            float cosTheta = dotProduct / (magnitudeBA * magnitudeBC);
+            // 计算夹角（弧度）
+            float angleRad = acos(cosTheta);
+            // 转换为角度
+            float angleDeg = angleRad * (180.0f / PI);
+            if (angleDeg < angle) {
+                min_angle_x = (float)k[1][0];
+                min_angle_y = (float)k[1][1];
+                map_perspective(min_angle_x, min_angle_y, angle_xy, 1);
+                corner_point[0] = (int)angle_xy[0];
+                corner_point[1] = (int)angle_xy[1];
+                return true;
+            }
+            i += 5;
+            if (i + 30 >= rpts_num)break;
+        }
+    }
+    return false;
+}
+
+
+
+
+
+
+
+
 
 // 点集三角滤波
 void blur_points(float pts_in[][2], int num, float pts_out[][2], int kernel) {
