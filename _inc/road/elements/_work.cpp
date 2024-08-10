@@ -67,6 +67,7 @@ void check_work()
 
     if (!IMG.element_over &&
         (!control_flag.contains(circle_element) || flag_circle == CIRCLE_OUT) &&   //当前没在环岛中
+        !control_flag.contains(yroad_element) &&    //当前没在追逐区中
         !control_flag.contains(work_element) &&     //当前没在工作区中
         !control_flag.contains(garage_element) &&   //当前没在入库中
         !control_flag.contains(ramp_element) &&      //当前没在桥中
