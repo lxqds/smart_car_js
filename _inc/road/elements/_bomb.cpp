@@ -236,6 +236,7 @@ void run_bomb()
                 IMG.rptsc0_num = IMG.rpts0s_num;
                 bomb_block_y = bomb_Lpt0_point_first.y;
             }
+            drawH(bomb_block_y, 0, 0, 255, IMG.mat_result);
             // for (auto r : IMG.detection_result) {
             //     if (r.label == IMG.label_block) {
             //         bomb_block_y = r.y + r.h / 2;
