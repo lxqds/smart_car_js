@@ -214,7 +214,7 @@ void run_bomb()
                 bomb_Lpt0_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
             };
             if (Find_corner_first(IMG.rpts1, IMG.ipts1_num, Lpt1_point, 110)) {
-                bomb_Lpt0_point_first = POINT(Lpt1_point[0], Lpt1_point[1]);
+                bomb_Lpt1_point_first = POINT(Lpt1_point[0], Lpt1_point[1]);
             };
 
             if (first_cone == 1) {    //第一个锥桶在右边，第二个锥桶在左边，寻右线
