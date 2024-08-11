@@ -137,7 +137,7 @@ void check_yroad() {
 				float a = (x1 - x0) / r;
 				float b = (y1 - y0) / r;
 				int flag = 0;
-				for (int i = x0 + 5;i < x0 + 15; i++) {
+				for (int i = x0 + 2;i < x0 + 15; i++) {
 					int sign = 0;
 					int count = 0;
 					for (float L = 1; ; L++) {
@@ -213,7 +213,7 @@ void check_yroad() {
 				float a = (x1 - x0) / r;
 				float b = (y1 - y0) / r;
 				int flag = 0;
-				for (int i = x0 - 5;i > x0 - 15; i--) {
+				for (int i = x0 - 2;i > x0 - 15; i--) {
 					int sign = 0;
 					int count = 0;
 					for (float L = 1; ; L++) {
