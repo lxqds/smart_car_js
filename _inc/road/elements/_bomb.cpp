@@ -62,7 +62,7 @@ void check_bomb()
                 if (bomb_Red.x != 0 && bomb_Red.y != 0 && bomb_Red.x > 0.25 * IMAGE_HEIGHT) {
                     IMG.element_identify = 1;
 
-                    IMG.set_pid(8, 0.2, 0);
+                    IMG.set_pid(8, 0.0, 0);
                     imgprocess.brake();
 
                     control_flag.push(bomb_element);
@@ -81,7 +81,7 @@ void check_bomb()
                 control_flag.push(bomb_element);
                 bomb_route = IMG.encoder.route;
 
-                IMG.set_pid(8, 0.2, 0);
+                IMG.set_pid(8, 0.0, 0);
                 imgprocess.brake();
                 flag_bomb = BOMB_FOUND;
                 MAT_LOG("BOMB_FOUND");
