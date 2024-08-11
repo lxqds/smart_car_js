@@ -128,146 +128,148 @@ void check_yroad() {
 				IMG.Lpt0_found &&//左角点找到
 				IMG.far_Lpt0_found //左远角点找到
 				) {
-
-				float x0 = IMG.ipts0[0][0];
-				float y0 = IMG.ipts0[0][1];
-				float x1 = IMG.ipts0[IMG.ipts0_num - 1][0];
-				float y1 = IMG.ipts0[IMG.ipts0_num - 1][1];
-				float r = sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
-				float a = (x1 - x0) / r;
-				float b = (y1 - y0) / r;
-				int flag = 0;
-				for (int i = x0 + 2;i < x0 + 15; i++) {
-					int sign = 0;
-					int count = 0;
-					for (float L = 1; ; L++) {
-						int x = (int)(i + L * a);
-						int y = (int)(y0 + L * b);
-						if (x < 0 || x >= IMAGE_WIDTH || y < 0 || y >= IMAGE_HEIGHT || y < y1)break;
-						if (sign == 0) {
-							if (AT_IMAGE(IMG.mat_bin, (int)x, (int)y) < 127)count++;
-							else count = 0;
-							if (count > 10) {
-								L -= 10;
-								sign = 1;
-								count = 0;
-								cv::line(IMG.mat_result, cv::Point(x, y),
-									cv::Point(x, y),
-									cv::Scalar(255, 0, 255), 1);
+				for (size_t direction_i = 0; direction_i < IMG.ipts0_direction.size(); ++direction_i) {
+					if (IMG.ipts0_direction[direction_i] == 2) {
+						int sign = 0;
+						for (size_t direction_j = direction_i; direction_j < IMG.ipts0_direction.size(); ++direction_j) {
+							if (sign == 0) {
+								if (IMG.ipts0_direction[direction_j] == 1) sign = 1;
+								else if (IMG.ipts0_direction[direction_j] != 2)break;
 							}
-						}
-						else if (sign == 1) {
-							if (AT_IMAGE(IMG.mat_bin, (int)x, (int)y) > 127)count++;
-							else count = 0;
-							if (count > 5) {
-								flag++;
-								count = 0;
-								break;
-							}
-						}
-					}
-					if (flag >= 5) {
-						for (size_t direction_i = 0; direction_i < IMG.ipts0_direction.size(); ++direction_i) {
-							if (IMG.ipts0_direction[direction_i] == 2) {
-								int sign = 0;
-								for (size_t direction_j = direction_i; direction_j < IMG.ipts0_direction.size(); ++direction_j) {
-									if (sign == 0) {
-										if (IMG.ipts0_direction[direction_j] == 1) sign = 1;
-										else if (IMG.ipts0_direction[direction_j] != 2)break;
-									}
-									else if (sign == 1) {
-										if (IMG.ipts0_direction[direction_j] == 4) {
-											IMG.element_identify = 1;
-											yroad_position = 0;
-											control_flag.push(yroad_element);
-											yroad_route = IMG.encoder.route;
-											flag_yroad = YROAD_FOUND_0;
-											MAT_LOG("YROAD_FOUND_0");
-											return;
-										}
-										else if (IMG.ipts0_direction[direction_j] != 1)break;
-									}
+							else if (sign == 1) {
+								if (IMG.ipts0_direction[direction_j] == 4) {
+									IMG.element_identify = 1;
+									yroad_position = 0;
+									control_flag.push(yroad_element);
+									yroad_route = IMG.encoder.route;
+									flag_yroad = YROAD_FOUND_0;
+									MAT_LOG("YROAD_FOUND_0");
+									return;
 								}
+								else if (IMG.ipts0_direction[direction_j] != 1)break;
 							}
 						}
 					}
 				}
+
+
+				// float x0 = IMG.ipts0[0][0];
+				// float y0 = IMG.ipts0[0][1];
+				// float x1 = IMG.ipts0[IMG.ipts0_num - 1][0];
+				// float y1 = IMG.ipts0[IMG.ipts0_num - 1][1];
+				// float r = sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
+				// float a = (x1 - x0) / r;
+				// float b = (y1 - y0) / r;
+				// int flag = 0;
+				// for (int i = x0 + 2;i < x0 + 15; i++) {
+				// 	int sign = 0;
+				// 	int count = 0;
+				// 	for (float L = 1; ; L++) {
+				// 		int x = (int)(i + L * a);
+				// 		int y = (int)(y0 + L * b);
+				// 		if (x < 0 || x >= IMAGE_WIDTH || y < 0 || y >= IMAGE_HEIGHT || y < y1)break;
+				// 		if (sign == 0) {
+				// 			if (AT_IMAGE(IMG.mat_bin, (int)x, (int)y) < 127)count++;
+				// 			else count = 0;
+				// 			if (count > 10) {
+				// 				L -= 10;
+				// 				sign = 1;
+				// 				count = 0;
+				// 				cv::line(IMG.mat_result, cv::Point(x, y),
+				// 					cv::Point(x, y),
+				// 					cv::Scalar(255, 0, 255), 1);
+				// 			}
+				// 		}
+				// 		else if (sign == 1) {
+				// 			if (AT_IMAGE(IMG.mat_bin, (int)x, (int)y) > 127)count++;
+				// 			else count = 0;
+				// 			if (count > 5) {
+				// 				flag++;
+				// 				count = 0;
+				// 				break;
+				// 			}
+				// 		}
+				// 	}
+				// 	if (flag >= 5) {
+
+				// 	}
+				// }
 			}
 			else if (R0 < 1.0f && IMG.Lpt1_found &&  // 右角点找到
 				IMG.far_Lpt1_found &&  // 右远角点找到
 				!IMG.Lpt0_found &&//左角点未找到
 				!IMG.far_Lpt0_found //左远角点未找到 
 				) {
-
+				for (size_t direction_i = 0; direction_i < IMG.ipts1_direction.size(); ++direction_i) {
+					if (IMG.ipts1_direction[direction_i] == 4) {
+						int sign = 0;
+						for (size_t direction_j = direction_i; direction_j < IMG.ipts1_direction.size(); ++direction_j) {
+							if (sign == 0) {
+								if (IMG.ipts1_direction[direction_j] == 1) sign = 1;
+								else if (IMG.ipts1_direction[direction_j] != 4)break;
+							}
+							else if (sign == 1) {
+								if (IMG.ipts1_direction[direction_j] == 2) {
+									IMG.element_identify = 1;
+									yroad_position = 0;
+									control_flag.push(yroad_element);
+									yroad_route = IMG.encoder.route;
+									flag_yroad = YROAD_FOUND_0;
+									MAT_LOG("YROAD_FOUND_0");
+									return;
+								}
+								else if (IMG.ipts1_direction[direction_j] != 1)break;
+							}
+						}
+					}
+				}
 				// float x0 = IMG.ipts1[0][0] - IMAGE_WIDTH / 2;
 				// float y0 = IMAGE_HEIGHT - IMG.ipts1[0][1];
 
 				// float x1 = IMG.ipts1[IMG.ipts1_num - 1][0] - IMAGE_WIDTH / 2;
 				// float y1 = IMAGE_HEIGHT - IMG.ipts1[IMG.ipts1_num - 1][1];
 
-				float x0 = IMG.ipts1[0][0];
-				float y0 = IMG.ipts1[0][1];
-				float x1 = IMG.ipts1[IMG.ipts1_num - 1][0];
-				float y1 = IMG.ipts1[IMG.ipts1_num - 1][1];
-				float r = sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
-				float a = (x1 - x0) / r;
-				float b = (y1 - y0) / r;
-				int flag = 0;
-				for (int i = x0 - 2;i > x0 - 15; i--) {
-					int sign = 0;
-					int count = 0;
-					for (float L = 1; ; L++) {
-						int x = (int)(i + L * a);
-						int y = (int)(y0 + L * b);
-						if (x < 0 || x >= IMAGE_WIDTH || y < 0 || y >= IMAGE_HEIGHT || y < y1)break;
-						if (sign == 0) {
-							if (AT_IMAGE(IMG.mat_bin, (int)x, (int)y) < 127)count++;
-							else count = 0;
-							if (count > 10) {
-								L -= 10;
-								sign = 1;
-								count = 0;
-								cv::line(IMG.mat_result, cv::Point(x, y),
-									cv::Point(x, y),
-									cv::Scalar(255, 0, 255), 1);
-							}
-						}
-						else if (sign == 1) {
-							if (AT_IMAGE(IMG.mat_bin, (int)x, (int)y) > 127)count++;
-							else count = 0;
-							if (count > 5) {
-								flag++;
-								count = 0;
-								break;
-							}
-						}
-					}
-					if (flag >= 5) {
-						for (size_t direction_i = 0; direction_i < IMG.ipts1_direction.size(); ++direction_i) {
-							if (IMG.ipts1_direction[direction_i] == 4) {
-								int sign = 0;
-								for (size_t direction_j = direction_i; direction_j < IMG.ipts1_direction.size(); ++direction_j) {
-									if (sign == 0) {
-										if (IMG.ipts1_direction[direction_j] == 1) sign = 1;
-										else if (IMG.ipts1_direction[direction_j] != 4)break;
-									}
-									else if (sign == 1) {
-										if (IMG.ipts1_direction[direction_j] == 2) {
-											IMG.element_identify = 1;
-											yroad_position = 0;
-											control_flag.push(yroad_element);
-											yroad_route = IMG.encoder.route;
-											flag_yroad = YROAD_FOUND_0;
-											MAT_LOG("YROAD_FOUND_0");
-											return;
-										}
-										else if (IMG.ipts1_direction[direction_j] != 1)break;
-									}
-								}
-							}
-						}
-					}
-				}
+				// float x0 = IMG.ipts1[0][0];
+				// float y0 = IMG.ipts1[0][1];
+				// float x1 = IMG.ipts1[IMG.ipts1_num - 1][0];
+				// float y1 = IMG.ipts1[IMG.ipts1_num - 1][1];
+				// float r = sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
+				// float a = (x1 - x0) / r;
+				// float b = (y1 - y0) / r;
+				// int flag = 0;
+				// for (int i = x0 - 2;i > x0 - 15; i--) {
+				// 	int sign = 0;
+				// 	int count = 0;
+				// 	for (float L = 1; ; L++) {
+				// 		int x = (int)(i + L * a);
+				// 		int y = (int)(y0 + L * b);
+				// 		if (x < 0 || x >= IMAGE_WIDTH || y < 0 || y >= IMAGE_HEIGHT || y < y1)break;
+				// 		if (sign == 0) {
+				// 			if (AT_IMAGE(IMG.mat_bin, (int)x, (int)y) < 127)count++;
+				// 			else count = 0;
+				// 			if (count > 10) {
+				// 				L -= 10;
+				// 				sign = 1;
+				// 				count = 0;
+				// 				cv::line(IMG.mat_result, cv::Point(x, y),
+				// 					cv::Point(x, y),
+				// 					cv::Scalar(255, 0, 255), 1);
+				// 			}
+				// 		}
+				// 		else if (sign == 1) {
+				// 			if (AT_IMAGE(IMG.mat_bin, (int)x, (int)y) > 127)count++;
+				// 			else count = 0;
+				// 			if (count > 5) {
+				// 				flag++;
+				// 				count = 0;
+				// 				break;
+				// 			}
+				// 		}
+				// 	}
+				// 	if (flag >= 5) {
+
+				// 	}
+				// }
 			}
 		}
 	}
