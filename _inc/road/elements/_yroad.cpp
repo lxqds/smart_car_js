@@ -225,7 +225,7 @@ void check_yroad() {
 									control_flag.push(yroad_element);
 									yroad_route = IMG.encoder.route;
 									flag_yroad = YROAD_FOUND_0;
-									MAT_LOG("YROAD_FOUND_0");
+									MAT_LOG("YROAD_FOUND_0_%d", yroad_position);
 									return;
 								}
 								else if (IMG.ipts1_direction[direction_j] == 1) {
@@ -405,7 +405,7 @@ void run_yroad() {
 			}
 			else {
 				IMG.flag_track = TRACK_RIGHT;
-				if (IMG.encoder.speed * 1000 > 1500)IMG.aim_speed = -3000;
+				if (IMG.encoder.speed * 1000 > 1500) IMG.aim_speed = -3000;
 				else {
 					if (Lpt1_point_first.y > 0.6 * IMAGE_HEIGHT)IMG.aim_speed = -100;
 					else if (Lpt1_point_first.y == 0) IMG.aim_speed = -500;
