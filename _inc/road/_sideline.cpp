@@ -1565,7 +1565,7 @@ bool Find_corner_first(float rpts[][2], int rpts_num, int corner_point[2], float
 
 
 
-void Get_ipts_direction(float ipts[][2], int ipts_num, std::vector<uint8_t>& ipts_direction)
+void Get_ipts_direction(int ipts[][2], int ipts_num, std::vector<uint8_t>& ipts_direction)
 {
     ipts_direction.clear();
     if (ipts_num > 20) {
