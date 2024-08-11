@@ -280,6 +280,7 @@ void run_work()
                         else {
                                 fond_flag = 1;
                                 MAT_LOG("WORK_ERR");  //假死
+                                stop_clock.tic();
                         }
                     }
 
@@ -289,8 +290,12 @@ void run_work()
                     srand(IMG.encoder.speed * 1000);
                     IMG.aim_speed = 800;
                     uint8_t fx = rand() % 255;
-                    if (fx > 125)IMG.aim_angle = 30;
-                    else IMG.aim_angle = -30;
+                    if (stop_clock.toc() > 500) {
+                        stop_clock.tic();
+                        if (fx > 125)IMG.aim_angle = 30;
+                        else IMG.aim_angle = -30;
+                    }
+
                 }
 
             }
