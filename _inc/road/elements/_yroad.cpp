@@ -129,16 +129,16 @@ void check_yroad() {
 				IMG.far_Lpt0_found //左远角点找到
 				) {
 
-				for (size_t direction_i = 0; direction_i < IMG.ipts1_direction.size(); ++direction_i) {
-					if (IMG.ipts1_direction[direction_i] == 4) {
+				for (size_t direction_i = 0; direction_i < IMG.ipts0_direction.size(); ++direction_i) {
+					if (IMG.ipts0_direction[direction_i] == 4) {
 						int sign = 0;
-						for (size_t direction_j = direction_i; direction_j < IMG.ipts1_direction.size(); ++direction_j) {
+						for (size_t direction_j = direction_i; direction_j < IMG.ipts0_direction.size(); ++direction_j) {
 							if (sign == 0) {
-								if (IMG.ipts1_direction[direction_j] == 1) sign = 1;
-								else if (IMG.ipts1_direction[direction_j] != 4)break;
+								if (IMG.ipts0_direction[direction_j] == 1) sign = 1;
+								else if (IMG.ipts0_direction[direction_j] != 4)break;
 							}
 							else if (sign == 1) {
-								if (IMG.ipts1_direction[direction_j] == 2) {
+								if (IMG.ipts0_direction[direction_j] == 2) {
 									IMG.element_identify = 1;
 									yroad_position = 0;
 									control_flag.push(yroad_element);
@@ -147,7 +147,7 @@ void check_yroad() {
 									MAT_LOG("YROAD_FOUND_0");
 									return;
 								}
-								else if (IMG.ipts1_direction[direction_j] != 1)break;
+								else if (IMG.ipts0_direction[direction_j] != 1)break;
 							}
 						}
 					}
@@ -200,16 +200,16 @@ void check_yroad() {
 				!IMG.Lpt0_found &&//左角点未找到
 				!IMG.far_Lpt0_found //左远角点未找到 
 				) {
-				for (size_t direction_i = 0; direction_i < IMG.ipts0_direction.size(); ++direction_i) {
-					if (IMG.ipts0_direction[direction_i] == 2) {
+				for (size_t direction_i = 0; direction_i < IMG.ipts1_direction.size(); ++direction_i) {
+					if (IMG.ipts1_direction[direction_i] == 2) {
 						int sign = 0;
-						for (size_t direction_j = direction_i; direction_j < IMG.ipts0_direction.size(); ++direction_j) {
+						for (size_t direction_j = direction_i; direction_j < IMG.ipts1_direction.size(); ++direction_j) {
 							if (sign == 0) {
-								if (IMG.ipts0_direction[direction_j] == 1) sign = 1;
-								else if (IMG.ipts0_direction[direction_j] != 2)break;
+								if (IMG.ipts1_direction[direction_j] == 1) sign = 1;
+								else if (IMG.ipts1_direction[direction_j] != 2)break;
 							}
 							else if (sign == 1) {
-								if (IMG.ipts0_direction[direction_j] == 4) {
+								if (IMG.ipts1_direction[direction_j] == 4) {
 									IMG.element_identify = 1;
 									yroad_position = 0;
 									control_flag.push(yroad_element);
@@ -218,7 +218,7 @@ void check_yroad() {
 									MAT_LOG("YROAD_FOUND_0");
 									return;
 								}
-								else if (IMG.ipts0_direction[direction_j] != 1)break;
+								else if (IMG.ipts1_direction[direction_j] != 1)break;
 							}
 						}
 					}
