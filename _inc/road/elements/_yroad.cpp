@@ -589,7 +589,7 @@ void run_yroad() {
 					PIXEL_PER_METER * 0.1 / 2);
 				IMG.rptsc0_num = IMG.rpts0s_num;
 			}
-			if (IMG.encoder.route - yroad_route > 50) {
+			if (IMG.encoder.route - yroad_route > IMG._config->yroad_2_route1) {
 				yroad_route = IMG.encoder.route;
 				flag_yroad = YROAD_FOUND_2_2;
 				MAT_LOG("YROAD_FOUND_2_2_%d", yroad_position);
@@ -635,7 +635,7 @@ void run_yroad() {
 				IMG.rptsc1_num = IMG.rpts1s_num;
 
 			}
-			if (IMG.encoder.route - yroad_route > 40) {
+			if (IMG.encoder.route - yroad_route > IMG._config->yroad_2_route2) {
 				yroad_route = IMG.encoder.route;
 				yroad_stop_clock.tic();
 				flag_yroad = YROAD_FOUND_2_3;
@@ -681,7 +681,7 @@ void run_yroad() {
 				IMG.rptsc1_num = IMG.rpts1s_num;
 
 			}
-			if (yroad_stop_clock.toc() > 3000) {
+			if (yroad_stop_clock.toc() > IMG._config->yroad_2_time) {
 				IMG.element_over = true;
 				IMG.element_over_route = IMG.encoder.route;
 				flag_yroad = YROAD_NONE;

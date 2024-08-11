@@ -106,6 +106,13 @@ struct ControlConfig
     float bomb_block_ready;   //黑块准备拐弯阈值
     float bomb_block_run_wide;//黑块道路系数
 
+    float yroad_2_route1;   // 嫌疑车辆通过距离
+    float yroad_2_route2;   // 嫌疑车辆别车距离
+    float yroad_2_time;     // 嫌疑车辆别车时间
+
+
+
+
     uint16_t work_recback_speed;           //施工区倒车速度
     uint8_t farm_rou_ready;    // 农场识别积分
     uint8_t farm_rou_in;       // 农场进入积分
@@ -271,6 +278,11 @@ struct ControlConfig
         AUTOCFG(bomb_first_cone_run_wide);
         AUTOCFG(bomb_second_run_wide);
         AUTOCFG(bomb_block_run_wide);
+
+        AUTOCFG(yroad_2_route1);
+        AUTOCFG(yroad_2_route2);
+        AUTOCFG(yroad_2_time);
+
 
         AUTOCFG(work_stop_time);
         AUTOCFG(work_error);
