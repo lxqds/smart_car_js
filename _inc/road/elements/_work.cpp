@@ -295,7 +295,7 @@ void run_work()
                 // 进入方向
                     work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
                     work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
-
+                    IMG.aim_speed = IMG._config->speed_work;
               //  LOG_I << " work_near_cone :" << work_near_cone.x << " IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy :" << IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy << LOG_END;
 
                 // 当车辆开始靠近锥桶: 准备进入 识别或色块 识别到的锥桶大于一段阈值
@@ -341,6 +341,7 @@ void run_work()
 
                 IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
 
+                if(IMG.aim_speed > IMG._config->speed_work) IMG.aim_speed = IMG._config->speed_work;
               //  if (speedP < 0)speedP -= IMG._config->work_read_cone_base_speed_k;
 
                 int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
