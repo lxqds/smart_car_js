@@ -37,11 +37,16 @@ void check_ramp() {
         for (auto r : IMG.detection_result) {
             if (r.label == IMG.label_bridge && r.score > 0.7 && r.y > IMAGE_HEIGHT * 0.3) {
                 ramp_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
+                if(ramp_Red.x == 0) search_right_near_Red(IMG.edge_right_far, IMG.mat_lab2); //远线处红色
                 if (ramp_Red.x != 0 && ramp_Red.y != 0 && ramp_Red.x > 0.25 * IMAGE_HEIGHT) {
                     bomb_near_cone_L = POINT(0, 0);
                     bomb_near_cone_R = POINT(0, 0);
                     bomb_near_cone_L = search_left_near_in(IMG.edge_left, IMG.mat_lab);
+                    if(bomb_near_cone_L.x==0) search_left_near(IMG.edge_left, IMG.mat_lab);//赛道外无黄色
+
                     bomb_near_cone_R = search_right_near_in(IMG.edge_right, IMG.mat_lab);
+                    if (bomb_near_cone_R.x == 0) search_right_near(IMG.edge_right, IMG.mat_lab); //赛道外无黄色
+
                     if (bomb_near_cone_L.x == 0 && bomb_near_cone_R.x == 0) {
                         IMG.element_identify = 1;
                         control_flag.push(ramp_element);
