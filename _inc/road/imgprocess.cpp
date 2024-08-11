@@ -419,6 +419,11 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     far_Lpt0_found = IMG.far_Lpt0_angle > 50 && IMG.far_Lpt0_angle < 120;
     far_Lpt1_found = IMG.far_Lpt1_angle > 50 && IMG.far_Lpt1_angle < 120;
 
+    Get_ipts_direction(ipts0, ipts0_num, ipts0_direction);
+    Get_ipts_direction(ipts1, ipts1_num, ipts1_direction);
+    
+
+
 
     /* ***************************************************************** */
     /* *************************** 弯直道检测 *************************** */
@@ -1156,7 +1161,7 @@ void ImageProcess::opid() {
 }
 
 void ImageProcess::set_pid(float p, float i, float d) {
-    float speedPID[3] = {p,i,d};
+    float speedPID[3] = { p,i,d };
     memcpy(speedPID_BUFF, speedPID, 12);
     init_slave_flag = 1;
 

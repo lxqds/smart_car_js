@@ -1565,7 +1565,41 @@ bool Find_corner_first(float rpts[][2], int rpts_num, int corner_point[2], float
 
 
 
-
+void Get_ipts_direction(float ipts[][2], int ipts_num, std::vector<uint8_t>& ipts_direction)
+{
+    ipts_direction.clear();
+    if (ipts_num > 20) {
+        int i = 0;
+        float k[2][2];
+        while (true) {
+            k[0][0] = ipts[i][0];
+            k[0][1] = ipts[i][1];
+            k[1][0] = ipts[i + 10][0];
+            k[1][1] = ipts[i + 10][1];
+            float x = (float)(k[1][0] - k[0][0]);
+            float y = (float)(k[1][1] - k[0][1]);
+            if (x >= 0 && y < 0) {
+                if (x == 0 || y / x < -1)ipts_direction.push_back(1);//上方
+                else ipts_direction.push_back(4);//右方
+            }
+            else if (x < 0 && y < 0) {
+                if (y / x > 1)ipts_direction.push_back(1);//上方
+                else ipts_direction.push_back(2);//左方
+            }
+            else if (x < 0 && y >= 0) {
+                if (y / x > -1)ipts_direction.push_back(3);//下方
+                else ipts_direction.push_back(2);//左方
+            }
+            else if (x >= 0 && y >= 0) {
+                if (x == 0 || y / x < 1)ipts_direction.push_back(3);//下方
+                else ipts_direction.push_back(4);//右方
+            }
+            MAT_INFO(IMG.mat_result, cv::Point(k[0][0] + 5, k[0][0]), 0.2, "%d", ipts_direction.back());
+            i += 10;
+            if (i + 20 >= ipts_num)break;
+        }
+    }
+}
 
 
 

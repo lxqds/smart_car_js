@@ -240,6 +240,13 @@ public:
     float rptsc1[IMAGE_HEIGHT][2];
     int rptsc0_num, rptsc1_num;
 
+    // 左右边线各点方向集合
+    std::vector<uint8_t> ipts0_direction;
+    std::vector<uint8_t> ipts1_direction;
+
+
+
+
 public:
     std::vector<POINT> edge_det;        // AI元素检测边缘点集
     std::vector<POINT> edge_left;       // 赛道左边缘点集   注意: 此点集 x 与 y 位置相反 !!!

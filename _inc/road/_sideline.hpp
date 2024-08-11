@@ -193,6 +193,8 @@ void find_far_right_line(cv::Mat mat_bin, int x, int y, int ipts[][2], int* ipts
 void Find_corner(float rpts[][2], int rpts_num, int corner_point[2], float* angle);
 //根据顺序点集找第一个小于angle角点
 bool Find_corner_first(float rpts[][2], int rpts_num, int corner_point[2], float angle);
+//获取点集方向
+void Get_ipts_direction(float ipts[][2], int ipts_num, std::vector<uint8_t>& ipts_direction);
 // 点集三角滤波
 void blur_points(float pts_in[][2], int num, float pts_out[][2], int kernel);
 
