@@ -285,7 +285,7 @@ void run_work()
 
                 }
 
-                if (fond_flag == 1) 
+                if (fond_flag == 1) {
                     srand(IMG.encoder.speed * 1000);
                     IMG.aim_speed = 800;
                     uint8_t fx = rand() % 255;
