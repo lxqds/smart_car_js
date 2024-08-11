@@ -103,6 +103,7 @@ int main(int argc, char const* argv[])
 
             if (serial_echo == 0xA1) {
                 serial_echo = 0;
+                LOG_I << "pid set" << "..." << serial_echo << LOG_END;
                 imgprocess.init_slave_flag = 0;//如果有响应
             }
 
