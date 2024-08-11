@@ -423,7 +423,7 @@ void run_yroad() {
 		}
 		else if (flag_yroad == YROAD_FOUND_1) {
 			IMG.aim_speed = IMG._config->speed_base;;
-			IMG.aim_distance_f = 0.4;
+			IMG.aim_distance_f = 0.6;
 			IMG.aim_distance_n = 0.2;
 
 			if (IMG.encoder.route - yroad_route > 200) {
