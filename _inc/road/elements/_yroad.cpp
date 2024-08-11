@@ -220,7 +220,7 @@ void check_yroad() {
 							else if (sign == 1) {
 								if (IMG.ipts1_direction[direction_j] == 4) {
 									IMG.element_identify = 1;
-									yroad_position = 0;
+									yroad_position = 1;
 									imgprocess.brake();
 									control_flag.push(yroad_element);
 									yroad_route = IMG.encoder.route;
