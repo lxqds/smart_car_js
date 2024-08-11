@@ -276,15 +276,19 @@ void run_work()
                             speed_fun(IMG._config->speed_work + 1, 2, 500);
                         }
                         else {
-                                MAT_LOG("WORK_ERR");  //假死
-                                srand(IMG.encoder.speed * 1000);
-                                IMG.aim_speed = 800;
-                                uint8_t fx = rand()%255;
-                                if(fx > 125)IMG.aim_angle = 10;
-                                else IMG.aim_angle = -10;
+                                fond_flag = 1;
                         }
                     }
 
+                }
+
+                if (fond_flag == 1) {
+                    MAT_LOG("WORK_ERR");  //假死
+                    srand(IMG.encoder.speed * 1000);
+                    IMG.aim_speed = 800;
+                    uint8_t fx = rand() % 255;
+                    if (fx > 125)IMG.aim_angle = 10;
+                    else IMG.aim_angle = -10;
                 }
 
             }
@@ -384,7 +388,7 @@ void run_work()
                 if (IMG.encoder.speed * 1000 < 0)IMG.aim_angle = -IMG.aim_angle;
 
                 // 超过指定距离未进入绕行区, 元素行驶失败
-                if ((IMG.encoder.route - work_route > IMG._config->work_error)) {
+                if ((IMG.encoder.route - work_route > IMG._config->work_error) && fond_flag != 1) {
                     IMG.element_over = true;
                     IMG.element_over_route = IMG.encoder.route;
                     control_flag.pop();//移除
