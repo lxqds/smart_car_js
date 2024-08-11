@@ -1156,10 +1156,7 @@ void ImageProcess::opid() {
 }
 
 void ImageProcess::set_pid(float p, float i, float d) {
-    float speedPID[3] = {
-    p,
-    i,
-    d };
+    float speedPID[3] = {p,i,d};
     memcpy(speedPID_BUFF, speedPID, 12);
     init_slave_flag = 1;
 
