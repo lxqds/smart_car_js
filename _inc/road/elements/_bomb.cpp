@@ -290,7 +290,15 @@ void run_bomb()
             IMG.aim_distance_f = 0.30;
             IMG.aim_distance_n = 0.1;
             IMG.aim_angle_p *= 2.5;
-            if (first_cone == 0) {    //第一个锥桶在右边，第二个锥桶在左边，寻右线
+            for (auto r : IMG.detection_result) {
+                if (r.label == IMG.label_block) {
+                    bomb_block_y = r.y + r.h / 2;
+                    bomb_block_x = r.x;
+                    break;
+                }
+            }
+
+            if (first_cone == 0) {    //第一个锥桶在左边，第二个锥桶在右边，寻右线
                 IMG.flag_track = TRACK_RIGHT;
                 //右边线预测中线
                 track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
@@ -304,12 +312,6 @@ void run_bomb()
                     control_flag.pop();
                     MAT_LOG("BOMB_NONE");
                 }
-                else if (IMG.encoder.route - bomb_route > 120) {
-                    flag_bomb = BOMB_NONE;
-                    IMG.opid();
-                    control_flag.pop();
-                    MAT_LOG("BOMB_ERROR2");
-                }
             }
             else {
                 IMG.flag_track = TRACK_LEFT;
@@ -319,20 +321,17 @@ void run_bomb()
                     PIXEL_PER_METER * IMG._config->bomb_block_run_wide / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
-                if (IMG.encoder.route - bomb_route > 40) {
+                if (IMG.encoder.route - bomb_route > 30) {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_NONE;
                     IMG.opid();
                     control_flag.pop();
                     MAT_LOG("BOMB_NONE");
                 }
-                else if (IMG.encoder.route - bomb_route > 120) {
-                    flag_bomb = BOMB_NONE;
-                    IMG.opid();
-                    control_flag.pop();
-                    MAT_LOG("BOMB_ERROR2");
-                }
             }
+            if (bomb_block_y > IMAGE_HEIGHT * 0.1)bomb_route = IMG.encoder.route;
+
+
         }
         // 正常巡线
         if (IMG.flag_track == TRACK_LEFT) {
