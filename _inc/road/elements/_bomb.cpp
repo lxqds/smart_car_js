@@ -354,10 +354,10 @@ void run_bomb()
             IMG.calculate_angle();//计算角度
         }
         else if (IMG.flag_track == TRACK_RIGHT) {
-            IMG.aim_angle = -45;
+            IMG.aim_angle = -70;
         }
         else if (IMG.flag_track == TRACK_LEFT) {
-            IMG.aim_angle = 45;
+            IMG.aim_angle = 70;
         }
 
     }
