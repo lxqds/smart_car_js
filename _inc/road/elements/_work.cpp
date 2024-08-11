@@ -370,7 +370,7 @@ void run_work()
                 drawH(coneLowy, 0, 0, 255, IMG.mat_result);
             }
 
-            if (flag_work == WORK_FOUND_2 || flag_work == WORK_FOUND_1 || flag_work == WORK_FOUND_0) {
+            if ((flag_work == WORK_FOUND_2 || flag_work == WORK_FOUND_1 || flag_work == WORK_FOUND_0) && &&fond_flag != 1) {
 
                 // 正常巡线
                 if (IMG.flag_track == TRACK_LEFT) {
@@ -390,7 +390,7 @@ void run_work()
                 if (IMG.encoder.speed * 1000 < 0)IMG.aim_angle = -IMG.aim_angle;
 
                 // 超过指定距离未进入绕行区, 元素行驶失败
-                if ((IMG.encoder.route - work_route > IMG._config->work_error) && fond_flag != 1) {
+                if ((IMG.encoder.route - work_route > IMG._config->work_error) ) {
                     IMG.element_over = true;
                     IMG.element_over_route = IMG.encoder.route;
                     control_flag.pop();//移除
