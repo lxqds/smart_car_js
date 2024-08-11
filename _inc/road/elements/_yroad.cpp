@@ -635,7 +635,7 @@ void run_yroad() {
 				IMG.rptsc1_num = IMG.rpts1s_num;
 
 			}
-			if (IMG.encoder.route - yroad_route > 50) {
+			if (IMG.encoder.route - yroad_route > 30) {
 				yroad_route = IMG.encoder.route;
 				yroad_stop_clock.tic();
 				flag_yroad = YROAD_FOUND_2_3;
