@@ -294,7 +294,7 @@ void run_bomb()
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * IMG._config->bomb_block_run_wide / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
-                if (IMG.encoder.route - bomb_route > 30) {//靠近黑块
+                if (IMG.encoder.route - bomb_route > 40) {//靠近黑块
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_NONE;
                     IMG.opid();
@@ -307,8 +307,6 @@ void run_bomb()
                     control_flag.pop();
                     MAT_LOG("BOMB_ERROR2");
                 }
-                if (IMG.encoder.route - bomb_route > 30)
-                    IMG.aim_speed = IMG._config->speed_bomb1;
             }
             else {
                 IMG.flag_track = TRACK_LEFT;
@@ -318,7 +316,7 @@ void run_bomb()
                     PIXEL_PER_METER * IMG._config->bomb_block_run_wide / 2);
                 IMG.rptsc0_num = IMG.rpts0s_num;
 
-                if (IMG.encoder.route - bomb_route > 30) {
+                if (IMG.encoder.route - bomb_route > 40) {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_NONE;
                     IMG.opid();
@@ -331,8 +329,6 @@ void run_bomb()
                     control_flag.pop();
                     MAT_LOG("BOMB_ERROR2");
                 }
-                if (IMG.encoder.route - bomb_route > 30)
-                    IMG.aim_speed = IMG._config->speed_bomb1;
             }
         }
         // 正常巡线
