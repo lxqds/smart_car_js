@@ -115,7 +115,7 @@ int main(int argc, char const* argv[])
             }
 
         }
-        if (imgprocess.brake_flag)serial->transmit_packet(0x10, (uint8_t*)"1", 1);
+        //if (imgprocess.brake_flag)serial->transmit_packet(0x10, (uint8_t*)"1", 1);
         if (serial_echo == 0xA2) { 
             imgprocess.brake_flag = 0;   
             serial_echo = 0;//如果有响应

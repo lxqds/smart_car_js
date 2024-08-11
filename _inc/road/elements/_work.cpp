@@ -276,12 +276,12 @@ void run_work()
                             speed_fun(IMG._config->speed_work + 1, 2, 500);
                         }
                         else {
-                            while (true)
-                            {
                                 MAT_LOG("WORK_ERR");  //假死
+                                srand(IMG.encoder.speed * 1000);
                                 IMG.aim_speed = 800;
-                                IMG.aim_angle = 10;
-                            }
+                                uint8_t fx = rand()%255;
+                                if(fx > 125)IMG.aim_angle = 10;
+                                else IMG.aim_angle = -10;
                         }
                     }
 
