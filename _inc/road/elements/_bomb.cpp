@@ -110,7 +110,10 @@ void run_bomb()
         }
 
         if (flag_bomb == BOMB_FOUND) {
-            IMG.aim_speed = IMG._config->speed_bomb1;
+
+            if (IMG.encoder.speed * 1000 > IMG._config->speed_bomb1 + 500)IMG.aim_speed = -3000;
+            else IMG.aim_speed = IMG._config->speed_bomb1;
+
             bomb_near_cone = POINT(0, 0);
             bomb_near_cone_L = POINT(0, 0);
             bomb_near_cone_R = POINT(0, 0);
