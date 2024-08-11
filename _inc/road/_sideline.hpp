@@ -26,7 +26,7 @@
 /* 窗口绘制信息 */
 #define MAT_INFO(mat, point, size, ...)                                        \
     sprintf(IMG.string_buf, __VA_ARGS__);                                          \
-    cv::putText(mat, (std::string)string_buf, point, cv::FONT_HERSHEY_SIMPLEX, \
+    cv::putText(mat, (std::string)IMG.string_buf, point, cv::FONT_HERSHEY_SIMPLEX, \
                 size, cv::Scalar(0, 0, 255));
 
 /* ********************************************************************* */
