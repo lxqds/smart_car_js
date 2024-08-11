@@ -135,7 +135,7 @@ struct ControlConfig
     uint8_t  assist_judgment;//协助判断参数
     uint16_t speed_bomb1;        //危险区速度1
     uint16_t speed_bomb2;        //危险区速度2
-
+    uint8_t work_Identify_timeouts; //超时处理标志
     uint16_t work_stop_time;     // 停在施工区时间
 
 
@@ -176,6 +176,7 @@ struct ControlConfig
         AUTOCFG(threshold);
         AUTOCFG(threshold_detection);
         AUTOCFG(assist_judgment);
+        AUTOCFG(work_Identify_timeouts);
         AUTOCFG(direction_garage);
         AUTOCFG(direction_yroad);
         AUTOCFG(direction_work);

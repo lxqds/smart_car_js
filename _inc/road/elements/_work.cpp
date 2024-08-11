@@ -255,13 +255,36 @@ void run_work()
                         IMG.aim_speed = 0;
                     }
 
-                    if (stop_clock.toc() > 3000 && abs((int)IMG.encoder.speed * 1000) < 500) {
-                        MAT_LOG("WORK_RED_ERR");
-                        flag_work = WORK_OUT;
-                        out_flage = 4;
-                        work_route = IMG.encoder.route;
-                        return;
+                    if (stop_clock.toc() > 2000 && abs((int)IMG.encoder.speed * 1000) < 500 ) {
+
+                        if (IMG._config->work_Identify_timeouts == 0) {  //退出工作区
+                            MAT_LOG("WORK_RED_ERR");
+                            flag_work = WORK_OUT;
+                            out_flage = 4;
+                            work_route = IMG.encoder.route;
+                            return;
+                        }
+                        else if (IMG._config->work_Identify_timeouts == 1) {  //直接进入左侧
+                            IMG.element_identify = 1;
+                            work_route = IMG.encoder.route;
+                            direction_work = true;
+                            IMG.flag_track = TRACK_LEFT;
+                            flag_work = WORK_FOUND_1;
+                            MAT_LOG("WORK_ERR_L");
+                            FOUND_last_y = 0;
+                            in_flag = 0;
+                            speed_fun(IMG._config->speed_work + 1, 2, 500);
+                        }
+                        else {
+                            while (true)
+                            {
+                                MAT_LOG("WORK_ERR");  //假死
+                                IMG.aim_speed = 800;
+                                IMG.aim_angle = 10;
+                            }
+                        }
                     }
+
                 }
 
             }
