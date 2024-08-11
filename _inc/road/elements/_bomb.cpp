@@ -290,13 +290,12 @@ void run_bomb()
             IMG.aim_distance_f = 0.30;
             IMG.aim_distance_n = 0.1;
             IMG.aim_angle_p *= 2.5;
-            for (auto r : IMG.detection_result) {
-                if (r.label == IMG.label_block) {
-                    bomb_block_y = r.y + r.h / 2;
-                    bomb_block_x = r.x;
-                    break;
-                }
-            }
+            int Lpt0_point[2] = { 0 };
+            int Lpt1_point[2] = { 0 };
+            if (Find_corner_first(IMG.rpts0, IMG.ipts0_num, Lpt0_point, 110))bomb_Lpt0_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
+            else bomb_Lpt0_point_first = POINT(0, 0);
+            if (Find_corner_first(IMG.rpts1, IMG.ipts1_num, Lpt1_point, 110)) bomb_Lpt1_point_first = POINT(Lpt1_point[0], Lpt1_point[1]);
+            else bomb_Lpt1_point_first = POINT(0, 0);
 
             if (first_cone == 0) {    //第一个锥桶在左边，第二个锥桶在右边，寻右线
                 IMG.flag_track = TRACK_RIGHT;
@@ -305,13 +304,14 @@ void run_bomb()
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * IMG._config->bomb_block_run_wide / 2);
                 IMG.rptsc1_num = IMG.rpts1s_num;
-                if (IMG.encoder.route - bomb_route > 40) {//靠近黑块
+                if (IMG.encoder.route - bomb_route > 30) {//靠近黑块
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_NONE;
                     IMG.opid();
                     control_flag.pop();
                     MAT_LOG("BOMB_NONE");
                 }
+                bomb_block_y = bomb_Lpt0_point_first.y;
             }
             else {
                 IMG.flag_track = TRACK_LEFT;
@@ -328,9 +328,10 @@ void run_bomb()
                     control_flag.pop();
                     MAT_LOG("BOMB_NONE");
                 }
+                bomb_block_y = bomb_Lpt1_point_first.y;
             }
-            if (bomb_block_y > IMAGE_HEIGHT * 0.1)bomb_route = IMG.encoder.route;
-
+            if (bomb_block_y > IMAGE_HEIGHT * 0.1)
+                bomb_route = IMG.encoder.route;
 
         }
         // 正常巡线
