@@ -61,6 +61,10 @@ void check_bomb()
                 bomb_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
                 if (bomb_Red.x != 0 && bomb_Red.y != 0 && bomb_Red.x > 0.25 * IMAGE_HEIGHT) {
                     IMG.element_identify = 1;
+
+                    IMG.set_pid(4, 0.4, 0);
+                    imgprocess.brake();
+
                     control_flag.push(bomb_element);
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_FOUND;
@@ -76,6 +80,9 @@ void check_bomb()
                 IMG.element_identify = 1;
                 control_flag.push(bomb_element);
                 bomb_route = IMG.encoder.route;
+
+                IMG.set_pid(4, 0.4, 0);
+                imgprocess.brake();
                 flag_bomb = BOMB_FOUND;
                 MAT_LOG("BOMB_FOUND");
                 bombC.init();
@@ -149,6 +156,7 @@ void run_bomb()
             else if (IMG.encoder.route - bomb_route > 60) {
                 first_cone_count = 0;
                 flag_bomb = BOMB_NONE;
+                IMG.opid();
                 control_flag.pop();
                 MAT_LOG("BOMB_ERROR1");
             }
@@ -186,6 +194,7 @@ void run_bomb()
                 }
                 else if (IMG.encoder.route - bomb_route > 120) {
                     flag_bomb = BOMB_NONE;
+                    IMG.opid();
                     control_flag.pop();
                     MAT_LOG("BOMB_ERROR3");
                 }
@@ -211,6 +220,7 @@ void run_bomb()
                 }
                 else if (IMG.encoder.route - bomb_route > 120) {
                     flag_bomb = BOMB_NONE;
+                    IMG.opid();
                     control_flag.pop();
                     MAT_LOG("BOMB_ERROR3");
                 }
@@ -288,11 +298,13 @@ void run_bomb()
                 if (IMG.encoder.route - bomb_route > 30) {//靠近黑块
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_NONE;
+                    IMG.opid();
                     control_flag.pop();
                     MAT_LOG("BOMB_NONE");
                 }
                 else if (IMG.encoder.route - bomb_route > 120) {
                     flag_bomb = BOMB_NONE;
+                    IMG.opid();
                     control_flag.pop();
                     MAT_LOG("BOMB_ERROR2");
                 }
@@ -310,11 +322,13 @@ void run_bomb()
                 if (IMG.encoder.route - bomb_route > 30) {
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_NONE;
+                    IMG.opid();
                     control_flag.pop();
                     MAT_LOG("BOMB_NONE");
                 }
                 else if (IMG.encoder.route - bomb_route > 120) {
                     flag_bomb = BOMB_NONE;
+                    IMG.opid();
                     control_flag.pop();
                     MAT_LOG("BOMB_ERROR2");
                 }

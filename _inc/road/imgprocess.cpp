@@ -1145,3 +1145,22 @@ void Control_Flag::remove(int value) {
 void ImageProcess::brake() {
     brake_flag = 1;
 }
+
+void ImageProcess::opid() {
+    float speedPID[3] = {
+    _config->speed_kp,
+    _config->speed_ki,
+    _config->speed_kd };
+    memcpy(speedPID_BUFF, speedPID, 12);
+    init_slave_flag = 1;
+}
+
+void ImageProcess::set_pid(float p, float i, float d) {
+    float speedPID[3] = {
+    p,
+    i,
+    d };
+    memcpy(speedPID_BUFF, speedPID, 12);
+    init_slave_flag = 1;
+
+}

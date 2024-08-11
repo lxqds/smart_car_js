@@ -67,7 +67,7 @@ public:
 public:
     std::shared_ptr<ControlConfig> _config;           // 跑车配置文件
     std::vector<DetectionPredictResult> _det_result;  // 目标检测结果
-
+    uint8_t init_slave_flag;
     cv::Mat mat_result;
     cv::Mat mat_bin;  // 原图转二值化图
     cv::Mat mat_lab;  // 原图转 LAB 图
@@ -101,6 +101,8 @@ public:
     uint8_t speedPID_BUFF[12];
     uint8_t brake_flag;  //刹车标志
     void brake();
+    void opid();
+    void set_pid();
     /* *********************************************************************** */
     /* ****************************** 下位机数据 ****************************** */
     /* *********************************************************************** */
