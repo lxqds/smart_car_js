@@ -326,7 +326,7 @@ void run_work()
             if (flag_work == WORK_FOUND_2) {
 
                 IMG.edge_det = search_targets(IMG._det_result);
-
+                IMG.aim_speed = IMG._config->speed_work;
                 // 找锥桶
                 if (direction_work)
                     work_near_cone = search_left_near_up(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
