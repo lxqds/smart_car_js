@@ -390,7 +390,7 @@ void run_yroad() {
 				IMG.flag_track = TRACK_LEFT;
 				if (IMG.encoder.speed * 1000 > 1500)IMG.aim_speed = -3000;
 				else {
-					if (Lpt0_point_first > 0.6 * IMAGE_HEIGHT)IMG.aim_speed = -100;
+					if (Lpt0_point_first.y > 0.6 * IMAGE_HEIGHT)IMG.aim_speed = -100;
 					else IMG.aim_speed = 400;
 				}
 			   // //左边线预测中线
@@ -403,7 +403,7 @@ void run_yroad() {
 				IMG.flag_track = TRACK_RIGHT;
 				if (IMG.encoder.speed * 1000 > 1500)IMG.aim_speed = -3000;
 				else {
-					if (Lpt1_point_first > 0.6 * IMAGE_HEIGHT)IMG.aim_speed = -100;
+					if (Lpt1_point_first.y > 0.6 * IMAGE_HEIGHT)IMG.aim_speed = -100;
 					else IMG.aim_speed = 400;
 				}
 				// //右边线预测中线
