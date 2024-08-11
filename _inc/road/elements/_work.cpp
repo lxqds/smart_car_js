@@ -149,7 +149,7 @@ void check_work()
                 work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
                 if(work_Red.x ==0)work_Red = search_right_near_Red(IMG.edge_right_far, IMG.mat_lab2);
 
-                if (work_Red.x != 0 && work_Red.x > 0.1* IMAGE_HEIGHT) {
+                if (work_Red.x != 0 && work_Red.x > 0.2* IMAGE_HEIGHT) {
                     MAT_LOG("SEE_RED");
                     IMG.element_identify = 1;
                     IMG.brake();
@@ -199,7 +199,7 @@ void run_work()
 
                     speed_fun(IMG._config->speed_work + 1, 2, 500); //快速减速
                     for (auto r : IMG.detection_result) {  //如果有识别到元素就进入工作区
-                        if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.78 && r.y > IMAGE_HEIGHT * 0.05) {
+                        if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.78 && r.y > IMAGE_HEIGHT * 0.15) {
                             IMG.element_identify = 1;
                             work_route = IMG.encoder.route;
                             direction_work = false;
@@ -217,7 +217,7 @@ void run_work()
                                 AI_find_sign.y = r.score * 100;
                             }
                         }
-                        else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.35 && r.y > IMAGE_HEIGHT * 0.05) {
+                        else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.35 && r.y > IMAGE_HEIGHT * 0.15) {
 
                             IMG.element_identify = 1;
                             work_route = IMG.encoder.route;

@@ -118,8 +118,8 @@ void run_bomb()
                 }
                 MAT_LOG("near_y L=%d R=%d ", bomb_near_cone_L.x, bomb_near_cone_R.x);
             }
-
-
+            drawH(IMAGE_HEIGHT * 0.4, 0, 255, 0, IMG.mat_result);
+            drawH(bomb_near_cone.x, 0, 255, 0, IMG.mat_result);
             if (first_cone_count >= 2) first_cone = 0;
             else if (first_cone_count <= -2) first_cone = 1;
             if (bomb_near_cone.x > IMAGE_HEIGHT * 0.1) {
