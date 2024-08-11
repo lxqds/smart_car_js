@@ -95,7 +95,11 @@ void run_bomb()
     if (control_flag.top() == bomb_element) {//当前为炸弹元素
         IMG.get_edge(0);
 
-
+        std::vector<cv::Rect> all_zt;
+        all_zt = bombC.search_all_cone_rect(IMG.mat_lab);
+        for (size_t i = 0; i < all_zt.size(); i++) {
+            cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
+        }
         if (flag_bomb == BOMB_FOUND) {
             IMG.aim_speed = IMG._config->speed_bomb1;
             bomb_near_cone = POINT(0, 0);
@@ -103,11 +107,7 @@ void run_bomb()
             bomb_near_cone_R = POINT(0, 0);
             bomb_near_cone_L = search_left_near_in(IMG.edge_left, IMG.mat_lab);
             bomb_near_cone_R = search_right_near_in(IMG.edge_right, IMG.mat_lab);
-            std::vector<cv::Rect> all_zt;
-            all_zt = bombC.search_all_cone_rect(IMG.mat_lab);
-            for (size_t i = 0; i < all_zt.size(); i++) {
-                cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
-            }
+
             if (bomb_near_cone_L.x != 0 && bomb_near_cone_R.x != 0) {
                 if (bomb_near_cone_L.x > bomb_near_cone_R.x)
                     bomb_near_cone = bomb_near_cone_L;
@@ -333,7 +333,7 @@ void run_bomb()
             IMG.rpts_num = IMG.rptscs_num;
         }
 
-        if (IMG.rpts_num > 0.3 / SAMPLE_DIST) {
+        if (IMG.rpts_num > 0.5 / SAMPLE_DIST) {
             IMG.calculate_angle();//计算角度
         }
         else if (IMG.flag_track == TRACK_RIGHT) {
