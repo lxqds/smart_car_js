@@ -54,6 +54,7 @@ void check_yroad() {
 						else yroad_position = 1;
 
 						IMG.element_identify = 1;
+						imgprocess.brake();
 						control_flag.push(yroad_element);
 						yroad_route = IMG.encoder.route;
 						flag_yroad = YROAD_FOUND_1;
@@ -78,6 +79,7 @@ void check_yroad() {
 						if (L0 < L1) yroad_position = 0;
 						else yroad_position = 1;
 						IMG.element_identify = 1;
+						imgprocess.brake();
 						control_flag.push(yroad_element);
 						yroad_route = IMG.encoder.route;
 						flag_yroad = YROAD_FOUND_2;
@@ -102,6 +104,7 @@ void check_yroad() {
 						if (L0 < L1) yroad_position = 0;
 						else yroad_position = 1;
 						IMG.element_identify = 1;
+						imgprocess.brake();
 						control_flag.push(yroad_element);
 						yroad_route = IMG.encoder.route;
 						flag_yroad = YROAD_FOUND_3;
@@ -142,6 +145,7 @@ void check_yroad() {
 								if (IMG.ipts0_direction[direction_j] == 2 && count > 2) {
 									IMG.element_identify = 1;
 									yroad_position = 0;
+									imgprocess.brake();
 									control_flag.push(yroad_element);
 									yroad_route = IMG.encoder.route;
 									flag_yroad = YROAD_FOUND_0;
@@ -217,6 +221,7 @@ void check_yroad() {
 								if (IMG.ipts1_direction[direction_j] == 4) {
 									IMG.element_identify = 1;
 									yroad_position = 0;
+									imgprocess.brake();
 									control_flag.push(yroad_element);
 									yroad_route = IMG.encoder.route;
 									flag_yroad = YROAD_FOUND_0;
