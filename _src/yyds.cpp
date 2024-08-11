@@ -79,12 +79,11 @@ int main(int argc, char const* argv[])
     display->start();
 
     /* 初始化PID */
-    float speedPID[3] = {
-        imgprocess._config->speed_kp,
-        imgprocess._config->speed_ki,
-        imgprocess._config->speed_kd };
+    fimgprocess.speedPID[0] = imgprocess._config->speed_kp;
+    fimgprocess.speedPID[1] = imgprocess._config->speed_ki;
+    fimgprocess.speedPID[2] = imgprocess._config->speed_kd;
     uint8_t speedPID_BUFF[12];
-    memcpy(speedPID_BUFF, speedPID, 12);
+    memcpy(speedPID_BUFF, fimgprocess.speedPID, 12);
     LOG_I << "kp=" << speedPID[0] << LOG_END;
     LOG_I << "ki=" << speedPID[1] << LOG_END;
     LOG_I << "kd=" << speedPID[2] << LOG_END;

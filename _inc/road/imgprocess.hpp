@@ -98,6 +98,7 @@ public:
     bool special_w = false;    // 施工区结束特殊处理
     bool special_g = false;    // 加油站结束特殊处理
 
+    float speedPID[3];
     uint8_t brake_flag;  //刹车标志
     void brake();
     /* *********************************************************************** */
