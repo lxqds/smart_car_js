@@ -153,9 +153,9 @@ void run_bomb()
         }
         else if (flag_bomb == BOMB_FIRST_CONE) {
             IMG.aim_speed = IMG._config->speed_bomb2;
-            IMG.aim_distance_f = 0.3;
+            IMG.aim_distance_f = 0.5;
             IMG.aim_distance_n = 0.1;
-            IMG.aim_angle_p *= 1.5;
+            IMG.aim_angle_p *= 2.5
 
             bomb_near_cone = POINT(0, 0);
             bomb_near_cone_L = POINT(0, 0);
@@ -173,6 +173,7 @@ void run_bomb()
 
                 IMG.rptsc1_num = IMG.rpts1s_num;
                 MAT_LOG(" R_near_y=%d", bomb_near_cone.x);
+
                 if (IMG.encoder.route - bomb_route > 20 &&
                     bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_second_cone_ready) {
                     bomb_route = IMG.encoder.route;
@@ -215,9 +216,9 @@ void run_bomb()
         }
         else if (flag_bomb == BOMB_SECOND_CONE) {
             IMG.aim_speed = IMG._config->speed_bomb2;
-            IMG.aim_distance_f = 0.2;
+            IMG.aim_distance_f = 0.5;
             IMG.aim_distance_n = 0.1;
-            IMG.aim_angle_p *= 1.5;
+            IMG.aim_angle_p *= 2.5;
             int Lpt0_point[2] = { 0 };
             int Lpt1_point[2] = { 0 };
             if (Find_corner_first(IMG.rpts0, IMG.ipts0_num, Lpt0_point, 110)) {
@@ -333,7 +334,7 @@ void run_bomb()
             IMG.rpts_num = IMG.rptscs_num;
         }
 
-        if (IMG.rpts_num > 0.5 / SAMPLE_DIST) {
+        if (IMG.rpts_num > 0.3 / SAMPLE_DIST) {
             IMG.calculate_angle();//计算角度
         }
         else if (IMG.flag_track == TRACK_RIGHT) {
