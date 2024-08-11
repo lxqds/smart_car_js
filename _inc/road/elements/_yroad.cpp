@@ -297,8 +297,8 @@ void run_yroad() {
 			else IMG.aim_speed = 200;
 
 
-			IMG.aim_distance_f = 0.3;
-			IMG.aim_distance_n = 0.1;
+			IMG.aim_distance_f = 0.6;
+			IMG.aim_distance_n = 0.3;
 			for (auto r : IMG.detection_result) {
 				switch (r.label) {
 					case IMG.label_safety://普通车辆
@@ -582,8 +582,8 @@ void run_yroad() {
 			IMG.calculate_angle();//计算角度
 		}
 		else if (flag_yroad == YROAD_FOUND_2_2) {//开始别车
-			IMG.aim_distance_f = 0.3;
-			IMG.aim_distance_n = 0.1;
+			IMG.aim_distance_f = 0.6;
+			IMG.aim_distance_n = 0.3;
 			IMG.aim_angle_p *= 2;
 			if (IMG.encoder.speed * 1000 > 1500)IMG.aim_speed = -1000;
 			else IMG.aim_speed = 700;
