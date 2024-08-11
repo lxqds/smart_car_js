@@ -132,13 +132,14 @@ void check_yroad() {
 				for (size_t direction_i = 0; direction_i < IMG.ipts0_direction.size(); ++direction_i) {
 					if (IMG.ipts0_direction[direction_i] == 4) {
 						int sign = 0;
+						int count = 0;
 						for (size_t direction_j = direction_i; direction_j < IMG.ipts0_direction.size(); ++direction_j) {
 							if (sign == 0) {
 								if (IMG.ipts0_direction[direction_j] == 1) sign = 1;
 								else if (IMG.ipts0_direction[direction_j] != 4)break;
 							}
 							else if (sign == 1) {
-								if (IMG.ipts0_direction[direction_j] == 2) {
+								if (IMG.ipts0_direction[direction_j] == 2 && count > 2) {
 									IMG.element_identify = 1;
 									yroad_position = 0;
 									control_flag.push(yroad_element);
@@ -147,7 +148,10 @@ void check_yroad() {
 									MAT_LOG("YROAD_FOUND_0");
 									return;
 								}
-								else if (IMG.ipts0_direction[direction_j] != 1)break;
+								else if (IMG.ipts0_direction[direction_j] == 1) {
+									if (++count > 8)break;
+								}
+								else break;
 							}
 						}
 					}
@@ -203,6 +207,7 @@ void check_yroad() {
 				for (size_t direction_i = 0; direction_i < IMG.ipts1_direction.size(); ++direction_i) {
 					if (IMG.ipts1_direction[direction_i] == 2) {
 						int sign = 0;
+						int count = 0;
 						for (size_t direction_j = direction_i; direction_j < IMG.ipts1_direction.size(); ++direction_j) {
 							if (sign == 0) {
 								if (IMG.ipts1_direction[direction_j] == 1) sign = 1;
@@ -218,7 +223,10 @@ void check_yroad() {
 									MAT_LOG("YROAD_FOUND_0");
 									return;
 								}
-								else if (IMG.ipts1_direction[direction_j] != 1)break;
+								else if (IMG.ipts1_direction[direction_j] == 1) {
+									if (++count > 8)break;
+								}
+								else break;
 							}
 						}
 					}
