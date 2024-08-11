@@ -97,9 +97,11 @@ void run_bomb()
 
         std::vector<cv::Rect> all_zt;
         all_zt = bombC.search_all_cone_rect(IMG.mat_lab);
+
         for (size_t i = 0; i < all_zt.size(); i++) {
             cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
         }
+
         if (flag_bomb == BOMB_FOUND) {
             IMG.aim_speed = IMG._config->speed_bomb1;
             bomb_near_cone = POINT(0, 0);
@@ -155,7 +157,7 @@ void run_bomb()
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.aim_distance_f = 0.5;
             IMG.aim_distance_n = 0.1;
-            IMG.aim_angle_p *= 2.5
+            IMG.aim_angle_p *= 2.5;
 
             bomb_near_cone = POINT(0, 0);
             bomb_near_cone_L = POINT(0, 0);
