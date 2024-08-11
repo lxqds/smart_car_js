@@ -370,7 +370,7 @@ void run_work()
                 drawH(coneLowy, 0, 0, 255, IMG.mat_result);
             }
 
-            if ((flag_work == WORK_FOUND_2 || flag_work == WORK_FOUND_1 || flag_work == WORK_FOUND_0) && &&fond_flag != 1) {
+            if ((flag_work == WORK_FOUND_2 || flag_work == WORK_FOUND_1 || flag_work == WORK_FOUND_0) && fond_flag != 1) {
 
                 // 正常巡线
                 if (IMG.flag_track == TRACK_LEFT) {
