@@ -104,7 +104,7 @@ void run_bomb()
             bomb_near_cone_L = search_left_near_in(IMG.edge_left, IMG.mat_lab);
             bomb_near_cone_R = search_right_near_in(IMG.edge_right, IMG.mat_lab);
             std::vector<cv::Rect> all_zt;
-            all_zt = workC.search_all_cone_rect(IMG.mat_lab);
+            all_zt = bombC.search_all_cone_rect(IMG.mat_lab);
             for (size_t i = 0; i < all_zt.size(); i++) {
                 cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
             }
