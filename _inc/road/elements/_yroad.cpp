@@ -440,7 +440,7 @@ void run_yroad() {
 			else if (IMG.flag_track == TRACK_LEFT) {
 				IMG.aim_angle = 45;
 			}
-
+			if (IMG.encoder.speed * 1000 < 0)IMG.aim_angle = -IMG.aim_angle;
 		}
 		else if (flag_yroad == YROAD_FOUND_1) {
 			IMG.aim_speed = IMG._config->speed_base;;
@@ -498,6 +498,7 @@ void run_yroad() {
 			else if (IMG.flag_track == TRACK_LEFT) {
 				IMG.aim_angle = 45;
 			}
+			if (IMG.encoder.speed * 1000 < 0)IMG.aim_angle = -IMG.aim_angle;
 		}
 		else if (flag_yroad == YROAD_FOUND_2) {
 			if (IMG.encoder.speed * 1000 > 1500)IMG.aim_speed = -1000;
