@@ -1591,7 +1591,7 @@ void Get_ipts_direction(int ipts[][2], int ipts_num, std::vector<uint8_t>& ipts_
                 else ipts_direction.push_back(2);//左方
             }
             else if (x >= 0 && y >= 0) {
-                if (x == 0 || y / x < 1)ipts_direction.push_back(3);//下方
+                if (x == 0 || y / x > 1)ipts_direction.push_back(3);//下方
                 else ipts_direction.push_back(4);//右方
             }
             MAT_INFO(IMG.mat_result, cv::Point(k[0][0] + 5, k[0][1]), 0.2, "%d", ipts_direction.back());
