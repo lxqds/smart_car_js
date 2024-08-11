@@ -455,8 +455,8 @@ void run_yroad() {
 			IMG.aim_speed = IMG._config->speed_base;;
 			IMG.aim_distance_f = 0.6;
 			IMG.aim_distance_n = 0.2;
-			IMG.aim_angle_p *= 2;
-			if (IMG.encoder.route - yroad_route > 100) {
+			IMG.aim_angle_p *= 1.5;
+			if (IMG.encoder.route - yroad_route > 50) {
 				IMG.element_over = true;
 				IMG.element_over_route = IMG.encoder.route;
 				flag_yroad = YROAD_NONE;
