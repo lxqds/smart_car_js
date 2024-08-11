@@ -293,8 +293,7 @@ void run_yroad() {
 	if (control_flag.top() == yroad_element) {//当前为圆环元素
 
 		if (flag_yroad == YROAD_FOUND_0) {
-			if (IMG.encoder.speed * 1000 > 1500)IMG.aim_speed = -1000;
-			else IMG.aim_speed = 200;
+
 
 
 			IMG.aim_distance_f = 0.6;
@@ -376,10 +375,25 @@ void run_yroad() {
 					return;
 				}
 			}
+			int Lpt0_point[2] = { 0 };
+			int Lpt1_point[2] = { 0 };
+			if (Find_corner_first(IMG.rpts0, IMG.ipts0_num, Lpt0_point, 110))Lpt0_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
+			else Lpt0_point_first = POINT(0, 0);
+			if (Find_corner_first(IMG.rpts1, IMG.ipts1_num, Lpt1_point, 110)) Lpt1_point_first = POINT(Lpt1_point[0], Lpt1_point[1]);
+			else Lpt1_point_first = POINT(0, 0);
+
+
+
+
 			IMG.get_edge();//获取边线
 			if (yroad_position == 0) {
 				IMG.flag_track = TRACK_LEFT;
-				// //左边线预测中线
+				if (IMG.encoder.speed * 1000 > 1500)IMG.aim_speed = -3000;
+				else {
+					if (Lpt0_point_first > 0.6 * IMAGE_HEIGHT)IMG.aim_speed = -100;
+					else IMG.aim_speed = 400;
+				}
+			   // //左边线预测中线
 				// track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
 				// 	(int)round(ANGLE_DIST / SAMPLE_DIST),
 				// 	PIXEL_PER_METER * 0.4 / 2);
@@ -387,6 +401,11 @@ void run_yroad() {
 			}
 			else {
 				IMG.flag_track = TRACK_RIGHT;
+				if (IMG.encoder.speed * 1000 > 1500)IMG.aim_speed = -3000;
+				else {
+					if (Lpt1_point_first > 0.6 * IMAGE_HEIGHT)IMG.aim_speed = -100;
+					else IMG.aim_speed = 400;
+				}
 				// //右边线预测中线
 				// track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
 				// 	(int)round(ANGLE_DIST / SAMPLE_DIST),
@@ -484,12 +503,10 @@ void run_yroad() {
 
 			int Lpt0_point[2] = { 0 };
 			int Lpt1_point[2] = { 0 };
-			if (Find_corner_first(IMG.rpts0, IMG.ipts0_num, Lpt0_point, 110)) {
-				Lpt0_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
-			};
-			if (Find_corner_first(IMG.rpts1, IMG.ipts1_num, Lpt1_point, 110)) {
-				Lpt1_point_first = POINT(Lpt1_point[0], Lpt1_point[1]);
-			};
+			if (Find_corner_first(IMG.rpts0, IMG.ipts0_num, Lpt0_point, 110))Lpt0_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
+			else Lpt0_point_first = POINT(0, 0);
+			if (Find_corner_first(IMG.rpts1, IMG.ipts1_num, Lpt1_point, 110)) Lpt1_point_first = POINT(Lpt1_point[0], Lpt1_point[1]);
+			else Lpt1_point_first = POINT(0, 0);
 			IMG.get_edge();//获取边线
 			if (yroad_position == 0) {
 				IMG.flag_track = TRACK_RIGHT;
