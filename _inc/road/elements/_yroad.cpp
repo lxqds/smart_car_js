@@ -394,11 +394,14 @@ void run_yroad() {
 					else if (Lpt0_point_first.y == 0) IMG.aim_speed = -500;
 					else IMG.aim_speed = 400;
 				}
-			   // //左边线预测中线
-				// track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
-				// 	(int)round(ANGLE_DIST / SAMPLE_DIST),
-				// 	PIXEL_PER_METER * 0.4 / 2);
-				// IMG.rptsc0_num = IMG.rpts0s_num;
+				if (Lpt0_point_first.y > 0.5 * IMAGE_HEIGHT || Lpt0_point_first.y == 0) {
+					IMG.flag_track = TRACK_RIGHT;
+					//右边线预测中线
+					track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
+						(int)round(ANGLE_DIST / SAMPLE_DIST),
+						PIXEL_PER_METER * 0.2 / 2);
+					IMG.rptsc1_num = IMG.rpts1s_num;
+				}
 			}
 			else {
 				IMG.flag_track = TRACK_RIGHT;
@@ -407,12 +410,18 @@ void run_yroad() {
 					if (Lpt1_point_first.y > 0.6 * IMAGE_HEIGHT)IMG.aim_speed = -100;
 					else if (Lpt1_point_first.y == 0) IMG.aim_speed = -500;
 					else IMG.aim_speed = 400;
+
+					if (Lpt1_point_first.y > 0.5 * IMAGE_HEIGHT || Lpt1_point_first.y == 0) {
+						IMG.flag_track = TRACK_LEFT;
+						//左边线预测中线
+						track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
+							(int)round(ANGLE_DIST / SAMPLE_DIST),
+							PIXEL_PER_METER * 0.2 / 2);
+						IMG.rptsc0_num = IMG.rpts0s_num;
+					}
+
 				}
-				// //右边线预测中线
-				// track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
-				// 	(int)round(ANGLE_DIST / SAMPLE_DIST),
-				// 	PIXEL_PER_METER * 0.4 / 2);
-				// IMG.rptsc1_num = IMG.rpts1s_num;
+
 
 			}
 
@@ -447,7 +456,7 @@ void run_yroad() {
 			IMG.aim_distance_f = 0.6;
 			IMG.aim_distance_n = 0.2;
 			IMG.aim_angle_p *= 2;
-			if (IMG.encoder.route - yroad_route > 200) {
+			if (IMG.encoder.route - yroad_route > 100) {
 				IMG.element_over = true;
 				IMG.element_over_route = IMG.encoder.route;
 				flag_yroad = YROAD_NONE;
