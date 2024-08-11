@@ -103,7 +103,7 @@ int main(int argc, char const* argv[])
 
             if (echo_sw.toc() > 500) {
                 echo_sw.tic();
-                serial->transmit_packet(0x09, speedPID_BUFF, 12);
+                serial->transmit_packet(0x09, imgprocess.speedPID_BUFF, 12);
                 LOG_I << "send!" << "..." << serial_echo << LOG_END;
 
             }
