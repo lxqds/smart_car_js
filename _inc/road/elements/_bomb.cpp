@@ -36,6 +36,8 @@ int first_cone_count = 0;    //第一个锥桶计数
 POINT bomb_Lpt0_point_first;
 POINT bomb_Lpt1_point_first;
 
+CVFind_Clone bombC;
+
 /* ********************************************************************* */
 
 void check_bomb()
@@ -63,6 +65,7 @@ void check_bomb()
                     bomb_route = IMG.encoder.route;
                     flag_bomb = BOMB_FOUND;
                     MAT_LOG("BOMB_FOUND_0");
+                    bombC.init();
                     return;
                 }
             }
@@ -75,6 +78,7 @@ void check_bomb()
                 bomb_route = IMG.encoder.route;
                 flag_bomb = BOMB_FOUND;
                 MAT_LOG("BOMB_FOUND");
+                bombC.init();
                 break;
             }
         }
@@ -99,6 +103,11 @@ void run_bomb()
             bomb_near_cone_R = POINT(0, 0);
             bomb_near_cone_L = search_left_near_in(IMG.edge_left, IMG.mat_lab);
             bomb_near_cone_R = search_right_near_in(IMG.edge_right, IMG.mat_lab);
+            std::vector<cv::Rect> all_zt;
+            all_zt = workC.search_all_cone_rect(IMG.mat_lab);
+            for (size_t i = 0; i < all_zt.size(); i++) {
+                cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
+            }
             if (bomb_near_cone_L.x != 0 && bomb_near_cone_R.x != 0) {
                 if (bomb_near_cone_L.x > bomb_near_cone_R.x)
                     bomb_near_cone = bomb_near_cone_L;
