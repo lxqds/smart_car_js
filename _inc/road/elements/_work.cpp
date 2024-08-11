@@ -194,49 +194,51 @@ void run_work()
             IMG.edge_det.clear();
             //预识别到元素，但是未识别到左右进入方向，后退回去识别
             if (flag_work == WORK_FOUND_0) {
-                speed_fun(IMG._config->speed_work+1, 2, 500); //快速减速
-                for (auto r : IMG.detection_result) {  //如果有识别到元素就进入工作区
-                    if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.78 && r.y > IMAGE_HEIGHT * 0.05) {
-                        IMG.element_identify = 1;
-                        work_route = IMG.encoder.route;
-                        direction_work = false;
-                        IMG.flag_track = TRACK_RIGHT;
-                        flag_work = WORK_FOUND_1;
-                        MAT_LOG("WORK_FOUND_R");
-                        LOG_I << "rescore" << r.score << LOG_END;
-                        FOUND_last_y = 0;
-                        in_flag = 0;
-
-                        speed_fun(IMG._config->speed_work+1, 2, 500);
-
-                        if (AI_find_sign.y < r.score * 100) {
-                            AI_find_sign.x = 1;
-                            AI_find_sign.y = r.score * 100;
-                        }
-                    }
-                    else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.35 && r.y > IMAGE_HEIGHT * 0.05) {
-
-                        IMG.element_identify = 1;
-                        work_route = IMG.encoder.route;
-                        direction_work = true;
-                        IMG.flag_track = TRACK_LEFT;
-                        flag_work = WORK_FOUND_1;
-                        MAT_LOG("WORK_FOUND_L");
-                        LOG_I << "rescore" << r.score << LOG_END;
-                        FOUND_last_y = 0;
-                        in_flag = 0;
-
-                        speed_fun(IMG._config->speed_work + 1, 2, 500);
-
-                        if (AI_find_sign.y < r.score * 100) {
-                            AI_find_sign.x = 0;
-                            AI_find_sign.y = r.score * 100;
-                        }
-                    }
-
-                }
 
                 if (fond_flag == 0) {
+
+                    speed_fun(IMG._config->speed_work + 1, 2, 500); //快速减速
+                    for (auto r : IMG.detection_result) {  //如果有识别到元素就进入工作区
+                        if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.78 && r.y > IMAGE_HEIGHT * 0.05) {
+                            IMG.element_identify = 1;
+                            work_route = IMG.encoder.route;
+                            direction_work = false;
+                            IMG.flag_track = TRACK_RIGHT;
+                            flag_work = WORK_FOUND_1;
+                            MAT_LOG("WORK_FOUND_R");
+                            LOG_I << "rescore" << r.score << LOG_END;
+                            FOUND_last_y = 0;
+                            in_flag = 0;
+
+                            speed_fun(IMG._config->speed_work + 1, 2, 500);
+
+                            if (AI_find_sign.y < r.score * 100) {
+                                AI_find_sign.x = 1;
+                                AI_find_sign.y = r.score * 100;
+                            }
+                        }
+                        else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.35 && r.y > IMAGE_HEIGHT * 0.05) {
+
+                            IMG.element_identify = 1;
+                            work_route = IMG.encoder.route;
+                            direction_work = true;
+                            IMG.flag_track = TRACK_LEFT;
+                            flag_work = WORK_FOUND_1;
+                            MAT_LOG("WORK_FOUND_L");
+                            LOG_I << "rescore" << r.score << LOG_END;
+                            FOUND_last_y = 0;
+                            in_flag = 0;
+
+                            speed_fun(IMG._config->speed_work + 1, 2, 500);
+
+                            if (AI_find_sign.y < r.score * 100) {
+                                AI_find_sign.x = 0;
+                                AI_find_sign.y = r.score * 100;
+                            }
+                        }
+
+                    }
+
                     work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2); //右线红色色块
                     float threshold_re = 0.15;
                     int thresholdh = IMAGE_HEIGHT * threshold_re;
@@ -277,18 +279,18 @@ void run_work()
                         }
                         else {
                                 fond_flag = 1;
+                                MAT_LOG("WORK_ERR");  //假死
                         }
                     }
 
                 }
 
-                if (fond_flag == 1) {
-                    MAT_LOG("WORK_ERR");  //假死
+                if (fond_flag == 1) 
                     srand(IMG.encoder.speed * 1000);
                     IMG.aim_speed = 800;
                     uint8_t fx = rand() % 255;
-                    if (fx > 125)IMG.aim_angle = 10;
-                    else IMG.aim_angle = -10;
+                    if (fx > 125)IMG.aim_angle = 30;
+                    else IMG.aim_angle = -30;
                 }
 
             }
