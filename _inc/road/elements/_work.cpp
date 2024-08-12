@@ -375,7 +375,6 @@ void run_work()
                 if (IMG.aim_speed < -IMG._config->speed_work) IMG.aim_speed = -IMG._config->speed_work;
               //  if (speedP < 0)speedP -= IMG._config->work_read_cone_base_speed_k;
 
-                IMG.aim_speed = (IMG._config->work_ready_speed);
                 int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
                 if (work_near_cone.x == 0)IMG.aim_speed = -IMG.aim_speed;
                 // LOG_I << "  speed_err:" << speed_err << LOG_END;
