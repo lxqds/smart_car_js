@@ -103,6 +103,8 @@ void check_work()
                     control_flag.remove(circle_element);
                     flag_circle = CIRCLE_NONE;
                 }
+                IMG.set_pid(8, 0.0, 0);
+                IMG.brake();
                 control_flag.push(work_element);
                 work_route = IMG.encoder.route;
                 direction_work = false;
@@ -122,6 +124,8 @@ void check_work()
                     control_flag.remove(circle_element);
                     flag_circle = CIRCLE_NONE;
                 }
+                IMG.set_pid(8, 0.0, 0);
+                IMG.brake();
                 control_flag.push(work_element);
                 work_route = IMG.encoder.route;
                 direction_work = true;
@@ -150,11 +154,13 @@ void check_work()
                 if (work_Red.x != 0 && work_Red.x > 0.2 * IMAGE_HEIGHT) {
                     MAT_LOG("SEE_RED");
                     IMG.element_identify = 1;
-                    IMG.brake();
+
                     if (control_flag.contains(circle_element)) {
                         control_flag.remove(circle_element);
                         flag_circle = CIRCLE_NONE;
                     }
+                    IMG.set_pid(8, 0.0, 0);
+                    IMG.brake();
                     control_flag.push(work_element);
                     work_route = IMG.encoder.route;
                     IMG.flag_track = TRACK_RIGHT;
@@ -396,6 +402,7 @@ void run_work()
                 if ((IMG.encoder.route - work_route > IMG._config->work_error)) {
                     IMG.element_over = true;
                     IMG.element_over_route = IMG.encoder.route;
+                    IMG.opid();
                     control_flag.pop();//移除
                     flag_work = WORK_NONE;
                     MAT_LOG("WORK_ERROR");
@@ -683,6 +690,7 @@ void run_work()
                     IMG.calculate_angle();//计算角度
 
                     if (IMG.encoder.route - work_route > IMG._config->work_out_route) {
+                        IMG.opid();
                         control_flag.pop();//移除
                         flag_work = WORK_NONE;
                         MAT_LOG("WORK_HAVE_DO");
