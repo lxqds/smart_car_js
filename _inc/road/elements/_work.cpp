@@ -219,7 +219,7 @@ void run_work()
                             LOG_I << "rescore" << r.score << LOG_END;
                             FOUND_last_y = 0;
                             in_flag = 0;
-
+                            IMG.set_pid(IMG._config->work_read_cone_base_speed_k, 0.0, 0);
                             speed_fun(IMG._config->speed_work + 1, 2, 500);
 
                             if (AI_find_sign.y < r.score * 100) {
@@ -238,7 +238,7 @@ void run_work()
                             LOG_I << "rescore" << r.score << LOG_END;
                             FOUND_last_y = 0;
                             in_flag = 0;
-
+                            IMG.set_pid(IMG._config->work_read_cone_base_speed_k, 0.0, 0);
                             speed_fun(IMG._config->speed_work + 1, 2, 500);
 
                             if (AI_find_sign.y < r.score * 100) {
@@ -367,20 +367,21 @@ void run_work()
 
                 int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + IMG._config->work_read_cone_allow_error / 2.0 - work_near_cone.x;
 
-                IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
-                if (IMG.aim_speed > 0 && IMG.aim_speed < 500) IMG.aim_speed = 500; //基础速度
-                if (IMG.aim_speed < 0 && IMG.aim_speed > -500) IMG.aim_speed = -500;
+                //IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
+                //if (IMG.aim_speed > 0 && IMG.aim_speed < 500) IMG.aim_speed = 500; //基础速度
+                //if (IMG.aim_speed < 0 && IMG.aim_speed > -500) IMG.aim_speed = -500;
 
-                if (IMG.aim_speed > IMG._config->speed_work) IMG.aim_speed = IMG._config->speed_work; //限幅
-                if (IMG.aim_speed < -IMG._config->speed_work) IMG.aim_speed = -IMG._config->speed_work;
+                //if (IMG.aim_speed > IMG._config->speed_work) IMG.aim_speed = IMG._config->speed_work; //限幅
+                //if (IMG.aim_speed < -IMG._config->speed_work) IMG.aim_speed = -IMG._config->speed_work;
               //  if (speedP < 0)speedP -= IMG._config->work_read_cone_base_speed_k;
 
+                IMG.aim_speed = (IMG._config->work_ready_speed);
                 int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
                 if (work_near_cone.x == 0)IMG.aim_speed = -IMG.aim_speed;
                 // LOG_I << "  speed_err:" << speed_err << LOG_END;
                 if (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) { IMG.brake(); speed_fun(0, 2, 500); }
 
-                if ((work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) &&
+                if ((work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) ||
                     speed_err < IMG._config->work_read_cone_allow_speed_error) {
                     IMG.aim_speed = 0;
                     work_route = IMG.encoder.route;
