@@ -390,11 +390,11 @@ void run_yroad() {
 				IMG.flag_track = TRACK_LEFT;
 				if (IMG.encoder.speed * 1000 > 1500)IMG.aim_speed = -3000;
 				else {
-					if (Lpt0_point_first.y > 0.6 * IMAGE_HEIGHT)IMG.aim_speed = -100;
+					if (Lpt0_point_first.y > 0.5 * IMAGE_HEIGHT)IMG.aim_speed = -100;
 					else if (Lpt0_point_first.y == 0) IMG.aim_speed = -500;
 					else IMG.aim_speed = 400;
 				}
-				if (Lpt0_point_first.y > 0.5 * IMAGE_HEIGHT || Lpt0_point_first.y == 0) {
+				if (Lpt0_point_first.y > 0.4 * IMAGE_HEIGHT || Lpt0_point_first.y == 0) {
 					IMG.flag_track = TRACK_RIGHT;
 					//右边线预测中线
 					track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
@@ -407,11 +407,11 @@ void run_yroad() {
 				IMG.flag_track = TRACK_RIGHT;
 				if (IMG.encoder.speed * 1000 > 1500) IMG.aim_speed = -3000;
 				else {
-					if (Lpt1_point_first.y > 0.6 * IMAGE_HEIGHT)IMG.aim_speed = -100;
+					if (Lpt1_point_first.y > 0.5 * IMAGE_HEIGHT)IMG.aim_speed = -100;
 					else if (Lpt1_point_first.y == 0) IMG.aim_speed = -500;
 					else IMG.aim_speed = 400;
 
-					if (Lpt1_point_first.y > 0.5 * IMAGE_HEIGHT || Lpt1_point_first.y == 0) {
+					if (Lpt1_point_first.y > 0.4 * IMAGE_HEIGHT || Lpt1_point_first.y == 0) {
 						IMG.flag_track = TRACK_LEFT;
 						//左边线预测中线
 						track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
