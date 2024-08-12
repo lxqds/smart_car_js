@@ -291,7 +291,7 @@ void run_bomb()
         }
         else if (flag_bomb == BOMB_BLOCK) {
             IMG.aim_speed = IMG._config->speed_bomb2;
-            IMG.aim_distance_f = 0.30;
+            IMG.aim_distance_f = 0.5;
             IMG.aim_distance_n = 0.1;
             IMG.aim_angle_p *= 2.5;
             int Lpt0_point[2] = { 0 };
