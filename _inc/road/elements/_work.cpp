@@ -238,7 +238,7 @@ void run_work()
                             LOG_I << "rescore" << r.score << LOG_END;
                             FOUND_last_y = 0;
                             in_flag = 0;
-                            IMG.set_pid(IMG._config->work_read_cone_base_speed_k, 0.0, 0)
+                            IMG.set_pid(IMG._config->work_read_cone_base_speed_k, 0.0, 0);
 
                             speed_fun(IMG._config->speed_work + 1, 2, 500);
 
