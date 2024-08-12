@@ -32,7 +32,7 @@ int main(int argc, char const* argv[])
     cv::Mat frame_origin; // 摄像头原始图像
     cv::Mat frame_imgpro; // 图像处理输出
 
-    StopWatch echo_sw;   // 应答计时器
+    // StopWatch echo_sw;   // 应答计时器
     /* 命令行参数 */
     auto args = util::argparser("yyds car command line parameters explained.");
     args.set_program_name("yyds")

@@ -126,7 +126,7 @@ void run_bomb()
                 else
                     bomb_near_cone = bomb_near_cone_R;
 
-                if (bomb_near_cone.x > IMAGE_HEIGHT * 0.4) {
+                if (bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_first_cone_ready) {
 
                     if (bomb_near_cone_L.x > bomb_near_cone_R.x) {
                         if (first_cone_count < 0)first_cone_count = 0;
@@ -136,10 +136,10 @@ void run_bomb()
                         if (first_cone_count > 0)first_cone_count = 0;
                         first_cone_count--;
                     }
+                    MAT_LOG("near_y L=%d R=%d ", bomb_near_cone_L.x, bomb_near_cone_R.x);
                 }
-                MAT_LOG("near_y L=%d R=%d ", bomb_near_cone_L.x, bomb_near_cone_R.x);
             }
-            drawH(IMAGE_HEIGHT * 0.4, 0, 255, 0, IMG.mat_result);
+            drawH(IMAGE_HEIGHT * IMG._config->bomb_first_cone_ready, 0, 255, 0, IMG.mat_result);
             drawH(bomb_near_cone.x, 0, 255, 0, IMG.mat_result);
             if (first_cone_count >= 2) first_cone = 0;
             else if (first_cone_count <= -2) first_cone = 1;
@@ -228,6 +228,8 @@ void run_bomb()
                     MAT_LOG("BOMB_ERROR3");
                 }
             }
+            drawH(IMAGE_HEIGHT* IMG._config->bomb_second_cone_ready, 0, 255, 0, IMG.mat_result);
+            drawH(bomb_near_cone.x, 0, 255, 0, IMG.mat_result);
         }
         else if (flag_bomb == BOMB_SECOND_CONE) {
             IMG.aim_speed = IMG._config->speed_bomb2;
@@ -261,7 +263,9 @@ void run_bomb()
                 IMG.rptsc0_num = IMG.rpts0s_num;
                 bomb_block_y = bomb_Lpt0_point_first.y;
             }
-            drawH(bomb_block_y, 0, 0, 255, IMG.mat_result);
+
+            drawH(IMAGE_HEIGHT* IMG._config->bomb_block_ready, 0, 255, 0, IMG.mat_result);
+            drawH(bomb_block_y, 0, 255, 0, IMG.mat_result);
             // for (auto r : IMG.detection_result) {
             //     if (r.label == IMG.label_block) {
             //         bomb_block_y = r.y + r.h / 2;

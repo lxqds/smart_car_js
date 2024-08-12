@@ -117,7 +117,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             }
         }
 
-        size_t redPixelsCount = cv::countNonZero(mask); //计算红色像素点
+        // size_t redPixelsCount = cv::countNonZero(mask); //计算红色像素点
 
         cv::Mat maskContour = cv::Mat::zeros(mask.size(), CV_8U);  //计算最大区域像素点
         cv::drawContours(maskContour, contours, maxAreaIndex, 255, -1);
@@ -421,7 +421,7 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
     Get_ipts_direction(ipts0, ipts0_num, ipts0_direction);
     Get_ipts_direction(ipts1, ipts1_num, ipts1_direction);
-    
+
 
 
 
