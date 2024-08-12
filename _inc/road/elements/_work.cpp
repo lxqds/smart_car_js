@@ -260,6 +260,7 @@ void run_work()
                     IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
                     if (work_Red.x == 0)IMG.aim_speed = -IMG._config->speed_work;
                     if (IMG.aim_speed > IMG._config->speed_work)IMG.aim_speed = IMG._config->speed_work;
+                    speed_fun(IMG.aim_speed + 1, 2, 500);
                     drawH(thresholdh, 0, 0, 255, IMG.mat_result);
                     drawH(work_Red.x, 255, 0, 0, IMG.mat_result);
                     drawH(coneLowy, 0, 0, 255, IMG.mat_result);
