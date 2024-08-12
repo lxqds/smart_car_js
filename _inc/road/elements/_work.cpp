@@ -324,7 +324,6 @@ void run_work()
                 if (in_flag == 0 && (work_near_cone.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT || work_near_cone1.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT) && abs(k) < 0.1) {
                     in_flag = 1;
                     flag_work = WORK_FOUND_2;
-                    IMG.brake();
                     work_route = IMG.encoder.route;
                     MAT_LOG("WORK_FOUND_2");
                 }
