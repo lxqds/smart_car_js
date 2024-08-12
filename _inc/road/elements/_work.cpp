@@ -41,10 +41,10 @@ POINT AI_find_sign = POINT(0, 0);  //标记，分数*100
 void speed_fun(int speed, float brake_P, float yx_speed_err) {
     if (IMG.aim_speed == speed)return;
     float speed_err;
-    if(IMG.encoder.speed*1000 >speed)IMG.aim_speed = speed -IMG.encoder.speed*1000 * brake_P;
-    else if(IMG.encoder.speed*1000 < speed) IMG.aim_speed = speed + IMG.encoder.speed*1000 * brake_P;
+    if (IMG.encoder.speed * 1000 > speed)IMG.aim_speed = speed - IMG.encoder.speed * 1000 * brake_P;
+    else if (IMG.encoder.speed * 1000 < speed) IMG.aim_speed = speed + IMG.encoder.speed * 1000 * brake_P;
 
-    speed_err = speed - IMG.encoder.speed*1000;
+    speed_err = speed - IMG.encoder.speed * 1000;
     if (abs(speed_err) < yx_speed_err) IMG.aim_speed = speed;
 }
 
@@ -63,8 +63,7 @@ bool rectA_intersect_rectB(cv::Rect rectA, cv::Rect rectB)
     float areaB = rectB.width * rectB.height;
     float intersectionPercent = intersection / (areaA + areaB - intersection);
 
-    if ((0 < intersectionPercent) && (intersectionPercent < 1) && (intersection != areaA) && (intersection != areaB))
-    {
+    if ((0 < intersectionPercent) && (intersectionPercent < 1) && (intersection != areaA) && (intersection != areaB)) {
         return true;
     }
 
@@ -76,8 +75,7 @@ bool pt_min_rect(std::vector<cv::Rect> all_zt, cv::Rect miny) {
     miny.width += 80;
     if (miny.x < 0)miny.x = 0;
     if (miny.width + miny.x > IMAGE_WIDTH)miny.width = IMAGE_WIDTH - miny.x;
-    for (size_t i = 0; i < all_zt.size(); i++)
-    {   
+    for (size_t i = 0; i < all_zt.size(); i++) {
         if (miny.y == all_zt[i].y)continue;
         LOG_I << " in_pt" << LOG_END;
        // cv::rectangle(IMG.mat_result, miny, cv::Scalar(255, 0, 0), 1);
@@ -128,7 +126,7 @@ void check_work()
                 work_route = IMG.encoder.route;
                 direction_work = true;
                 IMG.flag_track = TRACK_LEFT;
-                flag_work = WORK_FOUND_1;           
+                flag_work = WORK_FOUND_1;
                 MAT_LOG("WORK_FOUND_L");
                 LOG_I << "rescore" << r.score << LOG_END;
                 FOUND_last_y = 0;
@@ -141,15 +139,15 @@ void check_work()
         if (IMG._config->assist_judgment) {
             work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
             work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);//右工作区进入准备
-            if(work_near_cone1.x==0)work_near_cone1 = search_right_near(IMG.edge_right_far, IMG.mat_lab);//右工作区进入准备
+            if (work_near_cone1.x == 0)work_near_cone1 = search_right_near(IMG.edge_right_far, IMG.mat_lab);//右工作区进入准备
             if (work_near_cone.x == 0)work_near_cone = search_left_near(IMG.edge_left_far, IMG.mat_lab);//右工作区进入准备
 
-            if ((work_near_cone1.x != 0 || work_near_cone.x != 0) && work_near_cone.x > 0.25 * IMAGE_HEIGHT && work_near_cone1.x >0.25 * IMAGE_HEIGHT) {
+            if ((work_near_cone1.x != 0 || work_near_cone.x != 0) && work_near_cone.x > 0.25 * IMAGE_HEIGHT && work_near_cone1.x > 0.25 * IMAGE_HEIGHT) {
                 MAT_LOG("YEOW");
                 work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
-                if(work_Red.x ==0)work_Red = search_right_near_Red(IMG.edge_right_far, IMG.mat_lab2);
+                if (work_Red.x == 0)work_Red = search_right_near_Red(IMG.edge_right_far, IMG.mat_lab2);
 
-                if (work_Red.x != 0 && work_Red.x > 0.2* IMAGE_HEIGHT) {
+                if (work_Red.x != 0 && work_Red.x > 0.2 * IMAGE_HEIGHT) {
                     MAT_LOG("SEE_RED");
                     IMG.element_identify = 1;
                     IMG.brake();
@@ -245,7 +243,7 @@ void run_work()
 
                     int coneLowy = IMAGE_HEIGHT * threshold_re + 20;
 
-                    int err_H = IMAGE_HEIGHT * threshold_re + 10- work_Red.x;
+                    int err_H = IMAGE_HEIGHT * threshold_re + 10 - work_Red.x;
 
                     IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
                     if (work_Red.x == 0)IMG.aim_speed = -IMG._config->speed_work;
@@ -257,7 +255,7 @@ void run_work()
                         IMG.aim_speed = 0;
                     }
 
-                    if (stop_clock.toc() > 2000 && abs((int)IMG.encoder.speed * 1000) < 500 ) {
+                    if (stop_clock.toc() > 2000 && abs((int)IMG.encoder.speed * 1000) < 500) {
 
                         if (IMG._config->work_Identify_timeouts == 0) {  //退出工作区
                             MAT_LOG("WORK_RED_ERR");
@@ -278,9 +276,9 @@ void run_work()
                             speed_fun(IMG._config->speed_work + 1, 2, 500);
                         }
                         else {
-                                fond_flag = 1;
-                                MAT_LOG("WORK_ERR");  //假死
-                                stop_clock.tic();
+                            fond_flag = 1;
+                            MAT_LOG("WORK_ERR");  //假死
+                            stop_clock.tic();
                         }
                     }
 
@@ -304,26 +302,26 @@ void run_work()
                 // 找锥桶
                 IMG.edge_det = search_targets(IMG._det_result);
                 // 进入方向
-                    work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
-                    work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
-                    IMG.aim_speed = IMG._config->speed_work;
-              //  LOG_I << " work_near_cone :" << work_near_cone.x << " IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy :" << IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy << LOG_END;
+                work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
+                work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
+                IMG.aim_speed = IMG._config->speed_work;
+          //  LOG_I << " work_near_cone :" << work_near_cone.x << " IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy :" << IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy << LOG_END;
 
-                // 当车辆开始靠近锥桶: 准备进入 识别或色块 识别到的锥桶大于一段阈值
-                //if (work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy)
-                //{
-                //    flag_work = WORK_FOUND_2;
-                //    work_route = IMG.encoder.route;
-                //    MAT_LOG("WORK_FOUND_2");
-                //}
-                    float k = 1;
-                    if(work_near_cone1.y !=0 && work_near_cone.y !=0)k = (work_near_cone1.x - work_near_cone.x) / (work_near_cone1.y - work_near_cone.y);
-                   
-                    LOG_I << " work_near_cone k:" << k*100 << LOG_END;
-                    cv::line(IMG.mat_result, cv::Point(work_near_cone.y, work_near_cone.x),
-                        cv::Point(work_near_cone1.y, work_near_cone1.x), cv::Scalar(0, 255, 0), 1);
-                //当 第一个锥桶消失
-                if (in_flag == 0 && (work_near_cone.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT || work_near_cone1.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT) && abs(k) < 0.1  ) {
+            // 当车辆开始靠近锥桶: 准备进入 识别或色块 识别到的锥桶大于一段阈值
+            //if (work_near_cone.x > IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy)
+            //{
+            //    flag_work = WORK_FOUND_2;
+            //    work_route = IMG.encoder.route;
+            //    MAT_LOG("WORK_FOUND_2");
+            //}
+                float k = 1;
+                if (work_near_cone1.y != 0 && work_near_cone.y != 0)k = (work_near_cone1.x - work_near_cone.x) / (work_near_cone1.y - work_near_cone.y);
+
+                LOG_I << " work_near_cone k:" << k * 100 << LOG_END;
+                cv::line(IMG.mat_result, cv::Point(work_near_cone.y, work_near_cone.x),
+                    cv::Point(work_near_cone1.y, work_near_cone1.x), cv::Scalar(0, 255, 0), 1);
+            //当 第一个锥桶消失
+                if (in_flag == 0 && (work_near_cone.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT || work_near_cone1.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT) && abs(k) < 0.1) {
                     in_flag = 1;
                     flag_work = WORK_FOUND_2;
                     work_route = IMG.encoder.route;
@@ -352,7 +350,7 @@ void run_work()
 
                 IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
 
-                if(IMG.aim_speed > IMG._config->speed_work) IMG.aim_speed = IMG._config->speed_work;
+                if (IMG.aim_speed > IMG._config->speed_work) IMG.aim_speed = IMG._config->speed_work;
               //  if (speedP < 0)speedP -= IMG._config->work_read_cone_base_speed_k;
 
                 int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
@@ -395,7 +393,7 @@ void run_work()
                 if (IMG.encoder.speed * 1000 < 0)IMG.aim_angle = -IMG.aim_angle;
 
                 // 超过指定距离未进入绕行区, 元素行驶失败
-                if ((IMG.encoder.route - work_route > IMG._config->work_error) ) {
+                if ((IMG.encoder.route - work_route > IMG._config->work_error)) {
                     IMG.element_over = true;
                     IMG.element_over_route = IMG.encoder.route;
                     control_flag.pop();//移除
@@ -421,7 +419,7 @@ void run_work()
                 //}
                 // 
                 // 调整 进入角度
-                speed_fun(IMG._config->speed_work+1, 1.5, 500);
+                speed_fun(IMG._config->speed_work + 1, 1.5, 500);
                 IMG.aim_angle = IMG._config->work_angle_in_1;
                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
 
@@ -437,12 +435,11 @@ void run_work()
                 float in_yaw = 30;
 
                 float yaw_err = IMG.encoder.yaw - work_yaw;
-                if (yaw_err > 180 ) yaw_err -= 360;
+                if (yaw_err > 180) yaw_err -= 360;
                 if (yaw_err < -180)yaw_err += 360;
 
                 if (IMG.max_white_line_length < 300 ||
-                    (abs(yaw_err)> in_yaw))
-                    {
+                    (abs(yaw_err) > in_yaw)) {
                     work_route = IMG.encoder.route;
                     flag_work = WORK_RUN;
                     work_route2 = IMG.encoder.route;
@@ -506,12 +503,12 @@ void run_work()
 
 
                 //开始靠近锥桶
-                IMG.aim_speed = (int16_t)(IMG._config->work_run_speed );
+                IMG.aim_speed = (int16_t)(IMG._config->work_run_speed);
 
                 //if (minyCent.y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg) IMG.aim_speed = -IMG.aim_speed;
 
                 int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
-                if (abs(err_H) < IMAGE_HEIGHT * 0.1 ) {
+                if (abs(err_H) < IMAGE_HEIGHT * 0.1) {
                     IMG.brake();
                     speed_fun(0, 2, 300);
                     work_route = IMG.encoder.route;
@@ -611,7 +608,7 @@ void run_work()
                     if (direction_work) {
                         k = Calculate_Right_ConeK(all_zt);
                         cv::line(IMG.mat_result, cv::Point(all_zt[0].x, all_zt[0].y),
-                            cv::Point(IMAGE_WIDTH - 1,(int)(k * (IMAGE_WIDTH -1 - all_zt[0].x) + all_zt[0].y ) ), cv::Scalar(0, 255, 0), 1);
+                            cv::Point(IMAGE_WIDTH - 1, (int)(k * (IMAGE_WIDTH - 1 - all_zt[0].x) + all_zt[0].y)), cv::Scalar(0, 255, 0), 1);
                     }
                     else {
                         k = Calculate_Left_ConeK(all_zt);
@@ -621,7 +618,7 @@ void run_work()
                     }
 
                     IMG.aim_angle = (member_K - k) * IMG._config->work_out_angular_P;
-                    if(direction_work)IMG.aim_angle += IMG._config->work_out_angular_base_deviation;
+                    if (direction_work)IMG.aim_angle += IMG._config->work_out_angular_base_deviation;
                     else IMG.aim_angle -= IMG._config->work_out_angular_base_deviation;
                     //if (direction_work && IMG.aim_angle < IMG._config->work_out_angular_base_deviation) IMG.aim_angle = IMG._config->work_out_angular_base_deviation;
                     //else if (!direction_work && IMG.aim_angle > -IMG._config->work_out_angular_base_deviation)IMG.aim_angle = -IMG._config->work_out_angular_base_deviation;
@@ -629,8 +626,9 @@ void run_work()
                     IMG.aim_speed = -IMG._config->work_recback_speed;
 
                    // LOG_I << " work_route  " << work_route  << "  enco" << IMG.encoder.route <<"  cz  " << work_route - IMG.encoder.route <<LOG_END;
-                    if (IMG.max_white_line_length > 1000 && work_route - IMG.encoder.route >30) {
+                    if (IMG.max_white_line_length > 1000 && work_route - IMG.encoder.route > 30) {
                         out_flage = 2;
+                        IMG.brake();
                         MAT_LOG("out_flage2");
                     }
                 }
@@ -641,6 +639,7 @@ void run_work()
                     if (abs(IMG.encoder.speed * 1000) < 300) {
                         work_route = IMG.encoder.route;
                         out_flage = 4;
+                        IMG.brake();
                         MAT_LOG("out_flage3");
                     }
 
@@ -657,6 +656,7 @@ void run_work()
                         ((work_near_cone.x != 0 && work_near_cone.y != 0) &&
                             (work_near_cone1.x != 0 && work_near_cone1.y != 0)) ||
                         (IMG.encoder.route - work_route > 80)) {
+
                         out_flage = 4;
                         work_route = IMG.encoder.route;
                         MAT_LOG("out_flage4");
@@ -693,5 +693,5 @@ void run_work()
 
         }
     }
-    
+
 }
