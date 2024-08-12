@@ -674,7 +674,7 @@ void run_yroad() {
 			IMG.aim_angle_p *= 2;
 			IMG.aim_speed = 0;
 			IMG.get_edge();//获取边线
-			if (IMG.encoder.speed * 1000 < 200 && brake_sign == 0) {
+			if (IMG.encoder.speed * 1000 < 100 && brake_sign == 0) {
 				imgprocess.brake();
 				brake_sign = 1;
 			}
