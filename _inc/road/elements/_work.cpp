@@ -259,6 +259,7 @@ void run_work()
 
                     IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
                     if (work_Red.x == 0)IMG.aim_speed = -IMG._config->speed_work;
+                    if (IMG.aim_speed > IMG._config->speed_work)IMG.aim_speed = IMG._config->speed_work;
                     drawH(thresholdh, 0, 0, 255, IMG.mat_result);
                     drawH(work_Red.x, 255, 0, 0, IMG.mat_result);
                     drawH(coneLowy, 0, 0, 255, IMG.mat_result);
@@ -267,6 +268,9 @@ void run_work()
                         IMG.aim_speed = 0;
                     }
 
+                    if (work_Red.x > thresholdh && work_Red.x < coneLowy && abs(IMG.encoder.speed * 1000) >  IMG._config->speed_work) {
+                        IMG.brake();
+                    }
                     if (stop_clock.toc() > 2000 && abs((int)IMG.encoder.speed * 1000) < 500) {
 
                         if (IMG._config->work_Identify_timeouts == 0) {  //退出工作区
