@@ -543,7 +543,7 @@ void run_work()
                     if (abs(work_in_yaw - IMG.encoder.yaw) > 30)out_flage = 1;
                     last_data = 0;
                     member_K = 0;
-                    IMG.opid();
+                   // IMG.opid();
                     MAT_LOG("WORK_OUT");
                 }
             }
