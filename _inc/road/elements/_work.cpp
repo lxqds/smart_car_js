@@ -377,8 +377,7 @@ void run_work()
                 // LOG_I << "  speed_err:" << speed_err << LOG_END;
                 if (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) { IMG.brake(); speed_fun(0, 2, 500); }
 
-                if ((work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) &&
-                    speed_err < IMG._config->work_read_cone_allow_speed_error) {
+                if (speed_err < IMG._config->work_read_cone_allow_speed_error) {
                     IMG.aim_speed = 0;
                     work_route = IMG.encoder.route;
                     flag_work = WORK_READY;
