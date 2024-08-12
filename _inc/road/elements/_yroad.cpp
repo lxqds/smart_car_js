@@ -21,7 +21,7 @@ StopWatch yroad_stop_clock;//停车计时
 POINT Lpt0_point_first;
 POINT Lpt1_point_first;
 
-
+uint8_t brake_sign = 0;
 
 /* ********************************************************************* */
 
@@ -638,6 +638,8 @@ void run_yroad() {
 			if (IMG.encoder.route - yroad_route > IMG._config->yroad_2_route2) {
 				yroad_route = IMG.encoder.route;
 				yroad_stop_clock.tic();
+				imgprocess.brake();
+				brake_sign = 0;
 				flag_yroad = YROAD_FOUND_2_3;
 				MAT_LOG("YROAD_FOUND_2_3_%d", yroad_position);
 			}
@@ -663,6 +665,11 @@ void run_yroad() {
 			IMG.aim_angle_p *= 2;
 			IMG.aim_speed = 0;
 			IMG.get_edge();//获取边线
+			if (IMG.encoder.speed * 1000 < 200 && brake_sign == 0) {
+				imgprocess.brake();
+				brake_sign = 1;
+			}
+
 			if (yroad_position == 0) {
 				IMG.flag_track = TRACK_LEFT;
 				//左边线预测中线
