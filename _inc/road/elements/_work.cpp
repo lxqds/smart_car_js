@@ -103,6 +103,7 @@ void check_work()
                     control_flag.remove(circle_element);
                     flag_circle = CIRCLE_NONE;
                 }
+                IMG.set_pid(IMG._config->work_read_cone_base_speed_k, 0.0, 0);
                 IMG.brake();
                 control_flag.push(work_element);
                 work_route = IMG.encoder.route;
@@ -124,6 +125,7 @@ void check_work()
                     flag_circle = CIRCLE_NONE;
                 }
                 IMG.brake();
+                IMG.set_pid(IMG._config->work_read_cone_base_speed_k, 0.0, 0);
                 control_flag.push(work_element);
                 work_route = IMG.encoder.route;
                 direction_work = true;
