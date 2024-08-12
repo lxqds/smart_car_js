@@ -238,7 +238,8 @@ void run_work()
                             LOG_I << "rescore" << r.score << LOG_END;
                             FOUND_last_y = 0;
                             in_flag = 0;
-                            IMG.set_pid(IMG._config->work_read_cone_base_speed_k, 0.0, 0);
+                            IMG.set_pid(IMG._config->work_read_cone_base_speed_k, 0.0, 0)
+
                             speed_fun(IMG._config->speed_work + 1, 2, 500);
 
                             if (AI_find_sign.y < r.score * 100) {
@@ -297,6 +298,7 @@ void run_work()
                         else {
                             fond_flag = 2;
                             MAT_LOG("WORK_ERR");  //假死
+                            IMG.opid();
                             stop_clock.tic();
                         }
                     }
@@ -541,7 +543,8 @@ void run_work()
                     if (abs(work_in_yaw - IMG.encoder.yaw) > 30)out_flage = 1;
                     last_data = 0;
                     member_K = 0;
-                    MAT_LOG("WORK_STOPPING");
+                    IMG.opid();
+                    MAT_LOG("WORK_OUT");
                 }
             }
 
@@ -708,6 +711,7 @@ void run_work()
                     IMG.calculate_angle();//计算角度
 
                     if (IMG.encoder.route - work_route > IMG._config->work_out_route) {
+                        IMG.opid();
                         control_flag.pop();//移除
                         flag_work = WORK_NONE;
                         MAT_LOG("WORK_HAVE_DO");
