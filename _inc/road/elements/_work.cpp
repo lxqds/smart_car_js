@@ -644,7 +644,8 @@ void run_work()
 
                     IMG.aim_speed = -IMG._config->work_recback_speed;
 
-                    speed_fun(IMG.aim_speed+1, 2, 500);
+                    if(IMG.encoder.speed *1000 > 0) speed_fun(IMG.aim_speed + 1, 2, 500);
+
                    // LOG_I << " work_route  " << work_route  << "  enco" << IMG.encoder.route <<"  cz  " << work_route - IMG.encoder.route <<LOG_END;
                     if (IMG.max_white_line_length > 1000 && work_route - IMG.encoder.route > 30) {
                         out_flage = 2;
