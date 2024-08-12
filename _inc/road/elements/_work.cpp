@@ -144,7 +144,7 @@ void check_work()
             if (work_near_cone1.x == 0)work_near_cone1 = search_right_near(IMG.edge_right_far, IMG.mat_lab);//右工作区进入准备
             if (work_near_cone.x == 0)work_near_cone = search_left_near(IMG.edge_left_far, IMG.mat_lab);//右工作区进入准备
 
-            if ((work_near_cone1.x != 0 || work_near_cone.x != 0) && work_near_cone.x > 0.25 * IMAGE_HEIGHT && work_near_cone1.x > 0.25 * IMAGE_HEIGHT) {
+            if ((work_near_cone1.x != 0 || work_near_cone.x != 0) && (work_near_cone.x > 0.25 * IMAGE_HEIGHT || work_near_cone1.x > 0.25 * IMAGE_HEIGHT)) {
                 MAT_LOG("YEOW");
                 work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
                 if (work_Red.x == 0)work_Red = search_right_near_Red(IMG.edge_right_far, IMG.mat_lab2);
@@ -197,6 +197,15 @@ void run_work()
             if (flag_work == WORK_FOUND_0) {
 
                 if (fond_flag == 0) {
+                    work_near_cone1 = search_right_near(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
+                    work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);//右工作区进入准备
+                    if (work_near_cone1.x == 0)work_near_cone1 = search_right_near(IMG.edge_right_far, IMG.mat_lab);//右工作区进入准备
+                    if (work_near_cone.x == 0)work_near_cone = search_left_near(IMG.edge_left_far, IMG.mat_lab);//右工作区进入准备
+                    if (work_near_cone1.x != 0 && work_near_cone.x != 0)fond_flag = 1;
+                    speed_fun(IMG._config->speed_work + 1, 2, 200); //快速减速
+                }
+
+                if (fond_flag == 1) {
 
                     speed_fun(IMG._config->speed_work + 1, 2, 500); //快速减速
                     for (auto r : IMG.detection_result) {  //如果有识别到元素就进入工作区
@@ -279,7 +288,7 @@ void run_work()
                             speed_fun(IMG._config->speed_work + 1, 2, 500);
                         }
                         else {
-                            fond_flag = 1;
+                            fond_flag = 2;
                             MAT_LOG("WORK_ERR");  //假死
                             stop_clock.tic();
                         }
@@ -287,7 +296,7 @@ void run_work()
 
                 }
 
-                if (fond_flag == 1) {
+                if (fond_flag == 2) {
                     srand(IMG.encoder.speed * 1000);
                     IMG.aim_speed = 800;
                     uint8_t fx = rand() % 255;
