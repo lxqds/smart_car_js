@@ -438,7 +438,7 @@ void run_work()
                 //}
                 // 
                 // 调整 进入角度
-                IMG.aim_speed = (IMG._config->work_run_speed);
+                IMG.aim_speed = (IMG._config->work_ready_speed);
                 IMG.aim_angle = IMG._config->work_angle_in_1;
                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
 

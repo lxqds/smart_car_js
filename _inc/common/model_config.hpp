@@ -83,7 +83,7 @@ struct ControlConfig
     float work_read_cone_thresholdy_avg;  //施工区 进入锥桶平均阈值
 
     uint16_t work_run_speed; //施工区 进入速度
-
+    uint16_t work_ready_speed;
     float work_run_angle_p;
     float work_angle_in_1;           //施工区一段进入角度
 
@@ -296,6 +296,7 @@ struct ControlConfig
         AUTOCFG(work_read_cone_allow_error);
         AUTOCFG(work_read_cone_thresholdy_avg);
         AUTOCFG(work_run_speed);
+        AUTOCFG(work_ready_speed);
         AUTOCFG(work_read_cone_thresholdy_out);
         AUTOCFG(work_read_cone_speed_H_err);
         AUTOCFG(work_read_cone_threshold);
