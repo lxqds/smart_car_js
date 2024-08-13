@@ -251,7 +251,7 @@ void run_work()
                     }
 
                     work_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2); //右线红色色块
-                    float threshold_re = 0.5;
+                    float threshold_re = 0.4;
                     int thresholdh = IMAGE_HEIGHT * threshold_re;
 
                     int coneLowy = IMAGE_HEIGHT * threshold_re + 20;
