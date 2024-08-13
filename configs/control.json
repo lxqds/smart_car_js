@@ -135,9 +135,10 @@
 
     "********-work__route__qu__-*********": 0,
     "work_route_speed": 1500,
-    "work_route_angle_in_1": 120,
+    "work_route_angle_in_1": 150,
     "work_route_ready_yaw": 30,
-    "work_run_route": 40,
+    "work_run_route": 20,
+    "work_route_run_AVG": 0.6,
 
     "******-deviation-*******": 0,
     "deviation_garage_in_p": 0.3,
