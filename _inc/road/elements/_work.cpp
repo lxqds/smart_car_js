@@ -98,7 +98,7 @@ void check_work()
         for (auto r : IMG.detection_result) {
             if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.15) {
                 IMG.element_identify = 1;
-
+                IMG.set_pid(8, 1.6, 0);
                 if (control_flag.contains(circle_element)) {
                     control_flag.remove(circle_element);
                     flag_circle = CIRCLE_NONE;
@@ -118,7 +118,7 @@ void check_work()
             else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.15) {
 
                 IMG.element_identify = 1;
-
+                IMG.set_pid(8, 1.6, 0);
                 if (control_flag.contains(circle_element)) {
                     control_flag.remove(circle_element);
                     flag_circle = CIRCLE_NONE;
@@ -157,6 +157,7 @@ void check_work()
                         control_flag.remove(circle_element);
                         flag_circle = CIRCLE_NONE;
                     }
+                    IMG.set_pid(8, 1.6, 0);
                     IMG.brake();
                     control_flag.push(work_element);
                     work_route = IMG.encoder.route;
