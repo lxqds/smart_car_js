@@ -999,7 +999,7 @@ void run_work()
                     IMG.aim_angle = IMG._config->work_angle_in_1;
                     if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
 
-                    if (work_route - IMG.encoder.route > work_route2 + IMG._config->work_run_route || IMG.max_white_line_length > 1000) {
+                    if (work_route - IMG.encoder.route > IMG._config->work_leave_route && IMG.max_white_line_length > 1000) {
                         work_route = IMG.encoder.route;
                         out_flage=1;
                         MAT_LOG("WORK_leave");
