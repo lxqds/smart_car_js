@@ -647,7 +647,7 @@ void run_work()
                     //else if (!direction_work && IMG.aim_angle > -IMG._config->work_out_angular_base_deviation)IMG.aim_angle = -IMG._config->work_out_angular_base_deviation;
 
                     IMG.aim_speed = -IMG._config->work_recback_speed;
-
+                    speed_fun(IMG.aim_speed+1, 3, 500);
                     if(IMG.encoder.speed *1000 > 0) speed_fun(IMG.aim_speed + 1, 8, 500);
 
                    // LOG_I << " work_route  " << work_route  << "  enco" << IMG.encoder.route <<"  cz  " << work_route - IMG.encoder.route <<LOG_END;
