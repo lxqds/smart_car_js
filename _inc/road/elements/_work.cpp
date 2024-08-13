@@ -529,7 +529,7 @@ void run_work()
 
                 //if (minyCent.y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg) IMG.aim_speed = -IMG.aim_speed;
 
-                int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
+           
                 if (abs(err_H) < IMAGE_HEIGHT * 0.1) {
                     IMG.brake();
                     speed_fun(0, 2, 300);
@@ -593,7 +593,6 @@ void run_work()
                 cv::Rect miny;
                 std::vector<cv::Rect> all_zt;
                 all_zt = workC.search_all_cone_rect(IMG.mat_lab);
-                int16_t avg_y = search_mid_cone_getH(IMG.mat_lab);
                 // 最高点锥桶
                 if (all_zt.size() >= 2) miny = all_zt[0];
                 POINT mcentPoint = getCenterPoint(miny);
