@@ -41,8 +41,8 @@ POINT AI_find_sign = POINT(0, 0);  //标记，分数*100
 void speed_fun(int speed, float brake_P, float yx_speed_err) {
     if (IMG.aim_speed == speed)return;
     float speed_err;
-    if (IMG.encoder.speed * 1000 > speed)IMG.aim_speed = speed - IMG.encoder.speed * 1000 * brake_P;
-    else if (IMG.encoder.speed * 1000 < speed) IMG.aim_speed = speed + IMG.encoder.speed * 1000 * brake_P;
+    if (IMG.encoder.speed * 1000 > speed)IMG.aim_speed = speed - abs(IMG.encoder.speed * 1000) * brake_P;
+    else if (IMG.encoder.speed * 1000 < speed) IMG.aim_speed = speed + abs(IMG.encoder.speed * 1000) * brake_P;
 
     speed_err = speed - IMG.encoder.speed * 1000;
     if (abs(speed_err) < yx_speed_err) IMG.aim_speed = speed;
