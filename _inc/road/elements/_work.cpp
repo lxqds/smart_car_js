@@ -985,6 +985,7 @@ void run_work()
                 if (IMG.encoder.route - work_route > IMG._config->work_run_route && coney > IMG._config->work_route_run_AVG * IMAGE_HEIGHT) {
                     work_route = IMG.encoder.route;
                     flag_work = WORK_OUT;
+                    IMG.brake();
                     out_flage = 0;
                     MAT_LOG("WORK_OUT");
                 }
@@ -994,6 +995,9 @@ void run_work()
             {
                 if (out_flage == 0) {
                     IMG.aim_speed = -(IMG._config->work_recback_speed);
+                    if (IMG.encoder.speed * 1000 > 0)IMG.aim_speed* = 2;
+                    else IMG.aim_speed = -(IMG._config->work_recback_speed);
+
                     IMG.aim_angle = IMG._config->work_angle_in_1;
                     if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
 
