@@ -185,7 +185,7 @@ void check_work()
 
 void run_work()
 {
-    if(0)
+    if(1)
     {
         if (control_flag.top() == work_element) {
             IMG.get_edge(0);
