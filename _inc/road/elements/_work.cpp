@@ -995,8 +995,7 @@ void run_work()
             {
                 if (out_flage == 0) {
                     IMG.aim_speed = -(IMG._config->work_recback_speed);
-                    if (IMG.encoder.speed * 1000 > 0)IMG.aim_speed* = 2;
-                    else IMG.aim_speed = -(IMG._config->work_recback_speed);
+                    if (IMG.encoder.speed * 1000 > 0)IMG.aim_speed = -4000;
 
                     IMG.aim_angle = IMG._config->work_angle_in_1;
                     if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
