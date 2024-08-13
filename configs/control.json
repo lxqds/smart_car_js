@@ -101,6 +101,8 @@
     "speed_cross": 2500,
     "********-work-*********": 0,
     "speed_work": 1800,
+
+    "********-work__read__qu__-*********": 0,
     "work_read_cone_threshold": 0.70,
     "work_read_cone_thresholdy_in": 0.25,
     "work_read_cone_base_speed_k": 8,
@@ -108,12 +110,15 @@
     "work_read_cone_allow_speed_error": 2000,
     "work_read_cone_speed_H_err": 50,
     "work_angle_in_1": 120,
-    "work_ready_yaw": 60,
+    "work_ready_yaw": 30,
     "work_ready_speed": 1000,
+
+    "********-work__run__qu__-*********": 0,
     "work_run_speed": 1000,
-    "work_run_route": 60,
     "work_run_angle_p": 2,
     "work_read_cone_thresholdy_avg": 0.67,
+
+    "********-work__out__qu__-*********": 0,
     "work_out_angular_base_deviation": 20,
     "work_out_angular_P": 0,
     "work_recback_speed": 2000,
@@ -127,6 +132,13 @@
     "work_recback_max_route": 60,
     "work_out_route": 60,
     "work_leave_route": 150,
+
+    "********-work__route__qu__-*********": 0,
+    "work_route_speed": 1500,
+    "work_route_angle_in_1": 120,
+    "work_route_ready_yaw": 30,
+    "work_run_route": 40,
+
     "******-deviation-*******": 0,
     "deviation_garage_in_p": 0.3,
     "deviation_garage_out": 60,

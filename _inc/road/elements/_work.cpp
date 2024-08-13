@@ -961,8 +961,8 @@ void run_work()
 
             if (flag_work == WORK_READY)
             {
-                IMG.aim_speed = (IMG._config->work_ready_speed);
-                IMG.aim_angle = IMG._config->work_angle_in_1;
+                IMG.aim_speed = (IMG._config->work_route_speed);
+                IMG.aim_angle = IMG._config->work_route_angle_in_1;
                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
 
                 // 进入方向
@@ -974,7 +974,7 @@ void run_work()
                 }
 
                 // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready )
-                float in_yaw = IMG._config->work_ready_yaw;
+                float in_yaw = IMG._config->work_route_ready_yaw;
 
                 float yaw_err = IMG.encoder.yaw - work_yaw;
                 if (yaw_err > 180) yaw_err -= 360;
@@ -992,7 +992,7 @@ void run_work()
             }
 
             if (flag_work == WORK_RUN) {
-                IMG.aim_speed = (IMG._config->work_run_speed);
+                IMG.aim_speed = (IMG._config->work_route_speed);
                 IMG.aim_angle = IMG._config->work_angle_in_1;
                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
 
