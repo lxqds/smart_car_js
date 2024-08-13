@@ -1014,9 +1014,8 @@ void run_work()
 
                     if (work_route - IMG.encoder.route > work_route2 + IMG._config->work_run_route && IMG.max_white_line_length > 1000) {
                         work_route = IMG.encoder.route;
-                        flag_work = WORK_OUT;
                         out_flage++;
-                        MAT_LOG("WORK_OUT");
+                        MAT_LOG("WORK_leave");
                     }
                 }
 
