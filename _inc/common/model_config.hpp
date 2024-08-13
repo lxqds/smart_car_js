@@ -95,6 +95,7 @@ struct ControlConfig
     uint16_t work_route_speed;
     uint16_t work_route_angle_in_1;
     uint16_t work_route_ready_yaw;
+    float work_route_run_AVG;
     /*delete
     * work_rou_in
     * work_read_cone_thresholdy
@@ -310,6 +311,7 @@ struct ControlConfig
         AUTOCFG(work_route_speed);
         AUTOCFG(work_route_angle_in_1);
         AUTOCFG(work_route_ready_yaw);
+        AUTOCFG(work_route_run_AVG);
         AUTOCFG(work_read_cone_threshold);
         AUTOCFG(speed_ramp);
         AUTOCFG(ramp_rou);

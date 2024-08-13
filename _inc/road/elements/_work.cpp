@@ -996,7 +996,8 @@ void run_work()
                 IMG.aim_angle = IMG._config->work_angle_in_1;
                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
 
-                if (IMG.encoder.route - work_route > IMG._config->work_run_route) {
+                uint16_t coney = search_mid_cone_getH(IMG.mat_lab);
+                if (IMG.encoder.route - work_route > IMG._config->work_run_route || coney > IMG._config->work_route_run_AVG * IMAGE_HEIGHT) {
                     work_route = IMG.encoder.route;
                     flag_work = WORK_OUT;
                     out_flage = 0;
@@ -1011,7 +1012,7 @@ void run_work()
                     IMG.aim_angle = IMG._config->work_angle_in_1;
                     if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
 
-                    if (work_route - IMG.encoder.route > work_route2 + IMG._config->work_run_route) {
+                    if (work_route - IMG.encoder.route > work_route2 + IMG._config->work_run_route && IMG.max_white_line_length > 1000) {
                         work_route = IMG.encoder.route;
                         flag_work = WORK_OUT;
                         out_flage++;
