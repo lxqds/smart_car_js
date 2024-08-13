@@ -86,9 +86,11 @@ struct ControlConfig
     uint16_t work_ready_speed;
     float work_run_angle_p;
     float work_angle_in_1;           //施工区一段进入角度
-
+    float work_ready_yaw; 
     float work_out_angular_P;      ///施工区，退出斜率角度p值
     float work_out_angular_base_deviation;///施工区，退出斜率角度基础偏差
+    uint16_t work_run_route; 
+    uint16_t work_leave_route;
     /*delete
     * work_rou_in
     * work_read_cone_thresholdy
@@ -296,6 +298,8 @@ struct ControlConfig
         AUTOCFG(work_read_cone_allow_error);
         AUTOCFG(work_read_cone_thresholdy_avg);
         AUTOCFG(work_run_speed);
+        AUTOCFG(work_run_route);
+        AUTOCFG(work_ready_yaw);
         AUTOCFG(work_ready_speed);
         AUTOCFG(work_read_cone_thresholdy_out);
         AUTOCFG(work_read_cone_speed_H_err);
