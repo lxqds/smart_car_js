@@ -267,12 +267,11 @@ void run_work()
                     drawH(work_Red.x, 255, 0, 0, IMG.mat_result);
                     drawH(coneLowy, 0, 0, 255, IMG.mat_result);
                     //LOG_I << " speed" << abs((int)(IMG.encoder.speed * 1000)) << LOG_END;
-                    if (abs(IMG.encoder.speed * 1000) < 500 && work_Red.x > thresholdh) {
-                        IMG.aim_speed = 0;
-                    }
+
 
                     if (work_Red.x > thresholdh && work_Red.x < coneLowy && abs(IMG.encoder.speed * 1000) >  IMG._config->speed_work) {
                         IMG.brake();
+                        IMG.aim_speed = 0;
                     }
                     if (stop_clock.toc() > 2000 && abs((int)IMG.encoder.speed * 1000) < 500) {
 
