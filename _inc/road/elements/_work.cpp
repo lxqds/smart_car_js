@@ -915,7 +915,7 @@ void run_work()
 
             }
 
-            if (flag_work = WORK_READY)
+            if (flag_work == WORK_READY)
             {
                 IMG.aim_speed = (IMG._config->work_ready_speed);
                 IMG.aim_angle = IMG._config->work_angle_in_1;
@@ -947,7 +947,7 @@ void run_work()
 
             }
 
-            if (flag_work = WORK_RUN) {
+            if (flag_work == WORK_RUN) {
                 IMG.aim_speed = (IMG._config->work_run_speed);
                 IMG.aim_angle = IMG._config->work_angle_in_1;
                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
@@ -960,7 +960,7 @@ void run_work()
                 }
             }
 
-            if (flag_work = WORK_OUT)
+            if (flag_work == WORK_OUT)
             {
                 if (out_flage == 0) {
                     IMG.aim_speed = -(IMG._config->work_recback_speed);
