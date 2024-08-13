@@ -313,6 +313,7 @@ struct ControlConfig
         AUTOCFG(work_route_ready_yaw);
         AUTOCFG(work_route_run_AVG);
         AUTOCFG(work_read_cone_threshold);
+        AUTOCFG(work_leave_route);
         AUTOCFG(speed_ramp);
         AUTOCFG(ramp_rou);
 
