@@ -895,7 +895,7 @@ void run_work()
                 else
                     work_near_cone = search_right_near_up(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
 
-                int thresholdh = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in;
+                int thresholdh = IMAGE_HEIGHT * IMG._config->work_route_read_cone_thresholdy_in;
 
                 if ((work_near_cone.x >= thresholdh)) {
                     in_flag = 1;

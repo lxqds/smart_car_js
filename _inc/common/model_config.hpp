@@ -91,7 +91,7 @@ struct ControlConfig
     float work_out_angular_base_deviation;///施工区，退出斜率角度基础偏差
     uint16_t work_run_route; 
     uint16_t work_leave_route;
-
+    float work_route_read_cone_thresholdy_in;
     uint16_t work_route_speed;
     uint16_t work_route_angle_in_1;
     uint16_t work_route_ready_yaw;
@@ -316,7 +316,7 @@ struct ControlConfig
         AUTOCFG(work_leave_route);
         AUTOCFG(speed_ramp);
         AUTOCFG(ramp_rou);
-
+        AUTOCFG(work_route_read_cone_thresholdy_in);
         AUTOCFG(speed_circle);
         AUTOCFG(speed_cross);
 
