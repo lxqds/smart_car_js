@@ -875,16 +875,60 @@ void run_work()
                 if (in_flag == 0 && (work_near_cone.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT || work_near_cone1.x > IMG._config->work_read_cone_threshold * IMAGE_HEIGHT) && abs(k) < 0.1) {
                     in_flag = 1;
                     work_yaw = IMG.encoder.yaw;
-                    flag_work = WORK_READY;
+                    flag_work = WORK_FOUND_2;
                     work_route = IMG.encoder.route;
                     work_route2 = IMG.encoder.route;
-                    MAT_LOG("WORK_READY");
+                    MAT_LOG("WORK_FOUND_2");
                 }
                 drawH(work_near_cone1.x, 0, 255, 0, IMG.mat_result);
                 drawH(work_near_cone.x, 0, 255, 0, IMG.mat_result);
                 drawH(IMG._config->work_read_cone_threshold * IMAGE_HEIGHT, 255, 0, 0, IMG.mat_result);
             }
         
+            if (flag_work == WORK_FOUND_2) {
+
+                IMG.edge_det = search_targets(IMG._det_result);
+                IMG.aim_speed = IMG._config->speed_work;
+                // 找锥桶
+                if (direction_work)
+                    work_near_cone = search_left_near_up(IMG.edge_left, IMG.mat_lab); //左工作区进入准备
+                else
+                    work_near_cone = search_right_near_up(IMG.edge_right, IMG.mat_lab);//右工作区进入准备
+
+                int thresholdh = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in;
+
+                int coneLowy = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + IMG._config->work_read_cone_allow_error;
+
+                int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + IMG._config->work_read_cone_allow_error / 2.0 - work_near_cone.x;
+
+                IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
+                if (IMG.aim_speed > 0 && IMG.aim_speed < 500) IMG.aim_speed = 500; //基础速度
+                if (IMG.aim_speed < 0 && IMG.aim_speed > -500) IMG.aim_speed = -500;
+
+                if (IMG.aim_speed > IMG._config->speed_work) IMG.aim_speed = IMG._config->speed_work; //限幅
+                if (IMG.aim_speed < -IMG._config->speed_work) IMG.aim_speed = -IMG._config->speed_work;
+                //  if (speedP < 0)speedP -= IMG._config->work_read_cone_base_speed_k;
+
+                int speed_err = abs(IMG.aim_speed - IMG.encoder.speed * 1000);
+                if (work_near_cone.x == 0)IMG.aim_speed = -IMG.aim_speed;
+                // LOG_I << "  speed_err:" << speed_err << LOG_END;
+                if (work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy && IMG.encoder.speed * 1000 > 1000) { IMG.brake(); speed_fun(0, 2, 500); }
+
+                if ((work_near_cone.x >= thresholdh && work_near_cone.x <= coneLowy) &&
+                    speed_err < IMG._config->work_read_cone_allow_speed_error) {
+                    in_flag = 1;
+                    work_yaw = IMG.encoder.yaw;
+                    flag_work = WORK_READY;
+                    work_route = IMG.encoder.route;
+                    work_route2 = IMG.encoder.route;
+                    MAT_LOG("WORK_READY");
+                }
+
+                drawH(thresholdh, 0, 0, 255, IMG.mat_result);
+                drawH(work_near_cone.x, 255, 0, 0, IMG.mat_result);
+                drawH(coneLowy, 0, 0, 255, IMG.mat_result);
+            }
+
             if ((flag_work == WORK_FOUND_2 || flag_work == WORK_FOUND_1 || flag_work == WORK_FOUND_0) && fond_flag != 2) {
 
                 // 正常巡线
