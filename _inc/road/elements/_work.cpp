@@ -908,7 +908,6 @@ void run_work()
 
                 drawH(thresholdh, 0, 0, 255, IMG.mat_result);
                 drawH(work_near_cone.x, 255, 0, 0, IMG.mat_result);
-                drawH(coneLowy, 0, 0, 255, IMG.mat_result);
             }
 
             if ((flag_work == WORK_FOUND_2 || flag_work == WORK_FOUND_1 || flag_work == WORK_FOUND_0) && fond_flag != 2) {
