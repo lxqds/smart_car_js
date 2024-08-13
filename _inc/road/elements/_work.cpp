@@ -977,7 +977,7 @@ void run_work()
                 IMG.aim_angle = IMG._config->work_angle_in_1;
                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
                 drawW(IMAGE_WIDTH / 2 + 30, 0, 255, 0, IMG.mat_result);
-                drawW(IMAGE_WIDTH / 2 - 30, 0, 255, 0, IMG.mat_result)
+                drawW(IMAGE_WIDTH / 2 - 30, 0, 255, 0, IMG.mat_result);
 
                 int coney = search_mid_cone_getH(IMG.mat_lab);
                 drawH( coney, 0, 255, 0, IMG.mat_result);
