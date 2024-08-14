@@ -622,7 +622,10 @@ POINT getCenterPoint(cv::Rect rect) {
 
 }
 void sort_edge(std::vector<POINT> pointsEdge, int* a, int size, int mod) {
-    memset(a, 0, size);
+    for (size_t i = 0; i < size; i++)
+    {
+        a[i] = 0;
+    }
     for (size_t i = 0; i < pointsEdge.size(); i++)
     {
         if (a[pointsEdge[i].x] == 0) {
