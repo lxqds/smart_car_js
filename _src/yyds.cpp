@@ -79,7 +79,7 @@ int main(int argc, char const* argv[])
     unsigned short port = 8080;
     int sockfd;
     sockfd = socket(AF_INET, SOCK_STREAM, 0);// 创建通信端点：套接字
-    CHECK(sckfd >= 0) << "err_" << "socket" << LOG_END;
+    CHECK(sockfd >= 0) << "err_" << "socket" << LOG_END;
 
     struct sockaddr_in my_addr;
     bzero(&my_addr, sizeof(my_addr));
