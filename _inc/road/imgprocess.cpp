@@ -58,7 +58,7 @@ int ImageProcess::init(std::string config_path, bool is_result) {
     }
 
     //tcp初始化
-    ListenThread = std::thread([ListenSocket]() {
+    ListenThread = std::thread([this]() {
         while (true) {
             int ClientID = -1;
             int ClientSocket = accept(ListenSocket, NULL, NULL);
@@ -79,7 +79,7 @@ int ImageProcess::init(std::string config_path, bool is_result) {
             }
             if (ClientID != -1) {
 
-                std::thread([ClientSocket, ClientID]() {
+                std::thread([this, ClientID]() {
                     int clientSocket = ClientSocket;
                     int clientID = ClientID;
                     char recvBuffer[512];
