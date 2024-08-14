@@ -75,7 +75,7 @@ void check_garage()
                 if (edge_righty[y] != 0 && edge_lefty[y] != 0)
                 {
 
-                for (int16_t x = edge_lefty[y]; x < edge_righty[y]x; x++) {
+                for (int16_t x = edge_lefty[y]; x < edge_righty[y].x; x++) {
                     if (AT_IMAGE(IMG.mat_bin, x, y) < IMG._config->threshold) {
                         if (cursor < 20)
                             cursor++;
