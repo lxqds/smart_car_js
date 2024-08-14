@@ -187,11 +187,11 @@ void callbackSignal(int signum)
     if (is_exit == 1) {
         /* 结束线程 */
 
-        int result = shutdown(imgprocess.ClientSocket, SHUT_RD);
+        int result = shutdown(imgprocess.ListenSocket, SHUT_RD);
         if (result == -1) log_i("shutdown() failed");
-        int result = shutdown(imgprocess.ClientSocket, SHUT_RDWR);
+        int result = shutdown(imgprocess.ListenSocket, SHUT_RDWR);
         if (result == -1) log_i("shutdown() failed");
-        
+
         capture->stop();
         log_i("capture stopped.");
         detection->stop();
