@@ -22,7 +22,7 @@ using namespace LibSerial;
 // 引用图像处理
 extern ImageProcess imgprocess;
 
-extern uint8_t serial_echo;
+uint8_t serial_echo;
 
 #define IMG imgprocess
 
@@ -104,6 +104,13 @@ private:
                     imgprocess.init_slave_flag = 0;//如果有响应
                 }
 
+            }
+
+            if (imgprocess.brake_flag)serial->transmit_packet(0x10, (uint8_t*)"1", 1);
+            if (serial_echo == 0xA2) {
+                imgprocess.brake_flag = 0;
+                serial_echo = 0;//如果有响应
+                LOG_I << "shou!" << "..." << serial_echo << LOG_END;
             }
 
             if (_queue.Size() >= 1)
