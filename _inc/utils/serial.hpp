@@ -96,7 +96,7 @@ private:
 
             if (imgprocess.init_slave_flag) {
 
-                serial->transmit_packet(0x09, imgprocess.speedPID_BUFF, 12);
+                transmit_packet(0x09, imgprocess.speedPID_BUFF, 12);
 
                 if (serial_echo == 0xA1) {
                     serial_echo = 0;
