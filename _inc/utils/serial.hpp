@@ -22,7 +22,6 @@ using namespace LibSerial;
 // 引用图像处理
 extern ImageProcess imgprocess;
 
-uint8_t serial_echo;
 
 #define IMG imgprocess
 
@@ -43,7 +42,7 @@ class SerialDriver
 public:
     SerialDriver(const std::string& port_name, BaudRate bps) : _port_name(port_name), _bps(bps) {};
     ~SerialDriver() {};
-
+    uint8_t serial_echo;
 private:
     // 通讯协议结构体
 
