@@ -36,6 +36,7 @@ uint8_t out_flage;
 uint8_t in_flag;
 uint8_t fond_flag;
 float member_K = 0;
+
 POINT AI_find_sign = POINT(0, 0);  //标记，分数*100
 //速度控制函数
 void speed_fun(int speed, float brake_P, float yx_speed_err) {

@@ -22,9 +22,13 @@ int none_left = 0, none_right = 0;
 int have_left = 0, have_right = 0;
 
 extern uint8_t gas_which;
-
+CVFind_Clone garageB;
 /* ********************************************************************* */
 
+//bool pt_point_in_Line(int w) {
+//
+//
+//}
 void check_garage()
 {
     // 检测斑马线
@@ -50,6 +54,17 @@ void check_garage()
             int16_t black_blocks = 0;
             int16_t cursor = 0;
             int16_t times = 0;
+            //garageB.init();
+            //std::vector<cv::Rect> all_zt;
+            //all_zt = garageB.search_all_cone_rect(IMG.mat_bin);
+
+            //for (size_t i = 0; i < all_zt.size(); i++)
+            //{
+            //    
+            //}
+            
+            cv::line(map, cv::Point(IMG.edge_right[ipts1_num -1].y, IMG.edge_right[ipts1_num - 1].x),
+                cv::Point(IMG.edge_right[0].y, IMG.edge_right[0].x), cv::Scalar(r, g, b), 1);
 
             for (int16_t y = 40; y < 100; y++) {
                 black_blocks = 0;

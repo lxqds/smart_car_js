@@ -122,7 +122,7 @@ int main(int argc, char const* argv[])
         capture->get(frame_origin);
 
         // 目标检测
-       detection->run(frame_origin);
+       detection->run(frame_origin);IMG.edge_
 
         {
             // 图像处理 正常帧率
