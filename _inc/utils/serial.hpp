@@ -93,6 +93,19 @@ private:
     {
         while (_loop)
         {
+
+            if (imgprocess.init_slave_flag) {
+
+                serial->transmit_packet(0x09, imgprocess.speedPID_BUFF, 12);
+
+                if (serial_echo == 0xA1) {
+                    serial_echo = 0;
+                    LOG_I << "pid set" << "..." << serial_echo << LOG_END;
+                    imgprocess.init_slave_flag = 0;//如果有响应
+                }
+
+            }
+
             if (_queue.Size() >= 1)
             {
                 Payload Payload_Data;
@@ -228,6 +241,7 @@ private:
                     continue;
                 }
 
+               
                 if ((FRAME_LENGTH_RECE - 1) < counter)
                 {
                     if (0xE3 == datas[(FRAME_LENGTH_RECE - 1)])

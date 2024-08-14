@@ -97,17 +97,7 @@ int main(int argc, char const* argv[])
 
         // 开始计时
         fps_sw.tic();
-        if (imgprocess.init_slave_flag) {
 
-            serial->transmit_packet(0x09, imgprocess.speedPID_BUFF, 12);
-
-            if (serial_echo == 0xA1) {
-                serial_echo = 0;
-                LOG_I << "pid set" << "..." << serial_echo << LOG_END;
-                imgprocess.init_slave_flag = 0;//如果有响应
-            }
-
-        }
 
 
 
