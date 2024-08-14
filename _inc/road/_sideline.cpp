@@ -622,7 +622,7 @@ POINT getCenterPoint(cv::Rect rect) {
 
 }
 void sort_edge(std::vector<POINT> pointsEdge, int* a, int size, int mod) {
-    memset(a, 0, size);
+    memset(a, 0, size)
     for (size_t i = 0; i < pointsEdge.size(); i++)
     {
         if (a[pointsEdge[i].x] == 0) {
@@ -630,6 +630,11 @@ void sort_edge(std::vector<POINT> pointsEdge, int* a, int size, int mod) {
         }
         else if (mod && a[pointsEdge[i].x] > pointsEdge[i].y) a[pointsEdge[i].x] = pointsEdge[i].y;
         else if (!mod && a[pointsEdge[i].x] < pointsEdge[i].y)  a[pointsEdge[i].x] = pointsEdge[i].y;
+    }
+
+    for (size_t i = 0; i < size; i++)
+    {
+        if(a[i]!=0)cv::circle(mat_result, cv::Point(a[i], i), 2, cv::Scalar(0, 0, 255), 1, 8);
     }
 }
 //计算最高锥桶为中心 到 最左侧锥桶 的直线斜率
@@ -1604,7 +1609,7 @@ void Get_ipts_direction(int ipts[][2], int ipts_num, std::vector<uint8_t>& ipts_
                 if (x == 0 || y / x > 1)ipts_direction.push_back(3);//下方
                 else ipts_direction.push_back(4);//右方
             }
-            MAT_INFO(IMG.mat_result, cv::Point(k[0][0] + 5, k[0][1]), 0.2, "%d", ipts_direction.back());
+          //  MAT_INFO(IMG.mat_result, cv::Point(k[0][0] + 5, k[0][1]), 0.2, "%d", ipts_direction.back());
             i += 5;
             if (i + 10 >= ipts_num)break;
         }
