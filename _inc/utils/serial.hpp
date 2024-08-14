@@ -91,10 +91,8 @@ private:
 
     void run_send()
     {
-        while (_loop)
-        {
-            if (_queue.Size() >= 1)
-            {
+        while (_loop) {
+            if (_queue.Size() >= 1) {
                 Payload Payload_Data;
                 Payload_Data = _queue.Take();
                 DataBuffer pkt_buf(Payload_Data.size + 5);
@@ -105,102 +103,26 @@ private:
                 packet[3] = Payload_Data.size + 5;
                 memcpy(&packet[4], Payload_Data.pData, Payload_Data.size);
                 packet[Payload_Data.size + 5 - 1] = packet[0] + packet[1] + packet[2] + packet[3];
-                for (uint8_t i = 0; i < Payload_Data.size; i++)
-                {
+                for (uint8_t i = 0; i < Payload_Data.size; i++) {
                     packet[Payload_Data.size + 5 - 1] += packet[4 + i];
                 }
-                try
-                {
+                try {
                     _serial_port->Write(pkt_buf);
                 }
-                catch (const std::runtime_error&)
-                {
+                catch (const std::runtime_error&) {
                     log_e("The Write() runtime_error.");
                     continue;
                 }
-                catch (const NotOpen&)
-                {
+                catch (const NotOpen&) {
                     log_e("Port not open.");
                     continue;
                 }
                 // _serial_port->DrainWriteBuffer(); // 直到写缓冲区耗尽
             }
-            else
-            {
+            else {
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
             }
         }
-        // Payload_t payload;
-        // DataBuffer pkt_buf(sizeof(Packet));
-        // Packet *packet = (Packet *)&pkt_buf[0];
-
-        // Bint32_Union speed_union;
-        // Bint16_Union direction_union;
-
-        // while (_loop)
-        // {
-        //     if (_queue.Size() >= 1)
-        //     {
-        //         _can_close = false;
-
-        //         payload = _queue.Take();
-
-        //         // NEW send preration
-
-        //         speed_union.Float = payload.tSpeed / 1000.0;
-
-        //         direction_union.U16 = (uint16_t)(payload.tAngle * (-(IMG._config->send_k)) + PWM_MIDDLE);
-
-        //         packet->head = 0x42;
-        //         packet->addr = 0x01;
-        //         packet->length = 10;
-
-        //         packet->buf_speed[0] = speed_union.U8_Buff[0];
-        //         packet->buf_speed[1] = speed_union.U8_Buff[1];
-        //         packet->buf_speed[2] = speed_union.U8_Buff[2];
-        //         packet->buf_speed[3] = speed_union.U8_Buff[3];
-
-        //         packet->buf_direction[0] = direction_union.U8_Buff[0];
-        //         packet->buf_direction[1] = direction_union.U8_Buff[1];
-
-        //         packet->sumcheck = packet->head +
-        //                            packet->addr +
-        //                            packet->length;
-
-        //         for (uint8_t i = 0; i < 4; i++)
-        //         {
-        //             packet->sumcheck += packet->buf_speed[i];
-        //         }
-        //         for (uint8_t i = 0; i < 2; i++)
-        //         {
-        //             packet->sumcheck += packet->buf_direction[i];
-        //         }
-
-        //         try
-        //         {
-        //             _serial_port->Write(pkt_buf);
-        //         }
-        //         catch (const std::runtime_error &)
-        //         {
-        //             log_e("The Write() runtime_error.");
-        //             continue;
-        //         }
-        //         catch (const NotOpen &)
-        //         {
-        //             log_e("Port not open.");
-        //             continue;
-        //         }
-
-        //         _serial_port->DrainWriteBuffer(); // 直到写缓冲区耗尽
-
-        //         _can_close = true;
-        //     }
-        //     else
-        //     {
-        //         _can_close = true;
-        //         std::this_thread::sleep_for(std::chrono::milliseconds(1));
-        //     }
-        // }
     };
     void run_rece()
     {
@@ -210,32 +132,25 @@ private:
         uint8_t recv_data;
         uint16_t check;
 
-        while (_loop)
-        {
+        while (_loop) {
             // 循环阻塞接收一字节数据
-            if (!recv(recv_data, 10))
-            {
+            if (!recv(recv_data, 10)) {
                 datas[counter++] = recv_data;
 
-                if (0xF2 != datas[0])
-                {
+                if (0xF2 != datas[0]) {
                     counter = 0;
                     continue;
                 }
-                if (0xE2 != datas[1] && counter >= 2)
-                {
+                if (0xE2 != datas[1] && counter >= 2) {
                     counter = 0;
                     continue;
                 }
 
-                if ((FRAME_LENGTH_RECE - 1) < counter)
-                {
-                    if (0xE3 == datas[(FRAME_LENGTH_RECE - 1)])
-                    {
+                if ((FRAME_LENGTH_RECE - 1) < counter) {
+                    if (0xE3 == datas[(FRAME_LENGTH_RECE - 1)]) {
                         check = (uint16_t)(((uint16_t)datas[FRAME_LENGTH_RECE - 3] << 8) | datas[FRAME_LENGTH_RECE - 2]);
 
-                        if (check == CRC_CHECK(&datas[2], 9))
-                        {
+                        if (check == CRC_CHECK(&datas[2], 9)) {
                             byte2int32 b2i;
                             b2i.uc[0] = (unsigned char)datas[7];
                             b2i.uc[1] = (unsigned char)datas[6];
@@ -254,8 +169,7 @@ private:
 
 
             }
-            else
-            {
+            else {
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
             }
         }
@@ -267,8 +181,7 @@ public:
         _serial_port = std::make_shared<SerialPort>();
         CHECK(_serial_port != nullptr) << "Create Failed." << LOG_END;
         serial_echo = 0;
-        try
-        {
+        try {
             _loop = true;
             _can_close = true;
 
@@ -286,18 +199,15 @@ public:
             LOG_I << "[" << _port_name << "] Open Success." << LOG_END;
             return 0;
         }
-        catch (const OpenFailed&)
-        {
+        catch (const OpenFailed&) {
             LOG_E << "[" << _port_name << "] Open Failed." << LOG_END;
             return -2;
         }
-        catch (const AlreadyOpen&)
-        {
+        catch (const AlreadyOpen&) {
             LOG_E << "[" << _port_name << "] Already Open." << LOG_END;
             return -3;
         }
-        catch (...)
-        {
+        catch (...) {
             LOG_E << "[" << _port_name << "] Exception." << LOG_END;
             return -4;
         }
@@ -351,8 +261,7 @@ public:
         _worker_thread_rece.join();
         _queue.ShutDown();
 
-        if (_serial_port != nullptr)
-        {
+        if (_serial_port != nullptr) {
             _serial_port->Close();
             _serial_port = nullptr;
         }
@@ -414,17 +323,14 @@ public:
 private:
     int recv(unsigned char& charBuffer, size_t msTimeout = 0)
     {
-        try
-        {
+        try {
             _serial_port->ReadByte(charBuffer, msTimeout);
         }
-        catch (const ReadTimeout&)
-        {
+        catch (const ReadTimeout&) {
             // CHECK(false) << " The ReadByte() call has timed out." << LOG_END;
             return -2;
         }
-        catch (const NotOpen&)
-        {
+        catch (const NotOpen&) {
             CHECK(false) << "port not open." << LOG_END;
         }
 
@@ -437,11 +343,9 @@ private:
         uint16_t CRC_Temp = 0xffff;
         uint8_t i, j;
 
-        for (i = 0; i < CRC_CNT; i++)
-        {
+        for (i = 0; i < CRC_CNT; i++) {
             CRC_Temp ^= Buf[i];
-            for (j = 0; j < 8; j++)
-            {
+            for (j = 0; j < 8; j++) {
                 if (CRC_Temp & 0x01)
                     CRC_Temp = (CRC_Temp >> 1) ^ 0xa001;
                 else
