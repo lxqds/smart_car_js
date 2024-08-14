@@ -14,6 +14,12 @@ std::shared_ptr<SerialDriver> serial = nullptr;      // 线程 -> 串口接收�
 extern uint8_t gas_which;
 uint8_t serial_echo;
 
+
+std::mutex ListenID_mutex;
+uint64_t ListenID = 0;
+
+
+
 /* 主函数 */
 int main(int argc, char const* argv[])
 {
@@ -92,8 +98,7 @@ int main(int argc, char const* argv[])
         CHECK(err_log == 0) << "err_" << "listen" << LOG_END;
     }
 
-    std::mutex ListenID_mutex;
-    uint64_t ListenID = 0;
+
     std::thread ListenThread([ListenSocket]() {
         while (true) {
             int ClientID = -1;
