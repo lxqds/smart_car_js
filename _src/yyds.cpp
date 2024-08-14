@@ -155,12 +155,6 @@ int main(int argc, char const* argv[])
             // display->put(IMG.mat_lab.clone());
         }
 
-        int aaa = scanKeyboard();
-
-        if (aaa != 0) {
-            LOG_I << "keby" << aaa << LOG_END;
-        }
-
         // 停止计时
         fps_time = fps_sw.toc();
     }
@@ -202,23 +196,3 @@ void callbackSignal(int signum)
     }
 }
 
-
-
-int scanKeyboard()
-{
-    int in;
-    struct termios new_settings;
-    struct termios stored_settings;
-    tcgetattr(0, &stored_settings);
-    new_settings = stored_settings;
-    new_settings.c_lflag &= (~ICANON);
-    new_settings.c_cc[VTIME] = 0;
-    tcgetattr(0, &stored_settings);
-    new_settings.c_cc[VMIN] = 1;
-    tcsetattr(0, TCSANOW, &new_settings);
-
-    in = getchar();
-
-    tcsetattr(0, TCSANOW, &stored_settings);
-    return in;
-}

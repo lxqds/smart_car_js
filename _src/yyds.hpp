@@ -8,8 +8,6 @@
 #include <fstream>
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include <termio.h>
-#include <stdio.h>
 
 #include "../_inc/core/capture.hpp"
 #include "../_inc/core/detection.hpp"
@@ -23,4 +21,3 @@
 
 // 系统信号回调函数
 void callbackSignal(int signum);
-int scanKeyboard();
