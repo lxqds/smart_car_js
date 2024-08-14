@@ -30,7 +30,10 @@
 #include <thread>
 #include <future>
 #include <functional>
-
+#include <stdlib.h>				
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 
 class ImageProcess {
