@@ -73,6 +73,37 @@ int main(int argc, char const* argv[])
     ret = serial->open();
     CHECK(0 == ret) << "/dev/ttyUSB0 can not open !!" << LOG_END;
 
+
+
+
+    unsigned short port = 8080;
+    int sockfd;
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);// 创建通信端点：套接字
+    CHECK(sockfd >= 0) << "err_" << "socket" << LOG_END;
+
+    struct sockaddr_in my_addr;
+    bzero(&my_addr, sizeof(my_addr));
+    my_addr.sin_family = AF_INET;
+    my_addr.sin_port = htons(port);
+    my_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    int err_log = bind(sockfd, (struct sockaddr*)&my_addr, sizeof(my_addr));
+
+    if (err_log != 0) {
+        close(sockfd);
+        CHECK(err_log == 0) << "err_" << "binding" << LOG_END;
+    }
+    err_log = listen(sockfd, 10);
+    if (err_log != 0) {
+        close(sockfd);
+        CHECK(err_log == 0) << "err_" << "listen" << LOG_END;
+    }
+    LOG_I << "listen client @port==" << port << "..." << LOG_END;
+    system("netstat -an | grep 8080");	// 查看连接状态
+
+
+
+
+
     /* 启动多线程 */
     capture->start();
     detection->start();
@@ -113,16 +144,16 @@ int main(int argc, char const* argv[])
 
 
         if (imgprocess.brake_flag)serial->transmit_packet(0x10, (uint8_t*)"1", 1);
-        if (serial_echo == 0xA2) { 
-            imgprocess.brake_flag = 0;   
+        if (serial_echo == 0xA2) {
+            imgprocess.brake_flag = 0;
             serial_echo = 0;//如果有响应
             LOG_I << "shou!" << "..." << serial_echo << LOG_END;
-         }
-        // 获取图像
+        }
+       // 获取图像
         capture->get(frame_origin);
 
         // 目标检测
-       detection->run(frame_origin);
+        detection->run(frame_origin);
 
         {
             // 图像处理 正常帧率
