@@ -97,7 +97,7 @@ int main(int argc, char const* argv[])
     }
 
     //tcp初始化
-    IMG.ListenThread = std::thread([this]() {
+    IMG.ListenThread = std::thread([]() {
         while (true) {
             int ClientID = -1;
             int ClientSocket = accept(IMG.ListenSocket, NULL, NULL);
@@ -118,7 +118,7 @@ int main(int argc, char const* argv[])
             }
             if (ClientID != -1) {
 
-                std::thread([this, ClientSocket, ClientID]() {
+                std::thread([ClientSocket, ClientID]() {
                     int clientSocket = ClientSocket;
                     int clientID = ClientID;
                     char recvBuffer[512];
