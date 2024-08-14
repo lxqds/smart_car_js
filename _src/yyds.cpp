@@ -15,6 +15,8 @@ extern uint8_t gas_which;
 uint8_t serial_echo;
 
 
+std::mutex ListenID_mutex;
+uint64_t ListenID = 0;
 
 
 
@@ -77,41 +79,41 @@ int main(int argc, char const* argv[])
     ret = serial->open();
     CHECK(0 == ret) << "/dev/ttyUSB0 can not open !!" << LOG_END;
 
-
-    imgprocess.ListenSocket = socket(AF_INET, SOCK_STREAM, 0);// 创建通信端点：套接字
-    CHECK(imgprocess.ListenSocket >= 0) << "err_" << "socket" << LOG_END;
+    int ListenSocket;
+    ListenSocket = socket(AF_INET, SOCK_STREAM, 0);// 创建通信端点：套接字
+    CHECK(ListenSocket >= 0) << "err_" << "socket" << LOG_END;
     struct sockaddr_in my_addr;
     bzero(&my_addr, sizeof(my_addr));
     my_addr.sin_family = AF_INET;
     my_addr.sin_port = htons(45678);
     my_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    int err_log = bind(imgprocess.ListenSocket, (struct sockaddr*)&my_addr, sizeof(my_addr));
+    int err_log = bind(ListenSocket, (struct sockaddr*)&my_addr, sizeof(my_addr));
     if (err_log != 0) {
-        close(imgprocess.ListenSocket);
+        close(ListenSocket);
         CHECK(err_log == 0) << "err_" << "binding" << LOG_END;
     }
-    err_log = listen(imgprocess.ListenSocket, 10);
+    err_log = listen(ListenSocket, 10);
     if (err_log != 0) {
-        close(imgprocess.ListenSocket);
+        close(ListenSocket);
         CHECK(err_log == 0) << "err_" << "listen" << LOG_END;
     }
 
-    //tcp初始化
-    imgprocess.ListenThread = std::thread([]() {
+
+    std::thread ListenThread([ListenSocket]() {
         while (true) {
             int ClientID = -1;
-            int ClientSocket = accept(imgprocess.ListenSocket, NULL, NULL);
+            int ClientSocket = accept(ListenSocket, NULL, NULL);
             if (ClientSocket == -1) {
                 LOG_I << "Accept failed" << LOG_END;
-                close(imgprocess.ListenSocket);
+                close(ListenSocket);
                 return 1;
             }
             for (uint64_t i = 0; i < 64; i++) {
-                if ((imgprocess.ListenID & ((uint64_t)0x01 << i)) == 0) {
+                if ((ListenID & ((uint64_t)0x01 << i)) == 0) {
                     ClientID = (int)i;
                     {
-                        std::unique_lock<std::mutex> lock(imgprocess.ListenThread_mutex);
-                        imgprocess.ListenID |= ((uint64_t)0x01 << i);
+                        std::unique_lock<std::mutex> lock(ListenID_mutex);
+                        ListenID |= ((uint64_t)0x01 << i);
                     }
                     break;
                 }
@@ -142,22 +144,18 @@ int main(int argc, char const* argv[])
                         }
                     }
                     {
-                        std::unique_lock<std::mutex> lock(imgprocess.ListenThread_mutex);
-                        imgprocess.ListenID &= ~((uint64_t)0x01 << clientID);
+                        std::unique_lock<std::mutex> lock(ListenID_mutex);
+                        ListenID &= ~((uint64_t)0x01 << clientID);
                     }
                     // 关闭客户端套接字
                     close(clientSocket);
                     }).detach();
             }
-            else {
+            else
                 close(ClientSocket);
-            }
-
         }
 
         });
-
-
 
 
     /* 启动多线程 */
@@ -239,7 +237,7 @@ int main(int argc, char const* argv[])
             else {
                 display->put(frame_imgpro.clone());
             }
-            // display->put(imgprocess.mat_lab.clone());
+            // display->put(IMG.mat_lab.clone());
         }
 
         // 停止计时
@@ -268,12 +266,6 @@ void callbackSignal(int signum)
 
     if (is_exit == 1) {
         /* 结束线程 */
-
-        int result0 = shutdown(imgprocess.ListenSocket, SHUT_RD);
-        if (result0 == -1) log_i("shutdown() failed");
-        result0 = shutdown(imgprocess.ListenSocket, SHUT_RDWR);
-        if (result0 == -1) log_i("shutdown() failed");
-
         capture->stop();
         log_i("capture stopped.");
         detection->stop();

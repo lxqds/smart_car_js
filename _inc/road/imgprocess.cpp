@@ -37,8 +37,6 @@ int ImageProcess::init(std::string config_path, bool is_result) {
     element_over = false;
     speed_diff = (_config->speed_up - _config->speed_base) / 10;
 
-
-
     return 0;
 }
 
