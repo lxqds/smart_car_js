@@ -634,7 +634,7 @@ void sort_edge(std::vector<POINT> pointsEdge, int* a, int size, int mod) {
 
     for (size_t i = 0; i < size; i++)
     {
-        if(a[i]!=0)cv::circle(mat_result, cv::Point(a[i], i), 2, cv::Scalar(0, 0, 255), 1, 8);
+        if(a[i]!=0)cv::circle(IMG.mat_result, cv::Point(a[i], i), 2, cv::Scalar(0, 0, 255), 1, 8);
     }
 }
 //计算最高锥桶为中心 到 最左侧锥桶 的直线斜率
