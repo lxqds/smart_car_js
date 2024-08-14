@@ -30,7 +30,10 @@
 #include <thread>
 #include <future>
 #include <functional>
-
+#include <stdlib.h>				
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 
 class ImageProcess {
@@ -279,6 +282,24 @@ public:
     bool flag_rpts = false;
     // 透视变换临时变量
     float trans[2];
+
+
+
+
+    int ListenSocket;
+    std::mutex ListenThread_mutex;
+    uint64_t ListenID = 0;
+    std::thread ListenThread;
+
+
+
+
+
+
+
+
+
+
 
     /* *********************************************************************** */
     /* *********************************************************************** */
