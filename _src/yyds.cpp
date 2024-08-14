@@ -158,7 +158,7 @@ int main(int argc, char const* argv[])
         int aaa = scanKeyboard();
 
         if (aaa != 0) {
-            log_i(aaa +48);
+            LOG_I << "keby" << aaa << LOG_END;
         }
 
         // 停止计时
