@@ -75,7 +75,7 @@ bool sort_y_up(POINT a, POINT b);    // 升序
 bool sort_y_down(POINT a, POINT b);  // 降序
 bool sort_x_up(POINT a, POINT b);    // 升序
 bool sort_x_down(POINT a, POINT b);  // 降序
-
+void sort_edge(std::vector<mPOINT> pointsEdge, int* a, int size, int mod);
 //两点距离公式
 float distance_for_points(POINT a, POINT b);
 //搜索左右边缘的锥桶

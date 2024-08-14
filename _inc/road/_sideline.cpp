@@ -621,7 +621,17 @@ POINT getCenterPoint(cv::Rect rect) {
     return cpt;
 
 }
-
+void sort_edge(std::vector<mPOINT> pointsEdge, int* a, int size, int mod) {
+    memset(a, 0, size);
+    for (size_t i = 0; i < pointsEdge.size(); i++)
+    {
+        if (a[pointsEdge[i].x] == 0) {
+            a[pointsEdge[i].x] = pointsEdge[i].y;
+        }
+        else if (mod && a[pointsEdge[i].x] > pointsEdge[i].y) a[pointsEdge[i].x] = pointsEdge[i].y;
+        else if (!mod && a[pointsEdge[i].x] < pointsEdge[i].y)  a[pointsEdge[i].x] = pointsEdge[i].y;
+    }
+}
 //计算最高锥桶为中心 到 最左侧锥桶 的直线斜率
 float Calculate_Left_ConeK(std::vector<cv::Rect> arr) {
     if (arr.size() < 2)return 0;

@@ -29,6 +29,8 @@ CVFind_Clone garageB;
 //
 //
 //}
+int edge_lefty[200];
+int edge_righty[200];
 void check_garage()
 {
     // 检测斑马线
@@ -39,8 +41,7 @@ void check_garage()
     ///>    (也就是黑胶的宽度), black_blocks++, 否则不加. 然后将栈中元素清掉
     ///> 5、如果此行的black_blocks在6个左右, times++
     ///> 6、遍历18——23行, 如果times在4个左右, 则确定为起跑线。
-    cv::line(IMG.mat_lab, cv::Point(IMG.edge_right[IMG.ipts1_num - 1].y, IMG.edge_right[IMG.ipts1_num - 1].x),
-        cv::Point(IMG.edge_right[0].y, IMG.edge_right[0].x), cv::Scalar(0, 0, 255), 1);
+
     if (!IMG.element_over &&
         
         !control_flag.contains(work_element) &&         //当前没在工作区中
@@ -64,11 +65,17 @@ void check_garage()
             //    
             //}
 
+            sort_edge(IMG.edge_right, edge_righty, 200, 1);
+            sort_edge(IMG.edge_left, edge_lefty, 200, 0);
 
             for (int16_t y = 40; y < 100; y++) {
                 black_blocks = 0;
                 cursor = 0; // 指向栈顶的游标
-                for (int16_t x = IMAGE_WIDTH / 2 - 60; x < IMAGE_WIDTH / 2 + 60; x++) {
+
+                if (edge_righty[y] != 0 && edge_lefty[y] != 0)
+                {
+
+                for (int16_t x = edge_lefty[y]; x < edge_righty[y]; x++) {
                     if (AT_IMAGE(IMG.mat_bin, x, y) < IMG._config->threshold) {
                         if (cursor < 20)
                             cursor++;
@@ -81,6 +88,7 @@ void check_garage()
                 }
                 if (black_blocks >= 5 && black_blocks <= 9)
                     times++;
+                }
             }
             if (times >= 3) {
                 if (control_flag.contains(cross_element)) {//如果在十字路口中则删除十字路口
