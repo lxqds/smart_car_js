@@ -79,7 +79,7 @@ int ImageProcess::init(std::string config_path, bool is_result) {
             }
             if (ClientID != -1) {
 
-                std::thread([this, ClientID]() {
+                std::thread([this, ClientSocket, ClientID]() {
                     int clientSocket = ClientSocket;
                     int clientID = ClientID;
                     char recvBuffer[512];
