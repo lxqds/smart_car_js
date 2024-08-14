@@ -39,7 +39,8 @@ void check_garage()
     ///>    (也就是黑胶的宽度), black_blocks++, 否则不加. 然后将栈中元素清掉
     ///> 5、如果此行的black_blocks在6个左右, times++
     ///> 6、遍历18——23行, 如果times在4个左右, 则确定为起跑线。
-
+    cv::line(IMG.mat_lab, cv::Point(IMG.edge_right[IMG.ipts1_num - 1].y, IMG.edge_right[IMG.ipts1_num - 1].x),
+        cv::Point(IMG.edge_right[0].y, IMG.edge_right[0].x), cv::Scalar(0, 0, 255), 1);
     if (!IMG.element_over &&
         
         !control_flag.contains(work_element) &&         //当前没在工作区中
