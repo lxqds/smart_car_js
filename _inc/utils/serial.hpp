@@ -22,6 +22,7 @@ using namespace LibSerial;
 // 引用图像处理
 extern ImageProcess imgprocess;
 
+extern uint8_t serial_echo;
 
 #define IMG imgprocess
 
@@ -42,7 +43,7 @@ class SerialDriver
 public:
     SerialDriver(const std::string& port_name, BaudRate bps) : _port_name(port_name), _bps(bps) {};
     ~SerialDriver() {};
-    uint8_t serial_echo;
+
 private:
     // 通讯协议结构体
 
@@ -92,26 +93,6 @@ private:
     {
         while (_loop)
         {
-
-            if (imgprocess.init_slave_flag) {
-
-                transmit_packet(0x09, imgprocess.speedPID_BUFF, 12);
-
-                if (serial_echo == 0xA1) {
-                    serial_echo = 0;
-                    LOG_I << "pid set" << "..." << serial_echo << LOG_END;
-                    imgprocess.init_slave_flag = 0;//如果有响应
-                }
-
-            }
-
-            if (imgprocess.brake_flag)transmit_packet(0x10, (uint8_t*)"1", 1);
-            if (serial_echo == 0xA2) {
-                imgprocess.brake_flag = 0;
-                serial_echo = 0;//如果有响应
-                LOG_I << "shou!" << "..." << serial_echo << LOG_END;
-            }
-
             if (_queue.Size() >= 1)
             {
                 Payload Payload_Data;
@@ -247,7 +228,6 @@ private:
                     continue;
                 }
 
-               
                 if ((FRAME_LENGTH_RECE - 1) < counter)
                 {
                     if (0xE3 == datas[(FRAME_LENGTH_RECE - 1)])
@@ -413,6 +393,7 @@ public:
         _queue.Put(Payload_Data);
         _queue.Put(Payload_Data);
         _queue.Put(Payload_Data);
+
         // if (_queue.Size() < 5)
         // {
 

@@ -12,6 +12,7 @@ std::shared_ptr<Display> display = nullptr;          // 线程 -> 图像显示�
 std::shared_ptr<SerialDriver> serial = nullptr;      // 线程 -> 串口接收及发送
 
 extern uint8_t gas_which;
+uint8_t serial_echo;
 
 /* 主函数 */
 int main(int argc, char const* argv[])
@@ -96,11 +97,27 @@ int main(int argc, char const* argv[])
 
         // 开始计时
         fps_sw.tic();
+        if (imgprocess.init_slave_flag) {
+
+            serial->transmit_packet(0x09, imgprocess.speedPID_BUFF, 12);
+
+            if (serial_echo == 0xA1) {
+                serial_echo = 0;
+                LOG_I << "pid set" << "..." << serial_echo << LOG_END;
+                imgprocess.init_slave_flag = 0;//如果有响应
+            }
+
+        }
 
 
 
 
-
+        if (imgprocess.brake_flag)serial->transmit_packet(0x10, (uint8_t*)"1", 1);
+        if (serial_echo == 0xA2) { 
+            imgprocess.brake_flag = 0;   
+            serial_echo = 0;//如果有响应
+            LOG_I << "shou!" << "..." << serial_echo << LOG_END;
+         }
         // 获取图像
         capture->get(frame_origin);
 
