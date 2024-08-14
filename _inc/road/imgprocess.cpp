@@ -383,7 +383,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     }
 
 
-
+    cv::line(IMG.mat_lab, cv::Point(IMG.edge_right[IMG.ipts1_num - 1].y, IMG.edge_right[IMG.ipts1_num - 1].x),
+        cv::Point(IMG.edge_right[0].y, IMG.edge_right[0].x), cv::Scalar(0, 0, 255), 1);
 
     float far_rpts0[IMAGE_HEIGHT][2] = { 0 };
     float far_rpts1[IMAGE_HEIGHT][2] = { 0 };
