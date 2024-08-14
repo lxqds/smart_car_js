@@ -68,14 +68,14 @@ void check_garage()
             sort_edge(IMG.edge_right, edge_righty, 200, 1);
             sort_edge(IMG.edge_left, edge_lefty, 200, 0);
 
-            for (int16_t y = 40; y < 100; y++) {
+            for (int16_t y = 50; y < 180; y++) {
                 black_blocks = 0;
                 cursor = 0; // 指向栈顶的游标
 
                 if (edge_righty[y] != 0 && edge_lefty[y] != 0)
                 {
 
-                for (int16_t x = edge_lefty[y]; x < edge_righty[y]; x++) {
+                for (int16_t x = edge_lefty[y]; x < edge_righty[y]x; x++) {
                     if (AT_IMAGE(IMG.mat_bin, x, y) < IMG._config->threshold) {
                         if (cursor < 20)
                             cursor++;
