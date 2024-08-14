@@ -63,8 +63,8 @@ void check_garage()
             //    
             //}
             
-            cv::line(map, cv::Point(IMG.edge_right[ipts1_num -1].y, IMG.edge_right[ipts1_num - 1].x),
-                cv::Point(IMG.edge_right[0].y, IMG.edge_right[0].x), cv::Scalar(r, g, b), 1);
+            cv::line(IMG.mat_lab, cv::Point(IMG.edge_right[IMG.ipts1_num -1].y, IMG.edge_right[IMG.ipts1_num - 1].x),
+                cv::Point(IMG.edge_right[0].y, IMG.edge_right[0].x), cv::Scalar(0, 0, 255), 1);
 
             for (int16_t y = 40; y < 100; y++) {
                 black_blocks = 0;
