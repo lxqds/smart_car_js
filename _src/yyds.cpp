@@ -12,7 +12,6 @@ std::shared_ptr<Display> display = nullptr;          // 线程 -> 图像显示�
 std::shared_ptr<SerialDriver> serial = nullptr;      // 线程 -> 串口接收及发送
 
 extern uint8_t gas_which;
-uint8_t serial_echo;
 
 /* 主函数 */
 int main(int argc, char const* argv[])
