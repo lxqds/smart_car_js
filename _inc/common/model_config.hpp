@@ -78,7 +78,6 @@ struct ControlConfig
     float work_read_cone_thresholdy_in; //施工区二段进入阈值
     float work_read_cone_base_speed_k;  //work 准备进入时，姿态调整速度系数  0.05
     float work_read_cone_allow_error;    //work 准备进入时，姿态调整允许的位置误差  10
-    float work_read_cone_speed_H_err;   //work 准备进入时，姿态调整允许的速度p的偏差系数   50
     int16_t work_read_cone_allow_speed_error; //work 准备进入时，姿态调整允许的速度误差  10
     float work_read_cone_thresholdy_avg;  //施工区 进入锥桶平均阈值
 
@@ -88,6 +87,7 @@ struct ControlConfig
     float work_angle_in_1;           //施工区一段进入角度
     float work_ready_yaw; 
     float work_out_angular_P;      ///施工区，退出斜率角度p值
+    float work_ready_yaw_p;
     float work_out_angular_base_deviation;///施工区，退出斜率角度基础偏差
     uint16_t work_run_route; 
     uint16_t work_leave_route;
@@ -305,9 +305,9 @@ struct ControlConfig
         AUTOCFG(work_run_speed);
         AUTOCFG(work_run_route);
         AUTOCFG(work_ready_yaw);
+        AUTOCFG(work_ready_yaw_p);
         AUTOCFG(work_ready_speed);
         AUTOCFG(work_read_cone_thresholdy_out);
-        AUTOCFG(work_read_cone_speed_H_err);
         AUTOCFG(work_route_speed);
         AUTOCFG(work_route_angle_in_1);
         AUTOCFG(work_route_ready_yaw);
