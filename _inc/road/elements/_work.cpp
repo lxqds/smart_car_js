@@ -455,13 +455,17 @@ void run_work()
                 }
 
                 // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready )
-                float in_yaw = 30;
+                float in_yaw = IMG._config->work_ready_yaw;
 
                 float yaw_err = IMG.encoder.yaw - work_yaw;
                 if (yaw_err > 180) yaw_err -= 360;
                 if (yaw_err < -180)yaw_err += 360;
 
-                if (IMG.max_white_line_length < 300 ||
+                IMG.aim_angle = -(in_yaw - yaw_err) * IMG._config->work_ready_yaw_p;
+                if (direction_work)  IMG.aim_angle = -IMG.aim_angle;
+                MAT_LOG("YAW", yaw_err);
+
+                if (IMG.max_white_line_length < 300 &&
                     (abs(yaw_err) > in_yaw)) {
                     work_route = IMG.encoder.route;
                     flag_work = WORK_RUN;
