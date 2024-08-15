@@ -461,7 +461,7 @@ void run_work()
                 if (yaw_err > 180) yaw_err -= 360;
                 if (yaw_err < -180)yaw_err += 360;
 
-                IMG.aim_angle = -(in_yaw - yaw_err) * 10;
+                IMG.aim_angle = -(in_yaw - yaw_err) * 20;
                 if (direction_work)  IMG.aim_angle = -IMG.aim_angle;
                
 
