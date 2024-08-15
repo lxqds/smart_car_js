@@ -461,6 +461,8 @@ void run_work()
                 if (yaw_err > 180) yaw_err -= 360;
                 if (yaw_err < -180)yaw_err += 360;
 
+                IMG.aim_angle = yaw_err * 5 ;
+
                 if (IMG.max_white_line_length < 300 ||
                     (abs(yaw_err) > in_yaw)) {
                     work_route = IMG.encoder.route;
