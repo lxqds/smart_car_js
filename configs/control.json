@@ -113,6 +113,8 @@
     "work_read_cone_base_speed_k": 8,
     "work_read_cone_allow_error": 14,
     "work_read_cone_allow_speed_error": 2000,
+
+    "********-work__read__angle__-*********": 0,
     "work_angle_in_1": 150,
     "work_ready_yaw": 50,
     "work_ready_speed": 1100,
