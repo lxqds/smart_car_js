@@ -463,9 +463,9 @@ void run_work()
 
                 IMG.aim_angle = -(in_yaw - yaw_err) * IMG._config->work_ready_yaw_p;
                 if (direction_work)  IMG.aim_angle = -IMG.aim_angle;
-               
+                MAT_LOG("YAW", yaw_err);
 
-                if (IMG.max_white_line_length < 300 ||
+                if (IMG.max_white_line_length < 300 &&
                     (abs(yaw_err) > in_yaw)) {
                     work_route = IMG.encoder.route;
                     flag_work = WORK_RUN;
