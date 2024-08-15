@@ -455,7 +455,7 @@ void run_work()
                 }
 
                 // IMG.Attitude_Ring(IMG.encoder.yaw, 35, 0.8, 0.1);//(IMG.encoder.route - work_route > IMG._config->work_rou_ready )
-                float in_yaw = 30;
+                float in_yaw = 50;
 
                 float yaw_err = IMG.encoder.yaw - work_yaw;
                 if (yaw_err > 180) yaw_err -= 360;
