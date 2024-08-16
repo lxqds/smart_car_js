@@ -176,7 +176,7 @@ void run_bomb()
         }
         else if (flag_bomb == BOMB_FIRST_CONE) {
             IMG.aim_speed = IMG._config->speed_bomb2;
-            IMG.aim_distance_f = 0.35;
+            IMG.aim_distance_f = 0.6;
             IMG.aim_distance_n = 0.1;
             IMG.aim_angle_p = IMG._config->bomb_aim_angle_p1;
 
@@ -288,7 +288,7 @@ void run_bomb()
             if (bomb_block_y > IMAGE_HEIGHT * 0.1)
                 bomb_route = IMG.encoder.route;
 
-            if (bomb_block_y > IMAGE_HEIGHT * IMG._config->bomb_block_ready || IMG.encoder.route - bomb_route > 40) {//靠近黑块
+            if (bomb_block_y > IMAGE_HEIGHT * IMG._config->bomb_block_ready || IMG.encoder.route - bomb_route > 100) {//靠近黑块
                 bomb_route = IMG.encoder.route;
                 flag_bomb = BOMB_BLOCK;
                 MAT_LOG("BOMB_BLOCK");

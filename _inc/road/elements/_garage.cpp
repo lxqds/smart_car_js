@@ -43,12 +43,11 @@ void check_garage()
     ///> 6、遍历18——23行, 如果times在4个左右, 则确定为起跑线。
 
     if (!IMG.element_over &&
-        
+        !control_flag.contains(yroad_element) &&    //当前没在追逐区中
         !control_flag.contains(work_element) &&         //当前没在工作区中
         !control_flag.contains(garage_element) &&       //当前没在出入库中
         !control_flag.contains(ramp_element) &&         //当前没在桥中
         !control_flag.contains(bomb_element) &&         //当前没在炸弹中
-        !control_flag.contains(work_element) &&     //当前没在工作区中
         IMG.encoder.route > IMG._config->garage_out_route_  //出了车库之后
         ) {
         if (IMG._config->check_garage_AI == 0)      //不使用AI识别斑马线
@@ -72,22 +71,21 @@ void check_garage()
                 black_blocks = 0;
                 cursor = 0; // 指向栈顶的游标
 
-                if (edge_righty[y] != 0 && edge_lefty[y] != 0)
-                {
+                if (edge_righty[y] != 0 && edge_lefty[y] != 0) {
 
-                for (int16_t x = edge_lefty[y]; x < edge_righty[y]; x++) {
-                    if (AT_IMAGE(IMG.mat_bin, x, y) < IMG._config->threshold) {
-                        if (cursor < 20)
-                            cursor++;
+                    for (int16_t x = edge_lefty[y]; x < edge_righty[y]; x++) {
+                        if (AT_IMAGE(IMG.mat_bin, x, y) < IMG._config->threshold) {
+                            if (cursor < 20)
+                                cursor++;
+                        }
+                        else {
+                            if (cursor >= 4 && cursor <= 8)
+                                black_blocks++;
+                            cursor = 0;
+                        }
                     }
-                    else {
-                        if (cursor >= 4 && cursor <= 8)
-                            black_blocks++;
-                        cursor = 0;
-                    }
-                }
-                if (black_blocks >= 5 && black_blocks <= 9)
-                    times++;
+                    if (black_blocks >= 5 && black_blocks <= 9)
+                        times++;
                 }
             }
             if (times >= 3) {
