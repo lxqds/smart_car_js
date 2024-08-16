@@ -85,11 +85,11 @@ struct ControlConfig
     uint16_t work_ready_speed;
     float work_run_angle_p;
     float work_angle_in_1;           //施工区一段进入角度
-    float work_ready_yaw; 
+    float work_ready_yaw;
     float work_out_angular_P;      ///施工区，退出斜率角度p值
     float work_ready_yaw_p;
     float work_out_angular_base_deviation;///施工区，退出斜率角度基础偏差
-    uint16_t work_run_route; 
+    uint16_t work_run_route;
     uint16_t work_leave_route;
     float work_route_read_cone_thresholdy_in;
     uint16_t work_route_speed;
@@ -112,6 +112,10 @@ struct ControlConfig
     float bomb_second_run_wide;//第二个锥桶道路宽度系数： 靠近边线距离  
     float bomb_block_ready;   //黑块准备拐弯阈值
     float bomb_block_run_wide;//黑块道路系数
+    float bomb_aim_angle_p1;
+    float bomb_aim_angle_p2;
+    float bomb_aim_angle_p3;
+
 
     float yroad_2_route1;   // 嫌疑车辆通过距离
     float yroad_2_route2;   // 嫌疑车辆别车距离
@@ -277,6 +281,8 @@ struct ControlConfig
         AUTOCFG(work_out_angular_base_deviation);
         AUTOCFG(work_out_angular_P);
         AUTOCFG(work_out_route);
+
+
         AUTOCFG(speed_bomb1);
         AUTOCFG(speed_bomb2);
         AUTOCFG(bomb_first_cone_ready);
@@ -285,6 +291,9 @@ struct ControlConfig
         AUTOCFG(bomb_first_cone_run_wide);
         AUTOCFG(bomb_second_run_wide);
         AUTOCFG(bomb_block_run_wide);
+        AUTOCFG(bomb_aim_angle_p1);
+        AUTOCFG(bomb_aim_angle_p2);
+        AUTOCFG(bomb_aim_angle_p3);
 
         AUTOCFG(yroad_2_route1);
         AUTOCFG(yroad_2_route2);

@@ -101,7 +101,6 @@ void run_bomb()
 {
     if (control_flag.top() == bomb_element) {//当前为炸弹元素
         IMG.get_edge(0);
-
         std::vector<cv::Rect> all_zt;
         all_zt = bombC.search_all_cone_rect(IMG.mat_lab);
 
@@ -168,7 +167,7 @@ void run_bomb()
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.aim_distance_f = 0.35;
             IMG.aim_distance_n = 0.1;
-            IMG.aim_angle_p *= 2.0;
+            IMG.aim_angle_p = IMG._config->bomb_aim_angle_p1;
 
             bomb_near_cone = POINT(0, 0);
             bomb_near_cone_L = POINT(0, 0);
@@ -228,14 +227,14 @@ void run_bomb()
                     MAT_LOG("BOMB_ERROR3");
                 }
             }
-            drawH(IMAGE_HEIGHT* IMG._config->bomb_second_cone_ready, 0, 255, 0, IMG.mat_result);
+            drawH(IMAGE_HEIGHT * IMG._config->bomb_second_cone_ready, 0, 255, 0, IMG.mat_result);
             drawH(bomb_near_cone.x, 0, 255, 0, IMG.mat_result);
         }
         else if (flag_bomb == BOMB_SECOND_CONE) {
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.aim_distance_f = 0.35;
             IMG.aim_distance_n = 0.1;
-            IMG.aim_angle_p *= 2.0;
+            IMG.aim_angle_p = IMG._config->bomb_aim_angle_p2;
             int Lpt0_point[2] = { 0 };
             int Lpt1_point[2] = { 0 };
             if (Find_corner_first(IMG.rpts0, IMG.ipts0_num, Lpt0_point, 110))bomb_Lpt0_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
@@ -264,7 +263,7 @@ void run_bomb()
                 bomb_block_y = bomb_Lpt0_point_first.y;
             }
 
-            drawH(IMAGE_HEIGHT* IMG._config->bomb_block_ready, 0, 255, 0, IMG.mat_result);
+            drawH(IMAGE_HEIGHT * IMG._config->bomb_block_ready, 0, 255, 0, IMG.mat_result);
             drawH(bomb_block_y, 0, 255, 0, IMG.mat_result);
             // for (auto r : IMG.detection_result) {
             //     if (r.label == IMG.label_block) {
@@ -293,7 +292,7 @@ void run_bomb()
             IMG.aim_speed = IMG._config->speed_bomb2;
             IMG.aim_distance_f = 0.5;
             IMG.aim_distance_n = 0.1;
-            IMG.aim_angle_p *= 2.5;
+            IMG.aim_angle_p = IMG._config->bomb_aim_angle_p3;
             int Lpt0_point[2] = { 0 };
             int Lpt1_point[2] = { 0 };
             if (Find_corner_first(IMG.rpts0, IMG.ipts0_num, Lpt0_point, 110))bomb_Lpt0_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);

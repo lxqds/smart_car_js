@@ -186,8 +186,7 @@ void check_work()
 
 void run_work()
 {
-    if(1)
-    {
+    if (1) {
         if (control_flag.top() == work_element) {
             IMG.get_edge(0);
             //工作区基准速度
@@ -206,7 +205,7 @@ void run_work()
 
                     if (work_near_cone1.x != 0 && work_near_cone.x != 0) {  //左右都有黄色锥桶
                         std::unique_lock<std::mutex> lock(IMG.ListenThread_mutex);
-                        if (IMG.TCP_sign[3]==1) //左
+                        if (IMG.TCP_sign[3] == 1) //左
                         {
                             IMG.element_identify = 1;
                             work_route = IMG.encoder.route;
@@ -234,7 +233,7 @@ void run_work()
                             speed_fun(IMG._config->speed_work + 1, 2, 500);
                             IMG.TCP_sign[3] = 0;
                         }
-                        else if(IMG.TCP_sign[3] == 0)fond_flag = 1;
+                        else if (IMG.TCP_sign[3] == 0)fond_flag = 1;
                     }
 
                     speed_fun(IMG._config->speed_work + 1, 2, 200); //快速减速
@@ -567,7 +566,7 @@ void run_work()
 
                 //if (minyCent.y < IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_avg) IMG.aim_speed = -IMG.aim_speed;
 
-           
+
                 if (abs(err_H) < IMAGE_HEIGHT * 0.1) {
                     IMG.brake();
                     speed_fun(0, 2, 300);
@@ -684,8 +683,8 @@ void run_work()
                     //else if (!direction_work && IMG.aim_angle > -IMG._config->work_out_angular_base_deviation)IMG.aim_angle = -IMG._config->work_out_angular_base_deviation;
 
                     IMG.aim_speed = -IMG._config->work_recback_speed;
-                    speed_fun(IMG.aim_speed+1, 3, 500);
-                    if(IMG.encoder.speed *1000 > 0) speed_fun(IMG.aim_speed + 1, 8, 500);
+                    speed_fun(IMG.aim_speed + 1, 3, 500);
+                    if (IMG.encoder.speed * 1000 > 0) speed_fun(IMG.aim_speed + 1, 8, 500);
 
                    // LOG_I << " work_route  " << work_route  << "  enco" << IMG.encoder.route <<"  cz  " << work_route - IMG.encoder.route <<LOG_END;
                     if (IMG.max_white_line_length > 1000 && work_route - IMG.encoder.route > 30) {
@@ -922,7 +921,7 @@ void run_work()
                 drawH(work_near_cone.x, 0, 255, 0, IMG.mat_result);
                 drawH(IMG._config->work_read_cone_threshold * IMAGE_HEIGHT, 255, 0, 0, IMG.mat_result);
             }
-        
+
             if (flag_work == WORK_FOUND_2) {
 
                 IMG.edge_det = search_targets(IMG._det_result);
@@ -978,8 +977,7 @@ void run_work()
 
             }
 
-            if (flag_work == WORK_READY)
-            {
+            if (flag_work == WORK_READY) {
                 IMG.aim_speed = (IMG._config->work_route_speed);
                 IMG.aim_angle = IMG._config->work_route_angle_in_1;
                 if (!direction_work) IMG.aim_angle = -IMG.aim_angle;
@@ -1018,7 +1016,7 @@ void run_work()
                 drawW(IMAGE_WIDTH / 2 - 30, 0, 255, 0, IMG.mat_result);
 
                 int coney = search_mid_cone_getH(IMG.mat_lab);
-                drawH( coney, 0, 255, 0, IMG.mat_result);
+                drawH(coney, 0, 255, 0, IMG.mat_result);
 
                 if (IMG.encoder.route - work_route > IMG._config->work_run_route && coney > IMG._config->work_route_run_AVG * IMAGE_HEIGHT) {
                     work_route = IMG.encoder.route;
@@ -1029,8 +1027,7 @@ void run_work()
                 }
             }
 
-            if (flag_work == WORK_OUT)
-            {
+            if (flag_work == WORK_OUT) {
                 if (out_flage == 0) {
                     IMG.aim_speed = -(IMG._config->work_recback_speed);
                     if (IMG.encoder.speed * 1000 > -1000)IMG.aim_speed = -4000;
@@ -1040,7 +1037,7 @@ void run_work()
 
                     if (work_route - IMG.encoder.route > IMG._config->work_leave_route && IMG.max_white_line_length > 1000) {
                         work_route = IMG.encoder.route;
-                        out_flage=1;
+                        out_flage = 1;
                         MAT_LOG("WORK_leave");
                     }
                 }
