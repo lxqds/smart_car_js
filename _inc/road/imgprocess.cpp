@@ -91,7 +91,26 @@ int ImageProcess::init(std::string config_path, bool is_result) {
                         recvResult = recv(clientSocket, recvBuffer, sizeof(recvBuffer), 0);
                         if (recvResult > 0 && recvResult < 512) {
                             recvBuffer[recvResult] = '\0';  // 确保字符串以空字符结束
-                            LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
+
+                            if (recvResult == 3 && recvBuffer[0] == 0xFE && recvBuffer[1] == 0xEF) {
+
+                                byte str[] = { 0xFE,0xEF,recvBuffer[2] };
+                                recvResult = send(clientSocket, (char*)str, sizeof(str), 0);
+                                if (recvResult > 0) {
+                                    // LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
+                                    // std::cout << "回应成功" << recvBuffer << std::endl;
+                                }
+                                else {
+                                    LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
+                                    std::cout << "回应失败" << recvBuffer << std::endl;
+                                }
+                            }
+                            else {
+                                LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
+                            }
+
+
+
                         }
                         else if (recvResult == 0) {
                             LOG_I << "Client " << clientID << " disconnected." << LOG_END;
