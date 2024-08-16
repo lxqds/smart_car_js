@@ -37,8 +37,8 @@ POINT bomb_Lpt0_point_first;
 POINT bomb_Lpt1_point_first;
 
 CVFind_Clone bombC;
-uint16_t edge_lefty[200];
-uint16_t edge_righty[200];
+int edge_lefty[200];
+int edge_righty[200];
 /* ********************************************************************* */
 
 void check_bomb()
