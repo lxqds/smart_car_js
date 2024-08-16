@@ -508,7 +508,6 @@ void run_yroad() {
 				flag_yroad = YROAD_NONE;
 				control_flag.pop();//移除环岛
 			}
-			yroad_route = IMG.encoder.route;
 			IMG.get_edge();//获取边线
 			if (yroad_position == 0) {
 				IMG.flag_track = TRACK_RIGHT;
