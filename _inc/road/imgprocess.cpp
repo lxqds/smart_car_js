@@ -90,7 +90,7 @@ int ImageProcess::init(std::string config_path, bool is_result) {
                         if (recvResult > 0 && recvResult < 512) {
                             recvBuffer[recvResult] = '\0';  // 确保字符串以空字符结束
 
-                            if (recvResult == 12 && recvBuffer[0] == 0xFE && recvBuffer[1] == 0xEF) {
+                            if (recvResult == 3 && recvBuffer[0] == 0xFE && recvBuffer[1] == 0xEF) {
                                 uint8_t str[12]{};
                                 {
                                     std::unique_lock<std::mutex> lock(ListenThread_mutex);
@@ -115,8 +115,6 @@ int ImageProcess::init(std::string config_path, bool is_result) {
                                     TCP_sign[2] = recvBuffer[4];
                                     TCP_sign[3] = recvBuffer[5];
                                 }
-
-                                LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
                                 recvBuffer[0] = 0;
                                 recvBuffer[1] = 0;
                             }
@@ -129,11 +127,8 @@ int ImageProcess::init(std::string config_path, bool is_result) {
                                     if (recvBuffer[5] != 0)map_rf = recvBuffer[5];
                                     if (recvBuffer[6] != 0)image_mod = recvBuffer[6]-1; //1原图 ，2黄色，3红色
                                 }
-                                LOG_I << "Client " << clientID << " map_y: " << recvBuffer << LOG_END;
                             }
-                            else {
-                                LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
-                            }
+
 
 
                         }
