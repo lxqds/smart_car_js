@@ -37,7 +37,6 @@ void check_yroad() {
 		!control_flag.contains(garage_element) &&      //当前没在入库中
 		!control_flag.contains(ramp_element)
 		) {
-		uint8_t tcp_sign = 0;
 
 		for (auto r : IMG.detection_result) {
 			switch (r.label) {
@@ -231,6 +230,7 @@ void check_yroad() {
 									yroad_position = 1;
 									imgprocess.brake();
 									control_flag.push(yroad_element);
+									car_num++;
 									yroad_route = IMG.encoder.route;
 									flag_yroad = YROAD_FOUND_0;
 									MAT_LOG("YROAD_FOUND_0_%d", yroad_position);
