@@ -305,6 +305,14 @@ void run_yroad() {
 			IMG.aim_distance_n = 0.3;
 			uint8_t tcp_sign = 0;
 			if (car_num <= 3)tcp_sign = IMG.TCP_sign[car_num - 1];
+
+			int Lpt0_point[2] = { 0 };
+			int Lpt1_point[2] = { 0 };
+			if (Find_corner_first(IMG.rpts0, IMG.ipts0_num, Lpt0_point, 110))Lpt0_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
+			else Lpt0_point_first = POINT(0, 0);
+			if (Find_corner_first(IMG.rpts1, IMG.ipts1_num, Lpt1_point, 110)) Lpt1_point_first = POINT(Lpt1_point[0], Lpt1_point[1]);
+			else Lpt1_point_first = POINT(0, 0);
+
 			if (tcp_sign == 0) {
 				for (auto r : IMG.detection_result) {
 					switch (r.label) {
@@ -417,13 +425,6 @@ void run_yroad() {
 				}
 
 			}
-
-			int Lpt0_point[2] = { 0 };
-			int Lpt1_point[2] = { 0 };
-			if (Find_corner_first(IMG.rpts0, IMG.ipts0_num, Lpt0_point, 110))Lpt0_point_first = POINT(Lpt0_point[0], Lpt0_point[1]);
-			else Lpt0_point_first = POINT(0, 0);
-			if (Find_corner_first(IMG.rpts1, IMG.ipts1_num, Lpt1_point, 110)) Lpt1_point_first = POINT(Lpt1_point[0], Lpt1_point[1]);
-			else Lpt1_point_first = POINT(0, 0);
 
 
 
