@@ -94,15 +94,14 @@ int ImageProcess::init(std::string config_path, bool is_result) {
 
                             if (recvResult == 3 && recvBuffer[0] == 0xFE && recvBuffer[1] == 0xEF) {
 
-                                byte str[] = { 0xFE,0xEF,recvBuffer[2] };
+                                uint8_t str[] = { 0xFE,0xEF,recvBuffer[2] };
                                 recvResult = send(clientSocket, (char*)str, sizeof(str), 0);
                                 if (recvResult > 0) {
                                     // LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
                                     // std::cout << "回应成功" << recvBuffer << std::endl;
                                 }
                                 else {
-                                    LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
-                                    std::cout << "回应失败" << recvBuffer << std::endl;
+                                    LOG_I std::cout << "回应失败" << recvBuffer << LOG_END;
                                 }
                             }
                             else {
