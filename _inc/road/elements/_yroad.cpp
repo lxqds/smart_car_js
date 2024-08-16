@@ -435,8 +435,8 @@ void run_yroad() {
 				IMG.flag_track = TRACK_LEFT;
 				if (IMG.encoder.speed * 1000 > 1500)IMG.aim_speed = -3000;
 				else {
-					if (Lpt0_point_first.y > 0.5 * IMAGE_HEIGHT)IMG.aim_speed = -100;
-					else if (Lpt0_point_first.y == 0) IMG.aim_speed = -500;
+					if (Lpt0_point_first.y > 0.5 * IMAGE_HEIGHT)IMG.aim_speed = -300;
+					else if (Lpt0_point_first.y == 0) IMG.aim_speed = -700;
 					else IMG.aim_speed = 400;
 				}
 				// if (Lpt0_point_first.y > 0.4 * IMAGE_HEIGHT || Lpt0_point_first.y == 0) {
@@ -458,8 +458,8 @@ void run_yroad() {
 				IMG.flag_track = TRACK_RIGHT;
 				if (IMG.encoder.speed * 1000 > 1500) IMG.aim_speed = -3000;
 				else {
-					if (Lpt1_point_first.y > 0.5 * IMAGE_HEIGHT)IMG.aim_speed = -100;
-					else if (Lpt1_point_first.y == 0) IMG.aim_speed = -500;
+					if (Lpt1_point_first.y > 0.5 * IMAGE_HEIGHT)IMG.aim_speed = -300;
+					else if (Lpt1_point_first.y == 0) IMG.aim_speed = -700;
 					else IMG.aim_speed = 400;
 
 					// if (Lpt1_point_first.y > 0.4 * IMAGE_HEIGHT || Lpt1_point_first.y == 0) {
