@@ -18,7 +18,7 @@ int ImageProcess::init(std::string config_path, bool is_result) {
         control_flag.push(garage_element);
         flag_garage = GARAGE_OUT_LEFT;
     }
-
+    _config->direction_garage = 1;
     else if (_config->direction_garage == 1) {
         control_flag.push(garage_element);
         flag_garage = GARAGE_OUT_RIGHT;
