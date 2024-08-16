@@ -90,12 +90,12 @@ int ImageProcess::init(std::string config_path, bool is_result) {
                         if (recvResult > 0 && recvResult < 512) {
                             recvBuffer[recvResult] = '\0';  // 确保字符串以空字符结束
 
-                            if (recvResult == 3 && recvBuffer[0] == 0xFE && recvBuffer[1] == 0xEF) {
-                                uint8_t str[7]{};
+                            if (recvResult == 12 && recvBuffer[0] == 0xFE && recvBuffer[1] == 0xEF) {
+                                uint8_t str[12]{};
                                 {
                                     std::unique_lock<std::mutex> lock(ListenThread_mutex);
-                                    uint8_t str0[] = { 0xFE,0xEF,recvBuffer[2],TCP_sign[0],TCP_sign[1],TCP_sign[2],TCP_sign[3],map_y,map_yf,map_r,map_rf };
-                                    memcpy(str, str0, 11);
+                                    uint8_t str0[] = { 0xFE,0xEF,recvBuffer[2],TCP_sign[0],TCP_sign[1],TCP_sign[2],TCP_sign[3],map_y,map_yf,map_r,map_rf,image_mod+1 };
+                                    memcpy(str, str0, 12);
                                 }
                                 
                                 recvResult = send(clientSocket, (char*)str, sizeof(str), 0);
@@ -120,16 +120,16 @@ int ImageProcess::init(std::string config_path, bool is_result) {
                                 recvBuffer[0] = 0;
                                 recvBuffer[1] = 0;
                             }
-                            else if (recvResult >= 6 && recvBuffer[0] == 0xA1 && recvBuffer[1] == 0x1A) {
+                            else if (recvResult ==7 && recvBuffer[0] == 0xA1 && recvBuffer[1] == 0x1A) {
                                 {
                                     std::unique_lock<std::mutex> lock(ListenThread_mutex);
                                     if (recvBuffer[2] != 0)map_y = recvBuffer[2];
                                     if (recvBuffer[3] != 0)map_yf = recvBuffer[3];
                                     if (recvBuffer[4] != 0)map_r = recvBuffer[4];
                                     if (recvBuffer[5] != 0)map_rf = recvBuffer[5];
+                                    if (recvBuffer[6] != 0)image_mod = recvBuffer[6]-1; //1原图 ，2黄色，3红色
                                 }
-
-                                LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
+                                LOG_I << "Client " << clientID << " map_y: " << recvBuffer << LOG_END;
                             }
                             else {
                                 LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
@@ -278,17 +278,25 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     cv::threshold(mat_bin, mat_bin, 0, 255, cv::THRESH_OTSU);
 
     // 获取 LAB 图片 B 通道 (黄) -> 提取锥桶
+    uint8_t temp_y, temp_yf, temp_r, temp_rf;
+    {
+        std::unique_lock<std::mutex> lock(ListenThread_mutex);
+        temp_y = map_y;
+        temp_r = map_r;
+        temp_yf = map_yf;
+        temp_rf = map_rf;
+    }
     cv::cvtColor(mat_result, mat_lab, cv::COLOR_BGR2Lab);
     std::vector<cv::Mat> channels_lab;
     std::vector<cv::Mat> _channels_lab;
     cv::split(mat_lab, channels_lab);
     cv::split(mat_lab, _channels_lab);
-    cv::threshold(channels_lab[1], _channels_lab[1], map_yf, 255, cv::THRESH_BINARY_INV);
-    cv::threshold(channels_lab[2], _channels_lab[2], map_y, 255, cv::THRESH_BINARY);
+    cv::threshold(channels_lab[1], _channels_lab[1], temp_yf, 255, cv::THRESH_BINARY_INV);
+    cv::threshold(channels_lab[2], _channels_lab[2], temp_y, 255, cv::THRESH_BINARY);
     cv::bitwise_and(_channels_lab[1], _channels_lab[2], mat_lab);
 
-    cv::threshold(channels_lab[1], _channels_lab[1], map_r, 255, cv::THRESH_BINARY);
-    cv::threshold(channels_lab[2], _channels_lab[2], map_rf, 255, cv::THRESH_BINARY);
+    cv::threshold(channels_lab[1], _channels_lab[1], temp_r, 255, cv::THRESH_BINARY);
+    cv::threshold(channels_lab[2], _channels_lab[2], temp_rf, 255, cv::THRESH_BINARY);
     cv::bitwise_and(_channels_lab[1], _channels_lab[2], mat_lab2);
 
     // cv::threshold(channels_lab[1], mat_lab2, _config->lab_thresholdRED, 255, cv::THRESH_BINARY);
