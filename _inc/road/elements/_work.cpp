@@ -97,7 +97,9 @@ void check_work()
         !control_flag.contains(bomb_element)) {
 
         for (auto r : IMG.detection_result) {
-            if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.15) {
+            if (IMG.TCP_sign[3] >= 1) break;
+
+            if ((r.label == IMG.label_evil || r.label == IMG.label_thief) && r.score > 0.65 && r.y > IMAGE_HEIGHT * 0.15) {
                 IMG.element_identify = 1;
                 IMG.set_pid(8, 1.6, 0);
                 if (control_flag.contains(circle_element)) {
@@ -116,7 +118,7 @@ void check_work()
                 in_flag = 0;
                 return;
             }
-            else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.55 && r.y > IMAGE_HEIGHT * 0.15) {
+            else if ((r.label == IMG.label_patient || r.label == IMG.label_tumble) && r.score > 0.65 && r.y > IMAGE_HEIGHT * 0.15) {
 
                 IMG.element_identify = 1;
                 IMG.set_pid(8, 1.6, 0);
@@ -217,7 +219,7 @@ void run_work()
                             in_flag = 0;
                             speed_fun(IMG._config->speed_work + 1, 2, 500);
 
-                            IMG.TCP_sign[3] = 0;
+
                         }
                         else if (IMG.TCP_sign[3] == 2) //右
                         {
@@ -231,7 +233,7 @@ void run_work()
                             in_flag = 0;
 
                             speed_fun(IMG._config->speed_work + 1, 2, 500);
-                            IMG.TCP_sign[3] = 0;
+
                         }
                         else if (IMG.TCP_sign[3] == 0)fond_flag = 1;
                     }
