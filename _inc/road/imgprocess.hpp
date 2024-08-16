@@ -101,6 +101,7 @@ public:
     bool special_w = false;    // 施工区结束特殊处理
     bool special_g = false;    // 加油站结束特殊处理
 
+    bool TCP_sign[4];
     uint8_t speedPID_BUFF[12];
     uint8_t brake_flag;  //刹车标志
     void brake();

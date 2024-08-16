@@ -203,7 +203,39 @@ void run_work()
                     work_near_cone = search_left_near(IMG.edge_left, IMG.mat_lab);//右工作区进入准备
                     if (work_near_cone1.x == 0)work_near_cone1 = search_right_near(IMG.edge_right_far, IMG.mat_lab);//右工作区进入准备
                     if (work_near_cone.x == 0)work_near_cone = search_left_near(IMG.edge_left_far, IMG.mat_lab);//右工作区进入准备
-                    if (work_near_cone1.x != 0 && work_near_cone.x != 0)fond_flag = 1;
+
+                    if (work_near_cone1.x != 0 && work_near_cone.x != 0) {  //左右都有黄色锥桶
+                        if (IMG.TCP_sign[3]==1) //左
+                        {
+                            IMG.element_identify = 1;
+                            work_route = IMG.encoder.route;
+                            direction_work = true;
+                            IMG.flag_track = TRACK_LEFT;
+                            flag_work = WORK_FOUND_1;
+                            MAT_LOG("WORK_FOUND_L");
+                            FOUND_last_y = 0;
+                            in_flag = 0;
+                            speed_fun(IMG._config->speed_work + 1, 2, 500);
+
+                            IMG.TCP_sign[3] = 0;
+                        }
+                        else if (IMG.TCP_sign[3] == 2) //右
+                        {
+                            IMG.element_identify = 1;
+                            work_route = IMG.encoder.route;
+                            direction_work = false;
+                            IMG.flag_track = TRACK_RIGHT;
+                            flag_work = WORK_FOUND_1;
+                            MAT_LOG("WORK_FOUND_R");
+                            FOUND_last_y = 0;
+                            in_flag = 0;
+
+                            speed_fun(IMG._config->speed_work + 1, 2, 500);
+                            IMG.TCP_sign[3] = 0;
+                        }
+                        else if(IMG.TCP_sign[3] == 0)fond_flag = 1;
+                    }
+
                     speed_fun(IMG._config->speed_work + 1, 2, 200); //快速减速
                 }
 
