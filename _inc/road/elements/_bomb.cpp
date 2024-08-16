@@ -277,7 +277,7 @@ void run_bomb()
             if (bomb_block_y > IMAGE_HEIGHT * 0.1)
                 bomb_route = IMG.encoder.route;
 
-            if (bomb_block_y > IMAGE_HEIGHT * IMG._config->bomb_block_ready || IMG.encoder.route - bomb_route > 40) {//靠近黑块
+            if (bomb_block_y > IMAGE_HEIGHT * IMG._config->bomb_block_ready || IMG.encoder.route - bomb_route > 100) {//靠近黑块
                 bomb_route = IMG.encoder.route;
                 flag_bomb = BOMB_BLOCK;
                 MAT_LOG("BOMB_BLOCK");
