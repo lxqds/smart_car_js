@@ -655,12 +655,11 @@ void run_yroad() {
 					(int)round(ANGLE_DIST / SAMPLE_DIST),
 					PIXEL_PER_METER * 0.1 / 2);
 				IMG.rptsc1_num = IMG.rpts1s_num;
-
-				if (IMG.encoder.route - yroad_route > IMG._config->yroad_2_route1 || Lpt0_point_first.y < 0.4 * IMAGE_HEIGHT) {
+				if (Lpt0_point_first.y > 0.4 * IMAGE_HEIGHT) {
 					yroad_route = IMG.encoder.route;
-					flag_yroad = YROAD_FOUND_2_2;
-					MAT_LOG("YROAD_FOUND_2_2_%d", yroad_position);
 				}
+
+
 			}
 			else {
 				IMG.flag_track = TRACK_LEFT;
@@ -670,13 +669,15 @@ void run_yroad() {
 					(int)round(ANGLE_DIST / SAMPLE_DIST),
 					PIXEL_PER_METER * 0.1 / 2);
 				IMG.rptsc0_num = IMG.rpts0s_num;
-				if (IMG.encoder.route - yroad_route > IMG._config->yroad_2_route1 || Lpt1_point_first.y < 0.4 * IMAGE_HEIGHT) {
+				if (Lpt1_point_first.y > 0.4 * IMAGE_HEIGHT) {
 					yroad_route = IMG.encoder.route;
-					flag_yroad = YROAD_FOUND_2_2;
-					MAT_LOG("YROAD_FOUND_2_2_%d", yroad_position);
 				}
 			}
-
+			if (IMG.encoder.route - yroad_route > IMG._config->yroad_2_route1) {
+				yroad_route = IMG.encoder.route;
+				flag_yroad = YROAD_FOUND_2_2;
+				MAT_LOG("YROAD_FOUND_2_2_%d", yroad_position);
+			}
 
 
 			// 正常巡线
