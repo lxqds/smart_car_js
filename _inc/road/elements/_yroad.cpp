@@ -134,8 +134,8 @@ void check_yroad() {
 
 			if (R1 < 1.0f && !IMG.Lpt1_found &&  // 右角点未找到
 				!IMG.far_Lpt1_found &&  // 右远角点未找到
-				IMG.Lpt0_found &&//左角点找到
-				IMG.far_Lpt0_found //左远角点找到
+				IMG.Lpt0_angle < 120 &&//左角点找到
+				IMG.far_Lpt0_angle < 120 //左远角点找到
 				) {
 
 				for (size_t direction_i = 0; direction_i < IMG.ipts0_direction.size(); ++direction_i) {
@@ -210,8 +210,8 @@ void check_yroad() {
 				// 	}
 				// }
 			}
-			else if (R0 < 1.0f && IMG.Lpt1_found &&  // 右角点找到
-				IMG.far_Lpt1_found &&  // 右远角点找到
+			else if (R0 < 1.0f && IMG.Lpt1angle < 120 &&  // 右角点找到
+				IMG.far_Lpt1_angle < 120 &&  // 右远角点找到
 				!IMG.Lpt0_found &&//左角点未找到
 				!IMG.far_Lpt0_found //左远角点未找到 
 				) {
