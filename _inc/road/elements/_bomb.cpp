@@ -112,7 +112,7 @@ void run_bomb()
         std::vector<cv::Rect> in_zt;
 
         for (size_t i = 0; i < all_zt.size(); i++) {
-            if (all_zt[i].x > edge_lefty[all_zt[i].y] && all_zt[i].x < edge_righty[all_zt[i].y])
+            if (edge_lefty[all_zt[i].y]!=0 && edge_righty[all_zt[i].y]!=0 && all_zt[i].x > edge_lefty[all_zt[i].y] && all_zt[i].x < edge_righty[all_zt[i].y] )
             {
                 in_zt.push_back(all_zt[i]);
                 cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
@@ -189,14 +189,15 @@ void run_bomb()
             if (first_cone == 0) {    //第一个锥桶在左边，循右线
                 IMG.flag_track = TRACK_RIGHT;
                 bomb_near_cone = bomb_near_cone_R;
+                if (in_zt.size() >= 1)bomb_near_cone.x = in_zt[0].y + in_zt[0].height;
                 //右边线预测中线
                 track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
                     PIXEL_PER_METER * IMG._config->bomb_first_cone_run_wide / 2);
 
                 IMG.rptsc1_num = IMG.rpts1s_num;
-                MAT_LOG(" R_near_y=%d", bomb_near_cone.x);
 
+                MAT_LOG(" R_near_y=%d", bomb_near_cone.x)
                 if (IMG.encoder.route - bomb_route > 20 &&
                     bomb_near_cone.x > IMAGE_HEIGHT * IMG._config->bomb_second_cone_ready) {
                     bomb_route = IMG.encoder.route;
@@ -216,6 +217,7 @@ void run_bomb()
             else {
                 IMG.flag_track = TRACK_LEFT;
                 bomb_near_cone = bomb_near_cone_L;
+                if (in_zt.size() >= 1)bomb_near_cone.x = in_zt[0].y + in_zt[0].height;
                 //左边线预测中线
                 track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
                     (int)round(ANGLE_DIST / SAMPLE_DIST),
