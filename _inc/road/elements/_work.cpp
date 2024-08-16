@@ -400,7 +400,7 @@ void run_work()
 
                 int err_H = IMAGE_HEIGHT * IMG._config->work_read_cone_thresholdy_in + IMG._config->work_read_cone_allow_error / 2.0 - work_near_cone.x;
 
-                IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
+                //IMG.aim_speed = err_H * IMG._config->work_read_cone_base_speed_k;
                 if (IMG.aim_speed > 0 && IMG.aim_speed < 500) IMG.aim_speed = 500; //基础速度
                 if (IMG.aim_speed < 0 && IMG.aim_speed > -500) IMG.aim_speed = -500;
 
