@@ -12,13 +12,12 @@ Control_Flag control_flag;
 int ImageProcess::init(std::string config_path, bool is_result) {
     _config = make_shared<ControlConfig>(config_path);
     _is_result = is_result;
-
+    _config->direction_garage = 1;
     // 初始化出库方向
     if (_config->direction_garage == 0) {
         control_flag.push(garage_element);
         flag_garage = GARAGE_OUT_LEFT;
     }
-    _config->direction_garage = 1;
     else if (_config->direction_garage == 1) {
         control_flag.push(garage_element);
         flag_garage = GARAGE_OUT_RIGHT;
