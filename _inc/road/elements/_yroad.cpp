@@ -385,25 +385,37 @@ void run_yroad() {
 				}
 			}
 			else if (tcp_sign == 1) {
-				IMG.element_identify = 1;
-				yroad_route = IMG.encoder.route;
-				flag_yroad = YROAD_FOUND_1;
-				MAT_LOG("YROAD_FOUND_1_%d", yroad_position);
-				return;
+				if ((yroad_position == 0 && Lpt0_point_first.y > 0.5 * IMAGE_HEIGHT) ||
+					(yroad_position == 1 && Lpt1_point_first.y > 0.5 * IMAGE_HEIGHT)) {
+					IMG.element_identify = 1;
+					yroad_route = IMG.encoder.route;
+					flag_yroad = YROAD_FOUND_1;
+					MAT_LOG("YROAD_FOUND_1_%d", yroad_position);
+					return;
+				}
+
 			}
 			else if (tcp_sign == 2) {
-				IMG.element_identify = 1;
-				yroad_route = IMG.encoder.route;
-				flag_yroad = YROAD_FOUND_2;
-				MAT_LOG("YROAD_FOUND_2_%d", yroad_position);
-				return;
+				if ((yroad_position == 0 && Lpt0_point_first.y > 0.5 * IMAGE_HEIGHT) ||
+					(yroad_position == 1 && Lpt1_point_first.y > 0.5 * IMAGE_HEIGHT)) {
+					IMG.element_identify = 1;
+					yroad_route = IMG.encoder.route;
+					flag_yroad = YROAD_FOUND_2;
+					MAT_LOG("YROAD_FOUND_2_%d", yroad_position);
+					return;
+				}
+
 			}
 			else if (tcp_sign == 3) {
-				IMG.element_identify = 1;
-				yroad_route = IMG.encoder.route;
-				flag_yroad = YROAD_FOUND_3;
-				MAT_LOG("YROAD_FOUND_3_%d", yroad_position);
-				return;
+				if ((yroad_position == 0 && Lpt0_point_first.y > 0.5 * IMAGE_HEIGHT) ||
+					(yroad_position == 1 && Lpt1_point_first.y > 0.5 * IMAGE_HEIGHT)) {
+					IMG.element_identify = 1;
+					yroad_route = IMG.encoder.route;
+					flag_yroad = YROAD_FOUND_3;
+					MAT_LOG("YROAD_FOUND_3_%d", yroad_position);
+					return;
+				}
+
 			}
 
 			int Lpt0_point[2] = { 0 };
@@ -487,13 +499,15 @@ void run_yroad() {
 			IMG.aim_distance_f = 0.6;
 			IMG.aim_distance_n = 0.2;
 			IMG.aim_angle_p *= 1.5;
+
+
 			if (IMG.encoder.route - yroad_route > 50) {
 				IMG.element_over = true;
 				IMG.element_over_route = IMG.encoder.route;
 				flag_yroad = YROAD_NONE;
 				control_flag.pop();//移除环岛
 			}
-
+			yroad_route = IMG.encoder.route;
 			IMG.get_edge();//获取边线
 			if (yroad_position == 0) {
 				IMG.flag_track = TRACK_RIGHT;
