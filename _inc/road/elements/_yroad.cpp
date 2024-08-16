@@ -393,8 +393,9 @@ void run_yroad() {
 				}
 			}
 			else if (tcp_sign == 1) {
-				if ((yroad_position == 0 && Lpt0_point_first.y > 0.5 * IMAGE_HEIGHT) ||
-					(yroad_position == 1 && Lpt1_point_first.y > 0.5 * IMAGE_HEIGHT)) {
+				IMG.aim_speed = IMG._config->speed_base;
+				if ((yroad_position == 0 && Lpt0_point_first.y > 0.4 * IMAGE_HEIGHT) ||
+					(yroad_position == 1 && Lpt1_point_first.y > 0.4 * IMAGE_HEIGHT)) {
 					IMG.element_identify = 1;
 					yroad_route = IMG.encoder.route;
 					flag_yroad = YROAD_FOUND_1;
@@ -404,19 +405,19 @@ void run_yroad() {
 
 			}
 			else if (tcp_sign == 2) {
-				if ((yroad_position == 0 && Lpt0_point_first.y > 0.5 * IMAGE_HEIGHT) ||
-					(yroad_position == 1 && Lpt1_point_first.y > 0.5 * IMAGE_HEIGHT)) {
-					IMG.element_identify = 1;
-					yroad_route = IMG.encoder.route;
-					flag_yroad = YROAD_FOUND_2;
-					MAT_LOG("YROAD_FOUND_2_%d", yroad_position);
-					return;
-				}
+
+				IMG.element_identify = 1;
+				yroad_route = IMG.encoder.route;
+				flag_yroad = YROAD_FOUND_2;
+				MAT_LOG("YROAD_FOUND_2_%d", yroad_position);
+				return;
+
 
 			}
 			else if (tcp_sign == 3) {
-				if ((yroad_position == 0 && Lpt0_point_first.y > 0.5 * IMAGE_HEIGHT) ||
-					(yroad_position == 1 && Lpt1_point_first.y > 0.5 * IMAGE_HEIGHT)) {
+				IMG.aim_speed = IMG._config->speed_base;
+				if ((yroad_position == 0 && Lpt0_point_first.y > 0.4 * IMAGE_HEIGHT) ||
+					(yroad_position == 1 && Lpt1_point_first.y > 0.4 * IMAGE_HEIGHT)) {
 					IMG.element_identify = 1;
 					yroad_route = IMG.encoder.route;
 					flag_yroad = YROAD_FOUND_3;
@@ -496,7 +497,7 @@ void run_yroad() {
 			if (IMG.encoder.speed * 1000 < 0)IMG.aim_angle = -IMG.aim_angle;
 		}
 		else if (flag_yroad == YROAD_FOUND_1) {
-			IMG.aim_speed = IMG._config->speed_base;;
+			IMG.aim_speed = IMG._config->speed_base;
 			IMG.aim_distance_f = 0.6;
 			IMG.aim_distance_n = 0.2;
 			IMG.aim_angle_p *= 1.5;
