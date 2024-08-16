@@ -205,6 +205,7 @@ void run_work()
                     if (work_near_cone.x == 0)work_near_cone = search_left_near(IMG.edge_left_far, IMG.mat_lab);//右工作区进入准备
 
                     if (work_near_cone1.x != 0 && work_near_cone.x != 0) {  //左右都有黄色锥桶
+                        std::unique_lock<std::mutex> lock(IMG.ListenThread_mutex);
                         if (IMG.TCP_sign[3]==1) //左
                         {
                             IMG.element_identify = 1;

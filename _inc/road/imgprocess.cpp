@@ -93,8 +93,13 @@ int ImageProcess::init(std::string config_path, bool is_result) {
                             recvBuffer[recvResult] = '\0';  // 确保字符串以空字符结束
 
                             if (recvResult == 3 && recvBuffer[0] == 0xFE && recvBuffer[1] == 0xEF) {
-
-                                uint8_t str[] = { 0xFE,0xEF,recvBuffer[2] };
+                                uint8_t str[7]{};
+                                {
+                                    std::unique_lock<std::mutex> lock(ListenThread_mutex);
+                                    uint8_t str0[] = { 0xFE,0xEF,recvBuffer[2],TCP_sign[0],TCP_sign[1],TCP_sign[2],TCP_sign[3] };
+                                    memcpy(str, str0, 7);
+                                }
+                                
                                 recvResult = send(clientSocket, (char*)str, sizeof(str), 0);
                                 if (recvResult > 0) {
                                     // LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
@@ -105,23 +110,17 @@ int ImageProcess::init(std::string config_path, bool is_result) {
                                 }
                             }
                             else if (recvResult == 6 && recvBuffer[0] == 0xFA && recvBuffer[1] == 0xAF) {
-                                TCP_sign[0] = recvBuffer[2];
-                                TCP_sign[1] = recvBuffer[3];
-                                TCP_sign[2] = recvBuffer[4];
-                                TCP_sign[3] = recvBuffer[5];
+                                {
+                                    std::unique_lock<std::mutex> lock(ListenThread_mutex);
+                                    TCP_sign[0] = recvBuffer[2];
+                                    TCP_sign[1] = recvBuffer[3];
+                                    TCP_sign[2] = recvBuffer[4];
+                                    TCP_sign[3] = recvBuffer[5];
+                                }
+
                                 LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
                                 recvBuffer[0] = 0;
                                 recvBuffer[1] = 0;
-
-                                uint8_t str[] = { 0xFA,0xAF,recvBuffer[2] };
-                                recvResult = send(clientSocket, (char*)str, sizeof(str), 0);
-                                if (recvResult > 0) {
-                                    // LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
-                                    // std::cout << "回应成功" << recvBuffer << std::endl;
-                                }
-                                else {
-                                    LOG_I << "回应失败" << recvBuffer << LOG_END;
-                                }
                             }
                             else {
                                 LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
