@@ -506,6 +506,7 @@ void run_yroad() {
 			if (IMG.encoder.route - yroad_route > 50) {
 				IMG.element_over = true;
 				IMG.element_over_route = IMG.encoder.route;
+				MAT_LOG("YROAD_NONE");
 				flag_yroad = YROAD_NONE;
 				control_flag.pop();//移除环岛
 			}
@@ -747,6 +748,7 @@ void run_yroad() {
 				IMG.element_over = true;
 				IMG.element_over_route = IMG.encoder.route;
 				flag_yroad = YROAD_NONE;
+				MAT_LOG("YROAD_NONE");
 				control_flag.pop();//移除环岛
 			}
 
@@ -775,6 +777,7 @@ void run_yroad() {
 				IMG.element_over = true;
 				IMG.element_over_route = IMG.encoder.route;
 				flag_yroad = YROAD_NONE;
+				MAT_LOG("YROAD_NONE");
 				control_flag.pop();//移除环岛
 			}
 
