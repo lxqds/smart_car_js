@@ -35,7 +35,12 @@ int ImageProcess::init(std::string config_path, bool is_result) {
     element_over = false;
     speed_diff = (_config->speed_up - _config->speed_base) / 10;
 
-
+    //初始化图像阈值
+    map_y = _config->lab_threshold_Y;
+    map_yf = _config->lab_threshold_YF;
+    map_r = _config->lab_threshold_R;
+    map_rf = _config->lab_threshold_RF;
+    image_mod = _config->check_lab_;
 
     ListenSocket = socket(AF_INET, SOCK_STREAM, 0);// 创建通信端点：套接字
     CHECK(ListenSocket >= 0) << "err_" << "socket" << LOG_END;
@@ -94,10 +99,10 @@ int ImageProcess::init(std::string config_path, bool is_result) {
                                 uint8_t str[12]{};
                                 {
                                     std::unique_lock<std::mutex> lock(ListenThread_mutex);
-                                    uint8_t str0[] = { 0xFE,0xEF,recvBuffer[2],TCP_sign[0],TCP_sign[1],TCP_sign[2],TCP_sign[3],map_y,map_yf,map_r,map_rf,image_mod+1 };
+                                    uint8_t str0[] = { 0xFE,0xEF,recvBuffer[2],TCP_sign[0],TCP_sign[1],TCP_sign[2],TCP_sign[3],map_y,map_yf,map_r,map_rf,(uint8_t)(image_mod + 1) };
                                     memcpy(str, str0, 12);
                                 }
-                                
+
                                 recvResult = send(clientSocket, (char*)str, sizeof(str), 0);
                                 if (recvResult > 0) {
                                     // LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
@@ -118,14 +123,14 @@ int ImageProcess::init(std::string config_path, bool is_result) {
                                 recvBuffer[0] = 0;
                                 recvBuffer[1] = 0;
                             }
-                            else if (recvResult ==7 && recvBuffer[0] == 0xA1 && recvBuffer[1] == 0x1A) {
+                            else if (recvResult == 7 && recvBuffer[0] == 0xA1 && recvBuffer[1] == 0x1A) {
                                 {
                                     std::unique_lock<std::mutex> lock(ListenThread_mutex);
                                     if (recvBuffer[2] != 0)map_y = recvBuffer[2];
                                     if (recvBuffer[3] != 0)map_yf = recvBuffer[3];
                                     if (recvBuffer[4] != 0)map_r = recvBuffer[4];
                                     if (recvBuffer[5] != 0)map_rf = recvBuffer[5];
-                                    if (recvBuffer[6] != 0)image_mod = recvBuffer[6]-1; //1原图 ，2黄色，3红色
+                                    if (recvBuffer[6] != 0)image_mod = recvBuffer[6] - 1; //1原图 ，2黄色，3红色
                                 }
                             }
 

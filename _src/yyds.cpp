@@ -99,12 +99,7 @@ int main(int argc, char const* argv[])
     LOG_I << "PID Initing\n" << speedPID[0] << LOG_END;
     imgprocess.brake_flag = 1;
 
-    //初始化图像阈值
-    imgprocess.map_y = imgprocess._config->lab_threshold_Y;
-    imgprocess.map_yf = imgprocess._config->lab_threshold_YF;
-    imgprocess.map_r = imgprocess._config->lab_threshold_R;
-    imgprocess.map_rf = imgprocess._config->lab_threshold_RF;
-    imgprocess.image_mod = imgprocess._config->check_lab_;
+
     while (capture->_loop) {
 
         // 开始计时
