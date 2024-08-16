@@ -210,7 +210,7 @@ void check_yroad() {
 				// 	}
 				// }
 			}
-			else if (R0 < 1.0f && IMG.Lpt1angle < 120 &&  // 右角点找到
+			else if (R0 < 1.0f && IMG.Lpt1_angle < 120 &&  // 右角点找到
 				IMG.far_Lpt1_angle < 120 &&  // 右远角点找到
 				!IMG.Lpt0_found &&//左角点未找到
 				!IMG.far_Lpt0_found //左远角点未找到 
