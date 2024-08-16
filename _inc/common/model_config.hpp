@@ -283,7 +283,6 @@ struct ControlConfig
         AUTOCFG(work_out_route);
 
 
-
         AUTOCFG(speed_bomb1);
         AUTOCFG(speed_bomb2);
         AUTOCFG(bomb_first_cone_ready);
