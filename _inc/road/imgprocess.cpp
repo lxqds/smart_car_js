@@ -12,7 +12,6 @@ Control_Flag control_flag;
 int ImageProcess::init(std::string config_path, bool is_result) {
     _config = make_shared<ControlConfig>(config_path);
     _is_result = is_result;
-    _config->direction_garage = 1;
     // 初始化出库方向
     if (_config->direction_garage == 0) {
         control_flag.push(garage_element);
@@ -152,19 +151,6 @@ int ImageProcess::init(std::string config_path, bool is_result) {
         });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     return 0;
 }
 
@@ -176,9 +162,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     /* ***************************** 初始化 ***************************** */
     /* ***************************************************************** */
     mat_result = _mat_result;
-
-
-
 
 
     // 图像预处理: 缩放 -> 灰度 -> 二值化
@@ -259,8 +242,6 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             boundingRect.y -= expandPixels;
             boundingRect.width += 1.5 * expandPixels;
             boundingRect.height += expandPixels + 15;
-
-
 
         // 提取最大轮廓扩展后的区域
             boundingRect &= cv::Rect(0, 0, mat_result.cols, mat_result.rows);

@@ -343,6 +343,7 @@ struct ControlConfig
         log_i("Init Success.");
     }
     ~ControlConfig() {}
+
 };
 
 /*
