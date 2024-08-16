@@ -37,8 +37,8 @@ POINT bomb_Lpt0_point_first;
 POINT bomb_Lpt1_point_first;
 
 CVFind_Clone bombC;
-int edge_lefty[200];
-int edge_righty[200];
+int edge_leftyB[200];
+int edge_rightyB[200];
 /* ********************************************************************* */
 
 void check_bomb()
@@ -104,15 +104,15 @@ void run_bomb()
     if (control_flag.top() == bomb_element) {//当前为炸弹元素
         IMG.get_edge(0);
 
-        sort_edge(IMG.edge_right, edge_righty, 200, 1);
-        sort_edge(IMG.edge_left, edge_lefty, 200, 0);
+        sort_edge(IMG.edge_right, edge_rightyB, 200, 1);
+        sort_edge(IMG.edge_left, edge_leftyB, 200, 0);
 
         std::vector<cv::Rect> all_zt;
         all_zt = bombC.search_all_cone_rect(IMG.mat_lab);
         std::vector<cv::Rect> in_zt;
 
         for (size_t i = 0; i < all_zt.size(); i++) {
-            if (edge_lefty[all_zt[i].y]!=0 && edge_righty[all_zt[i].y]!=0 && all_zt[i].x > edge_lefty[all_zt[i].y] && all_zt[i].x < edge_righty[all_zt[i].y] )
+            if (edge_leftyB[all_zt[i].y]!=0 && edge_rightyB[all_zt[i].y]!=0 && all_zt[i].x > edge_leftyB[all_zt[i].y] && all_zt[i].x < edge_rightyB[all_zt[i].y] )
             {
                 in_zt.push_back(all_zt[i]);
                 cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);
