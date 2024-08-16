@@ -698,7 +698,7 @@ void run_yroad() {
 		else if (flag_yroad == YROAD_FOUND_2_2) {//开始别车
 			IMG.aim_distance_f = 0.6;
 			IMG.aim_distance_n = 0.3;
-			IMG.aim_angle_p *= 2;
+			IMG.aim_angle_p = 3.5;
 			if (IMG.encoder.speed * 1000 > 2000)IMG.aim_speed = -3000;
 			else IMG.aim_speed = 1200;
 			IMG.get_edge();//获取边线
@@ -707,7 +707,7 @@ void run_yroad() {
 				//左边线预测中线
 				track_leftline(IMG.rpts0s, IMG.rpts0s_num, IMG.rptsc0,
 					(int)round(ANGLE_DIST / SAMPLE_DIST),
-					PIXEL_PER_METER * 0.1 / 2);
+					PIXEL_PER_METER * 0.05 / 2);
 				IMG.rptsc0_num = IMG.rpts0s_num;
 			}
 			else {
@@ -716,7 +716,7 @@ void run_yroad() {
 				//右边线预测中线
 				track_rightline(IMG.rpts1s, IMG.rpts1s_num, IMG.rptsc1,
 					(int)round(ANGLE_DIST / SAMPLE_DIST),
-					PIXEL_PER_METER * 0.1 / 2);
+					PIXEL_PER_METER * 0.05 / 2);
 				IMG.rptsc1_num = IMG.rpts1s_num;
 
 			}
