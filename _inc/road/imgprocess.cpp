@@ -35,7 +35,12 @@ int ImageProcess::init(std::string config_path, bool is_result) {
     element_over = false;
     speed_diff = (_config->speed_up - _config->speed_base) / 10;
 
-
+    //初始化图像阈值
+    map_y = _config->lab_threshold_Y;
+    map_yf = _config->lab_threshold_YF;
+    map_r = _config->lab_threshold_R;
+    map_rf = _config->lab_threshold_RF;
+    image_mod = _config->check_lab_;
 
     ListenSocket = socket(AF_INET, SOCK_STREAM, 0);// 创建通信端点：套接字
     CHECK(ListenSocket >= 0) << "err_" << "socket" << LOG_END;
