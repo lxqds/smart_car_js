@@ -94,8 +94,8 @@ int ImageProcess::init(std::string config_path, bool is_result) {
                                 uint8_t str[7]{};
                                 {
                                     std::unique_lock<std::mutex> lock(ListenThread_mutex);
-                                    uint8_t str0[] = { 0xFE,0xEF,recvBuffer[2],TCP_sign[0],TCP_sign[1],TCP_sign[2],TCP_sign[3] };
-                                    memcpy(str, str0, 7);
+                                    uint8_t str0[] = { 0xFE,0xEF,recvBuffer[2],TCP_sign[0],TCP_sign[1],TCP_sign[2],TCP_sign[3],map_y,map_yf,map_r,map_rf };
+                                    memcpy(str, str0, 11);
                                 }
                                 
                                 recvResult = send(clientSocket, (char*)str, sizeof(str), 0);
@@ -107,7 +107,7 @@ int ImageProcess::init(std::string config_path, bool is_result) {
                                     LOG_I << "回应失败" << recvBuffer << LOG_END;
                                 }
                             }
-                            else if (recvResult == 6 && recvBuffer[0] == 0xFA && recvBuffer[1] == 0xAF) {
+                            else if (recvResult >= 6 && recvBuffer[0] == 0xFA && recvBuffer[1] == 0xAF) {
                                 {
                                     std::unique_lock<std::mutex> lock(ListenThread_mutex);
                                     TCP_sign[0] = recvBuffer[2];
@@ -120,9 +120,21 @@ int ImageProcess::init(std::string config_path, bool is_result) {
                                 recvBuffer[0] = 0;
                                 recvBuffer[1] = 0;
                             }
+                            else if (recvResult >= 6 && recvBuffer[0] == 0xA1 && recvBuffer[1] == 0x1A) {
+                                {
+                                    std::unique_lock<std::mutex> lock(ListenThread_mutex);
+                                    if (recvBuffer[2] != 0)map_y = recvBuffer[2];
+                                    if (recvBuffer[3] != 0)map_yf = recvBuffer[3];
+                                    if (recvBuffer[4] != 0)map_r = recvBuffer[4];
+                                    if (recvBuffer[5] != 0)map_rf = recvBuffer[5];
+                                }
+
+                                LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
+                            }
                             else {
                                 LOG_I << "Client " << clientID << " sent: " << recvBuffer << LOG_END;
                             }
+
 
                         }
                         else if (recvResult == 0) {
@@ -271,25 +283,25 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     std::vector<cv::Mat> _channels_lab;
     cv::split(mat_lab, channels_lab);
     cv::split(mat_lab, _channels_lab);
-    cv::threshold(channels_lab[1], _channels_lab[1], _config->lab_thresholdRG, 255, cv::THRESH_BINARY_INV);
-    cv::threshold(channels_lab[2], _channels_lab[2], _config->lab_threshold, 255, cv::THRESH_BINARY);
+    cv::threshold(channels_lab[1], _channels_lab[1], map_yf, 255, cv::THRESH_BINARY_INV);
+    cv::threshold(channels_lab[2], _channels_lab[2], map_y, 255, cv::THRESH_BINARY);
     cv::bitwise_and(_channels_lab[1], _channels_lab[2], mat_lab);
 
-    cv::threshold(channels_lab[1], _channels_lab[1], _config->lab_thresholdRED, 255, cv::THRESH_BINARY);
-    cv::threshold(channels_lab[2], _channels_lab[2], 120, 255, cv::THRESH_BINARY);
+    cv::threshold(channels_lab[1], _channels_lab[1], map_r, 255, cv::THRESH_BINARY);
+    cv::threshold(channels_lab[2], _channels_lab[2], map_rf, 255, cv::THRESH_BINARY);
     cv::bitwise_and(_channels_lab[1], _channels_lab[2], mat_lab2);
 
     // cv::threshold(channels_lab[1], mat_lab2, _config->lab_thresholdRED, 255, cv::THRESH_BINARY);
 
     // // 绘制处理结果图, 灰度格式转BGR格式
 
-    if (_config->check_binary_ || _config->check_lab_) {
+    if (_config->check_binary_ || image_mod) {
         std::vector<cv::Mat> channels;
         if (_config->check_binary_ == 1) {
             for (int i = 0; i < 3; i++)
                 channels.push_back(mat_bin);
         }
-        else if (_config->check_lab_ == 2) {
+        else if (image_mod == 2) {
             for (int i = 0; i < 3; i++)
                 channels.push_back(mat_lab2);
         }

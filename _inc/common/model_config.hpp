@@ -22,9 +22,18 @@ struct ControlConfig
     float exposure;           //曝光级别
     uint16_t threshold;           // 二值化阈值
     uint16_t threshold_detection; // 目标检测阈值
-    uint16_t lab_threshold;     //锥桶阈值
-    uint16_t lab_thresholdRG;   //锥桶红绿通道
-    uint16_t lab_thresholdRED;  //找红色色块的阈值
+
+    //uint16_t lab_threshold;     //锥桶阈值
+    //uint16_t lab_thresholdRG;   //锥桶红绿通道
+
+    uint16_t lab_threshold_Y;
+    uint16_t lab_threshold_YF;
+
+   // uint16_t lab_thresholdRED;  //找红色色块的阈值
+
+    uint16_t lab_threshold_R;
+    uint16_t lab_threshold_RF;
+
     uint8_t direction_garage; // 出库方向   0: 左   1: 右
     uint8_t direction_yroad;  // 泛行区方向  0: 左   1: 右
     uint8_t direction_work;   // 施工区方向  0: 左   1: 右
@@ -199,8 +208,8 @@ struct ControlConfig
         AUTOCFG(direction_yroad);
         AUTOCFG(direction_work);
         AUTOCFG(direction_gas);
-        AUTOCFG(lab_thresholdRG);
-        AUTOCFG(lab_thresholdRED);
+        AUTOCFG(lab_threshold_R);
+        AUTOCFG(lab_threshold_RF);
         AUTOCFG(rec_video_format);
         AUTOCFG(check_binary_);
         AUTOCFG(check_lab_);
@@ -214,7 +223,8 @@ struct ControlConfig
         AUTOCFG(check_slow_);
         AUTOCFG(check_circle_);
         AUTOCFG(check_cross_);
-        AUTOCFG(lab_threshold);
+        AUTOCFG(lab_threshold_Y);
+        AUTOCFG(lab_threshold_YF);
         AUTOCFG(ai_p_k);
         AUTOCFG(ai_p);
         AUTOCFG(ai_d);
