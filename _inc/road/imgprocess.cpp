@@ -101,7 +101,7 @@ int ImageProcess::init(std::string config_path, bool is_result) {
                                     // std::cout << "回应成功" << recvBuffer << std::endl;
                                 }
                                 else {
-                                    LOG_I std::cout << "回应失败" << recvBuffer << LOG_END;
+                                    LOG_I << "回应失败" << recvBuffer << LOG_END;
                                 }
                             }
                             else {
