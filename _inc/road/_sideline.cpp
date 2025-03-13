@@ -726,16 +726,22 @@ bool pt_point(cv::Mat mat, int x, int y, int num) {
 }
 // 搜索距离赛道左边缘最近的黄色色块 (黄色锥桶) 赛道内
 POINT search_left_near_in(std::vector<POINT> pointsEdge, cv::Mat matt) {
-    POINT find = POINT(0, 0);
-    int resw = IMAGE_WIDTH;
-    for (size_t i = 0; i < pointsEdge.size(); i++) {
-        for (int y = pointsEdge[i].y; y < pointsEdge[i].y + 50; y++) {
-            if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) {
-                if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0) {
+    POINT find = POINT(0, 0);//用于存储找到的最近锥桶点坐标
+    int resw = IMAGE_WIDTH;//用于记录锥桶到边线的最小距离
+
+    for (size_t i = 0; i < pointsEdge.size(); i++) //遍历左线边线点
+    {
+        for (int y = pointsEdge[i].y; y < pointsEdge[i].y + 50; y++)//从当前边线点向右搜索50像素
+         {
+            if ((y >= 0) && (y <= IMAGE_WIDTH - 1)) //检查y坐标是否在图像范围内
+            {
+                if (AT_IMAGE(matt, y, pointsEdge[i].x) > 0) //检查当前像素是否为黄色
+                {
                     //cv::line(IMG.mat_result, cv::Point(pointsEdge[i].y, pointsEdge[i].x),
                     //    cv::Point(y, pointsEdge[i].x),
                     //    cv::Scalar(255, 0, 255), 7);
-                    if (pt_point(matt, y, pointsEdge[i].x, 4)) {
+                    if (pt_point(matt, y, pointsEdge[i].x, 4)) //周围8个方向中至少要有4个方向存在黄色像素
+                    {
                         if (resw > y - pointsEdge[i].y) {
                             find = POINT(pointsEdge[i].x, y);
                             resw = y - pointsEdge[i].y;
@@ -1482,7 +1488,11 @@ void find_far_right_line(cv::Mat mat_bin, int x, int y, int ipts[][2], int* ipts
     else *ipts_num = 0;
 }
 
-//根据顺序点集找角点
+//根据顺序点集找角点，参数：
+//rpts：顺序点集
+//rpts_num：点集数量
+//corner_point：角点坐标
+//angle：返回拐角点处的角度
 void Find_corner(float rpts[][2], int rpts_num, int corner_point[2], float* angle)
 {
     *angle = 180;
@@ -1494,16 +1504,19 @@ void Find_corner(float rpts[][2], int rpts_num, int corner_point[2], float* angl
         int i = 0;
         float k[3][2];
         while (true) {
-            k[0][0] = rpts[i][0];
+            k[0][0] = rpts[i][0];//当前点
             k[0][1] = rpts[i][1];
-            k[1][0] = rpts[i + 15][0];
+
+            k[1][0] = rpts[i + 15][0];//中间点
             k[1][1] = rpts[i + 15][1];
-            k[2][0] = rpts[i + 30][0];
+
+            k[2][0] = rpts[i + 30][0];//远端点
             k[2][1] = rpts[i + 30][1];
             float BAx = (float)(k[0][0] - k[1][0]);
-            float BAy = (float)(k[0][1] - k[1][1]);
+            float BAy = (float)(k[0][1] - k[1][1]);//当前点到中间点的向量
+
             float BCx = (float)(k[2][0] - k[1][0]);
-            float BCy = (float)(k[2][1] - k[1][1]);
+            float BCy = (float)(k[2][1] - k[1][1]);//远端点到中间点的向量
             // 计算点积
             float dotProduct = (BAx * BCx) + (BAy * BCy);
             // 计算向量的模长
@@ -1592,6 +1605,7 @@ void Get_ipts_direction(int ipts[][2], int ipts_num, std::vector<uint8_t>& ipts_
             k[1][1] = ipts[i + 5][1];
             float x = (float)(k[1][0] - k[0][0]);
             float y = (float)(k[1][1] - k[0][1]);
+            //通过简单的比值判断方式，判断方向
             if (x >= 0 && y < 0) {
                 if (x == 0 || y / x < -1)ipts_direction.push_back(1);//上方
                 else ipts_direction.push_back(4);//右方

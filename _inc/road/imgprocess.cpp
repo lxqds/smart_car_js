@@ -536,8 +536,8 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
     }
 
-
-    float far_rpts0[IMAGE_HEIGHT][2] = { 0 };
+    
+    float far_rpts0[IMAGE_HEIGHT][2] = { 0 };//用于存放检测到的“远处”边线点经透视变换后的坐标   
     float far_rpts1[IMAGE_HEIGHT][2] = { 0 };
     edge_left.clear(); edge_right.clear(); edge_left_far.clear();  edge_right_far.clear();
     //透视变换得到的线
@@ -553,24 +553,27 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     for (int i = 0; i < far_ipts0_num; i++) {
         map_perspective((float)far_ipts0[i][0], (float)far_ipts0[i][1], far_rpts0[i], 0);
         edge_left_far.push_back(POINT(far_ipts0[i][1], far_ipts0[i][0]));
-    }
+    } 
 
     for (int i = 0; i < far_ipts1_num; i++) {
         map_perspective((float)far_ipts1[i][0], (float)far_ipts1[i][1], far_rpts1[i], 0);
         edge_right_far.push_back(POINT(far_ipts1[i][1], far_ipts1[i][0]));
     }
 
-
+    //角点检测 
     Find_corner(rpts0, ipts0_num, Lpt0_point, &Lpt0_angle);
     Find_corner(rpts1, ipts1_num, Lpt1_point, &Lpt1_angle);
     Find_corner(far_rpts0, far_ipts0_num, far_Lpt0_point, &far_Lpt0_angle);
     Find_corner(far_rpts1, far_ipts1_num, far_Lpt1_point, &far_Lpt1_angle);
 
+    // 判断角点是否在合理范围内，1表示发现角点
     Lpt0_found = IMG.Lpt0_angle > 50 && IMG.Lpt0_angle < 120;
     Lpt1_found = IMG.Lpt1_angle > 50 && IMG.Lpt1_angle < 120;
+
     far_Lpt0_found = IMG.far_Lpt0_angle > 50 && IMG.far_Lpt0_angle < 120;
     far_Lpt1_found = IMG.far_Lpt1_angle > 50 && IMG.far_Lpt1_angle < 120;
 
+    // 获取中线方向
     Get_ipts_direction(ipts0, ipts0_num, ipts0_direction);
     Get_ipts_direction(ipts1, ipts1_num, ipts1_direction);
 

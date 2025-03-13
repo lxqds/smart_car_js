@@ -56,9 +56,12 @@ void check_bomb()
             bomb_near_cone_R = POINT(0, 0);
             bomb_near_cone_L = search_left_near_in(IMG.edge_left, IMG.mat_lab);
             bomb_near_cone_R = search_right_near_in(IMG.edge_right, IMG.mat_lab);
-            if (bomb_near_cone_L.x != 0 && bomb_near_cone_R.x != 0) {
+
+            if (bomb_near_cone_L.x != 0 && bomb_near_cone_R.x != 0)//如果左右锥桶都存在
+            {
                 bomb_Red = search_right_near_Red(IMG.edge_right, IMG.mat_lab2);
-                if (bomb_Red.x != 0 && bomb_Red.y != 0 && bomb_Red.x > 0.25 * IMAGE_HEIGHT) {
+                if (bomb_Red.x != 0 && bomb_Red.y != 0 && bomb_Red.x > 0.25 * IMAGE_HEIGHT)
+                 {
                     IMG.element_identify = 1;
 
                     IMG.set_pid(8, 0.0, 0);
@@ -99,18 +102,24 @@ void check_bomb()
 void run_bomb()
 {
 
+    // 重新获取赛道边缘，然后在LAB颜色空间中搜索所有锥桶，并在处理结果图像上标记。
+
     if (control_flag.top() == bomb_element) {//当前为炸弹元素
         IMG.get_edge(0);
 
 
-        std::vector<cv::Rect> all_zt;
-        all_zt = bombC.search_all_cone_rect(IMG.mat_lab);
+        std::vector<cv::Rect> all_zt;   //存储所有锥桶的矩形区域
+        all_zt = bombC.search_all_cone_rect(IMG.mat_lab);  //检测场景中所有锥桶
 
-        for (size_t i = 0; i < all_zt.size(); i++) {
+        for (size_t i = 0; i < all_zt.size(); i++)   //在结果图像中标记检测到的锥桶  
+        {
              cv::rectangle(IMG.mat_result, all_zt[i], cv::Scalar(255, 0, 0), 1);  
         }
 
-        if (flag_bomb == BOMB_FOUND) {
+        //判断第一个锥桶的位置（左侧或右侧），基于此来决定后续的绕行策略。
+
+        if (flag_bomb == BOMB_FOUND) //初始发现炸弹区
+        {
 
             if (IMG.encoder.speed * 1000 > IMG._config->speed_bomb1 + 500)IMG.aim_speed = -3000;
             else IMG.aim_speed = IMG._config->speed_bomb1;
