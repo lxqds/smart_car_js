@@ -291,12 +291,12 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
     std::vector<cv::Mat> _channels_lab;
     cv::split(mat_lab, channels_lab);
     cv::split(mat_lab, _channels_lab);
-    cv::threshold(channels_lab[1], _channels_lab[1], temp_yf, 255, cv::THRESH_BINARY_INV);
-    cv::threshold(channels_lab[2], _channels_lab[2], temp_y, 255, cv::THRESH_BINARY);
+    cv::threshold(channels_lab[1], _channels_lab[1], temp_yf, 255, cv::THRESH_BINARY_INV); //过滤红色  红色与黄色相邻，红色会显示在黄色lab图中
+    cv::threshold(channels_lab[2], _channels_lab[2], temp_y, 255, cv::THRESH_BINARY);  // 过滤蓝色
     cv::bitwise_and(_channels_lab[1], _channels_lab[2], mat_lab);
 
-    cv::threshold(channels_lab[1], _channels_lab[1], temp_r, 255, cv::THRESH_BINARY);
-    cv::threshold(channels_lab[2], _channels_lab[2], temp_rf, 255, cv::THRESH_BINARY);
+    cv::threshold(channels_lab[1], _channels_lab[1], temp_r, 255, cv::THRESH_BINARY);// 过滤绿色
+    cv::threshold(channels_lab[2], _channels_lab[2], temp_rf, 255, cv::THRESH_BINARY);//
     cv::bitwise_and(_channels_lab[1], _channels_lab[2], mat_lab2);
 
     // cv::threshold(channels_lab[1], mat_lab2, _config->lab_thresholdRED, 255, cv::THRESH_BINARY);

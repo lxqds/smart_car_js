@@ -56,8 +56,8 @@ int DetectionPredictor::init() {
 
     // Initialize model
     LOG_I << "[PPNC] Initialize model." << LOG_END;
-    this->predictor_nna_ = std::make_shared<PPNCPredictor>("../configs/config_ppncnna.json");//如何构建 NNA? 
-    this->predictor_nms_ = std::make_shared<PPNCPredictor>("../configs/config_ppncnms.json");//判断重合框，与部署无关
+    this->predictor_nna_ = std::make_shared<PPNCPredictor>("../configs/config_ppncnna.json");
+    this->predictor_nms_ = std::make_shared<PPNCPredictor>("../configs/config_ppncnms.json");
     this->onnx_env_ = Ort::Env(OrtLoggingLevel::ORT_LOGGING_LEVEL_WARNING, "test");
     Ort::SessionOptions session_options;
     session_options.SetIntraOpNumThreads(8);
