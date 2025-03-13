@@ -326,90 +326,102 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
 
 
     {
-        //扇形扫描找最远的白线
-        int max_white_line_end[2]{};
-        max_white_line_length = 0;
-        int white_line_end[120][2]{};
-        float white_line_length[120]{};
+        // 扇形扫描算法：从图像底部中心向上呈扇形搜索，寻找最远的有效赛道方向
+        // 覆盖30°到150°的扫描范围，找出最长的连续白色路径
+        int max_white_line_end[2]{};  // 存储最长白线的终点坐标
+        max_white_line_length = 0;    // 最长白线的长度
+        int white_line_end[120][2]{}; // 存储各角度扫描线的终点坐标
+        float white_line_length[120]{};  // 存储各角度扫描线的长度
         {
-            for (int t = 0; t < 120; t++) {
-                float L = 5;
-                int count = 0;
+            for (int t = 0; t < 120; t++) {  // 扫描120个角度(30°-150°)
+                float L = 5;  // 初始搜索距离
+                int count = 0;  // 连续黑点计数器
                 while (true) {
+                    // 计算扇形上的点坐标，从图像底部中心向上扩散
                     float _x = (float)(L * cos((t + 30) / 180.0f * PI));
                     float _y = (float)(L * sin((t + 30) / 180.0f * PI) + 5);
-                    float x = _x + IMAGE_WIDTH / 2;
+                    float x = _x + IMAGE_WIDTH / 2;  // 转换到图像坐标系
                     float y = IMAGE_HEIGHT - _y;
-                    bool is_range = x > 5 && x < IMAGE_WIDTH - 5 && y >5;
+                    bool is_range = x > 5 && x < IMAGE_WIDTH - 5 && y >5;  // 检查是否在图像范围内
                     if (is_range) {
+                        // 检测黑点(赛道边界)，累计连续黑点数
                         if (AT_IMAGE(mat_bin, (int)x, (int)y) < 127)count++;
                         else count = 0;
                     }
+                    // 当找到连续两个黑点或超出图像范围时，认为找到了赛道边界
                     if (count == 2 || !is_range) {
                         float a[2]{};
-                        map_perspective(x, y, a, 0);
+                        map_perspective(x, y, a, 0);  // 转换到鸟瞰视图
+                        // 计算该点到图像底部中心的距离
                         float l = (float)dis_point_point(POINT((int)a[0], (int)a[1]), POINT(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1));
                         white_line_end[t][0] = (int)x;
                         white_line_end[t][1] = (int)y;
                         white_line_length[t] = l;
                         break;
                     }
-                    L += 2.0f;
+                    L += 2.0f;  // 扩大搜索距离
                 }
             }
             // MyThreadPool.waitThreadPoolFree();
         }
+        // 对各角度扫描结果进行平滑处理，找出最长的白线方向
+        // 使用11个角度的滑动窗口求和，减少噪声影响
         for (int t = 5; t < 120 - 5; t += 1) {
             float L = 0;
             for (int i = -5; i <= 5; i++) {
                 L += white_line_length[t + i];
             }
 
+            // 更新最长白线信息
             if (L > max_white_line_length) {
                 max_white_line_end[0] = white_line_end[t][0];
                 max_white_line_end[1] = white_line_end[t][1];
                 max_white_line_length = L;
             }
+            // 绘制所有扫描线(当前未启用)
             // cv::line(mat_result, cv::Point((int)white_line_end[t][0], (int)white_line_end[t][1]),
             //     cv::Point(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1), cv::Scalar(0, 255, 0), 1);
         }
+        // 在结果图像上绘制最长的白线方向
         cv::line(mat_result, cv::Point((int)max_white_line_end[0], (int)max_white_line_end[1]),
             cv::Point(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1), cv::Scalar(0, 0, 255), 1);
 
 
 
-        //横向扫描,得到横线数据集
-        std::vector<int> white_row_length[40];//透视变换白行长度
-        //寻找最符合跑道的白行
+        // 横向扫描算法：从下到上每隔5行扫描一次，检测赛道白色区域
+        // 目的是找出合适的巡线起点和识别赛道宽度
+        std::vector<int> white_row_length[40];  // 存储各行白色区域的宽度
+        // 循环处理每一行，收集白色区域信息
         {
-            for (int i = 39; i > 0; i--) {
+            for (int i = 39; i > 0; i--) {  // 从图像底部往上扫描
                 int start = 0, sign = 0, count = 0;
-                white_row_start_point[i].clear();
-                white_row_end_point[i].clear();
-                for (int x = 0; x < IMAGE_WIDTH; x += 2) {
-                    if (sign == 0) {//向右开始找白点
-                        if (AT_IMAGE(mat_bin, x, i * 5) >= 127)count++;
+                white_row_start_point[i].clear();  // 清空该行的起点列表
+                white_row_end_point[i].clear();    // 清空该行的终点列表
+                for (int x = 0; x < IMAGE_WIDTH; x += 2) {  // 横向每隔2像素扫描一次
+                    if (sign == 0) {  // 寻找白色区域的左边界
+                        if (AT_IMAGE(mat_bin, x, i * 5) >= 127)count++;  // 检测到白点
                         else count = 0;
-                        if (count == 2) {
-                            start = x - count + 1;
-                            sign = 1;
+                        if (count == 2) {  // 连续2个白点视为有效边界
+                            start = x - count + 1;  // 记录白色区域起点
+                            sign = 1;  // 切换到寻找右边界模式
                         }
                     }
-                    if (sign == 1) {//向右开始找黑点
-                        if (AT_IMAGE(mat_bin, x, i * 5) < 127)count++;
+                    if (sign == 1) {  // 寻找白色区域的右边界
+                        if (AT_IMAGE(mat_bin, x, i * 5) < 127)count++;  // 检测到黑点
                         else count = 0;
-                        if (count == 2 || x >= IMAGE_WIDTH - 2) {
+                        if (count == 2 || x >= IMAGE_WIDTH - 2) {  // 找到右边界或到达图像边缘
                             float a[2]{}, b[2]{};
+                            // 将边界点转换到鸟瞰视图计算实际宽度
                             map_perspective((float)start, (float)i * 5, a, 0);
                             map_perspective((float)x - count + 1, (float)i * 5, b, 0);
-                            float L = b[0] - a[0];
-                            if (L > 50) {
-                                white_row_start_point[i].push_back(POINT(start, i * 5));
-                                white_row_length[i].push_back((int)L);
-                                white_row_end_point[i].push_back(POINT(x - count + 1, i * 5));
+                            float L = b[0] - a[0];  // 计算白色区域宽度
+                            if (L > 50) {  // 宽度大于50认为是有效赛道
+                                white_row_start_point[i].push_back(POINT(start, i * 5));  // 记录起点
+                                white_row_length[i].push_back((int)L);  // 记录宽度
+                                white_row_end_point[i].push_back(POINT(x - count + 1, i * 5));  // 记录终点
                             }
                             count = 0;
-                            sign = 0;
+                            sign = 0;  // 重置为寻找左边界模式
                         }
                     }
                 }
@@ -417,94 +429,107 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             // MyThreadPool.waitThreadPoolFree();
         }
 
-        //处理横线数据集,得到最贴合主赛道的横线数据集
+        // 处理横线数据，筛选出最符合主赛道方向的白色区域
+        // 与前面扇形扫描找到的最远白线方向对比，保留最接近的区域
         for (int i = 39, start_sign = 0, end_sign = 0; i > 0; i--) {
             float mindistance = 0;
-            if (end_sign == 0) {
+            if (end_sign == 0) {  // 未到达处理结束行
                 for (uint32_t j = 0; j < white_row_start_point[i].size();) {
+                    // 计算当前白色区域中点
                     float x = (white_row_start_point[i][j].x + white_row_end_point[i][j].x) / 2.0f;
                     float y = (float)white_row_start_point[i][j].y;
+                    // 计算该行上扇形主方向线的x坐标
                     float _x = (float)findThirdPointX(POINT(max_white_line_end[0], max_white_line_end[1]),
                         POINT(IMAGE_WIDTH / 2, IMAGE_HEIGHT - 1), y);
-                    float L = abs(_x - x);
-                    if (j == 0) {
+                    float L = abs(_x - x);  // 计算横向距离
+                    if (j == 0) {  // 第一个白色区域
                         mindistance = L;
                         j++;
                     }
-                    else {
-                        if (L < mindistance) {
+                    else {  // 比较多个白色区域，保留距离最小的
+                        if (L < mindistance) {  // 找到更近的区域，删除之前记录的
                             white_row_start_point[i].erase(white_row_start_point[i].begin());
                             white_row_end_point[i].erase(white_row_end_point[i].begin());
                             white_row_length[i].erase(white_row_length[i].begin());
                             mindistance = L;
                         }
-                        else {
+                        else {  // 删除当前区域
                             white_row_start_point[i].erase(white_row_start_point[i].begin() + 1);
                             white_row_end_point[i].erase(white_row_end_point[i].begin() + 1);
                             white_row_length[i].erase(white_row_length[i].begin() + 1);
                         }
                     }
                 }
+                // 判断是否结束处理：检查连续性和位置是否合理
                 if (start_sign == 1 && (
                     white_row_start_point[i].empty() ||
                     white_row_start_point[i].back().x > white_row_end_point[i + 1].back().x ||
                     white_row_end_point[i].back().x < white_row_start_point[i + 1].back().x ||
                     white_row_start_point[i].back().y < max_white_line_end[1])) {
-                    end_sign = 1;
+                    end_sign = 1;  // 设置结束标志
                 }
                 if (!white_row_start_point[i].empty()) {
-                    start_sign = 1;
+                    start_sign = 1;  // 已找到有效数据
+                    
                     // cv::line(mat_result, cv::Point(white_row_start_point[i].back().x, white_row_start_point[i].back().y),
                     //     cv::Point(white_row_end_point[i].back().x, white_row_end_point[i].back().y),
                     //     cv::Scalar(0, 255, 0), 1);
                 }
             }
-            else {
+            else {  // 已经到达终止条件，清空剩余行数据
                 white_row_start_point[i].clear();
                 white_row_end_point[i].clear();
                 white_row_length[i].clear();
             }
         }
-        //找近处巡线开始点
+        // 在图像底部区域寻找适合的近处巡线起点
+        // 通常选择距离车辆较近的位置作为起点，提高检测稳定性
         for (int i = 39; i > 28; i--) {
             if (!white_row_start_point[i].empty()) {
+                // 选择该行白色区域的中点作为巡线起点
                 begin_x = (white_row_start_point[i].back().x + white_row_end_point[i].back().x) / 2;
                 begin_y = white_row_start_point[i].back().y;
                 break;
             }
         }
         {
+            // 初始化近处边线点集，预分配200个点的空间
             ipts0_num = 200; ipts1_num = 200;
-            //双线程巡线
+            // 从选定的起点开始，向上检测左右边线
+            // 双线程巡线功能当前未启用
             // if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
-            find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);
-            find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);
+            find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);  // 检测左边线
+            find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);  // 检测右边线
             // MyThreadPool.waitThreadPoolFree();
         }
 
 
 
 
-        //找远处巡线开始点
-        int far_begin_x = 0, far_begin_y = 0;//远线向下找线的开始位置
+        // 寻找远处巡线的起点，用于远处边线检测
+        // 通常在图像上半部分选择合适的点作为远处巡线起点
+        int far_begin_x = 0, far_begin_y = 0;  // 远线向下找线的起始位置
         int count = 0;
-        far_ipts0_num = 0; far_ipts1_num = 0;
-        for (int i = 5; i < 20; i++) {
+        far_ipts0_num = 0; far_ipts1_num = 0;  // 初始化远处边线点数
+        for (int i = 5; i < 20; i++) {  // 在图像上部区域搜索
             if (!white_row_start_point[i].empty()) {
+                // 寻找宽度较窄的赛道区域，通常是远处的赛道
                 if (white_row_length[i].back() < 220) count++;
-                if (count == 3) {
+                if (count == 3) {  // 连续找到3行符合条件的点
+                    // 选择该行白色区域的中点作为远处巡线起点
                     far_begin_x = (white_row_start_point[i].back().x + white_row_end_point[i].back().x) / 2;
                     far_begin_y = white_row_start_point[i].back().y;
-                    far_ipts0_num = 120; far_ipts1_num = 120;
+                    far_ipts0_num = 120; far_ipts1_num = 120;  // 预分配120个点的空间
                     break;
                 }
             }
         }
         {
-            //双线程巡线
+            // 从远处起点开始，向下检测左右边线
+            // 双线程巡线功能当前未启用
             // if (!MyThreadPool.addTask(find_far_left_line, mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num))
-            find_far_left_line(mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num);// 原图找左边线
-            find_far_right_line(mat_bin, far_begin_x, far_begin_y, far_ipts1, &far_ipts1_num);// 原图找右边线
+            find_far_left_line(mat_bin, far_begin_x, far_begin_y, far_ipts0, &far_ipts0_num);  // 检测远处左边线
+            find_far_right_line(mat_bin, far_begin_x, far_begin_y, far_ipts1, &far_ipts1_num);  // 检测远处右边线
             // MyThreadPool.waitThreadPoolFree();
         }
 
