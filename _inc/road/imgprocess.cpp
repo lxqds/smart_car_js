@@ -496,10 +496,10 @@ void ImageProcess::process(cv::Mat& mat_origin, cv::Mat& _mat_result,
             // 初始化近处边线点集，预分配200个点的空间
             ipts0_num = 200; ipts1_num = 200;
             // 从选定的起点开始，向上检测左右边线
-            // 双线程巡线功能当前未启用
+            
             // if (!MyThreadPool.addTask(find_left_line, mat_bin, begin_x, begin_y, ipts0, &ipts0_num))
-            find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);  // 检测左边线
-            find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);  // 检测右边线
+            find_left_line(mat_bin, begin_x, begin_y, ipts0, &ipts0_num);  // 检测左边线，获得左边线点集
+            find_right_line(mat_bin, begin_x, begin_y, ipts1, &ipts1_num);  // 检测右边线，获得右边线点集
             // MyThreadPool.waitThreadPoolFree();
         }
 
