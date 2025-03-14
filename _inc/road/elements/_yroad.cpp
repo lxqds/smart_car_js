@@ -93,7 +93,7 @@ void check_yroad() {
 					}
 				}
 				return;
-				case IMG.label_danger://危险车辆
+				case IMG.label_danger://危险车辆test
 				{
 					if (r.score > 0.8 && r.y > IMAGE_HEIGHT * 0.1 && IMG.ipts0_num > 180 && IMG.ipts1_num > 180) {
 						double L0 =
