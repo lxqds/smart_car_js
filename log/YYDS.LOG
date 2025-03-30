@@ -7944,3 +7944,137 @@
 [36;22mI/Display      [15:25:19] (display.cpp 13) Create Windows Success.[0m
 [31;22mE/Serial       [15:25:19] (serial.hpp 283) [/dev/ttyS0] Open Failed.[0m
 [31;22mE/Main         [15:25:19] (yyds.cpp 76) /dev/ttyUSB0 can not open !![0m
+[36;22mI/NO_TAG       [23:53:35] (logger_helper.cc 36) Build: Mar 29 2025 23:40:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [23:53:35] (model_config.hpp 225) Init Success.[0m
+[36;22mI/Capture      [23:53:35] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [23:53:35] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [23:53:35] (capture.cpp 18) >>> fps    = 30.00[0m
+[36;22mI/Capture      [23:53:35] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/NO_TAG       [00:00:07] (logger_helper.cc 36) Build: Mar 29 2025 23:40:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [00:00:07] (model_config.hpp 225) Init Success.[0m
+[36;22mI/Capture      [00:00:07] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [00:00:07] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [00:00:07] (capture.cpp 18) >>> fps    = 30.00[0m
+[36;22mI/Capture      [00:00:07] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/NO_TAG       [00:06:25] (logger_helper.cc 36) Build: Mar 29 2025 23:40:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [00:06:25] (model_config.hpp 225) Init Success.[0m
+[36;22mI/Capture      [00:06:25] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [00:06:25] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [00:06:25] (capture.cpp 18) >>> fps    = 30.00[0m
+[36;22mI/Capture      [00:06:25] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/NO_TAG       [21:25:10] (logger_helper.cc 36) Build: Mar 29 2025 23:40:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [21:25:10] (model_config.hpp 225) Init Success.[0m
+[36;22mI/Capture      [21:25:11] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [21:25:11] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [21:25:11] (capture.cpp 18) >>> fps    = 30.00[0m
+[36;22mI/Capture      [21:25:11] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/NO_TAG       [09:06:33] (logger_helper.cc 36) Build: Mar 29 2025 23:40:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [09:06:33] (model_config.hpp 225) Init Success.[0m
+[36;22mI/Capture      [09:06:33] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [09:06:33] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [09:06:33] (capture.cpp 18) >>> fps    = 30.00[0m
+[36;22mI/Capture      [09:06:33] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/Display      [09:06:35] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [09:06:35] (serial.hpp 278) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [09:06:35] (capture.cpp 28) Start![0m
+[36;22mI/Display      [09:06:35] (display.cpp 35) Start![0m
+[36;22mI/Cross        [09:06:36] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [09:06:36] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/System       [09:06:39] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [09:06:39] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [09:06:39] (yyds.cpp 188) capture stopped.[0m
+[36;22mI/System       [09:06:39] (yyds.cpp 190) detection stopped.[0m
+[36;22mI/Display      [09:06:40] (display.cpp 50) Stop.[0m
+[36;22mI/System       [09:06:40] (yyds.cpp 192) display stopped.[0m
+[36;22mI/Serial       [09:06:40] (serial.hpp 352) Stop.[0m
+[36;22mI/System       [09:06:40] (yyds.cpp 194) serial stopped.[0m
+[36;22mI/System       [09:06:40] (yyds.cpp 197) Exit Code: 0[0m
+[36;22mI/System       [09:06:40] (yyds.cpp 198) Finish !!![0m
+[36;22mI/NO_TAG       [09:06:43] (logger_helper.cc 36) Build: Mar 29 2025 23:40:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [09:06:43] (model_config.hpp 225) Init Success.[0m
+[36;22mI/Capture      [09:06:44] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [09:06:44] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [09:06:44] (capture.cpp 18) >>> fps    = 30.00[0m
+[36;22mI/Capture      [09:06:44] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/Display      [09:06:44] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [09:06:44] (serial.hpp 278) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [09:06:44] (capture.cpp 28) Start![0m
+[36;22mI/Display      [09:06:44] (display.cpp 35) Start![0m
+[36;22mI/Garage       [09:06:54] (_garage.cpp 66) GARAGE_DETECTION[0m
+[36;22mI/Garage       [09:06:54] (_garage.cpp 124) GARAGE_IN_MIDDLE[0m
+[36;22mI/System       [09:13:21] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [09:13:21] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [09:13:21] (yyds.cpp 188) capture stopped.[0m
+[36;22mI/System       [09:13:21] (yyds.cpp 190) detection stopped.[0m
+[36;22mI/Display      [09:13:21] (display.cpp 50) Stop.[0m
+[36;22mI/System       [09:13:21] (yyds.cpp 192) display stopped.[0m
+[36;22mI/Serial       [09:13:21] (serial.hpp 352) Stop.[0m
+[36;22mI/System       [09:13:21] (yyds.cpp 194) serial stopped.[0m
+[36;22mI/System       [09:13:21] (yyds.cpp 197) Exit Code: 0[0m
+[36;22mI/System       [09:13:21] (yyds.cpp 198) Finish !!![0m
