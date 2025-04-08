@@ -8078,3 +8078,88 @@
 [36;22mI/System       [09:13:21] (yyds.cpp 194) serial stopped.[0m
 [36;22mI/System       [09:13:21] (yyds.cpp 197) Exit Code: 0[0m
 [36;22mI/System       [09:13:21] (yyds.cpp 198) Finish !!![0m
+[36;22mI/NO_TAG       [16:59:21] (logger_helper.cc 36) Build: Mar 29 2025 23:40:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:59:21] (model_config.hpp 225) Init Success.[0m
+[36;22mI/Capture      [16:59:21] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:59:21] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:59:21] (capture.cpp 18) >>> fps    = 30.00[0m
+[36;22mI/Capture      [16:59:21] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/NO_TAG       [16:59:35] (logger_helper.cc 36) Build: Mar 29 2025 23:40:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [16:59:35] (model_config.hpp 225) Init Success.[0m
+[36;22mI/Capture      [16:59:36] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [16:59:36] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [16:59:36] (capture.cpp 18) >>> fps    = 30.00[0m
+[36;22mI/Capture      [16:59:36] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/NO_TAG       [17:00:17] (logger_helper.cc 36) Build: Mar 29 2025 23:40:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [17:00:17] (model_config.hpp 225) Init Success.[0m
+[36;22mI/Capture      [17:00:17] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [17:00:17] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [17:00:17] (capture.cpp 18) >>> fps    = 30.00[0m
+[36;22mI/Capture      [17:00:17] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/NO_TAG       [17:00:35] (logger_helper.cc 36) Build: Mar 29 2025 23:40:04
+
+        [YYDS Modified for PPNC Environment]
+        [Author:@XinnZ   Modified:@Edge2020]
+
+                        _ __    __               
+     /\  /\__ _ _ __ __| / / /\ \ \__ _ _ __ ___ 
+    / /_/ / _` | '__/ _` \ \/  \/ / _` | '__/ _ \
+   / __  | (_| | | | (_| |\  /\  | (_| | | |  __/
+   \/ /_/ \__,_|_|  \__,_| \/  \/ \__,_|_|  \___|
+
+[0m
+[36;22mI/Control Json [17:00:35] (model_config.hpp 225) Init Success.[0m
+[36;22mI/Capture      [17:00:36] (capture.cpp 16) >>> width  = 640.00[0m
+[36;22mI/Capture      [17:00:36] (capture.cpp 17) >>> height = 480.00[0m
+[36;22mI/Capture      [17:00:36] (capture.cpp 18) >>> fps    = 30.00[0m
+[36;22mI/Capture      [17:00:36] (capture.cpp 19) Create Capture Success.[0m
+[36;22mI/Display      [17:00:37] (display.cpp 13) Create Windows Success.[0m
+[36;22mI/Serial       [17:00:37] (serial.hpp 278) [/dev/ttyUSB0] Open Success.[0m
+[36;22mI/Capture      [17:00:37] (capture.cpp 28) Start![0m
+[36;22mI/Display      [17:00:37] (display.cpp 35) Start![0m
+[36;22mI/Cross        [17:00:37] (_cross.cpp 53) CROSS_BEGIN[0m
+[36;22mI/Cross        [17:00:37] (_cross.cpp 76) CROSS_IN[0m
+[36;22mI/Cross        [17:01:35] (_cross.cpp 112) CROSS_NONE[0m
+[36;22mI/System       [17:01:47] (capture.cpp 85) Exit...[0m
+[36;22mI/Capture      [17:01:47] (capture.cpp 41) Stop.[0m
+[36;22mI/System       [17:01:47] (yyds.cpp 188) capture stopped.[0m
+[36;22mI/System       [17:01:47] (yyds.cpp 190) detection stopped.[0m
+[36;22mI/Display      [17:01:48] (display.cpp 50) Stop.[0m
+[36;22mI/System       [17:01:48] (yyds.cpp 192) display stopped.[0m
+[36;22mI/Serial       [17:01:48] (serial.hpp 352) Stop.[0m
+[36;22mI/System       [17:01:48] (yyds.cpp 194) serial stopped.[0m
+[36;22mI/System       [17:01:48] (yyds.cpp 197) Exit Code: 0[0m
+[36;22mI/System       [17:01:48] (yyds.cpp 198) Finish !!![0m
