@@ -1,0 +1,10 @@
+{
+  "name": "Zikway HID gamepad",
+  "vendor": 13623,
+  "product": 4161,
+  "throttle_axis": 1,
+  "steering_axis": 0,
+  "enable_button": 312,
+  "invert_throttle": true,
+  "invert_steering": false
+}

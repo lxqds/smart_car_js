@@ -1,0 +1,26 @@
+[Unit]
+Description=Smart car USB gamepad sender (neutral on every start)
+After=local-fs.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=cat
+SupplementaryGroups=input dialout
+WorkingDirectory=/opt/smart-car
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 -m host_control.gamepad_display --racing --profile /opt/smart-car/host_control/zikway_racing_profile.json --send --port /dev/serial/by-id/usb-1a86_5523-if00-port0 --duration 0
+Restart=always
+RestartSec=3
+TimeoutStopSec=5
+KillSignal=SIGTERM
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+Environment=PYTHONDONTWRITEBYTECODE=1
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
